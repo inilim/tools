@@ -1,0 +1,41 @@
+{
+    "name": "inilim/tools",
+    "description": "",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Inilim\\Tool\\": "src/"
+        },
+        "files": []
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Inilim\\Tool\\Test\\": "Tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "inilim"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "inilim/singleton": "dev-main",
+        "inilim/lazy_method": "dev-main"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpstan/phpstan": "@stable",
+        "inilim/dump": "dev-main",
+        "phpunit/phpunit": "^11.5"
+    },
+    "scripts": {
+        "tests": [
+            "php vendor/bin/phpunit tests"
+        ],
+        "phpstan": [
+            "php vendor/bin/phpstan analyze"
+        ]
+    }
+}
