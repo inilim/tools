@@ -2,17 +2,14 @@
 
 namespace Inilim\Method\Arr;
 
-use Inilim\Tool\Arr;
-use Inilim\Tool\Str;
-
-Arr::__include([
+\Inilim\Tool\Arr::__include([
     'dataGet',
     'getDotKeys',
     'dot',
     'only',
     'undot',
 ]);
-Str::__include('contains');
+\Inilim\Tool\Str::__include('contains');
 
 /**
  * alternate dataGet

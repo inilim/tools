@@ -2,9 +2,8 @@
 
 namespace Inilim\Method\Arr;
 
-use Inilim\Tool\Arr;
 
-Arr::__include([
+\Inilim\Tool\Arr::__include([
     'get',
     'set',
 ]);

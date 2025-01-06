@@ -2,9 +2,7 @@
 
 namespace Inilim\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('dataSet');
+\Inilim\Tool\Arr::__include('dataSet');
 
 /**
  * Fill in data where it's missing.
