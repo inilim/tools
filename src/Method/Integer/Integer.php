@@ -5,25 +5,9 @@ use RuntimeException;
 
 class Integer
 {
-   function checkMax(int $value, int $max): bool
-   {
-      return $value <= $max;
-   }
 
-   function checkMin(int $value, int $min): bool
-   {
-      return $value >= $min;
-   }
 
-   function checkLenMax(int $value, int $max): bool
-   {
-      return $this->checkMax(\strlen(\strval($value)), $max);
-   }
 
-   function checkLenMin(int $value, int $min): bool
-   {
-      return $this->checkMin(\strlen(\strval($value)), $min);
-   }
 
    function checkLenBetween(int $value, int $from_to, int $to_from): bool
    {
