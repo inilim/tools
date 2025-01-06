@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 /**
  * Cross join the given arrays, returning all possible permutations.

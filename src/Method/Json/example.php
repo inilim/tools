@@ -1,7 +1,7 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
-// \Inilim\Method\Json\
+// \Inilim\Tool\Method\Json\
 
 // \Inilim\Tool\Json::__include('');

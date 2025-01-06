@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 /**
  * Clamp the given number between the given minimum and maximum.

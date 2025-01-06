@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -15,7 +15,7 @@ function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $desc
 {
     $t = [];
     foreach ($arr as $key => $value) {
-        $t[$key] = \Inilim\Method\Arr\dataGet($value, $by);
+        $t[$key] = \Inilim\Tool\Method\Arr\dataGet($value, $by);
     }
 
     $descending ? \arsort($t, $options) : \asort($t, $options);

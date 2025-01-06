@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -16,7 +16,7 @@ function getDotKeys(array $target, string $dotPattern): array
     $pattern = '#^' . \str_replace('\*', '[^\.]+', \preg_quote($dotPattern)) . '#';
     return \array_values(
         \array_filter(
-            \array_keys(\Inilim\Method\Arr\dot($target)),
+            \array_keys(\Inilim\Tool\Method\Arr\dot($target)),
             static fn($key) => \preg_match($pattern, $key),
         )
     );

@@ -1,7 +1,7 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
-// \Inilim\Method\Integer\
+// \Inilim\Tool\Method\Integer\
 
 // \Inilim\Tool\Integer::__include('');

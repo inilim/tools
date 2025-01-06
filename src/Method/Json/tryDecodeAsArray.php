@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 use Inilim\Tool\Json;
 
@@ -16,7 +16,7 @@ Json::__include('decode');
 function tryDecodeAsArray(?string $value, $default = null)
 {
     if ($value === null) return $default;
-    $value = \Inilim\Method\Json\decode($value, true);
+    $value = \Inilim\Tool\Method\Json\decode($value, true);
     if (\is_array($value)) return $value;
     return $default;
 }

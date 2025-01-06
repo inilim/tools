@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 function keysUpper(array $array): array
 {

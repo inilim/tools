@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 \Inilim\Tool\Json::__include('tryDecodeAsArray');
 \Inilim\Tool\Arr::__include('dataGet2');
@@ -11,9 +11,9 @@ namespace Inilim\Method\Json;
  */
 function dataGetFromJson(?string $json, string $dotKey, $default = null)
 {
-    $t = \Inilim\Method\Json\tryDecodeAsArray($json, []);
+    $t = \Inilim\Tool\Method\Json\tryDecodeAsArray($json, []);
     if (!$t) return $default;
-    return \Inilim\Method\Arr\dataGet2(
+    return \Inilim\Tool\Method\Arr\dataGet2(
         $t,
         $dotKey,
         $default,

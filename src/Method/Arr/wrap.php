@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 /**
  * If the given value is not an array, wrap it in one.

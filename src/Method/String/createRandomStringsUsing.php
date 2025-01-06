@@ -1,10 +1,10 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
-// \Inilim\Method\String\
+// \Inilim\Tool\Method\String\
 
 Str::__include('__state');
 
@@ -13,5 +13,5 @@ Str::__include('__state');
  */
 function createRandomStringsUsing(?callable $factory = null): void
 {
-    \Inilim\Method\String\__state()->randomStringFactory = $factory;
+    \Inilim\Tool\Method\String\__state()->randomStringFactory = $factory;
 }

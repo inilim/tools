@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 /**
- * @internal Inilim\Method\Integer
+ * @internal Inilim\Tool\Method\Integer
  * @param string[] $value
  * @param int[] $arrayInt
  * @return bool

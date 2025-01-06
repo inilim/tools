@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -18,10 +18,10 @@ function headline(string $value): string
     $parts = \explode(' ', $value);
 
     $parts = \sizeof($parts) > 1
-        ? \array_map('\Inilim\Method\String\title', $parts)
-        : \array_map('\Inilim\Method\String\title', \Inilim\Method\String\ucsplit(\implode('_', $parts)));
+        ? \array_map('\Inilim\Tool\Method\String\title', $parts)
+        : \array_map('\Inilim\Tool\Method\String\title', \Inilim\Tool\Method\String\ucsplit(\implode('_', $parts)));
 
-    $collapsed = \Inilim\Method\String\replace(['-', '_', ' '], '_', \implode('_', $parts));
+    $collapsed = \Inilim\Tool\Method\String\replace(['-', '_', ' '], '_', \implode('_', $parts));
 
     return \implode(' ', \array_filter(\explode('_', $collapsed)));
 }

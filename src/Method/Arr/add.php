@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 
 \Inilim\Tool\Arr::__include([
@@ -15,8 +15,8 @@ namespace Inilim\Method\Arr;
  */
 function add(array $array, string $key, $value)
 {
-    if (\Inilim\Method\Arr\get($array, $key) === null) {
-        \Inilim\Method\Arr\set($array, $key, $value);
+    if (\Inilim\Tool\Method\Arr\get($array, $key) === null) {
+        \Inilim\Tool\Method\Arr\set($array, $key, $value);
     }
 
     return $array;

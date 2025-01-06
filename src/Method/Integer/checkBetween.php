@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 \Inilim\Tool\Integer::__include('isNumeric');
 
@@ -10,7 +10,7 @@ namespace Inilim\Method\Integer;
  */
 function checkBetween($value, int $fromTo, int $toFrom)
 {
-    if (\is_string($value) && !\Inilim\Method\Integer\isNumeric($value)) {
+    if (\is_string($value) && !\Inilim\Tool\Method\Integer\isNumeric($value)) {
         throw new \TypeError('bad value: ' . $value);
     }
 

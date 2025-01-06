@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 \Inilim\Tool\Json::__include([
     'decode',
@@ -14,11 +14,11 @@ namespace Inilim\Method\Json;
 function isJsonAsArrList(?string $value)
 {
     if ($value === null) return false;
-    $value = \Inilim\Method\Json\decode($value);
+    $value = \Inilim\Tool\Method\Json\decode($value);
     if (
-        \Inilim\Method\Json\hasError()
+        \Inilim\Tool\Method\Json\hasError()
         || !\is_array($value)
-        || !\Inilim\Method\Arr\isList($value)
+        || !\Inilim\Tool\Method\Arr\isList($value)
     ) return false;
     return true;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -21,27 +21,27 @@ function dataSet(&$target, $key, $value, bool $overwrite = true)
     $segments = \is_array($key) ? $key : \explode('.', $key);
 
     if (($segment = \array_shift($segments)) === '*') {
-        if (!\Inilim\Method\Arr\accessible($target)) {
+        if (!\Inilim\Tool\Method\Arr\accessible($target)) {
             $target = [];
         }
 
         if ($segments) {
             foreach ($target as &$inner) {
-                \Inilim\Method\Arr\dataSet($inner, $segments, $value, $overwrite);
+                \Inilim\Tool\Method\Arr\dataSet($inner, $segments, $value, $overwrite);
             }
         } elseif ($overwrite) {
             foreach ($target as &$inner) {
                 $inner = $value;
             }
         }
-    } elseif (\Inilim\Method\Arr\accessible($target)) {
+    } elseif (\Inilim\Tool\Method\Arr\accessible($target)) {
         if ($segments) {
-            if (!\Inilim\Method\Arr\exists($target, $segment)) {
+            if (!\Inilim\Tool\Method\Arr\exists($target, $segment)) {
                 $target[$segment] = [];
             }
 
-            \Inilim\Method\Arr\dataSet($target[$segment], $segments, $value, $overwrite);
-        } elseif ($overwrite || !\Inilim\Method\Arr\exists($target, $segment)) {
+            \Inilim\Tool\Method\Arr\dataSet($target[$segment], $segments, $value, $overwrite);
+        } elseif ($overwrite || !\Inilim\Tool\Method\Arr\exists($target, $segment)) {
             $target[$segment] = $value;
         }
     } elseif (\is_object($target)) {
@@ -50,7 +50,7 @@ function dataSet(&$target, $key, $value, bool $overwrite = true)
                 $target->{$segment} = [];
             }
 
-            \Inilim\Method\Arr\dataSet($target->{$segment}, $segments, $value, $overwrite);
+            \Inilim\Tool\Method\Arr\dataSet($target->{$segment}, $segments, $value, $overwrite);
         } elseif ($overwrite || !isset($target->{$segment})) {
             $target->{$segment} = $value;
         }
@@ -58,7 +58,7 @@ function dataSet(&$target, $key, $value, bool $overwrite = true)
         $target = [];
 
         if ($segments) {
-            \Inilim\Method\Arr\dataSet($target[$segment], $segments, $value, $overwrite);
+            \Inilim\Tool\Method\Arr\dataSet($target[$segment], $segments, $value, $overwrite);
         } elseif ($overwrite) {
             $target[$segment] = $value;
         }

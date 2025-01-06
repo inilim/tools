@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 \Inilim\Tool\Json::__include('decode');
 \Inilim\Tool\Arr::__include('isList');
@@ -13,7 +13,7 @@ namespace Inilim\Method\Json;
 function tryDecodeAsArrList(?string $value, $default = null)
 {
     if ($value === null) return $default;
-    $value = \Inilim\Method\Json\decode($value);
-    if (\is_array($value) && \Inilim\Method\Arr\isList($value)) return $value;
+    $value = \Inilim\Tool\Method\Json\decode($value);
+    if (\is_array($value) && \Inilim\Tool\Method\Arr\isList($value)) return $value;
     return $default;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 \Inilim\Tool\Arr::__include([
     'collapse',
@@ -38,13 +38,13 @@ function dataGet($target, $key, $default = null)
             $result = [];
 
             foreach ($target as $item) {
-                $result[] = \Inilim\Method\Arr\dataGet($item, $key);
+                $result[] = \Inilim\Tool\Method\Arr\dataGet($item, $key);
             }
 
-            return \in_array('*', $key) ? \Inilim\Method\Arr\collapse($result) : $result;
+            return \in_array('*', $key) ? \Inilim\Tool\Method\Arr\collapse($result) : $result;
         }
 
-        if (\Inilim\Method\Arr\accessible($target) && \Inilim\Method\Arr\exists($target, $segment)) {
+        if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {
             $target = $target[$segment];
         } elseif (\is_object($target) && isset($target->{$segment})) {
             $target = $target->{$segment};

@@ -1,26 +1,10 @@
 <?php
 
-use Inilim\FuncCore\FuncCore;
 use NumberFormatter;
 use RuntimeException;
 
 class Integer
 {
-   function checkPositive(int $value): bool
-   {
-      return $value > -1;
-   }
-
-   function checkNegative(int $value): bool
-   {
-      return $value < 1;
-   }
-
-   function checkEqual(int $value, int $equal): bool
-   {
-      return $value === $equal;
-   }
-
    function checkMax(int $value, int $max): bool
    {
       return $value <= $max;

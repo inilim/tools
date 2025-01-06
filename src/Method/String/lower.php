@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 /**
  * Convert the given string to lower-case.

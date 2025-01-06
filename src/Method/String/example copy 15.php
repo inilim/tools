@@ -1,7 +1,7 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
-// \Inilim\Method\String\
+// \Inilim\Tool\Method\String\
 
 // \Inilim\Tool\Str::__include('');

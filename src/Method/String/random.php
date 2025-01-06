@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -11,7 +11,7 @@ Str::__include('__state');
  */
 function random(int $length = 16): string
 {
-    return (\Inilim\Method\String\__state()->randomStringFactory ?? static function ($length) {
+    return (\Inilim\Tool\Method\String\__state()->randomStringFactory ?? static function ($length) {
         $string = '';
 
         while (($len = \strlen($string)) < $length) {

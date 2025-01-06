@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 /**
- * @internal Inilim\Method\String
+ * @internal Inilim\Tool\Method\String
  * @return \Inilim\Internal\StrState
  */
 function __state()

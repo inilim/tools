@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -16,7 +16,7 @@ function endsWith(string $haystack, $needles)
     if (!\is_iterable($needles)) $needles = (array) $needles;
 
     foreach ($needles as $needle) {
-        if ((string) $needle !== '' && \Inilim\Method\String\__endsWith($haystack, $needle)) {
+        if ((string) $needle !== '' && \Inilim\Tool\Method\String\__endsWith($haystack, $needle)) {
             return true;
         }
     }

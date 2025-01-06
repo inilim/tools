@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 /**
  * Masks a portion of a string with a repeated character.

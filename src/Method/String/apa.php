@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -48,7 +48,7 @@ function apa(string $value): string
     for ($i = 0; $i < \sizeof($words); $i++) {
         $lowercaseWord = \mb_strtolower($words[$i]);
 
-        if (\Inilim\Method\String\__contains($lowercaseWord, '-')) {
+        if (\Inilim\Tool\Method\String\__contains($lowercaseWord, '-')) {
             $hyphenatedWords = \explode('-', $lowercaseWord);
 
             $hyphenatedWords = \array_map(function ($part) use ($minorWords) {

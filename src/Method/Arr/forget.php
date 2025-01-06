@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -20,7 +20,7 @@ function forget(array &$array, $keys): void
 
     foreach ($keys as $key) {
         // if the exact key exists in the top-level, remove it
-        if (\Inilim\Method\Arr\exists($array, $key)) {
+        if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
             unset($array[$key]);
 
             continue;

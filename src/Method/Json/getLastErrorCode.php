@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 function getLastErrorCode(): int
 {

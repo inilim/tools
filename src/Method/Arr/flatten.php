@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 /**
  * Flatten a multi-dimensional array into a single level.
@@ -15,7 +15,7 @@ function flatten(iterable $array, int $depth): array
         } else {
             $values = $depth === 1
                 ? \array_values($item)
-                : \Inilim\Method\Arr\flatten($item, $depth - 1);
+                : \Inilim\Tool\Method\Arr\flatten($item, $depth - 1);
 
             foreach ($values as $value) {
                 $result[] = $value;

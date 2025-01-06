@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 use Inilim\Tool\Integer;
 
@@ -15,10 +15,10 @@ Integer::__include([
  */
 function isTinyInt($value)
 {
-    if (!\Inilim\Method\Integer\isNumeric($value)) return false;
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|float|string $value */
     $value = \strval($value);
     /** @var string $value */
     if (\strlen(\ltrim($value, '-')) > Integer::TINY_INT_MAX_LENGHT) return false;
-    return \Inilim\Method\Integer\checkBetween($value, Integer::TINY_INT_MIN, Integer::TINY_INT_MAX);
+    return \Inilim\Tool\Method\Integer\checkBetween($value, Integer::TINY_INT_MIN, Integer::TINY_INT_MAX);
 }

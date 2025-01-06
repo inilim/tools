@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -11,7 +11,7 @@ Arr::__include('map');
  */
 function mapSpread(array $array, callable $callback): array
 {
-    return \Inilim\Method\Arr\map($array, static function ($chunk) use ($callback) {
+    return \Inilim\Tool\Method\Arr\map($array, static function ($chunk) use ($callback) {
         return $callback(...$chunk);
     });
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -21,27 +21,27 @@ Arr::__include([
  */
 function get($array, $key, $default = null)
 {
-    if (!\Inilim\Method\Arr\accessible($array)) {
-        return \Inilim\Method\Arr\value($default);
+    if (!\Inilim\Tool\Method\Arr\accessible($array)) {
+        return \Inilim\Tool\Method\Arr\value($default);
     }
 
     if ($key === null) {
         return $array;
     }
 
-    if (\Inilim\Method\Arr\exists($array, $key)) {
+    if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
         return $array[$key];
     }
 
     if (\strpos(\strval($key), '.') === false) {
-        return $array[$key] ?? \Inilim\Method\Arr\value($default);
+        return $array[$key] ?? \Inilim\Tool\Method\Arr\value($default);
     }
 
     foreach (\explode('.', \strval($key)) as $segment) {
-        if (\Inilim\Method\Arr\accessible($array) && \Inilim\Method\Arr\exists($array, $segment)) {
+        if (\Inilim\Tool\Method\Arr\accessible($array) && \Inilim\Tool\Method\Arr\exists($array, $segment)) {
             $array = $array[$segment];
         } else {
-            return \Inilim\Method\Arr\value($default);
+            return \Inilim\Tool\Method\Arr\value($default);
         }
     }
 

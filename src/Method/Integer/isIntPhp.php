@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 \Inilim\Tool\Integer::__include('isNumeric');
 
@@ -10,9 +10,9 @@ namespace Inilim\Method\Integer;
  */
 function isIntPHP(mixed $v): bool
 {
-    if (\Inilim\Method\Integer\isNumeric($v)) {
+    if (\Inilim\Tool\Method\Integer\isNumeric($v)) {
         /** @var string $v */
-        if (\strval(\intval($v)) == \strval($v)) return true;
+        if (\strval(\intval($v)) === \strval($v)) return true;
         return false;
     }
     return false;

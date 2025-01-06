@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -11,11 +11,11 @@ function sortRecursive(array $array, int $options = \SORT_REGULAR, bool $descend
 {
     foreach ($array as &$value) {
         if (\is_array($value)) {
-            $value = \Inilim\Method\Arr\sortRecursive($value, $options, $descending);
+            $value = \Inilim\Tool\Method\Arr\sortRecursive($value, $options, $descending);
         }
     }
 
-    if (\Inilim\Method\Arr\isAssoc($array)) {
+    if (\Inilim\Tool\Method\Arr\isAssoc($array)) {
         $descending
             ? \krsort($array, $options)
             : \ksort($array, $options);

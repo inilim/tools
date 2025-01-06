@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 use Inilim\Tool\Json;
 
@@ -26,7 +26,7 @@ function tryDecode(
     } catch (\JsonException $e) {
         return $default;
     }
-    if (\Inilim\Method\Json\hasError()) {
+    if (\Inilim\Tool\Method\Json\hasError()) {
         return $default;
     }
     return $value;

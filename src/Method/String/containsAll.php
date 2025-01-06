@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -14,7 +14,7 @@ Str::__include('contains');
 function containsAll(string $haystack, iterable $needles, bool $ignore_case = false)
 {
     foreach ($needles as $needle) {
-        if (!\Inilim\Method\String\contains($haystack, $needle, $ignore_case)) {
+        if (!\Inilim\Tool\Method\String\contains($haystack, $needle, $ignore_case)) {
             return false;
         }
     }

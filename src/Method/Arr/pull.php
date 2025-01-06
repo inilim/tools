@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -18,7 +18,7 @@ Arr::__include([
  */
 function pull(array &$array, $key, $default = null)
 {
-    $value = \Inilim\Method\Arr\get($array, $key, $default);
-    \Inilim\Method\Arr\forget($array, $key);
+    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    \Inilim\Tool\Method\Arr\forget($array, $key);
     return $value;
 }

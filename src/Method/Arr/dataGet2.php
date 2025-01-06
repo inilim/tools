@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 \Inilim\Tool\Arr::__include([
     'dataGet',
@@ -25,18 +25,18 @@ function dataGet2($target, $key, $default = null)
         return $target;
     }
 
-    if (\is_array($key) || \is_int($key) || !\Inilim\Method\String\contains($key, '*')) {
-        return \Inilim\Method\Arr\dataGet($target, $key, $default);
+    if (\is_array($key) || \is_int($key) || !\Inilim\Tool\Method\String\contains($key, '*')) {
+        return \Inilim\Tool\Method\Arr\dataGet($target, $key, $default);
     }
 
-    $keys = \Inilim\Method\Arr\getDotKeys($target, $key);
+    $keys = \Inilim\Tool\Method\Arr\getDotKeys($target, $key);
 
     if (!$keys) {
         return $default;
     }
 
-    return \Inilim\Method\Arr\dataGet(
-        \Inilim\Method\Arr\undot(\Inilim\Method\Arr\only(\Inilim\Method\Arr\dot($target), $keys)),
+    return \Inilim\Tool\Method\Arr\dataGet(
+        \Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target), $keys)),
         $key,
         $default
     );

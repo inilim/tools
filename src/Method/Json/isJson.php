@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 use Inilim\Tool\Json;
 
@@ -12,6 +12,6 @@ Json::__include([
 function isJson(?string $value): bool
 {
     if ($value === null) return false;
-    \Inilim\Method\Json\decode($value);
-    return !\Inilim\Method\Json\hasError();
+    \Inilim\Tool\Method\Json\decode($value);
+    return !\Inilim\Tool\Method\Json\hasError();
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 /**
  * the method does not throw exceptions JsonException, instead it returns the default value

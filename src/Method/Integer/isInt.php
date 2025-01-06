@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 use Inilim\Tool\Integer;
 
@@ -17,7 +17,7 @@ Integer::__include([
  */
 function isInt($value)
 {
-    if (!\Inilim\Method\Integer\isNumeric($value)) return false;
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|string $value */
     $value = \strval($value);
     /** @var string $value */
@@ -25,6 +25,6 @@ function isInt($value)
     if ($len < Integer::MAX_LEN_32_BIT) return true;
     if ($len > Integer::MAX_LEN_32_BIT) return false;
     // длина 10
-    $last = \Inilim\Method\String\__startsWith($value, '-') ? 8 : 7;
-    return \Inilim\Method\Integer\__compare(\str_split(\ltrim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
+    $last = \Inilim\Tool\Method\String\__startsWith($value, '-') ? 8 : 7;
+    return \Inilim\Tool\Method\Integer\__compare(\str_split(\ltrim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
 }

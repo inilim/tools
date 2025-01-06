@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -15,7 +15,7 @@ function undot($array): array
     $results = [];
 
     foreach ($array as $key => $value) {
-        \Inilim\Method\Arr\set($results, $key, $value);
+        \Inilim\Tool\Method\Arr\set($results, $key, $value);
     }
 
     return $results;

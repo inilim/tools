@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -14,7 +14,7 @@ Arr::__include('getKeyOffset');
  */
 function insertAfter(array &$array, $key, array $inserted)
 {
-    if ($key === null || ($offset = \Inilim\Method\Arr\getKeyOffset($array, $key)) === null) {
+    if ($key === null || ($offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $key)) === null) {
         $offset = \sizeof($array) - 1;
     }
 

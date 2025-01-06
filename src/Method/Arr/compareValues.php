@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 \Inilim\Tool\Arr::__include([
     'sortRecursive',
@@ -14,7 +14,7 @@ function compareValues(array $a, array $b, array ...$arrays): bool
     $arrays[] = $b;
     $arrays = \array_map(
         static fn($array) => \md5(\serialize($array)),
-        \Inilim\Method\Arr\sortRecursive(\Inilim\Method\Arr\resetKeysRecursive($arrays))
+        \Inilim\Tool\Method\Arr\sortRecursive(\Inilim\Tool\Method\Arr\resetKeysRecursive($arrays))
     );
-    return \sizeof(\Inilim\Method\Arr\unique($arrays)) === 1;
+    return \sizeof(\Inilim\Tool\Method\Arr\unique($arrays)) === 1;
 }

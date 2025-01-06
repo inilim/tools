@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 \Inilim\Tool\Arr::__include('dataSet');
 
@@ -13,5 +13,5 @@ namespace Inilim\Method\Arr;
  */
 function dataFill(&$target, $key, $value)
 {
-    return \Inilim\Method\Arr\dataSet($target, $key, $value, false);
+    return \Inilim\Tool\Method\Arr\dataSet($target, $key, $value, false);
 }

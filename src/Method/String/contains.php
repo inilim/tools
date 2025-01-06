@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -20,7 +20,7 @@ function contains(string $haystack, $needles, bool $ignoreCase = false)
     foreach ($needles as $needle) {
         if ($ignoreCase) $needle = \mb_strtolower($needle, 'UTF-8');
 
-        if ($needle !== '' && \Inilim\Method\String\__contains($haystack, $needle)) {
+        if ($needle !== '' && \Inilim\Tool\Method\String\__contains($haystack, $needle)) {
             return true;
         }
     }

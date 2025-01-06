@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 \Inilim\Tool\Json::__include([
     'decode',
@@ -10,7 +10,7 @@ namespace Inilim\Method\Json;
 function isJsonAsString(?string $value): bool
 {
     if ($value === null) return false;
-    $value = \Inilim\Method\Json\decode($value);
-    if (\Inilim\Method\Json\hasError()) return false;
+    $value = \Inilim\Tool\Method\Json\decode($value);
+    if (\Inilim\Tool\Method\Json\hasError()) return false;
     return \is_string($value);
 }

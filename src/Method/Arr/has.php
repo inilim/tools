@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -27,12 +27,12 @@ function has($array, $keys)
     foreach ($keys as $key) {
         $subKeyArray = $array;
 
-        if (\Inilim\Method\Arr\exists($array, $key)) {
+        if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
             continue;
         }
 
         foreach (\explode('.', $key) as $segment) {
-            if (\Inilim\Method\Arr\accessible($subKeyArray) && \Inilim\Method\Arr\exists($subKeyArray, $segment)) {
+            if (\Inilim\Tool\Method\Arr\accessible($subKeyArray) && \Inilim\Tool\Method\Arr\exists($subKeyArray, $segment)) {
                 $subKeyArray = $subKeyArray[$segment];
             } else {
                 return false;

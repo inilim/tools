@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Json;
+namespace Inilim\Tool\Method\Json;
 
 use Inilim\Tool\Json;
 
@@ -16,8 +16,8 @@ function isJsonAsArrOrObj(?string $value)
 {
     if ($value === null) return false;
 
-    $value = \Inilim\Method\Json\decode($value);
-    if (\Inilim\Method\Json\hasError()) return false;
+    $value = \Inilim\Tool\Method\Json\decode($value);
+    if (\Inilim\Tool\Method\Json\hasError()) return false;
 
     return \is_array($value) || \is_object($value);
 }

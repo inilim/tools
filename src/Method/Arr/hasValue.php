@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -11,7 +11,7 @@ Arr::__include('wrap');
  */
 function hasValue(array $array, $values, bool $strict = false): bool
 {
-    $values = \Inilim\Method\Arr\wrap($values);
+    $values = \Inilim\Tool\Method\Arr\wrap($values);
 
     if (!$array || !$values) {
         return false;

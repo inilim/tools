@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
@@ -15,14 +15,14 @@ Arr::__include([
  */
 function hasValueAny(array $array, $values, bool $strict = false)
 {
-    $values = \Inilim\Method\Arr\wrap($values);
+    $values = \Inilim\Tool\Method\Arr\wrap($values);
 
     if (!$array || !$values) {
         return false;
     }
 
     foreach ($values as $value) {
-        if (\Inilim\Method\Arr\hasValue($array, $value, $strict)) {
+        if (\Inilim\Tool\Method\Arr\hasValue($array, $value, $strict)) {
             return true;
         }
     }

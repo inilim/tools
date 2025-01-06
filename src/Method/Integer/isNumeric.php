@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Integer;
+namespace Inilim\Tool\Method\Integer;
 
 /**
  * функция не проверяет длину значения, будет true даже с bigint и более.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\String;
+namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
@@ -11,5 +11,5 @@ Str::__include('trim');
  */
 function squish(string $value): string
 {
-    return \preg_replace('#(\s|\x{3164}|\x{1160})+#u', ' ', \Inilim\Method\String\trim($value));
+    return \preg_replace('#(\s|\x{3164}|\x{1160})+#u', ' ', \Inilim\Tool\Method\String\trim($value));
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Method\Arr;
+namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
-// \Inilim\Method\Arr\
+// \Inilim\Tool\Method\Arr\
 
 Arr::__include('getKeyOffset');
 
@@ -14,7 +14,7 @@ Arr::__include('getKeyOffset');
  */
 function insertBefore(array &$array, $key, array $inserted): void
 {
-    $offset = $key === null ? 0 : (int) \Inilim\Method\Arr\getKeyOffset($array, $key);
+    $offset = $key === null ? 0 : (int) \Inilim\Tool\Method\Arr\getKeyOffset($array, $key);
     $array = \array_slice($array, 0, $offset, true)
         + $inserted
         + \array_slice($array, $offset, \sizeof($array), true);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Method\Other;
+namespace Inilim\Tool\Method\Other;
 
 /**
  * @param object|class-string $objectOrClass
