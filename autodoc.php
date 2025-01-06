@@ -63,7 +63,7 @@ foreach ($files as $file) {
     // исключить файлы
     // ------------------------------------------------------------------
 
-    if (\in_array($filename, ['Example', 'Property'])) {
+    if (\in_array($filename, ['example', '__state'])) {
         continue;
     }
 
@@ -129,7 +129,7 @@ foreach ($files as $file) {
             // если один метод под несколькоми именами
             // ------------------------------------------------------------------
 
-            $tm = \array_filter($ALIAS, fn ($m) => $m === $res->name);
+            $tm = \array_filter($ALIAS, fn($m) => $m === $res->name);
             $tm = \array_keys($tm);
 
             foreach ($tm as $item) {

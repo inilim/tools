@@ -20,6 +20,7 @@
     ],
     "require": {
         "php": ">=7.4",
+        "ext-mbstring": "*",
         "inilim/singleton": "dev-main",
         "inilim/lazy_method": "dev-main"
     },
