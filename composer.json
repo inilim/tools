@@ -28,7 +28,8 @@
     "require-dev": {
         "phpstan/phpstan": "@stable",
         "inilim/dump": "dev-main",
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "inilim/parse_lazy_method": "dev-main"
     },
     "scripts": {
         "tests": [
