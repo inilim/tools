@@ -11,9 +11,10 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkMax($num, $max)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
+    if (!isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
-    } elseif (!\Inilim\Tool\Method\Integer\isNumeric($max)) {
+    }
+    if (!isNumeric($max)) {
         throw new \InvalidArgumentException('$max must be numeric');
     }
 

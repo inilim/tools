@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
 function URLProtocolsAsClosure(): \Closure
 {

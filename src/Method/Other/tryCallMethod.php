@@ -2,9 +2,7 @@
 
 namespace Inilim\Tool\Method\Other;
 
-use Inilim\Tool\Other;
-
-Other::__include('tryCallCallable');
+\Inilim\Tool\Other::__include('tryCallCallable');
 
 /**
  * @template T
@@ -14,5 +12,5 @@ Other::__include('tryCallCallable');
  */
 function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null, ?\Throwable &$exception = null)
 {
-    return Other::tryCallCallable([$objectOrClass, $methodName], $args, $default, $exception);
+    return tryCallCallable([$objectOrClass, $methodName], $args, $default, $exception);
 }

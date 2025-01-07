@@ -12,5 +12,5 @@ Json::__include('tryEncode');
  */
 function isJsonSerializable($value, int $flags = 0, int $depth = 512)
 {
-    return \Inilim\Tool\Method\Json\tryEncode($value, $flags, $depth) === null ? false : true;
+    return tryEncode($value, $flags, $depth) === null ? false : true;
 }

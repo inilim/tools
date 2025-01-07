@@ -11,8 +11,8 @@ Integer::__include([
 
 function getRandomIntByLength(int $length): int
 {
-    $maxLen = \Inilim\Tool\Method\Integer\getCurLenMaxInt();
-    $length = \Inilim\Tool\Method\Integer\clamp($length, 1, $maxLen);
+    $maxLen = getCurLenMaxInt();
+    $length = clamp($length, 1, $maxLen);
     if ($length === 1) {
         $start = 0;
         $end   = 9;

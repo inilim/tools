@@ -11,9 +11,10 @@ namespace Inilim\Tool\Method\Integer;
  */
 function equals($num1, $num2)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($num1)) {
+    if (!isNumeric($num1)) {
         throw new \InvalidArgumentException('$num1 must be numeric');
-    } elseif (!\Inilim\Tool\Method\Integer\isNumeric($num2)) {
+    }
+    if (!isNumeric($num2)) {
         throw new \InvalidArgumentException('$num2 must be numeric');
     }
 

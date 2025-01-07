@@ -16,7 +16,7 @@ Json::__include('decode');
 function tryDecodeAsArray(?string $value, $default = null)
 {
     if ($value === null) return $default;
-    $value = \Inilim\Tool\Method\Json\decode($value, true);
+    $value = decode($value, true);
     if (\is_array($value)) return $value;
     return $default;
 }

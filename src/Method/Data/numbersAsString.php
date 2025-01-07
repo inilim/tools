@@ -1,12 +1,10 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
-use Inilim\Tool\Data;
-
-Data::__include('numbersAsClosure');
+\Inilim\Tool\Data::__include('numbersAsClosure');
 
 function numbersAsString(string $separator = ""): string
 {
-    return \implode($separator, Data::numbersAsClosure()->__invoke());
+    return \implode($separator, numbersAsClosure()->__invoke());
 }

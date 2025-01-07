@@ -26,7 +26,7 @@ function tryDecode(
     } catch (\JsonException $e) {
         return $default;
     }
-    if (\Inilim\Tool\Method\Json\hasError()) {
+    if (hasError()) {
         return $default;
     }
     return $value;

@@ -1,12 +1,10 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
-use Inilim\Tool\Data;
-
-Data::__include('cyrillicAlphabetAsClosure');
+\Inilim\Tool\Data::__include('cyrillicAlphabetAsClosure');
 
 function cyrillicAlphabetAsString(string $separator = "", bool $upper = false): string
 {
-    return \implode($separator, Data::cyrillicAlphabetAsClosure($upper)->__invoke());
+    return \implode($separator, cyrillicAlphabetAsClosure($upper)->__invoke());
 }

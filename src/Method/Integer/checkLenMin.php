@@ -4,6 +4,7 @@ namespace Inilim\Tool\Method\Integer;
 
 \Inilim\Tool\Integer::__include([
     'isNumeric',
+    'lenNumeric',
     'checkMin',
 ]);
 
@@ -14,12 +15,12 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkLenMin($num, $min)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
+    if (!isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
 
-    return \Inilim\Tool\Method\Integer\checkMin(
-        \strlen(\ltrim(\strval($num), '-')),
+    return checkMin(
+        lenNumeric($num),
         $min
     );
 }

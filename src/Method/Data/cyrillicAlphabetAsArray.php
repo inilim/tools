@@ -1,12 +1,10 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
-use Inilim\Tool\Data;
-
-Data::__include('cyrillicAlphabetAsClosure');
+\Inilim\Tool\Data::__include('cyrillicAlphabetAsClosure');
 
 function cyrillicAlphabetAsArray(bool $upper = false): array
 {
-    return Data::cyrillicAlphabetAsClosure($upper)->__invoke();
+    return cyrillicAlphabetAsClosure($upper)->__invoke();
 }

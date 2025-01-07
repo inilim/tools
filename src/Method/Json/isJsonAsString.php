@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Json;
 function isJsonAsString(?string $value): bool
 {
     if ($value === null) return false;
-    $value = \Inilim\Tool\Method\Json\decode($value);
-    if (\Inilim\Tool\Method\Json\hasError()) return false;
+    $value = decode($value);
+    if (hasError()) return false;
     return \is_string($value);
 }

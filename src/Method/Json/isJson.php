@@ -12,6 +12,6 @@ Json::__include([
 function isJson(?string $value): bool
 {
     if ($value === null) return false;
-    \Inilim\Tool\Method\Json\decode($value);
-    return !\Inilim\Tool\Method\Json\hasError();
+    decode($value);
+    return !hasError();
 }

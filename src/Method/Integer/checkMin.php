@@ -11,9 +11,10 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkMin($num, $min)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
+    if (!isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
-    } elseif (!\Inilim\Tool\Method\Integer\isNumeric($min)) {
+    }
+    if (!isNumeric($min)) {
         throw new \InvalidArgumentException('$min must be numeric');
     }
 

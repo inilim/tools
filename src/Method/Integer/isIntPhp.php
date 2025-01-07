@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Integer;
  */
 function isIntPHP(mixed $v): bool
 {
-    if (\Inilim\Tool\Method\Integer\isNumeric($v)) {
+    if (isNumeric($v)) {
         /** @var string $v */
         if (\strval(\intval($v)) === \strval($v)) return true;
         return false;

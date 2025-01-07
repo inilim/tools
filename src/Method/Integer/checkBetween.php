@@ -6,18 +6,28 @@ namespace Inilim\Tool\Method\Integer;
 
 /**
  * @param numeric-string|int $num
+ * @param numeric-string|int $fromTo
+ * @param numeric-string|int $toFrom
  * @return bool
  */
-function checkBetween($num, int $fromTo, int $toFrom)
+function checkBetween($num, $fromTo, $toFrom)
 {
-    if (\is_string($num) && !\Inilim\Tool\Method\Integer\isNumeric($num)) {
+    if (!isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
+    if (!isNumeric($fromTo)) {
+        throw new \InvalidArgumentException('$fromTo must be numeric');
+    }
+    if (!isNumeric($toFrom)) {
+        throw new \InvalidArgumentException('$toFrom must be numeric');
+    }
 
-    $v = \intval($num);
+    $toFrom = \intval($toFrom);
+    $fromTo = \intval($fromTo);
+    $num    = \intval($num);
 
     if ($fromTo > $toFrom) {
         list($toFrom, $fromTo) = [$fromTo, $toFrom];
     }
-    return $v >= $fromTo && $v <= $toFrom;
+    return $num >= $fromTo && $num <= $toFrom;
 }

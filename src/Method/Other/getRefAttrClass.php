@@ -2,20 +2,26 @@
 
 namespace Inilim\Tool\Method\Other;
 
-use Inilim\Tool\Other;
-
-Other::__include('getReflectionClass');
+\Inilim\Tool\Other::__include('getReflectionClass');
 
 /**
- * @param object|class-string|\ReflectionClass $class_or_obj_or_ref
+ * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @return \ReflectionAttribute[]|array{}|null
  */
-function getRefAttrClass($class_or_obj_or_ref, bool $throw = false): ?array
+function getRefAttrClass($classOrObjOrRef, bool $throw = false): ?array
 {
-    if ($class_or_obj_or_ref instanceof \ReflectionClass) {
-        $ref = $class_or_obj_or_ref;
-    } else {
-        $ref = Other::getReflectionClass($class_or_obj_or_ref, $throw);
+    if (\PHP_VERSION_ID < 80000) {
+        return null;
     }
-    return $ref?->getAttributes();
+
+    if ($classOrObjOrRef instanceof \ReflectionClass) {
+        $ref = $classOrObjOrRef;
+    } else {
+        $ref = getReflectionClass($classOrObjOrRef, $throw);
+    }
+
+    if ($ref === null) {
+        return null;
+    }
+    return $ref->getAttributes();
 }

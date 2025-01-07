@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Json;
 function tryDecodeAsArrList(?string $value, $default = null)
 {
     if ($value === null) return $default;
-    $value = \Inilim\Tool\Method\Json\decode($value);
+    $value = decode($value);
     if (\is_array($value) && \Inilim\Tool\Method\Arr\isList($value)) return $value;
     return $default;
 }

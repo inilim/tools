@@ -1,12 +1,10 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
-use Inilim\Tool\Data;
-
-Data::__include('latinAlphabetAsClosure');
+\Inilim\Tool\Data::__include('latinAlphabetAsClosure');
 
 function latinAlphabetAsString(string $separator = "", bool $upper = false): string
 {
-    return \implode($separator, Data::latinAlphabetAsClosure($upper)->__invoke());
+    return \implode($separator, latinAlphabetAsClosure($upper)->__invoke());
 }

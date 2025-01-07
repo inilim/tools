@@ -36,17 +36,7 @@ class Str
      */
     protected $random_string_factory;
 
-    /**
-     * Replace consecutive instances of a given character with a single character in the given string.
-     *
-     * @param  string  $string
-     * @param  string  $character
-     * @return string
-     */
-    function deduplicate(string $string, string $character = ' ')
-    {
-        return \preg_replace('/' . \preg_quote($character, '/') . '+/u', $character, $string);
-    }
+
 
     /**
      * Converts line endings to \n used on Unix-like systems.
@@ -104,59 +94,13 @@ class Str
 
 
 
-    /**
-     * Remove all whitespace from the beginning of a string.
-     *
-     * @param  string  $value
-     * @param  string|null  $charlist
-     * @return string
-     */
-    function ltrim($value, $charlist = null)
-    {
-        if ($charlist === null) {
-            return \preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}]+~u', '', $value) ?? \ltrim($value);
-        }
 
-        return \ltrim($value, $charlist);
-    }
 
-    /**
-     * Remove all whitespace from the end of a string.
-     *
-     * @param  string  $value
-     * @param  string|null  $charlist
-     * @return string
-     */
-    function rtrim($value, $charlist = null)
-    {
-        if ($charlist === null) {
-            return \preg_replace('~[\s\x{FEFF}\x{200B}\x{200E}]+$~u', '', $value) ?? \rtrim($value);
-        }
 
-        return \rtrim($value, $charlist);
-    }
 
-    /**
-     * Return the remainder of a string after the first occurrence of a given value.
-     */
-    function after(string $subject, string $search): string
-    {
-        return $search === '' ? $subject : \array_reverse(\explode($search, $subject, 2))[0];
-    }
 
-    /**
-     * Return the remainder of a string after the last occurrence of a given value.
-     */
-    function afterLast(string $subject, string $search): string
-    {
-        if ($search === '') return $subject;
 
-        $position = \strrpos($subject, $search);
 
-        if ($position === false) return $subject;
-
-        return \substr($subject, $position + \strlen($search));
-    }
 
     /**
      * Transliterate a UTF-8 value to ASCII.
@@ -174,51 +118,13 @@ class Str
         return ASCII::to_transliterate($string, $unknown, $strict);
     }
 
-    /**
-     * Get the portion of a string before the first occurrence of a given value.
-     */
-    function before(string $subject, string $search): string
-    {
-        if ($search === '') return $subject;
 
-        $result = \strstr($subject, $search, true);
 
-        return $result === false ? $subject : $result;
-    }
 
-    /**
-     * Get the portion of a string before the last occurrence of a given value.
-     */
-    function beforeLast(string $subject, string $search): string
-    {
-        if ($search === '') return $subject;
-        $pos = \mb_strrpos($subject, $search);
 
-        if ($pos === false) return $subject;
-        return $this->substr($subject, 0, $pos);
-    }
 
-    /**
-     * Get the portion of a string between two given values.
-     */
-    function between(string $subject, string $from, string $to): string
-    {
-        if ($from === '' || $to === '') return $subject;
 
-        return $this->beforeLast($this->after($subject, $from), $to);
-    }
 
-    /**
-     * Get the smallest possible portion of a string between two given values.
-     */
-    function betweenFirst(string $subject, string $from, string $to): string
-    {
-        if ($from === '' || $to === '') {
-            return $subject;
-        }
-
-        return $this->before($this->after($subject, $from), $to);
-    }
 
     /**
      * Convert a value to camel case.
@@ -231,32 +137,6 @@ class Str
 
         // return $this->camel_cache[$value] = \lcfirst($this->studly($value));
         return \lcfirst($this->studly($value));
-    }
-
-    /**
-     * Convert the case of a string.
-     */
-    function convertCase(string $string, int $mode = \MB_CASE_FOLD, ?string $encoding = 'UTF-8'): string
-    {
-        return \mb_convert_case($string, $mode, $encoding);
-    }
-
-    /**
-     * Cap a string with a single instance of a given value.
-     */
-    function finish(string $value, string $cap): string
-    {
-        $quoted = \preg_quote($cap, '/');
-
-        return \preg_replace('/(?:' . $quoted . ')+$/u', '', $value) . $cap;
-    }
-
-    /**
-     * Wrap the string with the given strings.
-     */
-    function wrap(string $value, string $before, ?string $after = null): string
-    {
-        return $before . $value . ($after ??= $before);
     }
 
     /**
@@ -331,23 +211,6 @@ class Str
         return \preg_match(\str_replace('LARAVEL_PROTOCOLS', $protocol_list, $pattern), $value) > 0;
     }
 
-
-
-    /**
-     * Determine if a given value is a valid ULID.
-     *
-     * @param  mixed  $value
-     * @return bool
-     */
-    // function isUlid($value)
-    // {
-    //     if (!\is_string($value)) {
-    //         return false;
-    //     }
-
-    //     return Ulid::isValid($value);
-    // }
-
     /**
      * Convert a string to kebab case.
      */
@@ -362,204 +225,6 @@ class Str
     function createRandomStringsNormally(): void
     {
         $this->random_string_factory = null;
-    }
-
-    /**
-     * Repeat the given string.
-     */
-    function repeat(string $string, int $times): string
-    {
-        return \str_repeat($string, $times);
-    }
-
-    /**
-     * Replace the first occurrence of a given value in the string.
-     */
-    function replaceFirst(string $search, string $replace, string $subject): string
-    {
-        if ($search === '') return $subject;
-
-        $position = \strpos($subject, $search);
-
-        if ($position !== false) {
-            return \substr_replace($subject, $replace, $position, \strlen($search));
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Replace the first occurrence of the given value if it appears at the start of the string.
-     */
-    function replaceStart(string $search, string $replace, string $subject): string
-    {
-        if ($search === '') return $subject;
-
-        if ($this->startsWith($subject, $search)) {
-            return $this->replaceFirst($search, $replace, $subject);
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Replace the last occurrence of a given value in the string.
-     */
-    function replaceLast(string $search, string $replace, string $subject): string
-    {
-        if ($search === '') return $subject;
-
-        $position = \strrpos($subject, $search);
-
-        if ($position !== false) {
-            return \substr_replace($subject, $replace, $position, \strlen($search));
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Replace the last occurrence of a given value if it appears at the end of the string.
-     */
-    function replaceEnd(string $search, string $replace, string $subject): string
-    {
-        if ($search === '') return $subject;
-
-        if ($this->endsWith($subject, $search)) {
-            return $this->replaceLast($search, $replace, $subject);
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Replace the patterns matching the given regular expression.
-     * @return string|string[]|null
-     */
-    function replaceMatches(string $pattern, Closure|string $replace, array|string $subject, int $limit = -1): string|array|null
-    {
-        if ($replace instanceof Closure) {
-            return \preg_replace_callback($pattern, $replace, $subject, $limit);
-        }
-
-        return \preg_replace($pattern, $replace, $subject, $limit);
-    }
-
-    /**
-     * Replace a given value in the string sequentially with an array. |
-     * 
-     * $string = 'The event will take place between ? and ?'; |
-     * $replaced = Str::replaceArray('?', ['8:30', '9:00'], $string); |
-     *
-     * @param  string[] $replace
-     */
-    function replaceArray(string $search, array $replace, string $subject): string
-    {
-        // if ($replace instanceof \Traversable) {
-        //     $replace = collect($replace)->all();
-        // }
-
-        $segments = \explode($search, $subject);
-        $result = \array_shift($segments);
-
-        foreach ($segments as $segment) {
-            $result .= $this->toStringOr(\array_shift($replace) ?? $search, $search) . $segment;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Reverse the given string.
-     */
-    function reverse(string $value): string
-    {
-        return \implode(\array_reverse(\mb_str_split($value)));
-    }
-
-    /**
-     * Begin a string with a single instance of a given value.
-     */
-    function start(string $value, string $prefix): string
-    {
-        $quoted = \preg_quote($prefix, '/');
-
-        return $prefix . \preg_replace('/^(?:' . $quoted . ')+/u', '', $value);
-    }
-
-
-
-
-
-
-
-    /**
-     * Convert a string to snake case.
-     */
-    function snake(string $value, string $delimiter = '_'): string
-    {
-        // $key = $value;
-
-        // if (isset($this->snake_cache[$key][$delimiter])) {
-        // return $this->snake_cache[$key][$delimiter];
-        // }
-
-        if (!\ctype_lower($value)) {
-            $value = \preg_replace('/\s+/u', '', \ucwords($value));
-
-            $value = $this->lower(\preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $value));
-        }
-
-        // return $this->snake_cache[$key][$delimiter] = $value;
-        return $value;
-    }
-
-
-
-
-
-    /**
-     * Convert a value to studly caps case.
-     */
-    function studly(string $value): string
-    {
-        // $key = $value;
-
-        // if (isset($this->studly_cache[$key])) return $this->studly_cache[$key];
-
-        $words = \explode(' ', $this->replace(['-', '_'], ' ', $value));
-
-        $studly_words = \array_map(fn($word) => $this->ucfirst($word), $words);
-
-        // return $this->studly_cache[$key] = \implode($studly_words);
-        return \implode($studly_words);
-    }
-
-    /**
-     * Returns the number of substring occurrences.
-     */
-    function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null): int
-    {
-        if ($length !== null) {
-            return \substr_count($haystack, $needle, $offset, $length);
-        }
-
-        return \substr_count($haystack, $needle, $offset);
-    }
-
-    /**
-     * Replace text within a portion of a string.
-     * @param  string|string[]  $string
-     * @param  string|string[]  $replace
-     * @param  int|int[]  $offset
-     * @param  int|int[]|null  $length
-     * @return string|string[]
-     */
-    function substrReplace(string|array $string, string|array $replace, int|array $offset = 0, int|array|null $length = null): string|array
-    {
-        if ($length === null) $length = \strlen($string);
-
-        return \substr_replace($string, $replace, $offset, $length);
     }
 
     /**

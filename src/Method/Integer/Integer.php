@@ -5,55 +5,6 @@ use RuntimeException;
 
 class Integer
 {
-
-
-
-
-   function checkLenBetween(int $value, int $from_to, int $to_from): bool
-   {
-      return $this->checkBetween(\strlen(\strval($value)), $from_to, $to_from);
-   }
-
-   function checkLenEqual(int $value, int $equal): bool
-   {
-      return $this->checkEqual(\strlen(\strval($value)), $equal);
-   }
-
-   /**
-    * @param numeric-string|int $value
-    */
-   // function between(string|int $value, int $min, int $max): bool
-   // {
-   //    $v = \intval($value);
-   //    return $v >= $min && $v <= $max;
-   // }
-
-
-
-
-
-
-
-
-
-   // ------------------------------------------------------------------
-   // ___
-   // ------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    // ------------------------------------------------------------------
    // ------------------------------------------------------------------
    // ------------------------------------------------------------------

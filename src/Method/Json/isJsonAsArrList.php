@@ -14,9 +14,9 @@ namespace Inilim\Tool\Method\Json;
 function isJsonAsArrList(?string $value)
 {
     if ($value === null) return false;
-    $value = \Inilim\Tool\Method\Json\decode($value);
+    $value = decode($value);
     if (
-        \Inilim\Tool\Method\Json\hasError()
+        hasError()
         || !\is_array($value)
         || !\Inilim\Tool\Method\Arr\isList($value)
     ) return false;

@@ -1,15 +1,13 @@
 <?php
 
-namespace Inilim\Data\Method;
+namespace Inilim\Tool\Method\Data;
 
-use Inilim\Tool\Data;
-
-Data::__include('magicMethodsAsClosure');
+\Inilim\Tool\Data::__include('magicMethodsAsClosure');
 
 /**
  * @return string[]
  */
 function magicMethodsAsArray()
 {
-    return Data::magicMethodsAsClosure()->__invoke();
+    return magicMethodsAsClosure()->__invoke();
 }

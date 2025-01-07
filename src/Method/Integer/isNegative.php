@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Integer;
  */
 function isNegative($num)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
+    if (!isNumeric($num)) {
         throw new \InvalidArgumentException('Give not numeric');
     }
     return \intval($num) < 0;

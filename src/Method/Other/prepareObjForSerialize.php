@@ -2,9 +2,7 @@
 
 namespace Inilim\Tool\Method\Other;
 
-use Inilim\Tool\Other;
-
-Other::__include([
+\Inilim\Tool\Other::__include([
     'tryCallMethod',
     'prepareArrayForSerializeRecursive',
     'getExceptionDetails',
@@ -18,11 +16,11 @@ function prepareObjForSerialize(object $obj)
     $e = null;
 
     if ($obj instanceof \JsonSerializable) {
-        $v = Other::tryCallMethod($obj, 'jsonSerialize', exception: $e);
+        $v = tryCallMethod($obj, 'jsonSerialize', [], null, $e);
         // jsonSerialize return mixed OR throw exception
         if ($e === null) {
             $v = [$v];
-            Other::prepareArrayForSerializeRecursive($v);
+            prepareArrayForSerializeRecursive($v);
             return $v[0];
         }
     }
@@ -30,35 +28,35 @@ function prepareObjForSerialize(object $obj)
 
     if ($obj instanceof \Serializable) {
         // __serialize return mixed OR throw exception
-        $v = Other::tryCallMethod($obj, '__serialize', exception: $e);
+        $v = tryCallMethod($obj, '__serialize', [], null, $e);
         if ($e === null) {
             $v = [$v];
-            Other::prepareArrayForSerializeRecursive($v);
+            prepareArrayForSerializeRecursive($v);
             return $v[0];
         }
     }
     $e = null;
 
     if (\PHP_VERSION_ID >= 80100 && $obj instanceof \UnitEnum) {
-        return $obj::class . '::' . $obj->name;
+        return \get_class($obj) . '::' . $obj->name;
     }
 
     if (\method_exists($obj, 'toArray')) {
-        $v = Other::tryCallMethod($obj, 'toArray', exception: $e);
+        $v = tryCallMethod($obj, 'toArray', [], null, $e);
         if ($e === null && \is_array($v)) {
-            Other::prepareArrayForSerializeRecursive($v);
+            prepareArrayForSerializeRecursive($v);
             return $v;
         }
     }
     $e = null;
 
     if ($obj instanceof \Throwable) {
-        $v = Other::getExceptionDetails($obj, true);
-        Other::prepareArrayForSerializeRecursive($v);
+        $v = getExceptionDetails($obj, true);
+        prepareArrayForSerializeRecursive($v);
         return $v;
     }
 
     $v = (array)$obj;
-    Other::prepareArrayForSerializeRecursive($v);
+    prepareArrayForSerializeRecursive($v);
     return $v;
 }

@@ -6,6 +6,7 @@ use Inilim\Tool\Integer;
 
 Integer::__include([
     'isNumeric',
+    'lenNumeric',
     'checkBetween',
 ]);
 
@@ -14,10 +15,10 @@ Integer::__include([
  */
 function isSmallInt(mixed $value)
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
+    if (!isNumeric($value)) return false;
     /** @var int|float|string $value */
     $value = \strval($value);
     /** @var string $value */
-    if (\strlen(\ltrim($value, '-')) > Integer::SMALL_INT_MAX_LENGHT) return false;
-    return \Inilim\Tool\Method\Integer\checkBetween($value, Integer::SMALL_INT_MIN, Integer::SMALL_INT_MAX);
+    if (lenNumeric($value) > Integer::SMALL_INT_MAX_LENGHT) return false;
+    return checkBetween($value, Integer::SMALL_INT_MIN, Integer::SMALL_INT_MAX);
 }

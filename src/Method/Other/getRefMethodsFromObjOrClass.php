@@ -2,33 +2,33 @@
 
 namespace Inilim\Tool\Method\Other;
 
-use Inilim\Tool\Other;
-use Inilim\Tool\Data;
-
-Data::__include('magicMethodsAsArray');
-Other::__include('getReflectionClass');
+\Inilim\Tool\Data::__include('magicMethodsAsArray');
+\Inilim\Tool\Other::__include('getReflectionClass');
 
 /**
- * @param object|class-string|\ReflectionClass $class_or_obj_or_ref
+ * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @param string[] $except_methods
  * @return \ReflectionMethod[]|array{}
  */
 function getRefMethodsFromObjOrClass(
-    $class_or_obj_or_ref,
+    $classOrObjOrRef,
     array $except_methods          = [],
     bool $throw                    = false,
     bool $except_magic_methods     = false,
     bool $except_private_methods   = false,
     bool $except_protected_methods = false,
     bool $except_public_methods    = false,
-    bool $except_parent_methods    = false,
+    bool $except_parent_methods    = false
 ): array {
 
-    if ($class_or_obj_or_ref instanceof \ReflectionClass) {
-        $ref = $class_or_obj_or_ref;
+    if ($classOrObjOrRef instanceof \ReflectionClass) {
+        $ref = $classOrObjOrRef;
     } else {
-        $ref = Other::getReflectionClass($class_or_obj_or_ref, $throw);
+        $ref = getReflectionClass($classOrObjOrRef, $throw);
     }
+
+    if ($ref === null) return [];
+
     $methods = $ref->getMethods();
 
     if (!$methods) {
@@ -61,7 +61,7 @@ function getRefMethodsFromObjOrClass(
     }
 
     if ($methods && $except_magic_methods) {
-        $magic_methods = Data::magicMethodsAsArray();
+        $magic_methods = \Inilim\Tool\Method\Data\magicMethodsAsArray();
         $methods = \array_filter($methods, static fn($m) => !\in_array($m->name, $magic_methods));
         unset($magic_methods);
     }
