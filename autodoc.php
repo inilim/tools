@@ -7,7 +7,7 @@ use Inilim\ParseLazyMethod\ParseFunction;
 use Inilim\ParseLazyMethod\ResultParseFunction;
 use Inilim\ParseLazyMethod\FormationFunctionAnnotation;
 
-use Inilim\Array\Array_;
+use Inilim\Tool\Arr;
 
 // php parser
 use PhpParser\Error;
@@ -28,12 +28,13 @@ Dump::init();
 // ------------------------------------------------------------------
 
 
-$file_doc = __DIR__ . '/autodoc.txt';
+$file_doc = __DIR__ . '/autodoc_arr.txt';
 
-$ref_class = new \ReflectionClass(Array_::class);
-$ALIAS = $ref_class->getConstant('ALIAS');
-$NAMESPACE = $ref_class->getConstant('NAMESPACE');
-$NAMESPACE = '\\' . \trim($NAMESPACE, '\\');
+$ref_class   = new \ReflectionClass(Arr::class);
+$ALIAS       = $ref_class->getConstant('ALIAS');
+$NAMESPACE   = $ref_class->getConstant('NAMESPACE');
+$PATH_TO_DIR = $ref_class->getConstant('PATH_TO_DIR');
+$NAMESPACE   = '\\' . \trim($NAMESPACE, '\\');
 unset($ref_class);
 $count_alias = \array_count_values($ALIAS);
 $flip_alias = \array_flip($ALIAS);
@@ -45,7 +46,7 @@ $node_finder = new NodeFinder;
 $s = new ParseFunction;
 $fa = new FormationFunctionAnnotation;
 
-$files = \glob(__DIR__ . '\src\Method\*.php');
+$files = \glob($PATH_TO_DIR . '/*.php');
 
 \file_put_contents($file_doc, '');
 
@@ -134,28 +135,28 @@ foreach ($files as $file) {
 
             foreach ($tm as $item) {
                 $t = new ResultParseFunction(
-                    name: $res->name,
-                    return_type: $res->return_type,
-                    args: $res->args,
-                    comments: $res->comments,
-                    annotations: $res->annotations,
+                    $res->name, // $name
+                    $res->return_type, // $return_type
+                    $res->args, // $args
+                    $res->comments, // $comments
+                    $res->annotations, // $annotations
                 );
                 $docs[] = $fa->__invoke($t);
-                $docs[] = $fa->__invoke($t, static: true);
+                $docs[] = $fa->__invoke($t, true);
                 $docs[] = $param;
                 $docs[] = '';
             }
         } else {
 
             $t = new ResultParseFunction(
-                name: $flip_alias[$res->name],
-                return_type: $res->return_type,
-                args: $res->args,
-                comments: $res->comments,
-                annotations: $res->annotations,
+                $flip_alias[$res->name], // $name
+                $res->return_type, // $return_type
+                $res->args, // $args
+                $res->comments, // $comments
+                $res->annotations, // $annotations
             );
             $docs[] = $fa->__invoke($t);
-            $docs[] = $fa->__invoke($t, static: true);
+            $docs[] = $fa->__invoke($t, true);
             $docs[] = $param;
             $docs[] = '';
         }
@@ -174,7 +175,7 @@ foreach ($files as $file) {
     // ------------------------------------------------------------------
 
     $docs[] = $fa->__invoke($res);
-    $docs[] = $fa->__invoke($res, static: true);
+    $docs[] = $fa->__invoke($res, true);
     $docs[] = $param;
     $docs[] = '';
 }

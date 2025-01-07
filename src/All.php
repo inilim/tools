@@ -19,6 +19,8 @@ final class All
 
     static function __include($name)
     {
-        // 
+        foreach ($name as $class => $n) {
+            self::NAMESPACES[$class] . $n;
+        }
     }
 }

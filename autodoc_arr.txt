@@ -1,7 +1,3 @@
-<?php
-
-namespace Inilim\Tool;
-
 /**
  * @method  bool accessible(mixed $value) 
  * @method  static  bool accessible(mixed $value) 
@@ -276,9 +272,3 @@ namespace Inilim\Tool;
  * @param \Inilim\Tool\Method\Arr\wrap
  * 
  */
-final class Arr extends \Inilim\LazyMethod\LazyMethodAbstract
-{
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Arr',
-        PATH_TO_DIR             = __DIR__ . '/Method/Arr',
-        ALIAS                   = [];
-}

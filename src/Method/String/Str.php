@@ -56,19 +56,7 @@ class Str
         return $this->length($str) >= $min;
     }
 
-    function checkLenBetween(string $str, int $from_to, int $to_from): bool
-    {
-        if ($from_to > $to_from) {
-            list($to_from, $from_to) = [$from_to, $to_from];
-        }
-        $len = $this->length($str);
-        return $len >= $from_to && $len <= $to_from;
-    }
 
-    function checkLenEqual(string $str, int $equal): bool
-    {
-        return $this->length($str) === $equal;
-    }
 
     function startsWithUrlBeforePath(string $url): bool
     {
