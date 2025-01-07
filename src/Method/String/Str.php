@@ -36,28 +36,6 @@ class Str
      */
     protected $random_string_factory;
 
-
-
-    /**
-     * Converts line endings to \n used on Unix-like systems.
-     * Line endings are: \n, \r, \r\n, U+2028 line separator, U+2029 paragraph separator.
-     */
-    function unixNewLines(string $s, string $replacement = "\n"): string
-    {
-        return \preg_replace("#\r\n?|\u{2028}|\u{2029}#", $replacement, $s);
-    }
-
-    /**
-     * Converts line endings to platform-specific, i.e. \r\n on Windows and \n elsewhere.
-     * Line endings are: \n, \r, \r\n, U+2028 line separator, U+2029 paragraph separator.
-     */
-    function platformNewLines(string $s): string
-    {
-        return $this->unixNewLines($s, \PHP_EOL);
-    }
-
-
-
     function empty(string $str): bool
     {
         return $str === '';
@@ -92,65 +70,10 @@ class Str
         return $this->length($str) === $equal;
     }
 
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Transliterate a UTF-8 value to ASCII.
-     */
-    function ascii(string $value, string $language = 'en'): string
-    {
-        return ASCII::to_ascii($value, $language);
-    }
-
-    /**
-     * Transliterate a string to its closest ASCII representation.
-     */
-    function transliterate(string $string, string|null $unknown = '?', bool|null $strict = false): string
-    {
-        return ASCII::to_transliterate($string, $unknown, $strict);
-    }
-
-
-
-
-
-
-
-
-
-    /**
-     * Convert a value to camel case.
-     */
-    function camel(string $value): string
-    {
-        // if (isset($this->camel_cache[$value])) {
-        // return $this->camel_cache[$value];
-        // }
-
-        // return $this->camel_cache[$value] = \lcfirst($this->studly($value));
-        return \lcfirst($this->studly($value));
-    }
-
-    /**
-     * Determine if a given string is 7 bit ASCII.
-     */
-    function isAscii(string $value): bool
-    {
-        return ASCII::is_ascii($value);
-    }
-
     function startsWithUrlBeforePath(string $url): bool
     {
         if (!\str_contains($url, '://')) return false;
-        $t = \preg_split('#[\/\?]#', $this->removeWWW($url), 4);
+        $t = \preg_split('#[\/\?]#', $this->removeWww($url), 4);
         if (\sizeof($t) < 3) return false;
         $t = \implode('/', \array_slice($t, 0, 3));
         return $this->isUrl($t);
@@ -212,114 +135,10 @@ class Str
     }
 
     /**
-     * Convert a string to kebab case.
-     */
-    function kebab(string $value): string
-    {
-        return $this->snake($value, '-');
-    }
-
-    /**
      * Indicate that random strings should be created normally and not using a custom factory.
      */
     function createRandomStringsNormally(): void
     {
         $this->random_string_factory = null;
-    }
-
-    /**
-     * Swap multiple keywords in a string with other keywords.
-     */
-    function swap(array $map, string $subject): string
-    {
-        return \strtr($subject, $map);
-    }
-
-    /**
-     * Take the first or last {$limit} characters of a string.
-     */
-    function take(string $string, int $limit): string
-    {
-        if ($limit < 0) {
-            return $this->substr($string, $limit);
-        }
-
-        return $this->substr($string, 0, $limit);
-    }
-
-    /**
-     * Make a string's first character lowercase.
-     */
-    function lcfirst(string $string): string
-    {
-        return $this->lower($this->substr($string, 0, 1)) . $this->substr($string, 1);
-    }
-
-    /**
-     * Make a string's first character uppercase.
-     */
-    function ucfirst(string $string): string
-    {
-        return $this->upper($this->substr($string, 0, 1)) . $this->substr($string, 1);
-    }
-
-
-
-    /**
-     * Get the number of words a string contains.
-     */
-    function wordCount(string $string, string|null $characters = null): int
-    {
-        return \str_word_count($string, 0, $characters);
-    }
-
-    /**
-     * Wrap a string to a given number of characters.
-     */
-    function wordWrap(string $string, int $characters = 75, string $break = "\n", bool $cut_long_words = false): string
-    {
-        return \wordwrap($string, $characters, $break, $cut_long_words);
-    }
-
-    /**
-     * Remove all strings from the casing caches.
-     */
-    // function flushCache(): void
-    // {
-    // $this->snake_cache  = [];
-    // $this->camel_cache  = [];
-    // $this->studly_cache = [];
-    // }
-
-    /**
-     * Remove the given string(s) if it exists at the end of the haystack.
-     *
-     * @param  string|array  $needle
-     */
-    function chopEnd(string $subject, $needle): string
-    {
-        foreach ((array) $needle as $n) {
-            if (\str_ends_with($subject, $n)) {
-                return \substr($subject, 0, -\strlen($n));
-            }
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Remove the given string(s) if it exists at the start of the haystack.
-     *
-     * @param  string|array  $needle
-     */
-    function chopStart(string $subject, $needle): string
-    {
-        foreach ((array) $needle as $n) {
-            if (\str_starts_with($subject, $n)) {
-                return \substr($subject, \strlen($n));
-            }
-        }
-
-        return $subject;
     }
 }
