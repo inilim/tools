@@ -8,7 +8,12 @@ use Inilim\ParseLazyMethod\ResultParseFunction;
 use Inilim\ParseLazyMethod\FormationFunctionAnnotation;
 
 use Inilim\Tool\Arr;
-
+use Inilim\Tool\Data;
+use Inilim\Tool\Double;
+use Inilim\Tool\Integer;
+use Inilim\Tool\Json;
+use Inilim\Tool\Other;
+use Inilim\Tool\Str;
 // php parser
 use PhpParser\Error;
 use PhpParser\ParserFactory;
@@ -26,11 +31,10 @@ Dump::init();
 // ------------------------------------------------------------------
 // 
 // ------------------------------------------------------------------
+$class = Str::class;
 
-
-$file_doc = __DIR__ . '/autodoc_arr.txt';
-
-$ref_class   = new \ReflectionClass(Arr::class);
+$file_doc    = \sprintf(__DIR__ . '/autodoc_%s.txt', \basename($class));
+$ref_class   = new \ReflectionClass($class);
 $ALIAS       = $ref_class->getConstant('ALIAS');
 $NAMESPACE   = $ref_class->getConstant('NAMESPACE');
 $PATH_TO_DIR = $ref_class->getConstant('PATH_TO_DIR');
@@ -64,7 +68,7 @@ foreach ($files as $file) {
     // исключить файлы
     // ------------------------------------------------------------------
 
-    if (\in_array($filename, ['example', '__state'])) {
+    if (\in_array($filename, ['example', '__state', '__compare'])) {
         continue;
     }
 
@@ -72,7 +76,7 @@ foreach ($files as $file) {
     // 
     // ------------------------------------------------------------------
 
-    $param = '@param ' . $NAMESPACE . '\\' . $filename;
+    $param = '@see ' . $NAMESPACE . '\\' . $filename . '()';
 
     // ------------------------------------------------------------------
     // 
@@ -174,7 +178,9 @@ foreach ($files as $file) {
     // 
     // ------------------------------------------------------------------
 
-    $docs[] = $fa->__invoke($res);
+    // @param ...
+    // $docs[] = $fa->__invoke($res);
+    // @param static ...
     $docs[] = $fa->__invoke($res, true);
     $docs[] = $param;
     $docs[] = '';

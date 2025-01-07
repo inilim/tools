@@ -1,274 +1,206 @@
 /**
- * @method  bool accessible(mixed $value) 
  * @method  static  bool accessible(mixed $value) 
- * @param \Inilim\Tool\Method\Arr\accessible
+ * @see \Inilim\Tool\Method\Arr\accessible()
  * 
- * @method  array add(array $array, string $key, mixed $value) 
  * @method  static  array add(array $array, string $key, mixed $value) 
- * @param \Inilim\Tool\Method\Arr\add
+ * @see \Inilim\Tool\Method\Arr\add()
  * 
- * @method  array collapse(iterable $array) 
  * @method  static  array collapse(iterable $array) 
- * @param \Inilim\Tool\Method\Arr\collapse
+ * @see \Inilim\Tool\Method\Arr\collapse()
  * 
- * @method  bool compareValues(array $a, array $b, array $arrays) 
  * @method  static  bool compareValues(array $a, array $b, array $arrays) 
- * @param \Inilim\Tool\Method\Arr\compareValues
+ * @see \Inilim\Tool\Method\Arr\compareValues()
  * 
- * @method  array crossJoin(iterable ... $arrays) 
  * @method  static  array crossJoin(iterable ... $arrays) 
- * @param \Inilim\Tool\Method\Arr\crossJoin
+ * @see \Inilim\Tool\Method\Arr\crossJoin()
  * 
- * @method  mixed dataFill(mixed $target, string|string[] $key, mixed $value) 
  * @method  static  mixed dataFill(mixed $target, string|string[] $key, mixed $value) 
- * @param \Inilim\Tool\Method\Arr\dataFill
+ * @see \Inilim\Tool\Method\Arr\dataFill()
  * 
- * @method  mixed dataGet(mixed $target, string|array|int|null $key, mixed $default = null) 
  * @method  static  mixed dataGet(mixed $target, string|array|int|null $key, mixed $default = null) 
- * @param \Inilim\Tool\Method\Arr\dataGet
+ * @see \Inilim\Tool\Method\Arr\dataGet()
  * 
- * @method  mixed dataGet2(mixed $target, string|array|int|null $key, mixed $default = null) 
  * @method  static  mixed dataGet2(mixed $target, string|array|int|null $key, mixed $default = null) 
- * @param \Inilim\Tool\Method\Arr\dataGet2
+ * @see \Inilim\Tool\Method\Arr\dataGet2()
  * 
- * @method  mixed dataSet(mixed $target, string|string[] $key, mixed $value, bool $overwrite = true) 
  * @method  static  mixed dataSet(mixed $target, string|string[] $key, mixed $value, bool $overwrite = true) 
- * @param \Inilim\Tool\Method\Arr\dataSet
+ * @see \Inilim\Tool\Method\Arr\dataSet()
  * 
- * @method  array divide(array $array) 
  * @method  static  array divide(array $array) 
- * @param \Inilim\Tool\Method\Arr\divide
+ * @see \Inilim\Tool\Method\Arr\divide()
  * 
- * @method  array dot(iterable $array, string $prepend = '') 
  * @method  static  array dot(iterable $array, string $prepend = '') 
- * @param \Inilim\Tool\Method\Arr\dot
+ * @see \Inilim\Tool\Method\Arr\dot()
  * 
- * @method  void each(array $array, callable(TValue,TKey): mixed $callback) 
  * @method  static  void each(array $array, callable(TValue,TKey): mixed $callback) 
- * @param \Inilim\Tool\Method\Arr\each
+ * @see \Inilim\Tool\Method\Arr\each()
  * 
- * @method  void eachSpread(array $array, callable(...mixed): mixed $callback) 
  * @method  static  void eachSpread(array $array, callable(...mixed): mixed $callback) 
- * @param \Inilim\Tool\Method\Arr\eachSpread
+ * @see \Inilim\Tool\Method\Arr\eachSpread()
  * 
- * @method  array except(array $array, (string|int)[]|string|int $keys) 
  * @method  static  array except(array $array, (string|int)[]|string|int $keys) 
- * @param \Inilim\Tool\Method\Arr\except
+ * @see \Inilim\Tool\Method\Arr\except()
  * 
- * @method  array exceptNestedArray(array $array, (string|int)[]|string|int $keys, int $depth = 1) 
  * @method  static  array exceptNestedArray(array $array, (string|int)[]|string|int $keys, int $depth = 1) 
- * @param \Inilim\Tool\Method\Arr\exceptNestedArray
+ * @see \Inilim\Tool\Method\Arr\exceptNestedArray()
  * 
- * @method  bool exists(\ArrayAccess|array $array, string|int $key) 
  * @method  static  bool exists(\ArrayAccess|array $array, string|int $key) 
- * @param \Inilim\Tool\Method\Arr\exists
+ * @see \Inilim\Tool\Method\Arr\exists()
  * 
- * @method  array flatten(iterable $array, int $depth) 
  * @method  static  array flatten(iterable $array, int $depth) 
- * @param \Inilim\Tool\Method\Arr\flatten
+ * @see \Inilim\Tool\Method\Arr\flatten()
  * 
- * @method  void forget(array $array, (string|int)[]|string|int $keys) 
  * @method  static  void forget(array $array, (string|int)[]|string|int $keys) 
- * @param \Inilim\Tool\Method\Arr\forget
+ * @see \Inilim\Tool\Method\Arr\forget()
  * 
- * @method  mixed|D get(\ArrayAccess|array $array, string|int|null $key, D $default = null) 
  * @method  static  mixed|D get(\ArrayAccess|array $array, string|int|null $key, D $default = null) 
- * @param \Inilim\Tool\Method\Arr\get
+ * @see \Inilim\Tool\Method\Arr\get()
  * 
- * @method  string[] getDotKeys(array $target, string $dotPattern) 
  * @method  static  string[] getDotKeys(array $target, string $dotPattern) 
- * @param \Inilim\Tool\Method\Arr\getDotKeys
+ * @see \Inilim\Tool\Method\Arr\getDotKeys()
  * 
- * @method  null|int getKeyOffset(array $array, string|int $key) 
  * @method  static  null|int getKeyOffset(array $array, string|int $key) 
- * @param \Inilim\Tool\Method\Arr\getKeyOffset
+ * @see \Inilim\Tool\Method\Arr\getKeyOffset()
  * 
- * @method  bool has(\ArrayAccess|array $array, (string|int)[]|string|int $keys) 
  * @method  static  bool has(\ArrayAccess|array $array, (string|int)[]|string|int $keys) 
- * @param \Inilim\Tool\Method\Arr\has
+ * @see \Inilim\Tool\Method\Arr\has()
  * 
- * @method  bool hasAny(\ArrayAccess|array $array, (string|int)[]|int|string|null $keys) 
  * @method  static  bool hasAny(\ArrayAccess|array $array, (string|int)[]|int|string|null $keys) 
- * @param \Inilim\Tool\Method\Arr\hasAny
+ * @see \Inilim\Tool\Method\Arr\hasAny()
  * 
- * @method  bool hasValue(array $array, mixed[]|mixed $values, bool $strict = false) 
  * @method  static  bool hasValue(array $array, mixed[]|mixed $values, bool $strict = false) 
- * @param \Inilim\Tool\Method\Arr\hasValue
+ * @see \Inilim\Tool\Method\Arr\hasValue()
  * 
- * @method  bool hasValueAny(array $array, mixed[]|mixed $values, bool $strict = false) 
  * @method  static  bool hasValueAny(array $array, mixed[]|mixed $values, bool $strict = false) 
- * @param \Inilim\Tool\Method\Arr\hasValueAny
+ * @see \Inilim\Tool\Method\Arr\hasValueAny()
  * 
- * @method  TValue|false head(array<TValue> $array) 
  * @method  static  TValue|false head(array<TValue> $array) 
- * @param \Inilim\Tool\Method\Arr\head
+ * @see \Inilim\Tool\Method\Arr\head()
  * 
- * @method  void insertAfter(array $array, string|int|null $key, array $inserted) 
  * @method  static  void insertAfter(array $array, string|int|null $key, array $inserted) 
- * @param \Inilim\Tool\Method\Arr\insertAfter
+ * @see \Inilim\Tool\Method\Arr\insertAfter()
  * 
- * @method  void insertBefore(array $array, string|int|null $key, array $inserted) 
  * @method  static  void insertBefore(array $array, string|int|null $key, array $inserted) 
- * @param \Inilim\Tool\Method\Arr\insertBefore
+ * @see \Inilim\Tool\Method\Arr\insertBefore()
  * 
- * @method  bool isAssoc(array $array) 
  * @method  static  bool isAssoc(array $array) 
- * @param \Inilim\Tool\Method\Arr\isAssoc
+ * @see \Inilim\Tool\Method\Arr\isAssoc()
  * 
- * @method  bool isList(array $array) 
  * @method  static  bool isList(array $array) 
- * @param \Inilim\Tool\Method\Arr\isList
+ * @see \Inilim\Tool\Method\Arr\isList()
  * 
- * @method  bool isMultidimensional(array $array) 
  * @method  static  bool isMultidimensional(array $array) 
- * @param \Inilim\Tool\Method\Arr\isMultidimensional
+ * @see \Inilim\Tool\Method\Arr\isMultidimensional()
  * 
- * @method  string join(array $array, string $glue, string $final_glue = '') 
  * @method  static  string join(array $array, string $glue, string $final_glue = '') 
- * @param \Inilim\Tool\Method\Arr\join
+ * @see \Inilim\Tool\Method\Arr\join()
  * 
- * @method  array keysLower(array $array) 
  * @method  static  array keysLower(array $array) 
- * @param \Inilim\Tool\Method\Arr\keysLower
+ * @see \Inilim\Tool\Method\Arr\keysLower()
  * 
- * @method  array keysLowerNestedArray(array $array, int $depth = 1) 
  * @method  static  array keysLowerNestedArray(array $array, int $depth = 1) 
- * @param \Inilim\Tool\Method\Arr\keysLowerNestedArray
+ * @see \Inilim\Tool\Method\Arr\keysLowerNestedArray()
  * 
- * @method  array keysUpper(array $array) 
  * @method  static  array keysUpper(array $array) 
- * @param \Inilim\Tool\Method\Arr\keysUpper
+ * @see \Inilim\Tool\Method\Arr\keysUpper()
  * 
- * @method  array keysUpperNestedArray(array $array, int $depth = 1) 
  * @method  static  array keysUpperNestedArray(array $array, int $depth = 1) 
- * @param \Inilim\Tool\Method\Arr\keysUpperNestedArray
+ * @see \Inilim\Tool\Method\Arr\keysUpperNestedArray()
  * 
- * @method  TValue|false last(array<TValue> $array) 
  * @method  static  TValue|false last(array<TValue> $array) 
- * @param \Inilim\Tool\Method\Arr\last
+ * @see \Inilim\Tool\Method\Arr\last()
  * 
- * @method  TReturn[] map(array<TKey,TValue> $array, callable(TValue,TKey):TReturn $callback) 
  * @method  static  TReturn[] map(array<TKey,TValue> $array, callable(TValue,TKey):TReturn $callback) 
- * @param \Inilim\Tool\Method\Arr\map
+ * @see \Inilim\Tool\Method\Arr\map()
  * 
- * @method  array mapFilter(array<TKey,TValue> $array, callable(TValue,TKey):mixed $callback, mixed $filteringValue = null, bool $preserveKeys = false) 
  * @method  static  array mapFilter(array<TKey,TValue> $array, callable(TValue,TKey):mixed $callback, mixed $filteringValue = null, bool $preserveKeys = false) 
- * @param \Inilim\Tool\Method\Arr\mapFilter
+ * @see \Inilim\Tool\Method\Arr\mapFilter()
  * 
- * @method  array mapSpread(array $array, callable $callback) 
  * @method  static  array mapSpread(array $array, callable $callback) 
- * @param \Inilim\Tool\Method\Arr\mapSpread
+ * @see \Inilim\Tool\Method\Arr\mapSpread()
  * 
- * @method  array mapToGroups(array<TKey,TValue> $array, callable(TValue,TKey) $callback) 
  * @method  static  array mapToGroups(array<TKey,TValue> $array, callable(TValue,TKey) $callback) 
- * @param \Inilim\Tool\Method\Arr\mapToGroups
+ * @see \Inilim\Tool\Method\Arr\mapToGroups()
  * 
- * @method  array mapWithKeys(array<TKey, TValue> $array, callable(TValue, TKey): array<TMapWithKeysKey, TMapWithKeysValue> $callback) 
  * @method  static  array mapWithKeys(array<TKey, TValue> $array, callable(TValue, TKey): array<TMapWithKeysKey, TMapWithKeysValue> $callback) 
- * @param \Inilim\Tool\Method\Arr\mapWithKeys
+ * @see \Inilim\Tool\Method\Arr\mapWithKeys()
  * 
- * @method  array only(array $array, (string|int)[]|string|int $keys) 
  * @method  static  array only(array $array, (string|int)[]|string|int $keys) 
- * @param \Inilim\Tool\Method\Arr\only
+ * @see \Inilim\Tool\Method\Arr\only()
  * 
- * @method  array onlyNestedArray(array $array, (string|int)[]|string|int $keys, int $depth = 1) 
  * @method  static  array onlyNestedArray(array $array, (string|int)[]|string|int $keys, int $depth = 1) 
- * @param \Inilim\Tool\Method\Arr\onlyNestedArray
+ * @see \Inilim\Tool\Method\Arr\onlyNestedArray()
  * 
- * @method  array pluck(iterable $array, string|array|int|null $value, string|string[]|null $key = null) 
  * @method  static  array pluck(iterable $array, string|array|int|null $value, string|string[]|null $key = null) 
- * @param \Inilim\Tool\Method\Arr\pluck
+ * @see \Inilim\Tool\Method\Arr\pluck()
  * 
- * @method  array prepend(array $array, mixed $value, mixed $key = null) 
  * @method  static  array prepend(array $array, mixed $value, mixed $key = null) 
- * @param \Inilim\Tool\Method\Arr\prepend
+ * @see \Inilim\Tool\Method\Arr\prepend()
  * 
- * @method  array prependKeysWith(array $array, string $prepend_with) 
  * @method  static  array prependKeysWith(array $array, string $prepend_with) 
- * @param \Inilim\Tool\Method\Arr\prependKeysWith
+ * @see \Inilim\Tool\Method\Arr\prependKeysWith()
  * 
- * @method  mixed pull(array $array, string|int $key, mixed $default = null) 
  * @method  static  mixed pull(array $array, string|int $key, mixed $default = null) 
- * @param \Inilim\Tool\Method\Arr\pull
+ * @see \Inilim\Tool\Method\Arr\pull()
  * 
- * @method  string query(array $array) 
  * @method  static  string query(array $array) 
- * @param \Inilim\Tool\Method\Arr\query
+ * @see \Inilim\Tool\Method\Arr\query()
  * 
- * @method  TValue|TValue[]|array<TKey,TValue>|array{} random(array<TKey,TValue> $array, int|null $number = null, bool $preserve_keys = false) 
  * @method  static  TValue|TValue[]|array<TKey,TValue>|array{} random(array<TKey,TValue> $array, int|null $number = null, bool $preserve_keys = false) 
- * @param \Inilim\Tool\Method\Arr\random
+ * @see \Inilim\Tool\Method\Arr\random()
  * 
- * @method  bool renameDotKey(array $array, string $oldKey, string $newKey) 
  * @method  static  bool renameDotKey(array $array, string $oldKey, string $newKey) 
- * @param \Inilim\Tool\Method\Arr\renameDotKey
+ * @see \Inilim\Tool\Method\Arr\renameDotKey()
  * 
- * @method  bool renameKey(array $array, string|int $oldKey, string|int $newKey) 
  * @method  static  bool renameKey(array $array, string|int $oldKey, string|int $newKey) 
- * @param \Inilim\Tool\Method\Arr\renameKey
+ * @see \Inilim\Tool\Method\Arr\renameKey()
  * 
- * @method  array resetKeysRecursive(array $array) 
  * @method  static  array resetKeysRecursive(array $array) 
- * @param \Inilim\Tool\Method\Arr\resetKeysRecursive
+ * @see \Inilim\Tool\Method\Arr\resetKeysRecursive()
  * 
- * @method  array set(array $array, null|string $key, mixed $value) 
  * @method  static  array set(array $array, null|string $key, mixed $value) 
- * @param \Inilim\Tool\Method\Arr\set
+ * @see \Inilim\Tool\Method\Arr\set()
  * 
- * @method  bool setValueIfEmpty(array $array, string $key_dot,  $value) 
  * @method  static  bool setValueIfEmpty(array $array, string $key_dot,  $value) 
- * @param \Inilim\Tool\Method\Arr\setValueIfEmpty
+ * @see \Inilim\Tool\Method\Arr\setValueIfEmpty()
  * 
- * @method  bool setValueIfNotExists(array $array, string $key_dot, mixed $value) 
  * @method  static  bool setValueIfNotExists(array $array, string $key_dot, mixed $value) 
- * @param \Inilim\Tool\Method\Arr\setValueIfNotExists
+ * @see \Inilim\Tool\Method\Arr\setValueIfNotExists()
  * 
- * @method  bool setValueIfNull(array $array, string $key_dot, mixed $value) 
  * @method  static  bool setValueIfNull(array $array, string $key_dot, mixed $value) 
- * @param \Inilim\Tool\Method\Arr\setValueIfNull
+ * @see \Inilim\Tool\Method\Arr\setValueIfNull()
  * 
- * @method  array shuffle(array $array, null|int $seed = null) 
  * @method  static  array shuffle(array $array, null|int $seed = null) 
- * @param \Inilim\Tool\Method\Arr\shuffle
+ * @see \Inilim\Tool\Method\Arr\shuffle()
  * 
- * @method  TArray sortBy(TArray $arr, string $by, int $options = sort_regular, bool $descending = false) 
  * @method  static  TArray sortBy(TArray $arr, string $by, int $options = sort_regular, bool $descending = false) 
- * @param \Inilim\Tool\Method\Arr\sortBy
+ * @see \Inilim\Tool\Method\Arr\sortBy()
  * 
- * @method  array sortRecursive(array $array, int $options = sort_regular, bool $descending = true) 
  * @method  static  array sortRecursive(array $array, int $options = sort_regular, bool $descending = true) 
- * @param \Inilim\Tool\Method\Arr\sortRecursive
+ * @see \Inilim\Tool\Method\Arr\sortRecursive()
  * 
- * @method  array sortRecursiveDesc(array $array, int $options = sort_regular) 
  * @method  static  array sortRecursiveDesc(array $array, int $options = sort_regular) 
- * @param \Inilim\Tool\Method\Arr\sortRecursiveDesc
+ * @see \Inilim\Tool\Method\Arr\sortRecursiveDesc()
  * 
- * @method  array<int,array<K,T>> splitIntoChunks(array<K,T> $array, int $chunks, bool $preserve_keys = false, bool $remove_empty_chunks = false) 
  * @method  static  array<int,array<K,T>> splitIntoChunks(array<K,T> $array, int $chunks, bool $preserve_keys = false, bool $remove_empty_chunks = false) 
- * @param \Inilim\Tool\Method\Arr\splitIntoChunks
+ * @see \Inilim\Tool\Method\Arr\splitIntoChunks()
  * 
- * @method  TArray take(TArray $array, int $limit) 
  * @method  static  TArray take(TArray $array, int $limit) 
- * @param \Inilim\Tool\Method\Arr\take
+ * @see \Inilim\Tool\Method\Arr\take()
  * 
- * @method  array undot(iterable $array) 
  * @method  static  array undot(iterable $array) 
- * @param \Inilim\Tool\Method\Arr\undot
+ * @see \Inilim\Tool\Method\Arr\undot()
  * 
- * @method  TValue[] unique(TValue[] $array) 
  * @method  static  TValue[] unique(TValue[] $array) 
- * @param \Inilim\Tool\Method\Arr\unique
+ * @see \Inilim\Tool\Method\Arr\unique()
  * 
- * @method  mixed value(mixed $value) 
  * @method  static  mixed value(mixed $value) 
- * @param \Inilim\Tool\Method\Arr\value
+ * @see \Inilim\Tool\Method\Arr\value()
  * 
- * @method  TValue[]|array<TKey,TValue> where(array<TKey,TValue> $array, callable(TValue,TKey) $callback, bool $preserve_keys = true) 
  * @method  static  TValue[]|array<TKey,TValue> where(array<TKey,TValue> $array, callable(TValue,TKey) $callback, bool $preserve_keys = true) 
- * @param \Inilim\Tool\Method\Arr\where
+ * @see \Inilim\Tool\Method\Arr\where()
  * 
- * @method  array wrap(mixed $value) 
  * @method  static  array wrap(mixed $value) 
- * @param \Inilim\Tool\Method\Arr\wrap
+ * @see \Inilim\Tool\Method\Arr\wrap()
  * 
  */

@@ -1,7 +1,3 @@
-<?php
-
-namespace Inilim\Tool;
-
 /**
  * @method  static  bool __contains(string $haystack, string $needle) 
  * @see \Inilim\Tool\Method\String\__contains()
@@ -262,9 +258,3 @@ namespace Inilim\Tool;
  * @see \Inilim\Tool\Method\String\wrap()
  * 
  */
-final class Str extends \Inilim\LazyMethod\LazyMethodAbstract
-{
-    protected const NAMESPACE   = 'Inilim\Tool\Method\String',
-        PATH_TO_DIR             = __DIR__ . '/Method/String',
-        ALIAS                   = [];
-}

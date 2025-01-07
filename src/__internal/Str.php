@@ -1,12 +1,10 @@
 <?php
 
-namespace Inilim\String;
-
 use Inilim\FuncCore\FuncCore;
 use Closure;
 use voku\helper\ASCII;
 
-class Str
+class Str____
 {
     /**
      * The cache of snake-cased words.

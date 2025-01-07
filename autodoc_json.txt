@@ -1,7 +1,3 @@
-<?php
-
-namespace Inilim\Tool;
-
 /**
  * @method  static  mixed dataGetFromJson(null|string $json, string $dotKey, mixed $default = null) 
  * @see \Inilim\Tool\Method\Json\dataGetFromJson()
@@ -76,9 +72,3 @@ namespace Inilim\Tool;
  * @see \Inilim\Tool\Method\Json\tryEncode()
  * 
  */
-final class Json extends \Inilim\LazyMethod\LazyMethodAbstract
-{
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Json',
-        PATH_TO_DIR             = __DIR__ . '/Method/Json',
-        ALIAS                   = [];
-}

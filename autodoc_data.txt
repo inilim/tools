@@ -1,7 +1,3 @@
-<?php
-
-namespace Inilim\Tool;
-
 /**
  * @method  static  array URLProtocolsAsArray() 
  * @see \Inilim\Tool\Method\Data\URLProtocolsAsArray()
@@ -55,9 +51,3 @@ namespace Inilim\Tool;
  * @see \Inilim\Tool\Method\Data\symbolsAsClosure()
  * 
  */
-final class Data extends \Inilim\LazyMethod\LazyMethodAbstract
-{
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Data',
-        PATH_TO_DIR             = __DIR__ . '/Method/Data',
-        ALIAS                   = [];
-}
