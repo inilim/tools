@@ -22,7 +22,7 @@ function replaceArray(string $search, array $replace, string $subject): string
     $result   = \array_shift($segments);
 
     foreach ($segments as $segment) {
-        $result .= toStringOr(\array_shift($replace) ?? $search, $search) . $segment;
+        $result .= \Inilim\Tool\Method\String\toStringOr(\array_shift($replace) ?? $search, $search) . $segment;
     }
 
     return $result;
