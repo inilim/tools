@@ -30,7 +30,8 @@
         "phpstan/phpstan": "@stable",
         "inilim/dump": "dev-main",
         "phpunit/phpunit": "^11.5",
-        "inilim/parse_lazy_method": "dev-main"
+        "inilim/parse_lazy_method": "dev-main",
+        "inilim/ipdo": "dev-main"
     },
     "scripts": {
         "tests": [

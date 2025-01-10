@@ -5,6 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
 use Inilim\Dump\Dump;
+use Inilim\IPDO\IPDOSQLite;
 use Inilim\Tool\Data;
 use Inilim\Tool\Json;
 use Inilim\Tool\Other;
@@ -56,7 +57,7 @@ $ignoreFilesPattern = [
 // 
 // ---------------------------------------------
 
-
+$pathToDb   = __DIR__ . '/build.sqlite';
 $parser     = (new ParserFactory())->createForHostVersion();
 $nodeFinder = new NodeFinder;
 $pretty     = new Standard;
@@ -64,6 +65,13 @@ $pretty     = new Standard;
 // ---------------------------------------------
 // 
 // ---------------------------------------------
+
+\file_put_contents($pathToDb, '');
+$db = new IPDOSQLite($pathToDb);
+
+// ------------------------------------------------------------------
+// 
+// ------------------------------------------------------------------
 
 foreach ($linksDir as $dir) {
     foreach (\glob($dir . '\*.php') as $pathToFile) {
