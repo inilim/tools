@@ -5,7 +5,6 @@ namespace Inilim\Tool\Method\Arr;
 use Inilim\Tool\Arr;
 
 Arr::__include([
-    'sortRecursive',
     'isAssoc',
 ]);
 

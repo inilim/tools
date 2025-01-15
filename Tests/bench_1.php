@@ -1,6 +1,7 @@
 <?php
 
 use Inilim\Tool\Arr;
+use Inilim\Tool\Str;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -17,6 +18,10 @@ Arr::accessible($a);
 Arr::get($a, 4);
 Arr::add($a, 'key', ['VALUE']);
 Arr::compareValues($a, $a);
+Str::nl2space('1
+
+
+2');
 
 // ---------------------------------------------
 // 
