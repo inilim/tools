@@ -17,7 +17,7 @@ for ($i = 0; $i < 25; $i++) {
     $output = [];
     \exec('php ' . $pathToPhp, $output);
     $output = \strval($output[0] ?? '');
-    $output = json_decode($output, true);
+    $output = \json_decode($output, true);
 
     $output['finalTime']           = $output['postNanoTime']      - $output['preNanoTime'];
     $output['finalMem']            = $output['postMem']           - $output['preMem'];
@@ -29,9 +29,9 @@ for ($i = 0; $i < 25; $i++) {
 }
 
 de([
-    // '$results'      => $results,
-    'finalTimeCols'          => $cols = \array_column($results, 'finalTime'),
-    'finalTimeAvg'           => \array_sum($cols) / \sizeof($cols),
-    // 'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
-    // 'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
+    '$results'      => $results,
+    'finalTimeCols' => $cols = \array_column($results, 'finalTime'),
+    'finalTimeAvg'  => \array_sum($cols) / \sizeof($cols),
+    'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
+    'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
 ]);
