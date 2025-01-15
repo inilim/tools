@@ -21,7 +21,6 @@ for ($i = 0; $i < 25; $i++) {
 
     $output['finalTime']           = $output['postNanoTime']      - $output['preNanoTime'];
     $output['finalMem']            = $output['postMem']           - $output['preMem'];
-    $output['finalCountIncludes']  = $output['postCountIncludes'] - $output['preCountIncludes'];
     $results[] = $output;
 
     // ---------------------------------------------
@@ -33,9 +32,6 @@ de([
     // '$results'      => $results,
     'finalTimeCols'          => $cols = \array_column($results, 'finalTime'),
     'finalTimeAvg'           => \array_sum($cols) / \sizeof($cols),
-
-    'finalCountIncludesCols' => $cols = \array_column($results, 'finalCountIncludes'),
-    'finalCountIncludesAvg'  => \array_sum($cols) / \sizeof($cols),
     // 'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
     // 'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
 ]);
