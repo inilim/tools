@@ -1,0 +1,341 @@
+// ---------------------------------------------
+// 
+// ---------------------------------------------
+
+Array
+(
+    [$results] => Array
+    (
+            [0] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109415531652700
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109415535982300
+                    [finalTime] => 4329600
+                    [finalMem] => 0
+                )
+
+            [1] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109415760922800
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109415765148400
+                    [finalTime] => 4225600
+                    [finalMem] => 0
+                )
+
+            [2] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109415995390300
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109415999671800
+                    [finalTime] => 4281500
+                    [finalMem] => 0
+                )
+
+            [3] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109416247213200
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109416251461100
+                    [finalTime] => 4247900
+                    [finalMem] => 0
+                )
+
+            [4] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109416501951800
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109416506161200
+                    [finalTime] => 4209400
+                    [finalMem] => 0
+                )
+
+            [5] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109416768719700
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109416772988100
+                    [finalTime] => 4268400
+                    [finalMem] => 0
+                )
+
+            [6] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109417010027100
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109417014497500
+                    [finalTime] => 4470400
+                    [finalMem] => 0
+                )
+
+            [7] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109417251441700
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109417255613500
+                    [finalTime] => 4171800
+                    [finalMem] => 0
+                )
+
+            [8] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109417399891200
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109417404112500
+                    [finalTime] => 4221300
+                    [finalMem] => 0
+                )
+
+            [9] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109417604150300
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109417608371500
+                    [finalTime] => 4221200
+                    [finalMem] => 0
+                )
+
+            [10] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109417836117800
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109417840364200
+                    [finalTime] => 4246400
+                    [finalMem] => 0
+                )
+
+            [11] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109418061289400
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109418065556900
+                    [finalTime] => 4267500
+                    [finalMem] => 0
+                )
+
+            [12] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109418313154200
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109418317434000
+                    [finalTime] => 4279800
+                    [finalMem] => 0
+                )
+
+            [13] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109418558087800
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109418562381500
+                    [finalTime] => 4293700
+                    [finalMem] => 0
+                )
+
+            [14] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109418819675400
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109418823885400
+                    [finalTime] => 4210000
+                    [finalMem] => 0
+                )
+
+            [15] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109419085767300
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109419090025900
+                    [finalTime] => 4258600
+                    [finalMem] => 0
+                )
+
+            [16] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109419381015200
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109419385230500
+                    [finalTime] => 4215300
+                    [finalMem] => 0
+                )
+
+            [17] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109419645791300
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109419650241800
+                    [finalTime] => 4450500
+                    [finalMem] => 0
+                )
+
+            [18] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109419914912100
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109419919206200
+                    [finalTime] => 4294100
+                    [finalMem] => 0
+                )
+
+            [19] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109420142702500
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109420146893400
+                    [finalTime] => 4190900
+                    [finalMem] => 0
+                )
+
+            [20] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109420404685100
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109420408927400
+                    [finalTime] => 4242300
+                    [finalMem] => 0
+                )
+
+            [21] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109420662531200
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109420666783300
+                    [finalTime] => 4252100
+                    [finalMem] => 0
+                )
+
+            [22] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109420889159400
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109420893418500
+                    [finalTime] => 4259100
+                    [finalMem] => 0
+                )
+
+            [23] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109421183142800
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109421187358300
+                    [finalTime] => 4215500
+                    [finalMem] => 0
+                )
+
+            [24] => Array
+                (
+                    [preMem] => 4194304
+                    [preNanoTime] => 2109421358380500
+                    [preCountIncludes] => 24
+                    [postCountIncludes] => 26
+                    [postMem] => 4194304
+                    [postNanoTime] => 2109421362614100
+                    [finalTime] => 4233600
+                    [finalMem] => 0
+                )
+
+    )
+
+    [finalTimeCols] => Array
+        (
+            [0] => 4329600
+            [1] => 4225600
+            [2] => 4281500
+            [3] => 4247900
+            [4] => 4209400
+            [5] => 4268400
+            [6] => 4470400
+            [7] => 4171800
+            [8] => 4221300
+            [9] => 4221200
+            [10] => 4246400
+            [11] => 4267500
+            [12] => 4279800
+            [13] => 4293700
+            [14] => 4210000
+            [15] => 4258600
+            [16] => 4215300
+            [17] => 4450500
+            [18] => 4294100
+            [19] => 4190900
+            [20] => 4242300
+            [21] => 4252100
+            [22] => 4259100
+            [23] => 4215500
+            [24] => 4233600
+        )
+
+    [finalTimeAvg] => 4262260
+)

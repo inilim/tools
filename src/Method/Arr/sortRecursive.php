@@ -4,6 +4,11 @@ namespace Inilim\Tool\Method\Arr;
 
 use Inilim\Tool\Arr;
 
+Arr::__include([
+    'sortRecursive',
+    'isAssoc',
+]);
+
 /**
  * Recursively sort an array by keys and values.
  */
