@@ -8,7 +8,10 @@ namespace Inilim\Tool\Method\Arr;
     'unique',
 ]);
 
-function compareValues(array $a, array $b, array ...$arrays): bool
+/**
+ * @return bool
+ */
+function compareValues(array $a, array $b, array ...$arrays)
 {
     $arrays[] = $a;
     $arrays[] = $b;

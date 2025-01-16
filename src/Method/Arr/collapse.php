@@ -5,8 +5,9 @@ namespace Inilim\Tool\Method\Arr;
 /**
  * Collapse an array of arrays into a single array.
  * @param  iterable  $array
+ * @return mixed[]
  */
-function collapse(iterable $array): array
+function collapse(iterable $array)
 {
     $results = [];
 
