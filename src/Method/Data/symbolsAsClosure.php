@@ -2,7 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-function symbolsAsClosure(): \Closure
+/**
+ * @return \Closure():string[]
+ */
+function symbolsAsClosure()
 {
     return static fn() => [
         '~',

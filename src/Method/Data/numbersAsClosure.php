@@ -2,7 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-function numbersAsClosure(): \Closure
+/**
+ * @return \Closure():int[]
+ */
+function numbersAsClosure()
 {
     return static fn() => [
         0,

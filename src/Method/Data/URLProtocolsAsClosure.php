@@ -2,7 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-function URLProtocolsAsClosure(): \Closure
+/**
+ * @return \Closure():string[]
+ */
+function URLProtocolsAsClosure()
 {
     return static fn() => [
         'aaa',

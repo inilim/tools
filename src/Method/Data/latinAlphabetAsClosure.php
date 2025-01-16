@@ -2,7 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-function latinAlphabetAsClosure(bool $upper = false): \Closure
+/**
+ * @return \Closure():string[]
+ */
+function latinAlphabetAsClosure(bool $upper = false)
 {
     if ($upper) return static fn() => [
         'A',

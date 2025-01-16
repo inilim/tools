@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Data;
 /**
  * @return \Closure():string[]
  */
-function magicMethodsAsClosure(): \Closure
+function magicMethodsAsClosure()
 {
     return static fn() => [
         '__construct',

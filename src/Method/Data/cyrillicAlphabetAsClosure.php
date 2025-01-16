@@ -2,7 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-function cyrillicAlphabetAsClosure(bool $upper = false): \Closure
+/**
+ * @return \Closure():string[]
+ */
+function cyrillicAlphabetAsClosure(bool $upper = false)
 {
     if ($upper) return static fn() => [
         'А',

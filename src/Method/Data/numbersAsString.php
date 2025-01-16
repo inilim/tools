@@ -4,7 +4,10 @@ namespace Inilim\Tool\Method\Data;
 
 \Inilim\Tool\Data::__include('numbersAsClosure');
 
-function numbersAsString(string $separator = ""): string
+/**
+ * @return string
+ */
+function numbersAsString(string $separator = "")
 {
     return \implode($separator, numbersAsClosure()->__invoke());
 }
