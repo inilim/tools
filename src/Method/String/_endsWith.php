@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\String;
 /**
  * @return bool
  */
-function __endsWith(string $haystack, string $needle)
+function _endsWith(string $haystack, string $needle)
 {
     if (\PHP_VERSION_ID >= 80000) {
         return \str_ends_with($haystack, $needle);

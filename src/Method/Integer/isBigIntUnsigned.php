@@ -9,7 +9,7 @@ Integer::__include([
     'lenNumeric',
     '__compare',
 ]);
-\Inilim\Tool\Str::__include('__startsWith');
+\Inilim\Tool\Str::__include('_startsWith');
 
 /**
  * 0 <> 18446744073709551615
@@ -22,7 +22,7 @@ function isBigIntUnsigned($value)
     /** @var int|float|string $value */
     $value = \strval($value);
     /** @var string $value */
-    if (\Inilim\Tool\Method\String\__startsWith($value, '-')) return false;
+    if (\Inilim\Tool\Method\String\_startsWith($value, '-')) return false;
     $len = lenNumeric($value);
     if ($len < Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
     if ($len > Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return false;

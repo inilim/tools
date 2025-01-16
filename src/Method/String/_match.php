@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\String;
 /**
  * Get the string matching the given pattern.
  */
-function __match(string $pattern, string $subject): string
+function _match(string $pattern, string $subject): string
 {
     \preg_match($pattern, $subject, $matches);
 

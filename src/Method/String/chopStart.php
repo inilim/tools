@@ -2,7 +2,7 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('__startsWith');
+\Inilim\Tool\Str::__include('_startsWith');
 
 /**
  * Remove the given string(s) if it exists at the start of the haystack.
@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\String;
 function chopStart(string $subject, $needle): string
 {
     foreach ((array) $needle as $n) {
-        if (__startsWith($subject, $n)) {
+        if (_startsWith($subject, $n)) {
             return \substr($subject, \strlen($n));
         }
     }

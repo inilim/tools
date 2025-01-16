@@ -9,7 +9,7 @@ Integer::__include([
     'lenNumeric',
     '__compare',
 ]);
-\Inilim\Tool\Str::__include('__startsWith');
+\Inilim\Tool\Str::__include('_startsWith');
 
 /**
  * -9223372036854775808 <> 9223372036854775807
@@ -26,6 +26,6 @@ function isBigInt($value)
     if ($len < Integer::BIG_INT_MAX_LENGHT) return true;
     if ($len > Integer::BIG_INT_MAX_LENGHT) return false;
     // длина 19
-    $last = \Inilim\Tool\Method\String\__startsWith($value, '-') ? 8 : 7;
+    $last = \Inilim\Tool\Method\String\_startsWith($value, '-') ? 8 : 7;
     return __compare(\str_split(\trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
 }

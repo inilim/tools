@@ -9,7 +9,7 @@ Integer::__include([
     'lenNumeric',
     '__compare',
 ]);
-\Inilim\Tool\Str::__include('__startsWith');
+\Inilim\Tool\Str::__include('_startsWith');
 
 /**
  * 0 <> 4_294_967_295
@@ -22,7 +22,7 @@ function isIntUnsigned($value)
     /** @var int|string $value */
     $value = \strval($value);
     /** @var string $value */
-    if (\Inilim\Tool\Method\String\__startsWith($value, '-')) return false;
+    if (\Inilim\Tool\Method\String\_startsWith($value, '-')) return false;
     $len = lenNumeric($value);
     if ($len < Integer::MAX_LEN_32_BIT) return true;
     if ($len > Integer::MAX_LEN_32_BIT) return false;

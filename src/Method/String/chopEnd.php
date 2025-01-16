@@ -2,7 +2,7 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('__endsWith');
+\Inilim\Tool\Str::__include('_endsWith');
 
 /**
  * Remove the given string(s) if it exists at the end of the haystack.
@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\String;
 function chopEnd(string $subject, $needle): string
 {
     foreach ((array) $needle as $n) {
-        if (__endsWith($subject, $n)) {
+        if (_endsWith($subject, $n)) {
             return \substr($subject, 0, -\strlen($n));
         }
     }

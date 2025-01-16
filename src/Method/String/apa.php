@@ -4,7 +4,7 @@ namespace Inilim\Tool\Method\String;
 
 use Inilim\Tool\Str;
 
-Str::__include('__contains');
+Str::__include('_contains');
 
 /**
  * Convert the given string to APA-style title case.
@@ -48,7 +48,7 @@ function apa(string $value): string
     for ($i = 0; $i < \sizeof($words); $i++) {
         $lowercaseWord = \mb_strtolower($words[$i]);
 
-        if (\Inilim\Tool\Method\String\__contains($lowercaseWord, '-')) {
+        if (\Inilim\Tool\Method\String\_contains($lowercaseWord, '-')) {
             $hyphenatedWords = \explode('-', $lowercaseWord);
 
             $hyphenatedWords = \array_map(function ($part) use ($minorWords) {

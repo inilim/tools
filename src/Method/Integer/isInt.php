@@ -9,7 +9,7 @@ Integer::__include([
     'lenNumeric',
     '__compare',
 ]);
-\Inilim\Tool\Str::__include('__startsWith');
+\Inilim\Tool\Str::__include('_startsWith');
 
 /**
  * -2147483648 <> 2147483647
@@ -26,6 +26,6 @@ function isInt($value)
     if ($len < Integer::MAX_LEN_32_BIT) return true;
     if ($len > Integer::MAX_LEN_32_BIT) return false;
     // длина 10
-    $last = \Inilim\Tool\Method\String\__startsWith($value, '-') ? 8 : 7;
+    $last = \Inilim\Tool\Method\String\_startsWith($value, '-') ? 8 : 7;
     return __compare(\str_split(\ltrim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
 }
