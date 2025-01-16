@@ -2,9 +2,7 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-
-Json::__include([
+\Inilim\Tool\Json::__include([
     'decode',
     'hasError',
 ]);

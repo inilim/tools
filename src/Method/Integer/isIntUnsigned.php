@@ -13,19 +13,19 @@ Integer::__include([
 
 /**
  * 0 <> 4_294_967_295
- * @param mixed $value
+ * @param mixed $v
  * @return bool
  */
-function isIntUnsigned($value)
+function isIntUnsigned($v)
 {
-    if (!isNumeric($value)) return false;
-    /** @var int|string $value */
-    $value = \strval($value);
-    /** @var string $value */
-    if (\Inilim\Tool\Method\String\_startsWith($value, '-')) return false;
-    $len = lenNumeric($value);
+    if (!isNumeric($v)) return false;
+    /** @var int|string $v */
+    $v = \strval($v);
+    /** @var string $v */
+    if (\Inilim\Tool\Method\String\_startsWith($v, '-')) return false;
+    $len = lenNumeric($v);
     if ($len < Integer::MAX_LEN_32_BIT) return true;
     if ($len > Integer::MAX_LEN_32_BIT) return false;
     // длина 10
-    return __compare(\str_split($value), [4, 2, 9, 4, 9, 6, 7, 2, 9, 5]);
+    return __compare(\str_split($v), [4, 2, 9, 4, 9, 6, 7, 2, 9, 5]);
 }

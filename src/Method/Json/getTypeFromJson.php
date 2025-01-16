@@ -2,14 +2,11 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-use Inilim\Tool\Other;
-
-Json::__include([
+\Inilim\Tool\Json::__include([
     'decode',
     'hasError',
 ]);
-Other::__include('getType');
+\Inilim\Tool\Other::__include('getType');
 
 /**
  * gettype - вернет null если json не валидный

@@ -11,14 +11,15 @@ Integer::__include([
 ]);
 
 /**
+ * @param mixed $v
  * @return bool
  */
-function isMediumIntUnsigned(mixed $value)
+function isMediumIntUnsigned($v)
 {
-    if (!isNumeric($value)) return false;
-    /** @var int|float|string $value */
-    $value = \strval($value);
-    /** @var string $value */
-    if (lenNumeric($value) > Integer::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
-    return checkBetween($value, Integer::MEDIUM_INT_UNSIGNED_MIN, Integer::MEDIUM_INT_UNSIGNED_MAX);
+    if (!isNumeric($v)) return false;
+    /** @var int|float|string $v */
+    $v = \strval($v);
+    /** @var string $v */
+    if (lenNumeric($v) > Integer::MEDIUM_INT_UNSIGNED_MAX_LENGHT) return false;
+    return checkBetween($v, Integer::MEDIUM_INT_UNSIGNED_MIN, Integer::MEDIUM_INT_UNSIGNED_MAX);
 }

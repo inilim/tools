@@ -7,6 +7,7 @@ use Inilim\Tool\Integer;
 Integer::__include([
     'isNumeric',
     'lenNumeric',
+    'abs',
     '__compare',
 ]);
 \Inilim\Tool\Str::__include('_startsWith');
@@ -27,5 +28,5 @@ function isBigInt($value)
     if ($len > Integer::BIG_INT_MAX_LENGHT) return false;
     // длина 19
     $last = \Inilim\Tool\Method\String\_startsWith($value, '-') ? 8 : 7;
-    return __compare(\str_split(\trim($value, '-')), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
+    return __compare(\str_split(abs($value)), [9, 2, 2, 3, 3, 7, 2, 0, 3, 6, 8, 5, 4, 7, 7, 5, 8, 0, $last]);
 }

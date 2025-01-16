@@ -17,7 +17,7 @@ function getRandomIntByLength(int $length): int
         $start = 0;
         $end   = 9;
     } else {
-        $start = \intval(1 . \str_repeat('0', ($length - 1)));
+        $start = \intval('1' . \str_repeat('0', ($length - 1)));
         $end   = $maxLen === $length ? \PHP_INT_MAX : \intval(\str_repeat('9', $length));
     }
     return \mt_rand($start, $end);
