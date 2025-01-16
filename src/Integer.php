@@ -85,8 +85,7 @@ namespace Inilim\Tool;
 final class Integer extends \Inilim\LazyMethod\LazyMethodAbstract
 {
     protected const NAMESPACE   = 'Inilim\Tool\Method\Integer',
-        PATH_TO_DIR             = __DIR__ . '/Method/Integer',
-        ALIAS                   = [];
+        PATH_TO_DIR             = __DIR__ . '/Method/Integer';
 
     // TINYINT: представляет целые числа от -128 до 127, занимает 1 байт
     // TINYINT UNSIGNED: представляет целые числа от 0 до 255, занимает 1 байт
