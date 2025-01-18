@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;\Inilim\Tool\Arr :: __include(['get','set']);function add(array $array,string $key,$value){if(\Inilim\Tool\Method\Arr\get($array,$key)===null){\Inilim\Tool\Method\Arr\set($array,$key,$value);}return $array;}

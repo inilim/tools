@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('map');function mapToGroups(array $array,callable $callback):array{return \array_reduce(\Inilim\Tool\Method\Arr\map($array,$callback),static function($groups,$pair){$groups[\key($pair)][]=\reset($pair);return $groups;});}

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include(['replace','ucfirst']);function studly(string $value):string{$words=\explode(' ',replace(['-','_'],' ',$value));$studly_words=\array_map(static fn($word)=>ucfirst($word),$words);return \implode($studly_words);}

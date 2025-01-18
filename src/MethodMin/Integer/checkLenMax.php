@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include(['isNumeric','lenNumeric','checkMax']);function checkLenMax($num,$max){if(!isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return checkMax(lenNumeric($num),$max);}

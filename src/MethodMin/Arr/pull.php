@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include(['get','forget']);function pull(array&$array,$key,$default=null){$value=\Inilim\Tool\Method\Arr\get($array,$key,$default);\Inilim\Tool\Method\Arr\forget($array,$key);return $value;}

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('getSegmentsPath');function getSegmentPath(string $path,int $segment):?string{return getSegmentsPath($path)[$segment]?? null;}

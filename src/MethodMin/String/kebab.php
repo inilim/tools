@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('snake');function kebab(string $value):string{return snake($value,'-');}

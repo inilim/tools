@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include('isNumeric');function isNegative($num){if(!isNumeric($num)){throw new \InvalidArgumentException('Give not numeric');}return \intval($num)<0;}

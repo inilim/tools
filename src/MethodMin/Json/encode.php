@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Json;function encode($value,int $flags=0,int $depth=512){return \json_encode($value,$flags,$depth);}

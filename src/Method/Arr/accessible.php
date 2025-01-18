@@ -2,6 +2,8 @@
 
 namespace Inilim\Tool\Method\Arr;
 
+// comm
+
 /**
  * Determine whether the given value is array accessible.
  * @param  mixed  $value

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('getKeyOffset');function insertAfter(array&$array,$key,array $inserted){if($key===null||($offset=\Inilim\Tool\Method\Arr\getKeyOffset($array,$key))===null){$offset=\sizeof($array)-1;}$array=\array_slice($array,0,$offset+1,true)+$inserted+\array_slice($array,$offset+1,\sizeof($array),true);}

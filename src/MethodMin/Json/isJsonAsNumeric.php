@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Json;\Inilim\Tool\Json :: __include(['decode','hasError']);\Inilim\Tool\Integer :: __include('isNumeric');function isJsonAsNumeric(?string $value){if($value===null){return false;}$value=decode($value);if(hasError()){return false;}return \Inilim\Tool\Method\Integer\isNumeric($value);}

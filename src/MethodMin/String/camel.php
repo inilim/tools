@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('studly');function camel(string $value):string{return \lcfirst(studly($value));}

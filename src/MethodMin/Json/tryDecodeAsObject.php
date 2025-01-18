@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Json;use Inilim\Tool\Json;Json :: __include('decode');function tryDecodeAsObject(?string $value,$default=null){if($value===null){return $default;}$value=decode($value);if(\is_object($value)){return $value;}return $default;}

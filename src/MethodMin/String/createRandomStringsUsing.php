@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('__state');function createRandomStringsUsing(?callable $factory=null):void{__state()-> randomStringFactory=$factory;}

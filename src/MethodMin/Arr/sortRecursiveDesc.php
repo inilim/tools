@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('sortRecursive');function sortRecursiveDesc(array $array,int $options=\SORT_REGULAR):array{return \Inilim\Tool\Method\Arr\sortRecursive($array,$options,true);}

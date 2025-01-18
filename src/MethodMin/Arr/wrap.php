@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;function wrap($value):array{return \is_array($value)?$value:[$value];}

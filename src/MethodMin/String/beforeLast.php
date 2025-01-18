@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('substr');function beforeLast(string $subject,string $search):string{if($search===''){return $subject;}$pos=\mb_strrpos($subject,$search);if($pos===false){return $subject;}return substr($subject,0,$pos);}

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('contains');function containsAll(string $haystack,iterable $needles,bool $ignore_case=false){foreach($needles as $needle){if(!contains($haystack,$needle,$ignore_case)){return false;}}return true;}

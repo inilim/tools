@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('set');function undot($array):array{$results=[];foreach($array as $key=>$value){\Inilim\Tool\Method\Arr\set($results,$key,$value);}return $results;}

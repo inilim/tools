@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('each');function eachSpread(array $array,callable $callback):void{\Inilim\Tool\Method\Arr\each($array,static function($chunk,$key)use($callback){$chunk[]=$key;return $callback(... $chunk);});}

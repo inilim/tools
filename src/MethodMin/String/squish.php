@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('trim');function squish(string $value):string{return \preg_replace('#(\s|\x{3164}|\x{1160})+#u',' ',trim($value));}

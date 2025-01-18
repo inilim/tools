@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Data;\Inilim\Tool\Data :: __include('magicMethodsAsClosure');function magicMethodsAsArray(){return magicMethodsAsClosure()-> __invoke();}

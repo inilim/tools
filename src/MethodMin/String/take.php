@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('substr');function take(string $string,int $limit):string{if($limit<0){return substr($string,$limit);}return substr($string,0,$limit);}

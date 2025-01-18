@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('trim');function getCountSegmentsPath(string $path){$t=\trim(trim($path),'/');if($t===''){return 0;}$t=\preg_replace('#\/{2,}#','/',$t);return \substr_count($t,'/');}

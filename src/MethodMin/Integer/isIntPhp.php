@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include('isNumeric');function isIntPHP($v){if(isNumeric($v)){if(\strval(\intval($v))===\strval($v)){return true;}return false;}return false;}

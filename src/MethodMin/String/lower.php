@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;function lower(string $value):string{return \mb_strtolower($value,'UTF-8');}

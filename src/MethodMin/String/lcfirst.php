@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include(['lower','substr']);function lcfirst(string $string):string{return lower(substr($string,0,1)).substr($string,1);}

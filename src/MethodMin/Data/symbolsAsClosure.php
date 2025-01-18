@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Data;function symbolsAsClosure(){return static fn()=>['~','!','#','$','%','^','&','*','(',')','-','_','.',',','<','>','?','/','\\','{','}','[',']','|',':',';'];}

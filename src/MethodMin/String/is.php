@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;function is($pattern,string $value){if(!\is_iterable($pattern)){$pattern=[$pattern];}foreach($pattern as $pattern){$pattern=(string) $pattern;if($pattern===$value){return true;}$pattern=\preg_quote($pattern,'#');$pattern=\str_replace('\*','.*',$pattern);if(\preg_match('#^'.$pattern.'\z#u',$value)===1){return true;}}return false;}

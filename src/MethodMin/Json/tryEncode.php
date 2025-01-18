@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Json;function tryEncode($value,int $flags=0,int $depth=512,$default=null){try{$json=\json_encode($value,$flags,$depth);}catch(\JsonException $e){return $default;}if($json===false){return $default;}return $json;}

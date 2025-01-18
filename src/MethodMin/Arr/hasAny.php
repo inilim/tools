@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('has');function hasAny($array,$keys){if($keys===null){return false;}$keys=(array) $keys;if(!$array){return false;}if($keys===[]){return false;}foreach($keys as $key){if(\Inilim\Tool\Method\Arr\has($array,$key)){return true;}}return false;}

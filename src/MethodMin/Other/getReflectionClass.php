@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Other;function getReflectionClass($objectOrClass,bool $throw=false){if(\is_string($objectOrClass)){if(!\class_exists($objectOrClass)){return $throw?throw new \ReflectionException('class not found '.$objectOrClass):null;}}return new \ReflectionClass($objectOrClass);}

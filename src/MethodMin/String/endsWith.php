@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('_endsWith');function endsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if((string) $needle!==''&&_endsWith($haystack,$needle)){return true;}}return false;}

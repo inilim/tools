@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;function set(array&$array,?string $key,$value):array{if($key===null){return $array=$value;}$keys=\explode('.',$key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;}

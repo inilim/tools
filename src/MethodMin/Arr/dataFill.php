@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;\Inilim\Tool\Arr :: __include('dataSet');function dataFill(&$target,$key,$value){return \Inilim\Tool\Method\Arr\dataSet($target,$key,$value,false);}

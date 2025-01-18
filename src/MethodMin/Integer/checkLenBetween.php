@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include(['checkBetween','isNumeric','lenNumeric']);function checkLenBetween($num,$fromTo,$toFrom){if(!isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return checkBetween(lenNumeric($num),$fromTo,$toFrom);}

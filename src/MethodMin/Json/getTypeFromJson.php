@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Json;\Inilim\Tool\Json :: __include(['decode','hasError']);\Inilim\Tool\Other :: __include('getType');function getTypeFromJson(?string $value):?string{if($value===null){return null;}$value=decode($value,false);if(hasError()){return null;}return \Inilim\Tool\Method\Other\getType($value);}

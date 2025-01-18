@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('unixNewLines');function platformNewLines(string $s):string{return unixNewLines($s,\PHP_EOL);}

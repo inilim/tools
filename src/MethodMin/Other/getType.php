@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Other;function getType($value):string{$r=\gettype($value);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$value instanceof \UnitEnum){return 'enum';}elseif($value instanceof \Throwable){return 'object exception';}return 'object';default:return $r;}}

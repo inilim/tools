@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include(['upper','substr']);function ucfirst(string $string):string{return upper(substr($string,0,1)).substr($string,1);}

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include('isNumeric');function equals($num1,$num2){if(!isNumeric($num1)){throw new \InvalidArgumentException('$num1 must be numeric');}if(!isNumeric($num2)){throw new \InvalidArgumentException('$num2 must be numeric');}return \intval($num1)===\intval($num2);}

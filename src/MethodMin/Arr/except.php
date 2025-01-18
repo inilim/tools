@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('forget');function except(array $array,$keys):array{\Inilim\Tool\Method\Arr\forget($array,$keys);return $array;}

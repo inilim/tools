@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;use Inilim\Tool\Integer;Integer :: __include(['isNumeric','lenNumeric','checkBetween']);function isMediumIntUnsigned($v){if(!isNumeric($v)){return false;}$v=\strval($v);if(lenNumeric($v)>Integer :: MEDIUM_INT_UNSIGNED_MAX_LENGHT){return false;}return checkBetween($v,Integer :: MEDIUM_INT_UNSIGNED_MIN,Integer :: MEDIUM_INT_UNSIGNED_MAX);}

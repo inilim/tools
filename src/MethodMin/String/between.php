@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include(['beforeLast','after']);function between(string $subject,string $from,string $to):string{if($from===''||$to===''){return $subject;}return beforeLast(after($subject,$from),$to);}

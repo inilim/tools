@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Data;\Inilim\Tool\Data :: __include('magicMethodsAsClosure');function magicMethodsAsString(string $separator=""){return \implode($separator,magicMethodsAsClosure()-> __invoke());}

@@ -1,0 +1,1 @@
+<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include(['isNumeric','lenNumeric','checkMin']);function checkLenMin($num,$min){if(!isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return checkMin(lenNumeric($num),$min);}
