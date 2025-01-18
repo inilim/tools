@@ -33,7 +33,7 @@ Dump::init();
 // ------------------------------------------------------------------
 $class = Str::class;
 
-$file_doc    = \sprintf(__DIR__ . '/autodoc_%s.txt', \basename($class));
+$file_doc    = \sprintf(__DIR__ . '/files/autodoc_%s.txt', \basename($class));
 $ref_class   = new \ReflectionClass($class);
 $ALIAS       = $ref_class->getConstant('ALIAS');
 $NAMESPACE   = $ref_class->getConstant('NAMESPACE');
