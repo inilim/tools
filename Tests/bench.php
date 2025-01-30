@@ -8,7 +8,7 @@ Dump::init();
 
 $results = [];
 
-for ($i = 0; $i < 25; $i++) {
+for ($i = 0; $i < 100; $i++) {
     // ---------------------------------------------
     // 
     // ---------------------------------------------
@@ -29,9 +29,9 @@ for ($i = 0; $i < 25; $i++) {
 }
 
 de([
-    '$results'      => $results,
+    // '$results'      => $results,
     'finalTimeCols' => $cols = \array_column($results, 'finalTime'),
     'finalTimeAvg'  => \array_sum($cols) / \sizeof($cols),
-    'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
-    'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
+    // 'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
+    // 'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
 ]);
