@@ -8,8 +8,8 @@
 /files/links.php export-ignore
 /files/build_dev.sqlite export-ignore
 
-/build.php
-/autoide.php
-/phpunit.xml
-/phpstan.neon
-/README.md
+/build.php export-ignore
+/autoide.php export-ignore
+/phpunit.xml export-ignore
+/phpstan.neon export-ignore
+/README.md export-ignore
