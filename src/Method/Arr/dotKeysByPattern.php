@@ -1,0 +1,19 @@
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+/**
+ * получаем ключи dot notation по паттерну | 
+ * key.*.key....
+ * @return string[]
+ */
+function dotKeysByPattern(iterable $target, string $dotPattern)
+{
+    $regex = '#^' . \str_replace('\*', '[^\.]+', \preg_quote($dotPattern)) . '#';
+    return \array_values(
+        \array_filter(
+            \Inilim\Tool\Method\Arr\dotKeys($target),
+            static fn($key) => \preg_match($regex, $key),
+        )
+    );
+}

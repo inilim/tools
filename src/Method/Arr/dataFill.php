@@ -2,14 +2,13 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-\Inilim\Tool\Arr::__include('dataSet');
-
 /**
  * Fill in data where it's missing.
- * @param  mixed  $target
+ * @template T of array|object
+ * @param T $target
  * @param  string|string[]  $key
  * @param  mixed  $value
- * @return mixed
+ * @return T
  */
 function dataFill(&$target, $key, $value)
 {

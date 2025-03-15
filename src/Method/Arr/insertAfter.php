@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('getKeyOffset');
-
 /**
  * Inserts the contents of the $inserted array into the $array before the $key.
  * If $key is null (or does not exist), it is inserted at the end.

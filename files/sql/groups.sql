@@ -1,4 +1,4 @@
 CREATE TABLE groups (
-    id        INTEGER,
-    method_id INTEGER
+    id        INTEGER NOT NULL,
+    method_id INTEGER NOT NULL
 );

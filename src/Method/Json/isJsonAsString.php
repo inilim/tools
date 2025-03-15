@@ -2,15 +2,13 @@
 
 namespace Inilim\Tool\Method\Json;
 
-\Inilim\Tool\Json::__include([
-    'decode',
-    'hasError',
-]);
-
-function isJsonAsString(?string $value): bool
+/**
+ * @return boolean
+ */
+function isJsonAsString(?string $v)
 {
-    if ($value === null) return false;
-    $value = decode($value);
-    if (hasError()) return false;
-    return \is_string($value);
+    if ($v === null) return false;
+    $v = \Inilim\Tool\Method\Json\decode($v);
+    if (\Inilim\Tool\Method\Json\hasError()) return false;
+    return \is_string($v);
 }

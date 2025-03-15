@@ -3,22 +3,22 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @template T
- * @template K
+ * @template V of mixed
+ * @template K of int|string
  *
- * @param array<K,T> $array
- * @return array<int,array<K,T>>
+ * @param array<K,V> $array
+ * @return array<int,array<K,V>>
  */
-function splitIntoChunks(array $array, int $chunks, bool $preserve_keys = false, bool $remove_empty_chunks = false): array
+function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false)
 {
-    if (!$array || $chunks === 0) return [];
-    // return \array_chunk($array, \ceil(\sizeof($array) / \abs($chunks)), $preserve_keys);
+    if (!$array || $chunks < 1) return [];
+    // return \array_chunk($array, \ceil(\sizeof($array) / \abs($chunks)), $preserveKeys);
 
     $i = 0;
-    $result = \array_fill(0, \abs($chunks), []);
+    $result = \array_fill(0, $chunks, []);
     foreach ($array as $key => $value) {
 
-        if ($preserve_keys) $result[$i][$key] = $value;
+        if ($preserveKeys) $result[$i][$key] = $value;
         else $result[$i][] = $value;
 
         $i++;
@@ -26,7 +26,7 @@ function splitIntoChunks(array $array, int $chunks, bool $preserve_keys = false,
         if (!isset($result[$i])) $i = 0;
     }
 
-    if ($remove_empty_chunks) {
+    if ($removeEmptyChunks) {
         $result = \array_filter($result, null);
     }
 

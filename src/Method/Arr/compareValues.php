@@ -2,12 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-\Inilim\Tool\Arr::__include([
-    'sortRecursive',
-    'resetKeysRecursive',
-    'unique',
-]);
-
 /**
  * @return bool
  */

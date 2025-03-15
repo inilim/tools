@@ -2,14 +2,11 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('wrap');
-
 /**
  * @param mixed[]|mixed $values
+ * @return bool
  */
-function hasValue(array $array, $values, bool $strict = false): bool
+function hasValue(array $array, $values, bool $strict = false)
 {
     $values = \Inilim\Tool\Method\Arr\wrap($values);
 

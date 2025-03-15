@@ -2,12 +2,6 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-\Inilim\Tool\Integer::__include([
-    'equals',
-    'isNumeric',
-    'lenNumeric',
-]);
-
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $equal
@@ -15,15 +9,15 @@ namespace Inilim\Tool\Method\Integer;
  */
 function lenEquals($num, $equal)
 {
-    if (!isNumeric($num)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
-    if (!isNumeric($equal)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($equal)) {
         throw new \InvalidArgumentException('$equal must be numeric');
     }
 
-    return equals(
-        lenNumeric($num),
-        lenNumeric($equal),
+    return \Inilim\Tool\Method\Integer\equals(
+        \Inilim\Tool\Method\Integer\lenNumeric($num),
+        \Inilim\Tool\Method\Integer\lenNumeric($equal),
     );
 }

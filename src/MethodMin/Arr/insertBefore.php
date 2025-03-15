@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('getKeyOffset');function insertBefore(array&$array,$key,array $inserted):void{$offset=$key===null?0:(int) \Inilim\Tool\Method\Arr\getKeyOffset($array,$key);$array=\array_slice($array,0,$offset,true)+$inserted+\array_slice($array,$offset,\sizeof($array),true);}
+<?php
+
+namespace Inilim\Tool\Method\Arr{function insertBefore(array&$array,$key,array $inserted){$offset=$key===null?0:(int) \Inilim\Tool\Method\Arr\getKeyOffset($array,$key);$array=\array_slice($array,0,$offset,true)+$inserted+\array_slice($array,$offset,\sizeof($array),true);}if(!\Inilim\Tool\Arr::__definedIfNot('getKeyOffset')){
+    function getKeyOffset(array $array,$key){$value=\array_search(\key([$key=>null]),\array_keys($array),true);return $value===false?null:$value;}
+    }}

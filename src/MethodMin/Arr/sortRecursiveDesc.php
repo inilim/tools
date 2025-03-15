@@ -1,1 +1,7 @@
-<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('sortRecursive');function sortRecursiveDesc(array $array,int $options=\SORT_REGULAR):array{return \Inilim\Tool\Method\Arr\sortRecursive($array,$options,true);}
+<?php
+
+namespace Inilim\Tool\Method\Arr{function sortRecursiveDesc(array $array,int $options=\SORT_REGULAR):array{return \Inilim\Tool\Method\Arr\sortRecursive($array,$options,true);}if(!\Inilim\Tool\Arr::__definedIfNot('isAssoc')){
+    function isAssoc(array $array){$keys=\array_keys($array);return \array_keys($keys)!==$keys;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('sortRecursive')){
+    function sortRecursive(array $array,int $options=\SORT_REGULAR,bool $descending=true):array{foreach($array as&$value){if(\is_array($value)){$value=\Inilim\Tool\Method\Arr\sortRecursive($value,$options,$descending);}}if(\Inilim\Tool\Method\Arr\isAssoc($array)){$descending?\krsort($array,$options):\ksort($array,$options);}else{$descending?\rsort($array,$options):\sort($array,$options);}return $array;}
+    }}

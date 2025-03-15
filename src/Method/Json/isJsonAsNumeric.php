@@ -2,21 +2,14 @@
 
 namespace Inilim\Tool\Method\Json;
 
-\Inilim\Tool\Json::__include([
-    'decode',
-    'hasError',
-]);
-
-\Inilim\Tool\Integer::__include('isNumeric');
-
 /**
  * @return bool
  */
-function isJsonAsNumeric(?string $value)
+function isJsonAsNumeric(?string $v)
 {
-    if ($value === null) return false;
-    $value = decode($value);
-    if (hasError()) return false;
+    if ($v === null) return false;
+    $v = \Inilim\Tool\Method\Json\decode($v);
+    if (\Inilim\Tool\Method\Json\hasError()) return false;
 
-    return \Inilim\Tool\Method\Integer\isNumeric($value);
+    return \Inilim\Tool\Method\Integer\isNumeric($v);
 }

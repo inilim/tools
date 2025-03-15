@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('_endsWith');function endsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if((string) $needle!==''&&_endsWith($haystack,$needle)){return true;}}return false;}
+<?php
+
+namespace Inilim\Tool\Method\String{function endsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\String\_endsWith($haystack,$needle)){return true;}}return false;}if(!\Inilim\Tool\Str::__definedIfNot('_endsWith')){
+    function _endsWith(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_ends_with($haystack,$needle);}if(''===$needle||$needle===$haystack){return true;}if(''===$haystack){return false;}$needleLength=\strlen($needle);return $needleLength<=\strlen($haystack)&&0===\substr_compare($haystack,$needle,-$needleLength);}
+    }}

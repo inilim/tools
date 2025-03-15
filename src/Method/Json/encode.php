@@ -3,11 +3,11 @@
 namespace Inilim\Tool\Method\Json;
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return string|false
  */
-function encode($value, int $flags = 0, int $depth = 512)
+function encode($v, int $flags = 0, int $depth = 512)
 {
     // @phpstan-ignore-next-line
-    return \json_encode($value, $flags, $depth);
+    return \json_encode($v, $flags, $depth);
 }

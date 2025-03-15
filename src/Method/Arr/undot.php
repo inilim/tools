@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('set');
-
 /**
  * Convert a flatten "dot" notation array into an expanded array.
  * @param  iterable  $array

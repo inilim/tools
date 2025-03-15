@@ -1,1 +1,9 @@
-<?php namespace Inilim\Tool\Method\Arr;\Inilim\Tool\Arr :: __include('dataSet');function dataFill(&$target,$key,$value){return \Inilim\Tool\Method\Arr\dataSet($target,$key,$value,false);}
+<?php
+
+namespace Inilim\Tool\Method\Arr{function dataFill(&$target,$key,$value){return \Inilim\Tool\Method\Arr\dataSet($target,$key,$value,false);}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dataSet')){
+    function dataSet(&$target,$key,$value,bool $overwrite=true){$segments=\is_array($key)?$key:\explode('.',$key);if(($segment=\array_shift($segments))==='*'){if(!\Inilim\Tool\Method\Arr\accessible($target)){$target=[];}if($segments){foreach($target as&$inner){\Inilim\Tool\Method\Arr\dataSet($inner,$segments,$value,$overwrite);}}elseif($overwrite){foreach($target as&$inner){$inner=$value;}}}elseif(\Inilim\Tool\Method\Arr\accessible($target)){if($segments){if(!\Inilim\Tool\Method\Arr\exists($target,$segment)){$target[$segment]=[];}\Inilim\Tool\Method\Arr\dataSet($target[$segment],$segments,$value,$overwrite);}elseif($overwrite||!\Inilim\Tool\Method\Arr\exists($target,$segment)){$target[$segment]=$value;}}elseif(\is_object($target)){if($segments){if(!isset($target ->{$segment})){$target ->{$segment}=[];}\Inilim\Tool\Method\Arr\dataSet($target ->{$segment},$segments,$value,$overwrite);}elseif($overwrite||!isset($target ->{$segment})){$target ->{$segment}=$value;}}else{$target=[];if($segments){\Inilim\Tool\Method\Arr\dataSet($target[$segment],$segments,$value,$overwrite);}elseif($overwrite){$target[$segment]=$value;}}return $target;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
+    function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
+    }}

@@ -1,0 +1,12 @@
+<?php
+
+{{ main.code_with_ns|raw }}
+
+{% for dep in deps %}
+namespace {{ dep.namespace }}{
+    if(!\{{ dep.tool }}::defined('{{ dep.name }}')){
+        {{ dep.code|raw }}
+        \{{ dep.tool }}::__add('{{ dep.name }}');
+    }
+}
+{% endfor %}

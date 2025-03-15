@@ -1,1 +1,7 @@
-<?php namespace Inilim\Tool\Method\Json;use Inilim\Tool\Json;Json :: __include(['decode','hasError']);function isJsonAsArrOrObj(?string $value){if($value===null){return false;}$value=decode($value);if(hasError()){return false;}return \is_array($value)||\is_object($value);}
+<?php
+
+namespace Inilim\Tool\Method\Json{function isJsonAsArrOrObj(?string $v){if($v===null){return false;}$v=\Inilim\Tool\Method\Json\decode($v);if(\Inilim\Tool\Method\Json\hasError()){return false;}return \is_array($v)||\is_object($v);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
+    function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
+    }if(!\Inilim\Tool\Json::__definedIfNot('hasError')){
+    function hasError(){return \json_last_error()!==\JSON_ERROR_NONE;}
+    }}

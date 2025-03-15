@@ -2,12 +2,11 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('trim');
-
 /**
  * Remove all "extra" blank space from the given string.
+ * @return string
  */
-function squish(string $value): string
+function squish(string $value)
 {
-    return \preg_replace('#(\s|\x{3164}|\x{1160})+#u', ' ', trim($value));
+    return \preg_replace('#(\s|\x{3164}|\x{1160})+#u', ' ', \Inilim\Tool\Method\String\trim($value));
 }

@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+      "**/src/MethodMin": true
+    },
+    "search.exclude": {
+      "**/src/MethodMin": true
+    }
+}

@@ -2,12 +2,11 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('__state');
-
 /**
  * Set the callable that will be used to generate random strings.
+ * @return void
  */
-function createRandomStringsUsing(?callable $factory = null): void
+function createRandomStringsUsing(?callable $factory = null)
 {
-    __state()->randomStringFactory = $factory;
+    \Inilim\Tool\Method\String\__state()->randomStringFactory = $factory;
 }

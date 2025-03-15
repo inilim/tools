@@ -1,2 +1,15 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+/Tests export-ignore
+/.git* export-ignore
+
+/files/other export-ignore
+/files/cache export-ignore
+/files/sql export-ignore
+/files/template export-ignore
+/files/links.php export-ignore
+/files/build_dev.sqlite export-ignore
+
+/build.php
+/autoide.php
+/phpunit.xml
+/phpstan.neon
+/README.md

@@ -3,24 +3,27 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Inilim\Dump\Dump;
+use Symfony\Component\Process\Process;
 
 Dump::init();
-
+$pathToPhp = __DIR__ . '/bench_1.php';
+// $process = new Process(['php', $pathToPhp]);
 $results = [];
 
-for ($i = 0; $i < 100; $i++) {
+for ($i = 0; $i < 25; $i++) {
     // ---------------------------------------------
     // 
     // ---------------------------------------------
-
-    $pathToPhp = __DIR__ . '/bench_1.php';
     $output = [];
     \exec('php ' . $pathToPhp, $output);
-    $output = \strval($output[0] ?? '');
-    $output = \json_decode($output, true);
+    // $process->run();
+    // $output = \json_decode(\trim($process->getOutput()), true);
+    $output = \json_decode(\trim($output[0]), true);
 
     $output['finalTime']           = $output['postNanoTime']      - $output['preNanoTime'];
+    $output['finalMicroTime']      = $output['postMicroTime']     - $output['preMicroTime'];
     $output['finalMem']            = $output['postMem']           - $output['preMem'];
+    $output['finalPeakMem']        = $output['postPeakMem']       - $output['prePeakMem'];
     $results[] = $output;
 
     // ---------------------------------------------
@@ -28,10 +31,17 @@ for ($i = 0; $i < 100; $i++) {
     // ---------------------------------------------
 }
 
+$colsT  = \array_column($results, 'finalTime');
+$colsMT = \array_column($results, 'finalMicroTime');
+$colsM  = \array_column($results, 'finalMem');
+$colsPM = \array_column($results, 'finalPeakMem');
+
 de([
-    // '$results'      => $results,
-    'finalTimeCols' => $cols = \array_column($results, 'finalTime'),
-    'finalTimeAvg'  => \array_sum($cols) / \sizeof($cols),
-    // 'finalMemCols'  => $cols = \array_column($results, 'finalMem'),
-    // 'finalMemAvg'   => @\array_sum($cols) / \sizeof($cols),
+    // '$results'       => $results,
+    // 'finalTimeCols'  => $colsT,
+    'finalTimeAvg'         => \array_sum($colsT) / \sizeof($colsT),
+    'finalMicroTimeAvg'    => \array_sum($colsMT) / \sizeof($colsMT),
+    // 'finalMemCols'   => $colsM,
+    'finalMemAvg'       => @\array_sum($colsM) / \sizeof($colsM),
+    'finalPeakMemAvg'   => @\array_sum($colsPM) / \sizeof($colsPM),
 ]);

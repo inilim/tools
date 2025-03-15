@@ -2,9 +2,12 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-function isList(array $array): bool
+/**
+ * @return bool
+ */
+function isList(array $array)
 {
-    if (PHP_VERSION_ID >= 80100) {
+    if (\PHP_VERSION_ID >= 80100) {
         return \array_is_list($array);
     }
 

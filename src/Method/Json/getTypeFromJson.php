@@ -2,19 +2,14 @@
 
 namespace Inilim\Tool\Method\Json;
 
-\Inilim\Tool\Json::__include([
-    'decode',
-    'hasError',
-]);
-\Inilim\Tool\Other::__include('getType');
-
 /**
  * gettype - вернет null если json не валидный
+ * @return ?string
  */
-function getTypeFromJson(?string $value): ?string
+function getTypeFromJson(?string $v)
 {
-    if ($value === null) return null;
-    $value = decode($value, false);
-    if (hasError()) return null;
-    return \Inilim\Tool\Method\Other\getType($value);
+    if ($v === null) return null;
+    $v = \Inilim\Tool\Method\Json\decode($v, false);
+    if (\Inilim\Tool\Method\Json\hasError()) return null;
+    return \Inilim\Tool\Method\Other\getType($v);
 }

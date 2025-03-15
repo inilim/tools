@@ -2,16 +2,12 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-
-\Inilim\Tool\Arr::__include([
-    'get',
-    'set',
-]);
-
 /**
  * Add an element to an array using "dot" notation if it doesn't exist.
+ * @template T of array
+ * @param T $array
  * @param mixed $value
- * @return array
+ * @return T
  */
 function add(array $array, string $key, $value)
 {

@@ -2,13 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include([
-    'exists',
-    'accessible',
-]);
-
 /**
  * Check if an item or items exist in an array using "dot" notation.
  *

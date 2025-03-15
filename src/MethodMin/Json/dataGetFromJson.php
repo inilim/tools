@@ -1,1 +1,33 @@
-<?php namespace Inilim\Tool\Method\Json;\Inilim\Tool\Json :: __include('tryDecodeAsArray');\Inilim\Tool\Arr :: __include('dataGet2');function dataGetFromJson(?string $json,string $dotKey,$default=null){$t=tryDecodeAsArray($json,[]);if(!$t){return $default;}return \Inilim\Tool\Method\Arr\dataGet2($t,$dotKey,$default);}
+<?php
+
+namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string $dotKey,$default=null){$t=\Inilim\Tool\Method\Json\tryDecodeAsArray($json,[]);if(!$t){return $default;}return \Inilim\Tool\Method\Arr\dataGetV2($t,$dotKey,$default);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
+    function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
+    }if(!\Inilim\Tool\Json::__definedIfNot('tryDecodeAsArray')){
+    function tryDecodeAsArray(?string $v,$default=null){if($v===null){return $default;}$v=\Inilim\Tool\Method\Json\decode($v,true);if(\is_array($v)){return $v;}return $default;}
+    }}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('collapse')){
+    function collapse(iterable $array){$results=[];foreach($array as $values){if(!\is_array($values)){continue;}$results[]=$values;}return \array_merge([],... $results);}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dataGet')){
+    function dataGet($target,$key,$default=null){if($key===null){return $target;}$key=\is_array($key)?$key:\explode('.',$key);foreach($key as $i=>$segment){unset($key[$i]);if($segment===null){return $target;}if($segment==='*'){if(!\is_array($target)){return $default;}$result=[];foreach($target as $item){$result[]=\Inilim\Tool\Method\Arr\dataGet($item,$key);}return \in_array('*',$key)?\Inilim\Tool\Method\Arr\collapse($result):$result;}if(\Inilim\Tool\Method\Arr\accessible($target)&&\Inilim\Tool\Method\Arr\exists($target,$segment)){$target=$target[$segment];}elseif(\is_object($target)&&isset($target ->{$segment})){$target=$target ->{$segment};}else{return $default;}}return $target;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dataGetV2')){
+    function dataGetV2($target,$key,$default=null){if($key===null){return $target;}if(\is_array($key)||\is_int($key)||!\Inilim\Tool\Method\String\contains($key,'*')){return \Inilim\Tool\Method\Arr\dataGet($target,$key,$default);}$keys=\Inilim\Tool\Method\Arr\dotKeysByPattern($target,$key);if(!$keys){return $default;}return \Inilim\Tool\Method\Arr\dataGet(\Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target),$keys)),$key,$default);}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
+    function dot(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dot($value,$prepend.$key.'.'));}else{$results[$prepend.$key]=$value;}}return $results;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeys')){
+    function dotKeys(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dotKeys($value,$prepend.$key.'.'));}else{$results[]=$prepend.$key;}}return $results;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeysByPattern')){
+    function dotKeysByPattern(iterable $target,string $dotPattern){$regex='#^'.\str_replace('\*','[^\.]+',\preg_quote($dotPattern)).'#';return \array_values(\array_filter(\Inilim\Tool\Method\Arr\dotKeys($target),static fn($key)=>\preg_match($regex,$key)));}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
+    function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('only')){
+    function only(array $array,$keys):array{return \array_intersect_key($array,\array_flip((array) $keys));}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('set')){
+    function set(array&$array,?string $key,$value):array{if($key===null){return $array=$value;}$keys=\explode('.',$key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);/*// If the key doesn't exist at this depth, we will just create an empty array*//*// to hold the next value, allowing us to create the arrays to hold final*//*// values at the correct depth. Then we'll keep digging into the array.*/if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('undot')){
+    function undot($array):array{$results=[];foreach($array as $key=>$value){\Inilim\Tool\Method\Arr\set($results,$key,$value);}return $results;}
+    }}namespace Inilim\Tool\Method\String{if(!\Inilim\Tool\Str::__definedIfNot('_contains')){
+    function _contains(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_contains($haystack,$needle);}return ''===$needle||false!==strpos($haystack,$needle);}
+    }if(!\Inilim\Tool\Str::__definedIfNot('contains')){
+    function contains(string $haystack,$needles,bool $ignoreCase=false){if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if($needle!==''&&\Inilim\Tool\Method\String\_contains($haystack,$needle)){return true;}}return false;}
+    }}

@@ -4,16 +4,31 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * Shuffle the given array and return the result.
+ * @param mixed[] $array
+ * @return mixed[]
  */
-function shuffle(array $array, ?int $seed = null): array
+function shuffle(array $array, ?int $seed = null, bool $preserveKeys = true)
 {
-    if ($seed === null) {
-        \shuffle($array);
-    } else {
+    if ($seed !== null) {
         \mt_srand($seed);
-        \shuffle($array);
-        \mt_srand();
     }
 
-    return $array;
+    if ($preserveKeys) {
+        $keys = \array_keys($array);
+        \shuffle($keys);
+
+        $result = [];
+        foreach ($keys as $key) {
+            $result[$key] = $array[$key];
+        }
+    } else {
+        \shuffle($array);
+        $result = $array;
+    }
+
+    if ($seed !== null) {
+        \mt_srand(); // Сброс seed, чтобы не влиять на другие вызовы
+    }
+
+    return $result;
 }

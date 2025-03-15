@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('mapWithKeys');
-
 /**
  * Prepend the key names of an associative array.
  */

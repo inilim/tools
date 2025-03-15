@@ -2,22 +2,15 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include([
-    'has',
-    'get',
-    'set',
-]);
-
 /**
  * установить значение если значение по ключу null
  * @param mixed $value
+ * @return bool
  */
-function setValueIfNull(array &$array, string $key_dot, $value): bool
+function setValueIfNull(array &$array, string $key, $value)
 {
-    if (\Inilim\Tool\Method\Arr\has($array, $key_dot) && \Inilim\Tool\Method\Arr\get($array, $key_dot) === null) {
-        \Inilim\Tool\Method\Arr\set($array, $key_dot, $value);
+    if (\Inilim\Tool\Method\Arr\has($array, $key) && \Inilim\Tool\Method\Arr\get($array, $key) === null) {
+        \Inilim\Tool\Method\Arr\set($array, $key, $value);
         return true;
     }
     return false;

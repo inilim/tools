@@ -2,8 +2,6 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('_contains');
-
 /**
  * Determine if a given string contains a given substring.
  * @param string|iterable<string> $needles
@@ -18,7 +16,7 @@ function contains(string $haystack, $needles, bool $ignoreCase = false)
     foreach ($needles as $needle) {
         if ($ignoreCase) $needle = \mb_strtolower($needle, 'UTF-8');
 
-        if ($needle !== '' && _contains($haystack, $needle)) {
+        if ($needle !== '' && \Inilim\Tool\Method\String\_contains($haystack, $needle)) {
             return true;
         }
     }

@@ -1,1 +1,9 @@
-<?php namespace Inilim\Tool\Method\Integer;\Inilim\Tool\Integer :: __include(['checkBetween','isNumeric','lenNumeric']);function checkLenBetween($num,$fromTo,$toFrom){if(!isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return checkBetween(lenNumeric($num),$fromTo,$toFrom);}
+<?php
+
+namespace Inilim\Tool\Method\Integer{function checkLenBetween($num,$fromTo,$toFrom){if(!\Inilim\Tool\Method\Integer\isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return \Inilim\Tool\Method\Integer\checkBetween(\Inilim\Tool\Method\Integer\lenNumeric($num),$fromTo,$toFrom);}if(!\Inilim\Tool\Integer::__definedIfNot('checkBetween')){
+    function checkBetween($num,$fromTo,$toFrom){if(!\Inilim\Tool\Method\Integer\isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}if(!\Inilim\Tool\Method\Integer\isNumeric($fromTo)){throw new \InvalidArgumentException('$fromTo must be numeric');}if(!\Inilim\Tool\Method\Integer\isNumeric($toFrom)){throw new \InvalidArgumentException('$toFrom must be numeric');}$toFrom=\intval($toFrom);$fromTo=\intval($fromTo);$num=\intval($num);if($fromTo>$toFrom){list($toFrom,$fromTo)=[$fromTo,$toFrom];}return $num>=$fromTo&&$num<=$toFrom;}
+    }if(!\Inilim\Tool\Integer::__definedIfNot('isNumeric')){
+    function isNumeric($v){if(!\is_scalar($v)||\is_bool($v)){return false;}/*// here string|int|float*//*// if (\preg_match('#^0$#', $v) || \preg_match('#^\-?[1-9][0-9]{0,}$#', $v)) return true;*/if(\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#',\strval($v))){return true;}return false;}
+    }if(!\Inilim\Tool\Integer::__definedIfNot('lenNumeric')){
+    function lenNumeric($num){if(!\Inilim\Tool\Method\Integer\isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return \strlen(\ltrim(\strval($num),'-'));}
+    }}

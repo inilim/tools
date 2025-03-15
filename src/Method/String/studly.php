@@ -2,20 +2,15 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include([
-    'replace',
-    'ucfirst',
-]);
-
 /**
  * Convert a value to studly caps case.
  */
 function studly(string $value): string
 {
-    $words = \explode(' ', replace(['-', '_'], ' ', $value));
+    $words = \explode(' ', \Inilim\Tool\Method\String\replace(['-', '_'], ' ', $value));
 
     $studly_words = \array_map(
-        static fn($word) => ucfirst($word),
+        static fn($word) => \Inilim\Tool\Method\String\ucfirst($word),
         $words
     );
 

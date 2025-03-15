@@ -2,8 +2,6 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('toStringOr');
-
 /**
  * Replace a given value in the string sequentially with an array. |
  * 
@@ -14,10 +12,6 @@ namespace Inilim\Tool\Method\String;
  */
 function replaceArray(string $search, array $replace, string $subject): string
 {
-    // if ($replace instanceof \Traversable) {
-    //     $replace = collect($replace)->all();
-    // }
-
     $segments = \explode($search, $subject);
     $result   = \array_shift($segments);
 

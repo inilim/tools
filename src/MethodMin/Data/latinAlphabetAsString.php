@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Data;\Inilim\Tool\Data :: __include('latinAlphabetAsClosure');function latinAlphabetAsString(string $separator="",bool $upper=false){return \implode($separator,latinAlphabetAsClosure($upper)-> __invoke());}
+<?php
+
+namespace Inilim\Tool\Method\Data{function latinAlphabetAsString(string $separator="",bool $upper=false){return \implode($separator,\Inilim\Tool\Method\Data\latinAlphabetAsClosure($upper)-> __invoke());}if(!\Inilim\Tool\Data::__definedIfNot('latinAlphabetAsClosure')){
+    function latinAlphabetAsClosure(bool $upper=false){if($upper){return static fn()=>['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];}else{return static fn()=>['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];}}
+    }}

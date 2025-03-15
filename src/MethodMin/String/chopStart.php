@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;\Inilim\Tool\Str :: __include('_startsWith');function chopStart(string $subject,$needle):string{foreach((array) $needle as $n){if(_startsWith($subject,$n)){return \substr($subject,\strlen($n));}}return $subject;}
+<?php
+
+namespace Inilim\Tool\Method\String{function chopStart(string $subject,$needle):string{foreach((array) $needle as $n){if(\Inilim\Tool\Method\String\_startsWith($subject,$n)){return \substr($subject,\strlen($n));}}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('_startsWith')){
+    function _startsWith(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_starts_with($haystack,$needle);}return 0===\strncmp($haystack,$needle,\strlen($needle));}
+    }}

@@ -2,16 +2,6 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-use Inilim\Tool\Integer;
-
-Integer::__include([
-    'isNumeric',
-    'lenNumeric',
-    'abs',
-    '__compare',
-]);
-\Inilim\Tool\Str::__include('_startsWith');
-
 /**
  * -2147483648 <> 2147483647
  * @param mixed $value
@@ -19,14 +9,14 @@ Integer::__include([
  */
 function isInt($value)
 {
-    if (!isNumeric($value)) return false;
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|string $value */
     $value = \strval($value);
     /** @var string $value */
-    $len = lenNumeric($value);
-    if ($len < Integer::MAX_LEN_32_BIT) return true;
-    if ($len > Integer::MAX_LEN_32_BIT) return false;
+    $len = \Inilim\Tool\Method\Integer\lenNumeric($value);
+    if ($len < \Inilim\Tool\Integer::MAX_LEN_32_BIT) return true;
+    if ($len > \Inilim\Tool\Integer::MAX_LEN_32_BIT) return false;
     // длина 10
     $last = \Inilim\Tool\Method\String\_startsWith($value, '-') ? 8 : 7;
-    return __compare(\str_split(abs($value)), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
+    return \Inilim\Tool\Method\Integer\__compare(\str_split(\ltrim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
 }

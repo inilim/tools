@@ -6,11 +6,11 @@ namespace Inilim\Tool\Method\Json;
  * @return mixed
  */
 function decode(
-    string $value,
+    string $v,
     ?bool $associative = null,
     int $depth         = 512,
     int $flags         = 0
 ) {
     // @phpstan-ignore-next-line
-    return \json_decode($value, $associative, $depth, $flags);
+    return \json_decode($v, $associative, $depth, $flags);
 }

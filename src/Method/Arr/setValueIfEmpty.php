@@ -2,21 +2,15 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include([
-    'get',
-    'set',
-]);
-
 /**
  * set if null OR empty string OR empty array
+ * @return bool
  */
-function setValueIfEmpty(array &$array, string $key_dot, $value): bool
+function setValueIfEmpty(array &$array, string $key, $value)
 {
-    $cur = \Inilim\Tool\Method\Arr\get($array, $key_dot);
+    $cur = \Inilim\Tool\Method\Arr\get($array, $key, -1);
     if (\in_array($cur, [null, '', []], true)) {
-        \Inilim\Tool\Method\Arr\set($array, $key_dot, $value);
+        \Inilim\Tool\Method\Arr\set($array, $key, $value);
         return true;
     }
     return false;

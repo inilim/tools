@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;function mapWithKeys(array $array,callable $callback):array{$result=[];foreach($array as $key=>$value){$assoc=$callback($value,$key);foreach($assoc as $map_key=>$map_value){$result[$map_key]=$map_value;}}return $result;}
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function mapWithKeys(array $array,callable $callback):array{$result=[];foreach($array as $key=>$value){$assoc=$callback($value,$key);foreach($assoc as $map_key=>$map_value){$result[$map_key]=$map_value;}}return $result;}

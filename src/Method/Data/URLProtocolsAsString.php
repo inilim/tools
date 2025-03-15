@@ -2,12 +2,10 @@
 
 namespace Inilim\Tool\Method\Data;
 
-\Inilim\Tool\Data::__include('URLProtocolsAsClosure');
-
 /**
  * @return string
  */
-function URLProtocolsAsString(string $separator = "")
+function URLProtocolsAsString(string $separator = '')
 {
-    return \implode($separator, URLProtocolsAsClosure()->__invoke());
+    return \implode($separator, \Inilim\Tool\Method\Data\URLProtocolsAsClosure()->__invoke());
 }

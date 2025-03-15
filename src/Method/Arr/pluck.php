@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('dataGet');
-
 /**
  * Pluck an array of values from an array.
  * @param  string|array|int|null  $value

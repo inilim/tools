@@ -2,17 +2,11 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-\Inilim\Tool\Arr::__include([
-    'collapse',
-    'accessible',
-    'exists',
-]);
-
 /**
  * Get an item from an array or object using "dot" notation.
- * @param  mixed  $target
- * @param  string|array|int|null  $key
- * @param  mixed  $default
+ * @param array|object $target
+ * @param string|array|int|null $key
+ * @param mixed $default
  * @return mixed
  */
 function dataGet($target, $key, $default = null)

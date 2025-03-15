@@ -2,82 +2,10 @@
 
 namespace Inilim\Tool;
 
-/**
- * @method  static  mixed dataGetFromJson(null|string $json, string $dotKey, mixed $default = null) 
- * @see \Inilim\Tool\Method\Json\dataGetFromJson()
- * 
- * @method  static  mixed decode(string $value, null|bool $associative = null, int $depth = 512, int $flags = 0) 
- * @see \Inilim\Tool\Method\Json\decode()
- * 
- * @method  static  string|false encode(mixed $value, int $flags = 0, int $depth = 512) 
- * @see \Inilim\Tool\Method\Json\encode()
- * 
- * @method  static  int getLastErrorCode() 
- * @see \Inilim\Tool\Method\Json\getLastErrorCode()
- * 
- * @method  static  string getLastErrorMsg() 
- * @see \Inilim\Tool\Method\Json\getLastErrorMsg()
- * 
- * @method  static  null|string getTypeFromJson(null|string $value) 
- * @see \Inilim\Tool\Method\Json\getTypeFromJson()
- * 
- * @method  static  bool hasError() 
- * @see \Inilim\Tool\Method\Json\hasError()
- * 
- * @method  static  bool isJson(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJson()
- * 
- * @method  static  bool isJsonAsArrList(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsArrList()
- * 
- * @method  static  bool isJsonAsArrOrObj(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsArrOrObj()
- * 
- * @method  static  bool isJsonAsFloat(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsFloat()
- * 
- * @method  static  bool isJsonAsInteger(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsInteger()
- * 
- * @method  static  bool isJsonAsNumeric(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsNumeric()
- * 
- * @method  static  bool isJsonAsObject(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsObject()
- * 
- * @method  static  bool isJsonAsString(null|string $value) 
- * @see \Inilim\Tool\Method\Json\isJsonAsString()
- * 
- * @method  static  bool isJsonSerializable(mixed $value, int $flags = 0, int $depth = 512) 
- * @see \Inilim\Tool\Method\Json\isJsonSerializable()
- * 
- * @method  static  mixed|T tryDecode(string $value, null|bool $associative = null, int $depth = 512, int $flags = 0, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecode()
- * 
- * @method  static  list<mixed>|T tryDecodeAsArrList(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsArrList()
- * 
- * @method  static  mixed[]|array{}|T tryDecodeAsArray(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsArray()
- * 
- * @method  static  float|T tryDecodeAsFloat(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsFloat()
- * 
- * @method  static  int|T tryDecodeAsInteger(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsInteger()
- * 
- * @method  static  object|T tryDecodeAsObject(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsObject()
- * 
- * @method  static  string|T tryDecodeAsString(null|string $value, T $default = null) 
- * @see \Inilim\Tool\Method\Json\tryDecodeAsString()
- * 
- * @method  static  string|T tryEncode(mixed $value, int $flags = 0, int $depth = 512,  $default = null) 
- * @see \Inilim\Tool\Method\Json\tryEncode()
- * 
- */
-final class Json extends \Inilim\LazyMethod\LazyMethodAbstract
+final class Json extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Json',
-        PATH_TO_DIR             = __DIR__ . '/MethodMin/Json';
+    const IDX                 = 6;
+    protected const NAMESPACE = 'Inilim\Tool\Method\Json',
+        PATH_TO_DIR           = __DIR__ . '/MethodMin/Json',
+        ALIAS                 = [];
 }

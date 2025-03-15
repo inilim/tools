@@ -2,23 +2,17 @@
 
 namespace Inilim\Tool\Method\Json;
 
-\Inilim\Tool\Json::__include([
-    'decode',
-    'hasError',
-]);
-\Inilim\Tool\Arr::__include('isList');
-
 /**
  * @return bool
  */
-function isJsonAsArrList(?string $value)
+function isJsonAsArrList(?string $v)
 {
-    if ($value === null) return false;
-    $value = decode($value);
+    if ($v === null) return false;
+    $v = \Inilim\Tool\Method\Json\decode($v);
     if (
-        hasError()
-        || !\is_array($value)
-        || !\Inilim\Tool\Method\Arr\isList($value)
+        \Inilim\Tool\Method\Json\hasError()
+        || !\is_array($v)
+        || !\Inilim\Tool\Method\Arr\isList($v)
     ) return false;
     return true;
 }

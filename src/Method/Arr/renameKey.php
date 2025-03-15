@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('getKeyOffset');
-
 /**
  * Renames key in array.
  * @param string|int $oldKey

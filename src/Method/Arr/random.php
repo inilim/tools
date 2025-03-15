@@ -10,11 +10,11 @@ namespace Inilim\Tool\Method\Arr;
  * @param  int|null  $number
  * @param  bool  $preserve_keys
  *
- * @return TValue|TValue[]|array<TKey,TValue>|array{}
+ * @return TValue|TValue[]|array<TKey,TValue>
  *
  * @throws \InvalidArgumentException
  */
-function random(array $array, ?int $number = null, bool $preserve_keys = false)
+function random(array $array, ?int $number = null, bool $preserveKeys = false)
 {
     $requested = $number === null ? 1 : $number;
 
@@ -38,7 +38,7 @@ function random(array $array, ?int $number = null, bool $preserve_keys = false)
 
     $results = [];
 
-    if ($preserve_keys) {
+    if ($preserveKeys) {
         foreach ((array) $keys as $key) {
             $results[$key] = $array[$key];
         }

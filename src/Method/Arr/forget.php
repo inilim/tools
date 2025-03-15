@@ -2,15 +2,12 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('exists');
-
 /**
  * Remove one or many array items from a given array using "dot" notation.
  * @param  (string|int)[]|string|int  $keys
+ * @return void
  */
-function forget(array &$array, $keys): void
+function forget(array &$array, $keys)
 {
     $original = &$array;
 

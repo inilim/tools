@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;function collapse(iterable $array){$results=[];foreach($array as $values){if(!\is_array($values)){continue;}$results[]=$values;}return \array_merge([],... $results);}
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function collapse(iterable $array){$results=[];foreach($array as $values){if(!\is_array($values)){continue;}$results[]=$values;}return \array_merge([],... $results);}

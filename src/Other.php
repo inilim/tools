@@ -2,43 +2,10 @@
 
 namespace Inilim\Tool;
 
-/**
- * @method  static   getExceptionDetails(\Throwable $e, T $traceAsArray = false) 
- * @see \Inilim\Tool\Method\Other\getExceptionDetails()
- * 
- * @method  static  string[]|array{} getNameMethodsFromObjOrClass(object|class-string|\ReflectionClass $classOrObjOrRef, string[] $except_methods = [], bool $throw = false, bool $except_magic_methods = false, bool $except_private_methods = false, bool $except_protected_methods = false, bool $except_public_methods = false, bool $except_parent_methods = false) 
- * @see \Inilim\Tool\Method\Other\getNameMethodsFromObjOrClass()
- * 
- * @method  static  \ReflectionAttribute[]|array{}|null getRefAttrClass(object|class-string|\ReflectionClass $classOrObjOrRef, bool $throw = false) 
- * @see \Inilim\Tool\Method\Other\getRefAttrClass()
- * 
- * @method  static  \ReflectionMethod[]|array{} getRefMethodsFromObjOrClass(object|class-string|\ReflectionClass $classOrObjOrRef, string[] $except_methods = [], bool $throw = false, bool $except_magic_methods = false, bool $except_private_methods = false, bool $except_protected_methods = false, bool $except_public_methods = false, bool $except_parent_methods = false) 
- * @see \Inilim\Tool\Method\Other\getRefMethodsFromObjOrClass()
- * 
- * @method  static  ?\ReflectionClass getReflectionClass(object|class-string $objectOrClass, bool $throw = false) 
- * @see \Inilim\Tool\Method\Other\getReflectionClass()
- * 
- * @method  static  string getType( $value) 
- * @see \Inilim\Tool\Method\Other\getType()
- * 
- * @method  static  bool isEnum( $value) 
- * @see \Inilim\Tool\Method\Other\isEnum()
- * 
- * @method  static  void prepareArrayForSerializeRecursive(array $value) 
- * @see \Inilim\Tool\Method\Other\prepareArrayForSerializeRecursive()
- * 
- * @method  static  mixed prepareObjForSerialize(object $obj) 
- * @see \Inilim\Tool\Method\Other\prepareObjForSerialize()
- * 
- * @method  static  C|D tryCallCallable(callable(...A):C $callable, array<A> $args = [], D $default = null, null|\Throwable $exception = null) 
- * @see \Inilim\Tool\Method\Other\tryCallCallable()
- * 
- * @method  static  mixed|T tryCallMethod(object|class-string $objectOrClass, string $methodName, array $args = [], T $default = null, null|\Throwable $exception = null) 
- * @see \Inilim\Tool\Method\Other\tryCallMethod()
- * 
- */
-final class Other extends \Inilim\LazyMethod\LazyMethodAbstract
+final class Other extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Other',
-        PATH_TO_DIR             = __DIR__ . '/MethodMin/Other';
+    const IDX                 = 7;
+    protected const NAMESPACE = 'Inilim\Tool\Method\Other',
+        PATH_TO_DIR           = __DIR__ . '/MethodMin/Other',
+        ALIAS                 = [];
 }

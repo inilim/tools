@@ -2,8 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
 /**
  * Return the default value of the given value.
  * @param  mixed $value

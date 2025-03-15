@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-
-Json::__include('hasError');
-
 /**
  * the method does not throw exceptions JsonException, instead it returns the default value
  * 
@@ -14,7 +10,7 @@ Json::__include('hasError');
  * @return mixed|T
  */
 function tryDecode(
-    string $value,
+    string $v,
     ?bool $associative = null,
     int $depth         = 512,
     int $flags         = 0,
@@ -22,12 +18,12 @@ function tryDecode(
 ) {
     try {
         // @phpstan-ignore-next-line
-        $value = \json_decode($value, $associative, $depth, $flags);
+        $v = \json_decode($v, $associative, $depth, $flags);
     } catch (\JsonException $e) {
         return $default;
     }
-    if (hasError()) {
+    if (\Inilim\Tool\Method\Json\hasError()) {
         return $default;
     }
-    return $value;
+    return $v;
 }

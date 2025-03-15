@@ -2,7 +2,12 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-function keysLower(array $array): array
+/**
+ * @template T of array
+ * @param T $array
+ * @return T
+ */
+function keysLower(array $array)
 {
     return \array_change_key_case($array, \CASE_LOWER);
 }

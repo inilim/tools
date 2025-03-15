@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;function query(array $array):string{return \http_build_query($array,'','&',\PHP_QUERY_RFC3986);}
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function query(array $array):string{return \http_build_query($array,'','&',\PHP_QUERY_RFC3986);}

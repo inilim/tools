@@ -2,3 +2,4 @@
 /composer.lock
 .htaccess
 .phpunit.result.cache
+/files/cache/*

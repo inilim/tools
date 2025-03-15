@@ -2,13 +2,9 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('keysUpper');
-
 function keysUpperNestedArray(array $array, int $depth = 1): array
 {
-    if ($depth === 0 || $depth < 0) {
+    if ($depth <= 0) {
         return \Inilim\Tool\Method\Arr\keysUpper($array);
     }
     foreach ($array as $idx =>  $item) {

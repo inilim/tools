@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('map');
-
 /**
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.

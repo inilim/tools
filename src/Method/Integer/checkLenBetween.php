@@ -2,12 +2,6 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-\Inilim\Tool\Integer::__include([
-    'checkBetween',
-    'isNumeric',
-    'lenNumeric',
-]);
-
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $fromTo
@@ -16,11 +10,11 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkLenBetween($num, $fromTo, $toFrom)
 {
-    if (!isNumeric($num)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
-    return checkBetween(
-        lenNumeric($num),
+    return \Inilim\Tool\Method\Integer\checkBetween(
+        \Inilim\Tool\Method\Integer\lenNumeric($num),
         $fromTo,
         $toFrom
     );

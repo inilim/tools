@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('has');
-
 /**
  * Determine if any of the keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|array  $array

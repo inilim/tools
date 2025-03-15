@@ -2,21 +2,17 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-
-Json::__include('decode');
-
 /**
  * object to array
  * 
  * @template T
  * @param T $default
- * @return mixed[]|array{}|T
+ * @return mixed[]|T
  */
-function tryDecodeAsArray(?string $value, $default = null)
+function tryDecodeAsArray(?string $v, $default = null)
 {
-    if ($value === null) return $default;
-    $value = decode($value, true);
-    if (\is_array($value)) return $value;
+    if ($v === null) return $default;
+    $v = \Inilim\Tool\Method\Json\decode($v, true);
+    if (\is_array($v)) return $v;
     return $default;
 }

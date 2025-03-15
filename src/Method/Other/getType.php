@@ -4,19 +4,21 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "object exception" "enum" "resource" "null" "unknown type" "resource (closed)"
+ * @param mixed $v
+ * @return string
  */
-function getType($value): string
+function getType($v)
 {
-    $r = \gettype($value);
+    $r = \gettype($v);
     switch ($r) {
         case 'NULL':
             return 'null';
         case 'double':
             return 'float';
         case 'object':
-            if (\PHP_VERSION_ID >= 80100 && $value instanceof \UnitEnum) {
+            if (\PHP_VERSION_ID >= 80100 && $v instanceof \UnitEnum) {
                 return 'enum';
-            } elseif ($value instanceof \Throwable) {
+            } elseif ($v instanceof \Throwable) {
                 return 'object exception';
             }
             return 'object';

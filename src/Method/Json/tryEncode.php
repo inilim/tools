@@ -5,16 +5,16 @@ namespace Inilim\Tool\Method\Json;
 /**
  * the method does not throw exceptions JsonException, instead it returns the default value
  * 
- * @template T
+ * @template T of mixed
  * @param T $default return default if failed encode
- * @param mixed $value
+ * @param mixed $v
  * @return string|T
  */
-function tryEncode($value, int $flags = 0, int $depth = 512, $default = null)
+function tryEncode($v, int $flags = 0, int $depth = 512, $default = null)
 {
     try {
         // @phpstan-ignore-next-line
-        $json = \json_encode($value, $flags, $depth);
+        $json = \json_encode($v, $flags, $depth);
     } catch (\JsonException $e) {
         return $default;
     }

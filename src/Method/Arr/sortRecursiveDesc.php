@@ -2,10 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('sortRecursive');
-
 /**
  * Recursively sort an array by keys and values in descending order.
  */

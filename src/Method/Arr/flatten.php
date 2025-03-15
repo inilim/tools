@@ -4,8 +4,9 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * Flatten a multi-dimensional array into a single level.
+ * @return array
  */
-function flatten(iterable $array, int $depth): array
+function flatten(iterable $array, int $depth)
 {
     $result = [];
 

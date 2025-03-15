@@ -2,16 +2,13 @@
 
 namespace Inilim\Tool\Method\String;
 
-use Inilim\Tool\Str;
-
-Str::__include('_contains');
-
 /**
  * Convert the given string to APA-style title case.
  *
  * See: https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case
+ * @return string
  */
-function apa(string $value): string
+function apa(string $value)
 {
     $minorWords = [
         'and',
@@ -51,7 +48,7 @@ function apa(string $value): string
         if (\Inilim\Tool\Method\String\_contains($lowercaseWord, '-')) {
             $hyphenatedWords = \explode('-', $lowercaseWord);
 
-            $hyphenatedWords = \array_map(function ($part) use ($minorWords) {
+            $hyphenatedWords = \array_map(static function ($part) use ($minorWords) {
                 return (\in_array($part, $minorWords) && \mb_strlen($part) <= 3) ? $part : \ucfirst($part);
             }, $hyphenatedWords);
 

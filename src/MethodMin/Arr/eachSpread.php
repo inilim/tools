@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;use Inilim\Tool\Arr;Arr :: __include('each');function eachSpread(array $array,callable $callback):void{\Inilim\Tool\Method\Arr\each($array,static function($chunk,$key)use($callback){$chunk[]=$key;return $callback(... $chunk);});}
+<?php
+
+namespace Inilim\Tool\Method\Arr{function eachSpread(array $array,callable $callback){\Inilim\Tool\Method\Arr\each($array,static function($chunk,$key)use($callback){$chunk[]=$key;return $callback(... $chunk);});}if(!\Inilim\Tool\Arr::__definedIfNot('each')){
+    function each($array,callable $callback){foreach($array as $key=>$item){if($callback($item,$key)===false){break;}}}
+    }}

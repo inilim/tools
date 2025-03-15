@@ -2,12 +2,6 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-\Inilim\Tool\Integer::__include([
-    'isNumeric',
-    'lenNumeric',
-    'checkMax',
-]);
-
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $max
@@ -15,12 +9,12 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkLenMax($num, $max)
 {
-    if (!isNumeric($num)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
 
-    return checkMax(
-        lenNumeric($num),
+    return \Inilim\Tool\Method\Integer\checkMax(
+        \Inilim\Tool\Method\Integer\lenNumeric($num),
         $max
     );
 }

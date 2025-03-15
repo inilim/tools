@@ -2,8 +2,6 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-\Inilim\Tool\Integer::__include('isNumeric');
-
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $max
@@ -11,10 +9,10 @@ namespace Inilim\Tool\Method\Integer;
  */
 function checkMax($num, $max)
 {
-    if (!isNumeric($num)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');
     }
-    if (!isNumeric($max)) {
+    if (!\Inilim\Tool\Method\Integer\isNumeric($max)) {
         throw new \InvalidArgumentException('$max must be numeric');
     }
 

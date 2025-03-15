@@ -8,6 +8,11 @@
         },
         "files": []
     },
+    "extra": {
+        "exclude-from-files": [
+            "symfony/var-dumper/Resources/functions/dump.php"
+        ]
+    },
     "autoload-dev": {
         "psr-4": {
             "Inilim\\Tool\\Test\\": "Tests/"
@@ -16,12 +21,18 @@
     "authors": [
         {
             "name": "inilim"
+        },
+        {
+            "name": "internet community"
         }
     ],
     "require": {
         "php": ">=7.4",
-        "ext-mbstring": "*",
-        "inilim/lazy_method": "dev-main"
+        "ext-mbstring": "*"
+    },
+    "suggest": {
+        "ext-zip": "TODO ...",
+        "ext-intl": "TODO ..."
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -29,17 +40,23 @@
         "phpstan/phpstan": "@stable",
         "inilim/dump": "dev-main",
         "phpunit/phpunit": "^11.5",
-        "inilim/parse_lazy_method": "dev-main",
         "inilim/ipdo": "dev-main",
         "php-code-minifier/php-code-minifier": "^1.2",
-        "dragon-code/benchmark": "^3.0"
+        "dragon-code/benchmark": "^3.0",
+        "twig/twig": "^3.19",
+        "mcaskill/composer-exclude-files": "^4.0"
     },
     "scripts": {
         "tests": [
             "php vendor/bin/phpunit tests"
         ],
-        "phpstan": [
+        "stan": [
             "php vendor/bin/phpstan analyze"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "mcaskill/composer-exclude-files": true
+        }
     }
 }

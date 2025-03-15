@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;function unique(array $array):array{return \array_keys(\array_flip($array));}
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function unique(array $array):array{return \array_keys(\array_flip($array));}

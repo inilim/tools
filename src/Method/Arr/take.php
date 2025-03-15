@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param TArray $array
  * @return TArray
  */
-function take(array $array, int $limit): array
+function take(array $array, int $limit)
 {
     if ($limit < 0) {
         return \array_slice($array, $limit, \abs($limit));

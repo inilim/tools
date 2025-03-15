@@ -1,0 +1,23 @@
+<?php
+
+{{ main.code_with_ns|raw }}
+
+namespace{
+    $d = [];
+}
+
+{% for dep in deps %}
+namespace {{ dep.namespace }}{
+    if(!\{{ dep.tool }}::defined('{{ dep.name }}')){
+        {{ dep.code|raw }}
+        $d['{{ dep.tool }}'] ??= [];
+        $d['{{ dep.tool }}'][] = '{{ dep.name }}';
+    }
+}
+{% endfor %}
+
+namespace{
+    foreach($d as $tool => $deps){
+        $tool::__add($deps);
+    }
+}

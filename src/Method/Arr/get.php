@@ -2,14 +2,6 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include([
-    'accessible',
-    'value',
-    'exists',
-]);
-
 /**
  * Get an item from an array using "dot" notation.
  * @template D

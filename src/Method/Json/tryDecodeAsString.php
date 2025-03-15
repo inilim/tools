@@ -2,19 +2,15 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-
-Json::__include('decode');
-
 /**
- * @template T
+ * @template T of mixed
  * @param T $default
  * @return string|T
  */
-function tryDecodeAsString(?string $value, $default = null)
+function tryDecodeAsString(?string $v, $default = null)
 {
-    if ($value === null) return $default;
-    $value = decode($value);
-    if (\is_string($value)) return $value;
+    if ($v === null) return $default;
+    $v = \Inilim\Tool\Method\Json\decode($v);
+    if (\is_string($v)) return $v;
     return $default;
 }

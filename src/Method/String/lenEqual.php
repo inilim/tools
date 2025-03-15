@@ -2,9 +2,6 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include('length');
-\Inilim\Tool\Integer::__include('equals');
-
 /**
  * @param int|numeric-string $equal
  * @return bool
@@ -12,7 +9,7 @@ namespace Inilim\Tool\Method\String;
 function lenEqual(string $str, $equal)
 {
     return \Inilim\Tool\Method\Integer\equals(
-        length($str),
+        \Inilim\Tool\Method\String\length($str),
         $equal
     );
 }

@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;function finish(string $value,string $cap):string{$quoted=\preg_quote($cap,'/');return \preg_replace('/(?:'.$quoted.')+$/u','',$value).$cap;}
+<?php
+
+namespace Inilim\Tool\Method\String;
+
+function finish(string $value,string $cap):string{return \preg_replace('/(?:'.\preg_quote($cap,'/').')+$/u','',$value).$cap;}

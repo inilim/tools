@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Json;use Inilim\Tool\Json;Json :: __include('decode');function tryDecodeAsInteger(?string $value,$default=null){if($value===null){return $default;}$value=decode($value);if(\is_int($value)){return $value;}return $default;}
+<?php
+
+namespace Inilim\Tool\Method\Json{function tryDecodeAsInteger(?string $v,$default=null){if($v===null){return $default;}$v=\Inilim\Tool\Method\Json\decode($v);if(\is_int($v)){return $v;}return $default;}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
+    function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
+    }}

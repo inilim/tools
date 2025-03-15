@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Data;\Inilim\Tool\Data :: __include('numbersAsClosure');function numbersAsString(string $separator=""){return \implode($separator,numbersAsClosure()-> __invoke());}
+<?php
+
+namespace Inilim\Tool\Method\Data{function numbersAsString(string $separator=''){return \implode($separator,\Inilim\Tool\Method\Data\numbersAsClosure()-> __invoke());}if(!\Inilim\Tool\Data::__definedIfNot('numbersAsClosure')){
+    function numbersAsClosure(){return static fn()=>[0,1,2,3,4,5,6,7,8,9];}
+    }}

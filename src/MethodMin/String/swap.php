@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;function swap(array $map,string $subject):string{return \strtr($subject,$map);}
+<?php
+
+namespace Inilim\Tool\Method\String;
+
+function swap(array $map,string $subject):string{return \strtr($subject,$map);}

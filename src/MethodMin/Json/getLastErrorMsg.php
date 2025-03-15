@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Json;function getLastErrorMsg():string{return \json_last_error_msg();}
+<?php
+
+namespace Inilim\Tool\Method\Json;
+
+function getLastErrorMsg(){return \json_last_error_msg();}

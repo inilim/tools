@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\Arr;function each(array $array,callable $callback):void{foreach($array as $key=>$item){if($callback($item,$key)===false){break;}}}
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function each($array,callable $callback){foreach($array as $key=>$item){if($callback($item,$key)===false){break;}}}

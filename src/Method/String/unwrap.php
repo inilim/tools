@@ -2,24 +2,17 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Str::__include([
-    'startsWith',
-    'endsWith',
-    'substr',
-    'length',
-]);
-
 /**
  * Unwrap the string with the given strings.
  */
 function unwrap(string $value, string $before, ?string $after = null): string
 {
-    if (startsWith($value, $before)) {
-        $value = substr($value, length($before));
+    if (\Inilim\Tool\Method\String\startsWith($value, $before)) {
+        $value = \Inilim\Tool\Method\String\substr($value, \Inilim\Tool\Method\String\length($before));
     }
 
-    if (endsWith($value, $after ??= $before)) {
-        $value = substr($value, 0, -length($after));
+    if (\Inilim\Tool\Method\String\endsWith($value, $after ??= $before)) {
+        $value = \Inilim\Tool\Method\String\substr($value, 0, -\Inilim\Tool\Method\String\length($after));
     }
 
     return $value;

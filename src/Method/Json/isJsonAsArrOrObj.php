@@ -2,22 +2,15 @@
 
 namespace Inilim\Tool\Method\Json;
 
-use Inilim\Tool\Json;
-
-Json::__include([
-    'decode',
-    'hasError',
-]);
-
 /**
  * @return bool
  */
-function isJsonAsArrOrObj(?string $value)
+function isJsonAsArrOrObj(?string $v)
 {
-    if ($value === null) return false;
+    if ($v === null) return false;
 
-    $value = decode($value);
-    if (hasError()) return false;
+    $v = \Inilim\Tool\Method\Json\decode($v);
+    if (\Inilim\Tool\Method\Json\hasError()) return false;
 
-    return \is_array($value) || \is_object($value);
+    return \is_array($v) || \is_object($v);
 }

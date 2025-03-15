@@ -2,18 +2,15 @@
 
 namespace Inilim\Tool\Method\Json;
 
-\Inilim\Tool\Json::__include('decode');
-\Inilim\Tool\Arr::__include('isList');
-
 /**
- * @template T
+ * @template T of mixed
  * @param T $default
  * @return list<mixed>|T
  */
-function tryDecodeAsArrList(?string $value, $default = null)
+function tryDecodeAsArrList(?string $v, $default = null)
 {
-    if ($value === null) return $default;
-    $value = decode($value);
-    if (\is_array($value) && \Inilim\Tool\Method\Arr\isList($value)) return $value;
+    if ($v === null) return $default;
+    $v = \Inilim\Tool\Method\Json\decode($v);
+    if (\is_array($v) && \Inilim\Tool\Method\Arr\isList($v)) return $v;
     return $default;
 }

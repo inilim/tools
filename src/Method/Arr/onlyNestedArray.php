@@ -2,16 +2,12 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('only');
-
 /**
  * @param  (string|int)[]|string|int $keys
  */
 function onlyNestedArray(array $array, $keys, int $depth = 1): array
 {
-    if ($depth === 0 || $depth < 0) {
+    if ($depth < 1) {
         return \Inilim\Tool\Method\Arr\only($array, $keys);
     }
     foreach ($array as $idx =>  $item) {

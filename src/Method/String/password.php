@@ -2,12 +2,6 @@
 
 namespace Inilim\Tool\Method\String;
 
-\Inilim\Tool\Data::__include([
-    'latinAlphabetAsClosure',
-    'numbersAsClosure',
-    'symbolsAsClosure',
-]);
-
 /**
  * Generate a random, secure password.
  */

@@ -2,20 +2,20 @@
 
 namespace Inilim\Tool\Method\Arr;
 
-use Inilim\Tool\Arr;
-
-Arr::__include('dataGet');
-
 /**
- * @template TArray of array
- * @param TArray $arr
- * @return TArray
+ * @template T of (mixed[]|object)[]
+ * @param T $arr
+ * @return T
  */
 function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $descending = false): array
 {
     $t = [];
     foreach ($arr as $key => $value) {
-        $t[$key] = \Inilim\Tool\Method\Arr\dataGet($value, $by);
+        if (\is_array($value) || \is_object($value)) {
+            $t[$key] = \Inilim\Tool\Method\Arr\dataGet($value, $by);
+        } else {
+            $t[$key] = null;
+        }
     }
 
     $descending ? \arsort($t, $options) : \asort($t, $options);

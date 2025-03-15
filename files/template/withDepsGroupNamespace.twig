@@ -1,0 +1,20 @@
+<?php
+
+{% for namespace,dep in deps -%}
+namespace {{ namespace }}{
+    {%- for depItem in dep -%}
+        {%- if depItem.isMain == false -%}
+
+if(!\{{ depItem.tool }}::__definedIfNot('{{ depItem.name }}')){
+    {{ depItem.code|raw }}
+    {# \{{ depItem.tool }}::__add('{{ depItem.name }}'); #}
+}
+
+        {%- else -%}
+
+{{ depItem.code|raw }}
+
+        {%- endif -%}
+    {%- endfor -%}
+}
+{%- endfor -%}

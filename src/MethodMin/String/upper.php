@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;function upper(string $value):string{return \mb_strtoupper($value,'UTF-8');}
+<?php
+
+namespace Inilim\Tool\Method\String;
+
+function upper(string $value,?string $encoding='UTF-8'){return \mb_strtoupper($value,$encoding);}

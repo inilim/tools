@@ -2,61 +2,10 @@
 
 namespace Inilim\Tool;
 
-/**
- * @method  static  array URLProtocolsAsArray() 
- * @see \Inilim\Tool\Method\Data\URLProtocolsAsArray()
- * 
- * @method  static  \Closure URLProtocolsAsClosure() 
- * @see \Inilim\Tool\Method\Data\URLProtocolsAsClosure()
- * 
- * @method  static  string URLProtocolsAsString(string $separator = "") 
- * @see \Inilim\Tool\Method\Data\URLProtocolsAsString()
- * 
- * @method  static  \Closure arabicAlphabetAsClosure() 
- * @see \Inilim\Tool\Method\Data\arabicAlphabetAsClosure()
- * 
- * @method  static  array cyrillicAlphabetAsArray(bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\cyrillicAlphabetAsArray()
- * 
- * @method  static  \Closure cyrillicAlphabetAsClosure(bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\cyrillicAlphabetAsClosure()
- * 
- * @method  static  string cyrillicAlphabetAsString(string $separator = "", bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\cyrillicAlphabetAsString()
- * 
- * @method  static  array latinAlphabetAsArray(bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\latinAlphabetAsArray()
- * 
- * @method  static  \Closure latinAlphabetAsClosure(bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\latinAlphabetAsClosure()
- * 
- * @method  static  string latinAlphabetAsString(string $separator = "", bool $upper = false) 
- * @see \Inilim\Tool\Method\Data\latinAlphabetAsString()
- * 
- * @method  static  string[] magicMethodsAsArray() 
- * @see \Inilim\Tool\Method\Data\magicMethodsAsArray()
- * 
- * @method  static  \Closure():string[] magicMethodsAsClosure() 
- * @see \Inilim\Tool\Method\Data\magicMethodsAsClosure()
- * 
- * @method  static  string magicMethodsAsString(string $separator = "") 
- * @see \Inilim\Tool\Method\Data\magicMethodsAsString()
- * 
- * @method  static  string numbersAsArray() 
- * @see \Inilim\Tool\Method\Data\numbersAsArray()
- * 
- * @method  static  \Closure numbersAsClosure() 
- * @see \Inilim\Tool\Method\Data\numbersAsClosure()
- * 
- * @method  static  string numbersAsString(string $separator = "") 
- * @see \Inilim\Tool\Method\Data\numbersAsString()
- * 
- * @method  static  \Closure symbolsAsClosure() 
- * @see \Inilim\Tool\Method\Data\symbolsAsClosure()
- * 
- */
-final class Data extends \Inilim\LazyMethod\LazyMethodAbstract
+final class Data extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE   = 'Inilim\Tool\Method\Data',
-        PATH_TO_DIR             = __DIR__ . '/MethodMin/Data';
+    const IDX                 = 1;
+    protected const NAMESPACE = 'Inilim\Tool\Method\Data',
+        PATH_TO_DIR           = __DIR__ . '/MethodMin/Data',
+        ALIAS                 = [];
 }

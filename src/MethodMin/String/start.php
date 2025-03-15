@@ -1,1 +1,5 @@
-<?php namespace Inilim\Tool\Method\String;function start(string $value,string $prefix):string{$quoted=\preg_quote($prefix,'/');return $prefix.\preg_replace('/^(?:'.$quoted.')+/u','',$value);}
+<?php
+
+namespace Inilim\Tool\Method\String;
+
+function start(string $value,string $prefix):string{$quoted=\preg_quote($prefix,'/');return $prefix.\preg_replace('/^(?:'.$quoted.')+/u','',$value);}
