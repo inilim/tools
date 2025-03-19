@@ -11,8 +11,7 @@ namespace Inilim\Tool\Method\File;
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @param ?get_throw $e
- * @return int<-1,max> return -1 if error
+ * @return array{result:int<-1,max>,exception:null|get_throw} return result -1 if error
  * @throws get_throw
  */
 function put(
@@ -20,7 +19,6 @@ function put(
     $data,
     int $flags            = 0,
     bool $throw           = false,
-    &$e                   = null,
     $context              = null,
     ?array $contextParams = null
 ) {
@@ -51,12 +49,17 @@ function put(
         }
     );
     if ($args['result'] === false) {
-        $e = $args['exception'];
-        if ($throw && $e) {
-            throw $e;
+        if ($throw && $args['exception']) {
+            throw $args['exception'];
         }
-        return -1;
+        return [
+            'result'    => -1,
+            'exception' => $args['exception'],
+        ];
     }
 
-    return $args['result'];
+    return [
+        'result'    => $args['result'],
+        'exception' => null,
+    ];
 }

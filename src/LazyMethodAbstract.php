@@ -56,6 +56,18 @@ abstract class LazyMethodAbstract
     }
 
     /**
+     * @template T of mixed
+     * @param T $value
+     * @return object{value:T}&\stdClass
+     */
+    static function stdWrap($value)
+    {
+        $std = new \stdClass;
+        $std->value = $value;
+        return $std;
+    }
+
+    /**
      * @internal
      * @return bool
      */

@@ -3,7 +3,9 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
- * @return \Closure
+ * @template T of \Closure
+ * @param T $cls
+ * @return T
  */
 function clearClosure(\Closure $cls)
 {

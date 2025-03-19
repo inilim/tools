@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @skip_build
  * @return void
  */
 function prepareArrayForSerializeRecursive(array &$value)

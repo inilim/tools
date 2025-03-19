@@ -13,11 +13,10 @@ namespace Inilim\Tool\Method\File;
 /**
  * @param mixed $value
  * @param ?int $lifetime default 1 year in seconds
- * @param ?\Throwable $e
- * @return bool
+ * @return array{result:bool,exception:null|\ErrorException}
  * @throws \ErrorException
  */
-function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false, &$e = null)
+function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false)
 {
     try {
         \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -81,9 +80,15 @@ function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $thro
         if ($throw) {
             throw $e;
         }
-        return false;
+        return [
+            'result'    => false,
+            'exception' => $e,
+        ];
     }
-    return true;
+    return [
+        'result'    => true,
+        'exception' => null,
+    ];
 }
 
 

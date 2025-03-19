@@ -14,10 +14,9 @@ namespace Inilim\Tool\Method\File;
  * @template TValue of string
  * @template TKey of string|int
  * @param TValue|iterable<TKey,TValue> $pathToFile
- * @param ?\Throwable $e
- * @return ($pathToFile is iterable ? array<TKey,mixed> : mixed)
+ * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|\Throwable}
  */
-function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false, &$e = null)
+function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false)
 {
     $args = [
         'result'     => [],
@@ -99,15 +98,20 @@ function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false, &
     // Finish
     // ---------------------------------------------
 
-    $e = $args['exception'];
-    if ($throw && $e) {
-        throw $e;
+    if ($throw && $args['exception']) {
+        throw $args['exception'];
     }
 
     if ($args['once']) {
-        return $args['result'][0];
+        return [
+            'result'    => $args['result'][0],
+            'exception' => $args['exception'],
+        ];
     }
-    return $args['result'];
+    return [
+        'result'    => $args['result'],
+        'exception' => $args['exception'],
+    ];
 }
 
 

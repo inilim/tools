@@ -6,8 +6,8 @@ namespace Inilim\Tool\Method\File;
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
- * @param array{filename:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,e?:get_throw|null,context?:resource|array,contextParams?:array} $params
- * @return null|string
+ * @param array{filename:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
+ * @return array{result:string|null,exception:null|get_throw}
  * @throws get_throw
  */
 function getV2(array $params)
@@ -18,7 +18,6 @@ function getV2(array $params)
         $params['length']         ?? null,
         $params['useIncludePath'] ?? false,
         $params['throw']          ?? false,
-        $params['e']              ?? null,
         $params['context']        ?? null,
         $params['contextParams']  ?? null
     );

@@ -9,8 +9,7 @@ namespace Inilim\Tool\Method\File;
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @param ?get_throw $e
- * @return null|string
+ * @return array{result:string|null,exception:null|get_throw}
  * @throws get_throw
  */
 function get(
@@ -19,7 +18,6 @@ function get(
     ?int $length          = null,
     bool $useIncludePath  = false,
     bool $throw           = false,
-    &$e                   = null,
     $context              = null,
     ?array $contextParams = null
 ) {
@@ -48,12 +46,17 @@ function get(
     );
 
     if ($args['result'] === false) {
-        $e = $args['exception'];
-        if ($throw && $e) {
-            throw $e;
+        if ($throw && $args['exception']) {
+            throw $args['exception'];
         }
-        return null;
+        return [
+            'result'    => null,
+            'exception' => $args['exception'],
+        ];
     }
 
-    return $args['result'];
+    return [
+        'result'    => $args['result'],
+        'exception' => null,
+    ];
 }

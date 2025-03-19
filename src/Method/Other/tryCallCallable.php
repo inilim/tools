@@ -3,25 +3,27 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
- * @template C
- * @template D
- * @template A
+ * @template C of mixed
+ * @template D of mixed
+ * @template A of mixed
  * 
  * @param callable(...A):C $callable
  * @param array<A> $args
  * @param D $default
- * @return C|D
+ * @return array{result:C|D,exception:null|\Throwable}
  */
-function tryCallCallable($callable, array $args = [], $default = null, ?\Throwable &$exception = null)
+function tryCallCallable(callable $callable, array $args = [], $default = null)
 {
     try {
-        if (!\is_callable($callable)) {
-            throw new \Exception('$callable give not callable');
-        }
-        $result = \call_user_func($callable, ...$args);
+        $result = \call_user_func_array($callable, $args);
     } catch (\Throwable $e) {
-        $exception = $e;
-        return $default;
+        return [
+            'result'    => $default,
+            'exception' => $e,
+        ];
     }
-    return $result;
+    return [
+        'result'    => $result,
+        'exception' => null,
+    ];
 }
