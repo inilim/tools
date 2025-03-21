@@ -9,9 +9,9 @@ namespace Inilim\Tool\Method\Arr;
 function undot($array): array
 {
     $results = [];
-
+    $set = \Inilim\Tool\Method\Arr\set();
     foreach ($array as $key => $value) {
-        \Inilim\Tool\Method\Arr\set()($results, $key, $value);
+        $set($results, $key, $value);
     }
 
     return $results;

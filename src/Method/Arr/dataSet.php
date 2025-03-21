@@ -11,6 +11,7 @@ function dataSet()
 {
     return static function (&$target, $key, $value, bool $overwrite = true) {
         $segments = \is_array($key) ? $key : \explode('.', $key);
+        $dataSet  = \Inilim\Tool\Method\Arr\dataSet();
 
         if (($segment = \array_shift($segments)) === '*') {
             if (!\Inilim\Tool\Method\Arr\accessible($target)) {
@@ -19,7 +20,7 @@ function dataSet()
 
             if ($segments) {
                 foreach ($target as &$inner) {
-                    \Inilim\Tool\Method\Arr\dataSet()($inner, $segments, $value, $overwrite);
+                    $dataSet($inner, $segments, $value, $overwrite);
                 }
             } elseif ($overwrite) {
                 foreach ($target as &$inner) {
@@ -32,7 +33,7 @@ function dataSet()
                     $target[$segment] = [];
                 }
 
-                \Inilim\Tool\Method\Arr\dataSet()($target[$segment], $segments, $value, $overwrite);
+                $dataSet($target[$segment], $segments, $value, $overwrite);
             } elseif ($overwrite || !\Inilim\Tool\Method\Arr\exists($target, $segment)) {
                 $target[$segment] = $value;
             }
@@ -42,7 +43,7 @@ function dataSet()
                     $target->{$segment} = [];
                 }
 
-                \Inilim\Tool\Method\Arr\dataSet()($target->{$segment}, $segments, $value, $overwrite);
+                $dataSet($target->{$segment}, $segments, $value, $overwrite);
             } elseif ($overwrite || !isset($target->{$segment})) {
                 $target->{$segment} = $value;
             }
@@ -50,7 +51,7 @@ function dataSet()
             $target = [];
 
             if ($segments) {
-                \Inilim\Tool\Method\Arr\dataSet()($target[$segment], $segments, $value, $overwrite);
+                $dataSet($target[$segment], $segments, $value, $overwrite);
             } elseif ($overwrite) {
                 $target[$segment] = $value;
             }

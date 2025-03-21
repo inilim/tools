@@ -18,12 +18,6 @@ use DragonCode\Benchmark\Benchmark;
 
 Dump::init();
 
-$a = [null, null];
-
-
-Arr::setValueIfNull([&$a], 0, '123');
-
-d($a);
 
 de();
 $fruits = [
