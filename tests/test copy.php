@@ -4,22 +4,44 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Inilim\Tool\Arr;
-use Inilim\Tool\Str;
 use Inilim\Dump\Dump;
-use Inilim\Tool\Data;
-use Inilim\Tool\File;
-use Inilim\Tool\Json;
-use Inilim\Tool\Refl;
-use Inilim\Tool\Other;
-use Inilim\Tool\Double;
-use Inilim\Tool\Integer;
-use DragonCode\Benchmark\Benchmark;
 
 Dump::init();
 
-class Test
+
+
+dUsage();
+
+
+static function (array $array, $key) {
+    $value = \array_search(
+        \key([$key => null]),
+        \array_keys($array),
+        true
+    );
+    return $value === false ? null : $value;
+};
+
+dUsage();
+
+
+
+
+
+
+de();
+final class Test
 {
+    protected static $instance;
+
+    protected function __construct() {}
+
+    static function __callStatic($name, $arguments)
+    {
+        self::$instance ??= new self;
+        return self::$instance->__get($name);
+    }
+
     function __get($name)
     {
         return static function () {
@@ -28,6 +50,4 @@ class Test
     }
 }
 
-$a = new Test;
-
-$a->name();
+Test::name()();

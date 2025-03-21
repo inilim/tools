@@ -4,10 +4,10 @@ namespace Inilim\Tool;
 
 final class Integer extends \Inilim\Tool\LazyMethodAbstract
 {
-    const IDX                 = 5;
     protected const NAMESPACE = 'Inilim\Tool\Method\Integer',
         PATH_TO_DIR           = __DIR__ . '/MethodMin/Integer',
-        ALIAS                 = [];
+        ALIAS                 = [],
+        IDX                   = 5;
 
     // TINYINT: представляет целые числа от -128 до 127, занимает 1 байт
     // TINYINT UNSIGNED: представляет целые числа от 0 до 255, занимает 1 байт

@@ -4,10 +4,10 @@ namespace Inilim\Tool;
 
 abstract class LazyMethodAbstract
 {
-    const IDX                   = -1;
-    protected const NAMESPACE   = '',
-        PATH_TO_DIR             = '',
-        ALIAS                   = [];
+    protected const NAMESPACE = '',
+        PATH_TO_DIR           = '',
+        ALIAS                 = [],
+        IDX                   = -1;
 
     /**
      * @var array<string,array<string,true>>
@@ -53,18 +53,6 @@ abstract class LazyMethodAbstract
         }
 
         throw new \RuntimeException('Call to undefined method ' . static::NAMESPACE . '\\' . $name);
-    }
-
-    /**
-     * @template T of mixed
-     * @param T $value
-     * @return object{value:T}&\stdClass
-     */
-    static function stdWrap($value)
-    {
-        $std = new \stdClass;
-        $std->value = $value;
-        return $std;
     }
 
     /**
