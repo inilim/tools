@@ -184,7 +184,14 @@ if (true) {
                 // INFO парсим
                 // ---------------------------------------------
 
-                $ast = $parser->parse($code);
+                try {
+                    $ast = $parser->parse($code);
+                } catch (\Throwable $e) {
+                    de([
+                        $name,
+                        $e->getMessage(),
+                    ]);
+                }
 
                 // ---------------------------------------------
                 // Ищем функцию

@@ -2,4 +2,6 @@
 
 namespace Inilim\Tool;
 
-class Double {}
+class Double
+{
+    }
