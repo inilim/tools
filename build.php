@@ -330,6 +330,7 @@ if (true) {
 
                 if (!$methodDep) {
                     de([
+                        '$method'       => $method,
                         '$methodDep'    => $methodDep,
                         '$methodDepStr' => $methodDepStr,
                     ]);

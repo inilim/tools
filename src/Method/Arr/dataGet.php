@@ -38,7 +38,7 @@ function dataGet($target, $key, $default = null)
             return \in_array('*', $key) ? \Inilim\Tool\Method\Arr\collapse($result) : $result;
         }
 
-        if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {
+        if (\Inilim\Tool\Arr::accessible($target) && \Inilim\Tool\Arr::exists($target, $segment)) {
             $target = $target[$segment];
         } elseif (\is_object($target) && isset($target->{$segment})) {
             $target = $target->{$segment};
