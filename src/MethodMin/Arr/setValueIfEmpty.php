@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Tool\Method\Arr{function add(array $array,string $key,$value){if(\Inilim\Tool\Method\Arr\get($array,$key)===null){\Inilim\Tool\Method\Arr\set()($array,$key,$value);}return $array;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+namespace Inilim\Tool\Method\Arr{function setValueIfEmpty(){return static function(array&$array,string $key,$value){$cur=\Inilim\Tool\Method\Arr\get($array,$key,-1);if(\in_array($cur,[null,'',[]],true)){\Inilim\Tool\Method\Arr\set()($array,$key,$value);return true;}return false;};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}

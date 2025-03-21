@@ -17,6 +17,14 @@ class Other
     static function getErrorHandler() {}
 
         /**
+ * @template T of bool
+ * @psalm-type Trace = (T is true ? array : string)
+ * @psalm-return array{message:string,line:int,code:int,file:string,trace:Trace,class:class-string}
+ * @param T $traceAsArray
+ */
+    static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false) {}
+
+        /**
  * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "object exception" "enum" "resource" "null" "unknown type" "resource (closed)"
  * @param mixed $v
  * @return string
@@ -59,6 +67,26 @@ class Other
  * @return void
  */
     static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}
+
+        /**
+ * @template C of mixed
+ * @template D of mixed
+ * @template A of mixed
+ * 
+ * @param callable(...A):C $callable
+ * @param array<A> $args
+ * @param D $default
+ * @return array{result:C|D,exception:null|\Throwable}
+ */
+    static function tryCallCallable(callable $callable, array $args = [], $default = null) {}
+
+        /**
+ * @template T of mixed
+ * @param T $default
+ * @param object|class-string $objectOrClass
+ * @return array{result:mixed|T,exception:null|\Throwable}
+ */
+    static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null) {}
 
         /**
  * @template TResult of mixed

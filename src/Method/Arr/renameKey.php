@@ -1,0 +1,24 @@
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+/**
+ * Renames key in array.
+ * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
+ */
+function renameKey()
+{
+    return static function (array &$array, $oldKey, $newKey) {
+        $offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $oldKey);
+        if ($offset === null) {
+            return false;
+        }
+
+        $val = &$array[$oldKey];
+        $keys = \array_keys($array);
+        $keys[$offset] = $newKey;
+        $array = \array_combine($keys, $array);
+        $array[$newKey] = &$val;
+        return true;
+    };
+}

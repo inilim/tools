@@ -25,7 +25,7 @@ function hasAny($array, $keys)
     }
 
     foreach ($keys as $key) {
-        if (\Inilim\Tool\Arr::has($array, $key)) {
+        if (\Inilim\Tool\Method\Arr\has($array, $key)) {
             return true;
         }
     }

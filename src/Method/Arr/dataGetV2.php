@@ -27,7 +27,7 @@ function dataGetV2($target, $key, $default = null)
     }
 
     return \Inilim\Tool\Method\Arr\dataGet(
-        \Inilim\Tool\Arr::undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Arr::dot($target), $keys)),
+        \Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target), $keys)),
         $key,
         $default
     );

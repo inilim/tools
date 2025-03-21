@@ -1,0 +1,5 @@
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}

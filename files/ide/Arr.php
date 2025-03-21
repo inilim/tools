@@ -5,6 +5,13 @@ namespace Inilim\Tool;
 class Arr
 {
         /**
+ * Determine whether the given value is array accessible.
+ * @param mixed $value
+ * @return bool
+ */
+    static function accessible($value) {}
+
+        /**
  * Add an element to an array using "dot" notation if it doesn't exist.
  * @template T of array
  * @param T $array
@@ -33,6 +40,13 @@ class Arr
     static function crossJoin(...$arrays) {}
 
         /**
+ * Fill in data where it's missing.
+ * @template T of array|object
+ * @return \Closure(T &$target, string|string[] $key, mixed $value):T
+ */
+    static function dataFill() {}
+
+        /**
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
  * @param string|array|int|null $key
@@ -52,6 +66,13 @@ class Arr
     static function dataGetV2($target, $key, $default = null) {}
 
         /**
+ * Set an item on an array or object using dot notation.
+ * @template T of array|object
+ * @return \Closure(T &$target, string|string[] $key, mixed $value):T
+ */
+    static function dataSet() {}
+
+        /**
  * Divide an array into two arrays. One with keys and the other with values.
  * @template K
  * @template V
@@ -59,6 +80,12 @@ class Arr
  * @return array{K[],V[]}
  */
     static function divide(array $array) {}
+
+        /**
+ * Flatten a multi-dimensional associative array with dots.
+ * @return array<string,mixed>
+ */
+    static function dot(iterable $array, string $prepend = '') {}
 
         /**
  * получаем ключи dot notation по паттерну | 
@@ -95,7 +122,7 @@ class Arr
  * Get all of the given array except for a specified array of keys.
  * @template T of array
  * @param T $array
- * @param  (string|int)[]|string|int $keys
+ * @param (string|int)[]|string|int $keys
  * @return T
  */
     static function except(array $array, $keys) {}
@@ -107,10 +134,52 @@ class Arr
     static function exceptNestedArray(array $array, $keys, int $depth = 1) {}
 
         /**
+ * Determine if the given key exists in the provided array.
+ *
+ * @param  \ArrayAccess|array  $array
+ * @param  string|int  $key
+ * @return bool
+ */
+    static function exists($array, $key) {}
+
+        /**
  * Flatten a multi-dimensional array into a single level.
  * @return array
  */
     static function flatten(iterable $array, int $depth) {}
+
+        /**
+ * Remove one or many array items from a given array using "dot" notation.
+ * @return \Closure(array &$array, (string|int)[]|string|int $keys):void
+ */
+    static function forget() {}
+
+        /**
+ * Get an item from an array using "dot" notation.
+ * @template D
+ *
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ * @param D $default
+ * @return mixed|D
+ */
+    static function get($array, $key, $default = null) {}
+
+        /**
+ * Returns zero-indexed position of given array key. Returns null if key is not found.
+ * @param string|int $key
+ * @return null|int
+ */
+    static function getKeyOffset(array $array, $key) {}
+
+        /**
+ * Check if an item or items exist in an array using "dot" notation.
+ *
+ * @param  \ArrayAccess|array  $array
+ * @param  (string|int)[]|string|int  $keys
+ * @return bool
+ */
+    static function has($array, $keys) {}
 
         /**
  * Determine if any of the keys exist in an array using "dot" notation.
@@ -139,6 +208,20 @@ class Arr
  * @return TValue|false
  */
     static function head(array $array) {}
+
+        /**
+ * Inserts the contents of the $inserted array into the $array before the $key.
+ * If $key is null (or does not exist), it is inserted at the end.
+ * @return \Closure(array &$array, string|int|null $key, array $inserted):void
+ */
+    static function insertAfter() {}
+
+        /**
+ * Inserts the contents of the $inserted array into the $array immediately after the $key.
+ * If $key is null (or does not exist), it is inserted at the beginning.
+ * @return \Closure(array &$array, string|int|null $key, array $inserted):void
+ */
+    static function insertBefore() {}
 
         /**
  * Determines if an array is associative.
@@ -270,6 +353,12 @@ class Arr
     static function prependKeysWith(array $array, string $prepend_with): array {}
 
         /**
+ * Get a value from the array, and remove it.
+ * @return \Closure(array &$array, string|int $key, mixed $default):mixed
+ */
+    static function pull() {}
+
+        /**
  * Convert the array into a query string.
  */
     static function query(array $array): string {}
@@ -289,9 +378,45 @@ class Arr
     static function random(array $array, ?int $number = null, bool $preserveKeys = false) {}
 
         /**
+ * @return \Closure(array &$array, string $oldKey, string $newKey):bool
+ */
+    static function renameDotKey() {}
+
+        /**
+ * Renames key in array.
+ * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
+ */
+    static function renameKey() {}
+
+        /**
  * @return array
  */
     static function resetKeysRecursive(array $array) {}
+
+        /**
+ * Set an array item to a given value using "dot" notation.
+ * If no key is given to the method, the entire array will be replaced.
+ * @return \Closure(array &$array, ?string $key, mixed $value):array
+ */
+    static function set() {}
+
+        /**
+ * set if null OR empty string OR empty array
+ * @return \Closure(array &$array, string $key, mixed $value):bool
+ */
+    static function setValueIfEmpty() {}
+
+        /**
+ * установить значение если значения по ключу нет
+ * @return \Closure(array &$array, string $key, mixed $value):bool
+ */
+    static function setValueIfNotExists() {}
+
+        /**
+ * установить значение если значение по ключу null
+ * @return \Closure(array &$array, string|int $key, mixed $value):bool
+ */
+    static function setValueIfNull() {}
 
         /**
  * Shuffle the given array and return the result.
@@ -335,11 +460,24 @@ class Arr
     static function take(array $array, int $limit) {}
 
         /**
+ * Convert a flatten "dot" notation array into an expanded array.
+ * @param  iterable  $array
+ */
+    static function undot($array): array {}
+
+        /**
  * @template TValue
  * @param TValue[] $array
  * @return TValue[]
  */
     static function unique(array $array): array {}
+
+        /**
+ * Return the default value of the given value.
+ * @param  mixed $value
+ * @return mixed
+ */
+    static function value($value) {}
 
         /**
  * Filter the array using the given callback. array_filter
