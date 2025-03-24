@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @return string
  */
-function requestMehod()
+function requestMethod()
 {
     $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
