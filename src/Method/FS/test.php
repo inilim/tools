@@ -11,7 +11,7 @@ Dump::init();
 /**
  * @return ?\RecursiveIteratorIterator<string,\SplFileInfo>
  */
-function getRecursiveIteratorFilesAsObj(string $dir, bool $skipDots = true)
+function recursiveIteratorFiles(string $dir, bool $skipDots = true)
 {
     $dir = \realpath($dir);
     if ($dir === false || !\is_dir($dir)) {

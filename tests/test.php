@@ -18,8 +18,66 @@ use DragonCode\Benchmark\Benchmark;
 
 Dump::init();
 
+/**
+ * @return \Closure(object|array &$array, callable $callable):void
+ */
+function walkRecursive()
+{
+    return static function (&$array, callable $callable) {
+        $recursive = null;
+        $state     = [
+            'depth'       => 0,
+            'prepend'     => '',
+            'changedKeys' => [],
+        ];
+        /**
+         * @param object|array $array
+         * @param callable $callable
+         * @param \Closure $recursive
+         */
+        $recursive = static function (&$array, $callable, $recursive) use (&$state) {
+            foreach ($array as $key => &$value) {
+                $dotKey = $state['prepend'] . $key;
+                if ($state['changedKeys'] && \in_array($dotKey, $state['changedKeys'])) {
+                    continue;
+                }
+                $beforeKey = $key;
 
-de();
+                $callable($value, $key, $dotKey, $state['depth']);
+
+                if ($beforeKey !== $key) {
+                    $state['changedKeys'][] = $state['prepend'] . $key;
+                    $array[$key] = $array[$beforeKey];
+                    unset($array[$beforeKey]);
+                }
+
+                if (\is_iterable($value)) {
+                    $state['depth']++;
+                    $beforePrepend = $state['prepend'];
+                    $state['prepend'] = $state['prepend'] . $key . '.';
+                    $recursive->__invoke($value, $callable, $recursive);
+                    $state['prepend'] = $beforePrepend;
+                    $state['depth']--;
+                }
+            }
+        };
+
+        $recursive($array, $callable, $recursive);
+    };
+}
+
+
+
+
+// ---------------------------------------------
+// 
+// ---------------------------------------------
+
+
+
+
+
+
 $fruits = [
     'sweet' => [
         'a' => 'яблоко',
@@ -40,73 +98,25 @@ $fruits = [
     ],
 ];
 
-$obj = new \stdClass;
-$obj->key1 = 'value1';
-$obj->key2 = 'value2';
-$obj->key3 = 'value3';
 
 
 
-/**
- * @param object|array $array
- */
-function walkRecursive(&$array, callable $callable)
-{
-    $recursive = null;
-    $state     = [
-        'depth'         => 0,
-        'dotKey'        => '',
-        'prepend'       => '',
-        'beforePrepend' => '',
-        // 't'      => [],
-    ];
-    /**
-     * @param object|array $array
-     * @param callable $callable
-     * @param \Closure $recursive
-     */
-    $recursive = static function (&$array, $callable, $recursive) use (&$state) {
-        foreach ($array as $key => &$value) {
-            $beforeKey       = $key;
-            $state['dotKey'] = $state['prepend'] . $key;
 
-            $dotKey = $state['dotKey'];
-            $callable($value, $key, $dotKey);
 
-            if ($beforeKey !== $key) {
-                $array[$key] = $array[$beforeKey];
-                unset($array[$beforeKey]);
-            }
+// d([
+//     '$fruits' => $fruits
+// ]);
 
-            // $array[$key] = $value;
-
-            if (\is_iterable($value)) {
-                $state['depth']++;
-                $state['beforePrepend'] = $state['prepend'];
-                $state['prepend']       = $state['prepend'] . $key . '.';
-                $recursive->__invoke($value, $callable, $recursive);
-                $state['prepend'] = $state['beforePrepend'];
-                $state['depth']--;
-            }
-        }
-    };
-
-    $recursive->__invoke($array, $callable, $recursive);
-}
-
-d([
-    '$fruits' => $fruits
-]);
-
-walkRecursive($fruits, static function (&$value, &$key, &$dotKey) {
+walkRecursive()($fruits, static function (&$value, &$key, $dotKey, $depth) {
     d([
         '$value'  => $value,
         '$key'    => $key,
-        '$dotKey' => $dotKey,
+        '$dotKey'    => $dotKey,
+        '$depth'    => $depth,
     ]);
 
-    if ($dotKey === 'sweet2.b2') {
-        $dotKey = '';
+    if ($key === 'sweet2') {
+        $key = 'sweet22';
     }
 
     // if (\is_array($value)) {
