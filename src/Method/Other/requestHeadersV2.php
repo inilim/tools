@@ -11,7 +11,7 @@ function requestHeadersV2(?array $_server = null)
     $_server ??= $_SERVER;
     $headers = [];
     foreach ($_server as $key => $value) {
-        if (\strpos($key, 'HTTP_') === 0) {
+        if (\stripos($key, 'HTTP_') === 0) {
             $headers[\substr($key, 5)] = $value;
         } elseif (\in_array($key, ['CONTENT_TYPE', 'CONTENT_LENGTH', 'CONTENT_MD5'], true) && '' !== $value) {
             $headers[$key] = $value;
