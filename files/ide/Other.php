@@ -69,6 +69,22 @@ class Other
     static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}
 
         /**
+ * @return array<string,string>
+ */
+    static function requestHeaders(?array $_server = null) {}
+
+        /**
+ * from Symfony
+ * @return array<string,string>
+ */
+    static function requestHeadersV2(?array $_server = null) {}
+
+        /**
+ * @return string
+ */
+    static function requestMethod() {}
+
+        /**
  * @template C of mixed
  * @template D of mixed
  * @template A of mixed

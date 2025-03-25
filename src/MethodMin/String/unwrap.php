@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\String{function unwrap(string $value,string $before
     }if(!\Inilim\Tool\Str::__definedIfNot('_startsWith')){
     function _startsWith(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_starts_with($haystack,$needle);}return 0===\strncmp($haystack,$needle,\strlen($needle));}
     }if(!\Inilim\Tool\Str::__definedIfNot('endsWith')){
-    function endsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\String\_endsWith($haystack,$needle)){return true;}}return false;}
+    function endsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\String\_endsWith($haystack,$needle)){return true;}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('length')){
     function length(string $value,$encoding='UTF-8'){return \mb_strlen($value,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('startsWith')){

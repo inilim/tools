@@ -480,6 +480,11 @@ class Arr
     static function value($value) {}
 
         /**
+ * @return \Closure(object|array &$array, callable $callable):void
+ */
+    static function walkRecursive() {}
+
+        /**
  * Filter the array using the given callback. array_filter
  * @template TValue
  * @template TKey

@@ -68,6 +68,12 @@ class Str
     static function camel(string $value): string {}
 
         /**
+ * mb_strcasecmp
+ * @return int
+ */
+    static function casecmp(string $str1, string $str2, string $encoding = 'UTF-8') {}
+
+        /**
  * Get the character at the specified index.
  * @return string|false
  */
@@ -131,7 +137,7 @@ class Str
 
         /**
  * Determine if a given string ends with a given substring.
- * @param  string|iterable<string>  $needles
+ * @param string|iterable<string> $needles
  * @return bool
  */
     static function endsWith(string $haystack, $needles) {}
@@ -178,6 +184,18 @@ class Str
  * Convert the given string to proper case for each word.
  */
     static function headline(string $value): string {}
+
+        /**
+ * @param string|iterable<string> $needles
+ * @return bool
+ */
+    static function iEndsWith(string $haystack, $needles) {}
+
+        /**
+ * @param string|iterable<string> $needles
+ * @return bool
+ */
+    static function iStartsWith(string $haystack, $needles) {}
 
         /**
  * Determine if a given string matches a given pattern.
