@@ -69,6 +69,11 @@ class Other
     static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}
 
         /**
+ * @return string
+ */
+    static function phpInput() {}
+
+        /**
  * @return array<string,string>
  */
     static function requestHeaders(?array $_server = null) {}
