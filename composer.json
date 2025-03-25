@@ -32,6 +32,7 @@
     },
     "suggest": {
         "ext-zip": "TODO ...",
+        "ext-xml": "TODO ...",
         "ext-intl": "TODO ..."
     },
     "minimum-stability": "dev",
