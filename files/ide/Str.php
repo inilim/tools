@@ -488,6 +488,11 @@ class Str
     static function title(string $value): string {}
 
         /**
+ * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
+ */
+    static function toCharsGenerator() {}
+
+        /**
  * Convert the given value to a string or return the given fallback on failure.
  * @param  mixed  $value
  * @return string

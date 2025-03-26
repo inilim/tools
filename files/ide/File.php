@@ -52,4 +52,9 @@ class File
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
+        /**
+ * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ */
+    static function toCharsGenerator(string $pathTofile, int $chunk = 1) {}
+
     }

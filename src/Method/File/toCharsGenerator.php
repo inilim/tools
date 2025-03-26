@@ -1,0 +1,54 @@
+<?php
+
+namespace Inilim\Tool\Method\File;
+
+/**
+ * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ */
+function toCharsGenerator(string $pathTofile, int $chunk = 1)
+{
+    if (!\is_file($pathTofile)) {
+        throw new \Exception(\sprintf('Not found file: "%s"', $pathTofile));
+    }
+
+    $resource = \fopen($pathTofile, 'r');
+
+    if ($resource === false) {
+        throw new \Exception(\sprintf('Failed open file: "%s"', $pathTofile));
+    }
+
+    $iteration = 0;
+    while (true) {
+        $posFrom = \ftell($resource); // берем текущую позицию/указатель
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        $chars = \fread($resource, (10 * $chunk));
+        if ($chars === false) {
+            break;
+        }
+        $chars = \mb_substr($chars, 0, $chunk, 'UTF-8'); // из кусочка берем один символ
+        \fseek($resource, ($posFrom + \strlen($chars))); // возвращаемся назад до того символна что взяли
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        $posTo = \ftell($resource); // берем текущую позицию/указатель
+
+        if ($posFrom === $posTo) {
+            break;
+        }
+
+        yield [
+            'iter'    => $iteration,
+            'posFrom' => $posFrom,
+            'posTo'   => $posTo,
+        ] => $chars;
+
+        $iteration++;
+    }
+
+    \fclose($resource);
+}
