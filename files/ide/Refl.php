@@ -5,8 +5,8 @@ namespace Inilim\Tool;
 class Refl
 {
         /**
- * @template T
- * @param object<T>|class-string<T> $objectOrClass
+ * @template T of object|class-string
+ * @param T $objectOrClass
  * @return ?\ReflectionClass<T>
  */
     static function _class($objectOrClass, bool $throw = false) {}
@@ -28,6 +28,13 @@ class Refl
     static function attrProperty(\ReflectionProperty $prop) {}
 
         /**
+ * @template T of object
+ * @param T|\ReflectionClass<T> $object
+ * @return null|\ReflectionProperty
+ */
+    static function getProp($object, string $name, bool $throw = false) {}
+
+        /**
  * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @param string[] $exceptMethods
  * @return \ReflectionMethod[]
@@ -40,5 +47,10 @@ class Refl
  * @return string[]
  */
     static function nameMethodsFromObjOrClass($classOrObjOrRef, array $exceptMethods = [], bool $throw = false, bool $exceptMagicMethods = false, bool $exceptPrivateMethods = false, bool $exceptProtectedMethods = false, bool $exceptPublicMethods = false, bool $exceptParentMethods = false): array {}
+
+        /**
+ * @return bool
+ */
+    static function setValueProp(object $object, string $name, $value, bool $throw = false) {}
 
     }

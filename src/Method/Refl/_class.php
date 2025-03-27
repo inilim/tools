@@ -3,8 +3,8 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
- * @template T
- * @param object<T>|class-string<T> $objectOrClass
+ * @template T of object|class-string
+ * @param T $objectOrClass
  * @return ?\ReflectionClass<T>
  */
 function _class($objectOrClass, bool $throw = false)
