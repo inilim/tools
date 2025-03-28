@@ -9,9 +9,9 @@ namespace Inilim\Tool\Method\Path;
 function normalizeName(string $name, string $default = '', string $replacement = '_'): string
 {
     $ext = '';
-    if (\Inilim\Tool\Method\String\_contains($name, '.')) {
-        $name = \Inilim\Tool\Method\String\beforeLast($name, '.');
-        $ext  = \Inilim\Tool\Method\String\afterLast($name, '.');
+    if (\Inilim\Tool\Method\Str\_contains($name, '.')) {
+        $name = \Inilim\Tool\Method\Str\beforeLast($name, '.');
+        $ext  = \Inilim\Tool\Method\Str\afterLast($name, '.');
     }
     return \preg_replace('#[^a-z\d\.\_\-]#ui', $replacement, $name) ?? $default;
 }

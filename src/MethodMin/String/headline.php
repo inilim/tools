@@ -1,7 +1,0 @@
-<?php
-
-namespace Inilim\Tool\Method\String{function headline(string $value):string{$parts=\explode(' ',$value);$parts=\sizeof($parts)>1?\array_map('\Inilim\Tool\Method\String\title',$parts):\array_map('\Inilim\Tool\Method\String\title',\Inilim\Tool\Method\String\ucsplit(\implode('_',$parts)));$collapsed=\Inilim\Tool\Method\String\replace(['-','_',' '],'_',\implode('_',$parts));return \implode(' ',\array_filter(\explode('_',$collapsed)));}if(!\Inilim\Tool\Str::__definedIfNot('replace')){
-    function replace($search,$replace,$subject,bool $caseSensitive=true){return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('ucsplit')){
-    function ucsplit(string $string):array{return \preg_split('/(?=\p{Lu})/u',$string,-1,\PREG_SPLIT_NO_EMPTY);}
-    }}

@@ -2,4 +2,4 @@
 
 namespace Inilim\Tool\Method\Refl;
 
-function _class($objectOrClass,bool $throw=false){if(\is_string($objectOrClass)){if(!\class_exists($objectOrClass)){return $throw?throw new \ReflectionException('class not found '.$objectOrClass):null;}}elseif($objectOrClass instanceof \ReflectionClass){return $objectOrClass;}return new \ReflectionClass($objectOrClass);}
+function _class($objectOrClass,bool $throw=false){try{return new \ReflectionClass($objectOrClass);}catch(\ReflectionException $e){return $throw?throw $e:null;}}

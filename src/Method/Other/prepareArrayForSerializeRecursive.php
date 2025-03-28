@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @skip_build
  * @return \Closure(array &$value):void
  */

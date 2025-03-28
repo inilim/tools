@@ -3,19 +3,17 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
+ * @author Inilim
  * @template T of object
- * @param T|\ReflectionClass<T> $object
- * @return null|\ReflectionProperty
+ * @param T|class-string<T> $object
+ * @return null|\ReflectionProperty<T>
  */
-function getProp($object, string $name, bool $throw = false)
+function getProp($objectOrClass, string $name, bool $throw = false)
 {
-    if ($object instanceof \ReflectionClass) {
-        $ref = $object;
-    } else {
-        $ref = \Inilim\Tool\Method\Refl\_class($object, $throw);
-        if ($ref === null) {
-            return null;
-        }
+    $name = \Inilim\Tool\Method\Other\unprefixVar($name);
+    $ref = \Inilim\Tool\Method\Refl\_class($objectOrClass, $throw);
+    if ($ref === null) {
+        return null;
     }
 
     try {

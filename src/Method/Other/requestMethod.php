@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Internet
  * @return string
  */
 function requestMethod()

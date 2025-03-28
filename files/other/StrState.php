@@ -3,7 +3,7 @@
 namespace Inilim\Internal;
 
 /**
- * @internal Inilim\Tool\Method\String
+ * @internal Inilim\Tool\Method\Str
  */
 class StrState
 {

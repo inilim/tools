@@ -11,6 +11,7 @@ namespace Inilim\Tool\Method\Other;
 // Dump::init();
 
 /**
+ * @author Inilim
  * @template TResult of mixed
  * @template TObj of \stdClass
  * @param callable(TObj):TResult $callable

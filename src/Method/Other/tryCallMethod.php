@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @template T of mixed
  * @param T $default
  * @param object|class-string $objectOrClass

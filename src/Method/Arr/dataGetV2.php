@@ -16,7 +16,7 @@ function dataGetV2($target, $key, $default = null)
         return $target;
     }
 
-    if (\is_array($key) || \is_int($key) || !\Inilim\Tool\Method\String\contains($key, '*')) {
+    if (\is_array($key) || \is_int($key) || !\Inilim\Tool\Method\Str\contains($key, '*')) {
         return \Inilim\Tool\Method\Arr\dataGet($target, $key, $default);
     }
 

@@ -1,5 +1,0 @@
-<?php
-
-namespace Inilim\Tool\Method\String;
-
-function numbers(string $value):string{return \preg_replace('/[^0-9]/','',$value);}

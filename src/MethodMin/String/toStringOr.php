@@ -1,5 +1,0 @@
-<?php
-
-namespace Inilim\Tool\Method\String;
-
-function toStringOr($value,string $fallback){try{return (string) $value;}catch(\Throwable $e){return $fallback;}}

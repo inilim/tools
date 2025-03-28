@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @skip_build
  * TODO вместо tryCall сделать изолированный с обработчиком ошибок
  * @return mixed

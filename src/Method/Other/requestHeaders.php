@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Internet
  * @return array<string,string>
  */
 function requestHeaders(?array $_server = null)

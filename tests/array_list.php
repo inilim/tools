@@ -253,7 +253,7 @@ return [
         'oQJBch77vAg6M2o',
         'ujJ0rww8ZsgPbLq',
     ],
-    'Inilim\Tool\Method\String' => [
+    'Inilim\Tool\Method\Str' => [
         '4nCuC8iOCzSnREs',
         '6hqUgDl10nfEJ3p',
         '5h9wQWy0qHUZFgK',

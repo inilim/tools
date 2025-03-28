@@ -1,5 +1,9 @@
 <?php
 
-namespace Inilim\Tool\Method\Refl{function getProp($object,string $name,bool $throw=false){if($object instanceof \ReflectionClass){$ref=$object;}else{$ref=\Inilim\Tool\Method\Refl\_class($object,$throw);if($ref===null){return null;}}try{return $ref -> getProperty($name);}catch(\ReflectionException $e){return $throw?throw $e:null;}}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
-    function _class($objectOrClass,bool $throw=false){if(\is_string($objectOrClass)){if(!\class_exists($objectOrClass)){return $throw?throw new \ReflectionException('class not found '.$objectOrClass):null;}}elseif($objectOrClass instanceof \ReflectionClass){return $objectOrClass;}return new \ReflectionClass($objectOrClass);}
+namespace Inilim\Tool\Method\Refl{function getProp($objectOrClass,string $name,bool $throw=false){$name=\Inilim\Tool\Method\Other\unprefixVar($name);$ref=\Inilim\Tool\Method\Refl\_class($objectOrClass,$throw);if($ref===null){return null;}try{return $ref -> getProperty($name);}catch(\ReflectionException $e){return $throw?throw $e:null;}}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
+    function _class($objectOrClass,bool $throw=false){try{return new \ReflectionClass($objectOrClass);}catch(\ReflectionException $e){return $throw?throw $e:null;}}
+    }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('trim')){
+    function trim(string $value,?string $charlist=null){if($charlist===null){return \preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}]+|[\s\x{FEFF}\x{200B}\x{200E}]+$~u','',$value)?? \trim($value);}return \trim($value,$charlist);}
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('unprefixVar')){
+    function unprefixVar(string $name){return \Inilim\Tool\Method\Str\trim(\strtr($name,['$'=>'','$this->$'=>'','$this->'=>'','self::$'=>'','static::$'=>'']));}
     }}

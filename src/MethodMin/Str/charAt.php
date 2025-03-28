@@ -1,0 +1,5 @@
+<?php
+
+namespace Inilim\Tool\Method\Str;
+
+function charAt(string $subject,int $index){$length=\mb_strlen($subject);if($index<0?$index<-$length:$index>$length-1){return false;}return \mb_substr($subject,$index,1);}

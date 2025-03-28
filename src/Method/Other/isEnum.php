@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @param mixed $v
  * @return boolean
  */

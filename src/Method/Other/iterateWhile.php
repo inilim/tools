@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @param callable(int,int):bool $condition
  * @param callable(int,int) $onBreak
  * @return void

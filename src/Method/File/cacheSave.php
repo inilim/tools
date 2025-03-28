@@ -65,7 +65,7 @@ function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $thro
             static function ($type, $message, $file, $line, $context) {
                 $obj = $context['obj'];
                 if ($obj->step === 'fopen') {
-                    if (!\Inilim\Tool\Method\String\_contains($message, 'File exists')) {
+                    if (!\Inilim\Tool\Method\Str\_contains($message, 'File exists')) {
                         throw new \ErrorException($message, 0, $type);
                     }
                 } elseif (\in_array($obj->step, ['fwrite', 'fclose', 'rename', 'copy'], true)) {

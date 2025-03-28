@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class Path
 {
         /**
+ * @author Inilim
  * advanced pathinfo() function
  * @param string $pathTo
  * @param bool $throw

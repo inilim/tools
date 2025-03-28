@@ -5,36 +5,42 @@ namespace Inilim\Tool;
 class Refl
 {
         /**
- * @template T of object|class-string
- * @param T $objectOrClass
+ * @author Inilim
+ * @template T of object
+ * @param T|class-string<T> $objectOrClass
  * @return ?\ReflectionClass<T>
  */
     static function _class($objectOrClass, bool $throw = false) {}
 
         /**
+ * @author Inilim
  * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @return \ReflectionAttribute[]|null
  */
     static function attrClass($classOrObjOrRef, bool $throw = false) {}
 
         /**
+ * @author Inilim
  * @return \ReflectionAttribute[]|null
  */
     static function attrMethod(\ReflectionMethod $method) {}
 
         /**
+ * @author Inilim
  * @return \ReflectionAttribute[]|null
  */
-    static function attrProperty(\ReflectionProperty $prop) {}
+    static function attrProp(\ReflectionProperty $prop) {}
 
         /**
+ * @author Inilim
  * @template T of object
- * @param T|\ReflectionClass<T> $object
- * @return null|\ReflectionProperty
+ * @param T|class-string<T> $object
+ * @return null|\ReflectionProperty<T>
  */
-    static function getProp($object, string $name, bool $throw = false) {}
+    static function getProp($objectOrClass, string $name, bool $throw = false) {}
 
         /**
+ * @author Inilim
  * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @param string[] $exceptMethods
  * @return \ReflectionMethod[]
@@ -42,6 +48,7 @@ class Refl
     static function methodsFromObjOrClass($classOrObjOrRef, array $exceptMethods = [], bool $throw = false, bool $exceptMagicMethods = false, bool $exceptPrivateMethods = false, bool $exceptProtectedMethods = false, bool $exceptPublicMethods = false, bool $exceptParentMethods = false) {}
 
         /**
+ * @author Inilim
  * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @param string[] $exceptMethods
  * @return string[]
@@ -49,8 +56,12 @@ class Refl
     static function nameMethodsFromObjOrClass($classOrObjOrRef, array $exceptMethods = [], bool $throw = false, bool $exceptMagicMethods = false, bool $exceptPrivateMethods = false, bool $exceptProtectedMethods = false, bool $exceptPublicMethods = false, bool $exceptParentMethods = false): array {}
 
         /**
+ * @author Inilim
+ * @template T of object
+ * @param T|class-string<T> $objectOrClass
+ * @param mixed $value
  * @return bool
  */
-    static function setValueProp(object $object, string $name, $value, bool $throw = false) {}
+    static function setValueProp($objectOrClass, string $name, $value, bool $throw = false) {}
 
     }

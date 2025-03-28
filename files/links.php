@@ -45,11 +45,11 @@ return [
         'pathMin'   => $root . '/src/MethodMin/Data',
     ],
     [
-        'method' => 'Inilim\Tool\Method\String',
+        'method' => 'Inilim\Tool\Method\Str',
         'tool'   => $class = \Inilim\Tool\Str::class,
         'nameClass'   => \basename($class),
-        'path'   => $root . '/src/Method/String',
-        'pathMin'   => $root . '/src/MethodMin/String',
+        'path'   => $root . '/src/Method/Str',
+        'pathMin'   => $root . '/src/MethodMin/Str',
     ],
     [
         'method' => 'Inilim\Tool\Method\Other',
@@ -106,5 +106,12 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Obj',
         'pathMin'   => $root . '/src/MethodMin/Obj',
+    ],
+    [
+        'method' => 'Inilim\Tool\Method\Assert',
+        'tool'   => $class = \Inilim\Tool\Assert::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Assert',
+        'pathMin'   => $root . '/src/MethodMin/Assert',
     ],
 ];

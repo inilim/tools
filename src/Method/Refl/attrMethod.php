@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
+ * @author Inilim
  * @return \ReflectionAttribute[]|null
  */
 function attrMethod(\ReflectionMethod $method)

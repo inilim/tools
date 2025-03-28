@@ -11,6 +11,7 @@ namespace Inilim\Tool\Method\Other;
 // Dump::init();
 
 /**
+ * @author Inilim
  * @skip_build
  * @template TResult of mixed
  * @template TObj of \stdClass

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @template T of bool
  * @psalm-type Trace = (T is true ? array : string)
  * @psalm-return array{message:string,line:int,code:int,file:string,trace:Trace,class:class-string}

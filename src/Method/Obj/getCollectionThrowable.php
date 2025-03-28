@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Obj;
 
 /**
+ * @author Inilim
  * @phpstan-import-type getCollectionThrowable_return from \Obj
  * @return getCollectionThrowable_return
  */

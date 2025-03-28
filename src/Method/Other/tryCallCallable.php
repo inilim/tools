@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @author Inilim
  * @template C of mixed
  * @template D of mixed
  * @template A of mixed

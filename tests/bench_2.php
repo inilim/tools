@@ -7,7 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 Dump::init();
 $find = 'T11Mq6nvvqRSUbP';
-$namespace = 'Inilim\Tool\Method\String';
+$namespace = 'Inilim\Tool\Method\Str';
 
 
 // $array = include  __DIR__ . '/array_list.php';

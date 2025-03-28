@@ -13,7 +13,7 @@ function isBigIntUnsigned($value)
     /** @var int|float|string $value */
     $value = \strval($value);
     /** @var string $value */
-    if (\Inilim\Tool\Method\String\_startsWith($value, '-')) return false;
+    if (\Inilim\Tool\Method\Str\_startsWith($value, '-')) return false;
     $len = lenNumeric($value);
     if ($len < \Inilim\Tool\Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
     if ($len > \Inilim\Tool\Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return false;

@@ -2,6 +2,9 @@
 
 namespace Inilim\Tool;
 
+/**
+ * File system
+ */
 final class FS extends \Inilim\Tool\LazyMethodAbstract
 {
     protected const NAMESPACE = 'Inilim\Tool\Method\FS',

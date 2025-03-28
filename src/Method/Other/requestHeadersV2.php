@@ -3,7 +3,7 @@
 namespace Inilim\Tool\Method\Other;
 
 /**
- * from Symfony
+ * @author Symfony
  * @return array<string,string>
  */
 function requestHeadersV2(?array $_server = null)

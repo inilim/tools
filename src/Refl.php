@@ -2,6 +2,9 @@
 
 namespace Inilim\Tool;
 
+/**
+ * Reflection
+ */
 final class Refl extends \Inilim\Tool\LazyMethodAbstract
 {
     protected const NAMESPACE = 'Inilim\Tool\Method\Refl',

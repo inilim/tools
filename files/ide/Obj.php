@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class Obj
 {
         /**
+ * @author Inilim
  * @phpstan-import-type getCollectionThrowable_return from \Obj
  * @return getCollectionThrowable_return
  */

@@ -3,15 +3,27 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
+ * @author Inilim
+ * @template T of object
+ * @param T|class-string<T> $objectOrClass
+ * @param mixed $value
  * @return bool
  */
-function setValueProp(object $object, string $name, $value, bool $throw = false)
+function setValueProp($objectOrClass, string $name, $value, bool $throw = false)
 {
-    $prop = \Inilim\Tool\Method\Refl\getProp($object, $name, $throw);
+    $prop = \Inilim\Tool\Method\Refl\getProp($objectOrClass, $name, $throw);
     if ($prop === null) {
         return false;
     }
+
     $prop->setAccessible(true);
-    $prop->setValue($object, $value);
+
+    try {
+        $prop->setValue($objectOrClass, $value);
+    } catch (\Throwable $e) {
+        return $throw
+            ? throw $e
+            : false;
+    }
     return true;
 }

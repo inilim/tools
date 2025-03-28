@@ -15,10 +15,87 @@ use Inilim\Tool\Other;
 use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
+use Inilim\Tool\Test\ForTest\ClassicClass;
 
 Dump::init();
 
+/**
+ * @param mixed $value
+ * @return bool
+ */
+function setValueProp(object $object, string $name, $value, bool $throw = false)
+{
+    $name = \strtr($name, ['$' => '']);
+    try {
+        $prop = new \ReflectionProperty($object, $name);
+    } catch (\ReflectionException $e) {
+        return $throw
+            ? throw $e
+            : false;
+    }
+    if ($prop === null) {
+        return false;
+    }
 
+    $prop->setAccessible(true);
+
+
+
+    dde($type);
+
+    try {
+
+        $prop->setValue($object, $value);
+    } catch (\Throwable $e) {
+        return $throw
+            ? throw $e
+            : false;
+    }
+    return true;
+}
+
+
+
+$a = new class extends \ReflectionNamedType {
+    function __toString()
+    {
+        return '';
+    }
+    function allowsNull(): bool
+    {
+        return true;
+    }
+    function getName(): string
+    {
+        return '';
+    }
+    function isBuiltin(): bool
+    {
+        return false;
+    }
+};
+
+$a = new \ReflectionNamedType;
+
+$closure = (function () {})->bindTo($a, $a);
+
+$a->getName = $closure;
+
+dde($a);
+
+// $ref = Refl::_class($a);
+
+// de($ref->getMethods());
+$obj = new ClassicClass;
+// $res = Refl::setValueProp($obj, 'publicPropBool', '');
+$res = setValueProp($obj, '$testProp2', '', true);
+dde($res);
+
+
+
+
+
+de();
 /**
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
+ * @author Inilim
  * @param object|class-string|\ReflectionClass $classOrObjOrRef
  * @param string[] $exceptMethods
  * @return \ReflectionMethod[]

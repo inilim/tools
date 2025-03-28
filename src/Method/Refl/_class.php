@@ -3,20 +3,18 @@
 namespace Inilim\Tool\Method\Refl;
 
 /**
- * @template T of object|class-string
- * @param T $objectOrClass
+ * @author Inilim
+ * @template T of object
+ * @param T|class-string<T> $objectOrClass
  * @return ?\ReflectionClass<T>
  */
 function _class($objectOrClass, bool $throw = false)
 {
-    if (\is_string($objectOrClass)) {
-        if (!\class_exists($objectOrClass)) {
-            return $throw
-                ? throw new \ReflectionException('class not found ' . $objectOrClass)
-                : null;
-        }
-    } elseif ($objectOrClass instanceof \ReflectionClass) {
-        return $objectOrClass;
+    try {
+        return new \ReflectionClass($objectOrClass);
+    } catch (\ReflectionException $e) {
+        return $throw
+            ? throw $e
+            : null;
     }
-    return new \ReflectionClass($objectOrClass);
 }

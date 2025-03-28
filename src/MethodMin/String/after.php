@@ -1,5 +1,0 @@
-<?php
-
-namespace Inilim\Tool\Method\String;
-
-function after(string $subject,string $search):string{return $search===''?$subject:\array_reverse(\explode($search,$subject,2))[0];}
