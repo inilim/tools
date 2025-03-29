@@ -5,80 +5,61 @@ namespace Inilim\Tool\Test\Method\Refl;
 use Inilim\Tool\Refl;
 use Inilim\Tool\Test\TestCase;
 use Inilim\Tool\Test\ForTest\ClassicClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SetValuePropTest extends TestCase
 {
-    function test_public_prop_type_array()
+    #[DataProvider('data')]
+    function test_public_prop_type_array($value)
     {
-        // 
         $obj = new ClassicClass;
 
         // ---------------------------------------------
         // assert
         // ---------------------------------------------
 
-        // Убираем массив
-        $values = \array_filter(self::$values, static function ($v) {
-            return !\is_array($v);
-        });
-
-        foreach ($values as $value) {
-            $res = Refl::setValueProp($obj, 'publicPropArray', $value);
+        $res = Refl::setValueProp($obj, 'publicPropArray', $value);
+        if (!\is_array($value)) {
             $this->assertFalse($res, \gettype($value));
-        }
-
-        // ---------------------------------------------
-        // assert
-        // ---------------------------------------------
-
-        // берем только массив
-        $values = \array_filter(self::$values, static function ($v) {
-            return \is_array($v);
-        });
-
-        foreach ($values as $value) {
-            $res = Refl::setValueProp($obj, 'publicPropArray', $value);
+        } else {
             $this->assertTrue($res, \gettype($value));
         }
     }
 
-    function test_public_prop_type_bool()
+    #[DataProvider('data')]
+    function test_public_prop_type_bool($value)
     {
-        // 
         $obj = new ClassicClass;
 
         // ---------------------------------------------
         // assert
         // ---------------------------------------------
 
-        // Убираем массив
-        $values = \array_filter(self::$values, static function ($v) {
-            return !\is_bool($v);
-        });
-
-        d($values);
-
-        foreach ($values as $value) {
-            $res = Refl::setValueProp($obj, 'publicPropBool', $value);
-            dd([
-                '$res' => $res,
-                '$value' => $value,
-            ]);
+        $res = Refl::setValueProp($obj, 'publicPropBool', $value);
+        if (!\is_bool($value)) {
             $this->assertFalse($res, \gettype($value));
-        }
-
-        // ---------------------------------------------
-        // assert
-        // ---------------------------------------------
-
-        // берем только массив
-        $values = \array_filter(self::$values, static function ($v) {
-            return \is_bool($v);
-        });
-
-        foreach ($values as $value) {
-            $res = Refl::setValueProp($obj, 'publicPropBool', $value);
+        } else {
             $this->assertTrue($res, \gettype($value));
         }
+    }
+
+    static function data()
+    {
+        $values = [
+            [''],
+            ['string'],
+            [true],
+            [false],
+            [new \stdClass],
+            [0.111],
+            [-0.111],
+            [123],
+            [-123],
+        ];
+
+        $values[] = [$values];
+        $values[] = [[]];
+
+        return $values;
     }
 }
