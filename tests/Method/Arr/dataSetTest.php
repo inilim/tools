@@ -42,7 +42,7 @@ class dataSetTest extends TestCase
         );
     }
 
-    function testDataSetWithStar()
+    function testWithStar()
     {
         $data = ['foo' => 'bar'];
 
@@ -67,7 +67,7 @@ class dataSetTest extends TestCase
         );
     }
 
-    function testDataSetWithDoubleStar()
+    function testWithDoubleStar()
     {
         $data = [
             'posts' => [
