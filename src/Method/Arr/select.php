@@ -18,6 +18,9 @@ function select(array $array, $keys)
         $result = [];
 
         foreach ($keys as $key) {
+            if ($key === null) {
+                continue;
+            }
             if (\Inilim\Tool\Method\Arr\accessible($item) && \Inilim\Tool\Method\Arr\exists($item, $key)) {
                 $result[$key] = $item[$key];
             } elseif (\is_object($item) && isset($item->{$key})) {
