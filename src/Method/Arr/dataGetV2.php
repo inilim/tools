@@ -23,7 +23,7 @@ function dataGetV2($target, $key, $default = null)
     $keys = \Inilim\Tool\Method\Arr\dotKeysByPattern($target, $key);
 
     if (!$keys) {
-        return $default;
+        return \Inilim\Tool\Method\Arr\value($default);
     }
 
     return \Inilim\Tool\Method\Arr\dataGet(

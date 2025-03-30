@@ -7,7 +7,7 @@ use Inilim\Tool\Test\TestCase;
 
 class dataGetTest extends TestCase
 {
-    function testDataGet()
+    function test()
     {
         $object = (object) ['users' => ['name' => ['Taylor', 'Otwell']]];
         $array = [(object) ['users' => [(object) ['name' => 'Taylor']]]];
@@ -18,7 +18,7 @@ class dataGetTest extends TestCase
         $this->assertSame('Taylor', Arr::dataGet($array, '0.users.0.name'));
         $this->assertNull(Arr::dataGet($array, '0.users.3'));
         $this->assertSame('Not found', Arr::dataGet($array, '0.users.3', 'Not found'));
-        $this->assertSame('Not found', Arr::dataGet($array, '0.users.3', function () {
+        $this->assertSame('Not found', Arr::dataGet($array, '0.users.3', static function () {
             return 'Not found';
         }));
         $this->assertSame('Taylor', Arr::dataGet($dottedArray, ['users', 'first.name']));
@@ -33,7 +33,7 @@ class dataGetTest extends TestCase
         $this->assertNull(Arr::dataGet($arrayAccess, 'email', 'Not found'));
     }
 
-    function testDataGetWithNestedArrays()
+    function testWithNestedArrays()
     {
         $array = [
             ['name' => 'taylor', 'email' => 'taylorotwell@gmail.com'],
@@ -67,7 +67,7 @@ class dataGetTest extends TestCase
         $this->assertNull(Arr::dataGet($array, 'posts.*.date'));
     }
 
-    function testDataGetWithDoubleNestedArraysCollapsesResult()
+    function testWithDoubleNestedArraysCollapsesResult()
     {
         $array = [
             'posts' => [
@@ -98,7 +98,7 @@ class dataGetTest extends TestCase
         $this->assertEquals([], Arr::dataGet($array, 'posts.*.users.*.name'));
     }
 
-    function testDataGetFirstLastDirectives()
+    function testFirstLastDirectives()
     {
         $array = [
             'flights' => [
@@ -136,7 +136,7 @@ class dataGetTest extends TestCase
         $this->assertEquals('Not found', Arr::dataGet($array, 'empty.{last}', 'Not found'));
     }
 
-    function testDataGetFirstLastDirectivesOnArrayAccessIterable()
+    function testFirstLastDirectivesOnArrayAccessIterable()
     {
         $arrayAccessIterable = [
             'flights' => new SupportTestArrayAccessIterable([
@@ -174,7 +174,7 @@ class dataGetTest extends TestCase
         $this->assertEquals('Not found', Arr::dataGet($arrayAccessIterable, 'empty.{last}', 'Not found'));
     }
 
-    function testDataGetFirstLastDirectivesOnKeyedArrays()
+    function testFirstLastDirectivesOnKeyedArrays()
     {
         $array = [
             'numericKeys' => [
@@ -196,7 +196,7 @@ class dataGetTest extends TestCase
         $this->assertEquals('last', Arr::dataGet($array, 'stringKeys.{last}'));
     }
 
-    function testDataGetEscapedSegmentKeys()
+    function testEscapedSegmentKeys()
     {
         $array = [
             'symbols' => [
@@ -214,7 +214,7 @@ class dataGetTest extends TestCase
         $this->assertEquals('caret', Arr::dataGet($array, 'symbols.{last}.description'));
     }
 
-    function testDataGetStar()
+    function testStar()
     {
         $data = ['foo' => 'bar'];
         $this->assertEquals(['bar'], Arr::dataGet($data, '*'));
@@ -222,11 +222,10 @@ class dataGetTest extends TestCase
         // $data = collect(['foo' => 'bar']);
         $data = new \stdClass;
         $data->foo = 'bar';
-        dde(Arr::dataGet($data, '*'));
         $this->assertEquals(['bar'], Arr::dataGet($data, '*'));
     }
 
-    function testDataGetNullKey()
+    function testNullKey()
     {
         $data = ['foo' => 'bar'];
 

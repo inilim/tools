@@ -26,7 +26,9 @@ function dataGet($target, $key, $default = null)
         }
 
         if ($segment === '*') {
-            if (!\is_iterable($target)) {
+            if (\is_object($target)) {
+                $target = \Inilim\Tool\Method\Arr\getArrayableItems($target);
+            } elseif (!\is_iterable($target)) {
                 return \Inilim\Tool\Method\Arr\value($default);
             }
 
@@ -62,7 +64,7 @@ function dataGet($target, $key, $default = null)
         } elseif (\is_object($target) && isset($target->{$segment})) {
             $target = $target->{$segment};
         } else {
-            return $default;
+            return \Inilim\Tool\Method\Arr\value($default);
         }
     }
 
