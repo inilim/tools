@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Get an item from an array using "dot" notation.
  * @template D
  *

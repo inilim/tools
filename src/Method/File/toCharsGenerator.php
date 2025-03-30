@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
 function toCharsGenerator(string $pathTofile, int $chunk = 1)

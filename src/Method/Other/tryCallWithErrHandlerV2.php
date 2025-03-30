@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Other;
 
-// use Inilim\Dump\Dump;
-// 
-// require_once __DIR__ . '/../../../vendor/autoload.php';
-// 
-// Dump::init();
-
 /**
  * @author Inilim
  * @skip_build

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @template V of mixed
  * @template K of int|string
  *

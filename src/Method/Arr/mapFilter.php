@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @template TValue of mixed
  * @template TKey of int|string
  * @template TOffset of int

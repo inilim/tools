@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @author Inilim
  * analog function "file_put_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-put-contents.php

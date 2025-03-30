@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Determine if the given key exists in the provided array.
  *
  * @param  \ArrayAccess|array  $array

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php

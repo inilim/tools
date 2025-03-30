@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Collapse an array of arrays into a single array.
  * @param  iterable  $array
  * @return array

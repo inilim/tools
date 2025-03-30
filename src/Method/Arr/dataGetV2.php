@@ -4,7 +4,7 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * alternate dataGet
- *
+ * @author inilim
  * @param array|object $target
  * @param string|array|int|null $key
  * @param mixed $default

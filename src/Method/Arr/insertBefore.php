@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author nette/utils
  * Inserts the contents of the $inserted array into the $array immediately after the $key.
  * If $key is null (or does not exist), it is inserted at the beginning.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @return bool
  */
 function compareValues(array $a, array $b, array ...$arrays)

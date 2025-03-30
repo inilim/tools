@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author laravel
  * Check if an item or items exist in an array using "dot" notation.
  *
  * @param  \ArrayAccess|array  $array

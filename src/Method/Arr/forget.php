@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Remove one or many array items from a given array using "dot" notation.
  * @return \Closure(array &$array, (string|int)[]|string|int $keys):void
  */

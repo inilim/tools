@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
  * @param string|array|int|null $key

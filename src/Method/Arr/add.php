@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Add an element to an array using "dot" notation if it doesn't exist.
  * @template T of array
  * @param T $array

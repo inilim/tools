@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author nette/utils
  * Renames key in array.
  * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
  */

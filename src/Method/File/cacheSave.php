@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\File;
 
-// use Inilim\Dump\Dump;
-// 
-// require_once __DIR__ . '/../../../vendor/autoload.php';
-// 
-// Dump::init();
-
 /**
  * @param mixed $value
  * @param ?int $lifetime default 1 year in seconds

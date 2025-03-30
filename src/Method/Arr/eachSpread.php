@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Execute a callback over each nested chunk of items.
  * @param callable(...mixed):mixed $callback
  * @return void

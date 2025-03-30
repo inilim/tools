@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
  */

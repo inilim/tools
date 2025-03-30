@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * set if null OR empty string OR empty array
  * @return \Closure(array &$array, string $key, mixed $value):bool
  */

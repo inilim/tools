@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Cross join the given arrays, returning all possible permutations.
  * @param iterable ...$arrays
  * @return array

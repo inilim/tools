@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Flatten a multi-dimensional array into a single level.
  * @return array
  */

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Divide an array into two arrays. One with keys and the other with values.
  * @template K
  * @template V

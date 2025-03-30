@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @param  (string|int)[]|string|int $keys
  * @return array
  */

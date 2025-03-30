@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @return \Closure(object|array &$array, callable $callable):void
  */
 function walkRecursive()

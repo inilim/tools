@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * установить значение если значение по ключу null
  * @return \Closure(array &$array, string|int $key, mixed $value):bool
  */

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * получаем ключи dot notation по паттерну | 
  * key.*.key....
  * @return string[]

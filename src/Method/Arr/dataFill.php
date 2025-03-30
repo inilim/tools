@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Fill in data where it's missing.
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T

@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author Laravel
  * Set an item on an array or object using dot notation.
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
