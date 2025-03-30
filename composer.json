@@ -48,10 +48,16 @@
         "mcaskill/composer-exclude-files": "^4.0"
     },
     "scripts": {
-        "tests": [
+        "unit": [
+            "php vendor/bin/phpunit"
+        ],
+        "unit-tests": [
             "php vendor/bin/phpunit tests"
         ],
         "stan": [
+            "php vendor/bin/phpstan"
+        ],
+        "stan-check": [
             "php vendor/bin/phpstan analyze"
         ]
     },
