@@ -10,8 +10,8 @@ namespace Inilim\Tool\Method\Arr;
  * @param  array<TKey,TValue>  $array
  * @return TValue[]|array<TKey,TValue>
  */
-function where(array $array, callable $callback, bool $preserve_keys = true): array
+function where(array $array, callable $callback, bool $preserveKeys = true): array
 {
     $result = \array_filter($array, $callback, \ARRAY_FILTER_USE_BOTH);
-    return $preserve_keys ? $result : \array_values($result);
+    return $preserveKeys ? $result : \array_values($result);
 }
