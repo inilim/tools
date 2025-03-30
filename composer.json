@@ -51,9 +51,6 @@
         "tests": [
             "php vendor/bin/phpunit tests"
         ],
-        "tests-filter": [
-            "php vendor/bin/phpunit tests --filter"
-        ],
         "stan": [
             "php vendor/bin/phpstan analyze"
         ]
