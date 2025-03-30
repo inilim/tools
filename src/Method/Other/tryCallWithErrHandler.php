@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Other;
  * @template TObj of \stdClass
  * @param callable(TObj):TResult $callable
  * @param null|callable(int $levelOrCode,string $message,string $file,int $line,array{exception?:\Throwable,isException:bool,isSuppress:bool,obj:TObj} $context) $handler
- * @return TResult
+ * @return ?TResult
  */
 function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL)
 {
@@ -45,10 +45,12 @@ function tryCallWithErrHandler(callable $callable, ?callable $handler, int $erro
 
     \set_error_handler($wrapHandler, $errorLevels);
     try {
+        // @phpstan-ignore-next-line
         $use['result'] = $callable($use['obj']);
     } catch (\Throwable $e) {
         \restore_error_handler();
         // Если исключение было выброшено внутри обработчика ошибок
+        // @phpstan-ignore-next-line
         if ($use['exception']) {
             throw $use['exception'];
         }
