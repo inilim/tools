@@ -93,6 +93,11 @@ class ClassicClass
     // Non static
     // ---------------------------------------------
 
+    function getClosureWithContext()
+    {
+        return function () {};
+    }
+
     function publicMethod() {}
     protected function protectedMethod() {}
     private function privateMethod() {}

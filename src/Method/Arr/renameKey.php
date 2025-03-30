@@ -8,6 +8,9 @@ namespace Inilim\Tool\Method\Arr;
  */
 function renameKey()
 {
+    if (\func_num_args() !== 0) {
+        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+    }
     return static function (array &$array, $oldKey, $newKey) {
         $offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $oldKey);
         if ($offset === null) {

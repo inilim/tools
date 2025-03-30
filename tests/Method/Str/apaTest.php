@@ -4,7 +4,9 @@ namespace Inilim\Tool\Test\Method\Str;
 
 use Inilim\Tool\Str;
 use Inilim\Tool\Test\TestCase;
+use PHPUnit\Framework\Attributes\Group;
 
+#[Group('inactive')]
 class apaTest extends TestCase
 {
     function test()

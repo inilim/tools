@@ -7,6 +7,9 @@ namespace Inilim\Tool\Method\Arr;
  */
 function walkRecursive()
 {
+    if (\func_num_args() !== 0) {
+        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+    }
     return static function (&$array, callable $callable) {
         $recursive = null;
         $state     = [

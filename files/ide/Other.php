@@ -13,6 +13,12 @@ class Other
     static function clearClosure(\Closure $cls) {}
 
         /**
+ * @author Inilim
+ * @return null|class-string
+ */
+    static function getClosureScopeClass(\Closure $cls) {}
+
+        /**
  * @author Internet
  * @return ?callable
  */

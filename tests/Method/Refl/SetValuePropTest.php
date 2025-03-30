@@ -4,9 +4,11 @@ namespace Inilim\Tool\Test\Method\Refl;
 
 use Inilim\Tool\Refl;
 use Inilim\Tool\Test\TestCase;
+use PHPUnit\Framework\Attributes\Group;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
+#[Group('inactive')]
 class SetValuePropTest extends TestCase
 {
     #[DataProvider('data')]

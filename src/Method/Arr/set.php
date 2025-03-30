@@ -9,6 +9,9 @@ namespace Inilim\Tool\Method\Arr;
  */
 function set()
 {
+    if (\func_num_args() !== 0) {
+        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+    }
     return static function (array &$array, ?string $key, $value) {
         if ($key === null) {
             return $array = $value;

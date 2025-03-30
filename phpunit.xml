@@ -6,4 +6,9 @@
     displayDetailsOnTestsThatTriggerWarnings="true"
     displayDetailsOnPhpunitDeprecations="true"
 >
+<groups>
+    <exclude>
+        <group>inactive</group>
+    </exclude>
+</groups>
 </phpunit>

@@ -148,6 +148,14 @@ class Str
     static function ent2ncr(string $text) {}
 
         /**
+ * Extracts an excerpt from text that matches the first instance of a phrase.
+ * 
+ * @param array{radius?:int,omission?:string} $options
+ * @return string|null
+ */
+    static function excerpt(string $text, string $phrase = '', array $options = []) {}
+
+        /**
  * Cap a string with a single instance of a given value.
  */
     static function finish(string $value, string $cap): string {}

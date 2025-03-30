@@ -9,6 +9,9 @@ namespace Inilim\Tool\Method\Other;
  */
 function prepareArrayForSerializeRecursive()
 {
+    if (\func_num_args() !== 0) {
+        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+    }
     return static function (array &$value) {
         \array_walk_recursive($value, static function (&$subVal) {
             if (\is_object($subVal)) {

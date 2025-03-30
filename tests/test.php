@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
@@ -16,8 +16,6 @@ use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
-
-Dump::init();
 
 /**
  * @param mixed $value

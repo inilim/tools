@@ -6,7 +6,7 @@ use Inilim\Tool\Str;
 use Inilim\Tool\Test\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class Example extends TestCase
+class containsAllTest extends TestCase
 {
     #[DataProvider('data')]
     function test($haystack, $needles, $expected, $ignoreCase = false)

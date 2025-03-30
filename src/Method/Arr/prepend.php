@@ -4,9 +4,9 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * Push an item onto the beginning of an array.
- * @param  array  $array
- * @param  mixed  $value
- * @param  mixed  $key
+ * @param array $array
+ * @param mixed $value
+ * @param mixed $key
  */
 function prepend(array $array, $value, $key = null): array
 {
