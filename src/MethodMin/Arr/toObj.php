@@ -1,0 +1,5 @@
+<?php
+
+namespace Inilim\Tool\Method\Arr;
+
+function toObj(iterable $array,object $object){foreach($array as $k=>&$v){$object ->{$k}=$v;}return $object;}

@@ -21,6 +21,7 @@ class File
     static function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false) {}
 
         /**
+ * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
@@ -31,6 +32,7 @@ class File
     static function get(string $filename, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
         /**
+ * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
@@ -41,6 +43,7 @@ class File
     static function getV2(array $params) {}
 
         /**
+ * @author Inilim
  * analog function "file_put_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-put-contents.php
@@ -53,6 +56,7 @@ class File
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
         /**
+ * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
     static function toCharsGenerator(string $pathTofile, int $chunk = 1) {}

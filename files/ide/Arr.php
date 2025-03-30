@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class Arr
 {
         /**
+ * @author Laravel
  * Determine whether the given value is array accessible.
  * @param mixed $value
  * @return bool
@@ -12,6 +13,7 @@ class Arr
     static function accessible($value) {}
 
         /**
+ * @author Laravel
  * Add an element to an array using "dot" notation if it doesn't exist.
  * @template T of array
  * @param T $array
@@ -21,6 +23,7 @@ class Arr
     static function add(array $array, string $key, $value) {}
 
         /**
+ * @author Laravel
  * Collapse an array of arrays into a single array.
  * @param  iterable  $array
  * @return array
@@ -28,11 +31,13 @@ class Arr
     static function collapse(iterable $array) {}
 
         /**
+ * @author inilim
  * @return bool
  */
     static function compareValues(array $a, array $b, array ...$arrays) {}
 
         /**
+ * @author Laravel
  * Cross join the given arrays, returning all possible permutations.
  * @param iterable ...$arrays
  * @return array
@@ -40,6 +45,7 @@ class Arr
     static function crossJoin(...$arrays) {}
 
         /**
+ * @author Laravel
  * Fill in data where it's missing.
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
@@ -47,6 +53,7 @@ class Arr
     static function dataFill() {}
 
         /**
+ * @author Laravel
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
  * @param string|array|int|null $key
@@ -57,7 +64,7 @@ class Arr
 
         /**
  * alternate dataGet
- *
+ * @author inilim
  * @param array|object $target
  * @param string|array|int|null $key
  * @param mixed $default
@@ -66,6 +73,7 @@ class Arr
     static function dataGetV2($target, $key, $default = null) {}
 
         /**
+ * @author Laravel
  * Set an item on an array or object using dot notation.
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
@@ -73,6 +81,7 @@ class Arr
     static function dataSet() {}
 
         /**
+ * @author Laravel
  * Divide an array into two arrays. One with keys and the other with values.
  * @template K
  * @template V
@@ -82,12 +91,14 @@ class Arr
     static function divide(array $array) {}
 
         /**
+ * @author Laravel
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
  */
     static function dot(iterable $array, string $prepend = '') {}
 
         /**
+ * @author inilim
  * получаем ключи dot notation по паттерну | 
  * key.*.key....
  * @return string[]
@@ -95,6 +106,7 @@ class Arr
     static function dotKeys(iterable $array, string $prepend = '') {}
 
         /**
+ * @author inilim
  * получаем ключи dot notation по паттерну | 
  * key.*.key....
  * @return string[]
@@ -112,6 +124,7 @@ class Arr
     static function each($array, callable $callback) {}
 
         /**
+ * @author Laravel
  * Execute a callback over each nested chunk of items.
  * @param callable(...mixed):mixed $callback
  * @return void
@@ -119,6 +132,7 @@ class Arr
     static function eachSpread(array $array, callable $callback) {}
 
         /**
+ * @author Laravel
  * Get all of the given array except for a specified array of keys.
  * @template T of array
  * @param T $array
@@ -128,12 +142,14 @@ class Arr
     static function except(array $array, $keys) {}
 
         /**
+ * @author inilim
  * @param  (string|int)[]|string|int $keys
  * @return array
  */
     static function exceptNestedArray(array $array, $keys, int $depth = 1) {}
 
         /**
+ * @author Laravel
  * Determine if the given key exists in the provided array.
  *
  * @param  \ArrayAccess|array  $array
@@ -143,18 +159,21 @@ class Arr
     static function exists($array, $key) {}
 
         /**
+ * @author Laravel
  * Flatten a multi-dimensional array into a single level.
  * @return array
  */
     static function flatten(iterable $array, int $depth) {}
 
         /**
+ * @author Laravel
  * Remove one or many array items from a given array using "dot" notation.
  * @return \Closure(array &$array, (string|int)[]|string|int $keys):void
  */
     static function forget() {}
 
         /**
+ * @author Laravel
  * Get an item from an array using "dot" notation.
  * @template D
  *
@@ -166,6 +185,16 @@ class Arr
     static function get($array, $key, $default = null) {}
 
         /**
+ * @author Laravel
+ * Results array of items from Collection or Arrayable.
+ *
+ * @param  mixed  $items
+ * @return array<TKey, TValue>
+ */
+    static function getArrayableItems($items) {}
+
+        /**
+ * @author nette/utils
  * Returns zero-indexed position of given array key. Returns null if key is not found.
  * @param string|int $key
  * @return null|int
@@ -173,6 +202,7 @@ class Arr
     static function getKeyOffset(array $array, $key) {}
 
         /**
+ * @author laravel
  * Check if an item or items exist in an array using "dot" notation.
  *
  * @param  \ArrayAccess|array  $array
@@ -210,6 +240,7 @@ class Arr
     static function head(array $array) {}
 
         /**
+ * @author nette/utils
  * Inserts the contents of the $inserted array into the $array before the $key.
  * If $key is null (or does not exist), it is inserted at the end.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
@@ -217,6 +248,7 @@ class Arr
     static function insertAfter() {}
 
         /**
+ * @author nette/utils
  * Inserts the contents of the $inserted array into the $array immediately after the $key.
  * If $key is null (or does not exist), it is inserted at the beginning.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
@@ -288,6 +320,7 @@ class Arr
     static function map(array $array, callable $callback): array {}
 
         /**
+ * @author inilim
  * @template TValue of mixed
  * @template TKey of int|string
  * @template TOffset of int
@@ -331,6 +364,20 @@ class Arr
  * @param  (string|int)[]|string|int $keys
  */
     static function onlyNestedArray(array $array, $keys, int $depth = 1): array {}
+
+        /**
+ * @author Laravel
+ * @author Inilim "Changed it a bit"
+ * Partition the array into two arrays using the given callback.
+ *
+ * @template TKey of array-key
+ * @template TValue of mixed
+ *
+ * @param  iterable<TKey, TValue>  $array
+ * @param  callable(TValue, TKey): bool  $callback
+ * @return array<int<0, 1>, array<TKey, TValue>>
+ */
+    static function partition(iterable $array, callable $callback) {}
 
         /**
  * Pluck an array of values from an array.
@@ -383,15 +430,27 @@ class Arr
     static function renameDotKey() {}
 
         /**
+ * @author nette/utils
  * Renames key in array.
  * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
  */
     static function renameKey() {}
 
         /**
+ * @author inilim
  * @return array
  */
     static function resetKeysRecursive(array $array) {}
+
+        /**
+ * @author Laravel
+ * Select an array of values from an array.
+ *
+ * @param  array  $array
+ * @param  array|string  $keys
+ * @return array
+ */
+    static function select(array $array, $keys) {}
 
         /**
  * Set an array item to a given value using "dot" notation.
@@ -401,18 +460,21 @@ class Arr
     static function set() {}
 
         /**
+ * @author inilim
  * set if null OR empty string OR empty array
  * @return \Closure(array &$array, string $key, mixed $value):bool
  */
     static function setValueIfEmpty() {}
 
         /**
+ * @author inilim
  * установить значение если значения по ключу нет
  * @return \Closure(array &$array, string $key, mixed $value):bool
  */
     static function setValueIfNotExists() {}
 
         /**
+ * @author inilim
  * установить значение если значение по ключу null
  * @return \Closure(array &$array, string|int $key, mixed $value):bool
  */
@@ -443,6 +505,7 @@ class Arr
     static function sortRecursiveDesc(array $array, int $options = \SORT_REGULAR): array {}
 
         /**
+ * @author inilim
  * @template V of mixed
  * @template K of int|string
  *
@@ -458,6 +521,15 @@ class Arr
  * @return TArray
  */
     static function take(array $array, int $limit) {}
+
+        /**
+ * @author nette/utils
+ * Copies the elements of the $array array to the $object object and then returns it.
+ * @template T of object
+ * @param  T  $object
+ * @return T
+ */
+    static function toObj(iterable $array, object $object) {}
 
         /**
  * Convert a flatten "dot" notation array into an expanded array.
@@ -480,6 +552,7 @@ class Arr
     static function value($value) {}
 
         /**
+ * @author inilim
  * @return \Closure(object|array &$array, callable $callable):void
  */
     static function walkRecursive() {}
@@ -492,7 +565,18 @@ class Arr
  * @param  array<TKey,TValue>  $array
  * @return TValue[]|array<TKey,TValue>
  */
-    static function where(array $array, callable $callback, bool $preserve_keys = true): array {}
+    static function where(array $array, callable $callback, bool $preserveKeys = true): array {}
+
+        /**
+ * @author Laravel
+ * @author Inilim "Changed it a bit"
+ * Filter items where the value is not null.
+ * @template TValue
+ * @template TKey
+ * @param array<TKey,TValue> $array
+ * @return TValue[]|array<TKey,TValue>
+ */
+    static function whereNotNull(array $array, bool $preserveKeys = true) {}
 
         /**
  * If the given value is not an array, wrap it in one.

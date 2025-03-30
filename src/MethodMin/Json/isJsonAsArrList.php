@@ -5,5 +5,5 @@ namespace Inilim\Tool\Method\Json{function isJsonAsArrList(?string $v){if($v===n
     }if(!\Inilim\Tool\Json::__definedIfNot('hasError')){
     function hasError(){return \json_last_error()!==\JSON_ERROR_NONE;}
     }}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('isList')){
-    function isList(array $array){if(\PHP_VERSION_ID>=80100){return \array_is_list($array);}if([]===$array||$array===\array_values($array)){return true;}$nextKey=-1;foreach($array as $k=>$v){if($k!==++$nextKey){return false;}}return true;}
+    function isList(array $array){if(\PHP_VERSION_ID>=80100){return \array_is_list($array);}if([]===$array||$array===\array_values($array)){return true;}$nextKey=-1;foreach($array as $k=>&$v){if($k!==++$nextKey){return false;}}return true;}
     }}

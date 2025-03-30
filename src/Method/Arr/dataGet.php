@@ -26,8 +26,8 @@ function dataGet($target, $key, $default = null)
         }
 
         if ($segment === '*') {
-            if (!\is_array($target)) {
-                return $default;
+            if (!\is_iterable($target)) {
+                return \Inilim\Tool\Method\Arr\value($default);
             }
 
             $result = [];
@@ -37,6 +37,24 @@ function dataGet($target, $key, $default = null)
             }
 
             return \in_array('*', $key) ? \Inilim\Tool\Method\Arr\collapse($result) : $result;
+        }
+
+        switch ($segment) {
+            case '\*':
+                $segment = '*';
+                break;
+            case '\{first}':
+                $segment = '{first}';
+                break;
+            case '{first}':
+                $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
+                break;
+            case '\{last}':
+                $segment = '{last}';
+                break;
+            case '{last}':
+                $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
+                break;
         }
 
         if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {
