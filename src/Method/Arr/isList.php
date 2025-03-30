@@ -17,7 +17,7 @@ function isList(array $array)
 
     $nextKey = -1;
 
-    foreach ($array as $k => $v) {
+    foreach ($array as $k => &$v) {
         if ($k !== ++$nextKey) {
             return false;
         }
