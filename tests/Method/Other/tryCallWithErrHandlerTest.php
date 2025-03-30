@@ -50,7 +50,8 @@ class tryCallWithErrHandlerTest extends TestCase
 
         Other::tryCallWithErrHandler(
             static function ($stdClass)  use ($self) {
-                $stdClass->testProp = 'Hello';
+                $self->assertInstanceOf(\stdClass::class, $stdClass);
+                $self->$stdClass->testProp = 'Hello';
 
                 \trigger_error('ERROR', \E_USER_ERROR);
 
@@ -213,6 +214,51 @@ class tryCallWithErrHandlerTest extends TestCase
 
         $this->assertEquals(1, $count);
     }
+
+    function test_value_return_callable()
+    {
+        \error_reporting(\E_ALL);
+
+        $result = Other::tryCallWithErrHandler(
+            static function () {
+                \trigger_error('', \E_USER_ERROR);
+                return 'result';
+            },
+            null
+        );
+
+        $this->assertEquals('result', $result);
+
+        $result = Other::tryCallWithErrHandler(
+            static function () {
+                $result = 'do_result';
+                \trigger_error('', \E_USER_ERROR);
+                return $result;
+            },
+            null
+        );
+
+        $this->assertEquals('do_result', $result);
+    }
+
+    // function test_default_error_handler()
+    // {
+    //     \error_reporting(\E_ALL);
+
+    //     $this->expectUserDeprecationMessage('__THIS_ERROR__');
+
+    //     // \ob_start();
+    //     Other::tryCallWithErrHandler(
+    //         static function () {
+    //             \trigger_error('__THIS_ERROR__', \E_USER_DEPRECATED);
+    //         },
+    //         static function () {
+    //             return false;
+    //         }
+    //     );
+
+    //     // $this->assertTrue(\str_contains(\ob_get_clean(), '__THIS_ERROR__'));
+    // }
 
     // ---------------------------------------------
     // 
