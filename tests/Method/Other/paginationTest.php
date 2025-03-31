@@ -8,23 +8,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class paginationTest extends TestCase
 {
-    function test()
+    #[DataProvider('data')]
+    function test($subValues)
     {
-        $logName = __FUNCTION__ . ' | ';
-
-        foreach ($this->getTestData() as $i => $subValues) {
-            $dto = (new Pagination)->getAll(
-                $subValues['curPage'],
-                $subValues['limitOnePage'],
-                $subValues['countRecords']
-            );
-
-            $this->assertSame(
-                $dto->toArray(),
-                $subValues['expecting'],
-                $logName . $i
-            );
-        }
+        // de($subValues);
+        $this->assertSame(
+            Other::pagination($subValues['curPage'], $subValues['limitOnePage'], $subValues['countRecords']),
+            $subValues['expecting'],
+        );
     }
 
     static function data()
@@ -35,15 +26,15 @@ class paginationTest extends TestCase
                 'limitOnePage' => 25,
                 'countRecords' => 100,
                 'expecting' => [
-                    'countPages'   => 4,
-                    'countRecords' => 100,
-                    'limitOnePage' => 25,
-                    'offset'       => 0,
+                    'pageCount'   => 4,
+                    'recordCount' => 100,
+                    'recordPerPage' => 25,
                     'curPage'      => 1,
-                    'nextPage'     => 2,
-                    'prevPage'     => null,
-                    'isLastPage'   => false,
-                    'isFirstPage'  => true,
+                    'offset'       => 0,
+                    'next'     => 2,
+                    'prev'     => null,
+                    'isLast'   => false,
+                    'isFirst'  => true,
                 ],
             ]],
             [[
@@ -51,15 +42,15 @@ class paginationTest extends TestCase
                 'limitOnePage' => 25,
                 'countRecords' => 100,
                 'expecting' => [
-                    'countPages'   => 4,
-                    'countRecords' => 100,
-                    'limitOnePage' => 25,
-                    'offset'       => 75,
+                    'pageCount'   => 4,
+                    'recordCount' => 100,
+                    'recordPerPage' => 25,
                     'curPage'      => 4,
-                    'nextPage'     => null,
-                    'prevPage'     => 3,
-                    'isLastPage'   => true,
-                    'isFirstPage'  => false,
+                    'offset'       => 75,
+                    'next'     => null,
+                    'prev'     => 3,
+                    'isLast'   => true,
+                    'isFirst'  => false,
                 ],
             ]],
             [[
@@ -67,15 +58,15 @@ class paginationTest extends TestCase
                 'limitOnePage' => 25,
                 'countRecords' => 100,
                 'expecting' => [
-                    'countPages'   => 4,
-                    'countRecords' => 100,
-                    'limitOnePage' => 25,
-                    'offset'       => 0,
+                    'pageCount'   => 4,
+                    'recordCount' => 100,
+                    'recordPerPage' => 25,
                     'curPage'      => 1,
-                    'nextPage'     => 2,
-                    'prevPage'     => null,
-                    'isLastPage'   => false,
-                    'isFirstPage'  => true,
+                    'offset'       => 0,
+                    'next'     => 2,
+                    'prev'     => null,
+                    'isLast'   => false,
+                    'isFirst'  => true,
                 ],
             ]],
             [[
@@ -83,15 +74,15 @@ class paginationTest extends TestCase
                 'limitOnePage' => 25,
                 'countRecords' => 99,
                 'expecting' => [
-                    'countPages'   => 4,
-                    'countRecords' => 99,
-                    'limitOnePage' => 25,
-                    'offset'       => 0,
+                    'pageCount'   => 4,
+                    'recordCount' => 99,
+                    'recordPerPage' => 25,
                     'curPage'      => 1,
-                    'nextPage'     => 2,
-                    'prevPage'     => null,
-                    'isLastPage'   => false,
-                    'isFirstPage'  => true,
+                    'offset'       => 0,
+                    'next'     => 2,
+                    'prev'     => null,
+                    'isLast'   => false,
+                    'isFirst'  => true,
                 ],
             ]],
             [[
@@ -99,15 +90,15 @@ class paginationTest extends TestCase
                 'limitOnePage' => 50,
                 'countRecords' => 25,
                 'expecting' => [
-                    'countPages'   => 1,
-                    'countRecords' => 25,
-                    'limitOnePage' => 50,
-                    'offset'       => 0,
+                    'pageCount'   => 1,
+                    'recordCount' => 25,
+                    'recordPerPage' => 50,
                     'curPage'      => 1,
-                    'nextPage'     => null,
-                    'prevPage'     => null,
-                    'isLastPage'   => true,
-                    'isFirstPage'  => true,
+                    'offset'       => 0,
+                    'next'     => null,
+                    'prev'     => null,
+                    'isLast'   => true,
+                    'isFirst'  => true,
                 ],
             ]],
         ];
