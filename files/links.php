@@ -114,4 +114,11 @@ return [
         'path'   => $root . '/src/Method/Assert',
         'pathMin'   => $root . '/src/MethodMin/Assert',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\Exp',
+        'tool'   => $class = \Inilim\Tool\Exp::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Exp',
+        'pathMin'   => $root . '/src/MethodMin/Exp',
+    ],
 ];
