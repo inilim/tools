@@ -186,6 +186,7 @@ class Arr
 
         /**
  * @author Laravel
+ * @author inilim
  * Results array of items from Collection or Arrayable.
  *
  * @param  mixed  $items

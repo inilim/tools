@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class File
 {
         /**
+ * @todo tests
  * @template TValue of string
  * @template TKey of string|int
  * @param TValue|iterable<TKey,TValue> $pathToFile
@@ -13,6 +14,7 @@ class File
     static function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false) {}
 
         /**
+ * @todo tests
  * @param mixed $value
  * @param ?int $lifetime default 1 year in seconds
  * @return array{result:bool,exception:null|\ErrorException}
@@ -21,6 +23,7 @@ class File
     static function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false) {}
 
         /**
+ * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
@@ -32,6 +35,7 @@ class File
     static function get(string $filename, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
         /**
+ * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
@@ -43,6 +47,7 @@ class File
     static function getV2(array $params) {}
 
         /**
+ * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
  * @phpstan-import-type get_throw from \File
@@ -56,6 +61,7 @@ class File
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
         /**
+ * @todo tests
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */

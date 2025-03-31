@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function renameDotKey(){if(\func_num_args()!==0){throw new \InvalidArgumentException(__FUNCTION__.'()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,string $oldKey,string $newKey){$tArr=\Inilim\Tool\Method\Arr\dot($array);$result=\Inilim\Tool\Method\Arr\renameKey()($tArr,$oldKey,$newKey);$array=\Inilim\Tool\Method\Arr\undot($tArr);return $result;};}if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
     function dot(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dot($value,$prepend.$key.'.'));}else{$results[$prepend.$key]=$value;}}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('getKeyOffset')){

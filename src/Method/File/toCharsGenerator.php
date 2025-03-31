@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @todo tests
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */

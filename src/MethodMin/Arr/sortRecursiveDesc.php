@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function sortRecursiveDesc(array $array,int $options=\SORT_REGULAR):array{return \Inilim\Tool\Method\Arr\sortRecursive($array,$options,true);}if(!\Inilim\Tool\Arr::__definedIfNot('isAssoc')){
     function isAssoc(array $array){$keys=\array_keys($array);return \array_keys($keys)!==$keys;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('sortRecursive')){

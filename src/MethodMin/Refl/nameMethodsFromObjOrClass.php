@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Refl{function nameMethodsFromObjOrClass($classOrObjOrRef,array $exceptMethods=[],bool $throw=false,bool $exceptMagicMethods=false,bool $exceptPrivateMethods=false,bool $exceptProtectedMethods=false,bool $exceptPublicMethods=false,bool $exceptParentMethods=false):array{return \array_column(\Inilim\Tool\Method\Refl\methodsFromObjOrClass($classOrObjOrRef,$exceptMethods,$throw,$exceptMagicMethods,$exceptPrivateMethods,$exceptProtectedMethods,$exceptPublicMethods,$exceptParentMethods),'name');}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
     function _class($objectOrClass,bool $throw=false){try{return new \ReflectionClass($objectOrClass);}catch(\ReflectionException $e){return $throw?throw $e:null;}}
     }if(!\Inilim\Tool\Refl::__definedIfNot('methodsFromObjOrClass')){

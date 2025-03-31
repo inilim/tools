@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Json{function getTypeFromJson(?string $v){if($v===null){return null;}$v=\Inilim\Tool\Method\Json\decode($v,false);if(\Inilim\Tool\Method\Json\hasError()){return null;}return \Inilim\Tool\Method\Other\getType($v);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
     function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
     }if(!\Inilim\Tool\Json::__definedIfNot('hasError')){

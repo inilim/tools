@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer{function checkLenMax($num,$max){if(!\Inilim\Tool\Method\Integer\isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}return \Inilim\Tool\Method\Integer\checkMax(\Inilim\Tool\Method\Integer\lenNumeric($num),$max);}if(!\Inilim\Tool\Integer::__definedIfNot('checkMax')){
     function checkMax($num,$max){if(!\Inilim\Tool\Method\Integer\isNumeric($num)){throw new \InvalidArgumentException('$num must be numeric');}if(!\Inilim\Tool\Method\Integer\isNumeric($max)){throw new \InvalidArgumentException('$max must be numeric');}return \intval($num)<=\intval($max);}
     }if(!\Inilim\Tool\Integer::__definedIfNot('isNumeric')){

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer{function isIntUnsigned($value){if(!\Inilim\Tool\Method\Integer\isNumeric($value)){return false;}/**@varint|string$value*/$value=\strval($value);/**@varstring$value*/if(\Inilim\Tool\Method\Str\_startsWith($value,'-')){return false;}$len=\Inilim\Tool\Method\Integer\lenNumeric($value);if($len<\Inilim\Tool\Integer :: MAX_LEN_32_BIT){return true;}if($len>\Inilim\Tool\Integer :: MAX_LEN_32_BIT){return false;}/*// длина 10*/return \Inilim\Tool\Method\Integer\__compare(\str_split($value),[4,2,9,4,9,6,7,2,9,5]);}if(!\Inilim\Tool\Integer::__definedIfNot('__compare')){
     function __compare(array $value,array $arrayInt){foreach(\array_map(null,$value,$arrayInt)as $c){list($v,$a)=$c;$v=\intval($v);if($v>$a){return false;}elseif($v<$a){return true;}}return true;}
     }if(!\Inilim\Tool\Integer::__definedIfNot('isNumeric')){

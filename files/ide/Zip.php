@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class Zip
 {
         /**
+ * @todo tests
  * @param string|\ZipArchive $zip path to file-zip OR ZipArchive object
  * @throws \ValueError
  * @throws \RuntimeException

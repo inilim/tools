@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function getSegmentPath(string $path,int $segment):?string{return \Inilim\Tool\Method\Str\getSegmentsPath($path)[$segment]?? null;}if(!\Inilim\Tool\Str::__definedIfNot('getSegmentsPath')){
     function getSegmentsPath(string $path):array{$t=\trim(\Inilim\Tool\Method\Str\trim($path),'/');if($t===''){return[];}$t=\preg_replace('#\/{2,}#','/',$t);return \explode('/',$t);}
     }if(!\Inilim\Tool\Str::__definedIfNot('trim')){

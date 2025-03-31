@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function containsAll(string $haystack,iterable $needles,bool $ignoreCase=false){foreach($needles as $needle){if(!\Inilim\Tool\Method\Str\contains($haystack,$needle,$ignoreCase)){return false;}}return true;}if(!\Inilim\Tool\Str::__definedIfNot('_contains')){
     function _contains(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_contains($haystack,$needle);}return ''===$needle||false!==strpos($haystack,$needle);}
     }if(!\Inilim\Tool\Str::__definedIfNot('contains')){

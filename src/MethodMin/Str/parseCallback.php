@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function parseCallback(string $callback,?string $default=null):array{if(\Inilim\Tool\Method\Str\contains($callback,"@anonymous\x00")){if(\Inilim\Tool\Method\Str\substrCount($callback,'@')>1){return[\Inilim\Tool\Method\Str\beforeLast($callback,'@'),\Inilim\Tool\Method\Str\afterLast($callback,'@')];}return[$callback,$default];}return \Inilim\Tool\Method\Str\contains($callback,'@')?\explode('@',$callback,2):[$callback,$default];}if(!\Inilim\Tool\Str::__definedIfNot('_contains')){
     function _contains(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_contains($haystack,$needle);}return ''===$needle||false!==strpos($haystack,$needle);}
     }if(!\Inilim\Tool\Str::__definedIfNot('afterLast')){

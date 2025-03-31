@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr;
 
 function prepend(array $array,$value,$key=null):array{if(\func_num_args()===2){\array_unshift($array,$value);}else{$array=[$key=>$value]+$array;}return $array;}

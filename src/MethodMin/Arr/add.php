@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function add(array $array,string $key,$value){if(\Inilim\Tool\Method\Arr\get($array,$key)===null){\Inilim\Tool\Method\Arr\set()($array,$key,$value);}return $array;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function setValueIfNotExists(){if(\func_num_args()!==0){throw new \InvalidArgumentException(__FUNCTION__.'()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,string $key,$value){if(!\Inilim\Tool\Method\Arr\has($array,$key)){\Inilim\Tool\Method\Arr\set()($array,$key,$value);return true;}return false;};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){

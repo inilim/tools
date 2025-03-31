@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @todo tests
  * @template TValue of string
  * @template TKey of string|int
  * @param TValue|iterable<TKey,TValue> $pathToFile

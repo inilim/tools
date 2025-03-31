@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function compareValues(array $a,array $b,array ... $arrays){$arrays[]=$a;$arrays[]=$b;$arrays=\array_map(static fn($array)=>\md5(\serialize($array)),\Inilim\Tool\Method\Arr\sortRecursive(\Inilim\Tool\Method\Arr\resetKeysRecursive($arrays)));return \sizeof(\Inilim\Tool\Method\Arr\unique($arrays))===1;}if(!\Inilim\Tool\Arr::__definedIfNot('isAssoc')){
     function isAssoc(array $array){$keys=\array_keys($array);return \array_keys($keys)!==$keys;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('resetKeysRecursive')){

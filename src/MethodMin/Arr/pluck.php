@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function pluck(iterable $array,$value,$key=null):array{$results=[];$value=\is_string($value)?\explode('.',$value):$value;$key=$key===null||\is_array($key)?$key:\explode('.',$key);foreach($array as $item){$itemValue=\Inilim\Tool\Method\Arr\dataGet($item,$value);/*// If the key is "null", we will just append the value to the array and keep*//*// looping. Otherwise we will key the array using the value of the key we*//*// received from the developer. Then we'll return the final array form.*/if($key===null){$results[]=$itemValue;}else{$itemKey=\Inilim\Tool\Method\Arr\dataGet($item,$key);if(\is_object($itemKey)&&\method_exists($itemKey,'__toString')){$itemKey=(string) $itemKey;}$results[$itemKey]=$itemValue;}}return $results;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('collapse')){

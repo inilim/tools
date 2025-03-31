@@ -5,6 +5,7 @@ namespace Inilim\Tool;
 class Time
 {
         /**
+ * @todo tests
  * @param null|int|\DateInterval $ttl
  * @return int
  */
@@ -26,6 +27,7 @@ class Time
     static function sleepRndSecs(int $min, int $max) {}
 
         /**
+ * @todo tests
  * @return int
  */
     static function unixMs() {}

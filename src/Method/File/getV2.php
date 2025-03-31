@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File

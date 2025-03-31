@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Time;
 
 /**
+ * @todo tests
  * @return int
  */
 function unixMs()

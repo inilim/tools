@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function pull(){if(\func_num_args()!==0){throw new \InvalidArgumentException(__FUNCTION__.'()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,$key,$default=null){$value=\Inilim\Tool\Method\Arr\get($array,$key,$default);\Inilim\Tool\Method\Arr\forget()($array,$key);return $value;};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){

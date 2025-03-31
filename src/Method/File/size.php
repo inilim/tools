@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @todo tests
  * Convert the given number to its file size equivalent.
  * @skip_build
  * @param int|float $bytes

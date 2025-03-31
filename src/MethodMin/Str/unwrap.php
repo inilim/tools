@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function unwrap(string $value,string $before,?string $after=null):string{if(\Inilim\Tool\Method\Str\startsWith($value,$before)){$value=\Inilim\Tool\Method\Str\substr($value,\Inilim\Tool\Method\Str\length($before));}if(\Inilim\Tool\Method\Str\endsWith($value,$after ??= $before)){$value=\Inilim\Tool\Method\Str\substr($value,0,-\Inilim\Tool\Method\Str\length($after));}return $value;}if(!\Inilim\Tool\Str::__definedIfNot('_endsWith')){
     function _endsWith(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_ends_with($haystack,$needle);}if(''===$needle||$needle===$haystack){return true;}if(''===$haystack){return false;}$needleLength=\strlen($needle);return $needleLength<=\strlen($haystack)&&0===\substr_compare($haystack,$needle,-$needleLength);}
     }if(!\Inilim\Tool\Str::__definedIfNot('_startsWith')){

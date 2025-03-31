@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function kebab(string $value):string{return \Inilim\Tool\Method\Str\snake($value,'-');}if(!\Inilim\Tool\Str::__definedIfNot('lower')){
     function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('snake')){

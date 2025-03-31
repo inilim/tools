@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Refl{function getProp($objectOrClass,string $name,bool $throw=false){$name=\Inilim\Tool\Method\Other\unprefixVar($name);$ref=\Inilim\Tool\Method\Refl\_class($objectOrClass,$throw);if($ref===null){return null;}try{return $ref -> getProperty($name);}catch(\ReflectionException $e){return $throw?throw $e:null;}}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
     function _class($objectOrClass,bool $throw=false){try{return new \ReflectionClass($objectOrClass);}catch(\ReflectionException $e){return $throw?throw $e:null;}}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('trim')){

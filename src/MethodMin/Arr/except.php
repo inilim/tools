@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr{function except(array $array,$keys){\Inilim\Tool\Method\Arr\forget()($array,$keys);return $array;}if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('forget')){

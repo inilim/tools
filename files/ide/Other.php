@@ -13,6 +13,15 @@ class Other
     static function clearClosure(\Closure $cls) {}
 
         /**
+ * @author nette/utils
+ * Compares two values in the same way that PHP does. Recognizes operators: >, >=, <, <=, =, ==, ===, !=, !==, <>
+ * @param mixed $left
+ * @param mixed $right
+ * @return bool
+ */
+    static function compareViaOperator($left, string $operator, $right) {}
+
+        /**
  * @author Inilim
  * @return null|class-string
  */
@@ -85,6 +94,26 @@ class Other
     static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}
 
         /**
+ * @author inilim
+ *
+ * @param int $curPage
+ * @param int $limitOnePage
+ * @param int $countRecords
+ * @return array{
+ * pageCount:int,
+ * recordCount:int,
+ * recordPerPage:int,
+ * curPage:int,
+ * offset:int,
+ * next:?int,
+ * prev:?int,
+ * isLast:bool,
+ * isFirst:bool
+ * }
+ */
+    static function pagination(int $curPage, int $limitOnePage, int $countRecords) {}
+
+        /**
  * @author Inilim
  * @return string
  */
@@ -107,6 +136,15 @@ class Other
  * @return string
  */
     static function requestMethod() {}
+
+        /**
+ * @author Laravel
+ * Conditionally compile styles from an array into a style list.
+ *
+ * @param array $array
+ * @return string
+ */
+    static function toCssStyles(array $array) {}
 
         /**
  * @author Inilim

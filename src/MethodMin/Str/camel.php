@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function camel(string $value):string{return \lcfirst(\Inilim\Tool\Method\Str\studly($value));}if(!\Inilim\Tool\Str::__definedIfNot('replace')){
     function replace($search,$replace,$subject,bool $caseSensitive=true){return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
     }if(!\Inilim\Tool\Str::__definedIfNot('studly')){

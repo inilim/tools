@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str{function lenEqual(string $str,$equal){return \Inilim\Tool\Method\Integer\equals(\Inilim\Tool\Method\Str\length($str),$equal);}if(!\Inilim\Tool\Str::__definedIfNot('length')){
     function length(string $value,$encoding='UTF-8'){return \mb_strlen($value,$encoding);}
     }}namespace Inilim\Tool\Method\Integer{if(!\Inilim\Tool\Integer::__definedIfNot('equals')){

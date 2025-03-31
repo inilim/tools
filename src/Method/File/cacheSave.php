@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
+ * @todo tests
  * @param mixed $value
  * @param ?int $lifetime default 1 year in seconds
  * @return array{result:bool,exception:null|\ErrorException}

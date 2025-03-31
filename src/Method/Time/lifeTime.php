@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Method\Time;
 
 /**
+ * @todo tests
  * @param null|int|\DateInterval $ttl
  * @return int
  */

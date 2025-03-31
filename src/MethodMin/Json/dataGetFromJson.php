@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string $dotKey,$default=null){$t=\Inilim\Tool\Method\Json\tryDecodeAsArray($json,[]);if(!$t){return $default;}return \Inilim\Tool\Method\Arr\dataGetV2($t,$dotKey,$default);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
     function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
     }if(!\Inilim\Tool\Json::__definedIfNot('tryDecodeAsArray')){
