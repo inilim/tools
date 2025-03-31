@@ -121,4 +121,11 @@ return [
         'path'   => $root . '/src/Method/Exp',
         'pathMin'   => $root . '/src/MethodMin/Exp',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\Enum',
+        'tool'   => $class = \Inilim\Tool\Enum::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Enum',
+        'pathMin'   => $root . '/src/MethodMin/Enum',
+    ],
 ];

@@ -234,8 +234,8 @@ class Arr
 
         /**
  * Get the first element of an array. Useful for method chaining.
- * @template TValue of mixed
- * @param array<TValue> $array
+ * @template TValue
+ * @param TValue[] $array
  * @return TValue|false
  */
     static function head(array $array) {}

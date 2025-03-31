@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @author Inilim
  * @param mixed $v
- * @return boolean
+ * @return bool
  */
 function isEnum($v)
 {

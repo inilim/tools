@@ -6,8 +6,8 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * Get the first element of an array. Useful for method chaining.
- * @template TValue of mixed
- * @param array<TValue> $array
+ * @template TValue
+ * @param TValue[] $array
  * @return TValue|false
  */
 function head(array $array)
