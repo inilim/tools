@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 {% for namespace,dep in deps -%}
 namespace {{ namespace }}{
     {%- for depItem in dep -%}

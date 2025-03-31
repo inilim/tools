@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Arr;
 
 /**
@@ -8,5 +10,5 @@ namespace Inilim\Tool\Method\Arr;
  */
 function in($array)
 {
-    \in_array()
+    \in_array();
 }
