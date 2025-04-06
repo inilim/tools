@@ -9,6 +9,7 @@ use Inilim\Tool\Str;
 use Inilim\Dump\Dump;
 use Inilim\Tool\Data;
 use Inilim\Tool\File;
+use Inilim\Tool\Enum;
 use Inilim\Tool\Json;
 use Inilim\Tool\Refl;
 use Inilim\Tool\Other;
@@ -16,6 +17,43 @@ use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
+
+$message = ';';
+
+
+dde($message ?: 'пппп');
+enum Test: string
+{
+    case ONE = 'a';
+    case TWO = 'b';
+}
+
+
+dde(is_object(Test::ONE));
+
+$a = Enum::options(Test::class);
+// $a = Enum::cases(Test::class);
+
+
+de($a);
+
+
+de();
+$flags = \FilesystemIterator::KEY_AS_FILENAME | \FilesystemIterator::CURRENT_AS_PATHNAME | \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS;
+// $flags = \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_FILEINFO;
+
+$directoryIterator = new \RecursiveDirectoryIterator(
+    \realpath('../../../../tools/vendor/inilim'),
+    // 'D:\projects\tools',
+    $flags
+);
+
+$iteratorIterator = new \RecursiveIteratorIterator(
+    $directoryIterator,
+    \RecursiveIteratorIterator::SELF_FIRST
+);
+
+$t = \iterator_to_array($iteratorIterator);
 
 /**
  * @param mixed $value

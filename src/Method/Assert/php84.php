@@ -16,5 +16,5 @@ function php84($message = '')
     if (\PHP_VERSION_ID >= 80400) {
         return;
     }
-    throw new \AssertionError($message ? $message : 'The current version is lower than required "8.4"');
+    throw new \AssertionError($message ?: 'The current version is lower than required "8.4"');
 }

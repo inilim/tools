@@ -6,12 +6,19 @@ class Assert
 {
         /**
  * @author Inilim
- * equal to or greater than
- * @param string $message
+ * @param mixed $value
  * @return void
  * @throws \AssertionError
  */
-    static function php81($message = '') {}
+    static function enumCase($value, string $message = '') {}
+
+        /**
+ * @author Inilim
+ * equal to or greater than
+ * @return void
+ * @throws \AssertionError
+ */
+    static function php81(string $message = '') {}
 
         /**
  * @author Inilim

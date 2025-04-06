@@ -14,8 +14,8 @@ namespace Inilim\Tool\Method\Enum;
 function cases($enum)
 {
     \Inilim\Tool\Method\Assert\php81();
-    if (!\Inilim\Tool\Method\Other\isEnum($enum)) {
-        throw new \InvalidArgumentException('Must be of type \UnitEnum');
+    if (\Inilim\Tool\Method\Other\isEnum($enum)) {
+        return $enum::cases();
     }
-    return $enum::cases();
+    throw new \InvalidArgumentException('Must be of type \UnitEnum');
 }

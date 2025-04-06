@@ -9,6 +9,7 @@ class Enum
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  * @return T[]
+ * @throws \InvalidArgumentException
  */
     static function cases($enum) {}
 
@@ -16,17 +17,186 @@ class Enum
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
+ * @return int
+ */
+    static function count($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
  * @return null|string|int
  */
-    static function getFirstValue($enum) {}
+    static function firstValue($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return T
+ * @throws \ValueError
+ */
+    static function fromName($enum, string $name, bool $caseInsensitive = false) {}
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  * @param int|string $value
+ * @return T
+ * @throws \ValueError
+ */
+    static function fromValue($enum, $value, bool $caseInsensitive = false) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ */
+    static function hasName($enum, string $name, bool $caseInsensitive = false) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @param int|string $value
+ */
+    static function hasValue($enum, $value, bool $caseInsensitive = false) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return bool
+ */
+    static function hasValues($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return T
+ */
+    static function head($enum) {}
+
+        /**
+ * @author Inilim
+ * @param \UnitEnum $enum
+ * @param \UnitEnum[] $haystack
+ * @return bool
+ */
+    static function in(object $enum, array $haystack) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return bool
+ */
+    static function intValues($enum) {}
+
+        /**
+ * @author Inilim
+ * @param \UnitEnum $enum
+ * @param \UnitEnum $needle
+ * @return bool
+ */
+    static function is(object $enum, object $needle) {}
+
+        /**
+ * @author Inilim
+ * @param mixed $v
+ * @return bool
+ */
+    static function isCase($v) {}
+
+        /**
+ * @author Inilim
+ * @param \UnitEnum $enum
+ * @param \UnitEnum $needle
+ * @return bool
+ */
+    static function isNot(object $enum, object $needle) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return T
+ */
+    static function last($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return null|string|int
+ */
+    static function lastValue($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return string[]
+ */
+    static function names($enum) {}
+
+        /**
+ * @author Inilim
+ * @param \UnitEnum $enum
+ * @param \UnitEnum[] $haystack
+ * @return bool
+ */
+    static function notIn(object $enum, array $haystack) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return string[]|array<string,string|int>
+ */
+    static function options($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return bool
+ */
+    static function strValues($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return ?T
+ */
+    static function tryFromName($enum, string $name, bool $caseInsensitive = false) {}
+
+        /**
+ * @author Inilim
+ * @template T of \BackedEnum
+ * @param class-string<T>|T $enum
+ * @param int|string $value
  * @return ?T
  */
     static function tryFromValue($enum, $value, bool $caseInsensitive = false) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return null|('int'|'string')
+ */
+    static function typeValues($enum) {}
+
+        /**
+ * @author Inilim
+ * @template T of \UnitEnum
+ * @param class-string<T>|T $enum
+ * @return string[]|int[]
+ */
+    static function values($enum) {}
 
     }
