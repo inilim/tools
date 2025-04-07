@@ -18,6 +18,14 @@ class Assert
  * @return void
  * @throws \AssertionError
  */
+    static function php80(string $message = '') {}
+
+        /**
+ * @author Inilim
+ * equal to or greater than
+ * @return void
+ * @throws \AssertionError
+ */
     static function php81(string $message = '') {}
 
         /**

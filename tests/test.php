@@ -18,6 +18,85 @@ use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
+
+
+
+
+/**
+ * @author inilim
+ * @param mixed[] $array
+ * @param callable(array $node, int|string|null $keyNode):array $callable
+ * @return mixed[]
+ */
+function nestedMap(array $array, int $depth, callable $callable)
+{
+    $internal = static function ($internal, &$array, $key, $depth, $callable) {
+        /**
+         * @var \Closure $internal
+         * @var mixed[] $array
+         * @var int|string|null $key
+         * @var int $depth
+         * @var callable $callable
+         */
+        if ($depth <= 0) {
+            return $callable($array, $key);
+        }
+        foreach ($array as $idx =>  $item) {
+            if (\is_array($item)) {
+                $array[$idx] = $internal($internal, $item, $idx, ($depth - 1), $callable);
+            }
+        }
+        return $array;
+    };
+
+    return $internal->__invoke($internal, $array, null, $depth, $callable);
+}
+
+
+
+
+
+
+// __include('Arr::nestedMap');
+
+
+$a = [
+    [
+        'привет 1',
+    ],
+    [
+        'привет 2',
+    ],
+    [
+        'привет 3',
+    ],
+    [
+        'key' => [
+            'Привет 4',
+        ],
+    ]
+];
+
+
+$res = nestedMap($a, 2, static function ($node, $keyNode) {
+    de([
+        $node,
+        $keyNode,
+    ]);
+});
+
+
+de($res);
+
+
+
+
+
+
+
+
+
+de();
 $message = ';';
 
 

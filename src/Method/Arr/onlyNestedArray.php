@@ -6,16 +6,15 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @param  (string|int)[]|string|int $keys
+ * @return array
  */
-function onlyNestedArray(array $array, $keys, int $depth = 1): array
+function onlyNestedArray(array $array, $keys, int $depth = 1)
 {
-    if ($depth < 1) {
-        return \Inilim\Tool\Method\Arr\only($array, $keys);
-    }
-    foreach ($array as $idx =>  $item) {
-        if (\is_array($item)) {
-            $array[$idx] = \Inilim\Tool\Method\Arr\onlyNestedArray($item, $keys, ($depth - 1));
+    return \Inilim\Tool\Method\Arr\nestedMap(
+        $array,
+        $depth,
+        static function ($value) use ($keys) {
+            return \Inilim\Tool\Method\Arr\only($value, $keys);
         }
-    }
-    return $array;
+    );
 }

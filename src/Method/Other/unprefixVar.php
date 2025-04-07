@@ -11,10 +11,10 @@ namespace Inilim\Tool\Method\Other;
 function unprefixVar(string $name)
 {
     return \Inilim\Tool\Method\Str\trim(\strtr($name, [
-        '$'         => '',
+        'static::$' => '',
         '$this->$'  => '',
         '$this->'   => '',
         'self::$'   => '',
-        'static::$' => '',
+        '$'         => '',
     ]));
 }

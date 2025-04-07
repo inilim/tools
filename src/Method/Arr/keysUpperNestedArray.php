@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Arr;
 
-function keysUpperNestedArray(array $array, int $depth = 1): array
+/**
+ * @author inilim
+ * @param mixed[] $array
+ * @return mixed[]
+ */
+function keysUpperNestedArray(array $array, int $depth = 1)
 {
-    if ($depth <= 0) {
-        return \Inilim\Tool\Method\Arr\keysUpper($array);
-    }
-    foreach ($array as $idx =>  $item) {
-        if (\is_array($item)) {
-            $array[$idx] = \Inilim\Tool\Method\Arr\keysUpperNestedArray($item, ($depth - 1));
+    return \Inilim\Tool\Method\Arr\nestedMap(
+        $array,
+        $depth,
+        static function ($value) {
+            return \Inilim\Tool\Method\Arr\keysUpper($value);
         }
-    }
-    return $array;
+    );
 }

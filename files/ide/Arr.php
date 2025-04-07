@@ -288,8 +288,11 @@ class Arr
  */
     static function keysLower(array $array) {}
 
-        
-    static function keysLowerNestedArray(array $array, int $depth = 1): array {}
+        /**
+ * @param array $array
+ * @return array
+ */
+    static function keysLowerNestedArray(array $array, int $depth = 1) {}
 
         /**
  * @template T of array
@@ -298,8 +301,12 @@ class Arr
  */
     static function keysUpper(array $array) {}
 
-        
-    static function keysUpperNestedArray(array $array, int $depth = 1): array {}
+        /**
+ * @author inilim
+ * @param mixed[] $array
+ * @return mixed[]
+ */
+    static function keysUpperNestedArray(array $array, int $depth = 1) {}
 
         /**
  * Get the last element from an array.
@@ -328,8 +335,9 @@ class Arr
  * @param mixed $filteringValue
  * @param array<TKey,TValue> $array
  * @param callable(TValue,TKey,TOffset):mixed $callback
+ * @return array<TKey,TValue>
  */
-    static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false): array {}
+    static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false) {}
 
         /**
  * Run a grouping map over the items.
@@ -356,6 +364,14 @@ class Arr
     static function mapWithKeys(array $array, callable $callback): array {}
 
         /**
+ * @author inilim
+ * @param mixed[] $array
+ * @param callable(array $node, int|string|null $keyNode):array $callable
+ * @return mixed[]
+ */
+    static function nestedMap(array $array, int $depth, callable $callable) {}
+
+        /**
  * Get a subset of the items from the given array.
  * @param  (string|int)[]|string|int  $keys
  */
@@ -363,8 +379,9 @@ class Arr
 
         /**
  * @param  (string|int)[]|string|int $keys
+ * @return array
  */
-    static function onlyNestedArray(array $array, $keys, int $depth = 1): array {}
+    static function onlyNestedArray(array $array, $keys, int $depth = 1) {}
 
         /**
  * @author Laravel

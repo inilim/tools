@@ -5,13 +5,13 @@ namespace Inilim\Tool\Method\Refl;
 /**
  * @author Inilim
  * @template T of object
- * @param T|class-string<T> $objectOrClass
+ * @param T|class-string<T> $classOrObj
  * @return ?\ReflectionClass<T>
  */
-function _class($objectOrClass, bool $throw = false)
+function _class($classOrObj, bool $throw = false)
 {
     try {
-        return new \ReflectionClass($objectOrClass);
+        return new \ReflectionClass($classOrObj);
     } catch (\ReflectionException $e) {
         return $throw
             ? throw $e

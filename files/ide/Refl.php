@@ -7,10 +7,10 @@ class Refl
         /**
  * @author Inilim
  * @template T of object
- * @param T|class-string<T> $objectOrClass
+ * @param T|class-string<T> $classOrObj
  * @return ?\ReflectionClass<T>
  */
-    static function _class($objectOrClass, bool $throw = false) {}
+    static function _class($classOrObj, bool $throw = false) {}
 
         /**
  * @author Inilim
