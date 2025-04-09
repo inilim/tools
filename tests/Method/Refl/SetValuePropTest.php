@@ -11,7 +11,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[Group('inactive')]
 class SetValuePropTest extends TestCase
 {
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test_public_prop_type_array($value)
     {
         $obj = new ClassicClass;
@@ -28,7 +30,9 @@ class SetValuePropTest extends TestCase
         }
     }
 
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test_public_prop_type_bool($value)
     {
         $obj = new ClassicClass;

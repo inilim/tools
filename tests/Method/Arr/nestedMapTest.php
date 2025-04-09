@@ -4,11 +4,12 @@ namespace Inilim\Tool\Test\Method\Arr;
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Test\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class nestedMapTest extends TestCase
 {
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test($expect, $array, $depth, $callable)
     {
         $result = Arr::nestedMap($array, $depth, $callable);

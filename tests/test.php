@@ -19,6 +19,10 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
+
+
+
+
 __include('Other::methodFromScope');
 
 class Staticc

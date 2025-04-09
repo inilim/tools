@@ -8,7 +8,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class containsAllTest extends TestCase
 {
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test($haystack, $needles, $expected, $ignoreCase = false)
     {
         $this->assertEquals($expected, Str::containsAll($haystack, $needles, $ignoreCase));

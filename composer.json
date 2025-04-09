@@ -10,7 +10,11 @@
     },
     "extra": {
         "exclude-from-files": [
-            "symfony/var-dumper/Resources/functions/dump.php"
+            "symfony/*",
+            "twig/*",
+            "phpunit/*",
+            "phpstan/*",
+            "myclabs/*"
         ]
     },
     "autoload-dev": {
@@ -49,10 +53,10 @@
     },
     "scripts": {
         "unit": [
-            "php vendor/bin/phpunit"
+            "php74 vendor/bin/phpunit"
         ],
         "unit-tests": [
-            "php vendor/bin/phpunit tests"
+            "php74 vendor/bin/phpunit tests"
         ],
         "stan": [
             "php vendor/bin/phpstan"

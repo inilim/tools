@@ -244,7 +244,12 @@ class dataGetTest extends TestCase
 
 trait SupportTestTraitArrayIterable
 {
-    function __construct(protected array $items = []) {}
+    protected array $items = [];
+
+    function __construct(array $items = [])
+    {
+        $this->items = $items;
+    }
 
     function getIterator(): \Traversable
     {
@@ -254,7 +259,12 @@ trait SupportTestTraitArrayIterable
 
 trait SupportTestTraitArrayAccess
 {
-    function __construct(protected array $items = []) {}
+    protected array $items = [];
+
+    function __construct(array $items = [])
+    {
+        $this->items = $items;
+    }
 
     function offsetExists($offset): bool
     {

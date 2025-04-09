@@ -8,7 +8,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class paginationTest extends TestCase
 {
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test($subValues)
     {
         // de($subValues);

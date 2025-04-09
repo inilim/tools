@@ -8,7 +8,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class tryCallWithErrHandlerTest extends TestCase
 {
-    #[DataProvider('data')]
+    /**
+     * @dataProvider data
+     */
     function test_not_show_error($callable)
     {
         \error_reporting(\E_ALL);
@@ -23,7 +25,9 @@ class tryCallWithErrHandlerTest extends TestCase
         \ob_end_clean();
     }
 
-    #[DataProvider('dataEcho')]
+    /**
+     * @dataProvider dataEcho
+     */
     function test_echo_after_error($callable)
     {
         \error_reporting(\E_ALL);

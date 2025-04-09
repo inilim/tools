@@ -263,8 +263,9 @@ class Str
 
         /**
  * Limit the number of characters in a string.
+ * @return string
  */
-    static function limit(string $value, int $limit = 100, string $end = '...'): string {}
+    static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false) {}
 
         /**
  * Convert the given string to lower-case.
