@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Other;
+
+/**
+ * @author inilim
+ * @template T of object
+ * @param T|class-string<T> $scope
+ * @param string[] $props
+ * @return array<string,mixed>
+ */
+function propsFromScope($scope, array $props)
+{
+    if (!$props) {
+        return [];
+    }
+
+    return (function ($props) {
+        $results = [];
+        foreach ($props as $prop) {
+            if (\property_exists(self::class, $prop)) {
+                $results[$prop] = self::$$prop;
+            }
+        }
+        return $results;
+    })->bindTo(null, $scope)->__invoke($props);
+}

@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": "^7.4",
         "ext-mbstring": "*"
     },
     "suggest": {
@@ -40,12 +40,12 @@
     "require-dev": {
         "phpstan/phpstan": "@stable",
         "inilim/dump": "dev-main",
-        "phpunit/phpunit": "^11.5",
         "inilim/ipdo": "dev-main",
+        "phpunit/phpunit": "^9.6",
+        "twig/twig": "^3.11",
+        "mcaskill/composer-exclude-files": "^4.0",
         "php-code-minifier/php-code-minifier": "^1.2",
-        "dragon-code/benchmark": "^3.0",
-        "twig/twig": "^3.19",
-        "mcaskill/composer-exclude-files": "^4.0"
+        "dragon-code/benchmark": "^3.1"
     },
     "scripts": {
         "unit": [
@@ -62,6 +62,9 @@
         ]
     },
     "config": {
+        "platform": {
+            "php": "7.4"
+        },
         "allow-plugins": {
             "mcaskill/composer-exclude-files": true
         }
