@@ -95,6 +95,16 @@ class Other
 
         /**
  * @author inilim
+ * @template T of object
+ * @param T|class-string<T> $scope
+ * @param string $method
+ * @param mixed[] $args
+ * @return mixed[]
+ */
+    static function methodFromScope($scope, string $method, array $args = []) {}
+
+        /**
+ * @author inilim
  *
  * @param int $curPage
  * @param int $limitOnePage
@@ -118,6 +128,15 @@ class Other
  * @return string
  */
     static function phpInput() {}
+
+        /**
+ * @author inilim
+ * @template T of object
+ * @param T|class-string<T> $scope
+ * @param string[] $props
+ * @return array<string,mixed>
+ */
+    static function propsFromScope($scope, array $props) {}
 
         /**
  * @author Internet
