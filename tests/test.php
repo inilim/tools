@@ -23,7 +23,7 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
 
-__include('Other::methodFromScope');
+__include('Other::backtrace');
 
 class Staticc
 {
@@ -31,14 +31,20 @@ class Staticc
     static $bbb = 'aaa';
     static $ccc;
 
-    static private function dawd($a)
+    static  function dawd()
     {
-        echo $a;
+        $props = \Inilim\Tool\Method\Other\backtrace();
+        dde($props);
+    }
+
+    static function wadwdw()
+    {
+        self::dawd();
     }
 }
 
-$props = \Inilim\Tool\Method\Other\methodFromScope(Staticc::class, 'dawd2', [12312312]);
+
+Staticc::wadwdw();
 
 
-
-dde($props);
+de();

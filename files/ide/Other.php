@@ -6,6 +6,12 @@ class Other
 {
         /**
  * @author Inilim
+ * @return array<array{file:string|null,line:int|null,method:string|null,type:string|null,class:class-string|null,object:object|null,args:mixed[]|null}>
+ */
+    static function backtrace(int $limit = 0, int $reset = 0, int $flags = \DEBUG_BACKTRACE_IGNORE_ARGS, bool $reverse = true) {}
+
+        /**
+ * @author Inilim
  * @template T of \Closure
  * @param T $cls
  * @return T
