@@ -19,8 +19,21 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
+__include('Exp::hashFile');
 
 
+// $a = \md5_file('D:\projects\txt_to_sqlite\domains.sqlite');
+// $a = \filesize('D:\projects\txt_to_sqlite\domains.sqlite');
+// de($a);
+
+// $a = hashFile('md5', 'D:\projects\tools\tests\bench.txt');
+// $a = \Inilim\Tool\Method\Exp\hashFile('sha1', 'D:\projects\txt_to_sqlite\domains.sqlite');
+
+$a = sha1_file('D:\projects\tools\tests\bench.txt');
+$b = sha1(file_get_contents('D:\projects\tools\tests\bench.txt'));
+
+
+de($a, $b);
 
 
 __include('Other::backtrace');

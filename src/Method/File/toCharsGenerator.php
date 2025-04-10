@@ -9,16 +9,16 @@ namespace Inilim\Tool\Method\File;
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
-function toCharsGenerator(string $pathTofile, int $chunk = 1)
+function toCharsGenerator(string $pathToFile, int $chunk = 1)
 {
-    if (!\is_file($pathTofile)) {
-        throw new \Exception(\sprintf('Not found file: "%s"', $pathTofile));
+    if (!\is_file($pathToFile)) {
+        throw new \Exception(\sprintf('Not found file: "%s"', $pathToFile));
     }
 
-    $resource = \fopen($pathTofile, 'r');
+    $resource = \fopen($pathToFile, 'r');
 
     if ($resource === false) {
-        throw new \Exception(\sprintf('Failed open file: "%s"', $pathTofile));
+        throw new \Exception(\sprintf('Failed open file: "%s"', $pathToFile));
     }
 
     $iteration = 0;
