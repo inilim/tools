@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
  * @return ?object
  */

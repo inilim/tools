@@ -10,9 +10,6 @@ class ClassicClass
     // Non static
     // ---------------------------------------------
 
-    public ClassForProp|\stdClass $testProp;
-    public ClassForProp&\stdClass $testProp2;
-
     public $publicPropNonType;
     protected $protectedPropNonType;
     private $privatePropNonType;
