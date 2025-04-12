@@ -28,6 +28,12 @@ class Other
     static function compareViaOperator($left, string $operator, $right) {}
 
         /**
+ * @author inilim
+ * @return ?object
+ */
+    static function getCallableThis(callable $callable) {}
+
+        /**
  * @author Inilim
  * @return null|class-string
  */

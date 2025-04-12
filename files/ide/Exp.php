@@ -14,6 +14,14 @@ class Exp
     static function getSuggestionLevenshtein(array $possibilities, string $value) {}
 
         /**
+ * @author inilim
+ * @return string
+ * @throws \InvalidArgumentException
+ * @throws \Exception
+ */
+    static function hashFile(string $algo, string $pathToFile, int $byteStart = 1024, int $byteEnd = 1024, bool $binary = false) {}
+
+        /**
  * @todo tests
  * @author youkidearitai <https://github.com/youkidearitai>
  * Implementation levenshtein distance algorithm.

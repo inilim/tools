@@ -19,7 +19,20 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
-__include('Exp::hashFile');
+// __include('Exp::hashFile');
+class C
+{
+    public function aaa($name)
+    {
+        echo 'Привет ', $name, "\n";
+    }
+}
+
+$c = new C();
+
+dde(is_callable([$c, 'aaa']));
+
+de($a);
 
 
 // $a = \md5_file('D:\projects\txt_to_sqlite\domains.sqlite');
