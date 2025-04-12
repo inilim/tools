@@ -11,6 +11,7 @@ use PhpParser\ParserFactory;
 use PhpCodeMinifier\PhpMinifier;
 use Twig\Loader\FilesystemLoader;
 use PhpParser\Node\Stmt\Function_;
+use PhpParser\Node\Stmt\Class_;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Node\Name\FullyQualified;
 
@@ -34,6 +35,9 @@ function replaceFirst(string $search, string $replace, string $subject): string
 // ---------------------------------------------
 
 $links = include __DIR__ . '/files/links.php';
+/**
+ * @var array{method:string,tool:string,nameClass:string,path:string,pathMin:string,pathToClass:string} $links
+ */
 $linksNamespace = \array_column($links, 'method', 'tool');
 $linksDir       = \array_column($links, 'path', 'tool');
 $ignoreFilesPattern = [
@@ -45,6 +49,7 @@ $ignoreFilesPattern = [
 // 
 // ---------------------------------------------
 
+$switch          = true;
 $parser          = (new ParserFactory())->createForHostVersion();
 $nodeFinder      = new NodeFinder;
 $pretty          = new Standard;
@@ -56,12 +61,21 @@ $phpCodeMinifier = new PhpMinifier(
     new \PhpCodeMinifier\Validator\PhpFileValidator(),
     new \PhpCodeMinifier\PhpTokenizer()
 );
+$twig = new Environment(
+    new FilesystemLoader(__DIR__ . '/files/template'),
+    [
+        'cache'            => __DIR__ . '/files/cache',
+        'debug'            => true,
+        'auto_reload'      => true, // Если true, при каждом рендеринге шаблона Symfony сначала проверяет, изменился ли его исходный код с момента его компиляции. Если он изменился, шаблон автоматически компилируется заново.
+        'strict_variables' => true, // Если установлено значение false, Twig будет молча игнорировать недопустимые переменные (переменные и/или атрибуты/методы, которые не существуют) и заменять их нулевым значением. Если установлено значение true, Twig вместо этого генерирует исключение (по умолчанию — false).
+    ]
+);
 
 // ---------------------------------------------
 // Создание таблиц
 // ---------------------------------------------
 
-if (true) {
+if ($switch || false) {
     \file_put_contents($pathToDb, '');
 
     // ---------------------------------------------
@@ -113,13 +127,15 @@ if (true) {
             'не удалось создать индекс idx_groups_id'
         ]);
     }
+
+    d('Create DB tables');
 }
 
 // ------------------------------------------------------------------
 // Первичный сбор методов
 // ------------------------------------------------------------------
 
-if (true) {
+if ($switch || false) {
 
     (static function (
         array $linksDir,
@@ -164,7 +180,7 @@ if (true) {
                 unset($files[$idx]);
                 $results  = [];
                 $nameFile = \basename($pathToFile);
-                $name     = str_replace('.php', '', $nameFile);
+                $name     = \str_replace('.php', '', $nameFile);
 
                 // ---------------------------------------------
                 // INFO проверка на regex
@@ -255,6 +271,8 @@ if (true) {
 
             } // endforeach php file
         } // endforeach dir
+
+        d('Collecting methods');
     })->__invoke(
         $linksDir,
         $ignoreFilesPattern,
@@ -276,7 +294,7 @@ unset(
 // Сбор зависимостей методов
 // ---------------------------------------------
 
-if (true) {
+if ($switch || false) {
     (static function (
         IPDOSQLite $dbDev,
         Parser $parser,
@@ -442,6 +460,7 @@ if (true) {
         // 
         // ---------------------------------------------
 
+        d('Collecting deps methods');
     })->__invoke(
         $dbDev,
         $parser,
@@ -453,27 +472,21 @@ if (true) {
 // Очищаем папку от старых скриптов
 // ------------------------------------------------------------------
 
-foreach ($links as $link) {
-    foreach (\glob($link['pathMin'] . '/*.php') as $file) {
-        \unlink($file);
+if ($switch || false) {
+    foreach ($links as $link) {
+        foreach (\glob($link['pathMin'] . '/*.php') as $file) {
+            \unlink($file);
+        }
     }
+
+    d('Clear old bundles');
 }
 
 // ---------------------------------------------
-// 
+// Формируем бандлы
 // ---------------------------------------------
 
-$twig = new Environment(
-    new FilesystemLoader(__DIR__ . '/files/template'),
-    [
-        'cache'            => __DIR__ . '/files/cache',
-        'debug'            => true,
-        'auto_reload'      => true, // Если true, при каждом рендеринге шаблона Symfony сначала проверяет, изменился ли его исходный код с момента его компиляции. Если он изменился, шаблон автоматически компилируется заново.
-        'strict_variables' => true, // Если установлено значение false, Twig будет молча игнорировать недопустимые переменные (переменные и/или атрибуты/методы, которые не существуют) и заменять их нулевым значением. Если установлено значение true, Twig вместо этого генерирует исключение (по умолчанию — false).
-    ]
-);
-
-if (true) {
+if ($switch || false) {
     (static function (
         NodeFinder $nodeFinder,
         IPDOSQLite $dbDev,
@@ -481,7 +494,7 @@ if (true) {
         Standard $pretty,
         PhpMinifier $phpCodeMinifier,
         Environment $twig,
-        $links
+        array $links
     ) {
 
         $methods        = $dbDev->exec('SELECT * FROM methods', 2);
@@ -571,6 +584,8 @@ if (true) {
 
             // de($result);
         }
+
+        d('Bundles regen');
     })->__invoke(
         $nodeFinder,
         $dbDev,
@@ -579,5 +594,107 @@ if (true) {
         $phpCodeMinifier,
         $twig,
         $links,
+    );
+}
+
+// ---------------------------------------------
+// formation all.php
+// ---------------------------------------------
+
+if ($switch || false) {
+    (static function (
+        array $links,
+        Environment $twig,
+        NodeFinder $nodeFinder,
+        Parser $parser,
+        Standard $pretty
+    ) {
+        $pathToFile   = __DIR__ . '/src/all.php';
+        $exists       = \is_file($pathToFile);
+        $countClasses = \sizeof($links);
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        if (!$exists) {
+            \file_put_contents($pathToFile, $twig->render('all.twig'));
+        }
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        $code = \file_get_contents($pathToFile);
+
+        if (\substr_count($code, 'final class') === ($countClasses)) {
+            return;
+        }
+        unset($code, $countClasses, $exists);
+
+        \file_put_contents($pathToFile, $twig->render('all.twig'));
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        foreach (
+            [['pathToClass' => __DIR__ . '/src/LazyMethodAbstract.php'], ...$links]
+            as $link
+        ) {
+
+            $code = \file_get_contents($link['pathToClass']);
+
+            try {
+                $ast = $parser->parse($code);
+            } catch (\Throwable $e) {
+                de([
+                    __LINE__,
+                    $link,
+                    $e->getMessage(),
+                ]);
+            }
+
+            // ---------------------------------------------
+            // find class
+            // ---------------------------------------------
+
+            $class = $nodeFinder->findFirstInstanceOf($ast, Class_::class);
+            unset($ast);
+            if ($class === null) {
+                de([
+                    __LINE__,
+                    $link,
+                ]);
+            }
+
+            // ---------------------------------------------
+            // чистим класс от комментариев
+            // ---------------------------------------------
+
+            $class->setDocComment(new \PhpParser\Comment\Doc(''));
+
+            // ---------------------------------------------
+            // 
+            // ---------------------------------------------
+
+            $code = $pretty->prettyPrint([$class]);
+            $code = \str_replace('\Inilim\Tool\LazyMethodAbstract', 'LazyMethodAbstract', $code);
+
+            // ---------------------------------------------
+            // Дописываем
+            // ---------------------------------------------
+
+            // dde($code);
+            \file_put_contents($pathToFile, "\n" . $code, \FILE_APPEND);
+        } // endforeach
+
+        d('File "all.php" regen');
+    })->__invoke(
+        $links,
+        $twig,
+        $nodeFinder,
+        $parser,
+        $pretty
     );
 }

@@ -1,6 +1,7 @@
 <?php
 
 $root = \dirname(__DIR__);
+
 return [
     [
         'method' => 'Inilim\Tool\Method\File',
@@ -8,6 +9,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/File',
         'pathMin'   => $root . '/src/MethodMin/File',
+        'pathToClass' => $root . '/src/File.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Path',
@@ -15,6 +17,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Path',
         'pathMin'   => $root . '/src/MethodMin/Path',
+        'pathToClass' => $root . '/src/Path.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Arr',
@@ -22,6 +25,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Arr',
         'pathMin'   => $root . '/src/MethodMin/Arr',
+        'pathToClass' => $root . '/src/Arr.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Integer',
@@ -29,6 +33,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Integer',
         'pathMin'   => $root . '/src/MethodMin/Integer',
+        'pathToClass' => $root . '/src/Integer.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Double',
@@ -36,6 +41,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Double',
         'pathMin'   => $root . '/src/MethodMin/Double',
+        'pathToClass' => $root . '/src/Double.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Data',
@@ -43,6 +49,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Data',
         'pathMin'   => $root . '/src/MethodMin/Data',
+        'pathToClass' => $root . '/src/Data.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Str',
@@ -50,6 +57,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Str',
         'pathMin'   => $root . '/src/MethodMin/Str',
+        'pathToClass' => $root . '/src/Str.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Other',
@@ -57,6 +65,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Other',
         'pathMin'   => $root . '/src/MethodMin/Other',
+        'pathToClass' => $root . '/src/Other.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Json',
@@ -64,6 +73,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Json',
         'pathMin'   => $root . '/src/MethodMin/Json',
+        'pathToClass' => $root . '/src/Json.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\FS',
@@ -71,6 +81,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/FS',
         'pathMin'   => $root . '/src/MethodMin/FS',
+        'pathToClass' => $root . '/src/FS.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Zip',
@@ -78,6 +89,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Zip',
         'pathMin'   => $root . '/src/MethodMin/Zip',
+        'pathToClass' => $root . '/src/Zip.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Refl',
@@ -85,6 +97,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Refl',
         'pathMin'   => $root . '/src/MethodMin/Refl',
+        'pathToClass' => $root . '/src/Refl.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\ID',
@@ -92,6 +105,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/ID',
         'pathMin'   => $root . '/src/MethodMin/ID',
+        'pathToClass' => $root . '/src/ID.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Time',
@@ -99,6 +113,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Time',
         'pathMin'   => $root . '/src/MethodMin/Time',
+        'pathToClass' => $root . '/src/Time.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Obj',
@@ -106,6 +121,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Obj',
         'pathMin'   => $root . '/src/MethodMin/Obj',
+        'pathToClass' => $root . '/src/Obj.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Assert',
@@ -113,6 +129,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Assert',
         'pathMin'   => $root . '/src/MethodMin/Assert',
+        'pathToClass' => $root . '/src/Assert.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Exp',
@@ -120,6 +137,7 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Exp',
         'pathMin'   => $root . '/src/MethodMin/Exp',
+        'pathToClass' => $root . '/src/Exp.php',
     ],
     [
         'method' => 'Inilim\Tool\Method\Enum',
@@ -127,5 +145,6 @@ return [
         'nameClass'   => \basename($class),
         'path'   => $root . '/src/Method/Enum',
         'pathMin'   => $root . '/src/MethodMin/Enum',
+        'pathToClass' => $root . '/src/Enum.php',
     ],
 ];
