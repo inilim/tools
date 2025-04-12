@@ -6,7 +6,6 @@ final class Integer extends \Inilim\Tool\LazyMethodAbstract
 {
     protected const NAMESPACE = 'Inilim\Tool\Method\Integer',
         PATH_TO_DIR           = __DIR__ . '/MethodMin/Integer',
-        ALIAS                 = [],
         IDX                   = 5;
 
     // TINYINT: представляет целые числа от -128 до 127, занимает 1 байт
