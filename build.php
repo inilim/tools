@@ -2,20 +2,38 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+use PhpParser\Node;
 use Inilim\Dump\Dump;
 use PhpParser\Parser;
 use Twig\Environment;
 use PhpParser\NodeFinder;
 use Inilim\IPDO\IPDOSQLite;
+use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
+use PhpParser\Node\Stmt\Class_;
 use PhpCodeMinifier\PhpMinifier;
 use Twig\Loader\FilesystemLoader;
 use PhpParser\Node\Stmt\Function_;
-use PhpParser\Node\Stmt\Class_;
+use PhpCodeMinifier\MinifierFactory;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\NodeVisitorAbstract;
 
 Dump::init();
+
+class CommentVisitor extends NodeVisitorAbstract
+{
+    function leaveNode(Node $node)
+    {
+        // Удаляем комментарии из узла (если они есть)
+        if ($node->getAttribute('comments')) {
+            // $node->setDocComment(new \PhpParser\Comment\Doc(''));
+            $node->setAttribute('comments', []);
+            // de($node);
+        }
+        return null; // Не изменяем сам узел
+    }
+}
 
 function replaceFirst(string $search, string $replace, string $subject): string
 {
@@ -51,16 +69,14 @@ $ignoreFilesPattern = [
 
 $switch          = true;
 $parser          = (new ParserFactory())->createForHostVersion();
+$traverser       = new NodeTraverser();
+$traverser->addVisitor(new CommentVisitor);
 $nodeFinder      = new NodeFinder;
 $pretty          = new Standard;
 $pathToDb        = __DIR__ . '/files/build_dev.sqlite';
 $pathToSqlFiles  = __DIR__ . '/files/sql/';
 $dbDev           = new IPDOSQLite($pathToDb);
-// $phpCodeMinifier = \PhpCodeMinifier\MinifierFactory::create();
-$phpCodeMinifier = new PhpMinifier(
-    new \PhpCodeMinifier\Validator\PhpFileValidator(),
-    new \PhpCodeMinifier\PhpTokenizer()
-);
+$phpCodeMinifier = MinifierFactory::create();
 $twig = new Environment(
     new FilesystemLoader(__DIR__ . '/files/template'),
     [
@@ -145,7 +161,8 @@ if ($switch || false) {
         IPDOSQLite $dbDev,
         Parser $parser,
         Standard $pretty,
-        PhpMinifier $phpCodeMinifier
+        PhpMinifier $phpCodeMinifier,
+        NodeTraverser $traverser
     ) {
 
         $sqlAddMethod = 'INSERT INTO methods
@@ -208,6 +225,12 @@ if ($switch || false) {
                         $e->getMessage(),
                     ]);
                 }
+
+                // ---------------------------------------------
+                // Очистка функций от внутренних комментариев
+                // ---------------------------------------------
+
+                $ast = $traverser->traverse($ast);
 
                 // ---------------------------------------------
                 // Ищем функцию
@@ -281,7 +304,8 @@ if ($switch || false) {
         $dbDev,
         $parser,
         $pretty,
-        $phpCodeMinifier
+        $phpCodeMinifier,
+        $traverser
     );
 }
 

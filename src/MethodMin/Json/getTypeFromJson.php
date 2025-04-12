@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Json{function getTypeFromJson(?string $v){if($v===null){return null;}$v=\Inilim\Tool\Method\Json\decode($v,false);if(\Inilim\Tool\Method\Json\hasError()){return null;}return \Inilim\Tool\Method\Other\getType($v);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
-    function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){/*// @phpstan-ignore-next-line*/return \json_decode($v,$associative,$depth,$flags);}
+    function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){return \json_decode($v,$associative,$depth,$flags);}
     }if(!\Inilim\Tool\Json::__definedIfNot('hasError')){
     function hasError(){return \json_last_error()!==\JSON_ERROR_NONE;}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){

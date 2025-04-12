@@ -33,7 +33,6 @@ function getCollectionThrowable(
         /**
          * @return bool
          */
-        #[\ReturnTypeWillChange]
         function offsetExists($offset)
         {
             return isset($this->array[$offset]);
@@ -41,7 +40,6 @@ function getCollectionThrowable(
         /**
          * @return ?\Throwable
          */
-        #[\ReturnTypeWillChange]
         function offsetGet($offset)
         {
             return $this->array[$offset] ?? null;
@@ -50,7 +48,6 @@ function getCollectionThrowable(
          * @param \Throwable $e
          * @return void
          */
-        #[\ReturnTypeWillChange]
         function offsetSet($offset, $e)
         {
             if (!($e instanceof \Throwable)) {
@@ -65,7 +62,6 @@ function getCollectionThrowable(
         /**
          * @return void
          */
-        #[\ReturnTypeWillChange]
         function offsetUnset($offset)
         {
             unset($this->array[$offset]);
@@ -74,7 +70,6 @@ function getCollectionThrowable(
         /**
          * @return int
          */
-        #[\ReturnTypeWillChange]
         function count()
         {
             return \sizeof($this->array);

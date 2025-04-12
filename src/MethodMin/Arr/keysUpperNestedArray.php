@@ -5,5 +5,5 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr{function keysUpperNestedArray(array $array,int $depth=1){return \Inilim\Tool\Method\Arr\nestedMap($array,$depth,static function($value){return \Inilim\Tool\Method\Arr\keysUpper($value);});}if(!\Inilim\Tool\Arr::__definedIfNot('keysUpper')){
     function keysUpper(array $array){return \array_change_key_case($array,\CASE_UPPER);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('nestedMap')){
-    function nestedMap(array $array,int $depth,callable $callable){$internal=static function($internal,&$array,$key,$depth,$callable){/***@var\Closure$internal*@varmixed[]$array*@varint|string|null$key*@varint$depth*@varcallable$callable*/if($depth<=0){return $callable($array,$key);}foreach($array as $idx=>$item){if(\is_array($item)){$array[$idx]=$internal($internal,$item,$idx,$depth-1,$callable);}}return $array;};return $internal -> __invoke($internal,$array,null,$depth,$callable);}
+    function nestedMap(array $array,int $depth,callable $callable){$internal=static function($internal,&$array,$key,$depth,$callable){if($depth<=0){return $callable($array,$key);}foreach($array as $idx=>$item){if(\is_array($item)){$array[$idx]=$internal($internal,$item,$idx,$depth-1,$callable);}}return $array;};return $internal -> __invoke($internal,$array,null,$depth,$callable);}
     }}
