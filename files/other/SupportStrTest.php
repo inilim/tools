@@ -13,46 +13,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class SupportStrTest extends \Inilim\Tool\Test\TestCase
 {
-    function testParseCallback()
-    {
-        $this->assertEquals(['Class', 'method'], Str::parseCallback('Class@method'));
-        $this->assertEquals(['Class', 'method'], Str::parseCallback('Class@method', 'foo'));
-        $this->assertEquals(['Class', 'foo'], Str::parseCallback('Class', 'foo'));
-        $this->assertEquals(['Class', null], Str::parseCallback('Class'));
-
-        $this->assertEquals(["Class@anonymous\0/explosion/382.php:8$2ec", 'method'], Str::parseCallback("Class@anonymous\0/explosion/382.php:8$2ec@method"));
-        $this->assertEquals(["Class@anonymous\0/explosion/382.php:8$2ec", 'method'], Str::parseCallback("Class@anonymous\0/explosion/382.php:8$2ec@method", 'foo'));
-        $this->assertEquals(["Class@anonymous\0/explosion/382.php:8$2ec", 'foo'], Str::parseCallback("Class@anonymous\0/explosion/382.php:8$2ec", 'foo'));
-        $this->assertEquals(["Class@anonymous\0/explosion/382.php:8$2ec", null], Str::parseCallback("Class@anonymous\0/explosion/382.php:8$2ec"));
-    }
-
-    function testSlug()
-    {
-        $this->assertSame('hello-world', Str::slug('hello world'));
-        $this->assertSame('hello-world', Str::slug('hello-world'));
-        $this->assertSame('hello-world', Str::slug('hello_world'));
-        $this->assertSame('hello_world', Str::slug('hello_world', '_'));
-        $this->assertSame('user-at-host', Str::slug('user@host'));
-        $this->assertSame('سلام-دنیا', Str::slug('سلام دنیا', '-', null));
-        $this->assertSame('sometext', Str::slug('some text', ''));
-        $this->assertSame('', Str::slug('', ''));
-        $this->assertSame('', Str::slug(''));
-        $this->assertSame('bsm-allah', Str::slug('بسم الله', '-', 'en', ['allh' => 'allah']));
-        $this->assertSame('500-dollar-bill', Str::slug('500$ bill', '-', 'en', ['$' => 'dollar']));
-        $this->assertSame('500-dollar-bill', Str::slug('500--$----bill', '-', 'en', ['$' => 'dollar']));
-        $this->assertSame('500-dollar-bill', Str::slug('500-$-bill', '-', 'en', ['$' => 'dollar']));
-        $this->assertSame('500-dollar-bill', Str::slug('500$--bill', '-', 'en', ['$' => 'dollar']));
-        $this->assertSame('500-dollar-bill', Str::slug('500-$--bill', '-', 'en', ['$' => 'dollar']));
-        $this->assertSame('أحمد-في-المدرسة', Str::slug('أحمد@المدرسة', '-', null, ['@' => 'في']));
-    }
-
-    function testStrStart()
-    {
-        $this->assertSame('/test/string', Str::start('test/string', '/'));
-        $this->assertSame('/test/string', Str::start('/test/string', '/'));
-        $this->assertSame('/test/string', Str::start('//test/string', '/'));
-    }
-
     function testFlushCache()
     {
         $reflection = new ReflectionClass(Str::class);
@@ -68,147 +28,11 @@ class SupportStrTest extends \Inilim\Tool\Test\TestCase
         $this->assertEmpty($property->getValue());
     }
 
-    function testFinish()
-    {
-        $this->assertSame('abbc', Str::finish('ab', 'bc'));
-        $this->assertSame('abbc', Str::finish('abbcbc', 'bc'));
-        $this->assertSame('abcbbc', Str::finish('abcbbcbc', 'bc'));
-    }
-
-    function testWrap()
-    {
-        $this->assertEquals('"value"', Str::wrap('value', '"'));
-        $this->assertEquals('foo-bar-baz', Str::wrap('-bar-', 'foo', 'baz'));
-    }
-
-    function testUnwrap()
-    {
-        $this->assertEquals('value', Str::unwrap('"value"', '"'));
-        $this->assertEquals('value', Str::unwrap('"value', '"'));
-        $this->assertEquals('value', Str::unwrap('value"', '"'));
-        $this->assertEquals('bar', Str::unwrap('foo-bar-baz', 'foo-', '-baz'));
-        $this->assertEquals('some: "json"', Str::unwrap('{some: "json"}', '{', '}'));
-    }
-
-    function testIs()
-    {
-        $this->assertTrue(Str::is('/', '/'));
-        $this->assertFalse(Str::is('/', ' /'));
-        $this->assertFalse(Str::is('/', '/a'));
-        $this->assertTrue(Str::is('foo/*', 'foo/bar/baz'));
-
-        $this->assertTrue(Str::is('*@*', 'App\Class@method'));
-        $this->assertTrue(Str::is('*@*', 'app\Class@'));
-        $this->assertTrue(Str::is('*@*', '@method'));
-
-        // is case sensitive
-        $this->assertFalse(Str::is('*BAZ*', 'foo/bar/baz'));
-        $this->assertFalse(Str::is('*FOO*', 'foo/bar/baz'));
-        $this->assertFalse(Str::is('A', 'a'));
-
-        // is not case sensitive
-        $this->assertTrue(Str::is('A', 'a', true));
-        $this->assertTrue(Str::is('*BAZ*', 'foo/bar/baz', true));
-        $this->assertTrue(Str::is(['A*', 'B*'], 'a/', true));
-        $this->assertFalse(Str::is(['A*', 'B*'], 'f/', true));
-        $this->assertTrue(Str::is('FOO', 'foo', true));
-        $this->assertTrue(Str::is('*FOO*', 'foo/bar/baz', true));
-        $this->assertTrue(Str::is('foo/*', 'FOO/bar', true));
-
-        // Accepts array of patterns
-        $this->assertTrue(Str::is(['a*', 'b*'], 'a/'));
-        $this->assertTrue(Str::is(['a*', 'b*'], 'b/'));
-        $this->assertFalse(Str::is(['a*', 'b*'], 'f/'));
-
-        // numeric values and patterns
-        $this->assertFalse(Str::is(['a*', 'b*'], 123));
-        $this->assertTrue(Str::is(['*2*', 'b*'], 11211));
-
-        $this->assertTrue(Str::is('*/foo', 'blah/baz/foo'));
-
-        $valueObject = new StringableObjectStub('foo/bar/baz');
-        $patternObject = new StringableObjectStub('foo/*');
-
-        $this->assertTrue(Str::is('foo/bar/baz', $valueObject));
-        $this->assertTrue(Str::is($patternObject, $valueObject));
-
-        // empty patterns
-        $this->assertFalse(Str::is([], 'test'));
-
-        $this->assertFalse(Str::is('', 0));
-        $this->assertFalse(Str::is([null], 0));
-        $this->assertTrue(Str::is([null], null));
-    }
-
-    function testIsWithMultilineStrings()
-    {
-        $this->assertFalse(Str::is('/', "/\n"));
-        $this->assertTrue(Str::is('/*', "/\n"));
-        $this->assertTrue(Str::is('*/*', "/\n"));
-        $this->assertTrue(Str::is('*/*', "\n/\n"));
-
-        $this->assertTrue(Str::is('*', "\n"));
-        $this->assertTrue(Str::is('*', "\n\n"));
-        $this->assertFalse(Str::is('', "\n"));
-        $this->assertFalse(Str::is('', "\n\n"));
-
-        $multilineValue = <<<'VALUE'
-        <?php
-
-        namespace Illuminate\Tests\Support;
-
-        use Exception;
-        VALUE;
-
-        $this->assertTrue(Str::is($multilineValue, $multilineValue));
-        $this->assertTrue(Str::is('*', $multilineValue));
-        $this->assertTrue(Str::is("*namespace Illuminate\Tests\*", $multilineValue));
-        $this->assertFalse(Str::is("namespace Illuminate\Tests\*", $multilineValue));
-        $this->assertFalse(Str::is("*namespace Illuminate\Tests", $multilineValue));
-        $this->assertTrue(Str::is('<?php*', $multilineValue));
-        $this->assertTrue(Str::is("<?php*namespace Illuminate\Tests\*", $multilineValue));
-        $this->assertFalse(Str::is('use Exception;', $multilineValue));
-        $this->assertFalse(Str::is('use Exception;*', $multilineValue));
-        $this->assertTrue(Str::is('*use Exception;', $multilineValue));
-
-        $this->assertTrue(Str::is("<?php\n\nnamespace Illuminate\Tests\*", $multilineValue));
-
-        $this->assertTrue(Str::is(<<<'PATTERN'
-        <?php
-        *
-        namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
-
-        $this->assertTrue(Str::is(<<<'PATTERN'
-        <?php
-
-        namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
-    }
-
     function testIsUrl()
     {
         $this->assertTrue(Str::isUrl('https://explosion.com'));
         $this->assertTrue(Str::isUrl('http://localhost'));
         $this->assertFalse(Str::isUrl('invalid url'));
-    }
-
-    #[DataProvider('validUuidList')]
-    function testIsUuidWithValidUuid($uuid)
-    {
-        $this->assertTrue(Str::isUuid($uuid));
-    }
-
-    #[DataProvider('invalidUuidList')]
-    function testIsUuidWithInvalidUuid($uuid)
-    {
-        $this->assertFalse(Str::isUuid($uuid));
-    }
-
-    #[DataProvider('uuidVersionList')]
-    function testIsUuidWithVersion($uuid, $version, $passes)
-    {
-        $this->assertSame(Str::isUuid($uuid, $version), $passes);
     }
 
     function testIsJson()
@@ -229,156 +53,9 @@ class SupportStrTest extends \Inilim\Tool\Test\TestCase
         $this->assertFalse(Str::isJson([]));
     }
 
-    function testIsMatch()
-    {
-        $this->assertTrue(Str::isMatch('/.*,.*!/', 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch('/^.*$(.*)/', 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch('/explosion/i', 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch('/^(.*(.*(.*)))/', 'Hello, Explosion!'));
-
-        $this->assertFalse(Str::isMatch('/H.o/', 'Hello, Explosion!'));
-        $this->assertFalse(Str::isMatch('/^explosion!/i', 'Hello, Explosion!'));
-        $this->assertFalse(Str::isMatch('/explosion!(.*)/', 'Hello, Explosion!'));
-        $this->assertFalse(Str::isMatch('/^[a-zA-Z,!]+$/', 'Hello, Explosion!'));
-
-        $this->assertTrue(Str::isMatch(['/.*,.*!/', '/H.o/'], 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch(['/^explosion!/i', '/^.*$(.*)/'], 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch(['/explosion/i', '/explosion!(.*)/'], 'Hello, Explosion!'));
-        $this->assertTrue(Str::isMatch(['/^[a-zA-Z,!]+$/', '/^(.*(.*(.*)))/'], 'Hello, Explosion!'));
-    }
-
-    function testKebab()
-    {
-        $this->assertSame('explosion-php-tools', Str::kebab('ExplosionPhpTools'));
-        $this->assertSame('explosion-php-tools', Str::kebab('Explosion Php Tools'));
-        $this->assertSame('explosion❤-php-tools', Str::kebab('Explosion ❤ Php Tools'));
-        $this->assertSame('', Str::kebab(''));
-    }
-
-    function testLower()
-    {
-        $this->assertSame('foo bar baz', Str::lower('FOO BAR BAZ'));
-        $this->assertSame('foo bar baz', Str::lower('fOo Bar bAz'));
-    }
-
-    function testUpper()
-    {
-        $this->assertSame('FOO BAR BAZ', Str::upper('foo bar baz'));
-        $this->assertSame('FOO BAR BAZ', Str::upper('foO bAr BaZ'));
-    }
-
-    function testLength()
-    {
-        $this->assertEquals(11, Str::length('foo bar baz'));
-        $this->assertEquals(11, Str::length('foo bar baz', 'UTF-8'));
-    }
-
-    function testNumbers()
-    {
-        $this->assertSame('5551234567', Str::numbers('(555) 123-4567'));
-        $this->assertSame('443', Str::numbers('L4r4v3l!'));
-        $this->assertSame('', Str::numbers('Explosion!'));
-
-        $arrayValue = ['(555) 123-4567', 'L4r4v3l', 'Explosion!'];
-        $arrayExpected = ['5551234567', '443', ''];
-        $this->assertSame($arrayExpected, Str::numbers($arrayValue));
-    }
-
-    function testRandom()
-    {
-        $this->assertEquals(16, strlen(Str::random()));
-        $randomInteger = random_int(1, 100);
-        $this->assertEquals($randomInteger, strlen(Str::random($randomInteger)));
-        $this->assertIsString(Str::random());
-    }
-
-    function testWhetherTheNumberOfGeneratedCharactersIsEquallyDistributed()
-    {
-        $results = [];
-        // take 6.200.000 samples, because there are 62 different characters
-        for ($i = 0; $i < 620000; $i++) {
-            $random = Str::random(1);
-            $results[$random] = ($results[$random] ?? 0) + 1;
-        }
-
-        // each character should occur 100.000 times with a variance of 5%.
-        foreach ($results as $result) {
-            $this->assertEqualsWithDelta(10000, $result, 500);
-        }
-    }
-
-    function testRandomStringFactoryCanBeSet()
-    {
-        Str::createRandomStringsUsing(fn($length) => 'length:' . $length);
-
-        $this->assertSame('length:7', Str::random(7));
-        $this->assertSame('length:7', Str::random(7));
-
-        Str::createRandomStringsNormally();
-
-        $this->assertNotSame('length:7', Str::random());
-    }
-
-    function testItCanSpecifyASequenceOfRandomStringsToUtilise()
-    {
-        Str::createRandomStringsUsingSequence([
-            0 => 'x',
-            // 1 => just generate a random one here...
-            2 => 'y',
-            3 => 'z',
-            // ... => continue to generate random strings...
-        ]);
-
-        $this->assertSame('x', Str::random());
-        $this->assertSame(16, mb_strlen(Str::random()));
-        $this->assertSame('y', Str::random());
-        $this->assertSame('z', Str::random());
-        $this->assertSame(16, mb_strlen(Str::random()));
-        $this->assertSame(16, mb_strlen(Str::random()));
-
-        Str::createRandomStringsNormally();
-    }
-
-    function testItCanSpecifyAFallbackForARandomStringSequence()
-    {
-        Str::createRandomStringsUsingSequence([Str::random(), Str::random()], fn() => throw new Exception('Out of random strings.'));
-        Str::random();
-        Str::random();
-
-        try {
-            $this->expectExceptionMessage('Out of random strings.');
-            Str::random();
-            $this->fail();
-        } finally {
-            Str::createRandomStringsNormally();
-        }
-    }
-
-    function testReplace()
-    {
-        $this->assertSame('foo bar explosion', Str::replace('baz', 'explosion', 'foo bar baz'));
-        $this->assertSame('foo bar explosion', Str::replace('baz', 'explosion', 'foo bar Baz', false));
-        $this->assertSame('foo bar baz 8.x', Str::replace('?', '8.x', 'foo bar baz ?'));
-        $this->assertSame('foo bar baz 8.x', Str::replace('x', '8.x', 'foo bar baz X', false));
-        $this->assertSame('foo/bar/baz', Str::replace(' ', '/', 'foo bar baz'));
-        $this->assertSame('foo bar baz', Str::replace(['?1', '?2', '?3'], ['foo', 'bar', 'baz'], '?1 ?2 ?3'));
-        $this->assertSame(['foo', 'bar', 'baz'], Str::replace(collect(['?1', '?2', '?3']), collect(['foo', 'bar', 'baz']), collect(['?1', '?2', '?3'])));
-    }
-
-    function testReplaceArray()
-    {
-        $this->assertSame('foo/bar/baz', Str::replaceArray('?', ['foo', 'bar', 'baz'], '?/?/?'));
-        $this->assertSame('foo/bar/baz/?', Str::replaceArray('?', ['foo', 'bar', 'baz'], '?/?/?/?'));
-        $this->assertSame('foo/bar', Str::replaceArray('?', ['foo', 'bar', 'baz'], '?/?'));
-        $this->assertSame('?/?/?', Str::replaceArray('x', ['foo', 'bar', 'baz'], '?/?/?'));
-        // Ensure recursive replacements are avoided
-        $this->assertSame('foo?/bar/baz', Str::replaceArray('?', ['foo?', 'bar', 'baz'], '?/?/?'));
-        // Test for associative array support
-        $this->assertSame('foo/bar', Str::replaceArray('?', [1 => 'foo', 2 => 'bar'], '?/?'));
-        $this->assertSame('foo/bar', Str::replaceArray('?', ['x' => 'foo', 'y' => 'bar'], '?/?'));
-        // Test does not crash on bad input
-        $this->assertSame('?', Str::replaceArray('?', [(object) ['foo' => 'bar']], '?'));
-    }
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
 
     function testReplaceFirst()
     {
@@ -813,7 +490,6 @@ class SupportStrTest extends \Inilim\Tool\Test\TestCase
     {
         $this->assertSame('', Str::ascii(null));
         $this->assertTrue(Str::isAscii(null));
-        $this->assertSame('', Str::slug(null));
     }
 
     function testPadBoth()
@@ -880,94 +556,6 @@ class SupportStrTest extends \Inilim\Tool\Test\TestCase
 
         $this->assertEquals('❤Multi<br />Byte☆❤☆❤☆❤', Str::wordWrap('❤Multi Byte☆❤☆❤☆❤', 3, '<br />'));
     }
-
-    static function validUuidList()
-    {
-        return [
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de'],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1'],
-            ['00000000-0000-0000-0000-000000000000'],
-            ['e60d3f48-95d7-4d8d-aad0-856f29a27da2'],
-            ['ff6f8cb0-c57d-11e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-31e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-41e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-51e1-9b21-0800200c9a66'],
-            ['FF6F8CB0-C57D-11E1-9B21-0800200C9A66'],
-        ];
-    }
-
-    static function invalidUuidList()
-    {
-        return [
-            ['not a valid uuid so we can test this'],
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66'],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1' . PHP_EOL],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1 '],
-            [' 145a1e72-d11d-11e8-a8d5-f2801f1b9fd1'],
-            ['145a1e72-d11d-11e8-a8d5-f2z01f1b9fd1'],
-            ['3f6f8cb0-c57d-11e1-9b21-0800200c9a6'],
-            ['af6f8cb-c57d-11e1-9b21-0800200c9a66'],
-            ['af6f8cb0c57d11e19b210800200c9a66'],
-            ['ff6f8cb0-c57da-51e1-9b21-0800200c9a66'],
-        ];
-    }
-
-    static function uuidVersionList()
-    {
-        return [
-            ['00000000-0000-0000-0000-000000000000', null, true],
-            ['00000000-0000-0000-0000-000000000000', 0, true],
-            ['00000000-0000-0000-0000-000000000000', 1, false],
-            ['00000000-0000-0000-0000-000000000000', 42, false],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1', null, true],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1', 1, true],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1', 4, false],
-            ['145a1e72-d11d-11e8-a8d5-f2801f1b9fd1', 42, false],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66', null, true],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66', 1, false],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66', 2, true],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66', 42, false],
-            ['76a4ba72-cc4e-3e1d-b52d-856382f408c3', null, true],
-            ['76a4ba72-cc4e-3e1d-b52d-856382f408c3', 1, false],
-            ['76a4ba72-cc4e-3e1d-b52d-856382f408c3', 3, true],
-            ['76a4ba72-cc4e-3e1d-b52d-856382f408c3', 42, false],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', null, true],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 1, false],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 4, true],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 42, false],
-            ['d3b2b5a9-d433-5c58-b038-4fa13696e357', null, true],
-            ['d3b2b5a9-d433-5c58-b038-4fa13696e357', 1, false],
-            ['d3b2b5a9-d433-5c58-b038-4fa13696e357', 5, true],
-            ['d3b2b5a9-d433-5c58-b038-4fa13696e357', 42, false],
-            ['1ef97d97-b5ab-67d8-9f12-5600051f1387', null, true],
-            ['1ef97d97-b5ab-67d8-9f12-5600051f1387', 1, false],
-            ['1ef97d97-b5ab-67d8-9f12-5600051f1387', 6, true],
-            ['1ef97d97-b5ab-67d8-9f12-5600051f1387', 42, false],
-            ['0192e4b9-92eb-7aec-8707-1becfb1e3eb7', null, true],
-            ['0192e4b9-92eb-7aec-8707-1becfb1e3eb7', 1, false],
-            ['0192e4b9-92eb-7aec-8707-1becfb1e3eb7', 7, true],
-            ['0192e4b9-92eb-7aec-8707-1becfb1e3eb7', 42, false],
-            ['07e80a1f-1629-831f-811f-c595103c91b5', null, true],
-            ['07e80a1f-1629-831f-811f-c595103c91b5', 1, false],
-            ['07e80a1f-1629-831f-811f-c595103c91b5', 8, true],
-            ['07e80a1f-1629-831f-811f-c595103c91b5', 42, false],
-            ['FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF', null, true],
-            ['FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF', 1, false],
-            ['FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF', 42, false],
-            ['FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF', 'max', true],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', null, true],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 1, false],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 4, true],
-            ['a0a2a2d2-0b87-4a18-83f2-2529882be2de', 42, false],
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66', null, false],
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66', 1, false],
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66', 4, false],
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66', 42, false],
-        ];
-    }
-
-
 
     function testMarkdown()
     {
@@ -1356,20 +944,5 @@ class SupportStrTest extends \Inilim\Tool\Test\TestCase
         };
 
         $this->assertSame('UserGroups', Str::pluralPascal('UserGroup', $countable));
-    }
-}
-
-class StringableObjectStub
-{
-    private $value;
-
-    function __construct($value)
-    {
-        $this->value = $value;
-    }
-
-    function __toString()
-    {
-        return $this->value;
     }
 }

@@ -12,7 +12,4 @@ class StrState
      * @var callable|null
      */
     var $randomStringFactory;
-    private $internalEncoding = 'UTF-8';
-
-    function getEncoding(?string $encoding): string {}
 }

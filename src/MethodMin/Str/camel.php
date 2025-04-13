@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Str{function camel(string $value):string{return \lcfirst(\Inilim\Tool\Method\Str\studly($value));}if(!\Inilim\Tool\Str::__definedIfNot('replace')){
-    function replace($search,$replace,$subject,bool $caseSensitive=true){return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
+    function replace($search,$replace,$subject,bool $caseSensitive=true){if($search instanceof \Traversable){$search=\iterator_to_array($search);}if($replace instanceof \Traversable){$replace=\iterator_to_array($replace);}if($subject instanceof \Traversable){$subject=\iterator_to_array($subject);}return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
     }if(!\Inilim\Tool\Str::__definedIfNot('studly')){
     function studly(string $value):string{$words=\explode(' ',\Inilim\Tool\Method\Str\replace(['-','_'],' ',$value));$studly_words=\array_map(static fn($word)=>\Inilim\Tool\Method\Str\ucfirst($word),$words);return \implode($studly_words);}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){

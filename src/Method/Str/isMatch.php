@@ -1,18 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str;
 
 /**
  * Determine if a given string matches a given pattern.
- * @param  string|iterable<string>  $patterns
+ * @param  string|iterable<string> $pattern
  * @return bool
  */
-function isMatch($patterns, string $value)
+function isMatch($pattern, string $value)
 {
-    if (!\is_iterable($patterns)) $patterns = [$patterns];
+    if (!\is_iterable($pattern)) {
+        $pattern = [$pattern];
+    }
 
-    foreach ($patterns as $pattern) {
-        if (\preg_match((string) $pattern, $value) === 1) return true;
+    foreach ($pattern as $pattern) {
+        if (\preg_match((string) $pattern, $value) === 1) {
+            return true;
+        }
     }
 
     return false;

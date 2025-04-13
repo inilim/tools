@@ -1,8 +1,8 @@
 <?php
 
-namespace Inilim\Tool\Method\Str;
+declare(strict_types=1);
 
-\Inilim\Tool\Str::__include('__endsWith');
+namespace Inilim\Tool\Method\Str;
 
 /**
  * Remove the given string(s) if it exists at the end of the haystack.

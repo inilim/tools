@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str;
 
 /**
@@ -8,7 +10,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function cyrillicTranslit(string $str)
 {
-    $str = \_str()->lower($str);
+    $str = \Inilim\Tool\Method\Str\lower($str);
     $str = \preg_replace('#[^а-яёa-z\s0-9\_\-]#u', '', $str);
     $arr = [
         'а' => 'a',

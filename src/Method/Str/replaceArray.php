@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str;
 
 /**
@@ -8,10 +10,15 @@ namespace Inilim\Tool\Method\Str;
  * $string = 'The event will take place between ? and ?'; |
  * $replaced = Str::replaceArray('?', ['8:30', '9:00'], $string); |
  *
- * @param  string[] $replace
+ * @param iterable<string> $replace
+ * @return string
  */
-function replaceArray(string $search, array $replace, string $subject): string
+function replaceArray(string $search, $replace, string $subject)
 {
+    if ($replace instanceof \Traversable) {
+        $replace = \iterator_to_array($replace);
+    }
+
     $segments = \explode($search, $subject);
     $result   = \array_shift($segments);
 

@@ -112,6 +112,12 @@ class Str
     static function convertCase(string $string, int $mode = \MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
 
         /**
+ * Indicate that random strings should be created normally and not using a custom factory.
+ * @return void
+ */
+    static function createRandomStringsNormally() {}
+
+        /**
  * Set the callable that will be used to generate random strings.
  * @return void
  */
@@ -121,7 +127,7 @@ class Str
  * Set the sequence that will be used to generate random strings.
  * @return void
  */
-    static function createRandomStringsUsingSequence(array $sequence, ?callable $when_missing = null) {}
+    static function createRandomStringsUsingSequence(array $sequence, ?callable $whenMissing = null) {}
 
         /**
  * Replace consecutive instances of a given character with a single character in the given string.
@@ -191,8 +197,9 @@ class Str
 
         /**
  * Convert the given string to proper case for each word.
+ * @return string
  */
-    static function headline(string $value): string {}
+    static function headline(string $value) {}
 
         /**
  * @param string|iterable<string> $needles
@@ -211,14 +218,14 @@ class Str
  * @param  string|iterable<string>  $pattern
  * @return bool
  */
-    static function is($pattern, string $value) {}
+    static function is($pattern, string $value, $ignoreCase = false) {}
 
         /**
  * Determine if a given string matches a given pattern.
- * @param  string|iterable<string>  $patterns
+ * @param  string|iterable<string> $pattern
  * @return bool
  */
-    static function isMatch($patterns, string $value) {}
+    static function isMatch($pattern, string $value) {}
 
         /**
  * @return bool
@@ -234,8 +241,9 @@ class Str
 
         /**
  * Convert a string to kebab case.
+ * @return string
  */
-    static function kebab(string $value): string {}
+    static function kebab(string $value) {}
 
         /**
  * Make a string's first character lowercase.
@@ -299,8 +307,10 @@ class Str
 
         /**
  * Remove all non-numeric characters from a string.
+ * @param string[]|string $value
+ * @return ($value is string ? string : string[])
  */
-    static function numbers(string $value): string {}
+    static function numbers($value) {}
 
         /**
  * Pad both sides of a string with another.
@@ -373,10 +383,10 @@ class Str
 
         /**
  * Replace the given value in the given string.
- * @param  string|string[]  $search
- * @param  string|string[]  $replace
- * @param  string|string[]  $subject
- * @return string|string[]
+ * @param string|iterable<string> $search
+ * @param string|iterable<string> $replace
+ * @param string|iterable<string> $subject
+ * @return ($subject is string ? string : string[])
  */
     static function replace($search, $replace, $subject, bool $caseSensitive = true) {}
 
@@ -386,9 +396,10 @@ class Str
  * $string = 'The event will take place between ? and ?'; |
  * $replaced = Str::replaceArray('?', ['8:30', '9:00'], $string); |
  *
- * @param  string[] $replace
+ * @param iterable<string> $replace
+ * @return string
  */
-    static function replaceArray(string $search, array $replace, string $subject): string {}
+    static function replaceArray(string $search, $replace, string $subject) {}
 
         /**
  * Replace the last occurrence of a given value if it appears at the end of the string.
@@ -434,8 +445,9 @@ class Str
 
         /**
  * Convert a string to snake case.
+ * @return string
  */
-    static function snake(string $value, string $delimiter = '_'): string {}
+    static function snake(string $value, string $delimiter = '_') {}
 
         /**
  * Remove all "extra" blank space from the given string.

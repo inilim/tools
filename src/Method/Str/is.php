@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Str;
 
 /**
@@ -7,9 +9,11 @@ namespace Inilim\Tool\Method\Str;
  * @param  string|iterable<string>  $pattern
  * @return bool
  */
-function is($pattern, string $value)
+function is($pattern, string $value, $ignoreCase = false)
 {
-    if (!\is_iterable($pattern)) $pattern = [$pattern];
+    if (!\is_iterable($pattern)) {
+        $pattern = [$pattern];
+    }
 
     foreach ($pattern as $pattern) {
         $pattern = (string) $pattern;
@@ -17,7 +21,13 @@ function is($pattern, string $value)
         // If the given value is an exact match we can of course return true right
         // from the beginning. Otherwise, we will translate asterisks and do an
         // actual pattern match against the two strings to see if they match.
-        if ($pattern === $value) return true;
+        if ($pattern === '*' || $pattern === $value) {
+            return true;
+        }
+
+        if ($ignoreCase && \mb_strtolower($pattern) === \mb_strtolower($value)) {
+            return true;
+        }
 
         $pattern = \preg_quote($pattern, '#');
 
@@ -26,7 +36,9 @@ function is($pattern, string $value)
         // pattern such as "library/*", making any string check convenient.
         $pattern = \str_replace('\*', '.*', $pattern);
 
-        if (\preg_match('#^' . $pattern . '\z#u', $value) === 1) return true;
+        if (\preg_match('#^' . $pattern . '\z#' . ($ignoreCase ? 'isu' : 'su'), $value) === 1) {
+            return true;
+        }
     }
 
     return false;
