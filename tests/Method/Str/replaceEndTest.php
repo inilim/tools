@@ -1,0 +1,23 @@
+<?php
+
+namespace Inilim\Tool\Test\Method\Str;
+
+use Inilim\Tool\Str;
+use Inilim\Tool\Test\TestCase;
+
+class replaceEndTest extends TestCase
+{
+    function test()
+    {
+        $this->assertSame('foobar fooqux', Str::replaceEnd('bar', 'qux', 'foobar foobar'));
+        $this->assertSame('foo/bar? foo/qux?', Str::replaceEnd('bar?', 'qux?', 'foo/bar? foo/bar?'));
+        $this->assertSame('foobar foo', Str::replaceEnd('bar', '', 'foobar foobar'));
+        $this->assertSame('foobar foobar', Str::replaceEnd('xxx', 'yyy', 'foobar foobar'));
+        $this->assertSame('foobar foobar', Str::replaceEnd('', 'yyy', 'foobar foobar'));
+        $this->assertSame('fooxxx foobar', Str::replaceEnd('xxx', 'yyy', 'fooxxx foobar'));
+
+        // // Test for multibyte string support
+        $this->assertSame('Malmö Jönköping', Str::replaceEnd('ö', 'xxx', 'Malmö Jönköping'));
+        $this->assertSame('Malmö Jönkyyy', Str::replaceEnd('öping', 'yyy', 'Malmö Jönköping'));
+    }
+}

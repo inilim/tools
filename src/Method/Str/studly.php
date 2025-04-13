@@ -6,15 +6,17 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Convert a value to studly caps case.
+ * @return string
  */
-function studly(string $value): string
+function studly(string $value)
 {
     $words = \explode(' ', \Inilim\Tool\Method\Str\replace(['-', '_'], ' ', $value));
 
-    $studly_words = \array_map(
-        static fn($word) => \Inilim\Tool\Method\Str\ucfirst($word),
+    // @deps(\Inilim\Tool\Method\Str\ucfirst)
+    $studlyWords = \array_map(
+        '\Inilim\Tool\Method\Str\ucfirst',
         $words
     );
 
-    return \implode($studly_words);
+    return \implode($studlyWords);
 }

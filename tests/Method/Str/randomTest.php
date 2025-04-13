@@ -64,7 +64,9 @@ class randomTest extends TestCase
 
     function testItCanSpecifyAFallbackForARandomStringSequence()
     {
-        Str::createRandomStringsUsingSequence([Str::random(), Str::random()], static fn() => throw new \Exception('Out of random strings.'));
+        Str::createRandomStringsUsingSequence([Str::random(), Str::random()], static function () {
+            throw new \Exception('Out of random strings.');
+        });
         Str::random();
         Str::random();
 

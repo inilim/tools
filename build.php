@@ -320,7 +320,6 @@ if ($switch || false) {
         foreach ($methods as $idx => $method) {
             unset($methods[$idx]);
             // d('method: ' . $method['name']);
-
             // de($method['code']);
 
             // ---------------------------------------------
@@ -331,6 +330,27 @@ if ($switch || false) {
             $depsAs = [
                 \sprintf('%s\%s', $method['namespace'], $method['name']),
             ];
+
+            // ---------------------------------------------
+            // Берем зависимости из doc блока "@deps(...)"
+            // ---------------------------------------------
+
+            if (\str_contains($method['code_raw'], '@deps(')) {
+
+                \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $method['code_raw'], $depsMatches);
+
+                if (!$depsMatches) {
+                    de([
+                        __LINE__,
+                        '$method'    => $method,
+                    ]);
+                }
+
+                $depsMatches = $depsMatches[1];
+                $depsMatches = \array_map(static fn($d) => \trim($d, '\\'), $depsMatches);
+                $depsAs      = \array_merge($depsAs, $depsMatches);
+                unset($depsMatches);
+            }
 
             while (true) {
 
@@ -419,27 +439,6 @@ if ($switch || false) {
             // de($deps);
 
             if (!$deps) continue;
-
-            // ---------------------------------------------
-            // Берем зависимости из doc блока "@deps(...)"
-            // ---------------------------------------------
-
-            if (\str_contains($method['code_raw'], '@deps(')) {
-
-                \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $method['code_raw'], $depsMatches);
-
-                if (!$depsMatches) {
-                    de([
-                        __LINE__,
-                        '$method'    => $method,
-                    ]);
-                }
-
-                $depsMatches = $depsMatches[1];
-                $depsMatches = \array_map(static fn($d) => \trim($d, '\\'), $depsMatches);
-                $deps        = \array_merge($deps, $depsMatches);
-                unset($depsMatches);
-            }
 
             // ---------------------------------------------
             // Добавляем в БД группу зависимостей

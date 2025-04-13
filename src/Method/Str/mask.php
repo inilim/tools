@@ -6,14 +6,19 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Masks a portion of a string with a repeated character.
+ * @return string
  */
-function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string
+function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8')
 {
-    if ($character === '') return $string;
+    if ($character === '') {
+        return $string;
+    }
 
     $segment = \mb_substr($string, $index, $length, $encoding);
 
-    if ($segment === '') return $string;
+    if ($segment === '') {
+        return $string;
+    }
 
     $strlen = \mb_strlen($string, $encoding);
     $startIndex = $index;

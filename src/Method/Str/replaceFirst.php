@@ -6,10 +6,13 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Replace the first occurrence of a given value in the string.
+ * @return string
  */
-function replaceFirst(string $search, string $replace, string $subject): string
+function replaceFirst(string $search, string $replace, string $subject)
 {
-    if ($search === '') return $subject;
+    if ($search === '') {
+        return $subject;
+    }
 
     $position = \strpos($subject, $search);
 

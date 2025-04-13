@@ -6,8 +6,9 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Convert a value to camel case.
+ * @return string
  */
-function camel(string $value): string
+function camel(string $value)
 {
     return \lcfirst(\Inilim\Tool\Method\Str\studly($value));
 }

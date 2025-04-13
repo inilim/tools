@@ -13,7 +13,9 @@ namespace Inilim\Tool\Method\Str;
 function ltrim($value, $charlist = null)
 {
     if ($charlist === null) {
-        return \preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}]+~u', '', $value) ?? \ltrim($value);
+        $ltrimDefaultCharacters = " \n\r\t\v\0";
+
+        return \preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}' . $ltrimDefaultCharacters . ']+~u', '', $value) ?? \ltrim($value);
     }
 
     return \ltrim($value, $charlist);

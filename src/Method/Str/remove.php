@@ -6,14 +6,19 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Remove any occurrence of the given string in the subject.
- * 
- * @template Subj of string|string[]
- * @param string|string[] $search
- * @param Subj $subject
- * @return Subj
+ * @param string|iterable<string> $search
+ * @param string|iterable<string> $subject
+ * @return ($subject is string ? string : string[])
  */
 function remove($search, $subject, bool $caseSensitive = true)
 {
+    if ($search instanceof \Traversable) {
+        $search = \iterator_to_array($search);
+    }
+    if ($subject instanceof \Traversable) {
+        $subject = \iterator_to_array($subject);
+    }
+
     return $caseSensitive
         ? \str_replace($search, '', $subject)
         : \str_ireplace($search, '', $subject);

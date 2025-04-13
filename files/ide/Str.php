@@ -16,8 +16,9 @@ class Str
 
         /**
  * Get the string matching the given pattern.
+ * @return string
  */
-    static function _match(string $pattern, string $subject): string {}
+    static function _match(string $pattern, string $subject) {}
 
         /**
  * @return bool
@@ -64,8 +65,9 @@ class Str
 
         /**
  * Convert a value to camel case.
+ * @return string
  */
-    static function camel(string $value): string {}
+    static function camel(string $value) {}
 
         /**
  * mb_strcasecmp
@@ -233,13 +235,6 @@ class Str
     static function isMobile(string $useragent) {}
 
         /**
- * Determine if a given value is a valid UUID.
- * @param mixed $value
- * @return bool
- */
-    static function isUuid($value) {}
-
-        /**
  * Convert a string to kebab case.
  * @return string
  */
@@ -292,8 +287,9 @@ class Str
 
         /**
  * Masks a portion of a string with a repeated character.
+ * @return string
  */
-    static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string {}
+    static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8') {}
 
         /**
  * @return string
@@ -363,11 +359,9 @@ class Str
 
         /**
  * Remove any occurrence of the given string in the subject.
- * 
- * @template Subj of string|string[]
- * @param string|string[] $search
- * @param Subj $subject
- * @return Subj
+ * @param string|iterable<string> $search
+ * @param string|iterable<string> $subject
+ * @return ($subject is string ? string : string[])
  */
     static function remove($search, $subject, bool $caseSensitive = true) {}
 
@@ -403,18 +397,21 @@ class Str
 
         /**
  * Replace the last occurrence of a given value if it appears at the end of the string.
+ * @return string
  */
-    static function replaceEnd(string $search, string $replace, string $subject): string {}
+    static function replaceEnd(string $search, string $replace, string $subject) {}
 
         /**
  * Replace the first occurrence of a given value in the string.
+ * @return string
  */
-    static function replaceFirst(string $search, string $replace, string $subject): string {}
+    static function replaceFirst(string $search, string $replace, string $subject) {}
 
         /**
  * Replace the last occurrence of a given value in the string.
+ * @return string
  */
-    static function replaceLast(string $search, string $replace, string $subject): string {}
+    static function replaceLast(string $search, string $replace, string $subject) {}
 
         /**
  * Replace the patterns matching the given regular expression.
@@ -426,13 +423,15 @@ class Str
 
         /**
  * Replace the first occurrence of the given value if it appears at the start of the string.
+ * @return string
  */
-    static function replaceStart(string $search, string $replace, string $subject): string {}
+    static function replaceStart(string $search, string $replace, string $subject) {}
 
         /**
  * Reverse the given string.
+ * @return string
  */
-    static function reverse(string $value): string {}
+    static function reverse(string $value) {}
 
         /**
  * Remove all whitespace from the end of a string.
@@ -469,8 +468,9 @@ class Str
 
         /**
  * Convert a value to studly caps case.
+ * @return string
  */
-    static function studly(string $value): string {}
+    static function studly(string $value) {}
 
         /**
  * Returns the portion of the string specified by the start and length parameters.
@@ -510,6 +510,15 @@ class Str
     static function title(string $value): string {}
 
         /**
+ * @author laravel
+ * Converts a string to array using the first found separator from the provided list.
+ * @param string $string  The input string to convert
+ * @param array $separators  List of possible separators to check
+ * @return string[]
+ */
+    static function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']) {}
+
+        /**
  * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
  */
     static function toCharsGenerator() {}
@@ -540,8 +549,9 @@ class Str
 
         /**
  * Make a string's first character uppercase.
+ * @return string
  */
-    static function ucfirst(string $string): string {}
+    static function ucfirst(string $string) {}
 
         /**
  * Split a string into pieces by uppercase characters.
