@@ -19,23 +19,7 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
-
-
-
-
-$parser = (new \PhpParser\ParserFactory())->createForHostVersion();
-
-$ast = $parser->parse('
-<?php
-function aaa($name)
-{
-    // dakwjdkawdklj
-    echo "Привет ", $name, "\n";
-    // 2312321
-}
-');
-
-de($ast);
+// de(get_included_files());
 // __include('Exp::hashFile');
 class C
 {

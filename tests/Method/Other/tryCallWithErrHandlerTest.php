@@ -53,9 +53,9 @@ class tryCallWithErrHandlerTest extends TestCase
         // ---------------------------------------------
 
         Other::tryCallWithErrHandler(
-            static function ($stdClass)  use ($self) {
+            static function ($stdClass) use ($self) {
                 $self->assertInstanceOf(\stdClass::class, $stdClass);
-                $self->$stdClass->testProp = 'Hello';
+                $stdClass->testProp = 'Hello';
 
                 \trigger_error('ERROR', \E_USER_ERROR);
 

@@ -9,6 +9,8 @@ use ReflectionClass;
 use Ramsey\Uuid\UuidInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 
+// @see https://github.com/laravel/framework/blob/12.x/tests/Support/SupportStrTest.php
+
 class SupportStrTest extends \Inilim\Tool\Test\TestCase
 {
     function testParseCallback()

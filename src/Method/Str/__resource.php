@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function __resource(string $name)
 {
-    if (\is_file($name = __DIR__ . '/../../files/resources/str/' . $name . '.php')) {
+    if (\is_file($name = __DIR__ . '/../../../files/resources/str/' . $name . '.php')) {
         return require $name;
     }
 

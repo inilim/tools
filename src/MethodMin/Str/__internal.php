@@ -1,0 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Str;
+
+function __internal(){static $o=null;return $o ?? new class{};}

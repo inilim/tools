@@ -19,18 +19,18 @@ class containsTest extends TestCase
     static function data()
     {
         return [
-            ['Hello', 'ylo', true, true],
-            ['Hello', 'ylo', true, false],
-            ['Hello', 'hello', true, true],
-            ['Hello', 'hello', false, false],
-            ['Hello', ['ylo'], true, true],
-            ['Hello', ['ylo'], true, false],
-            ['Hello', ['xxx', 'ylo'], true, true],
-            // ['Hello', collect(['xxx', 'ylo']), true, true],
-            ['Hello', ['xxx', 'ylo'], true, false],
-            ['Hello', 'xxx', false],
-            ['Hello', ['xxx'], false],
-            ['Hello', '', false],
+            ['Taylor', 'ylo', true, true],
+            ['Taylor', 'ylo', true, false],
+            ['Taylor', 'taylor', true, true],
+            ['Taylor', 'taylor', false, false],
+            ['Taylor', ['ylo'], true, true],
+            ['Taylor', ['ylo'], true, false],
+            ['Taylor', ['xxx', 'ylo'], true, true],
+            // ['Taylor', collect(['xxx', 'ylo']), true, true],
+            ['Taylor', ['xxx', 'ylo'], true, false],
+            ['Taylor', 'xxx', false],
+            ['Taylor', ['xxx'], false],
+            ['Taylor', '', false],
             ['', '', false],
         ];
     }
