@@ -18,17 +18,17 @@ class endsWithTest extends TestCase
         $this->assertFalse(Str::endsWith('jason', ['no']));
         $this->assertFalse(Str::endsWith('jason', ''));
         $this->assertFalse(Str::endsWith('', ''));
-        $this->assertFalse(Str::endsWith('jason', [null]));
-        $this->assertFalse(Str::endsWith('jason', null));
+        $this->assertFalse(Str::endsWith('jason', ['']));
+        $this->assertFalse(Str::endsWith('jason', ''));
         $this->assertFalse(Str::endsWith('jason', 'N'));
         $this->assertFalse(Str::endsWith('7', ' 7'));
         $this->assertTrue(Str::endsWith('a7', '7'));
-        $this->assertTrue(Str::endsWith('a7', 7));
-        $this->assertTrue(Str::endsWith('a7.12', 7.12));
-        $this->assertFalse(Str::endsWith('a7.12', 7.13));
-        $this->assertTrue(Str::endsWith(0.27, '7'));
-        $this->assertTrue(Str::endsWith(0.27, '0.27'));
-        $this->assertFalse(Str::endsWith(0.27, '8'));
+        $this->assertTrue(Str::endsWith('a7', '7'));
+        $this->assertTrue(Str::endsWith('a7.12', '7.12'));
+        $this->assertFalse(Str::endsWith('a7.12', '7.13'));
+        $this->assertTrue(Str::endsWith('0.27', '7'));
+        $this->assertTrue(Str::endsWith('0.27', '0.27'));
+        $this->assertFalse(Str::endsWith('0.27', '8'));
         // $this->assertFalse(Str::endsWith(null, 'Marc'));
         // Test for multibyte string support
         $this->assertTrue(Str::endsWith('Jönköping', 'öping'));

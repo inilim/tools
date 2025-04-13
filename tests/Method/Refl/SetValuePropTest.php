@@ -8,7 +8,9 @@ use PHPUnit\Framework\Attributes\Group;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-#[Group('inactive')]
+/**
+ * @group inactive
+ */
 class SetValuePropTest extends TestCase
 {
     /**

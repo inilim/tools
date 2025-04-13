@@ -166,9 +166,9 @@ if ($switch || false) {
     ) {
 
         $sqlAddMethod = 'INSERT INTO methods
-            (name,code,code_with_ns,namespace,path_to_file)
+            (name,code,code_raw,namespace,path_to_file)
             VALUES
-            ({name},{code},{code_with_ns},{namespace},{path_to_file});';
+            ({name},{code},{code_raw},{namespace},{path_to_file});';
 
         // ---------------------------------------------
         // 
@@ -217,6 +217,7 @@ if ($switch || false) {
                 // INFO парсим
                 // ---------------------------------------------
 
+                $code_raw = $code;
                 try {
                     $ast = $parser->parse($code);
                 } catch (\Throwable $e) {
@@ -225,12 +226,6 @@ if ($switch || false) {
                         $e->getMessage(),
                     ]);
                 }
-
-                // ---------------------------------------------
-                // Очистка функций от внутренних комментариев
-                // ---------------------------------------------
-
-                $ast = $traverser->traverse($ast);
 
                 // ---------------------------------------------
                 // Ищем функцию
@@ -245,28 +240,21 @@ if ($switch || false) {
                 }
 
                 // ---------------------------------------------
-                // чистим функцию от комментариев
+                // Очистка функций от внутренних комментариев
                 // ---------------------------------------------
 
-                $function->setDocComment(new \PhpParser\Comment\Doc(''));
+                [$function] = $traverser->traverse([$function]);
 
                 // ------------------------------------------------------------------
                 // 
                 // ------------------------------------------------------------------
 
                 $code = $pretty->prettyPrint([$function]);
-                $codeNs = \sprintf(
-                    'namespace %s { %s }',
-                    $linksNamespace[$toolNamespace],
-                    $code
-                );
 
                 // ---------------------------------------------
                 // минифицируем код
                 // ---------------------------------------------
 
-                $codeNs = $phpCodeMinifier->minifyString('<?php ' . $codeNs);
-                $codeNs = \replaceFirst('<?php ', '', $codeNs);
                 $code   = $phpCodeMinifier->minifyString('<?php ' . $code);
                 $code   = \replaceFirst('<?php ', '', $code);
 
@@ -277,7 +265,7 @@ if ($switch || false) {
                 $dbDev->exec($sqlAddMethod, [
                     'name'         => $name,
                     'code'         => $code,
-                    'code_with_ns' => $codeNs,
+                    'code_raw'     => $code_raw,
                     'namespace'    => $linksNamespace[$toolNamespace],
                     'path_to_file' => $pathToFile,
                 ]);
@@ -433,6 +421,27 @@ if ($switch || false) {
             if (!$deps) continue;
 
             // ---------------------------------------------
+            // Берем зависимости из doc блока "@deps(...)"
+            // ---------------------------------------------
+
+            if (\str_contains($method['code_raw'], '@deps(')) {
+
+                \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $method['code_raw'], $depsMatches);
+
+                if (!$depsMatches) {
+                    de([
+                        __LINE__,
+                        '$method'    => $method,
+                    ]);
+                }
+
+                $depsMatches = $depsMatches[1];
+                $depsMatches = \array_map(static fn($d) => \trim($d, '\\'), $depsMatches);
+                $deps        = \array_merge($deps, $depsMatches);
+                unset($depsMatches);
+            }
+
+            // ---------------------------------------------
             // Добавляем в БД группу зависимостей
             // ---------------------------------------------
 
@@ -462,7 +471,7 @@ if ($switch || false) {
                         'Не удалось добавить запись для groups',
                     ]);
                 }
-            } // endforeach
+            } // endforeach $deps
 
             if (!$dbDev->commit()) {
                 de([
@@ -478,7 +487,7 @@ if ($switch || false) {
             // ---------------------------------------------
 
             $groupID++;
-        } // endforeach
+        } // endforeach $methods
 
         // ---------------------------------------------
         // 

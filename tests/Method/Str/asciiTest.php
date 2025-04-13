@@ -6,7 +6,9 @@ use Inilim\Tool\Str;
 use Inilim\Tool\Test\TestCase;
 use PHPUnit\Framework\Attributes\Group;
 
-#[Group('inactive')]
+/**
+ * @group inactive
+ */
 class asciiTest extends TestCase
 {
     function testStringAscii(): void

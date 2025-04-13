@@ -3,7 +3,7 @@ CREATE TABLE methods (
                       NOT NULL,
     name      TEXT    NOT NULL,
     code      TEXT    NOT NULL,
-    code_with_ns TEXT NOT NULL,
+    code_raw     TEXT NOT NULL,
     namespace TEXT    NOT NULL,
     path_to_file TEXT NOT NULL
 );

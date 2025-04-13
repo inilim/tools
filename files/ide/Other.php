@@ -28,6 +28,7 @@ class Other
     static function compareViaOperator($left, string $operator, $right) {}
 
         /**
+ * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
  * @return ?object
  */

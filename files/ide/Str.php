@@ -107,8 +107,9 @@ class Str
 
         /**
  * Convert the case of a string.
+ * @return string
  */
-    static function convertCase(string $string, int $mode = \MB_CASE_FOLD, ?string $encoding = 'UTF-8'): string {}
+    static function convertCase(string $string, int $mode = \MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
 
         /**
  * Set the callable that will be used to generate random strings.
