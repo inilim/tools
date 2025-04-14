@@ -7,7 +7,7 @@ use Inilim\Tool\Test\TestCase;
 
 class isTest extends TestCase
 {
-    function testIs()
+    function test()
     {
         $this->assertTrue(Str::is('/', '/'));
         $this->assertFalse(Str::is('/', ' /'));

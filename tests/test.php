@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 require_once __DIR__ . '/bootstrap.php';
 
 use Inilim\Tool\Arr;
@@ -19,8 +20,42 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
+$multilineValue = <<<'VALUE'
+        <?php
+
+        namespace Illuminate\Tests\Support;
+
+        use Exception;
+        VALUE;
+dde($multilineValue);
+
 // de(get_included_files());
-// __include('Exp::hashFile');
+// __include('Str::ltrim');
+// $a = Str::excerpt('This is a beautiful morning', 'beautiful', ['radius' => 5]);
+// Str::excerpt('This is a beautiful morning', 'beautiful', ['radius' => 5]);
+// Str::excerpt('This is a beautiful morning', 'this', ['radius' => 5]);
+// Str::excerpt('This is a beautiful morning', 'morning', ['radius' => 5]);
+// Str::excerpt('This is a beautiful morning', 'day');
+// Str::excerpt('This is a beautiful! morning', 'Beautiful', ['radius' => 5]);
+// Str::excerpt('This is a beautiful? morning', 'beautiful', ['radius' => 5]);
+// Str::excerpt('', '', ['radius' => 0]);
+// Str::excerpt('a', 'a', ['radius' => 0]);
+// Str::excerpt('abc', 'B', ['radius' => 0]);
+// Str::excerpt('abc', 'b', ['radius' => 1]);
+// Str::excerpt('abcd', 'b', ['radius' => 1]);
+// Str::excerpt('zabc', 'b', ['radius' => 1]);
+// Str::excerpt('zabcd', 'b', ['radius' => 1]);
+// Str::excerpt('zabcd', 'b', ['radius' => 2]);
+// Str::excerpt('  zabcd  ', 'b', ['radius' => 4]);
+// Str::excerpt('z  abc  d', 'b', ['radius' => 1]);
+// Str::excerpt('This is a beautiful morning', 'beautiful', ['omission' => '[...]', 'radius' => 5]);
+// Str::excerpt(
+//     'This is the ultimate supercalifragilisticexpialidocious very looooooooooooooooooong looooooooooooong beautiful morning with amazing sunshine and awesome temperatures. So what are you gonna do about it?',
+//     'very',
+//     ['omission' => '[...]'],
+// );
+
+dde();
 class C
 {
     public function aaa($name)

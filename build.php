@@ -48,6 +48,25 @@ function replaceFirst(string $search, string $replace, string $subject): string
     return $subject;
 }
 
+function getDepsFromDoc(string $codeRaw): array
+{
+    if (\str_contains($codeRaw, '@deps(')) {
+
+        \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $codeRaw, $depsMatches);
+
+        if (!$depsMatches) {
+            de([
+                __LINE__,
+                '$codeRaw' => $codeRaw,
+            ]);
+        }
+
+        return \array_map(static fn($d) => \trim($d, '\\'), $depsMatches[1]);
+    }
+
+    return [];
+}
+
 // ---------------------------------------------
 // 
 // ---------------------------------------------
@@ -335,22 +354,7 @@ if ($switch || false) {
             // Берем зависимости из doc блока "@deps(...)"
             // ---------------------------------------------
 
-            if (\str_contains($method['code_raw'], '@deps(')) {
-
-                \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $method['code_raw'], $depsMatches);
-
-                if (!$depsMatches) {
-                    de([
-                        __LINE__,
-                        '$method'    => $method,
-                    ]);
-                }
-
-                $depsMatches = $depsMatches[1];
-                $depsMatches = \array_map(static fn($d) => \trim($d, '\\'), $depsMatches);
-                $depsAs      = \array_merge($depsAs, $depsMatches);
-                unset($depsMatches);
-            }
+            $depsAs = \array_merge($depsAs, getDepsFromDoc($method['code_raw']));
 
             while (true) {
 
@@ -421,6 +425,12 @@ if ($switch || false) {
                 $tDeps = \array_column($tDeps, 'name');
                 $tDeps = \array_values($tDeps);
                 /** @var string[] $tDeps */
+
+                // ---------------------------------------------
+                // Берем зависимости из doc блока "@deps(...)"
+                // ---------------------------------------------
+
+                $tDeps = \array_merge($tDeps, getDepsFromDoc($methodDep['code_raw']));
 
                 // ---------------------------------------------
                 // 
