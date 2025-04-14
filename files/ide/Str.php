@@ -279,17 +279,25 @@ class Str
 
         /**
  * Remove all whitespace from the beginning of a string.
- * @param  string  $value
- * @param  string|null  $charlist
  * @return string
  */
-    static function ltrim($value, $charlist = null) {}
+    static function ltrim(string $value, ?string $charlist = null) {}
 
         /**
  * Masks a portion of a string with a repeated character.
  * @return string
  */
     static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8') {}
+
+        /**
+ * @author laravel
+ * Get the string matching the given pattern.
+ *
+ * @param  string  $pattern
+ * @param  string  $subject
+ * @return string[]
+ */
+    static function matchAll(string $pattern, string $subject) {}
 
         /**
  * @return string
@@ -435,12 +443,9 @@ class Str
 
         /**
  * Remove all whitespace from the end of a string.
- *
- * @param  string  $value
- * @param  string|null  $charlist
  * @return string
  */
-    static function rtrim($value, $charlist = null) {}
+    static function rtrim(string $value, ?string $charlist = null) {}
 
         /**
  * Convert a string to snake case.
@@ -468,6 +473,7 @@ class Str
 
         /**
  * Convert a value to studly caps case.
+ * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
  * @return string
  */
     static function studly(string $value) {}

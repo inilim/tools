@@ -18,4 +18,13 @@ class Obj
  */
     static function rewriteLocationException(\Throwable $e, string $file, int $line) {}
 
+        /**
+ * @author mohammadrasoulasghari <https://github.com/mohammadrasoulasghari>
+ * Convert a Traversable to an array, or return the original value if not Traversable.
+ * @template T of mixed
+ * @param T $value
+ * @return ($value is \Traversable ? array : T)
+ */
+    static function toArrayIfTraversable($value) {}
+
     }

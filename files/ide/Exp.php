@@ -5,6 +5,25 @@ namespace Inilim\Tool;
 class Exp
 {
         /**
+ * @author stevebauman <https://github.com/stevebauman>
+ * Extract values from the haystack using the given template pattern.
+ * @return array<string,string>
+ */
+    static function extract(string $haystack, string $pattern) {}
+
+        /**
+ * @author shaedrich <https://github.com/shaedrich>
+ * Formats the input string accodring to the pattern passed in.
+ *
+ * @param  string  $string  the input string
+ * @param  string  $pattern  asterisks will be replaced with the character
+ *                           at the respective position of the input string
+ *                           while other characters will put inserted as
+ *                           is into the output string
+ */
+    static function formatByPattern(string $string, string $pattern) {}
+
+        /**
  * @author nette/utils
  * @author inilim
  * Looks for a string from possibilities that is most similar to value, but not the same (for 8-bit encoding).
@@ -20,6 +39,23 @@ class Exp
  * @throws \Exception
  */
     static function hashFile(string $algo, string $pathToFile, int $byteStart = 1024, int $byteEnd = 1024, bool $binary = false) {}
+
+        /**
+ * @author Ashot1995 <https://github.com/Ashot1995>
+ * @author inilim
+ * @param  string  $value
+ * @param  string  $separator
+ * @return string
+ */
+    static function initials(string $value, string $separator = '') {}
+
+        /**
+ * @author princejohnsantillan <https://github.com/princejohnsantillan>
+ * Interpolate placeholders in a string with mapped values.
+ * @param  array<string,string>  $map
+ * @return string
+ */
+    static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/') {}
 
         /**
  * @todo tests
