@@ -147,4 +147,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/Enum',
         'pathToClass' => $root . '/src/Enum.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\VD',
+        'tool'   => $class = \Inilim\Tool\VD::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/VD',
+        'pathMin'   => $root . '/src/MethodMin/VD',
+        'pathToClass' => $root . '/src/VD.php',
+    ],
 ];

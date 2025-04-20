@@ -12,6 +12,14 @@ class Obj
     static function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, \Throwable $previous = null) {}
 
         /**
+ * @todo tests
+ * @author inilim
+ * @return \RecursiveIteratorIterator<string,\SplFileInfo>
+ * @throws \InvalidArgumentException
+ */
+    static function iteratorFilesRecursive(string $pathToDir, bool $skipDots = true) {}
+
+        /**
  * @template T of \Throwable
  * @param T $e
  * @return T

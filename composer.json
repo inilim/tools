@@ -20,7 +20,10 @@
     "autoload-dev": {
         "psr-4": {
             "Inilim\\Tool\\Test\\": "tests/"
-        }
+        },
+        "files": [
+            "bootstrap.dev.php"
+        ]
     },
     "authors": [
         {

@@ -134,3 +134,7 @@ final class Enum extends LazyMethodAbstract
 {
     protected const NAMESPACE = 'Inilim\Tool\Method\Enum', PATH_TO_DIR = __DIR__ . '/MethodMin/Enum', IDX = 17;
 }
+final class VD extends LazyMethodAbstract
+{
+    protected const NAMESPACE = 'Inilim\Tool\Method\VD', PATH_TO_DIR = __DIR__ . '/MethodMin/VD', IDX = 18;
+}
