@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('dataGetV2')){
     function dataGetV2($target,$key,$default=null){if($key===null){return $target;}if(\is_array($key)||\is_int($key)||!\Inilim\Tool\Method\Str\contains($key,'*')){return \Inilim\Tool\Method\Arr\dataGet($target,$key,$default);}$keys=\Inilim\Tool\Method\Arr\dotKeysByPattern($target,$key);if(!$keys){return \Inilim\Tool\Method\Arr\value($default);}return \Inilim\Tool\Method\Arr\dataGet(\Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target),$keys)),$key,$default);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
-    function dot(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dot($value,$prepend.$key.'.'));}else{$results[$prepend.$key]=$value;}}return $results;}
+    function dot(iterable $array,string $prepend=''){$results=[];$flatten=static function($data,$prefix)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.'.');}else{$results[$newKey]=$value;}}};$flatten($array,$prepend);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeys')){
     function dotKeys(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dotKeys($value,$prepend.$key.'.'));}else{$results[]=$prepend.$key;}}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeysByPattern')){

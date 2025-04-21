@@ -94,6 +94,14 @@ class Json
     static function isJsonSerializable($v, int $flags = 0, int $depth = 512) {}
 
         /**
+ * @author <http://stackoverflow.com/questions/6054033/pretty-printing-json-with-php>
+ * @todo tests
+ * @param string $json A JSON formatted object definition
+ * @return string The nicely formatted JSON definition
+ */
+    static function prettyPrint(string $json) {}
+
+        /**
  * the method does not throw exceptions JsonException, instead it returns the default value
  * 
  * @template T
