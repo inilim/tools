@@ -155,4 +155,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/VD',
         'pathToClass' => $root . '/src/VD.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\Check',
+        'tool'   => $class = \Inilim\Tool\Check::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Check',
+        'pathMin'   => $root . '/src/MethodMin/Check',
+        'pathToClass' => $root . '/src/Check.php',
+    ],
 ];

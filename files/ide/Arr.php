@@ -233,12 +233,30 @@ class Arr
     static function hasValueAny(array $array, $values, bool $strict = false) {}
 
         /**
- * Get the first element of an array. Useful for method chaining.
+ * @author laravel
+ * Return the first element in an array passing a given truth test.
+ * @template TKey
  * @template TValue
- * @param TValue[] $array
- * @return TValue|false
+ * @template TFirstDefault
+ * @param  iterable<TKey, TValue>  $array
+ * @param  (callable(TValue, TKey): bool)|null  $callback
+ * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
+ * @return TValue|TFirstDefault
  */
-    static function head(array $array) {}
+    static function head(iterable $array, ?callable $callback = null, $default = null) {}
+
+        /**
+ * @author laravel
+ * Return the first element in an array passing a given truth test.
+ * @template TKey
+ * @template TValue
+ * @template TFirstDefault
+ * @param  iterable<TKey, TValue>  $array
+ * @param  (callable(TValue, TKey): bool)|null  $callback
+ * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
+ * @return TValue|TFirstDefault
+ */
+    static function first(iterable $array, ?callable $callback = null, $default = null) {}
 
         /**
  * @author nette/utils
@@ -309,12 +327,17 @@ class Arr
     static function keysUpperNestedArray(array $array, int $depth = 1) {}
 
         /**
- * Get the last element from an array.
- * @template TValue of mixed
- * @param array<TValue> $array
- * @return TValue|false
+ * @author laravel
+ * Return the last element in an array passing a given truth test.
+ * @template TKey
+ * @template TValue
+ * @template TLastDefault
+ * @param  iterable<TKey, TValue>  $array
+ * @param  (callable(TValue, TKey): bool)|null  $callback
+ * @param  TLastDefault|(\Closure(): TLastDefault)  $default
+ * @return TValue|TLastDefault
  */
-    static function last(array $array) {}
+    static function last(iterable $array, ?callable $callback = null, $default = null) {}
 
         /**
  * Run a map over each of the items in the array.
@@ -472,6 +495,8 @@ class Arr
     static function select(array $array, $keys) {}
 
         /**
+ * @todo check PR _set()
+ * @author laravel
  * Set an array item to a given value using "dot" notation.
  * If no key is given to the method, the entire array will be replaced.
  * @return \Closure(array &$array, ?string $key, mixed $value):array
@@ -551,6 +576,7 @@ class Arr
     static function toObj(iterable $array, object $object) {}
 
         /**
+ * @todo check PR _undot()
  * Convert a flatten "dot" notation array into an expanded array.
  * @param  iterable  $array
  */

@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Assert;
  */
 function php81(string $message = '')
 {
-    if (\PHP_VERSION_ID >= 80100) {
+    if (\Inilim\Tool\Method\Check\php81()) {
         return;
     }
     throw new \AssertionError($message ?: 'The current version is lower than required "8.1"');

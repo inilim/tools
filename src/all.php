@@ -69,7 +69,7 @@ final class Path extends LazyMethodAbstract
 }
 final class Arr extends LazyMethodAbstract
 {
-    protected const NAMESPACE = 'Inilim\Tool\Method\Arr', PATH_TO_DIR = __DIR__ . '/MethodMin/Arr', IDX = 0;
+    protected const NAMESPACE = 'Inilim\Tool\Method\Arr', PATH_TO_DIR = __DIR__ . '/MethodMin/Arr', IDX = 0, ALIAS = ['head' => 'first'];
 }
 final class Integer extends LazyMethodAbstract
 {
@@ -137,4 +137,8 @@ final class Enum extends LazyMethodAbstract
 final class VD extends LazyMethodAbstract
 {
     protected const NAMESPACE = 'Inilim\Tool\Method\VD', PATH_TO_DIR = __DIR__ . '/MethodMin/VD', IDX = 18;
+}
+final class Check extends LazyMethodAbstract
+{
+    protected const NAMESPACE = 'Inilim\Tool\Method\Check', PATH_TO_DIR = __DIR__ . '/MethodMin/Check', IDX = 19;
 }
