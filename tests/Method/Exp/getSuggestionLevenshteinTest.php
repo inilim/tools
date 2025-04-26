@@ -4,7 +4,6 @@ namespace Inilim\Tool\Test\Method\Exp;
 
 use Inilim\Tool\Exp;
 use Inilim\Tool\Test\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class getSuggestionLevenshteinTest extends TestCase
 {

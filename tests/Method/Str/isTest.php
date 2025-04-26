@@ -76,6 +76,7 @@ class isTest extends TestCase
 
         use Exception;
         VALUE;
+        $multilineValue = Str::unixNewLines($multilineValue);
 
         $this->assertTrue(Str::is($multilineValue, $multilineValue));
         $this->assertTrue(Str::is('*', $multilineValue));
@@ -87,20 +88,20 @@ class isTest extends TestCase
         $this->assertFalse(Str::is('use Exception;', $multilineValue));
         $this->assertFalse(Str::is('use Exception;*', $multilineValue));
         $this->assertTrue(Str::is('*use Exception;', $multilineValue));
-
+        // dde($multilineValue);
         $this->assertTrue(Str::is("<?php\n\nnamespace Illuminate\Tests\*", $multilineValue));
 
-        $this->assertTrue(Str::is(<<<'PATTERN'
+        $this->assertTrue(Str::is(Str::unixNewLines(<<<'PATTERN'
         <?php
         *
         namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
+        PATTERN), $multilineValue));
 
-        $this->assertTrue(Str::is(<<<'PATTERN'
+        $this->assertTrue(Str::is(Str::unixNewLines(<<<'PATTERN'
         <?php
 
         namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
+        PATTERN), $multilineValue));
     }
 }
 

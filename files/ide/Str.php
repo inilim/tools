@@ -448,6 +448,7 @@ class Str
     static function rtrim(string $value, ?string $charlist = null) {}
 
         /**
+ * @todo проблема с php74 preg_replace отдает null из-за модификатора "u"
  * Convert a string to snake case.
  * @return string
  */

@@ -5,7 +5,7 @@ namespace Inilim\Tool\Test\Method\Exp;
 use Inilim\Tool\Exp;
 use Inilim\Tool\Test\TestCase;
 
-class formatByPatternTest extends TestCase
+class extractTest extends TestCase
 {
     function test()
     {

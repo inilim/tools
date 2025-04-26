@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-require_once __DIR__ . '/bootstrap.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
@@ -19,6 +19,26 @@ use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
+
+
+
+
+
+de(get_loaded_extensions(true));
+
+
+
+de();
+__include('Check::php80');
+__include('Str::lower');
+__include('Str::snake');
+__include('Str::kebab');
+
+
+
+dde(\Inilim\Tool\Method\Str\kebab('Laravel ❤ Php Framework'));
+
+de();
 
 $multilineValue = <<<'VALUE'
         <?php

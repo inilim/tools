@@ -28,6 +28,18 @@ class Other
     static function compareViaOperator($left, string $operator, $right) {}
 
         /**
+ * @author inilim
+ * @return bool
+ */
+    static function extPhp(string $ext, bool $rechecking = false) {}
+
+        /**
+ * @author inilim
+ * @return bool
+ */
+    static function funcPhp(string $function, bool $rechecking = false) {}
+
+        /**
  * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
  * @return ?object

@@ -163,4 +163,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/Check',
         'pathToClass' => $root . '/src/Check.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\PF',
+        'tool'   => $class = \Inilim\Tool\PF::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/PF',
+        'pathMin'   => $root . '/src/MethodMin/PF',
+        'pathToClass' => $root . '/src/PF.php',
+    ],
 ];

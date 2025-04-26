@@ -9,6 +9,13 @@ class Check
  * equal to or greater than
  * @return bool
  */
+    static function php74() {}
+
+        /**
+ * @author Inilim
+ * equal to or greater than
+ * @return bool
+ */
     static function php80() {}
 
         /**

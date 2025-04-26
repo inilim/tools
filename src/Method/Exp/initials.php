@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Exp;
 function initials(string $value, string $separator = '')
 {
     $value = \Inilim\Tool\Method\Str\trim($value);
-    $value = \Inilim\Tool\Method\Str\unixNewLines($value, "\s");
+    $value = \Inilim\Tool\Method\Str\unixNewLines($value, " ");
     return \implode($separator, \array_map(
         static fn($word) => \mb_strtoupper(\mb_substr($word, 0, 1, 'UTF-8'), 'UTF-8'),
         \preg_split('/\s+/', $value)

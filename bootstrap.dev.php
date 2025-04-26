@@ -21,7 +21,7 @@ if (!\function_exists('__include')) {
 
         $pathToFile = \sprintf(
             '%s/src/Method/%s/%s.php',
-            \dirname(__DIR__),
+            __DIR__,
             $class,
             $func,
         );
