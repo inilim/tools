@@ -21,7 +21,7 @@ namespace Inilim\Tool\Method\Arr{function dataGetV2($target,$key,$default=null){
     }if(!\Inilim\Tool\Arr::__definedIfNot('only')){
     function only(array $array,$keys):array{return \array_intersect_key($array,\array_flip((array) $keys));}
     }if(!\Inilim\Tool\Arr::__definedIfNot('set')){
-    function set(){if(\func_num_args()!==0){throw new \InvalidArgumentException(__FUNCTION__.'()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,?string $key,$value){if($key===null){return $array=$value;}$keys=\explode('.',$key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
+    function set(){if(\func_num_args()!==0){throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,?string $key,$value){if($key===null){return $array=$value;}$keys=\explode('.',$key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
     }if(!\Inilim\Tool\Arr::__definedIfNot('undot')){
     function undot($array):array{$results=[];$set=\Inilim\Tool\Method\Arr\set();foreach($array as $key=>$value){$set($results,$key,$value);}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){

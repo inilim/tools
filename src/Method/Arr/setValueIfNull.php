@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Arr;
 function setValueIfNull()
 {
     if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+        throw new \InvalidArgumentException('setValueIfNull()(...) <-- The arguments were passed to the wrong place');
     }
     return static function (array &$array, $key, $value) {
         if (\Inilim\Tool\Method\Arr\has($array, $key) && \Inilim\Tool\Method\Arr\get($array, $key) === null) {

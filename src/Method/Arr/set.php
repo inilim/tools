@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
 function set()
 {
     if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+        throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
     }
 
     return static function (array &$array, ?string $key, $value) {
@@ -59,7 +59,7 @@ function set()
 function _set()
 {
     if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+        throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
     }
 
     return static function (array &$array, ?string $key, $value) {

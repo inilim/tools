@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Arr;
 function setValueIfNotExists()
 {
     if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+        throw new \InvalidArgumentException('setValueIfNotExists()(...) <-- The arguments were passed to the wrong place');
     }
     return static function (array &$array, string $key, $value) {
         if (!\Inilim\Tool\Method\Arr\has($array, $key)) {

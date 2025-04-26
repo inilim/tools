@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Arr;
 function insertBefore()
 {
     if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException(__FUNCTION__ . '()(...) <-- The arguments were passed to the wrong place');
+        throw new \InvalidArgumentException('insertBefore()(...) <-- The arguments were passed to the wrong place');
     }
     return static function (array &$array, $key, array $inserted) {
         $offset = $key === null ? 0 : (int) \Inilim\Tool\Method\Arr\getKeyOffset($array, $key);
