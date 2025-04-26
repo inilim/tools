@@ -11,8 +11,5 @@ namespace Inilim\Tool\Method\Check;
  */
 function php84()
 {
-    if (\PHP_VERSION_ID >= 80400) {
-        return true;
-    }
-    return false;
+    return \PHP_VERSION_ID >= 80400 ? true : false;
 }

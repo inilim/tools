@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Path;
 function normalizeName(string $name, string $default = '', string $replacement = '_'): string
 {
     $ext = '';
-    if (\Inilim\Tool\Method\Str\_contains($name, '.')) {
+    if (\Inilim\Tool\Method\PF\str_contains($name, '.')) {
         $name = \Inilim\Tool\Method\Str\beforeLast($name, '.');
         $ext  = \Inilim\Tool\Method\Str\afterLast($name, '.');
     }

@@ -17,6 +17,6 @@ function isInt($value)
     if ($len < \Inilim\Tool\Integer::MAX_LEN_32_BIT) return true;
     if ($len > \Inilim\Tool\Integer::MAX_LEN_32_BIT) return false;
     // длина 10
-    $last = \Inilim\Tool\Method\Str\_startsWith($value, '-') ? 8 : 7;
+    $last = \Inilim\Tool\Method\PF\str_starts_with($value, '-') ? 8 : 7;
     return \Inilim\Tool\Method\Integer\__compare(\str_split(\ltrim($value, '-')), [2, 1, 4, 7, 4, 8, 3, 6, 4, $last]);
 }

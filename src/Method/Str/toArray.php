@@ -20,7 +20,7 @@ function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '
 
     $result = [$string];
     foreach ($separators as $separator) {
-        if (\Inilim\Tool\Method\Str\_contains($string, $separator)) {
+        if (\Inilim\Tool\Method\PF\str_contains($string, $separator)) {
             $result = \explode($separator, $string);
             break; // Exit once we find the first separator
         }

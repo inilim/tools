@@ -13,7 +13,7 @@ function isIntUnsigned($value)
     /** @var int|string $value */
     $value = \strval($value);
     /** @var string $value */
-    if (\Inilim\Tool\Method\Str\_startsWith($value, '-')) return false;
+    if (\Inilim\Tool\Method\PF\str_starts_with($value, '-')) return false;
     $len = \Inilim\Tool\Method\Integer\lenNumeric($value);
     if ($len < \Inilim\Tool\Integer::MAX_LEN_32_BIT) return true;
     if ($len > \Inilim\Tool\Integer::MAX_LEN_32_BIT) return false;

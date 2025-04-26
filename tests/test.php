@@ -23,7 +23,6 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
 
-
 de(get_loaded_extensions(true));
 
 

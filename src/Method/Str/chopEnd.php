@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Str;
 function chopEnd(string $subject, $needle): string
 {
     foreach ((array) $needle as $n) {
-        if (\Inilim\Tool\Method\Str\_endsWith($subject, $n)) {
+        if (\Inilim\Tool\Method\PF\str_ends_with($subject, $n)) {
             return \substr($subject, 0, -\strlen($n));
         }
     }

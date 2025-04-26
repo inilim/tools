@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Str{function iStartsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as&$needle){$needle=\Inilim\Tool\Method\Str\lower($needle);}return \Inilim\Tool\Method\Str\startsWith(\Inilim\Tool\Method\Str\lower($haystack),$needles);}if(!\Inilim\Tool\Str::__definedIfNot('_startsWith')){
-    function _startsWith(string $haystack,string $needle){if(\PHP_VERSION_ID>=80000){return \str_starts_with($haystack,$needle);}return 0===\strncmp($haystack,$needle,\strlen($needle));}
-    }if(!\Inilim\Tool\Str::__definedIfNot('lower')){
+namespace Inilim\Tool\Method\Str{function iStartsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as&$needle){$needle=\Inilim\Tool\Method\Str\lower($needle);}return \Inilim\Tool\Method\Str\startsWith(\Inilim\Tool\Method\Str\lower($haystack),$needles);}if(!\Inilim\Tool\Str::__definedIfNot('lower')){
     function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('startsWith')){
-    function startsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\Str\_startsWith($haystack,$needle)){return true;}}return false;}
+    function startsWith(string $haystack,$needles){if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_starts_with($haystack,$needle)){return true;}}return false;}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
+    function php80(){return \PHP_VERSION_ID>=80000?true:false;}
+    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_starts_with')){
+    function str_starts_with(string $haystack,string $needle){if(\Inilim\Tool\Method\Check\php80()){return \str_starts_with($haystack,$needle);}return 0===\strncmp($haystack,$needle,\strlen($needle));}
     }}

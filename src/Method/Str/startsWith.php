@@ -14,7 +14,7 @@ function startsWith(string $haystack, $needles)
     if (!\is_iterable($needles)) $needles = [$needles];
 
     foreach ($needles as $needle) {
-        if ((string) $needle !== '' && \Inilim\Tool\Method\Str\_startsWith($haystack, $needle)) {
+        if ((string) $needle !== '' && \Inilim\Tool\Method\PF\str_starts_with($haystack, $needle)) {
             return true;
         }
     }

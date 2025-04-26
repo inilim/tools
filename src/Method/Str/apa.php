@@ -47,7 +47,7 @@ function apa(string $value)
     for ($i = 0; $i < \sizeof($words); $i++) {
         $lowercaseWord = \mb_strtolower($words[$i]);
 
-        if (\Inilim\Tool\Method\Str\_contains($lowercaseWord, '-')) {
+        if (\Inilim\Tool\Method\PF\str_contains($lowercaseWord, '-')) {
             $hyphenatedWords = \explode('-', $lowercaseWord);
 
             $hyphenatedWords = \array_map(static function ($part) use ($minorWords) {

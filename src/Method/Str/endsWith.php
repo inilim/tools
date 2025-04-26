@@ -14,7 +14,7 @@ function endsWith(string $haystack, $needles)
     if (!\is_iterable($needles)) $needles = [$needles];
 
     foreach ($needles as $needle) {
-        if ((string) $needle !== '' && \Inilim\Tool\Method\Str\_endsWith($haystack, $needle)) {
+        if ((string) $needle !== '' && \Inilim\Tool\Method\PF\str_ends_with($haystack, $needle)) {
             return true;
         }
     }

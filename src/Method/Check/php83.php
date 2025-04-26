@@ -11,8 +11,5 @@ namespace Inilim\Tool\Method\Check;
  */
 function php83()
 {
-    if (\PHP_VERSION_ID >= 80300) {
-        return true;
-    }
-    return false;
+    return \PHP_VERSION_ID >= 80300 ? true : false;
 }

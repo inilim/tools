@@ -6,6 +6,13 @@ class PF
 {
         /**
  * @author symfony/polyfill
+ * @param callable():bool $callback
+ * @return mixed
+ */
+    static function array_find(array $array, callable $callback) {}
+
+        /**
+ * @author symfony/polyfill
  * Returns TRUE if every character in text is either a letter or a digit, FALSE otherwise.
  * @see https://php.net/ctype-alnum
  * @param mixed $text
@@ -88,5 +95,42 @@ class PF
  * @return bool
  */
     static function ctype_xdigit($text) {}
+
+        /**
+ * @return float
+ */
+    static function fdiv(float $dividend, float $divisor) {}
+
+        /**
+ * @param mixed $value
+ * @return string
+ */
+    static function get_debug_type($value) {}
+
+        /**
+ * @param resource $res
+ * @return int
+ */
+    static function get_resource_id($res) {}
+
+        /**
+ * @return string
+ */
+    static function preg_last_error_msg() {}
+
+        /**
+ * @return bool
+ */
+    static function str_contains(string $haystack, string $needle) {}
+
+        /**
+ * @return bool
+ */
+    static function str_ends_with(string $haystack, string $needle) {}
+
+        /**
+ * @return bool
+ */
+    static function str_starts_with(string $haystack, string $needle) {}
 
     }

@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Str;
 function chopStart(string $subject, $needle): string
 {
     foreach ((array) $needle as $n) {
-        if (\Inilim\Tool\Method\Str\_startsWith($subject, $n)) {
+        if (\Inilim\Tool\Method\PF\str_starts_with($subject, $n)) {
             return \substr($subject, \strlen($n));
         }
     }
