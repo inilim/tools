@@ -4,7 +4,6 @@ namespace Inilim\Tool;
 
 final class Time extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE = 'Inilim\Tool\Method\Time',
-        PATH_TO_DIR           = __DIR__ . '/MethodMin/Time',
-        IDX                   = 13;
+    protected const NAME = 'Time',
+        IDX              = 13;
 }

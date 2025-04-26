@@ -6,7 +6,6 @@ namespace Inilim\Tool;
 
 final class Enum extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE = 'Inilim\Tool\Method\Enum',
-        PATH_TO_DIR           = __DIR__ . '/MethodMin/Enum',
-        IDX                   = 17;
+    protected const NAME = 'Enum',
+        IDX              = 17;
 }

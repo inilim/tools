@@ -7,7 +7,6 @@ namespace Inilim\Tool;
  */
 final class ID extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE = 'Inilim\Tool\Method\ID',
-        PATH_TO_DIR           = __DIR__ . '/MethodMin/ID',
-        IDX                   = 12;
+    protected const NAME = 'ID',
+        IDX              = 12;
 }

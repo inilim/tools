@@ -4,10 +4,9 @@ namespace Inilim\Tool;
 
 abstract class LazyMethodAbstract
 {
-    protected const NAMESPACE = '',
-        PATH_TO_DIR           = '',
-        ALIAS                 = [],
-        IDX                   = -1;
+    protected const NAME = '',
+        ALIAS            = [],
+        IDX              = -1;
 
     /**
      * @var array<string,array<string,true>>
@@ -20,27 +19,16 @@ abstract class LazyMethodAbstract
      * @param mixed[] $args
      * @return mixed|void
      */
-    function __call($name, $args)
-    {
-        return self::__callStatic($name, $args);
-    }
-
-    /**
-     * @internal desc
-     * @param string $name
-     * @param mixed[] $args
-     * @return mixed|void
-     */
     static function __callStatic($name, $args)
     {
         $n  = static::ALIAS[$name] ?? $name;
-        $fn = static::NAMESPACE . '\\' . $n;
+        $fn = 'Inilim\\Tool\\Method\\' . static::NAME . '\\' . $n;
 
         if (isset(self::$exists[static::IDX][$n])) {
             return $fn(...$args);
         }
 
-        $file = static::PATH_TO_DIR . '/' . $n . '.php';
+        $file = __DIR__ . '/MethodMin/' . static::NAME . '/' . $n . '.php';
 
         if (\is_file($file)) {
             require $file;
@@ -52,7 +40,7 @@ abstract class LazyMethodAbstract
             }
         }
 
-        throw new \RuntimeException('Call to undefined method ' . static::NAMESPACE . '\\' . $name);
+        throw new \RuntimeException('Call to undefined method Inilim\\Tool\\Method\\' . static::NAME . '\\' . $name);
     }
 
     /**

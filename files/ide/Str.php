@@ -111,7 +111,7 @@ class Str
  * Convert the case of a string.
  * @return string
  */
-    static function convertCase(string $string, int $mode = \MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
+    static function convertCase(string $string, int $mode = \Inilim\Tool\PF::MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
 
         /**
  * Indicate that random strings should be created normally and not using a custom factory.

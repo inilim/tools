@@ -20,9 +20,9 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
+$res = Str::_contains('awdwdwdawd', 'w');
 
-
-
+dde($res);
 de(get_loaded_extensions(true));
 
 

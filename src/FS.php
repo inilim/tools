@@ -7,7 +7,6 @@ namespace Inilim\Tool;
  */
 final class FS extends \Inilim\Tool\LazyMethodAbstract
 {
-    protected const NAMESPACE = 'Inilim\Tool\Method\FS',
-        PATH_TO_DIR           = __DIR__ . '/MethodMin/FS',
-        IDX                   = 4;
+    protected const NAME = 'FS',
+        IDX              = 4;
 }
