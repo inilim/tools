@@ -559,6 +559,13 @@ class Arr
     static function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false) {}
 
         /**
+ * @author gigabites19 <https://github.com/gigabites19>
+ * Swap places of items in an array.
+ * @return \Closure(array &$array, string|int $keyOne, string|int $keyTwo):void
+ */
+    static function swap() {}
+
+        /**
  * Take the first or last {$limit} items from an array.
  * @template TArray
  * @param TArray $array
