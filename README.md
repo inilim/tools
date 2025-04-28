@@ -30,4 +30,4 @@
 ## 📥 Установка
 
 ```bash
-composer require inilim/tools@dev-main
+composer require inilim/tools:dev-main
