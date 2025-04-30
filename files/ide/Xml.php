@@ -5,6 +5,14 @@ namespace Inilim\Tool;
 class Xml
 {
         /**
+ * @param \DOMNode $what
+ * @param \DOMNode $where
+ * @return ?\DOMNode
+ * @throws \DOMException
+ */
+    static function appendChild(\DOMNode $what, \DOMNode $where, bool $throw = false) {}
+
+        /**
  * @return \DOMElement
  * @throws \DOMException
  */
