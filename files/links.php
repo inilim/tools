@@ -171,4 +171,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/PF',
         'pathToClass' => $root . '/src/PF.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\Xml',
+        'tool'   => $class = \Inilim\Tool\Xml::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Xml',
+        'pathMin'   => $root . '/src/MethodMin/Xml',
+        'pathToClass' => $root . '/src/Xml.php',
+    ],
 ];

@@ -7,10 +7,11 @@ require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
+use Inilim\Tool\Xml;
 use Inilim\Dump\Dump;
 use Inilim\Tool\Data;
-use Inilim\Tool\File;
 use Inilim\Tool\Enum;
+use Inilim\Tool\File;
 use Inilim\Tool\Json;
 use Inilim\Tool\Refl;
 use Inilim\Tool\Other;
@@ -20,6 +21,21 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
 
+
+// $el = Xml::createElFromStr('<field/>');
+// $el = Xml::createElFromStr('<field/>');
+$el = Xml::createElFromStr('<field/>');
+
+dde($el->ownerDocument->saveHTML($el));
+foreach ($el->firstElementChild as $node) {
+    de($node);
+}
+
+// de($el->nodeType);
+// de($el->ownerDocument->saveHTML());
+// dde(Xml::toHtml($el->ownerDocument));
+
+de();
 $res = Str::_contains('awdwdwdawd', 'w');
 
 dde($res);
