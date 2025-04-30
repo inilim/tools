@@ -11,6 +11,11 @@ class Xml
     static function createEl(string $qualifiedName, ?string $value = null, string $encoding = 'UTF-8', string $namespace = '') {}
 
         /**
+ * @return mixed[]
+ */
+    static function domToArray(\DOMNode $root) {}
+
+        /**
  * @return ?string
  */
     static function toHtml(\DOMNode $node) {}
