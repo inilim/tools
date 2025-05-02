@@ -19,9 +19,13 @@ class Xml
     static function createEl(string $qualifiedName, ?string $value = null, string $encoding = 'UTF-8', string $namespace = '') {}
 
         /**
- * @return mixed[]
+ * @template Attrs of array<string,string>
+ * @template ItemNodeNS of array{nodeName:string,nodeValue:?string,nodeType:int,prefix:string,localName:?string,namespaceURI:?string,isConnected:bool,ownerDocument:?class-string,parentNode:?class-string,parentElement:?class-string}
+ * @template ItemNode of array{attributes:Attrs,nodeName:string,nodeValue:?string,nodeType:int,prefix:string,localName:?string,namespaceURI:?string,baseURI:?string,textContent:string,ownerDocument:?class-string,parentNode:?class-string,parentElement:?class-string,childNodes:array<ItemNode|ItemNodeNS>}
+ * @param \DOMNodeList|\DOMNode|\DOMNameSpaceNode $el
+ * @return ItemNodeNS[]|ItemNode[]
  */
-    static function domToArray(\DOMNode $root) {}
+    static function domToArray(object $el) {}
 
         /**
  * @return ?string
