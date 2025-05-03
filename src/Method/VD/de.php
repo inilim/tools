@@ -11,6 +11,15 @@ namespace Inilim\Tool\Method\VD;
  */
 function de(...$v)
 {
+    if (($cur = \ob_get_level()) > 1) {
+        while (true) {
+            if (\ob_get_level() === 1) {
+                break;
+            }
+            \ob_end_clean();
+        }
+        echo \sprintf('__CLIPBOARD__: "%s"', $cur) . PHP_EOL;
+    }
     \Inilim\Tool\Method\VD\d(...$v);
     exit();
 }
