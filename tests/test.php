@@ -6,6 +6,7 @@ declare(strict_types=1);
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use Inilim\Tool\Arr;
+use Inilim\Tool\Obj;
 use Inilim\Tool\Str;
 use Inilim\Tool\Xml;
 use Inilim\Dump\Dump;
@@ -20,9 +21,19 @@ use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
+
+__include('Obj::getValueProp');
+
+$obj = new \Reflection;
+// $result = \Inilim\Tool\Method\Obj\getValueProp('publicStaticPropNonType', $obj, 'awdwwdnull', true);
+$result = \Inilim\Tool\Method\Obj\getValueProp('publicPropNonType', $obj, 'awdwwdnull', true);
+
+
+dde($result);
+
+
+de();
 __include('Xml::domToArray');
-
-
 $el = Xml::createEl('field');
 $el->setAttribute('id', 'public_log222');
 $el->setAttribute('hook', '');
