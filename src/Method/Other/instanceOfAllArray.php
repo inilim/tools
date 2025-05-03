@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @author Inilim
  * @param (class-string|object)[] $classes
- * @return bool
  */
-function instanceOfAllArray(object $obj, array $classes)
+function instanceOfAllArray(object $obj, array $classes): bool
 {
     foreach ($classes as $class) {
         $class = \is_object($class) ? \get_class($class) : $class;

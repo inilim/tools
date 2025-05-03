@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Integer{function getRandomIntByLength(int $length){$maxLen=\Inilim\Tool\Method\Integer\getCurLenMaxInt();$length=\Inilim\Tool\Method\Integer\clamp($length,1,$maxLen);if($length===1){$start=0;$end=9;}else{$start=\intval('1'.\str_repeat('0',$length-1));$end=$maxLen===$length?\PHP_INT_MAX:\intval(\str_repeat('9',$length));}return \mt_rand($start,$end);}if(!\Inilim\Tool\Integer::__definedIfNot('clamp')){
+namespace Inilim\Tool\Method\Integer{function getRandomIntByLength(int $length):int{$maxLen=\Inilim\Tool\Method\Integer\getCurLenMaxInt();$length=\Inilim\Tool\Method\Integer\clamp($length,1,$maxLen);if($length===1){$start=0;$end=9;}else{$start=\intval('1'.\str_repeat('0',$length-1));$end=$maxLen===$length?\PHP_INT_MAX:\intval(\str_repeat('9',$length));}return \mt_rand($start,$end);}if(!\Inilim\Tool\Integer::__definedIfNot('clamp')){
     function clamp($number,$min,$max){return \min(\max($number,$min),$max);}
     }if(!\Inilim\Tool\Integer::__definedIfNot('getCurLenMaxInt')){
-    function getCurLenMaxInt(){return \strlen(\strval(\PHP_INT_MAX));}
+    function getCurLenMaxInt():int{return \strlen(\strval(\PHP_INT_MAX));}
     }}

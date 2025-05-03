@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @param mixed[]|mixed $values
- * @return bool
  */
-function hasValueAny(array $array, $values, bool $strict = false)
+function hasValueAny(array $array, $values, bool $strict = false): bool
 {
     $values = \Inilim\Tool\Method\Arr\wrap($values);
 

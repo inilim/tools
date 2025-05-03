@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Enum;
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return int
  */
-function count($enum)
+function count($enum): int
 {
     return \sizeof(\Inilim\Tool\Method\Enum\cases($enum));
 }

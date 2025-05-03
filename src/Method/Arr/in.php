@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @skip_build
- * @return bool
  */
-function in($array)
+function in($array): bool
 {
     \in_array();
 }

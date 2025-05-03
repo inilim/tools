@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Json;
 
-/**
- * @return bool
- */
-function isJsonAsArrList(?string $v)
+function isJsonAsArrList(?string $v): bool
 {
     if ($v === null) return false;
     $v = \Inilim\Tool\Method\Json\decode($v);

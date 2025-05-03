@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Determine if a given string ends with a given substring.
  * @param string|iterable<string> $needles
- * @return bool
  */
-function endsWith(string $haystack, $needles)
+function endsWith(string $haystack, $needles): bool
 {
     if (!\is_iterable($needles)) $needles = [$needles];
 

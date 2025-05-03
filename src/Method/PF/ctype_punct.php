@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_punct($text)
+function ctype_punct($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_punct')) {
         return \ctype_punct($text);

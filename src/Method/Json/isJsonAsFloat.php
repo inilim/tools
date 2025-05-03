@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Json;
 
-/**
- * @return boolean
- */
-function isJsonAsFloat(?string $v)
+function isJsonAsFloat(?string $v): bool
 {
     if ($v === null) return false;
     $v = \Inilim\Tool\Method\Json\decode($v);

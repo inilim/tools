@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Json;
 
-/**
- * @return integer
- */
-function getLastErrorCode()
+function getLastErrorCode(): int
 {
     return \json_last_error();
 }

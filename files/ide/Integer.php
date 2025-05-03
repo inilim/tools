@@ -8,45 +8,39 @@ class Integer
  * @param numeric-string|int $num
  * @param numeric-string|int $fromTo
  * @param numeric-string|int $toFrom
- * @return bool
  */
-    static function checkBetween($num, $fromTo, $toFrom) {}
+    static function checkBetween($num, $fromTo, $toFrom): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $fromTo
  * @param numeric-string|int $toFrom
- * @return bool
  */
-    static function checkLenBetween($num, $fromTo, $toFrom) {}
+    static function checkLenBetween($num, $fromTo, $toFrom): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $max
- * @return bool
  */
-    static function checkLenMax($num, $max) {}
+    static function checkLenMax($num, $max): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $min
- * @return bool
  */
-    static function checkLenMin($num, $min) {}
+    static function checkLenMin($num, $min): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $max
- * @return bool
  */
-    static function checkMax($num, $max) {}
+    static function checkMax($num, $max): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $min
- * @return bool
  */
-    static function checkMin($num, $min) {}
+    static function checkMin($num, $min): bool {}
 
         /**
  * Clamp the given number between the given minimum and maximum.
@@ -60,121 +54,99 @@ class Integer
         /**
  * @param numeric-string|int $num1
  * @param numeric-string|int $num2
- * @return bool
  */
-    static function equals($num1, $num2) {}
+    static function equals($num1, $num2): bool {}
 
-        /**
- * @return int
- */
-    static function getCurLenMaxInt() {}
+        
+    static function getCurLenMaxInt(): int {}
 
-        /**
- * @return int
- */
-    static function getRandomIntByLength(int $length) {}
+        
+    static function getRandomIntByLength(int $length): int {}
 
         /**
  * -9223372036854775808 <> 9223372036854775807
  * @param mixed $value
- * @return bool
  */
-    static function isBigInt($value) {}
+    static function isBigInt($value): bool {}
 
         /**
  * 0 <> 18446744073709551615
  * @param mixed $value
- * @return bool
  */
-    static function isBigIntUnsigned($value) {}
+    static function isBigIntUnsigned($value): bool {}
 
         /**
  * -2147483648 <> 2147483647
  * @param mixed $value
- * @return bool
  */
-    static function isInt($value) {}
+    static function isInt($value): bool {}
 
         /**
  * проверка int для php, 32bit или 64bit
  * может ли значение стать integer без изменений
  * @param mixed $v
- * @return bool
  */
-    static function isIntPHP($v) {}
+    static function isIntPHP($v): bool {}
 
         /**
  * 0 <> 4_294_967_295
  * @param mixed $value
- * @return bool
  */
-    static function isIntUnsigned($value) {}
+    static function isIntUnsigned($value): bool {}
 
         /**
  * @param mixed $v
- * @return bool
  */
-    static function isMediumInt($v) {}
+    static function isMediumInt($v): bool {}
 
-        /**
- * @return bool
- */
-    static function isMediumIntUnsigned(mixed $value) {}
+        
+    static function isMediumIntUnsigned(mixed $value): bool {}
 
         /**
  * @param numeric-string|int $num
- * @return bool
  */
-    static function isNegative($num) {}
+    static function isNegative($num): bool {}
 
         /**
  * функция не проверяет длину значения, будет true даже с bigint и более.
  * @param mixed $v
- * @return bool
  */
-    static function isNumeric($v) {}
+    static function isNumeric($v): bool {}
 
         /**
  * @param numeric-string|int $num
- * @return bool
  */
-    static function isPositive($num) {}
+    static function isPositive($num): bool {}
 
         /**
  * @param mixed $value
- * @return bool
  */
-    static function isSmallInt($value) {}
+    static function isSmallInt($value): bool {}
 
         /**
  * @param mixed $value
- * @return bool
  */
-    static function isSmallIntUnsigned($value) {}
+    static function isSmallIntUnsigned($value): bool {}
 
         /**
  * @param mixed $value
- * @return bool
  */
-    static function isTinyInt($value) {}
+    static function isTinyInt($value): bool {}
 
         /**
  * @param mixed $value
- * @return bool
  */
-    static function isTinyIntUnsigned($value) {}
+    static function isTinyIntUnsigned($value): bool {}
 
         /**
  * @param numeric-string|int $num
  * @param numeric-string|int $equal
- * @return bool
  */
-    static function lenEquals($num, $equal) {}
+    static function lenEquals($num, $equal): bool {}
 
         /**
  * @param numeric-string|int $num
- * @return int
  */
-    static function lenNumeric($num) {}
+    static function lenNumeric($num): int {}
 
     }

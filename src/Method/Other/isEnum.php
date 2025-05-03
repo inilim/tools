@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @author Inilim
  * @param mixed $v
- * @return bool
  */
-function isEnum($v)
+function isEnum($v): bool
 {
     if (\PHP_VERSION_ID < 80100) {
         return false;

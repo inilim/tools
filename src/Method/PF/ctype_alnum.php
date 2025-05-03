@@ -9,9 +9,8 @@ namespace Inilim\Tool\Method\PF;
  * Returns TRUE if every character in text is either a letter or a digit, FALSE otherwise.
  * @see https://php.net/ctype-alnum
  * @param mixed $text
- * @return bool
  */
-function ctype_alnum($text)
+function ctype_alnum($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_alnum')) {
         return \ctype_alnum($text);

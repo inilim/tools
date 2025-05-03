@@ -67,6 +67,6 @@ class Exp
  *
  * @return int The Levenshtein distance between the two strings.
  */
-    static function mbLevenshtein(string $str1, string $str2) {}
+    static function mbLevenshtein(string $str1, string $str2): int {}
 
     }

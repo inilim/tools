@@ -6,10 +6,9 @@ namespace Inilim\Tool\Method\Path;
 
 /**
  * @skip_build
- * @return bool
  * @throws \ValueError
  */
-function isRealPath(string $path, bool $checkExistsFile = false)
+function isRealPath(string $path, bool $checkExistsFile = false): bool
 {
     if ($checkExistsFile) {
         if (!\is_file($path)) {

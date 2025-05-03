@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_space($text)
+function ctype_space($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_space')) {
         return \ctype_space($text);

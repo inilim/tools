@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * 0 <> 4_294_967_295
  * @param mixed $value
- * @return bool
  */
-function isIntUnsigned($value)
+function isIntUnsigned($value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|string $value */

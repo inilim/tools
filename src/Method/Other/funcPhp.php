@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author inilim
- * @return bool
  */
-function funcPhp(string $function, bool $rechecking = false)
+function funcPhp(string $function, bool $rechecking = false): bool
 {
     static $o = null;
     $o ??= [];

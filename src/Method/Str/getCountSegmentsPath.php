@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * count segments url path
- * @return int
  */
-function getCountSegmentsPath(string $path)
+function getCountSegmentsPath(string $path): int
 {
     $t = \trim(\Inilim\Tool\Method\Str\trim($path), '/');
     if ($t === '') return 0;

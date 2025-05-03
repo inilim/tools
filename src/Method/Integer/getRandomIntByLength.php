@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-/**
- * @return int
- */
-function getRandomIntByLength(int $length)
+function getRandomIntByLength(int $length): int
 {
     $maxLen = \Inilim\Tool\Method\Integer\getCurLenMaxInt();
     $length = \Inilim\Tool\Method\Integer\clamp($length, 1, $maxLen);

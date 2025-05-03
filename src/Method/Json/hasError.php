@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Json;
 
-/**
- * @return bool
- */
-function hasError()
+function hasError(): bool
 {
     return \json_last_error() !== \JSON_ERROR_NONE;
 }

@@ -7,43 +7,37 @@ class Check
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php74() {}
+    static function php74(): bool {}
 
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php80() {}
+    static function php80(): bool {}
 
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php81() {}
+    static function php81(): bool {}
 
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php82() {}
+    static function php82(): bool {}
 
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php83() {}
+    static function php83(): bool {}
 
         /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-    static function php84() {}
+    static function php84(): bool {}
 
     }

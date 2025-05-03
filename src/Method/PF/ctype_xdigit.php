@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_xdigit($text)
+function ctype_xdigit($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_xdigit')) {
         return \ctype_xdigit($text);

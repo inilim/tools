@@ -7,9 +7,8 @@ class Time
         /**
  * @todo tests
  * @param null|int|\DateInterval $ttl
- * @return int
  */
-    static function lifeTime($ttl, int $default = 3600) {}
+    static function lifeTime($ttl, int $default = 3600): int {}
 
         /**
  * @return void

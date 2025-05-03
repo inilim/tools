@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Enum;
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return bool
  */
-function hasValues($enum)
+function hasValues($enum): bool
 {
     \Inilim\Tool\Method\Assert\php81();
 

@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-/**
- * @return int
- */
-function getCurLenMaxInt()
+function getCurLenMaxInt(): int
 {
     return \strlen(\strval(\PHP_INT_MAX));
 }

@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Integer;
 
-/**
- * @return bool
- */
-function isMediumIntUnsigned(mixed $value)
+function isMediumIntUnsigned(mixed $value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|float|string $value */

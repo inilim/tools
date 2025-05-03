@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Integer;
  * @param numeric-string|int $num
  * @param numeric-string|int $fromTo
  * @param numeric-string|int $toFrom
- * @return bool
  */
-function checkLenBetween($num, $fromTo, $toFrom)
+function checkLenBetween($num, $fromTo, $toFrom): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');

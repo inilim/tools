@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Enum;
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return bool
  */
-function intValues($enum)
+function intValues($enum): bool
 {
     return \Inilim\Tool\Method\Enum\typeValues($enum) === 'int';
 }

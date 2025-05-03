@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * 0 <> 18446744073709551615
  * @param mixed $value
- * @return bool
  */
-function isBigIntUnsigned($value)
+function isBigIntUnsigned($value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|float|string $value */

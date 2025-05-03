@@ -9,9 +9,8 @@ namespace Inilim\Tool\Method\PF;
  * Returns TRUE if every character in the string text is a decimal digit, FALSE otherwise.
  * @see https://php.net/ctype-digit
  * @param mixed $text
- * @return bool
  */
-function ctype_digit($text)
+function ctype_digit($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_digit')) {
         return \ctype_digit($text);

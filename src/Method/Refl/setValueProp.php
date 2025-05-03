@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Refl;
  * @template T of object
  * @param T|class-string<T> $objectOrClass
  * @param mixed $value
- * @return bool
  */
-function setValueProp($objectOrClass, string $name, $value, bool $throw = false)
+function setValueProp($objectOrClass, string $name, $value, bool $throw = false): bool
 {
     $prop = \Inilim\Tool\Method\Refl\getProp($objectOrClass, $name, $throw);
     if ($prop === null) {

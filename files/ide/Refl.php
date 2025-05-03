@@ -60,8 +60,7 @@ class Refl
  * @template T of object
  * @param T|class-string<T> $objectOrClass
  * @param mixed $value
- * @return bool
  */
-    static function setValueProp($objectOrClass, string $name, $value, bool $throw = false) {}
+    static function setValueProp($objectOrClass, string $name, $value, bool $throw = false): bool {}
 
     }

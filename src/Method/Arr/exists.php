@@ -10,9 +10,8 @@ namespace Inilim\Tool\Method\Arr;
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|int  $key
- * @return bool
  */
-function exists($array, $key)
+function exists($array, $key): bool
 {
     if ($array instanceof \ArrayAccess) {
         return $array->offsetExists($key);

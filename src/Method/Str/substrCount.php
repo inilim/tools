@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Returns the number of substring occurrences.
- * @return int
  */
-function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null)
+function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null): int
 {
     if ($length !== null) {
         return \substr_count($haystack, $needle, $offset, $length);

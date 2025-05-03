@@ -9,9 +9,8 @@ namespace Inilim\Tool\Method\PF;
  * Returns TRUE if every character in text is a control character from the current locale, FALSE otherwise.
  * @see https://php.net/ctype-cntrl
  * @param mixed $text
- * @return bool
  */
-function ctype_cntrl($text)
+function ctype_cntrl($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_cntrl')) {
         return \ctype_cntrl($text);

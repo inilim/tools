@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * -9223372036854775808 <> 9223372036854775807
  * @param mixed $value
- * @return bool
  */
-function isBigInt($value)
+function isBigInt($value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|string $value */

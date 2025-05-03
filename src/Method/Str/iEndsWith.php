@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * @param string|iterable<string> $needles
- * @return bool
  */
-function iEndsWith(string $haystack, $needles)
+function iEndsWith(string $haystack, $needles): bool
 {
     if (!\is_iterable($needles)) $needles = [$needles];
 

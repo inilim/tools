@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * -2147483648 <> 2147483647
  * @param mixed $value
- * @return bool
  */
-function isInt($value)
+function isInt($value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|string $value */

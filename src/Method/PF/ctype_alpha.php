@@ -9,9 +9,8 @@ namespace Inilim\Tool\Method\PF;
  * Returns TRUE if every character in text is a letter, FALSE otherwise.
  * @see https://php.net/ctype-alpha
  * @param mixed $text
- * @return bool
  */
-function ctype_alpha($text)
+function ctype_alpha($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_alpha')) {
         return \ctype_alpha($text);

@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Enum;
 /**
  * @author Inilim
  * @param mixed $v
- * @return bool
  */
-function isCase($v)
+function isCase($v): bool
 {
     if (\PHP_VERSION_ID < 80100) {
         return false;

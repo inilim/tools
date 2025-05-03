@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @author Inilim
  * @param class-string|object ...$classes
- * @return bool
  */
-function instanceOfAny(object $obj, ...$classes)
+function instanceOfAny(object $obj, ...$classes): bool
 {
     return \Inilim\Tool\Method\Other\instanceOfAnyArray($obj, $classes);
 }

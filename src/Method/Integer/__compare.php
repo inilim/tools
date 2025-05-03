@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Integer;
  * @internal Inilim\Tool\Method\Integer
  * @param string[] $value
  * @param int[] $arrayInt
- * @return bool
  */
-function __compare(array $value, array $arrayInt)
+function __compare(array $value, array $arrayInt): bool
 {
     foreach (\array_map(null, $value, $arrayInt) as $c) {
         list($v, $a) = $c;

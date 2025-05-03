@@ -4,9 +4,8 @@ namespace Inilim\Tool\Method\Integer;
 
 /**
  * @param mixed $v
- * @return bool
  */
-function isMediumInt($v)
+function isMediumInt($v): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($v)) return false;
     /** @var int|float|string $v */

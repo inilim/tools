@@ -37,9 +37,8 @@ abstract class LazyMethodAbstract
     }
     /**
      * @internal
-     * @return bool
      */
-    static function __definedIfNot(string $name)
+    static function __definedIfNot(string $name): bool
     {
         $status = isset(self::$exists[static::IDX][$name]);
         if (!$status) {

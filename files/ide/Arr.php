@@ -8,9 +8,8 @@ class Arr
  * @author Laravel
  * Determine whether the given value is array accessible.
  * @param mixed $value
- * @return bool
  */
-    static function accessible($value) {}
+    static function accessible($value): bool {}
 
         /**
  * @author Laravel
@@ -32,9 +31,8 @@ class Arr
 
         /**
  * @author inilim
- * @return bool
  */
-    static function compareValues(array $a, array $b, array ...$arrays) {}
+    static function compareValues(array $a, array $b, array ...$arrays): bool {}
 
         /**
  * @author Laravel
@@ -154,9 +152,8 @@ class Arr
  *
  * @param  \ArrayAccess|array  $array
  * @param  string|int  $key
- * @return bool
  */
-    static function exists($array, $key) {}
+    static function exists($array, $key): bool {}
 
         /**
  * @author Laravel
@@ -208,29 +205,25 @@ class Arr
  *
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|string|int  $keys
- * @return bool
  */
-    static function has($array, $keys) {}
+    static function has($array, $keys): bool {}
 
         /**
  * Determine if any of the keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|int|string|null  $keys
- * @return bool
  */
-    static function hasAny($array, $keys) {}
+    static function hasAny($array, $keys): bool {}
 
         /**
  * @param mixed[]|mixed $values
- * @return bool
  */
-    static function hasValue(array $array, $values, bool $strict = false) {}
+    static function hasValue(array $array, $values, bool $strict = false): bool {}
 
         /**
  * @param mixed[]|mixed $values
- * @return bool
  */
-    static function hasValueAny(array $array, $values, bool $strict = false) {}
+    static function hasValueAny(array $array, $values, bool $strict = false): bool {}
 
         /**
  * @author laravel
@@ -277,22 +270,18 @@ class Arr
         /**
  * Determines if an array is associative.
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
- * @return bool
  */
-    static function isAssoc(array $array) {}
+    static function isAssoc(array $array): bool {}
 
-        /**
- * @return bool
- */
-    static function isList(array $array) {}
+        
+    static function isList(array $array): bool {}
 
         /**
  * проверка на многомерный массив
  * true - многомерный
  * false - одномерный
- * @return bool
  */
-    static function isMultidimensional(array $array) {}
+    static function isMultidimensional(array $array): bool {}
 
         /**
  * Join all items using a string. The final items can use a separate glue string.

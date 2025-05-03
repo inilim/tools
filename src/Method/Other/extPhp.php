@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author inilim
- * @return bool
  */
-function extPhp(string $ext, bool $rechecking = false)
+function extPhp(string $ext, bool $rechecking = false): bool
 {
     static $o = null;
     $o ??= [];

@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * функция не проверяет длину значения, будет true даже с bigint и более.
  * @param mixed $v
- * @return bool
  */
-function isNumeric($v)
+function isNumeric($v): bool
 {
     if (!\is_scalar($v) || \is_bool($v)) return false;
     // here string|int|float

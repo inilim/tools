@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Enum;
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum[] $haystack
- * @return bool
  */
-function in(object $enum, array $haystack)
+function in(object $enum, array $haystack): bool
 {
     \Inilim\Tool\Method\Assert\enumCase($enum);
     foreach ($haystack as $item) {

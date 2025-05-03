@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Exp;
  *
  * @return int The Levenshtein distance between the two strings.
  */
-function mbLevenshtein(string $str1, string $str2)
+function mbLevenshtein(string $str1, string $str2): int
 {
     $len1 = \mb_strlen($str1, 'UTF-8');
     $len2 = \mb_strlen($str2, 'UTF-8');

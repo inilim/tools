@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Arr;
  * проверка на многомерный массив
  * true - многомерный
  * false - одномерный
- * @return bool
  */
-function isMultidimensional(array $array)
+function isMultidimensional(array $array): bool
 {
     return \sizeof(\array_filter($array, 'is_array')) > 0;
 }

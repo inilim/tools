@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $max
- * @return bool
  */
-function checkMax($num, $max)
+function checkMax($num, $max): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');

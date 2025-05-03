@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_graph($text)
+function ctype_graph($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_graph')) {
         return \ctype_graph($text);

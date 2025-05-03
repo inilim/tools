@@ -10,9 +10,8 @@ namespace Inilim\Tool\Method\Arr;
  *
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|string|int  $keys
- * @return bool
  */
-function has($array, $keys)
+function has($array, $keys): bool
 {
     $keys = (array) $keys;
 

@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Check;
 /**
  * @author Inilim
  * equal to or greater than
- * @return bool
  */
-function php82()
+function php82(): bool
 {
     return \PHP_VERSION_ID >= 80200 ? true : false;
 }

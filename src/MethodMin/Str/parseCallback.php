@@ -7,13 +7,13 @@ namespace Inilim\Tool\Method\Str{function parseCallback(string $callback,?string
     }if(!\Inilim\Tool\Str::__definedIfNot('beforeLast')){
     function beforeLast(string $subject,string $search):string{if($search===''){return $subject;}$pos=\mb_strrpos($subject,$search);if($pos===false){return $subject;}return \Inilim\Tool\Method\Str\substr($subject,0,$pos);}
     }if(!\Inilim\Tool\Str::__definedIfNot('contains')){
-    function contains(string $haystack,$needles,bool $ignoreCase=false){if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if($needle!==''&&\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}return false;}
+    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if($needle!==''&&\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
     function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('substrCount')){
-    function substrCount(string $haystack,string $needle,int $offset=0,?int $length=null){if($length!==null){return \substr_count($haystack,$needle,$offset,$length);}return \substr_count($haystack,$needle,$offset);}
+    function substrCount(string $haystack,string $needle,int $offset=0,?int $length=null):int{if($length!==null){return \substr_count($haystack,$needle,$offset,$length);}return \substr_count($haystack,$needle,$offset);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
-    function php80(){return \PHP_VERSION_ID>=80000?true:false;}
+    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){
-    function str_contains(string $haystack,string $needle){if(\Inilim\Tool\Method\Check\php80()){return \str_contains($haystack,$needle);}return ''===$needle||false!==\strpos($haystack,$needle);}
+    function str_contains(string $haystack,string $needle):bool{if(\Inilim\Tool\Method\Check\php80()){return \str_contains($haystack,$needle);}return ''===$needle||false!==\strpos($haystack,$needle);}
     }}

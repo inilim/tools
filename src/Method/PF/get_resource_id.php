@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @param resource $res
- * @return int
  */
-function get_resource_id($res)
+function get_resource_id($res): int
 {
     if (\Inilim\Tool\Method\Check\php80()) {
         return \get_resource_id($res);

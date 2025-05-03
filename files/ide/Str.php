@@ -4,15 +4,11 @@ namespace Inilim\Tool;
 
 class Str
 {
-        /**
- * @return bool
- */
-    static function _contains(string $haystack, string $needle) {}
+        
+    static function _contains(string $haystack, string $needle): bool {}
 
-        /**
- * @return bool
- */
-    static function _endsWith(string $haystack, string $needle) {}
+        
+    static function _endsWith(string $haystack, string $needle): bool {}
 
         /**
  * Get the string matching the given pattern.
@@ -20,10 +16,8 @@ class Str
  */
     static function _match(string $pattern, string $subject) {}
 
-        /**
- * @return bool
- */
-    static function _startsWith(string $haystack, string $needle) {}
+        
+    static function _startsWith(string $haystack, string $needle): bool {}
 
         /**
  * Return the remainder of a string after the first occurrence of a given value.
@@ -71,9 +65,8 @@ class Str
 
         /**
  * mb_strcasecmp
- * @return int
  */
-    static function casecmp(string $str1, string $str2, string $encoding = 'UTF-8') {}
+    static function casecmp(string $str1, string $str2, string $encoding = 'UTF-8'): int {}
 
         /**
  * Get the character at the specified index.
@@ -96,16 +89,14 @@ class Str
         /**
  * Determine if a given string contains a given substring.
  * @param string|iterable<string> $needles
- * @return bool
  */
-    static function contains(string $haystack, $needles, bool $ignoreCase = false) {}
+    static function contains(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * Determine if a given string contains all array values.
  * @param  iterable<string>  $needles
- * @return bool
  */
-    static function containsAll(string $haystack, iterable $needles, bool $ignoreCase = false) {}
+    static function containsAll(string $haystack, iterable $needles, bool $ignoreCase = false): bool {}
 
         /**
  * Convert the case of a string.
@@ -140,16 +131,14 @@ class Str
         /**
  * Determine if a given string doesn't contain a given substring.
  * @param string|iterable<string> $needles
- * @return bool
  */
-    static function doesntContain(string $haystack, $needles, bool $ignoreCase = false) {}
+    static function doesntContain(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * Determine if a given string ends with a given substring.
  * @param string|iterable<string> $needles
- * @return bool
  */
-    static function endsWith(string $haystack, $needles) {}
+    static function endsWith(string $haystack, $needles): bool {}
 
         /**
  * @return string
@@ -171,9 +160,8 @@ class Str
 
         /**
  * count segments url path
- * @return int
  */
-    static function getCountSegmentsPath(string $path) {}
+    static function getCountSegmentsPath(string $path): int {}
 
         /**
  * @return null|string
@@ -205,34 +193,28 @@ class Str
 
         /**
  * @param string|iterable<string> $needles
- * @return bool
  */
-    static function iEndsWith(string $haystack, $needles) {}
+    static function iEndsWith(string $haystack, $needles): bool {}
 
         /**
  * @param string|iterable<string> $needles
- * @return bool
  */
-    static function iStartsWith(string $haystack, $needles) {}
+    static function iStartsWith(string $haystack, $needles): bool {}
 
         /**
  * Determine if a given string matches a given pattern.
  * @param  string|iterable<string>  $pattern
- * @return bool
  */
-    static function is($pattern, string $value, $ignoreCase = false) {}
+    static function is($pattern, string $value, $ignoreCase = false): bool {}
 
         /**
  * Determine if a given string matches a given pattern.
  * @param  string|iterable<string> $pattern
- * @return bool
  */
-    static function isMatch($pattern, string $value) {}
+    static function isMatch($pattern, string $value): bool {}
 
-        /**
- * @return bool
- */
-    static function isMobile(string $useragent) {}
+        
+    static function isMobile(string $useragent): bool {}
 
         /**
  * Convert a string to kebab case.
@@ -248,22 +230,19 @@ class Str
         /**
  * @param int|numeric-string $fromTo
  * @param int|numeric-string $toFrom
- * @return bool
  */
-    static function lenBetween(string $str, $fromTo, $toFrom) {}
+    static function lenBetween(string $str, $fromTo, $toFrom): bool {}
 
         /**
  * @param int|numeric-string $equal
- * @return bool
  */
-    static function lenEqual(string $str, $equal) {}
+    static function lenEqual(string $str, $equal): bool {}
 
         /**
  * Return the length of the given string.
  * @param string|null $encoding
- * @return int
  */
-    static function length(string $value, $encoding = 'UTF-8') {}
+    static function length(string $value, $encoding = 'UTF-8'): int {}
 
         /**
  * Limit the number of characters in a string.
@@ -468,9 +447,8 @@ class Str
         /**
  * Determine if a given string starts with a given substring.
  * @param  string|iterable<string>  $needles
- * @return bool
  */
-    static function startsWith(string $haystack, $needles) {}
+    static function startsWith(string $haystack, $needles): bool {}
 
         /**
  * Convert a value to studly caps case.
@@ -487,9 +465,8 @@ class Str
 
         /**
  * Returns the number of substring occurrences.
- * @return int
  */
-    static function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null) {}
+    static function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null): int {}
 
         /**
  * Replace text within a portion of a string.

@@ -27,6 +27,9 @@ class Xml
  */
     static function domToArray(object $el) {}
 
+        
+    static function removeNode(\DOMNode $node): bool {}
+
         /**
  * @return ?string
  */

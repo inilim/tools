@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Time;
 /**
  * @todo tests
  * @param null|int|\DateInterval $ttl
- * @return int
  */
-function lifeTime($ttl, int $default = 3600)
+function lifeTime($ttl, int $default = 3600): int
 {
     if ($ttl === null) {
         return $default;

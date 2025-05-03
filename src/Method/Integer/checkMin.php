@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $min
- * @return bool
  */
-function checkMin($num, $min)
+function checkMin($num, $min): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');

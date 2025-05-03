@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Arr;
  * Determine if any of the keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|int|string|null  $keys
- * @return bool
  */
-function hasAny($array, $keys)
+function hasAny($array, $keys): bool
 {
     if ($keys === null) {
         return false;

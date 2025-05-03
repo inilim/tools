@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_lower($text)
+function ctype_lower($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_lower')) {
         return \ctype_lower($text);

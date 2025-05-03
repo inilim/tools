@@ -23,21 +23,18 @@ class Other
  * Compares two values in the same way that PHP does. Recognizes operators: >, >=, <, <=, =, ==, ===, !=, !==, <>
  * @param mixed $left
  * @param mixed $right
- * @return bool
  */
-    static function compareViaOperator($left, string $operator, $right) {}
+    static function compareViaOperator($left, string $operator, $right): bool {}
 
         /**
  * @author inilim
- * @return bool
  */
-    static function extPhp(string $ext, bool $rechecking = false) {}
+    static function extPhp(string $ext, bool $rechecking = false): bool {}
 
         /**
  * @author inilim
- * @return bool
  */
-    static function funcPhp(string $function, bool $rechecking = false) {}
+    static function funcPhp(string $function, bool $rechecking = false): bool {}
 
         /**
  * @tests tests/Method/Other/getCallableThisTest.php
@@ -78,37 +75,32 @@ class Other
         /**
  * @author Inilim
  * @param class-string|object ...$classes
- * @return bool
  */
-    static function instanceOfAll(object $obj, ...$classes) {}
+    static function instanceOfAll(object $obj, ...$classes): bool {}
 
         /**
  * @author Inilim
  * @param (class-string|object)[] $classes
- * @return bool
  */
-    static function instanceOfAllArray(object $obj, array $classes) {}
+    static function instanceOfAllArray(object $obj, array $classes): bool {}
 
         /**
  * @author Inilim
  * @param class-string|object ...$classes
- * @return bool
  */
-    static function instanceOfAny(object $obj, ...$classes) {}
+    static function instanceOfAny(object $obj, ...$classes): bool {}
 
         /**
  * @author Inilim
  * @param (class-string|object)[] $classes
- * @return bool
  */
-    static function instanceOfAnyArray(object $obj, array $classes) {}
+    static function instanceOfAnyArray(object $obj, array $classes): bool {}
 
         /**
  * @author Inilim
  * @param mixed $v
- * @return bool
  */
-    static function isEnum($v) {}
+    static function isEnum($v): bool {}
 
         /**
  * @author Inilim

@@ -26,10 +26,8 @@ class Json
  */
     static function getLastError() {}
 
-        /**
- * @return integer
- */
-    static function getLastErrorCode() {}
+        
+    static function getLastErrorCode(): int {}
 
         /**
  * @return string
@@ -42,56 +40,37 @@ class Json
  */
     static function getTypeFromJson(?string $v) {}
 
-        /**
- * @return bool
- */
-    static function hasError() {}
+        
+    static function hasError(): bool {}
 
-        /**
- * @return boolean
- */
-    static function isJson(?string $v) {}
+        
+    static function isJson(?string $v): bool {}
 
-        /**
- * @return bool
- */
-    static function isJsonAsArrList(?string $v) {}
+        
+    static function isJsonAsArrList(?string $v): bool {}
 
-        /**
- * @return bool
- */
-    static function isJsonAsArrOrObj(?string $v) {}
+        
+    static function isJsonAsArrOrObj(?string $v): bool {}
 
-        /**
- * @return boolean
- */
-    static function isJsonAsFloat(?string $v) {}
+        
+    static function isJsonAsFloat(?string $v): bool {}
 
-        /**
- * @return bool
- */
-    static function isJsonAsInteger(?string $v) {}
+        
+    static function isJsonAsInteger(?string $v): bool {}
 
-        /**
- * @return bool
- */
-    static function isJsonAsNumeric(?string $v) {}
+        
+    static function isJsonAsNumeric(?string $v): bool {}
 
-        /**
- * @return bool
- */
-    static function isJsonAsObject(?string $v) {}
+        
+    static function isJsonAsObject(?string $v): bool {}
 
-        /**
- * @return boolean
- */
-    static function isJsonAsString(?string $v) {}
+        
+    static function isJsonAsString(?string $v): bool {}
 
         /**
  * @param mixed $v
- * @return bool
  */
-    static function isJsonSerializable($v, int $flags = 0, int $depth = 512) {}
+    static function isJsonSerializable($v, int $flags = 0, int $depth = 512): bool {}
 
         /**
  * @author <http://stackoverflow.com/questions/6054033/pretty-printing-json-with-php>

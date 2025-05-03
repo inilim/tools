@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\PF;
 
-/**
- * @return bool
- */
-function str_starts_with(string $haystack, string $needle)
+function str_starts_with(string $haystack, string $needle): bool
 {
     if (\Inilim\Tool\Method\Check\php80()) {
         return \str_starts_with($haystack, $needle);

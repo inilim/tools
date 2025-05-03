@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-function ctype_upper($text)
+function ctype_upper($text): bool
 {
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_upper')) {
         return \ctype_upper($text);

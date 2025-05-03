@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @author inilim
- * @return bool
  */
-function compareValues(array $a, array $b, array ...$arrays)
+function compareValues(array $a, array $b, array ...$arrays): bool
 {
     $arrays[] = $a;
     $arrays[] = $b;

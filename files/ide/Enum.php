@@ -17,9 +17,8 @@ class Enum
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return int
  */
-    static function count($enum) {}
+    static function count($enum): int {}
 
         /**
  * @author Inilim
@@ -67,9 +66,8 @@ class Enum
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return bool
  */
-    static function hasValues($enum) {}
+    static function hasValues($enum): bool {}
 
         /**
  * @author Inilim
@@ -83,40 +81,35 @@ class Enum
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum[] $haystack
- * @return bool
  */
-    static function in(object $enum, array $haystack) {}
+    static function in(object $enum, array $haystack): bool {}
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return bool
  */
-    static function intValues($enum) {}
+    static function intValues($enum): bool {}
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum $needle
- * @return bool
  */
-    static function is(object $enum, object $needle) {}
+    static function is(object $enum, object $needle): bool {}
 
         /**
  * @author Inilim
  * @param mixed $v
- * @return bool
  */
-    static function isCase($v) {}
+    static function isCase($v): bool {}
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum $needle
- * @return bool
  */
-    static function isNot(object $enum, object $needle) {}
+    static function isNot(object $enum, object $needle): bool {}
 
         /**
  * @author Inilim
@@ -146,9 +139,8 @@ class Enum
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum[] $haystack
- * @return bool
  */
-    static function notIn(object $enum, array $haystack) {}
+    static function notIn(object $enum, array $haystack): bool {}
 
         /**
  * @author Inilim
@@ -162,9 +154,8 @@ class Enum
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
- * @return bool
  */
-    static function strValues($enum) {}
+    static function strValues($enum): bool {}
 
         /**
  * @author Inilim

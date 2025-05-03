@@ -4,9 +4,8 @@ namespace Inilim\Tool\Method\Integer;
 
 /**
  * @param mixed $value
- * @return bool
  */
-function isTinyInt($value)
+function isTinyInt($value): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
     /** @var int|float|string $value */

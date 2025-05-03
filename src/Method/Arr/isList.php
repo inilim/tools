@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Arr;
 
-/**
- * @return bool
- */
-function isList(array $array)
+function isList(array $array): bool
 {
     if (\PHP_VERSION_ID >= 80100) {
         return \array_is_list($array);

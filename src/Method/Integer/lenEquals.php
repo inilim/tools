@@ -5,9 +5,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * @param numeric-string|int $num
  * @param numeric-string|int $equal
- * @return bool
  */
-function lenEquals($num, $equal)
+function lenEquals($num, $equal): bool
 {
     if (!\Inilim\Tool\Method\Integer\isNumeric($num)) {
         throw new \InvalidArgumentException('$num must be numeric');

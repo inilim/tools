@@ -16,90 +16,77 @@ class PF
  * Returns TRUE if every character in text is either a letter or a digit, FALSE otherwise.
  * @see https://php.net/ctype-alnum
  * @param mixed $text
- * @return bool
  */
-    static function ctype_alnum($text) {}
+    static function ctype_alnum($text): bool {}
 
         /**
  * @author symfony/polyfill
  * Returns TRUE if every character in text is a letter, FALSE otherwise.
  * @see https://php.net/ctype-alpha
  * @param mixed $text
- * @return bool
  */
-    static function ctype_alpha($text) {}
+    static function ctype_alpha($text): bool {}
 
         /**
  * @author symfony/polyfill
  * Returns TRUE if every character in text is a control character from the current locale, FALSE otherwise.
  * @see https://php.net/ctype-cntrl
  * @param mixed $text
- * @return bool
  */
-    static function ctype_cntrl($text) {}
+    static function ctype_cntrl($text): bool {}
 
         /**
  * @author symfony/polyfill
  * Returns TRUE if every character in the string text is a decimal digit, FALSE otherwise.
  * @see https://php.net/ctype-digit
  * @param mixed $text
- * @return bool
  */
-    static function ctype_digit($text) {}
+    static function ctype_digit($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_graph($text) {}
+    static function ctype_graph($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_lower($text) {}
+    static function ctype_lower($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_print($text) {}
+    static function ctype_print($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_punct($text) {}
+    static function ctype_punct($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_space($text) {}
+    static function ctype_space($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_upper($text) {}
+    static function ctype_upper($text): bool {}
 
         /**
  * @author symfony/polyfill
  * @param mixed $text
- * @return bool
  */
-    static function ctype_xdigit($text) {}
+    static function ctype_xdigit($text): bool {}
 
-        /**
- * @return float
- */
-    static function fdiv(float $dividend, float $divisor) {}
+        
+    static function fdiv(float $dividend, float $divisor): float {}
 
         /**
  * @param mixed $value
@@ -109,28 +96,21 @@ class PF
 
         /**
  * @param resource $res
- * @return int
  */
-    static function get_resource_id($res) {}
+    static function get_resource_id($res): int {}
 
         /**
  * @return string
  */
     static function preg_last_error_msg() {}
 
-        /**
- * @return bool
- */
-    static function str_contains(string $haystack, string $needle) {}
+        
+    static function str_contains(string $haystack, string $needle): bool {}
 
-        /**
- * @return bool
- */
-    static function str_ends_with(string $haystack, string $needle) {}
+        
+    static function str_ends_with(string $haystack, string $needle): bool {}
 
-        /**
- * @return bool
- */
-    static function str_starts_with(string $haystack, string $needle) {}
+        
+    static function str_starts_with(string $haystack, string $needle): bool {}
 
     }

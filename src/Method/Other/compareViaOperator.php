@@ -9,9 +9,8 @@ namespace Inilim\Tool\Method\Other;
  * Compares two values in the same way that PHP does. Recognizes operators: >, >=, <, <=, =, ==, ===, !=, !==, <>
  * @param mixed $left
  * @param mixed $right
- * @return bool
  */
-function compareViaOperator($left, string $operator, $right)
+function compareViaOperator($left, string $operator, $right): bool
 {
     switch ($operator) {
         case '>':

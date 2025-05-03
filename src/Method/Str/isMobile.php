@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Str;
 
-/**
- * @return bool
- */
-function isMobile(string $useragent)
+function isMobile(string $useragent): bool
 {
     if (
         // add '|android|ipad|playbook|silk' to the first regular to also define tablet

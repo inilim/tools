@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Determine if a given string starts with a given substring.
  * @param  string|iterable<string>  $needles
- * @return bool
  */
-function startsWith(string $haystack, $needles)
+function startsWith(string $haystack, $needles): bool
 {
     if (!\is_iterable($needles)) $needles = [$needles];
 

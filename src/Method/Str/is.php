@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Determine if a given string matches a given pattern.
  * @param  string|iterable<string>  $pattern
- * @return bool
  */
-function is($pattern, string $value, $ignoreCase = false)
+function is($pattern, string $value, $ignoreCase = false): bool
 {
     if (!\is_iterable($pattern)) {
         $pattern = [$pattern];

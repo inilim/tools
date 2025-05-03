@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Determine if a given string contains a given substring.
  * @param string|iterable<string> $needles
- * @return bool
  */
-function contains(string $haystack, $needles, bool $ignoreCase = false)
+function contains(string $haystack, $needles, bool $ignoreCase = false): bool
 {
     if ($ignoreCase) $haystack = \mb_strtolower($haystack, 'UTF-8');
 
