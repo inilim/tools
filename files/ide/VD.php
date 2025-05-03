@@ -9,27 +9,27 @@ class VD
  * @param mixed ...$v
  * @return void
  */
-    static function d() {}
+    static function d(...$v) {}
 
         /**
  * @author inilim
  * @param mixed ...$v
  * @return void
  */
-    static function dd() {}
+    static function dd(...$v) {}
 
         /**
  * @author inilim
  * @param mixed ...$v
  * @return void
  */
-    static function dde() {}
+    static function dde(...$v) {}
 
         /**
  * @author inilim
  * @param mixed ...$v
  * @return void
  */
-    static function de() {}
+    static function de(...$v) {}
 
     }

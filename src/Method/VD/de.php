@@ -9,8 +9,8 @@ namespace Inilim\Tool\Method\VD;
  * @param mixed ...$v
  * @return void
  */
-function de()
+function de(...$v)
 {
-    \Inilim\Tool\Method\VD\d(...\func_get_args());
+    \Inilim\Tool\Method\VD\d(...$v);
     exit();
 }

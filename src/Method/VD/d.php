@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\VD;
  * @param mixed ...$v
  * @return void
  */
-function d()
+function d(...$v)
 {
     $isCLI = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true);
 
@@ -24,7 +24,7 @@ function d()
                 echo '</pre>';
             }
         },
-        \func_get_args()
+        $v
     );
 
     if ($isCLI) {
