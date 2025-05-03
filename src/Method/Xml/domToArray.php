@@ -13,10 +13,11 @@ namespace Inilim\Tool\Method\Xml;
  */
 function domToArray(object $el)
 {
-    $array = [];
+    $results = [];
 
     $fn = static function ($el) use (&$fn) {
-        $array = [];
+        $item = [];
+
         /**
          * @var \DOMNode|\DOMNameSpaceNode $el
          * @var \Closure $fn
@@ -33,7 +34,7 @@ function domToArray(object $el)
                     $_attributes[$attribute->name] = $attribute->value;
                 }
                 if ($_attributes) {
-                    $array['attributes'] = $_attributes;
+                    $item['attributes'] = $_attributes;
                 }
                 unset($_attributes);
             }
@@ -42,7 +43,28 @@ function domToArray(object $el)
             // props
             // ---------------------------------------------
 
-            $array += [
+            if ($el instanceof \DOMDocument) {
+                $item += [
+                    // 'actualEncoding'      => $el->actualEncoding, // deprecate
+                    // 'standalone'          => $el->standalone, // deprecate
+                    // 'version'             => $el->version, // deprecate
+                    // 'config'             => $el->config, // deprecate
+                    'encoding'            => $el->encoding,
+                    'xmlEncoding'         => $el->xmlEncoding,
+                    'xmlStandalone'       => $el->xmlStandalone,
+                    'xmlVersion'          => $el->xmlVersion,
+                    'strictErrorChecking' => $el->strictErrorChecking,
+                    'documentURI'         => $el->documentURI,
+                    'formatOutput'        => $el->formatOutput,
+                    'validateOnParse'     => $el->validateOnParse,
+                    'resolveExternals'    => $el->resolveExternals,
+                    'preserveWhiteSpace'  => $el->preserveWhiteSpace,
+                    'recover'             => $el->recover,
+                    'substituteEntities'  => $el->substituteEntities,
+                ];
+            }
+
+            $item += [
                 'nodeName'      => $el->nodeName,
                 'nodeValue'     => $el->nodeValue,
                 'nodeType'      => $el->nodeType,
@@ -72,12 +94,12 @@ function domToArray(object $el)
                     }
                 } // endfor
                 if ($_children) {
-                    $array['childNodes'] = $_children;
+                    $item['childNodes'] = $_children;
                 }
                 unset($_children);
             }
         } elseif ($el instanceof \DOMNameSpaceNode) {
-            $array = [
+            $item = [
                 'nodeName'      => $el->nodeName,
                 'nodeValue'     => $el->nodeValue,
                 'nodeType'      => $el->nodeType,
@@ -90,15 +112,17 @@ function domToArray(object $el)
                 'parentElement' => $el->parentElement ? \get_class($el->parentElement) : null,
             ];
         }
+
+        return $item;
     };
 
     if ($el instanceof \DOMNodeList) {
         foreach ($el as $item) {
-            $array[] = $fn($item);
+            $results[] = $fn($item);
         }
     } elseif ($el instanceof \DOMNode || $el instanceof \DOMNameSpaceNode) {
-        $array[] = $fn($el);
+        $results[] = $fn($el);
     }
 
-    return $array;
+    return $results;
 }

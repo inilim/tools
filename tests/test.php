@@ -20,7 +20,14 @@ use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
+__include('Xml::domToArray');
 
+
+$el = Xml::createEl('field');
+$el->setAttribute('id', 'public_log222');
+$el->setAttribute('hook', '');
+
+de(\Inilim\Tool\Method\Xml\domToArray($el->ownerDocument));
 
 // $el = Xml::createElFromStr('<field/>');
 // $el = Xml::createElFromStr('<field/>');
