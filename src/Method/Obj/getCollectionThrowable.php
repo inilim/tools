@@ -30,10 +30,7 @@ function getCollectionThrowable(
             $this->file = $file ?? '';
         }
 
-        /**
-         * @return bool
-         */
-        function offsetExists($offset)
+        function offsetExists($offset): bool
         {
             return isset($this->array[$offset]);
         }
@@ -67,10 +64,7 @@ function getCollectionThrowable(
             unset($this->array[$offset]);
         }
 
-        /**
-         * @return int
-         */
-        function count()
+        function count(): int
         {
             return \sizeof($this->array);
         }
