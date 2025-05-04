@@ -36,6 +36,12 @@ class Arr
 
         /**
  * @author Laravel
+ * Determine if the collection contains exactly one item. If a callback is provided, determine if exactly one item matches the condition.
+ */
+    static function containsOneItem(array $array, ?callable $callable = null): bool {}
+
+        /**
+ * @author Laravel
  * Cross join the given arrays, returning all possible permutations.
  * @param iterable ...$arrays
  * @return array
