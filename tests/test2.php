@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
+
+use Inilim\Tool\FS;
+use Inilim\Tool\File;
+use Inilim\Tool\Path;
 use Inilim\Tool\Other;
 use Inilim\Tool\Test\ForTest\ClassicClass;
-
-require_once __DIR__ . '/bootstrap.php';
 
 
 // de(get_defined_constants(true)['Core']);
