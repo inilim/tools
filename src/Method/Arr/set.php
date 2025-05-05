@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * @author laravel
  * Set an array item to a given value using "dot" notation.
  * If no key is given to the method, the entire array will be replaced.
- * @return \Closure(array &$array, ?string $key, mixed $value):array
+ * @return \Closure(array &$array, string|int|null $key, mixed $value):array
  */
 function set()
 {
@@ -17,12 +17,16 @@ function set()
         throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
     }
 
-    return static function (array &$array, ?string $key, $value) {
+    return static function (array &$array, $key, $value) {
+        /**
+         * @var string|int|null $key
+         * @var mixed $value
+         */
         if ($key === null) {
             return $array = $value;
         }
 
-        $keys = \explode('.', $key);
+        $keys = \explode('.', (string)$key);
 
         foreach ($keys as $i => $key) {
             if (\sizeof($keys) === 1) {
@@ -54,44 +58,44 @@ function set()
 /**
  * Set an array item to a given value using "dot" notation.
  * If no key is given to the method, the entire array will be replaced.
- * @return \Closure(array &$array, ?string $key, mixed $value):array
+ * @return \Closure(array &$array, string|int|null $key, mixed $value):array
  */
-function _set()
-{
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
-    }
+// function _set()
+// {
+//     if (\func_num_args() !== 0) {
+//         throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
+//     }
 
-    return static function (array &$array, ?string $key, $value) {
-        if ($key === null) {
-            return $array = $value;
-        }
+//     return static function (array &$array, $key, $value) {
+//         if ($key === null) {
+//             return $array = $value;
+//         }
 
-        if ($key === '') {
-            $array[''] = $value;
+//         if ($key === '') {
+//             $array[''] = $value;
 
-            return $array;
-        }
+//             return $array;
+//         }
 
-        $current = &$array;
-        $segment = \strtok($key, '.');
+//         $current = &$array;
+//         $segment = \strtok($key, '.');
 
-        while (true) {
-            $nextSegment = \strtok('.');
+//         while (true) {
+//             $nextSegment = \strtok('.');
 
-            if ($nextSegment === false) {
-                $current[$segment] = $value;
-                break;
-            } else {
-                if (! isset($current[$segment]) || ! \is_array($current[$segment])) {
-                    $current[$segment] = [];
-                }
-                $current = &$current[$segment];
-                $segment = $nextSegment;
-            }
-        }
-        unset($current);
+//             if ($nextSegment === false) {
+//                 $current[$segment] = $value;
+//                 break;
+//             } else {
+//                 if (! isset($current[$segment]) || ! \is_array($current[$segment])) {
+//                     $current[$segment] = [];
+//                 }
+//                 $current = &$current[$segment];
+//                 $segment = $nextSegment;
+//             }
+//         }
+//         unset($current);
 
-        return $array;
-    };
-}
+//         return $array;
+//     };
+// }

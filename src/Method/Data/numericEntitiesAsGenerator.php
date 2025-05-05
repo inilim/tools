@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Data;
 
-/**
- * @return \Generator
- */
-function numericEntitiesAsGenerator()
+function numericEntitiesAsGenerator(): \Generator
 {
     yield '&#34;';
     yield '&#38;';

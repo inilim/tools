@@ -7,13 +7,20 @@ namespace Inilim\Tool\Method\Arr;
 /**
  * @author Laravel
  * Flatten a multi-dimensional array into a single level.
+ * @param int $depth
  * @return array
  */
-function flatten(iterable $array, int $depth)
+function flatten(iterable $array, $depth = \INF)
 {
     $result = [];
+    $depth  = (int)$depth;
 
     foreach ($array as $item) {
+
+        if ($item instanceof \Traversable) {
+            $item = \iterator_to_array($item);
+        }
+
         if (!\is_array($item)) {
             $result[] = $item;
         } else {

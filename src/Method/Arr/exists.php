@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Determine if the given key exists in the provided array.
  *
  * @param  \ArrayAccess|array  $array
- * @param  string|int  $key
+ * @param  string|int $key
  */
 function exists($array, $key): bool
 {

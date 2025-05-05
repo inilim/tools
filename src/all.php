@@ -58,7 +58,7 @@ final class Path extends LazyMethodAbstract
 }
 final class Arr extends LazyMethodAbstract
 {
-    protected const NAME = 'Arr', IDX = 0, ALIAS = ['head' => 'first'];
+    protected const NAME = 'Arr', IDX = 0;
 }
 final class Integer extends LazyMethodAbstract
 {

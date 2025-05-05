@@ -12,7 +12,7 @@ function toCharsGenerator()
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('toCharsGenerator()(...) <-- The arguments were passed to the wrong place');
     }
-    return static function (string &$string, int $chunk = 1) {
+    return static function (string &$string, int $chunk = 1): \Generator {
         $len = \mb_strlen($string, 'UTF-8');
         if ($len > 0) {
             $iteration = 0;

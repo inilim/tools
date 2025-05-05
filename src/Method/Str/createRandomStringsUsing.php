@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @author laravel
  * Set the callable that will be used to generate random strings.
  * @return void
  */

@@ -22,30 +22,30 @@ function undot($array): array
 
 
 
-function _undot($array)
-{
-    $results = [];
+// function _undot($array)
+// {
+//     $results = [];
 
-    foreach ($array as $key => $value) {
-        $current = &$results;
-        $segment = \strtok($key, '.');
+//     foreach ($array as $key => $value) {
+//         $current = &$results;
+//         $segment = \strtok($key, '.');
 
-        while (true) {
-            $nextSegment = \strtok('.');
+//         while (true) {
+//             $nextSegment = \strtok('.');
 
-            if ($nextSegment === false) {
-                $current[$segment] = $value;
-                break;
-            } else {
-                if (! isset($current[$segment]) || ! \is_array($current[$segment])) {
-                    $current[$segment] = [];
-                }
-                $current = &$current[$segment];
-                $segment = $nextSegment;
-            }
-        }
-        unset($current);
-    }
+//             if ($nextSegment === false) {
+//                 $current[$segment] = $value;
+//                 break;
+//             } else {
+//                 if (! isset($current[$segment]) || ! \is_array($current[$segment])) {
+//                     $current[$segment] = [];
+//                 }
+//                 $current = &$current[$segment];
+//                 $segment = $nextSegment;
+//             }
+//         }
+//         unset($current);
+//     }
 
-    return $results;
-}
+//     return $results;
+// }

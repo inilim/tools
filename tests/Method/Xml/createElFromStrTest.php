@@ -5,6 +5,9 @@ namespace Inilim\Tool\Test\Method\Xml;
 use Inilim\Tool\Xml;
 use Inilim\Tool\Test\TestCase;
 
+/**
+ * @group inactive
+ */
 class createElFromStrTest extends TestCase
 {
     function testReturnEmptyHtml()

@@ -23,11 +23,10 @@ class Arr
 
         /**
  * @author Laravel
+ * @todo add support \IteratorAggregate
  * Collapse an array of arrays into a single array.
- * @param  iterable  $array
- * @return array
  */
-    static function collapse(iterable $array) {}
+    static function collapse(iterable $array): array {}
 
         /**
  * @author inilim
@@ -157,16 +156,32 @@ class Arr
  * Determine if the given key exists in the provided array.
  *
  * @param  \ArrayAccess|array  $array
- * @param  string|int  $key
+ * @param  string|int $key
  */
     static function exists($array, $key): bool {}
 
         /**
+ * @author laravel
+ * Return the first element in an array passing a given truth test.
+ *
+ * @template TKey
+ * @template TValue
+ * @template TFirstDefault
+ *
+ * @param  iterable<TKey, TValue>  $array
+ * @param  (callable(TValue, TKey): bool)|null  $callback
+ * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
+ * @return TValue|TFirstDefault
+ */
+    static function first($array, ?callable $callback = null, $default = null) {}
+
+        /**
  * @author Laravel
  * Flatten a multi-dimensional array into a single level.
+ * @param int $depth
  * @return array
  */
-    static function flatten(iterable $array, int $depth) {}
+    static function flatten(iterable $array, $depth = \INF) {}
 
         /**
  * @author Laravel
@@ -243,19 +258,6 @@ class Arr
  * @return TValue|TFirstDefault
  */
     static function head(iterable $array, ?callable $callback = null, $default = null) {}
-
-        /**
- * @author laravel
- * Return the first element in an array passing a given truth test.
- * @template TKey
- * @template TValue
- * @template TFirstDefault
- * @param  iterable<TKey, TValue>  $array
- * @param  (callable(TValue, TKey): bool)|null  $callback
- * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
- * @return TValue|TFirstDefault
- */
-    static function first(iterable $array, ?callable $callback = null, $default = null) {}
 
         /**
  * @author nette/utils
@@ -494,7 +496,7 @@ class Arr
  * @author laravel
  * Set an array item to a given value using "dot" notation.
  * If no key is given to the method, the entire array will be replaced.
- * @return \Closure(array &$array, ?string $key, mixed $value):array
+ * @return \Closure(array &$array, string|int|null $key, mixed $value):array
  */
     static function set() {}
 
@@ -536,7 +538,7 @@ class Arr
         /**
  * Recursively sort an array by keys and values.
  */
-    static function sortRecursive(array $array, int $options = \SORT_REGULAR, bool $descending = true): array {}
+    static function sortRecursive(array $array, int $options = \SORT_REGULAR, bool $descending = false): array {}
 
         /**
  * Recursively sort an array by keys and values in descending order.

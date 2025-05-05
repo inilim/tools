@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @author laravel
  * Set the sequence that will be used to generate random strings.
  * @return void
  */
@@ -15,13 +16,13 @@ function createRandomStringsUsingSequence(array $sequence, ?callable $whenMissin
     $whenMissing ??= static function ($length) use (&$next) {
         $state = \Inilim\Tool\Method\Str\__state();
 
-        $factory_cache = $state->randomStringFactory;
+        $factoryCache = $state->randomStringFactory;
 
         $state->randomStringFactory = null;
 
         $randomString = \Inilim\Tool\Method\Str\random($length);
 
-        $state->randomStringFactory = $factory_cache;
+        $state->randomStringFactory = $factoryCache;
 
         $next++;
 

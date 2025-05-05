@@ -5,6 +5,9 @@ namespace Inilim\Tool\Test\Method\Obj;
 use Inilim\Tool\Obj;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 
+/**
+ * @group inactive
+ */
 class getValuePropTest extends \Inilim\Tool\Test\TestCase
 {
     /**

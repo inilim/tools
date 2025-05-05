@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @author laravel
  * Generate a more truly "random" alpha-numeric string.
  */
 function random(int $length = 16): string
 {
-    return (\Inilim\Tool\Method\Str\__state()->randomStringFactory ?? static function ($length) {
+    return (\Inilim\Tool\Method\Str\__state()->randomStringFactory ?? static function (int $length) {
         $string = '';
 
         while (($len = \strlen($string)) < $length) {

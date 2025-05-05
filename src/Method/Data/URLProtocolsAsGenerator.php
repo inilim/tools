@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Data;
 
-/**
- * @return \Generator
- */
-function URLProtocolsAsGenerator()
+function URLProtocolsAsGenerator(): \Generator
 {
     yield 'aaa';
     yield 'aaas';

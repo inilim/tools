@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\File;
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
-function toCharsGenerator(string $pathToFile, int $chunk = 1)
+function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
 {
     if (!\is_file($pathToFile)) {
         throw new \Exception(\sprintf('Not found file: "%s"', $pathToFile));

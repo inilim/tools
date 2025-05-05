@@ -15,6 +15,9 @@ function forget()
         throw new \InvalidArgumentException('forget()(...) <-- The arguments were passed to the wrong place');
     }
     return static function (array &$array, $keys) {
+        /**
+         * @var (string|int)[]|string|int $keys
+         */
         $original = &$array;
 
         $keys = (array) $keys;
@@ -22,6 +25,7 @@ function forget()
         if (!$keys) return;
 
         foreach ($keys as $key) {
+            $key = (string)$key;
             // if the exact key exists in the top-level, remove it
             if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
                 unset($array[$key]);

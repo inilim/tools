@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * @todo проблема с php74 preg_replace отдает null из-за модификатора "u"
  * Convert a string to snake case.
- * @return string
  */
-function snake(string $value, string $delimiter = '_')
+function snake(string $value, string $delimiter = '_'): string
 {
     if (!\Inilim\Tool\Method\PF\ctype_lower($value)) {
         $modeU = \Inilim\Tool\Method\Check\php80() ? 'u' : '';

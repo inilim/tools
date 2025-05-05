@@ -65,6 +65,6 @@ class File
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
-    static function toCharsGenerator(string $pathToFile, int $chunk = 1) {}
+    static function toCharsGenerator(string $pathToFile, int $chunk = 1): Generator {}
 
     }

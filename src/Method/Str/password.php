@@ -28,16 +28,20 @@ function password(
         $characters[] = \Inilim\Tool\Method\Data\symbolsAsClosure()->__invoke();
     }
     if ($spaces) {
-        $characters[] = [
-            ' '
-        ];
+        $characters[] = [' '];
     }
 
+    foreach ($characters as $items) {
+        $password .= $items[\random_int(0, \sizeof($items) - 1)];
+    }
+
+    $partsCount       = \sizeof($characters);
     $characters       = \array_merge([], ...$characters);
-    $charactersLength = \sizeof($characters);
+    $charactersLength = \sizeof($characters) - 1;
+    $length           = $length - $partsCount;
 
     for ($i = 0; $i < $length; $i++) {
-        $password .= $characters[\random_int(0, $charactersLength - 1)];
+        $password .= $characters[\random_int(0, $charactersLength)];
     }
 
     return \str_shuffle($password);

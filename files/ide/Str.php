@@ -105,18 +105,21 @@ class Str
     static function convertCase(string $string, int $mode = \Inilim\Tool\PF::MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
 
         /**
+ * @author laravel
  * Indicate that random strings should be created normally and not using a custom factory.
  * @return void
  */
     static function createRandomStringsNormally() {}
 
         /**
+ * @author laravel
  * Set the callable that will be used to generate random strings.
  * @return void
  */
     static function createRandomStringsUsing(?callable $factory = null) {}
 
         /**
+ * @author laravel
  * Set the sequence that will be used to generate random strings.
  * @return void
  */
@@ -218,9 +221,8 @@ class Str
 
         /**
  * Convert a string to kebab case.
- * @return string
  */
-    static function kebab(string $value) {}
+    static function kebab(string $value): string {}
 
         /**
  * Make a string's first character lowercase.
@@ -264,9 +266,8 @@ class Str
 
         /**
  * Masks a portion of a string with a repeated character.
- * @return string
  */
-    static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8') {}
+    static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string {}
 
         /**
  * @author laravel
@@ -340,6 +341,7 @@ class Str
     static function position(string $haystack, string $needle, int $offset = 0, ?string $encoding = 'UTF-8') {}
 
         /**
+ * @author laravel
  * Generate a more truly "random" alpha-numeric string.
  */
     static function random(int $length = 16): string {}
@@ -429,9 +431,8 @@ class Str
         /**
  * @todo проблема с php74 preg_replace отдает null из-за модификатора "u"
  * Convert a string to snake case.
- * @return string
  */
-    static function snake(string $value, string $delimiter = '_') {}
+    static function snake(string $value, string $delimiter = '_'): string {}
 
         /**
  * Remove all "extra" blank space from the given string.

@@ -20,8 +20,21 @@ use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
+use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+
+$array = [2 => [1 => 'products', 3 => 'users']];
+Arr::forget()($array, 2.3);
+
+de();
+
+$collection = new ClassArrayAccessIteratorAggregate(['baz', 'boom']);
+$mixedArray = [[1], [2], [3], ['foo', 'bar'], $collection];
+de(Arr::collapse($mixedArray));
+
+
+de();
 __include('Obj::getValueProp');
 
 $obj = new \Reflection;

@@ -7,7 +7,7 @@ use Inilim\Tool\Test\TestCase;
 
 class randomTest extends TestCase
 {
-    function testRandom()
+    function test()
     {
         $this->assertEquals(16, strlen(Str::random()));
         $randomInteger = random_int(1, 100);

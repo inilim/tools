@@ -14,10 +14,8 @@ class Data
  */
     static function URLProtocolsAsClosure() {}
 
-        /**
- * @return \Generator
- */
-    static function URLProtocolsAsGenerator() {}
+        
+    static function URLProtocolsAsGenerator(): Generator {}
 
         /**
  * @return string
@@ -70,13 +68,12 @@ class Data
     static function htmlEntitiesAsClosure() {}
 
         /**
- * @return \Generator
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsString()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsArray()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
  */
-    static function htmlEntitiesAsGenerator() {}
+    static function htmlEntitiesAsGenerator(): Generator {}
 
         /**
  * @return string
@@ -112,10 +109,8 @@ class Data
  */
     static function magicMethodsAsClosure() {}
 
-        /**
- * @return \Generator
- */
-    static function magicMethodsAsGenerator() {}
+        
+    static function magicMethodsAsGenerator(): Generator {}
 
         /**
  * @return string
@@ -147,10 +142,8 @@ class Data
  */
     static function numericEntitiesAsClosure() {}
 
-        /**
- * @return \Generator
- */
-    static function numericEntitiesAsGenerator() {}
+        
+    static function numericEntitiesAsGenerator(): Generator {}
 
         /**
  * @return string

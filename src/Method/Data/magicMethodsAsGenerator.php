@@ -2,10 +2,7 @@
 
 namespace Inilim\Tool\Method\Data;
 
-/**
- * @return \Generator
- */
-function magicMethodsAsGenerator()
+function magicMethodsAsGenerator(): \Generator
 {
     yield '__construct';
     yield '__destruct';
