@@ -12,6 +12,20 @@ class PF
     static function array_find(array $array, callable $callback) {}
 
         /**
+ * @template T of mixed
+ * @param T[] $array
+ * @return ?T
+ */
+    static function array_first(array $array) {}
+
+        /**
+ * @template T of mixed
+ * @param T[] $array
+ * @return ?T
+ */
+    static function array_last(array $array) {}
+
+        /**
  * @author symfony/polyfill
  * Returns TRUE if every character in text is either a letter or a digit, FALSE otherwise.
  * @see https://php.net/ctype-alnum

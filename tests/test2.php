@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-use Inilim\Tool\FS;
-use Inilim\Tool\File;
-use Inilim\Tool\Path;
-use Inilim\Tool\Other;
-use Inilim\Tool\Test\ForTest\ClassicClass;
+function __resource(string $name)
+{
+    if (\is_file($name = __DIR__ . '/' . $name . '.php')) {
+        return require $name;
+    }
 
+    return null;
+}
 
-// de(get_defined_constants(true)['Core']);
-// de(\array_keys(get_defined_vars()));
-__include('Exp::getSuggestionLevenshtein');
+dUsage();
 
-$part = ['follo', 'hallo', 'gello', 'bar', 'baz', 'oof'];
-$res = \Inilim\Tool\Method\Exp\getSuggestionLevenshtein($part, 'hello');
+$a = \__resource('testResourceClosureGenerator');
 
+dUsage();
 
-deUsage($res);
+unset($a);
+
+dUsage();

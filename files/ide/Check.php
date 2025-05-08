@@ -40,4 +40,10 @@ class Check
  */
     static function php84(): bool {}
 
+        /**
+ * @author Inilim
+ * equal to or greater than
+ */
+    static function php85(): bool {}
+
     }
