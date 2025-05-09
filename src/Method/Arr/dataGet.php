@@ -23,6 +23,7 @@ function dataGet($target, $key, $default = null)
     foreach ($key as $i => $segment) {
         unset($key[$i]);
 
+
         if ($segment === null) {
             return $target;
         }
@@ -43,22 +44,18 @@ function dataGet($target, $key, $default = null)
             return \in_array('*', $key) ? \Inilim\Tool\Method\Arr\collapse($result) : $result;
         }
 
-        switch ($segment) {
-            case '\*':
-                $segment = '*';
-                break;
-            case '\{first}':
-                $segment = '{first}';
-                break;
-            case '{first}':
-                $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
-                break;
-            case '\{last}':
-                $segment = '{last}';
-                break;
-            case '{last}':
-                $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
-                break;
+        // var_dump(0 == '\*'); // true php74 EPIC
+
+        if ($segment === '\*') {
+            $segment = '*';
+        } elseif ($segment === '\{first}') {
+            $segment = '{first}';
+        } elseif ($segment === '{first}') {
+            $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
+        } elseif ($segment === '\{last}') {
+            $segment = '{last}';
+        } elseif ($segment === '{last}') {
+            $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
         }
 
         if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {

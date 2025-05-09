@@ -20,8 +20,14 @@ class mapTest extends TestCase
 
     function testMapByReference()
     {
+        // php7.4 ругается на то что в функцию входят лишние аргументы
+        function strrev2($value, $key)
+        {
+            return \strrev($value);
+        }
+
         $data = ['first' => 'taylor', 'last' => 'otwell'];
-        $mapped = Arr::map($data, 'strrev');
+        $mapped = Arr::map($data, 'Inilim\Tool\Test\Method\Arr\strrev2');
 
         $this->assertEquals(['first' => 'rolyat', 'last' => 'llewto'], $mapped);
         $this->assertEquals(['first' => 'taylor', 'last' => 'otwell'], $data);

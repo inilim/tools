@@ -13,7 +13,8 @@ function ctype_lower($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_lower')) {
         return \ctype_lower($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('ctype_lower');
+    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
-    return $cls($text);
+    $text = $cls->__invoke($text, 'ctype_lower');
+    return \is_string($text) && '' !== $text && !\preg_match('/[^a-z]/', $text);
 }

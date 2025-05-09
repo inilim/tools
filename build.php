@@ -205,7 +205,7 @@ if ($switch || false) {
 
                 $code = \file_get_contents($pathToFile);
 
-                if (\str_contains($code, '@skip_build')) {
+                if (\str_contains($code, '@skip_build') || \str_contains($code, '@build_skip')) {
                     continue;
                 }
 

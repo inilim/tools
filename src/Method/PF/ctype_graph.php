@@ -13,7 +13,8 @@ function ctype_graph($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_graph')) {
         return \ctype_graph($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('ctype_graph');
+    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
-    return $cls($text);
+    $text = $cls->__invoke($text, 'ctype_graph');
+    return \is_string($text) && '' !== $text && !\preg_match('/[^!-~]/', $text);
 }

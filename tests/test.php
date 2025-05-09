@@ -23,6 +23,34 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+__include('PF::ctype_print');
+__include('PF::__resource');
+__include('PF::__resourceCache');
+__include('Other::funcPhp');
+
+
+$a = \Inilim\Tool\Method\PF\ctype_print('é');
+
+
+dde($a);
+
+
+
+__include('Arr::pluck');
+__include('Arr::dataGet');
+__include('Arr::accessible');
+__include('Arr::exists');
+__include('Arr::value');
+
+$array = [['user' => ['taylor', 'otwell']], ['user' => ['dayle', 'rees']]];
+
+// ['taylor', 'dayle'], 
+
+// $a = \Inilim\Tool\Method\Arr\pluck($array, ['user', 0]);
+
+$a = \Inilim\Tool\Method\Arr\dataGet(['user' => ['taylor', 'otwell']], ['user', 0]);
+
+de($a);
 
 $array = [2 => [1 => 'products', 3 => 'users']];
 Arr::forget()($array, 2.3);

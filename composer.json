@@ -10,7 +10,7 @@
     },
     "extra": {
         "exclude-from-files": [
-            "symfony/var-dumper/*",
+            "symfony/*",
             "twig/*",
             "phpunit/*",
             "phpstan/*",

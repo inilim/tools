@@ -13,7 +13,8 @@ function ctype_punct($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_punct')) {
         return \ctype_punct($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('ctype_punct');
+    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
-    return $cls($text);
+    $text = $cls->__invoke($text, 'ctype_punct');
+    return \is_string($text) && '' !== $text && !\preg_match('/[^!-\/\:-@\[-`\{-~]/', $text);
 }

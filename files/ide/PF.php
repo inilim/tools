@@ -18,6 +18,9 @@ class PF
  */
     static function array_first(array $array) {}
 
+        
+    static function array_is_list(array $array): bool {}
+
         /**
  * @template T of mixed
  * @param T[] $array

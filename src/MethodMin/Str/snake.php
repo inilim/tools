@@ -13,5 +13,5 @@ namespace Inilim\Tool\Method\Str{function snake(string $value,string $delimiter=
     }if(!\Inilim\Tool\PF::__definedIfNot('__resourceCache')){
     function __resourceCache(string $name){static $o=null;$o ??=[];if(\array_key_exists($name,$o)){return $o[$name];}return $o[$name]=\Inilim\Tool\Method\PF\__resource($name);}
     }if(!\Inilim\Tool\PF::__definedIfNot('ctype_lower')){
-    function ctype_lower($text):bool{if(\Inilim\Tool\Method\Other\funcPhp('ctype_lower')){return \ctype_lower($text);}$cls=\Inilim\Tool\Method\PF\__resourceCache('ctype_lower');return $cls($text);}
+    function ctype_lower($text):bool{if(\Inilim\Tool\Method\Other\funcPhp('ctype_lower')){return \ctype_lower($text);}$cls=\Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');$text=$cls -> __invoke($text,'ctype_lower');return \is_string($text)&&''!==$text&&!\preg_match('/[^a-z]/',$text);}
     }}

@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Enum{function last($enum){return \Inilim\Tool\Metho
     }if(!\Inilim\Tool\Arr::__definedIfNot('last')){
     function last(iterable $array,?callable $callback=null,$default=null){if($callback===null){return empty($array)?\Inilim\Tool\Method\Arr\value($default):\Inilim\Tool\Method\PF\array_last($array);}return \Inilim\Tool\Method\Arr\head(\array_reverse($array,true),$callback,$default);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
-    function value($value){return $value instanceof \Closure?$value():$value;}
+    function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('isEnum')){
     function isEnum($v):bool{if(\PHP_VERSION_ID<80100){return false;}if(\is_object($v)){return $v instanceof \UnitEnum;}elseif(\is_string($v)){return \enum_exists($v);}return false;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('php81')){

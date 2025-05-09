@@ -7,11 +7,8 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @author Laravel
  * Conditionally compile styles from an array into a style list.
- *
- * @param array $array
- * @return string
  */
-function toCssStyles(array $array)
+function toCssStyles(array $array): string
 {
     $styles = [];
 

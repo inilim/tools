@@ -297,6 +297,14 @@ class Arr
     static function join(array $array, string $glue, string $finalGlue = ''): string {}
 
         /**
+ * @build_skip
+ * TODO сложна!
+ *
+ * @return void
+ */
+    static function keyBy() {}
+
+        /**
  * @template T of array
  * @param T $array
  * @return T
@@ -360,6 +368,18 @@ class Arr
     static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false) {}
 
         /**
+ * Run a map over each nested chunk of items.
+ *
+ * @template TKey
+ * @template TValue
+ *
+ * @param  array<TKey, array>  $array
+ * @param  callable(mixed...): TValue  $callback
+ * @return array<TKey, TValue>
+ */
+    static function mapSpread(array $array, callable $callback): array {}
+
+        /**
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TValue
@@ -416,9 +436,10 @@ class Arr
  * @param  callable(TValue, TKey): bool  $callback
  * @return array<int<0, 1>, array<TKey, TValue>>
  */
-    static function partition(iterable $array, callable $callback) {}
+    static function partition(iterable $array, callable $callback): array {}
 
         /**
+ * @author laravel
  * Pluck an array of values from an array.
  * @param  string|array|int|null  $value
  * @param  string|string[]|null  $key
@@ -436,7 +457,7 @@ class Arr
         /**
  * Prepend the key names of an associative array.
  */
-    static function prependKeysWith(array $array, string $prepend_with): array {}
+    static function prependKeysWith(array $array, string $prependWith): array {}
 
         /**
  * Get a value from the array, and remove it.
@@ -462,6 +483,13 @@ class Arr
  * @throws \InvalidArgumentException
  */
     static function random(array $array, ?int $number = null, bool $preserveKeys = false) {}
+
+        /**
+ * @author laravel
+ * Filter the array using the negation of the given callback.
+ * @param  callable  $callback
+ */
+    static function reject(array $array, callable $callback): array {}
 
         /**
  * @return \Closure(array &$array, string $oldKey, string $newKey):bool
@@ -529,11 +557,34 @@ class Arr
     static function shuffle(array $array, ?int $seed = null, bool $preserveKeys = true) {}
 
         /**
+ * @author laravel
+ * Get the first item in the collection, but only if exactly one item exists. Otherwise, throw an exception.
+ *
+ * @return mixed
+ *
+ * @throws \Illuminate\Support\ItemNotFoundException
+ * @throws \Illuminate\Support\MultipleItemsFoundException
+ */
+    static function sole(array $array, ?callable $callback = null) {}
+
+        /**
+ * @build_skip
+ * TODO сложна!
+ */
+    static function sort() {}
+
+        /**
  * @template T of (mixed[]|object)[]
  * @param T $arr
  * @return T
  */
     static function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $descending = false): array {}
+
+        /**
+ * @build_skip
+ * TODO сложна!
+ */
+    static function sortDesc() {}
 
         /**
  * Recursively sort an array by keys and values.
@@ -563,12 +614,13 @@ class Arr
     static function swap() {}
 
         /**
+ * @author laravel
  * Take the first or last {$limit} items from an array.
  * @template TArray
  * @param TArray $array
  * @return TArray
  */
-    static function take(array $array, int $limit) {}
+    static function take(array $array, int $limit): array {}
 
         /**
  * @author nette/utils
@@ -594,11 +646,17 @@ class Arr
     static function unique(array $array): array {}
 
         /**
+ * @author laravel
  * Return the default value of the given value.
- * @param  mixed $value
- * @return mixed
+ *
+ * @template TValue
+ * @template TArgs
+ *
+ * @param  TValue|\Closure(TArgs): TValue  $value
+ * @param  TArgs  ...$args
+ * @return TValue
  */
-    static function value($value) {}
+    static function value($value, ...$args) {}
 
         /**
  * @author inilim

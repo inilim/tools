@@ -31,6 +31,7 @@ class dataGetTest extends TestCase
         $this->assertNull(Arr::dataGet($arrayAccess, 'foo'));
         $this->assertNull(Arr::dataGet($arrayAccess, 'user.foo'));
         $this->assertNull(Arr::dataGet($arrayAccess, 'email', 'Not found'));
+        $this->assertEquals('taylor', Arr::dataGet(['user' => ['taylor', 'otwell']], ['user', 0]));
     }
 
     function testWithNestedArrays()

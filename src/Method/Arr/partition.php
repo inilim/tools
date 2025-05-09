@@ -16,7 +16,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param  callable(TValue, TKey): bool  $callback
  * @return array<int<0, 1>, array<TKey, TValue>>
  */
-function partition(iterable $array, callable $callback)
+function partition(iterable $array, callable $callback): array
 {
     $passed = [];
     $failed = [];

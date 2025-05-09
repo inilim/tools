@@ -5,11 +5,17 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author laravel
  * Return the default value of the given value.
- * @param  mixed $value
- * @return mixed
+ *
+ * @template TValue
+ * @template TArgs
+ *
+ * @param  TValue|\Closure(TArgs): TValue  $value
+ * @param  TArgs  ...$args
+ * @return TValue
  */
-function value($value)
+function value($value, ...$args)
 {
-    return $value instanceof \Closure ? $value() : $value;
+    return $value instanceof \Closure ? $value(...$args) : $value;
 }

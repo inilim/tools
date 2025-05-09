@@ -20,6 +20,7 @@ class ctype_upperTest extends \Inilim\Tool\Test\TestCase
     static function provideValidUppers()
     {
         return [
+            [-128],
             [65],
             ['ADD'],
             ['ASDF'],
@@ -53,7 +54,6 @@ class ctype_upperTest extends \Inilim\Tool\Test\TestCase
             [127],
             [280],
             [-129],
-            [-128],
             ['asdf'],
             ['123'],
             ["\x01"],

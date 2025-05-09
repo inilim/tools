@@ -7,5 +7,5 @@ namespace Inilim\Tool\Method\Arr{function get($array,$key,$default=null){if(!\In
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
-    function value($value){return $value instanceof \Closure?$value():$value;}
+    function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}

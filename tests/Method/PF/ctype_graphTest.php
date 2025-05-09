@@ -27,6 +27,7 @@ class ctype_graphTest extends \Inilim\Tool\Test\TestCase
             [53],
             [65],
             [98],
+            ['é'],
             ['asdf'],
             ['ADD'],
             ['123'],
@@ -57,7 +58,6 @@ class ctype_graphTest extends \Inilim\Tool\Test\TestCase
             [127],
             ['asd df'],
             [''],
-            ['é'],
             ["\n"],
             ["\x00asdf"],
         ];

@@ -28,6 +28,7 @@ class ctype_printTest extends \Inilim\Tool\Test\TestCase
             [280],
             [65],
             [98],
+            ['é'],
             ['567'],
             ['!!'],
             ['@@!#^$'],
@@ -54,7 +55,6 @@ class ctype_printTest extends \Inilim\Tool\Test\TestCase
             [25.4],
             [8],
             [127],
-            ['é'],
             ["\n"],
             ["\x00asdf"],
         ];

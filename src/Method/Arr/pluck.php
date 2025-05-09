@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author laravel
  * Pluck an array of values from an array.
  * @param  string|array|int|null  $value
  * @param  string|string[]|null  $key
@@ -13,9 +14,9 @@ function pluck(iterable $array, $value, $key = null): array
 {
     $results = [];
 
-    $value = \is_string($value) ? \explode('.', $value) : $value;
-
-    $key = $key === null || \is_array($key) ? $key : \explode('.', $key);
+    // [$value, $key] = static::explodePluckParameters($value, $key);
+    $value = \is_string($value)               ? \explode('.', $value) : $value;
+    $key   = $key === null || \is_array($key) ? $key                  : \explode('.', $key);
 
     foreach ($array as $item) {
         $itemValue = \Inilim\Tool\Method\Arr\dataGet($item, $value);

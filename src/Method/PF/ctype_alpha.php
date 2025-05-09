@@ -15,7 +15,8 @@ function ctype_alpha($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_alpha')) {
         return \ctype_alpha($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('ctype_alpha');
+    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
-    return $cls($text);
+    $text = $cls->__invoke($text, 'ctype_alpha');
+    return \is_string($text) && '' !== $text && !\preg_match('/[^A-Za-z]/', $text);
 }

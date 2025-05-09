@@ -174,13 +174,16 @@ class Other
     static function requestMethod() {}
 
         /**
+ * @author laravel
+ * Conditionally compile classes from an array into a CSS class list.
+ */
+    static function toCssClasses(array $array): string {}
+
+        /**
  * @author Laravel
  * Conditionally compile styles from an array into a style list.
- *
- * @param array $array
- * @return string
  */
-    static function toCssStyles(array $array) {}
+    static function toCssStyles(array $array): string {}
 
         /**
  * @author Inilim
