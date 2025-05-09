@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Data;
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsArray()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
+ * @return \Generator<string>
  */
 function htmlEntitiesAsGenerator(): \Generator
 {

@@ -12,15 +12,15 @@ class Data
         /**
  * @return \Closure():string[]
  */
-    static function URLProtocolsAsClosure() {}
-
-        
-    static function URLProtocolsAsGenerator(): Generator {}
+    static function URLProtocolsAsClosure(): Closure {}
 
         /**
- * @return string
+ * @return \Generator<string>
  */
-    static function URLProtocolsAsString(string $separator = '') {}
+    static function URLProtocolsAsGenerator(): Generator {}
+
+        
+    static function URLProtocolsAsString(string $separator = ''): string {}
 
         /**
  * @return \Closure():string[]
@@ -72,6 +72,7 @@ class Data
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsArray()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
+ * @return \Generator<string>
  */
     static function htmlEntitiesAsGenerator(): Generator {}
 
@@ -109,7 +110,9 @@ class Data
  */
     static function magicMethodsAsClosure() {}
 
-        
+        /**
+ * @return \Generator<string>
+ */
     static function magicMethodsAsGenerator(): Generator {}
 
         /**
@@ -142,7 +145,9 @@ class Data
  */
     static function numericEntitiesAsClosure() {}
 
-        
+        /**
+ * @return \Generator<string>
+ */
     static function numericEntitiesAsGenerator(): Generator {}
 
         /**

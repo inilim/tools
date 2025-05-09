@@ -50,3 +50,27 @@ if (!\function_exists('__include')) {
         require_once $pathToFile;
     }
 }
+
+if (!\function_exists('infoStringFunction')) {
+    function infoStringFunction(string $name)
+    {
+        $refl = new \ReflectionFunction($name);
+
+        $result = [
+            'str' => $refl->__toString(),
+            'args' => [],
+        ];
+
+        foreach ($refl->getParameters() as $param) {
+            $result['args'][] = [
+                'name' => $param->getName(),
+                'pos'  => $param->getPosition(),
+                // 'default' => $param->getDefaultValue(),
+                'str' => $param->__toString(),
+                'type' => $param->getType() ? $param->getType()->getName() : 'mixed',
+            ];
+        }
+
+        return $result;
+    }
+}

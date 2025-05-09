@@ -2,6 +2,9 @@
 
 namespace Inilim\Tool\Method\Data;
 
+/**
+ * @return \Generator<string>
+ */
 function numericEntitiesAsGenerator(): \Generator
 {
     yield '&#34;';

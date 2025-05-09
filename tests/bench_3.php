@@ -1,20 +1,22 @@
 <?php
 
-use Inilim\Dump\Dump;
-use Inilim\Tool\Str;
+use Inilim\Tool\Data;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-Dump::init();
+__include('Data::URLProtocolsAsString');
+__include('Data::URLProtocolsAsGenerator');
+__include('Data::URLProtocolsAsClosure');
+__include('Str::replaceFirst');
 
+// $a = \Inilim\Tool\Method\Data\URLProtocolsAsString('|');
 
-$e = new \Exception('ttt', 100);
-
+// de($a);
 
 $start = \microtime(true);
 for ($i = 0; $i <= 10000; $i++) {
-
-    // de($a);
+    // \Inilim\Tool\Method\Data\URLProtocolsAsStringV2('|');
+    \Inilim\Tool\Method\Data\URLProtocolsAsString('|');
 }
 $finish = \microtime(true) - $start;
 

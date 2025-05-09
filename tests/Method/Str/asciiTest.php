@@ -11,6 +11,12 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class asciiTest extends TestCase
 {
+    function testAsciiNull()
+    {
+        $this->assertSame('', Str::ascii(null));
+        $this->assertTrue(Str::isAscii(null));
+    }
+
     function testStringAscii(): void
     {
         $this->assertSame('@', Str::ascii('@'));

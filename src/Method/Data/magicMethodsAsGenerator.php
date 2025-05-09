@@ -2,6 +2,9 @@
 
 namespace Inilim\Tool\Method\Data;
 
+/**
+ * @return \Generator<string>
+ */
 function magicMethodsAsGenerator(): \Generator
 {
     yield '__construct';

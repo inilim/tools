@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use Inilim\Tool\Arr;
@@ -23,6 +22,33 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+__include('Str::wordCount');
+
+$a = \Inilim\Tool\Method\Str\wordCount('мама мыла раму');
+
+de($a);
+
+// $this->assertEquals(0, Str::wordCount('мама'));
+
+
+de();
+$a = infoStringFunction('str_word_count');
+
+de($a);
+
+dde(Json::isJson('1'));
+
+de();
+__include('Json::isJson');
+__include('Json::hasError');
+__include('Json::decode');
+__include('Check::php83');
+
+dde(\Inilim\Tool\Method\Json\isJson('1'));
+
+
+
+de();
 __include('PF::ctype_print');
 __include('PF::__resource');
 __include('PF::__resourceCache');

@@ -220,6 +220,14 @@ class Str
     static function isMobile(string $useragent): bool {}
 
         /**
+ * @author laravel
+ * @author symfony
+ * Determine if a given value is a valid URL.
+ * @param  string[] $protocols
+ */
+    static function isUrl(string $value, array $protocols = []): bool {}
+
+        /**
  * Convert a string to kebab case.
  */
     static function kebab(string $value): string {}
@@ -361,6 +369,7 @@ class Str
 
         /**
  * Repeat the given string.
+ * @param int<0,max> $times
  */
     static function repeat(string $string, int $times): string {}
 
@@ -404,11 +413,12 @@ class Str
 
         /**
  * Replace the patterns matching the given regular expression.
+ * @param string[]|string $replace
  * @param \Closure|string $replace
  * @param string[]|string $subject
  * @return string|string[]|null
  */
-    static function replaceMatches(string $pattern, $replace, $subject, int $limit = -1) {}
+    static function replaceMatches($pattern, $replace, $subject, int $limit = -1) {}
 
         /**
  * Replace the first occurrence of the given value if it appears at the start of the string.

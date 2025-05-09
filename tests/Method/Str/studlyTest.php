@@ -7,6 +7,7 @@ use Inilim\Tool\Test\TestCase;
 
 class studlyTest extends TestCase
 {
+    // alias pascal
     function test()
     {
         $this->assertSame('ExplosionPHPTools', Str::studly('explosion_p_h_p_tools'));
