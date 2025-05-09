@@ -18,8 +18,14 @@ namespace Inilim\Tool\Method\Arr;
 function last(iterable $array, ?callable $callback = null, $default = null)
 {
     if ($callback === null) {
-        return empty($array) ? \Inilim\Tool\Method\Arr\value($default) : \end($array);
+        return empty($array)
+            ? \Inilim\Tool\Method\Arr\value($default)
+            : \Inilim\Tool\Method\PF\array_last($array);
     }
 
-    return \Inilim\Tool\Method\Arr\head(\array_reverse($array, true), $callback, $default);
+    return \Inilim\Tool\Method\Arr\head(
+        \array_reverse($array, true),
+        $callback,
+        $default
+    );
 }

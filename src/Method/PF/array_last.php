@@ -14,9 +14,6 @@ function array_last(array $array)
     if (\Inilim\Tool\Method\Check\php85()) {
         return \array_last($array);
     }
-    if ($array === []) {
-        return null;
-    }
 
-    return \end($array);
+    return $array ? \current(\array_slice($array, -1)) : null;
 }

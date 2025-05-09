@@ -9,10 +9,16 @@ namespace Inilim\Tool\Method\Arr;
  */
 function join(array $array, string $glue, string $finalGlue = ''): string
 {
-    if ($finalGlue === '') return \implode($glue, $array);
+    if ($finalGlue === '') {
+        return \implode($glue, $array);
+    }
 
-    if (!$array) return '';
-    if (\sizeof($array) === 1) return \end($array);
+    if (!$array) {
+        return '';
+    }
+    if (\sizeof($array) === 1) {
+        return \Inilim\Tool\Method\PF\array_last($array);
+    }
 
     $finalItem = \array_pop($array);
 
