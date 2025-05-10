@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Str;
  * @param \PHP_URL_* $constant \PHP_URL_* constant.
  * @return string|empty-string The named key or false.
  */
-function translatePhpUrlConstantToKey(int $constant)
+function translatePhpUrlConstantToKey(int $constant): string
 {
 	if ($constant === \PHP_URL_SCHEME) {
 		$r = 'protocol';

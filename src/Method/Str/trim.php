@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Remove all whitespace from both ends of a string.
- * @return string
  */
-function trim(string $value, ?string $charlist = null)
+function trim(string $value, ?string $charlist = null): string
 {
     if ($charlist === null) {
         $trimDefaultCharacters = \preg_quote(" \n\r\t\v\0");

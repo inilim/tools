@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Convert the given value to a string or return the given fallback on failure.
  * @param  mixed  $value
- * @return string
  */
-function toStringOr($value, string $fallback)
+function toStringOr($value, string $fallback): string
 {
     try {
         return (string) $value;
