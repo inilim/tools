@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Integer{function abbreviate($number,int $precision=0,?int $maxPrecision=null){return \Inilim\Tool\Method\Integer\forHumans($number,$precision,$maxPrecision,true);}if(!\Inilim\Tool\Integer::__definedIfNot('__state')){
+    function __state(){static $o=null;return $o ?? new class{var string $locale='en';var string $currency='USD';};}
+    }if(!\Inilim\Tool\Integer::__definedIfNot('__summarize')){
+    function __summarize($number,int $precision=0,?int $maxPrecision=null,array $units=[]){if(!$units){$units=[3=>'K',6=>'M',9=>'B',12=>'T',15=>'Q'];}switch(true){case \floatval($number)===0.0:return $precision>0?\Inilim\Tool\Method\Integer\format(0,$precision,$maxPrecision):'0';case $number<0:return \sprintf('-%s',\Inilim\Tool\Method\Integer\__summarize(\abs($number),$precision,$maxPrecision,$units));case $number>=1000000000000000.0:return \sprintf('%s'.\end($units),\Inilim\Tool\Method\Integer\__summarize($number/1000000000000000.0,$precision,$maxPrecision,$units));}$numberExponent=\floor(\log10($number));$displayExponent=$numberExponent-$numberExponent%3;$number /= \pow(10,$displayExponent);return \trim(\sprintf('%s%s',\Inilim\Tool\Method\Integer\format($number,$precision,$maxPrecision),$units[$displayExponent]?? ''));}
+    }if(!\Inilim\Tool\Integer::__definedIfNot('forHumans')){
+    function forHumans($number,int $precision=0,?int $maxPrecision=null,bool $abbreviate=false){return \Inilim\Tool\Method\Integer\__summarize($number,$precision,$maxPrecision,$abbreviate?[3=>'K',6=>'M',9=>'B',12=>'T',15=>'Q']:[3=>' thousand',6=>' million',9=>' billion',12=>' trillion',15=>' quadrillion']);}
+    }if(!\Inilim\Tool\Integer::__definedIfNot('format')){
+    function format($number,?int $precision=null,?int $maxPrecision=null,?string $locale=null){if(!\Inilim\Tool\Method\Other\extPhp('intl')){throw new \RuntimeException('The "intl" PHP extension is required to use the [format] function.');}$formatter=new \NumberFormatter($locale ?? \Inilim\Tool\Method\Integer\__state()-> locale,\NumberFormatter :: DECIMAL);if($maxPrecision!==null){$formatter -> setAttribute(\NumberFormatter :: MAX_FRACTION_DIGITS,$maxPrecision);}elseif($precision!==null){$formatter -> setAttribute(\NumberFormatter :: FRACTION_DIGITS,$precision);}return $formatter -> format($number);}
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    }}

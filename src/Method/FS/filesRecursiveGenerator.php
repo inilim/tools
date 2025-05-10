@@ -6,7 +6,7 @@ namespace Inilim\Tool\Method\FS;
 
 /**
  * @skip_build
- * @author inilijm
+ * @author inilim
  */
 function filesRecursiveGenerator(string $pathToDir): \Generator
 {

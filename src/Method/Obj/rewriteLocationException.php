@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Obj;
  * @param T $e
  * @return T
  */
-function rewriteLocationException(\Throwable $e, string $file, int $line)
+function rewriteLocationException(\Throwable $e, string $file, int $line): object
 {
     $rc = new \ReflectionClass($e);
 

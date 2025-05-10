@@ -23,6 +23,12 @@ class File
     static function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false) {}
 
         /**
+ * Delete the file at a given path.
+ * @param  string[]|string  $paths
+ */
+    static function delete($paths): bool {}
+
+        /**
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
@@ -32,7 +38,7 @@ class File
  * @return array{result:string|null,exception:null|get_throw}
  * @throws get_throw
  */
-    static function get(string $filename, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null) {}
+    static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
         /**
  * @todo tests
@@ -40,11 +46,31 @@ class File
  * analog function "file_get_contents"
  * @phpstan-import-type get_throw from \File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
- * @param array{filename:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
+ * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
  * @return array{result:string|null,exception:null|get_throw}
  * @throws get_throw
  */
-    static function getV2(array $params) {}
+    static function getViaArray(array $params) {}
+
+        /**
+ * Get the contents of a file as decoded JSON.
+ * @param  mixed  $default
+ * @return mixed
+ * @phpstan-import-type get_throw from \File
+ * @throws get_throw
+ * @throws \JsonException
+ */
+    static function json(string $pathToFile, int $flags = 0, bool $lock = false, bool $throw = false, $default = null) {}
+
+        /**
+ * Get the contents of a file as decoded JSON.
+ * @param array{pathToFile:string,flags?:int,lock?:bool,throw?:bool,default?:mixed} $params
+ * @return mixed
+ * @phpstan-import-type get_throw from \File
+ * @throws get_throw
+ * @throws \JsonException
+ */
+    static function jsonViaArray(array $params) {}
 
         /**
  * @todo tests
@@ -59,6 +85,25 @@ class File
  * @throws get_throw
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
+
+        /**
+ * Get contents of a file with shared access.
+ * @phpstan-import-type get_throw from \File
+ * @return array{result:string|null,exception:null|get_throw}
+ * @throws get_throw
+ */
+    static function sharedGet(string $pathToFile, bool $throw = false): array {}
+
+        /**
+ * @todo tests
+ * Convert the given number to its file size equivalent.
+ * @param int|float|string $bytesOrFile
+ * @return string
+ * 
+ * @throws \Exception
+ * @throws \ValueError
+ */
+    static function size($bytesOrFile, bool $useBinaryPrefix = false): string {}
 
         /**
  * @todo tests

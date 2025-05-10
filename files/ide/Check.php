@@ -6,6 +6,54 @@ class Check
 {
         /**
  * @author Inilim
+ * @param mixed  $value
+ */
+    static function allArray($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function allBool($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function allNullOrArray($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function allNullOrBool($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function file($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function intOrFloat($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function intOrFloatOrFile($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed  $value
+ */
+    static function intOrFloatOrString($value): bool {}
+
+        /**
+ * @author Inilim
  * equal to or greater than
  */
     static function php74(): bool {}

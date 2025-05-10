@@ -22,6 +22,23 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+__include('File::sharedGet');
+__include('File::json');
+__include('File::get');
+__include('Other::tryCallWithErrHandler');
+__include('Obj::getCollectionThrowable');
+__include('Json::isJson');
+__include('Json::decode');
+__include('Json::hasError');
+__include('Check::php83');
+
+$a = \Inilim\Tool\Method\File\json('D:\projects\tools\tests\test.json', 0, false, true);
+
+de($a);
+
+de();
+
+
 __include('Str::wordCount');
 
 $a = \Inilim\Tool\Method\Str\wordCount('мама мыла раму');

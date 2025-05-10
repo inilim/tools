@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Obj;
 
+use IteratorAggregate;
+
 /**
  * @author Inilim
  * @phpstan-import-type getCollectionThrowable_return from \Obj
@@ -16,8 +18,8 @@ function getCollectionThrowable(
     ?string $file        = null,
     \Throwable $previous = null
 ) {
-    return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \Countable {
-        protected $array = [];
+    return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable {
+        protected $a = [];
 
         /**
          * @param \Throwable[] $exceptions
@@ -30,16 +32,21 @@ function getCollectionThrowable(
             $this->file = $file ?? '';
         }
 
+        function getIterator(): \Traversable
+        {
+            return new \ArrayIterator($this->a);
+        }
+
         function offsetExists($offset): bool
         {
-            return isset($this->array[$offset]);
+            return isset($this->a[$offset]);
         }
         /**
          * @return ?\Throwable
          */
         function offsetGet($offset)
         {
-            return $this->array[$offset] ?? null;
+            return $this->a[$offset] ?? null;
         }
         /**
          * @param \Throwable $e
@@ -51,9 +58,9 @@ function getCollectionThrowable(
                 throw new \Exception('Value must be of type object<\Throwable>');
             }
             if ($offset === null) {
-                $this->array[] = $e;
+                $this->a[] = $e;
             } else {
-                $this->array[$offset] = $e;
+                $this->a[$offset] = $e;
             }
         }
         /**
@@ -61,13 +68,14 @@ function getCollectionThrowable(
          */
         function offsetUnset($offset)
         {
-            unset($this->array[$offset]);
+            unset($this->a[$offset]);
         }
 
         function count(): int
         {
-            return \sizeof($this->array);
+            return \sizeof($this->a);
         }
     };
+
     return $e;
 }

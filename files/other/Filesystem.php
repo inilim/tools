@@ -16,30 +16,6 @@ use Symfony\Component\Mime\MimeTypes;
 
 class Filesystem
 {
-    use Conditionable, Macroable;
-
-    /**
-     * Determine if a file or directory exists.
-     *
-     * @param  string  $path
-     * @return bool
-     */
-    public function exists($path)
-    {
-        return file_exists($path);
-    }
-
-    /**
-     * Determine if a file or directory is missing.
-     *
-     * @param  string  $path
-     * @return bool
-     */
-    public function missing($path)
-    {
-        return ! $this->exists($path);
-    }
-
     /**
      * Get the contents of a file.
      *
@@ -58,49 +34,7 @@ class Filesystem
         throw new FileNotFoundException("File does not exist at path {$path}.");
     }
 
-    /**
-     * Get the contents of a file as decoded JSON.
-     *
-     * @param  string  $path
-     * @param  int  $flags
-     * @param  bool  $lock
-     * @return array
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    public function json($path, $flags = 0, $lock = false)
-    {
-        return json_decode($this->get($path, $lock), true, 512, $flags);
-    }
 
-    /**
-     * Get contents of a file with shared access.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    public function sharedGet($path)
-    {
-        $contents = '';
-
-        $handle = fopen($path, 'rb');
-
-        if ($handle) {
-            try {
-                if (flock($handle, LOCK_SH)) {
-                    clearstatcache(true, $path);
-
-                    $contents = fread($handle, $this->size($path) ?: 1);
-
-                    flock($handle, LOCK_UN);
-                }
-            } finally {
-                fclose($handle);
-            }
-        }
-
-        return $contents;
-    }
 
     /**
      * Get the returned value of a file.
@@ -273,61 +207,6 @@ class Filesystem
     public function append($path, $data, $lock = false)
     {
         return file_put_contents($path, $data, FILE_APPEND | ($lock ? LOCK_EX : 0));
-    }
-
-    /**
-     * Get or set UNIX mode of a file or directory.
-     *
-     * @param  string  $path
-     * @param  int|null  $mode
-     * @return mixed
-     */
-    public function chmod($path, $mode = null)
-    {
-        if ($mode) {
-            return chmod($path, $mode);
-        }
-
-        return substr(sprintf('%o', fileperms($path)), -4);
-    }
-
-    /**
-     * Delete the file at a given path.
-     *
-     * @param  string|array  $paths
-     * @return bool
-     */
-    public function delete($paths)
-    {
-        $paths = is_array($paths) ? $paths : func_get_args();
-
-        $success = true;
-
-        foreach ($paths as $path) {
-            try {
-                if (@unlink($path)) {
-                    clearstatcache(false, $path);
-                } else {
-                    $success = false;
-                }
-            } catch (ErrorException) {
-                $success = false;
-            }
-        }
-
-        return $success;
-    }
-
-    /**
-     * Move a file to a new location.
-     *
-     * @param  string  $path
-     * @param  string  $target
-     * @return bool
-     */
-    public function move($path, $target)
-    {
-        return rename($path, $target);
     }
 
     /**
@@ -550,17 +429,6 @@ class Filesystem
         $hash = @hash_file('xxh128', $firstFile);
 
         return $hash && hash_equals($hash, (string) @hash_file('xxh128', $secondFile));
-    }
-
-    /**
-     * Determine if the given path is a file.
-     *
-     * @param  string  $file
-     * @return bool
-     */
-    public function isFile($file)
-    {
-        return is_file($file);
     }
 
     /**

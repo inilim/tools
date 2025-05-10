@@ -7,25 +7,30 @@ namespace Inilim\Tool\Method\File;
 /**
  * @todo tests
  * Convert the given number to its file size equivalent.
- * @skip_build
- * @param int|float $bytes
- * @param int $precision
- * @param int|null $maxPrecision
+ * @param int|float|string $bytesOrFile
  * @return string
+ * 
+ * @throws \Exception
+ * @throws \ValueError
  */
-function size($bytes, int $precision = 0, ?int $maxPrecision = null)
+function size($bytesOrFile, bool $useBinaryPrefix = false): string
 {
-    $units = [
-        'B',
-        'KB',
-        'MB',
-        'GB',
-        'TB',
-        'PB',
-        'EB',
-        'ZB',
-        'YB',
-    ];
+    if (!\Inilim\Tool\Method\Check\intOrFloatOrFile($bytesOrFile)) {
+        throw new \ValueError(\sprintf('Argument #1 ($bytesOrFile) must be of type int|float|string-path-to-file, %s given in ', \gettype($bytesOrFile)));
+    }
+
+    if (\is_string($bytesOrFile)) {
+        $bytes = @\filesize($bytesOrFile);
+        if ($bytes === false) {
+            throw new \Exception(\sprintf('Fail open file "%s"', $bytesOrFile));
+        }
+    } else {
+        $bytes = $bytesOrFile;
+    }
+
+    $units = $useBinaryPrefix
+        ? ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'RiB', 'QiB']
+        : ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'RB', 'QB'];
 
     for ($i = 0; ($bytes / 1024) > 0.9 && ($i < \sizeof($units) - 1); $i++) {
         $bytes /= 1024;
@@ -33,7 +38,6 @@ function size($bytes, int $precision = 0, ?int $maxPrecision = null)
 
     return \sprintf(
         '%s %s',
-        // $this->format($bytes, $precision, $maxPrecision),
         $bytes,
         $units[$i]
     );

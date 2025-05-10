@@ -13,6 +13,6 @@ class File {}
 class Arr {}
 
 /**
- * @phpstan-type getCollectionThrowable_return \Exception&\ArrayAccess&\Countable
+ * @phpstan-type getCollectionThrowable_return \Exception&\ArrayAccess&\IteratorAggregate&\Countable
  */
 class Obj {}

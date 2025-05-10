@@ -15,16 +15,16 @@ namespace Inilim\Tool\Method\File;
  * @throws get_throw
  */
 function get(
-    string $filename,
+    string $pathToFile,
     int $offset           = 0,
     ?int $length          = null,
     bool $useIncludePath  = false,
     bool $throw           = false,
     $context              = null,
     ?array $contextParams = null
-) {
+): array {
     $args = [
-        'filename'       => $filename,
+        'pathToFile'     => $pathToFile,
         'offset'         => $offset,
         'length'         => $length,
         'useIncludePath' => $useIncludePath,
@@ -37,9 +37,19 @@ function get(
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use (&$args) {
             if (\is_array($args['context'])) {
-                $args['context'] = \stream_context_create($args['context'], $args['contextParams']);
+                // php 8.0.0 Параметры options и params теперь принимают значение null.
+                if ($args['contextParams'] === null) {
+                    $args['context'] = \stream_context_create($args['context']);
+                } else {
+                    $args['context'] = \stream_context_create($args['context'], $args['contextParams']);
+                }
             }
-            $args['result'] = \file_get_contents($args['filename'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
+            // php 8.0.0 Параметр length теперь принимает значение null.
+            if ($args['length'] === null) {
+                $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset']);
+            } else {
+                $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
+            }
         },
         static function ($type, $message) use (&$args) {
             $args['exception'] ??= \Inilim\Tool\Method\Obj\getCollectionThrowable();
@@ -59,6 +69,6 @@ function get(
 
     return [
         'result'    => $args['result'],
-        'exception' => null,
+        'exception' => $args['exception'],
     ];
 }

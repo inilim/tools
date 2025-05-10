@@ -24,7 +24,7 @@ class Obj
  * @param T $e
  * @return T
  */
-    static function rewriteLocationException(\Throwable $e, string $file, int $line) {}
+    static function rewriteLocationException(\Throwable $e, string $file, int $line): object {}
 
         /**
  * @author mohammadrasoulasghari <https://github.com/mohammadrasoulasghari>
