@@ -14,7 +14,7 @@ function d(...$v)
     $isCLI = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true);
     \array_map(
         static function ($i) use ($isCLI) {
-            $t = \preg_replace('#Object[\n\s]++\*RECURSION\*#', 'Object *RECURSION*', \print_r($i, true));
+            $t = \preg_replace('#Object[\n\r\t\s]++\*RECURSION\*#', 'Object *RECURSION*', \print_r($i, true));
             if ($isCLI) {
                 echo $t;
                 echo PHP_EOL;

@@ -13,7 +13,7 @@ function dd(...$v)
 {
     \ob_start();
     \var_dump(...$v);
-    $t = \preg_replace('#\=\>[\n\s]++\*RECURSION\*#', '=> *RECURSION*', \strval(\ob_get_clean()));
+    $t = \preg_replace('#\=\>[\n\r\t\s]++\*RECURSION\*#', '=> *RECURSION*', \strval(\ob_get_clean()));
 
     if (\in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
         echo $t;
