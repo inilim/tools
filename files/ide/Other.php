@@ -144,7 +144,7 @@ class Other
  * @author Inilim
  * @return string
  */
-    static function phpInput() {}
+    static function phpInput(): string {}
 
         /**
  * @author inilim

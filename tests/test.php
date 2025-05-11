@@ -32,7 +32,8 @@ __include('Json::decode');
 __include('Json::hasError');
 __include('Check::php83');
 
-$a = \Inilim\Tool\Method\File\json('D:\projects\tools\tests\test.json', 0, false, true);
+// $a = \Inilim\Tool\Method\File\json('D:\projects\tools\tests\test.json', 0, false, true);
+$a = \Inilim\Tool\Method\File\get('D:\projects\tools\tests\test222.json');
 
 de($a);
 

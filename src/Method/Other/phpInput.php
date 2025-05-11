@@ -8,11 +8,12 @@ namespace Inilim\Tool\Method\Other;
  * @author Inilim
  * @return string
  */
-function phpInput()
+function phpInput(): string
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function () {
-        return \file_get_contents('php://input');
-    }, null);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
+        static fn() => \file_get_contents('php://input'),
+        null
+    );
 
     if (\is_string($value)) {
         return $value;

@@ -73,6 +73,13 @@ class File
     static function jsonViaArray(array $params) {}
 
         /**
+ * Get the contents of a file one line at a time.
+ * @return \Closure():\Generator<string>
+ * @throws \ValueError
+ */
+    static function lines(string $pathToFile): Closure {}
+
+        /**
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
@@ -95,6 +102,12 @@ class File
     static function sharedGet(string $pathToFile, bool $throw = false): array {}
 
         /**
+ * Get the file size of a given file.
+ * @return int<-1,max>
+ */
+    static function size(string $pathToFile): int {}
+
+        /**
  * @todo tests
  * Convert the given number to its file size equivalent.
  * @param int|float|string $bytesOrFile
@@ -103,7 +116,7 @@ class File
  * @throws \Exception
  * @throws \ValueError
  */
-    static function size($bytesOrFile, bool $useBinaryPrefix = false): string {}
+    static function sizeConvert($bytesOrFile, bool $useBinaryPrefix = false): string {}
 
         /**
  * @todo tests

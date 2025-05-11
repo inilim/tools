@@ -32,6 +32,7 @@ function put(
         'contextParams' => $contextParams,
         'result'        => null,
         'exception'     => null,
+        'errors'        => null,
     ];
 
     // if ($mkdir && !is_dir($dir)) {
@@ -41,15 +42,31 @@ function put(
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use (&$args) {
             if (\is_array($args['context'])) {
-                $args['context'] = \stream_context_create($args['context'], $args['contextParams']);
+                // php 8.0.0 Параметры options и params теперь принимают значение null.
+                if ($args['contextParams'] === null) {
+                    $args['context'] = \stream_context_create($args['context']);
+                } else {
+                    $args['context'] = \stream_context_create($args['context'], $args['contextParams']);
+                }
             }
             $args['result'] = \file_put_contents($args['filename'], $args['data'], $args['flags'], $args['context']);
         },
-        static function ($type, $message) use (&$args) {
-            $args['exception'] ??= \Inilim\Tool\Method\Obj\getCollectionThrowable();
-            $args['exception'][] = new \ErrorException($message, 0, $type);
+        // [Handle]
+        static function ($type, $message, $file, $line) use (&$args) {
+            $args['errors'] ??= [];
+            $args['errors'][] = [$message, $type, $file, $line];
         }
     );
+
+    // Делаем исключения
+    if ($args['errors']) {
+        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
+        foreach ($args['errors'] as $err) {
+            $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
+        }
+        unset($args['errors']);
+    }
+
     if ($args['result'] === false) {
         if ($throw && $args['exception']) {
             throw $args['exception'];
@@ -62,6 +79,6 @@ function put(
 
     return [
         'result'    => $args['result'],
-        'exception' => null,
+        'exception' => $args['exception'],
     ];
 }

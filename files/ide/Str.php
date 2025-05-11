@@ -521,9 +521,8 @@ class Str
         /**
  * Convert the given value to a string or return the given fallback on failure.
  * @param  mixed  $value
- * @return string
  */
-    static function toStringOr($value, string $fallback) {}
+    static function toStringOr($value, string $fallback): string {}
 
         /**
  * Translate a PHP_URL_# constant to the named array keys PHP uses. | analog wp func "_wp_translate_php_url_constant_to_key"
@@ -534,13 +533,12 @@ class Str
  * @param \PHP_URL_* $constant \PHP_URL_* constant.
  * @return string|empty-string The named key or false.
  */
-    static function translatePhpUrlConstantToKey(int $constant) {}
+    static function translatePhpUrlConstantToKey(int $constant): string {}
 
         /**
  * Remove all whitespace from both ends of a string.
- * @return string
  */
-    static function trim(string $value, ?string $charlist = null) {}
+    static function trim(string $value, ?string $charlist = null): string {}
 
         /**
  * Make a string's first character uppercase.

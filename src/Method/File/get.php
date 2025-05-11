@@ -32,6 +32,7 @@ function get(
         'contextParams'  => $contextParams,
         'result'         => null,
         'exception'      => null,
+        'errors'         => null,
     ];
 
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -51,11 +52,21 @@ function get(
                 $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
             }
         },
-        static function ($type, $message) use (&$args) {
-            $args['exception'] ??= \Inilim\Tool\Method\Obj\getCollectionThrowable();
-            $args['exception'][] = new \ErrorException($message, 0, $type);
+        // [Handle]
+        static function ($type, $message, $file, $line) use (&$args) {
+            $args['errors'] ??= [];
+            $args['errors'][] = [$message, $type, $file, $line];
         }
     );
+
+    // Делаем исключения
+    if ($args['errors']) {
+        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
+        foreach ($args['errors'] as $err) {
+            $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
+        }
+        unset($args['errors']);
+    }
 
     if ($args['result'] === false) {
         if ($throw && $args['exception']) {

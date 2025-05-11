@@ -16,6 +16,7 @@ function sharedGet(string $pathToFile, bool $throw = false): array
         'pathToFile' => $pathToFile,
         'result'     => null,
         'exception'  => null,
+        'errors'     => null,
     ];
 
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -36,11 +37,21 @@ function sharedGet(string $pathToFile, bool $throw = false): array
                 }
             }
         },
-        static function ($type, $message) use (&$args) {
-            $args['exception'] ??= \Inilim\Tool\Method\Obj\getCollectionThrowable();
-            $args['exception'][] = new \ErrorException($message, 0, $type);
+        // [Handle]
+        static function ($type, $message, $file, $line) use (&$args) {
+            $args['errors'] ??= [];
+            $args['errors'][] = [$message, $type, $file, $line];
         }
     );
+
+    // Делаем исключения
+    if ($args['errors']) {
+        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
+        foreach ($args['errors'] as $err) {
+            $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
+        }
+        unset($args['errors']);
+    }
 
     if ($args['result'] === false || $args['result'] === null) {
         if ($throw && $args['exception']) {

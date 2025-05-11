@@ -87,33 +87,6 @@ class Filesystem
     }
 
     /**
-     * Get the contents of a file one line at a time.
-     *
-     * @param  string  $path
-     * @return \Illuminate\Support\LazyCollection
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    public function lines($path)
-    {
-        if (! $this->isFile($path)) {
-            throw new FileNotFoundException(
-                "File does not exist at path {$path}."
-            );
-        }
-
-        return new LazyCollection(function () use ($path) {
-            $file = new SplFileObject($path);
-
-            $file->setFlags(SplFileObject::DROP_NEW_LINE);
-
-            while (! $file->eof()) {
-                yield $file->fgets();
-            }
-        });
-    }
-
-    /**
      * Get the hash of the file at the given path.
      *
      * @param  string  $path
@@ -350,16 +323,7 @@ class Filesystem
         return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
     }
 
-    /**
-     * Get the file size of a given file.
-     *
-     * @param  string  $path
-     * @return int
-     */
-    public function size($path)
-    {
-        return filesize($path);
-    }
+
 
     /**
      * Get the file's last modification time.
