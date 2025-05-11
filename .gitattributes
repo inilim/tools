@@ -10,6 +10,7 @@
 
 /build.php export-ignore
 /build.bat export-ignore
+/bootstrap.dev.php export-ignore
 /checkTests.php export-ignore
 /autoide.php export-ignore
 /phpunit.xml export-ignore

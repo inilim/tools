@@ -381,19 +381,7 @@ class Filesystem
         return is_writable($path);
     }
 
-    /**
-     * Determine if two files are the same by comparing their hashes.
-     *
-     * @param  string  $firstFile
-     * @param  string  $secondFile
-     * @return bool
-     */
-    public function hasSameHash($firstFile, $secondFile)
-    {
-        $hash = @hash_file('xxh128', $firstFile);
 
-        return $hash && hash_equals($hash, (string) @hash_file('xxh128', $secondFile));
-    }
 
     /**
      * Find path names matching a given pattern.
