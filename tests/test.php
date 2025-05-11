@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
+use Inilim\Tool\VD;
 use Inilim\Tool\Arr;
 use Inilim\Tool\Obj;
 use Inilim\Tool\Str;
@@ -22,6 +23,47 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+__include('VD::d');
+__include('VD::dd');
+
+class test1
+{
+    protected $obj1;
+
+    function __construct($obj)
+    {
+        $this->obj1 = $obj;
+    }
+}
+
+class test2
+{
+    protected $obj2;
+
+    // function __construct($obj)
+    // {
+    //     $this->obj2 = $obj;
+    // }
+
+    function set($obj)
+    {
+        $this->obj2 = $obj;
+    }
+}
+
+$a = new test2;
+$b = new test1($a);
+$a->set($b);
+
+\Inilim\Tool\Method\VD\dd($a);
+
+
+
+
+
+
+
+de();
 __include('File::sharedGet');
 __include('File::json');
 __include('File::get');

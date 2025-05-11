@@ -53,6 +53,11 @@ class File
     static function getViaArray(array $params) {}
 
         /**
+ * Determine if two files are the same by comparing their hashes.
+ */
+    static function hasSameHash(string $firstFile, string $secondFile): ?bool {}
+
+        /**
  * Get the contents of a file as decoded JSON.
  * @param  mixed  $default
  * @return mixed
