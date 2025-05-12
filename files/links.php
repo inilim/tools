@@ -179,4 +179,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/Xml',
         'pathToClass' => $root . '/src/Xml.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\Sql',
+        'tool'   => $class = \Inilim\Tool\Sql::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Sql',
+        'pathMin'   => $root . '/src/MethodMin/Sql',
+        'pathToClass' => $root . '/src/Sql.php',
+    ],
 ];

@@ -12,8 +12,8 @@ namespace Inilim\Tool\Method\Str;
  */
 function remove($search, $subject, bool $caseSensitive = true)
 {
-    $search  = \Inilim\Tool\Method\Obj\toArrayIfTraversable($search);
-    $subject = \Inilim\Tool\Method\Obj\toArrayIfTraversable($subject);
+    $search  = \Inilim\Tool\Method\Arr\from($search);
+    $subject = \Inilim\Tool\Method\Arr\from($subject);
 
     return $caseSensitive
         ? \str_replace($search, '', $subject)

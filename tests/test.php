@@ -55,7 +55,7 @@ $a = new test2;
 $b = new test1($a);
 $a->set($b);
 
-\Inilim\Tool\Method\VD\dd($a);
+\Inilim\Tool\Method\VD\d($a);
 
 
 

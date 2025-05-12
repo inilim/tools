@@ -22,6 +22,12 @@ class Arr
     static function add(array $array, string $key, $value) {}
 
         /**
+ * Determine whether the given value is arrayable.
+ * @param  mixed  $value
+ */
+    static function arrayable($value): bool {}
+
+        /**
  * @author Laravel
  * @todo add support \IteratorAggregate
  * Collapse an array of arrays into a single array.
@@ -191,6 +197,20 @@ class Arr
     static function forget() {}
 
         /**
+ * @author laravel
+ * Get the underlying array of items from the given argument.
+ *
+ * @template TKey of array-key = array-key
+ * @template TValue = mixed
+ *
+ * @param  array<TKey, TValue>|WeakMap<object, TValue>|Traversable<TKey, TValue>|JsonSerializable|object  $items
+ * @return ($items is WeakMap ? list<TValue> : array<TKey, TValue>)
+ *
+ * @throws \InvalidArgumentException
+ */
+    static function from($items): array {}
+
+        /**
  * @author Laravel
  * Get an item from an array using "dot" notation.
  * @template D
@@ -210,7 +230,7 @@ class Arr
  * @param  mixed  $items
  * @return array<TKey, TValue>
  */
-    static function getArrayableItems($items) {}
+    static function getArrayableItems($items): array {}
 
         /**
  * @author nette/utils

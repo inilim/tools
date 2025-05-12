@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function replaceArray(string $search, $replace, string $subject)
 {
-    $replace = \Inilim\Tool\Method\Obj\toArrayIfTraversable($replace);
+    $replace = \Inilim\Tool\Method\Arr\from($replace);
 
     $segments = \explode($search, $subject);
     $result   = \array_shift($segments);

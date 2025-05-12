@@ -30,7 +30,7 @@ function dataGet($target, $key, $default = null)
 
         if ($segment === '*') {
             if (\is_object($target)) {
-                $target = \Inilim\Tool\Method\Arr\getArrayableItems($target);
+                $target = \Inilim\Tool\Method\Arr\from($target);
             } elseif (!\is_iterable($target)) {
                 return \Inilim\Tool\Method\Arr\value($default);
             }
@@ -51,11 +51,11 @@ function dataGet($target, $key, $default = null)
         } elseif ($segment === '\{first}') {
             $segment = '{first}';
         } elseif ($segment === '{first}') {
-            $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
+            $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\from($target));
         } elseif ($segment === '\{last}') {
             $segment = '{last}';
         } elseif ($segment === '{last}') {
-            $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\getArrayableItems($target));
+            $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\from($target));
         }
 
         if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {

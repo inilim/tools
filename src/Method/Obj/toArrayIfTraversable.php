@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Obj;
 
 /**
+ * @deprecated use Arr::from
  * @author mohammadrasoulasghari <https://github.com/mohammadrasoulasghari>
  * Convert a Traversable to an array, or return the original value if not Traversable.
  * @template T of mixed

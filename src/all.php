@@ -77,7 +77,7 @@ final class Data extends LazyMethodAbstract
 }
 final class Str extends LazyMethodAbstract
 {
-    protected const NAME = 'Str', IDX = 9;
+    protected const NAME = 'Str', IDX = 9, ALIAS = ['pascal' => 'studly'];
 }
 final class Other extends LazyMethodAbstract
 {
@@ -139,4 +139,8 @@ final class PF extends LazyMethodAbstract
 final class Xml extends LazyMethodAbstract
 {
     protected const NAME = 'Xml', IDX = 21;
+}
+final class Sql extends LazyMethodAbstract
+{
+    protected const NAME = 'Sql', IDX = 22;
 }
