@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use PhpParser\Node;
 use Inilim\Dump\Dump;
@@ -71,7 +71,7 @@ function getDepsFromDoc(string $codeRaw): array
 // 
 // ---------------------------------------------
 
-$links = include __DIR__ . '/files/links.php';
+$links = include \DIR_ROOT . '/files/links.php';
 /**
  * @var array{method:string,tool:string,nameClass:string,path:string,pathMin:string,pathToClass:string} $links
  */
@@ -92,14 +92,14 @@ $traverser       = new NodeTraverser();
 $traverser->addVisitor(new CommentVisitor);
 $nodeFinder      = new NodeFinder;
 $pretty          = new Standard;
-$pathToDb        = __DIR__ . '/files/build_dev.sqlite';
-$pathToSqlFiles  = __DIR__ . '/files/sql/';
+$pathToDb        = \DIR_ROOT . '/files/build_dev.sqlite';
+$pathToSqlFiles  = \DIR_ROOT . '/files/sql/';
 $dbDev           = new IPDOSQLite($pathToDb);
 $phpCodeMinifier = MinifierFactory::create();
 $twig = new Environment(
-    new FilesystemLoader(__DIR__ . '/files/template'),
+    new FilesystemLoader(\DIR_ROOT . '/files/template'),
     [
-        'cache'            => __DIR__ . '/files/cache',
+        'cache'            => \DIR_ROOT . '/files/cache',
         'debug'            => true,
         'auto_reload'      => true, // Если true, при каждом рендеринге шаблона Symfony сначала проверяет, изменился ли его исходный код с момента его компиляции. Если он изменился, шаблон автоматически компилируется заново.
         'strict_variables' => true, // Если установлено значение false, Twig будет молча игнорировать недопустимые переменные (переменные и/или атрибуты/методы, которые не существуют) и заменять их нулевым значением. Если установлено значение true, Twig вместо этого генерирует исключение (по умолчанию — false).
@@ -664,28 +664,28 @@ if ($switch || false) {
         Parser $parser,
         Standard $pretty
     ) {
-        $pathToFile   = __DIR__ . '/src/all.php';
-        $exists       = \is_file($pathToFile);
-        $countClasses = \sizeof($links);
+        $pathToFile   = \DIR_ROOT . '/src/all.php';
+        // $exists       = \is_file($pathToFile);
+        // $countClasses = \sizeof($links);
 
         // ---------------------------------------------
         // 
         // ---------------------------------------------
 
-        if (!$exists) {
-            \file_put_contents($pathToFile, $twig->render('all.twig'));
-        }
+        // if (!$exists) {
+        //     \file_put_contents($pathToFile, $twig->render('all.twig'));
+        // }
 
         // ---------------------------------------------
         // 
         // ---------------------------------------------
 
-        $code = \file_get_contents($pathToFile);
+        // $code = \file_get_contents($pathToFile);
 
-        if (\substr_count($code, 'class') === ($countClasses)) {
-            return;
-        }
-        unset($code, $countClasses, $exists);
+        // if (\substr_count($code, 'class') === $countClasses) {
+        //     return;
+        // }
+        // unset($code, $countClasses, $exists);
 
         \file_put_contents($pathToFile, $twig->render('all.twig'));
 
@@ -695,10 +695,10 @@ if ($switch || false) {
 
         $links = [
             [
-                'pathToClass' => __DIR__ . '/src/LazyMethodAbstract.php',
+                'pathToClass' => \DIR_ROOT . '/src/LazyMethodAbstract.php',
             ],
             [
-                'pathToClass' => __DIR__ . '/src/Num.php',
+                'pathToClass' => \DIR_ROOT . '/src/Num.php',
             ],
             ...$links,
         ];

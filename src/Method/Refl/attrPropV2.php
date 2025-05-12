@@ -18,9 +18,10 @@ function attrPropV2($classOrObj, string $prop, bool $throw = false)
     try {
         $reflProp = $refl->getProperty($prop);
     } catch (\ReflectionException $e) {
-        return $throw
-            ? throw $e
-            : null;
+        if ($throw) {
+            throw $e;
+        }
+        return null;
     }
 
     // \Inilim\Tool\Method\Arr\mapFilter();

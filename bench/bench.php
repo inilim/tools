@@ -1,19 +1,21 @@
 <?php
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
+require_once __DIR__ . '/ArrClassic.php';
 
-use Inilim\Dump\Dump;
-use Symfony\Component\Process\Process;
-
-Dump::init();
-$pathToPhp = __DIR__ . '/bench_1.php';
-// $process = new Process(['php', $pathToPhp]);
+// $pathToPhp = __DIR__ . '/bench_1.php';
+$pathToPhp = __DIR__ . '/bench_diff.php';
 $results = [];
+
+// Прогрев
+\exec('php ' . $pathToPhp);
+\exec('php ' . $pathToPhp);
 
 for ($i = 0; $i < 25; $i++) {
     // ---------------------------------------------
     // 
     // ---------------------------------------------
+
     $output = [];
     \exec('php ' . $pathToPhp, $output);
     // $process->run();
@@ -37,6 +39,7 @@ $colsM  = \array_column($results, 'finalMem');
 $colsPM = \array_column($results, 'finalPeakMem');
 
 de([
+    '$pathToPhp' => $pathToPhp,
     // '$results'       => $results,
     // 'finalTimeCols'  => $colsT,
     'finalTimeAvg'         => \array_sum($colsT) / \sizeof($colsT),

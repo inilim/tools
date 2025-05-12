@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 use PhpParser\Node;
 use Inilim\Dump\Dump;
@@ -98,7 +98,7 @@ Dump::init();
 // 
 // ------------------------------------------------------------------
 
-foreach (\glob(__DIR__ . '/files/ide/*') as $file) {
+foreach (\glob(\DIR_ROOT . '/files/ide/*') as $file) {
     \unlink($file);
 }
 
@@ -106,7 +106,7 @@ foreach (\glob(__DIR__ . '/files/ide/*') as $file) {
 // 
 // ------------------------------------------------------------------
 
-$links      = include __DIR__ . '/files/links.php';
+$links      = include \DIR_ROOT . '/files/links.php';
 
 $parser      = (new ParserFactory())->createForHostVersion();
 $traverser   = new NodeTraverser;
@@ -114,9 +114,9 @@ $traverser->addVisitor(new NameResolver);
 $nodeFinder = new NodeFinder;
 $pretty          = new Standard;
 $twig = new Environment(
-    new FilesystemLoader(__DIR__ . '/files/template'),
+    new FilesystemLoader(\DIR_ROOT . '/files/template'),
     [
-        'cache'            => __DIR__ . '/files/cache',
+        'cache'            => \DIR_ROOT . '/files/cache',
         'debug'            => true,
         'auto_reload'      => true, // Если true, при каждом рендеринге шаблона Symfony сначала проверяет, изменился ли его исходный код с момента его компиляции. Если он изменился, шаблон автоматически компилируется заново.
         'strict_variables' => true, // Если установлено значение false, Twig будет молча игнорировать недопустимые переменные (переменные и/или атрибуты/методы, которые не существуют) и заменять их нулевым значением. Если установлено значение true, Twig вместо этого генерирует исключение (по умолчанию — false).
@@ -132,7 +132,7 @@ foreach ($links as $link) {
 
     $fileFuncs = \glob($link['path'] . '/*.php');
     // \shuffle($fileFuncs);
-    $fileDoc    = \sprintf(__DIR__ . '/files/ide/%s.php', \basename($link['tool']));
+    $fileDoc    = \sprintf(\DIR_ROOT . '/files/ide/%s.php', \basename($link['tool']));
     $alias      = getAlias($link['tool']);
     // ------------------------------------------------------------------
     // 

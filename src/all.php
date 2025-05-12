@@ -10,19 +10,51 @@ abstract class LazyMethodAbstract
     /**
      * @var array<string,array<string,true>>
      */
-    protected static $exists = [];
+    protected static array $exists = [];
+    /**
+     * @param string ...$name
+     * @return \Closure|\Closure[]
+     */
+    static function __asClosure(string ...$name)
+    {
+        $one = false;
+        if (\sizeof($name) === 1) {
+            $one = true;
+        }
+        $result = [];
+        foreach ($name as $n) {
+            $fn = self::init($n);
+            if ($fn === false) {
+                throw new \RuntimeException('Undefined method Inilim\Tool\Method\\' . static::NAME . '\\' . $n);
+            } else {
+                $result[] = \Closure::fromCallable($fn);
+            }
+        }
+        return $one ? $result[0] : $result;
+    }
     /**
      * @internal desc
      * @param string $name
      * @param mixed[] $args
      * @return mixed|void
      */
-    static function __callStatic($name, $args)
+    static function __callStatic(string $name, array $args)
     {
-        $n = static::ALIAS[$name] ?? $name;
+        $fn = self::init($name);
+        if ($fn !== false) {
+            return $fn(...$args);
+        }
+        throw new \RuntimeException('Call to undefined method Inilim\Tool\Method\\' . static::NAME . '\\' . $name);
+    }
+    /**
+     * @return callable|false
+     */
+    protected static function init(string $name)
+    {
+        $n = (string) (static::ALIAS[$name] ?? $name);
         $fn = 'Inilim\Tool\Method\\' . static::NAME . '\\' . $n;
         if (isset(self::$exists[static::IDX][$n])) {
-            return $fn(...$args);
+            return $fn;
         }
         $file = __DIR__ . '/MethodMin/' . static::NAME . '/' . $n . '.php';
         if (\is_file($file)) {
@@ -30,10 +62,10 @@ abstract class LazyMethodAbstract
             if (\function_exists($fn)) {
                 self::$exists[static::IDX] ??= [];
                 self::$exists[static::IDX][$n] = true;
-                return $fn(...$args);
+                return $fn;
             }
         }
-        throw new \RuntimeException('Call to undefined method Inilim\Tool\Method\\' . static::NAME . '\\' . $name);
+        return false;
     }
     /**
      * @internal
@@ -43,7 +75,7 @@ abstract class LazyMethodAbstract
         $status = isset(self::$exists[static::IDX][$name]);
         if (!$status) {
             self::$exists[static::IDX] ??= [];
-            self::$exists[static::IDX][static::ALIAS[$name] ?? $name] = true;
+            self::$exists[static::IDX][$name] = true;
         }
         return $status;
     }

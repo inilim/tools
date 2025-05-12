@@ -27,6 +27,49 @@
 - Все функции минифицированы
 - Ускоренный парсинг PHP
 
+## 🌟 Особенности использования
+
+### 🚀 Внутри цикла
+
+#### Плохо
+```php
+use \Inilim\Tool\Arr;
+
+$array = [/** big array */];
+
+foreach($array as $item){
+    Arr::sortBy($item, 'key');
+}
+```
+#### Хорошо
+```php
+use \Inilim\Tool\Arr;
+
+$array = [/** big array */];
+$sortBy = Arr::__asClosure('sortBy');
+
+foreach($array as $item){
+    $sortBy($item, 'key');
+}
+```
+
+### 🚀 Изменение аргумента по ссылке "&"
+
+```php
+use \Inilim\Tool\Arr;
+
+$array = ['a' => 1, 'b' => 2];
+
+// Так как вызов идет через __callStatic(), аргументы передавать по ссылке нельзя.
+// Такие функции возвращают обьект \Closure с реализацией.
+Arr::pull()($array, 'a');
+
+/**
+ * $array ['b' => 2]
+ */
+
+```
+
 ## 📥 Установка
 
 ```bash

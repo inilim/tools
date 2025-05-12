@@ -6,9 +6,9 @@ use Inilim\Tool\PF;
 use Inilim\Tool\File;
 use Inilim\Tool\Path;
 
-require_once __DIR__ . '/bootstrap.dev.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-$links = include __DIR__ . '/files/links.php';
+$links = include \DIR_ROOT . '/files/links.php';
 
 $notFoundTest = 0;
 $foundTest    = 0;
@@ -20,7 +20,7 @@ foreach ($links as $link) {
 
     $pattern = \sprintf(
         '%s/src/Method/%s/*.php',
-        __DIR__,
+        \DIR_ROOT,
         $link['nameClass'],
     );
 
@@ -39,7 +39,7 @@ foreach ($links as $link) {
 
         $fileTest = \sprintf(
             '%s/tests/Method/%s/%s',
-            __DIR__,
+            \DIR_ROOT,
             $link['nameClass'],
             $fileInfo['name'] . 'Test.php'
         );

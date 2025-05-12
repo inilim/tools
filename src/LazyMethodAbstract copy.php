@@ -11,31 +11,7 @@ abstract class LazyMethodAbstract
     /**
      * @var array<string,array<string,true>>
      */
-    static protected array $exists = [];
-
-    /**
-     * @param string ...$name
-     * @return \Closure|\Closure[]
-     */
-    static function __asClosure(string ...$name)
-    {
-        $one = false;
-        if (\sizeof($name) === 1) {
-            $one = true;
-        }
-
-        $result = [];
-        foreach ($name as $n) {
-            $fn = self::init($n);
-            if ($fn === false) {
-                throw new \RuntimeException('Undefined method Inilim\\Tool\\Method\\' . static::NAME . '\\' . $n);
-            } else {
-                $result[] = \Closure::fromCallable($fn);
-            }
-        }
-
-        return $one ? $result[0] : $result;
-    }
+    protected static $exists = [];
 
     /**
      * @internal desc
@@ -45,25 +21,11 @@ abstract class LazyMethodAbstract
      */
     static function __callStatic(string $name, array $args)
     {
-        $fn = self::init($name);
-
-        if ($fn !== false) {
-            return $fn(...$args);
-        }
-
-        throw new \RuntimeException('Call to undefined method Inilim\\Tool\\Method\\' . static::NAME . '\\' . $name);
-    }
-
-    /**
-     * @return callable|false
-     */
-    static protected function init(string $name)
-    {
-        $n  = (string)(static::ALIAS[$name] ?? $name);
+        $n  = static::ALIAS[$name] ?? $name;
         $fn = 'Inilim\\Tool\\Method\\' . static::NAME . '\\' . $n;
 
         if (isset(self::$exists[static::IDX][$n])) {
-            return $fn;
+            return $fn(...$args);
         }
 
         $file = __DIR__ . '/MethodMin/' . static::NAME . '/' . $n . '.php';
@@ -74,11 +36,11 @@ abstract class LazyMethodAbstract
             if (\function_exists($fn)) {
                 self::$exists[static::IDX] ??= [];
                 self::$exists[static::IDX][$n] = true;
-                return $fn;
+                return $fn(...$args);
             }
         }
 
-        return false;
+        throw new \RuntimeException('Call to undefined method Inilim\\Tool\\Method\\' . static::NAME . '\\' . $name);
     }
 
     /**

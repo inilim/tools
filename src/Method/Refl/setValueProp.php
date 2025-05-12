@@ -20,9 +20,10 @@ function setValueProp($objectOrClass, string $name, $value, bool $throw = false)
     try {
         $prop->setValue($objectOrClass, $value);
     } catch (\Throwable $e) {
-        return $throw
-            ? throw $e
-            : false;
+        if ($throw) {
+            throw $e;
+        }
+        return null;
     }
     return true;
 }

@@ -28,10 +28,10 @@ function info(string $pathTo, bool $throw = true)
 {
     $t = \realpath($pathTo);
     if ($t === false) {
-        return $throw ? throw new \Exception(\sprintf(
-            '"%s" not found',
-            $pathTo
-        )) : null;
+        if ($throw) {
+            throw new \Exception(\sprintf('"%s" not found', $pathTo));
+        }
+        return null;
     }
 
     $t = \Inilim\Tool\Method\Path\normalizePath($t);

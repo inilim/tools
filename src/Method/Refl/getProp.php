@@ -17,10 +17,15 @@ function getProp($objectOrClass, string $name, bool $throw = false)
     }
 
     try {
-        return $ref->getProperty($name);
+        $prop = $ref->getProperty($name);
+        if (!\Inilim\Tool\Method\Check\php81()) {
+            $prop->setAccessible(true);
+        }
+        return $prop;
     } catch (\ReflectionException $e) {
-        return $throw
-            ? throw $e
-            : null;
+        if ($throw) {
+            throw $e;
+        }
+        return null;
     }
 }
