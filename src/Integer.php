@@ -2,7 +2,7 @@
 
 namespace Inilim\Tool;
 
-final class Integer extends \Inilim\Tool\LazyMethodAbstract
+class Integer extends \Inilim\Tool\LazyMethodAbstract
 {
     protected const NAME = 'Integer',
         IDX              = 5;

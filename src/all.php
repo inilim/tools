@@ -48,6 +48,9 @@ abstract class LazyMethodAbstract
         return $status;
     }
 }
+final class Num extends \Inilim\Tool\Integer
+{
+}
 final class File extends LazyMethodAbstract
 {
     protected const NAME = 'File', IDX = 3;
@@ -60,7 +63,7 @@ final class Arr extends LazyMethodAbstract
 {
     protected const NAME = 'Arr', IDX = 0;
 }
-final class Integer extends LazyMethodAbstract
+class Integer extends LazyMethodAbstract
 {
     protected const NAME = 'Integer', IDX = 5;
     // TINYINT: представляет целые числа от -128 до 127, занимает 1 байт

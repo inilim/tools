@@ -669,7 +669,7 @@ if ($switch || false) {
 
         $code = \file_get_contents($pathToFile);
 
-        if (\substr_count($code, 'final class') === ($countClasses)) {
+        if (\substr_count($code, 'class') === ($countClasses)) {
             return;
         }
         unset($code, $countClasses, $exists);
@@ -677,13 +677,24 @@ if ($switch || false) {
         \file_put_contents($pathToFile, $twig->render('all.twig'));
 
         // ---------------------------------------------
+        // Доп. классы
+        // ---------------------------------------------
+
+        $links = [
+            [
+                'pathToClass' => __DIR__ . '/src/LazyMethodAbstract.php',
+            ],
+            [
+                'pathToClass' => __DIR__ . '/src/Num.php',
+            ],
+            ...$links,
+        ];
+
+        // ---------------------------------------------
         // 
         // ---------------------------------------------
 
-        foreach (
-            [['pathToClass' => __DIR__ . '/src/LazyMethodAbstract.php'], ...$links]
-            as $link
-        ) {
+        foreach ($links as $link) {
 
             $code = \file_get_contents($link['pathToClass']);
 

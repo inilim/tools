@@ -113,15 +113,14 @@ class File
     static function size(string $pathToFile): int {}
 
         /**
- * @todo tests
+ * @author laravel from Number::fileSize
  * Convert the given number to its file size equivalent.
- * @param int|float|string $bytesOrFile
- * @return string
+ * @param int|float $bytes
  * 
  * @throws \Exception
- * @throws \ValueError
+ * @throws \InvalidArgumentException
  */
-    static function sizeConvert($bytesOrFile, bool $useBinaryPrefix = false): string {}
+    static function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null, bool $useBinaryPrefix = false): string {}
 
         /**
  * @todo tests

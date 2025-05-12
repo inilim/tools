@@ -5,40 +5,33 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
- * @todo tests
+ * @author laravel from Number::fileSize
  * Convert the given number to its file size equivalent.
- * @param int|float|string $bytesOrFile
- * @return string
+ * @param int|float $bytes
  * 
  * @throws \Exception
- * @throws \ValueError
+ * @throws \InvalidArgumentException
  */
-function sizeConvert($bytesOrFile, bool $useBinaryPrefix = false): string
+function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null, bool $useBinaryPrefix = false): string
 {
-    if (!\Inilim\Tool\Method\Check\intOrFloatOrFile($bytesOrFile)) {
-        throw new \ValueError(\sprintf('Argument #1 ($bytesOrFile) must be of type int|float|string-path-to-file, %s given in ', \gettype($bytesOrFile)));
+    if (!\Inilim\Tool\Method\Check\intOrFloat($bytes)) {
+        throw new \InvalidArgumentException(
+            \sprintf('Argument #1 ($bytes) must be of type int|float, %s given in ', \gettype($bytes))
+        );
     }
 
-    if (\is_string($bytesOrFile)) {
-        $bytes = \Inilim\Tool\Method\File\size($bytesOrFile);
-        if ($bytes === -1) {
-            throw new \Exception(\sprintf('Fail open file "%s"', $bytesOrFile));
-        }
-    } else {
-        $bytes = $bytesOrFile;
-    }
-
+    $base  = $useBinaryPrefix ? 1024 : 1000;
     $units = $useBinaryPrefix
         ? ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'RiB', 'QiB']
         : ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'RB', 'QB'];
 
-    for ($i = 0; ($bytes / 1024) > 0.9 && ($i < \sizeof($units) - 1); $i++) {
-        $bytes /= 1024;
+    for ($i = 0; ($bytes / $base) > 0.9 && ($i < \sizeof($units) - 1); $i++) {
+        $bytes /= $base;
     }
 
     return \sprintf(
         '%s %s',
-        $bytes,
+        \Inilim\Tool\Method\Integer\format($bytes, $precision, $maxPrecision),
         $units[$i]
     );
 }
