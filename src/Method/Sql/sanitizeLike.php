@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Sql;
  * LIKE statement. This method uses +escape_character+ to escape all
  * occurrences of itself, "_" and "%".
  */
-function sanitizeSqlLike(string $string, string $escapeChar = '\\'): string
+function sanitizeLike(string $string, string $escapeChar = '\\'): string
 {
     if (str_contains($string, $escapeChar) && $escapeChar !== '%' && $escapeChar !== '_') {
         $string = \str_replace($escapeChar, $escapeChar . $escapeChar, $string);

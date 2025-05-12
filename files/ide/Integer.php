@@ -136,7 +136,7 @@ class Integer
  * может ли значение стать integer без изменений
  * @param mixed $v
  */
-    static function isIntPHP($v): bool {}
+    static function isIntPhp($v): bool {}
 
         /**
  * 0 <> 4_294_967_295

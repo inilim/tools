@@ -146,7 +146,7 @@ foreach ($links as $link) {
         // 
         // ---------------------------------------------
 
-        if (\str_contains($code, '@skip_build')) {
+        if (\str_contains($code, '@skip_build') || \str_contains($code, '@build_skip')) {
             continue;
         }
 

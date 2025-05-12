@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Integer;
  * может ли значение стать integer без изменений
  * @param mixed $v
  */
-function isIntPHP($v): bool
+function isIntPhp($v): bool
 {
     if (\Inilim\Tool\Method\Integer\isNumeric($v)) {
         /** @var string $v */

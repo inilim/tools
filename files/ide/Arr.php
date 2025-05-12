@@ -317,14 +317,6 @@ class Arr
     static function join(array $array, string $glue, string $finalGlue = ''): string {}
 
         /**
- * @build_skip
- * TODO сложна!
- *
- * @return void
- */
-    static function keyBy() {}
-
-        /**
  * @template T of array
  * @param T $array
  * @return T
@@ -588,23 +580,11 @@ class Arr
     static function sole(array $array, ?callable $callback = null) {}
 
         /**
- * @build_skip
- * TODO сложна!
- */
-    static function sort() {}
-
-        /**
  * @template T of (mixed[]|object)[]
  * @param T $arr
  * @return T
  */
     static function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $descending = false): array {}
-
-        /**
- * @build_skip
- * TODO сложна!
- */
-    static function sortDesc() {}
 
         /**
  * Recursively sort an array by keys and values.
