@@ -3,7 +3,7 @@
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 $prePeakMem       = \memory_get_peak_usage(true);
 $preMem           = \memory_get_usage(true);

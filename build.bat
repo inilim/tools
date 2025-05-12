@@ -1,2 +1,2 @@
-php build.php & php autoide.php
+php build/build.php & php build/autoide.php
 pause

@@ -3,7 +3,7 @@
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Dump\Dump;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 Dump::init();
 $find = 'T11Mq6nvvqRSUbP';

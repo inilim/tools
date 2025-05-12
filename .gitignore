@@ -1,6 +1,11 @@
+# Exts
+
+# Dirs
 /vendor
+/files/cache/*
+
+# Files
 /composer.lock
 .htaccess
 .phpunit.result.cache
-/files/cache/*
 /files/build_dev.sqlite

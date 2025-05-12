@@ -1,18 +1,20 @@
-/tests export-ignore
-/.git* export-ignore
+# Exts
+/*.bat export-ignore
 
-/files/other export-ignore
-/files/cache export-ignore
-/files/sql export-ignore
+# Dirs
+/.git*          export-ignore
+/tests          export-ignore
 /files/template export-ignore
-/files/links.php export-ignore
-/files/build_dev.sqlite export-ignore
+/files/sql      export-ignore
+/files/other    export-ignore
+/files/cache    export-ignore
+/build          export-ignore
+/bench          export-ignore
 
-/build.php export-ignore
-/build.bat export-ignore
-/bootstrap.dev.php export-ignore
-/checkTests.php export-ignore
-/autoide.php export-ignore
-/phpunit.xml export-ignore
-/phpstan.neon export-ignore
-/README.md export-ignore
+# Files
+/bootstrap.dev.php      export-ignore
+/files/links.php        export-ignore
+/files/build_dev.sqlite export-ignore
+/phpunit.xml            export-ignore
+/phpstan.neon           export-ignore
+/README.md              export-ignore
