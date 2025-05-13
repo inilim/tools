@@ -203,4 +203,75 @@ class ArrClassic
         $result = \array_filter($array, $callback, \ARRAY_FILTER_USE_BOTH);
         return $preserveKeys ? $result : \array_values($result);
     }
+
+    /**
+     * @author inilim
+     */
+    static function compareValues(array $a, array $b, array ...$arrays): bool
+    {
+        $arrays[] = $a;
+        $arrays[] = $b;
+        $arrays = \array_map(
+            static fn($array) => \md5(\serialize($array)),
+            self::sortRecursive(self::resetKeysRecursive($arrays))
+        );
+        return \sizeof(self::unique($arrays)) === 1;
+    }
+
+    /**
+     * Recursively sort an array by keys and values.
+     */
+    static function sortRecursive(array $array, int $options = \SORT_REGULAR, bool $descending = false): array
+    {
+        foreach ($array as &$value) {
+            if (\is_array($value)) {
+                $value = self::sortRecursive($value, $options, $descending);
+            }
+        }
+
+        if (self::isAssoc($array)) {
+            $descending
+                ? \krsort($array, $options)
+                : \ksort($array, $options);
+        } else {
+            $descending
+                ? \rsort($array, $options)
+                : \sort($array, $options);
+        }
+
+        return $array;
+    }
+
+    /**
+     * Determines if an array is associative.
+     * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
+     */
+    static function isAssoc(array $array): bool
+    {
+        $keys = \array_keys($array);
+        return \array_keys($keys) !== $keys;
+    }
+
+    /**
+     * @author inilim
+     * @return array
+     */
+    static function resetKeysRecursive(array $array)
+    {
+        $array = \array_values($array);
+        foreach ($array as $idx => $value) {
+            $array[$idx] = \is_array($value) ? self::resetKeysRecursive($value) : $value;
+        }
+        return $array;
+    }
+
+    /**
+     * @template TValue
+     * @param TValue[] $array
+     * @return TValue[]
+     */
+    static function unique(array $array): array
+    {
+        return \array_keys(\array_flip($array));
+    }
 }

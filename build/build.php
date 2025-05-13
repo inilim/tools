@@ -553,6 +553,10 @@ if ($switch || false) {
     ) {
 
         $methods        = $dbDev->exec('SELECT * FROM methods', 2);
+        $methods        = \array_map(static function ($m) {
+            unset($m['code_raw']);
+            return $m;
+        }, $methods);
         $tool_method    = \array_column($links, 'tool', 'method');
         $pathMin_method = \array_column($links, 'pathMin', 'method');
 
@@ -584,12 +588,13 @@ if ($switch || false) {
                 ], 2);
 
                 $deps = \array_map(static function ($dep) use (&$tool_method) {
+                    unset($dep['code_raw']);
                     $dep['tool'] = $tool_method[$dep['namespace']];
                     $dep['isMain'] = false;
                     return $dep;
                 }, $deps);
 
-                $method['tool'] = $tool_method[$method['namespace']];
+                $mainNamespace = $method['tool'] = $tool_method[$method['namespace']];
 
                 // ---------------------------------------------
                 // 
@@ -604,17 +609,15 @@ if ($switch || false) {
                 }
                 $deps = $newDeps;
                 unset($newDeps);
-                // d($deps);
 
                 // ---------------------------------------------
-                // 
+                // TODO добавить use ..., для сокращения
                 // ---------------------------------------------
 
                 $result = $twig->render('withDepsGroupNamespace.twig', [
                     // 'main' => $method,
                     'deps' => $deps,
                 ]);
-                // de($result);
                 $deps = [];
             }
 
@@ -630,14 +633,11 @@ if ($switch || false) {
             // 
             // ---------------------------------------------
 
-            // de($result);
             \file_put_contents(\sprintf(
                 '%s/%s.php',
                 $pathToDir,
                 $method['name'],
             ), $result);
-
-            // de($result);
         }
 
         d('Bundles regen');
