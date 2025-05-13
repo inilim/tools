@@ -1,5 +1,7 @@
 <?php
 
+namespace Inilim\Tool\Bench;
+
 class ArrClassic
 {
     /**

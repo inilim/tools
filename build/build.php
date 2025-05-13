@@ -2,70 +2,22 @@
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-use PhpParser\Node;
-use Inilim\Dump\Dump;
 use PhpParser\Parser;
 use Twig\Environment;
 use PhpParser\NodeFinder;
 use Inilim\IPDO\IPDOSQLite;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
+use Inilim\Tool\Build\Helper;
 use PhpParser\Node\Stmt\Class_;
 use PhpCodeMinifier\PhpMinifier;
 use Twig\Loader\FilesystemLoader;
 use PhpParser\Node\Stmt\Function_;
 use PhpCodeMinifier\MinifierFactory;
+use Inilim\Tool\Build\CommentVisitor;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Node\Name\FullyQualified;
-use PhpParser\NodeVisitorAbstract;
 
-Dump::init();
-
-class CommentVisitor extends NodeVisitorAbstract
-{
-    function leaveNode(Node $node)
-    {
-        // Удаляем комментарии из узла (если они есть)
-        if ($node->getAttribute('comments')) {
-            // $node->setDocComment(new \PhpParser\Comment\Doc(''));
-            $node->setAttribute('comments', []);
-            // de($node);
-        }
-        return null; // Не изменяем сам узел
-    }
-}
-
-function replaceFirst(string $search, string $replace, string $subject): string
-{
-    if ($search === '') return $subject;
-
-    $position = \strpos($subject, $search);
-
-    if ($position !== false) {
-        return \substr_replace($subject, $replace, $position, \strlen($search));
-    }
-
-    return $subject;
-}
-
-function getDepsFromDoc(string $codeRaw): array
-{
-    if (\str_contains($codeRaw, '@deps(')) {
-
-        \preg_match_all('#@deps\(([a-z\d\_' . \preg_quote('\\') . ']{1,})\)#i', $codeRaw, $depsMatches);
-
-        if (!$depsMatches) {
-            de([
-                __LINE__,
-                '$codeRaw' => $codeRaw,
-            ]);
-        }
-
-        return \array_map(static fn($d) => \trim($d, '\\'), $depsMatches[1]);
-    }
-
-    return [];
-}
 
 // ---------------------------------------------
 // 
@@ -288,7 +240,7 @@ if ($switch || false) {
                 // ---------------------------------------------
 
                 $code   = $phpCodeMinifier->minifyString('<?php ' . $code);
-                $code   = \replaceFirst('<?php ', '', $code);
+                $code   = Helper::replaceFirst('<?php ', '', $code);
 
                 // ------------------------------------------------------------------
                 // 
@@ -367,7 +319,7 @@ if ($switch || false) {
             // Берем зависимости из doc блока "@deps(...)"
             // ---------------------------------------------
 
-            $depsAs = \array_merge($depsAs, getDepsFromDoc($method['code_raw']));
+            $depsAs = \array_merge($depsAs, Helper::getDepsFromDoc($method['code_raw']));
 
             while (true) {
 
@@ -443,7 +395,7 @@ if ($switch || false) {
                 // Берем зависимости из doc блока "@deps(...)"
                 // ---------------------------------------------
 
-                $tDeps = \array_merge($tDeps, getDepsFromDoc($methodDep['code_raw']));
+                $tDeps = \array_merge($tDeps, Helper::getDepsFromDoc($methodDep['code_raw']));
 
                 // ---------------------------------------------
                 // 

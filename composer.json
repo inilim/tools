@@ -19,7 +19,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Inilim\\Tool\\Test\\": "tests/"
+            "Inilim\\Tool\\Test\\": "tests/",
+            "Inilim\\Tool\\Build\\": "build/src/",
+            "Inilim\\Tool\\Bench\\": "bench/src/"
         },
         "files": []
     },

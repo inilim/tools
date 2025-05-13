@@ -3,9 +3,9 @@
 use Inilim\Tool\Arr;
 use Inilim\Tool\Refl;
 use Inilim\Tool\LazyMethodAbstract;
+use Inilim\Tool\Bench\ArrClassic;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
-require_once __DIR__ . '/ArrClassic.php';
 
 [$get, $add, $compareValues] = Arr::__asClosure('get', 'add', 'compareValues');
 

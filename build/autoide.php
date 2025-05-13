@@ -15,6 +15,7 @@ use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\NodeVisitor\NameResolver;
+use Inilim\Tool\Build\Helper;
 
 function getAlias(string $class): array
 {

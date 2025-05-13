@@ -2,9 +2,9 @@
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Str;
+use Inilim\Tool\Bench\ArrClassic;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
-require_once __DIR__ . '/ArrClassic.php';
 
 $prePeakMem       = \memory_get_peak_usage(false);
 $preMem           = \memory_get_usage(false);

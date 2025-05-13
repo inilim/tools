@@ -1,7 +1,8 @@
 <?php
 
+use Inilim\Tool\Bench\ArrClassic;
+
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
-require_once __DIR__ . '/ArrClassic.php';
 
 // $pathToPhp = __DIR__ . '/bench_1.php';
 $pathToPhp = __DIR__ . '/bench_diff.php';
