@@ -32,4 +32,16 @@ class VD
  */
     static function de(...$v) {}
 
+        /**
+ * @author inilim
+ * @return void
+ */
+    static function trace(int $limit = 0, bool $ignoreArgs = true) {}
+
+        /**
+ * @author inilim
+ * @return void
+ */
+    static function tracee(int $limit = 0, bool $ignoreArgs = true) {}
+
     }

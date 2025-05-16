@@ -1,24 +1,12 @@
 <?php
 
-declare(strict_types=1);
+use Inilim\Tool\Arr;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-function __resource(string $name)
-{
-    if (\is_file($name = __DIR__ . '/' . $name . '.php')) {
-        return require $name;
-    }
+$test = [];
 
-    return null;
-}
+// $get = Arr::__asClosure('get');
+Arr::get($test, 1);
 
-dUsage();
-
-$a = \__resource('testResourceClosureGenerator');
-
-dUsage();
-
-unset($a);
-
-dUsage();
+deUsage();

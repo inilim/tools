@@ -2,7 +2,7 @@
 
 namespace Inilim\Tool;
 
-abstract class LazyMethodAbstract
+abstract class LazyMethodAbstract1
 {
     protected const NAME = '',
         ALIAS            = [],

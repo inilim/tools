@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\File;
  * @throws \Exception
  * @throws \InvalidArgumentException
  */
-function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null, bool $useBinaryPrefix = false): string
+function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null): string
 {
     if (!\Inilim\Tool\Method\Check\intOrFloat($bytes)) {
         throw new \InvalidArgumentException(
@@ -20,13 +20,10 @@ function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null, bool
         );
     }
 
-    $base  = $useBinaryPrefix ? 1024 : 1000;
-    $units = $useBinaryPrefix
-        ? ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'RiB', 'QiB']
-        : ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'RB', 'QB'];
+    $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-    for ($i = 0; ($bytes / $base) > 0.9 && ($i < \sizeof($units) - 1); $i++) {
-        $bytes /= $base;
+    for ($i = 0; ($bytes / 1024) > 0.9 && ($i < \count($units) - 1); $i++) {
+        $bytes /= 1024;
     }
 
     return \sprintf(

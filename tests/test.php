@@ -23,6 +23,21 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+de();
+
+
 __include('VD::d');
 __include('VD::dd');
 
