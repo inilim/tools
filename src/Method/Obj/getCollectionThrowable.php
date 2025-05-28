@@ -16,7 +16,7 @@ function getCollectionThrowable(
     int $code            = 0,
     ?int $line           = null,
     ?string $file        = null,
-    \Throwable $previous = null
+    ?\Throwable $previous = null
 ) {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable {
         protected $a = [];
