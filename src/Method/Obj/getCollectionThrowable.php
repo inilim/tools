@@ -8,14 +8,14 @@ use IteratorAggregate;
 
 /**
  * @author Inilim
- * @phpstan-import-type getCollectionThrowable_return from \Obj
- * @return getCollectionThrowable_return
+ * @phpstan-import-type TYPEgetCollectionThrowable from \TypeObj
+ * @return TYPEgetCollectionThrowable
  */
 function getCollectionThrowable(
-    string $message      = '',
-    int $code            = 0,
-    ?int $line           = null,
-    ?string $file        = null,
+    string $message       = '',
+    int $code             = 0,
+    ?int $line            = null,
+    ?string $file         = null,
     ?\Throwable $previous = null
 ) {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable {
@@ -37,6 +37,7 @@ function getCollectionThrowable(
             return new \ArrayIterator($this->a);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetExists($offset): bool
         {
             return isset($this->a[$offset]);
@@ -44,6 +45,7 @@ function getCollectionThrowable(
         /**
          * @return ?\Throwable
          */
+        #[\ReturnTypeWillChange]
         function offsetGet($offset)
         {
             return $this->a[$offset] ?? null;
@@ -52,10 +54,11 @@ function getCollectionThrowable(
          * @param \Throwable $e
          * @return void
          */
+        #[\ReturnTypeWillChange]
         function offsetSet($offset, $e)
         {
             if (!($e instanceof \Throwable)) {
-                throw new \Exception('Value must be of type object<\Throwable>');
+                throw new \InvalidArgumentException('Value must be of type object<\Throwable>');
             }
             if ($offset === null) {
                 $this->a[] = $e;
@@ -66,6 +69,7 @@ function getCollectionThrowable(
         /**
          * @return void
          */
+        #[\ReturnTypeWillChange]
         function offsetUnset($offset)
         {
             unset($this->a[$offset]);

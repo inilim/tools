@@ -8,8 +8,8 @@ namespace Inilim\Tool\Method\File;
  * Get the contents of a file as decoded JSON.
  * @param array{pathToFile:string,flags?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @phpstan-import-type get_throw from \File
- * @throws get_throw
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @throws TYPEExceptionV1
  * @throws \JsonException
  */
 function jsonViaArray(array $params)

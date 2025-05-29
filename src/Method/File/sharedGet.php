@@ -6,9 +6,9 @@ namespace Inilim\Tool\Method\File;
 
 /**
  * Get contents of a file with shared access.
- * @phpstan-import-type get_throw from \File
- * @return array{result:string|null,exception:null|get_throw}
- * @throws get_throw
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @throws TYPEExceptionV1
  */
 function sharedGet(string $pathToFile, bool $throw = false): array
 {

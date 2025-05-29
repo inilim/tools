@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @phpstan-import-type getCollectionThrowable_return from \Obj
+ * @phpstan-import-type TYPEgetCollectionThrowable from \TypeObj
  * 
- * @phpstan-type get_throw (getCollectionThrowable_return)<\ErrorException>
+ * @phpstan-type TYPEExceptionV1 (TYPEgetCollectionThrowable)<\ErrorException>
  */
-class File {}
+class TypeFile {}
 
 /**
  * 
  */
-class Arr {}
+class TypeArr {}
 
 /**
- * @phpstan-type getCollectionThrowable_return \Exception&\ArrayAccess&\IteratorAggregate&\Countable
+ * @phpstan-type TYPEgetCollectionThrowable \Exception&\ArrayAccess&\IteratorAggregate&\Countable
  */
-class Obj {}
+class TypeObj {}

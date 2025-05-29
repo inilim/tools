@@ -32,11 +32,11 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type get_throw from \File
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:string|null,exception:null|get_throw}
- * @throws get_throw
+ * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @throws TYPEExceptionV1
  */
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
@@ -44,11 +44,11 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type get_throw from \File
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:string|null,exception:null|get_throw}
- * @throws get_throw
+ * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @throws TYPEExceptionV1
  */
     static function getViaArray(array $params) {}
 
@@ -61,8 +61,8 @@ class File
  * Get the contents of a file as decoded JSON.
  * @param  mixed  $default
  * @return mixed
- * @phpstan-import-type get_throw from \File
- * @throws get_throw
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @throws TYPEExceptionV1
  * @throws \JsonException
  */
     static function json(string $pathToFile, int $flags = 0, bool $lock = false, bool $throw = false, $default = null) {}
@@ -71,8 +71,8 @@ class File
  * Get the contents of a file as decoded JSON.
  * @param array{pathToFile:string,flags?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @phpstan-import-type get_throw from \File
- * @throws get_throw
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @throws TYPEExceptionV1
  * @throws \JsonException
  */
     static function jsonViaArray(array $params) {}
@@ -88,21 +88,21 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
- * @phpstan-import-type get_throw from \File
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-put-contents.php
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|get_throw} return result -1 if error
- * @throws get_throw
+ * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
+ * @throws TYPEExceptionV1
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
 
         /**
  * Get contents of a file with shared access.
- * @phpstan-import-type get_throw from \File
- * @return array{result:string|null,exception:null|get_throw}
- * @throws get_throw
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @throws TYPEExceptionV1
  */
     static function sharedGet(string $pathToFile, bool $throw = false): array {}
 

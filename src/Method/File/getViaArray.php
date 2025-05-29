@@ -8,11 +8,11 @@ namespace Inilim\Tool\Method\File;
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type get_throw from \File
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:string|null,exception:null|get_throw}
- * @throws get_throw
+ * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @throws TYPEExceptionV1
  */
 function getViaArray(array $params)
 {

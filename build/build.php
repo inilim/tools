@@ -202,7 +202,9 @@ if ($switch || false) {
                 // Ищем функцию
                 // ---------------------------------------------
 
+                $attr     = $nodeFinder->findFirstInstanceOf($ast, \PhpParser\Node\Attribute::class);
                 $function = $nodeFinder->findFirstInstanceOf($ast, Function_::class);
+
                 unset($ast);
                 if ($function === null) {
                     de([
@@ -239,8 +241,12 @@ if ($switch || false) {
                 // минифицируем код
                 // ---------------------------------------------
 
-                $code   = $phpCodeMinifier->minifyString('<?php ' . $code);
-                $code   = Helper::replaceFirst('<?php ', '', $code);
+                // Если есть аттрибут, то мы его не минифицируем.
+                // TODO при минификации ставить перенос строки, для аттрибутов.
+                if (!$attr) {
+                    $code   = $phpCodeMinifier->minifyString('<?php ' . $code);
+                    $code   = Helper::replaceFirst('<?php ', '', $code);
+                }
 
                 // ------------------------------------------------------------------
                 // 
