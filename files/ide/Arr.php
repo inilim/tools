@@ -659,6 +659,16 @@ class Arr
     static function value($value, ...$args) {}
 
         /**
+ * Return all the values of an array
+ * @link https://php.net/manual/en/function.array-values.php
+ * @template TValue
+ * @param array<int|string,TValue> $array
+ * The array.
+ * @return TValue[] an indexed array of values.
+ */
+    static function values(array $array): array {}
+
+        /**
  * @author inilim
  * @return \Closure(object|array &$array, callable $callable):void
  */
