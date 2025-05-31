@@ -2,10 +2,9 @@
 
 namespace Inilim\Tool\Method\Time;
 
-/**
- * @return void
- */
-function sleepMilSecs(int $v)
+function sleepMilSecs(int $v): int
 {
-    \usleep((1000 * $v));
+    $t = 1000 * $v;
+    \usleep($t);
+    return $t;
 }

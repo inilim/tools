@@ -10,25 +10,18 @@ class Time
  */
     static function lifeTime($ttl, int $default = 3600): int {}
 
-        /**
- * @return void
- */
-    static function sleepMilSecs(int $v) {}
+        
+    static function sleepMilSecs(int $v): int {}
 
-        /**
- * @return void
- */
-    static function sleepRndMilSecs(int $min, int $max) {}
+        
+    static function sleepRndMilSecs(int $min, int $max): int {}
 
-        /**
- * @return void
- */
-    static function sleepRndSecs(int $min, int $max) {}
+        
+    static function sleepRndSecs(int $min, int $max): int {}
 
         /**
  * @todo tests
- * @return int
  */
-    static function unixMs() {}
+    static function unixMs(): int {}
 
     }

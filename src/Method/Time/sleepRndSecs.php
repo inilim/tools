@@ -2,10 +2,9 @@
 
 namespace Inilim\Tool\Method\Time;
 
-/**
- * @return void
- */
-function sleepRndSecs(int $min, int $max)
+function sleepRndSecs(int $min, int $max): int
 {
-    \sleep(\mt_rand($min, $max));
+    $t = \mt_rand($min, $max);
+    \sleep($t);
+    return $t;
 }
