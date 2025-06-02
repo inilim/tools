@@ -5,6 +5,14 @@ namespace Inilim\Tool;
 class Arr
 {
         /**
+ * @author laravel
+ * Get an array item from an array using "dot" notation.
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ */
+    static function _array($array, $key, ?array $default = null): array {}
+
+        /**
  * @author Laravel
  * Determine whether the given value is array accessible.
  * @param mixed $value
@@ -26,6 +34,14 @@ class Arr
  * @param  mixed  $value
  */
     static function arrayable($value): bool {}
+
+        /**
+ * @author laravel
+ * Get a boolean item from an array using "dot" notation.
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ */
+    static function boolean($array, $key, ?bool $default = null): bool {}
 
         /**
  * @author Laravel
@@ -190,6 +206,14 @@ class Arr
     static function flatten(iterable $array, $depth = \INF) {}
 
         /**
+ * @author laravel
+ * Get a float item from an array using "dot" notation.
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ */
+    static function float($array, $key, ?float $default = null): float {}
+
+        /**
  * @author Laravel
  * Remove one or many array items from a given array using "dot" notation.
  * @return \Closure(array &$array, (string|int)[]|string|int $keys):void
@@ -294,6 +318,14 @@ class Arr
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
  */
     static function insertBefore() {}
+
+        /**
+ * @author laravel
+ * Get an integer item from an array using "dot" notation.
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ */
+    static function integer($array, $key, ?int $default = null): int {}
 
         /**
  * Determines if an array is associative.
@@ -605,6 +637,14 @@ class Arr
  * @return array<int,array<K,V>>
  */
     static function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false) {}
+
+        /**
+ * @author laravel
+ * Get a string item from an array using "dot" notation.
+ * @param \ArrayAccess|array $array
+ * @param string|int|null $key
+ */
+    static function string($array, $key, ?string $default = null): string {}
 
         /**
  * @author gigabites19 <https://github.com/gigabites19>
