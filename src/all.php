@@ -10,17 +10,13 @@ abstract class LazyMethodAbstract
     /**
      * @var array<string,array<string,true>>
      */
-    protected static array $exists = [];
+    protected static array $map = [];
     /**
      * @param string ...$name
      * @return \Closure|\Closure[]
      */
     static function __asClosure(string ...$name)
     {
-        $one = false;
-        if (\sizeof($name) === 1) {
-            $one = true;
-        }
         $result = [];
         foreach ($name as $n) {
             $fn = self::init($n);
@@ -30,7 +26,8 @@ abstract class LazyMethodAbstract
                 $result[] = \Closure::fromCallable($fn);
             }
         }
-        return $one ? $result[0] : $result;
+        // if true more one
+        return isset($result[1]) ? $result : $result[0];
     }
     /**
      * @internal desc
@@ -53,15 +50,15 @@ abstract class LazyMethodAbstract
     {
         $n = (string) (static::ALIAS[$name] ?? $name);
         $fn = 'Inilim\Tool\Method\\' . static::NAME . '\\' . $n;
-        if (isset(self::$exists[static::IDX][$n])) {
+        if (isset(self::$map[static::IDX][$n])) {
             return $fn;
         }
         $file = __DIR__ . '/MethodMin/' . static::NAME . '/' . $n . '.php';
         if (\is_file($file)) {
             require $file;
             if (\function_exists($fn)) {
-                self::$exists[static::IDX] ??= [];
-                self::$exists[static::IDX][$n] = true;
+                self::$map[static::IDX] ??= [];
+                self::$map[static::IDX][$n] = true;
                 return $fn;
             }
         }
@@ -72,10 +69,10 @@ abstract class LazyMethodAbstract
      */
     static function __definedIfNot(string $name): bool
     {
-        $status = isset(self::$exists[static::IDX][$name]);
+        $status = isset(self::$map[static::IDX][$name]);
         if (!$status) {
-            self::$exists[static::IDX] ??= [];
-            self::$exists[static::IDX][$name] = true;
+            self::$map[static::IDX] ??= [];
+            self::$map[static::IDX][$name] = true;
         }
         return $status;
     }

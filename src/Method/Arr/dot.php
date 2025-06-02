@@ -13,11 +13,7 @@ function dot(iterable $array, string $prepend = '')
 {
     $results = [];
 
-    $flatten = static function ($data, $prefix) use (&$results, &$flatten) {
-        /**
-         * @var iterable $data
-         * @var string $prefix
-         */
+    $flatten = static function (iterable $data, string $prefix) use (&$results, &$flatten) {
         foreach ($data as $key => $value) {
             $newKey = $prefix . $key;
 

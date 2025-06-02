@@ -1,6 +1,6 @@
 <?php
 
-return static function () {
+return static function (): \Generator {
     yield '&quot;';
     yield '&amp;';
     yield '&lt;';

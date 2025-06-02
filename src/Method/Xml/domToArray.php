@@ -15,7 +15,7 @@ function domToArray(object $el)
 {
     $results = [];
 
-    $fn = static function ($el) use (&$fn) {
+    $fn = static function (object $el) use (&$fn) {
         $item = [];
 
         /**

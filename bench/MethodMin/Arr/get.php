@@ -1,0 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Arr;
+
+function get($array, $key, $default = null)
+{
+    return $array;
+}

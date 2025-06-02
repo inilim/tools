@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('dataGetV2')){
     function dataGetV2($target,$key,$default=null){if($key===null){return $target;}if(\is_array($key)||\is_int($key)||!\Inilim\Tool\Method\Str\contains($key,'*')){return \Inilim\Tool\Method\Arr\dataGet($target,$key,$default);}$keys=\Inilim\Tool\Method\Arr\dotKeysByPattern($target,$key);if(!$keys){return \Inilim\Tool\Method\Arr\value($default);}return \Inilim\Tool\Method\Arr\dataGet(\Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target),$keys)),$key,$default);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
-    function dot(iterable $array,string $prepend=''){$results=[];$flatten=static function($data,$prefix)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.'.');}else{$results[$newKey]=$value;}}};$flatten($array,$prepend);return $results;}
+    function dot(iterable $array,string $prepend=''){$results=[];$flatten=static function(iterable $data,string $prefix)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.'.');}else{$results[$newKey]=$value;}}};$flatten($array,$prepend);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeys')){
     function dotKeys(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dotKeys($value,$prepend.$key.'.'));}else{$results[]=$prepend.$key;}}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeysByPattern')){
@@ -27,7 +27,7 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('only')){
     function only(array $array,$keys):array{return \array_intersect_key($array,\array_flip((array) $keys));}
     }if(!\Inilim\Tool\Arr::__definedIfNot('set')){
-    function set(){if(\func_num_args()!==0){throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,$key,$value){if($key===null){return $array=$value;}$keys=\explode('.',(string) $key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
+    function set():\Closure{if(\func_num_args()!==0){throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,$key,$value):array{if($key===null){return $array=$value;}$keys=\explode('.',(string) $key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
     }if(!\Inilim\Tool\Arr::__definedIfNot('undot')){
     function undot($array):array{$results=[];$set=\Inilim\Tool\Method\Arr\set();foreach($array as $key=>$value){$set($results,$key,$value);}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){

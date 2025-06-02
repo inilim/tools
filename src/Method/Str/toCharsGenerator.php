@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
  */
-function toCharsGenerator()
+function toCharsGenerator(): \Closure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('toCharsGenerator()(...) <-- The arguments were passed to the wrong place');

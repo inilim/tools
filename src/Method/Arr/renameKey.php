@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Renames key in array.
  * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
  */
-function renameKey()
+function renameKey(): \CLosure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('renameKey()(...) <-- The arguments were passed to the wrong place');

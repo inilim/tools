@@ -22,7 +22,9 @@ function tryCallWithErrHandler(callable $callable, ?callable $handler, int $erro
     ];
     $wrapHandler = static function ($levelOrCode, $message, $file, $line, $context = []) use (&$use) {
         // возвращаем true чтобы глушить внутренний обработчик ошибок
-        if ($use['handler'] === null) return true;
+        if ($use['handler'] === null) {
+            return true;
+        }
 
         $context['isException'] = isset($context['exception']);
         $context['isSuppress']  = $context['isException'] ? false : !(\error_reporting() & $levelOrCode);

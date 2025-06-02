@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Swap places of items in an array.
  * @return \Closure(array &$array, string|int $keyOne, string|int $keyTwo):void
  */
-function swap()
+function swap(): \Closure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('swap()(...) <-- The arguments were passed to the wrong place');

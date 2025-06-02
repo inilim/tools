@@ -11,7 +11,7 @@ abstract class LazyMethodAbstract
     /**
      * @var array<string,array<string,true>>
      */
-    static protected array $exists = [];
+    static protected array $map = [];
 
     /**
      * @param string ...$name
@@ -58,7 +58,7 @@ abstract class LazyMethodAbstract
         $n  = (string)(static::ALIAS[$name] ?? $name);
         $fn = 'Inilim\\Tool\\Method\\' . static::NAME . '\\' . $n;
 
-        if (isset(self::$exists[static::IDX][$n])) {
+        if (isset(self::$map[static::IDX][$n])) {
             return $fn;
         }
 
@@ -68,8 +68,8 @@ abstract class LazyMethodAbstract
             require $file;
 
             if (\function_exists($fn)) {
-                self::$exists[static::IDX] ??= [];
-                self::$exists[static::IDX][$n] = true;
+                self::$map[static::IDX] ??= [];
+                self::$map[static::IDX][$n] = true;
                 return $fn;
             }
         }
@@ -82,11 +82,11 @@ abstract class LazyMethodAbstract
      */
     static function __definedIfNot(string $name): bool
     {
-        $status = isset(self::$exists[static::IDX][$name]);
+        $status = isset(self::$map[static::IDX][$name]);
 
         if (!$status) {
-            self::$exists[static::IDX] ??= [];
-            self::$exists[static::IDX][$name] = true;
+            self::$map[static::IDX] ??= [];
+            self::$map[static::IDX][$name] = true;
         }
 
         return $status;

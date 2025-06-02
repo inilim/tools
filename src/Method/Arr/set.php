@@ -11,13 +11,13 @@ namespace Inilim\Tool\Method\Arr;
  * If no key is given to the method, the entire array will be replaced.
  * @return \Closure(array &$array, string|int|null $key, mixed $value):array
  */
-function set()
+function set(): \Closure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
     }
 
-    return static function (array &$array, $key, $value) {
+    return static function (array &$array, $key, $value): array {
         /**
          * @var string|int|null $key
          * @var mixed $value

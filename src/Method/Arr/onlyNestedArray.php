@@ -13,7 +13,7 @@ function onlyNestedArray(array $array, $keys, int $depth = 1)
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,
         $depth,
-        static function ($value) use ($keys) {
+        static function (array $value) use ($keys) {
             return \Inilim\Tool\Method\Arr\only($value, $keys);
         }
     );

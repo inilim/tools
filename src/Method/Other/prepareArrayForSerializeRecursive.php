@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Other;
  * @skip_build
  * @return \Closure(array &$value):void
  */
-function prepareArrayForSerializeRecursive()
+function prepareArrayForSerializeRecursive(): \CLosure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('prepareArrayForSerializeRecursive()(...) <-- The arguments were passed to the wrong place');

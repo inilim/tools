@@ -516,7 +516,7 @@ class Str
         /**
  * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
  */
-    static function toCharsGenerator() {}
+    static function toCharsGenerator(): Closure {}
 
         /**
  * Convert the given value to a string or return the given fallback on failure.

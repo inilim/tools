@@ -1,6 +1,6 @@
 <?php
 
-return static function () {
+return static function (): array {
     return [
         '&quot;',
         '&amp;',

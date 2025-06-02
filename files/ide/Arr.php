@@ -454,7 +454,7 @@ class Arr
  * @param callable(array $node, int|string|null $keyNode):array $callable
  * @return mixed[]
  */
-    static function nestedMap(array $array, int $depth, callable $callable) {}
+    static function nestedMap(array $array, int $depth, callable $callable): array {}
 
         /**
  * Get a subset of the items from the given array.
@@ -538,14 +538,14 @@ class Arr
         /**
  * @return \Closure(array &$array, string $oldKey, string $newKey):bool
  */
-    static function renameDotKey() {}
+    static function renameDotKey(): Closure {}
 
         /**
  * @author nette/utils
  * Renames key in array.
  * @return \Closure(array &$array, string|int $oldKey, string|int $newKey):bool
  */
-    static function renameKey() {}
+    static function renameKey(): CLosure {}
 
         /**
  * @author inilim
@@ -570,28 +570,28 @@ class Arr
  * If no key is given to the method, the entire array will be replaced.
  * @return \Closure(array &$array, string|int|null $key, mixed $value):array
  */
-    static function set() {}
+    static function set(): Closure {}
 
         /**
  * @author inilim
  * set if null OR empty string OR empty array
  * @return \Closure(array &$array, string $key, mixed $value):bool
  */
-    static function setValueIfEmpty() {}
+    static function setValueIfEmpty(): CLosure {}
 
         /**
  * @author inilim
  * установить значение если значения по ключу нет
  * @return \Closure(array &$array, string $key, mixed $value):bool
  */
-    static function setValueIfNotExists() {}
+    static function setValueIfNotExists(): Closure {}
 
         /**
  * @author inilim
  * установить значение если значение по ключу null
  * @return \Closure(array &$array, string|int $key, mixed $value):bool
  */
-    static function setValueIfNull() {}
+    static function setValueIfNull(): Closure {}
 
         /**
  * Shuffle the given array and return the result.
@@ -651,7 +651,7 @@ class Arr
  * Swap places of items in an array.
  * @return \Closure(array &$array, string|int $keyOne, string|int $keyTwo):void
  */
-    static function swap() {}
+    static function swap(): Closure {}
 
         /**
  * @author laravel

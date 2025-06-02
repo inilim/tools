@@ -53,9 +53,8 @@ class Exp
  * @author princejohnsantillan <https://github.com/princejohnsantillan>
  * Interpolate placeholders in a string with mapped values.
  * @param  array<string,string>  $map
- * @return string
  */
-    static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/') {}
+    static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/'): string {}
 
         /**
  * @todo tests

@@ -11,7 +11,7 @@ abstract class LazyMethodAbstract
     /**
      * @var array<string,array<string,\Closure>>
      */
-    static protected array $exists = [];
+    static protected array $map = [];
 
     /**
      * @param string ...$name
@@ -19,11 +19,6 @@ abstract class LazyMethodAbstract
      */
     static function __asClosure(string ...$name)
     {
-        $one = false;
-        if (\sizeof($name) === 1) {
-            $one = true;
-        }
-
         $result = [];
         foreach ($name as $n) {
             $fn = self::init($n);
@@ -34,7 +29,7 @@ abstract class LazyMethodAbstract
             }
         }
 
-        return $one ? $result[0] : $result;
+        return isset($result[1]) ? $result : $result[0];
     }
 
     /**
@@ -61,8 +56,8 @@ abstract class LazyMethodAbstract
     {
         $n  = (string)(static::ALIAS[$name] ?? $name);
 
-        if (isset(self::$exists[static::IDX][$n])) {
-            return self::$exists[static::IDX][$n];
+        if (isset(self::$map[static::IDX][$n])) {
+            return self::$map[static::IDX][$n];
         }
 
         $file = __DIR__ . '/MethodMin/' . static::NAME . '/' . $n . '.php';
@@ -72,8 +67,8 @@ abstract class LazyMethodAbstract
 
             $fn = 'Inilim\\Tool\\Method\\' . static::NAME . '\\' . $n;
             if (\function_exists($fn)) {
-                self::$exists[static::IDX] ??= [];
-                return self::$exists[static::IDX][$n] = \Closure::fromCallable($fn);
+                self::$map[static::IDX] ??= [];
+                return self::$map[static::IDX][$n] = \Closure::fromCallable($fn);
             }
         }
 
@@ -85,7 +80,7 @@ abstract class LazyMethodAbstract
      */
     static function __definedIfNot(string $name): bool
     {
-        $status = isset(self::$exists[static::IDX][$name]);
+        $status = isset(self::$map[static::IDX][$name]);
 
         if (!$status) {
             self::init($name, false);

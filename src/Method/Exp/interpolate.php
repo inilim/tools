@@ -8,9 +8,8 @@ namespace Inilim\Tool\Method\Exp;
  * @author princejohnsantillan <https://github.com/princejohnsantillan>
  * Interpolate placeholders in a string with mapped values.
  * @param  array<string,string>  $map
- * @return string
  */
-function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/')
+function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/'): string
 {
     $interpolated = \preg_replace_callback(
         $pattern,
