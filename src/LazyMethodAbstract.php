@@ -19,11 +19,6 @@ abstract class LazyMethodAbstract
      */
     static function __asClosure(string ...$name)
     {
-        $one = false;
-        if (\sizeof($name) === 1) {
-            $one = true;
-        }
-
         $result = [];
         foreach ($name as $n) {
             $fn = self::init($n);
@@ -34,7 +29,8 @@ abstract class LazyMethodAbstract
             }
         }
 
-        return $one ? $result[0] : $result;
+        // if true more one
+        return isset($result[1]) ? $result : $result[0];
     }
 
     /**
