@@ -9,8 +9,12 @@ namespace Inilim\Tool\Method\Json;
  */
 function tryDecodeAsArrList(?string $v, $default = null)
 {
-    if ($v === null) return $default;
+    if ($v === null) {
+        return $default;
+    }
     $v = \Inilim\Tool\Method\Json\decode($v);
-    if (\is_array($v) && \Inilim\Tool\Method\Arr\isList($v)) return $v;
+    if (\is_array($v) && \Inilim\Tool\Method\Arr\isList($v)) {
+        return $v;
+    }
     return $default;
 }

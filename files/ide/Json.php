@@ -101,7 +101,7 @@ class Json
  * 
  * @template T
  * @param T $default
- * @return mixed[]|T
+ * @return array<int|string,mixed>|T
  */
     static function tryDecodeAsArray(?string $v, $default = null) {}
 
@@ -118,6 +118,13 @@ class Json
  * @return int|T
  */
     static function tryDecodeAsInteger(?string $v, $default = null) {}
+
+        /**
+ * @template T of mixed
+ * @param T $default
+ * @return int|float|numeric-string|T
+ */
+    static function tryDecodeAsNumeric(?string $v, $default = null) {}
 
         /**
  * @template T of mixed

@@ -9,8 +9,12 @@ namespace Inilim\Tool\Method\Json;
  */
 function tryDecodeAsInteger(?string $v, $default = null)
 {
-    if ($v === null) return $default;
+    if ($v === null) {
+        return $default;
+    }
     $v = \Inilim\Tool\Method\Json\decode($v);
-    if (\is_int($v)) return $v;
+    if (\is_int($v)) {
+        return $v;
+    }
     return $default;
 }

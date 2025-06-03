@@ -7,12 +7,16 @@ namespace Inilim\Tool\Method\Json;
  * 
  * @template T
  * @param T $default
- * @return mixed[]|T
+ * @return array<int|string,mixed>|T
  */
 function tryDecodeAsArray(?string $v, $default = null)
 {
-    if ($v === null) return $default;
+    if ($v === null) {
+        return $default;
+    }
     $v = \Inilim\Tool\Method\Json\decode($v, true);
-    if (\is_array($v)) return $v;
+    if (\is_array($v)) {
+        return $v;
+    }
     return $default;
 }
