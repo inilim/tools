@@ -9,6 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Get a float item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
  * @param string|int|null $key
+ * @throws \InvalidArgumentException
  */
 function float($array, $key, ?float $default = null): float
 {

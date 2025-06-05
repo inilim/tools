@@ -9,6 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Get a string item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
  * @param string|int|null $key
+ * @throws \InvalidArgumentException
  */
 function string($array, $key, ?string $default = null): string
 {

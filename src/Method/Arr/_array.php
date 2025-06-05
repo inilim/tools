@@ -9,6 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * Get an array item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
  * @param string|int|null $key
+ * @throws \InvalidArgumentException
  */
 function _array($array, $key, ?array $default = null): array
 {

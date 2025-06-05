@@ -24,4 +24,9 @@ class Time
  */
     static function unixMs(): int {}
 
+        /**
+ * @todo tests
+ */
+    static function unixMsFromGlobals(): int {}
+
     }
