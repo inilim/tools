@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Obj;
 
-use IteratorAggregate;
-
 /**
  * @author Inilim
  * @phpstan-import-type TYPEgetCollectionThrowable from \TypeObj

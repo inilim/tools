@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\File;
 /**
  * Get contents of a file with shared access.
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @return array{result:?string,exception:?TYPEExceptionV1}
  * @throws TYPEExceptionV1
  */
 function sharedGet(string $pathToFile, bool $throw = false): array
@@ -15,7 +15,7 @@ function sharedGet(string $pathToFile, bool $throw = false): array
     $args = [
         'pathToFile' => $pathToFile,
         'result'     => null,
-        'exception'  => null,
+        'e'          => null,
         'errors'     => null,
     ];
 
@@ -46,25 +46,25 @@ function sharedGet(string $pathToFile, bool $throw = false): array
 
     // Делаем исключения
     if ($args['errors']) {
-        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
+        $args['e'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
         foreach ($args['errors'] as $err) {
-            $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
+            $args['e'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
         }
         unset($args['errors']);
     }
 
     if ($args['result'] === false || $args['result'] === null) {
-        if ($throw && $args['exception']) {
-            throw $args['exception'];
+        if ($throw && $args['e']) {
+            throw $args['e'];
         }
         return [
             'result'    => null,
-            'exception' => $args['exception'],
+            'exception' => $args['e'],
         ];
     }
 
     return [
         'result'    => $args['result'],
-        'exception' => $args['exception'],
+        'exception' => $args['e'],
     ];
 }

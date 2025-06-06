@@ -35,7 +35,7 @@ class File
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @return array{result:?string,exception:?TYPEExceptionV1}
  * @throws TYPEExceptionV1
  */
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
@@ -101,7 +101,7 @@ class File
         /**
  * Get contents of a file with shared access.
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @return array{result:?string,exception:?TYPEExceptionV1}
  * @throws TYPEExceptionV1
  */
     static function sharedGet(string $pathToFile, bool $throw = false): array {}
@@ -128,5 +128,27 @@ class File
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
  */
     static function toCharsGenerator(string $pathToFile, int $chunk = 1): Generator {}
+
+        /**
+ * Get the contents of a file as serialize.
+ * @todo tests
+ * @author inilim
+ * @param  mixed  $default
+ * @return mixed
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @throws TYPEExceptionV1
+ */
+    static function unserialize(string $pathToFile, array $options = [], bool $lock = false, bool $throw = false, $default = null) {}
+
+        /**
+ * Get the contents of a file as serialize.
+ * @todo tests
+ * @author inilim
+ * @param array{pathToFile:string,options?:int,lock?:bool,throw?:bool,default?:mixed} $params
+ * @return mixed
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @throws TYPEExceptionV1
+ */
+    static function unserializeAsArray(array $params) {}
 
     }

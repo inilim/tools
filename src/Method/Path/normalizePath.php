@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Path;
 
-/**
- * @return string
- */
-function normalizePath(string $path)
+function normalizePath(string $path): string
 {
     $path = \strtr($path, '\\', '/');
     $path = \Inilim\Tool\Method\Str\deduplicate($path, '/');

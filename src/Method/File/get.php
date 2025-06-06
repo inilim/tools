@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\File;
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @return array{result:?string,exception:?TYPEExceptionV1}
  * @throws TYPEExceptionV1
  */
 function get(

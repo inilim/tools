@@ -12,8 +12,13 @@ namespace Inilim\Tool\Method\File;
  * @throws TYPEExceptionV1
  * @throws \JsonException
  */
-function json(string $pathToFile, int $flags = 0, bool $lock = false, bool $throw = false, $default = null)
-{
+function json(
+    string $pathToFile,
+    int $flags  = 0,
+    bool $lock  = false,
+    bool $throw = false,
+    $default    = null
+) {
     if ($lock) {
         $result = \Inilim\Tool\Method\File\sharedGet($pathToFile);
     } else {

@@ -26,9 +26,7 @@ class Path
  */
     static function info(string $pathTo, bool $throw = true) {}
 
-        /**
- * @return string
- */
-    static function normalizePath(string $path) {}
+        
+    static function normalizePath(string $path): string {}
 
     }
