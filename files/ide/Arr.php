@@ -277,6 +277,14 @@ class Arr
     static function has($array, $keys): bool {}
 
         /**
+ * @author laravel
+ * Determine if all keys exist in an array using "dot" notation.
+ * @param  \ArrayAccess|mixed[]  $array
+ * @param  string|string[]  $keys
+ */
+    static function hasAll($array, $keys): bool {}
+
+        /**
  * Determine if any of the keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|int|string|null  $keys
