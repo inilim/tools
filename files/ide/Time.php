@@ -11,11 +11,27 @@ class Time
  */
     static function dateMs(string $format, ?int $timestampMs = null) {}
 
+        
+    static function daysMs(int $days): int {}
+
+        
+    static function daysSec(int $days): int {}
+
         /**
  * @todo tests
  * @param null|int|\DateInterval $ttl
  */
     static function lifeTime($ttl, int $default = 3600): int {}
+
+        /**
+ * 1 month 30 days
+ */
+    static function monthsMs(int $months): int {}
+
+        /**
+ * 1 month 30 days
+ */
+    static function monthsSec(int $months): int {}
 
         
     static function sleepMilSecs(int $v): int {}
@@ -35,5 +51,11 @@ class Time
  * @todo tests
  */
     static function unixMsFromGlobals(): int {}
+
+        
+    static function weeksMs(int $weeks): int {}
+
+        
+    static function weeksSec(int $weeks): int {}
 
     }
