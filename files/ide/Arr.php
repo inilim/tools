@@ -478,7 +478,7 @@ class Arr
  * @param  (string|int)[]|string|int $keys
  * @return array
  */
-    static function onlyNestedArray(array $array, $keys, int $depth = 1) {}
+    static function onlyNestedArray(array $array, $keys, int $depth = 1): array {}
 
         /**
  * @author Laravel

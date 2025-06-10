@@ -11,5 +11,11 @@ namespace Inilim\Tool\Method\Arr;
  */
 function isMultidimensional(array $array): bool
 {
-    return \sizeof(\array_filter($array, 'is_array')) > 0;
+    foreach ($array as $item) {
+        if (\is_array($item)) {
+            return true;
+        }
+    }
+    return false;
+    // return \sizeof(\array_filter($array, 'is_array')) > 0;
 }

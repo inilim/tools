@@ -25,7 +25,10 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
 
-de();
+$a = realpath(__DIR__ . '/../../tests/test.php');
+
+
+de($a);
 $s = 'D:/projects/long_req/req/04/33/1749196513884-0433170356f00635df56dfbf53a34aa4-bG9uZy50ZXN0-v00';
 try {
     $s = File::unserialize($s, [], false, true);

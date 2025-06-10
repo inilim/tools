@@ -6,16 +6,13 @@ namespace Inilim\Tool\Method\Path;
 
 /**
  * @skip_build
- * @throws \ValueError
  */
-function isRealPath(string $path, bool $checkExistsFile = false): bool
+function isRealPath(string $path): bool
 {
-    if ($checkExistsFile) {
-        if (!\is_file($path)) {
-            throw new \ValueError(\sprintf('File "%s" not found', $path));
-        }
-    }
-
     $path = \Inilim\Tool\Method\Path\normalizePath($path);
-    return !!\preg_match('#(\/\.{1,}\/)|(^\.{1,}\/)#', $path);
+    return !!\preg_match(\sprintf(
+        '#%s|%s#',
+        '(\/\.{1,}\/)', // "/..../"
+        '(^\.{1,}\/)', // "..../"
+    ), $path);
 }

@@ -16,6 +16,21 @@ class FS
     static function exists(string $path): bool {}
 
         /**
+ * Gigabytes to Bytes
+ */
+    static function gbToBytes(int $gb): int {}
+
+        /**
+ * Kilobytes to Bytes
+ */
+    static function kbToBytes(int $kb): int {}
+
+        /**
+ * Megabytes to Bytes
+ */
+    static function mbToBytes(int $mb): int {}
+
+        /**
  * Determine if a file or directory is missing.
  */
     static function missing(string $path): bool {}
