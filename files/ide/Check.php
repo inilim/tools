@@ -38,7 +38,7 @@ class Check
         /**
  * @author Inilim
  * @param mixed $value
- * @phpstan-assert-if-true \ArrayAccess&\IteratorAggregate&\Countable $value
+ * @phpstan-assert-if-true \ArrayAccess&\Traversable&\Countable $value
  */
     static function arrLike($value): bool {}
 

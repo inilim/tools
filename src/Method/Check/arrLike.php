@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Check;
 /**
  * @author Inilim
  * @param mixed $value
- * @phpstan-assert-if-true \ArrayAccess&\IteratorAggregate&\Countable $value
+ * @phpstan-assert-if-true \ArrayAccess&\Traversable&\Countable $value
  */
 function arrLike($value): bool
 {
@@ -15,7 +15,7 @@ function arrLike($value): bool
         return false;
     }
     if (
-        $value instanceof \IteratorAggregate &&
+        $value instanceof \Traversable &&
         $value instanceof \Countable &&
         $value instanceof \ArrayAccess
     ) {
