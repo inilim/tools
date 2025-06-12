@@ -24,7 +24,18 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+try {
+    $res = File::get('dkawdjawd');
+} catch (\Throwable $e) {
+    de($e);
+}
+$res = $res['exception'];
+foreach ($res as $r) {
+    de($r);
+}
 
+
+de();
 $a = realpath(__DIR__ . '/../../tests/test.php');
 
 

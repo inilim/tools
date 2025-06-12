@@ -36,4 +36,12 @@ class Obj
  */
     static function toArrayIfTraversable($value) {}
 
+        /**
+ * @author inilim
+ * @template T of mixed
+ * @param \Traversable<T> $obj
+ * @return T[]
+ */
+    static function unpuckTraversableRecursive(\Traversable $obj): array {}
+
     }

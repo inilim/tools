@@ -61,7 +61,7 @@ function get(
 
     // Делаем исключения
     if ($args['errors']) {
-        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
+        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable('File::get(...)');
         foreach ($args['errors'] as $err) {
             $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
         }
