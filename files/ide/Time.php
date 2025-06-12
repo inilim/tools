@@ -17,11 +17,17 @@ class Time
         
     static function daysSec(int $days): int {}
 
+        
+    static function hoursToMs(int $hours): int {}
+
         /**
  * @todo tests
  * @param null|int|\DateInterval $ttl
  */
     static function lifeTime($ttl, int $default = 3600): int {}
+
+        
+    static function minutesToMs(int $min): int {}
 
         /**
  * 1 month 30 days
@@ -32,6 +38,9 @@ class Time
  * 1 month 30 days
  */
     static function monthsSec(int $months): int {}
+
+        
+    static function secondsToMs(int $sec): int {}
 
         
     static function sleepMilSecs(int $v): int {}
