@@ -173,6 +173,14 @@ class Other
     static function requestMethod() {}
 
         /**
+ * @author inilim
+ * @template T of mixed
+ * @param callable():T $callable
+ * @return array{result:T,time:int}
+ */
+    static function timedMsCall(callable $callable): array {}
+
+        /**
  * @author laravel
  * Conditionally compile classes from an array into a CSS class list.
  */
