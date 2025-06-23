@@ -50,6 +50,11 @@ class Data
     static function cyrillicAlphabetAsString(string $separator = "", bool $upper = false) {}
 
         /**
+ * @return array<string,string>
+ */
+    static function dateTimePatterns(): array {}
+
+        /**
  * @return string[]
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsString()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsArray()
