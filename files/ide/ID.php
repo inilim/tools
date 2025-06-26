@@ -27,14 +27,10 @@ class ID
  */
     static function uuidToBytes(string $uuid) {}
 
-        /**
- * @return string
- */
-    static function uuidv4() {}
+        
+    static function uuidv4(): string {}
 
-        /**
- * @return string
- */
-    static function uuidv7() {}
+        
+    static function uuidv7(): string {}
 
     }

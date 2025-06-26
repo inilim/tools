@@ -40,6 +40,9 @@ class Time
     static function monthsSec(int $months): int {}
 
         
+    static function msToSec(int $ms): int {}
+
+        
     static function secondsToMs(int $sec): int {}
 
         
