@@ -62,6 +62,24 @@ class File
     static function getInclude(string $pathToFile, array $data = []) {}
 
         /**
+ * Get the returned value of a file.
+ *
+ * @param mixed[] $data
+ * @return mixed
+ * @throws \Exception
+ */
+    static function getRequire(string $pathToFile, array $data = [], bool $once = false) {}
+
+        /**
+ * Get the returned value of a file.
+ *
+ * @param mixed[] $data
+ * @return mixed
+ * @throws \Exception
+ */
+    static function getRequireOnce(string $pathToFile, array $data = []) {}
+
+        /**
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
