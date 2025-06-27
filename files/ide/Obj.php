@@ -27,6 +27,16 @@ class Obj
     static function rewriteLocationException(\Throwable $e, string $file, int $line): object {}
 
         /**
+ * @author inilim
+ * @template T of \Throwable
+ *
+ * @param array $values
+ * @param class-string<T>|T $classOrObj
+ * @return T
+ */
+    static function sprintfException(string $format, array $values, $classOrObj = \Exception::class, array $args = []): Throwable {}
+
+        /**
  * @deprecated use Arr::from
  * @author mohammadrasoulasghari <https://github.com/mohammadrasoulasghari>
  * Convert a Traversable to an array, or return the original value if not Traversable.

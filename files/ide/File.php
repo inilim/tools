@@ -53,6 +53,15 @@ class File
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
         /**
+ * Get the returned value of a file.
+ *
+ * @param mixed[] $data
+ * @return mixed
+ * @throws \Exception
+ */
+    static function getInclude(string $pathToFile, array $data = []) {}
+
+        /**
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
