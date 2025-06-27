@@ -23,7 +23,7 @@ function scan($zip)
                 $zip
             ));
         }
-        $rp     = \Inilim\Tool\Method\Path\normalizePath($rp);
+        $rp     = \Inilim\Tool\Method\Path\normalize($rp);
         $zip    = new \ZipArchive;
         $status = $zip->open($rp, \ZipArchive::RDONLY);
         if ($status !== true) {

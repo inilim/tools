@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Path;
  */
 function isRealPath(string $path): bool
 {
-    $path = \Inilim\Tool\Method\Path\normalizePath($path);
+    $path = \Inilim\Tool\Method\Path\normalize($path);
     return !!\preg_match(\sprintf(
         '#%s|%s#',
         '(\/\.{1,}\/)', // "/..../"

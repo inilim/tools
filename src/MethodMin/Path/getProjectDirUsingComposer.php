@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Obj{function iteratorFilesRecursive(string $pathToDir,bool $skipDots=true){$dir=\realpath($pathToDir);if($dir===false||!\is_dir($dir)){throw new \InvalidArgumentException(\sprintf('Not found dir "%s"',$pathToDir));}$dir=\Inilim\Tool\Method\Path\normalize($dir);$flags=\FilesystemIterator :: KEY_AS_FILENAME|\FilesystemIterator :: CURRENT_AS_FILEINFO|\FilesystemIterator :: UNIX_PATHS;if($skipDots){$flags |= \FilesystemIterator :: SKIP_DOTS;}$rdi=new \RecursiveDirectoryIterator($dir,$flags);return new \RecursiveIteratorIterator($rdi,\RecursiveIteratorIterator :: SELF_FIRST);}}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
+namespace Inilim\Tool\Method\Path{function getProjectDirUsingComposer():?string{$dir=\Inilim\Tool\Method\Path\getVendorDirUsingComposer();return $dir?\dirname($dir,1):null;}if(!\Inilim\Tool\Path::__definedIfNot('getVendorDirUsingComposer')){
+    function getVendorDirUsingComposer():?string{static $cacheDir=null;if($cacheDir!==null){return $cacheDir;}if(\class_exists($class=\Composer\InstalledVersions :: class,true)&&\method_exists($class,'getRootPackage')&&\is_array($result=$class :: getRootPackage())&&\is_string($result=$result['install_path']?? null)&&\is_string($result=\realpath($result))){return $cacheDir=\Inilim\Tool\Method\Path\normalize($result.'/vendor');}return null;}
+    }if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}

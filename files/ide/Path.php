@@ -5,6 +5,32 @@ namespace Inilim\Tool;
 class Path
 {
         /**
+ * @todo tests
+ * @author inilim
+ * via Path::getVendorDirByPath()
+ */
+    static function getProjectDirByPath(?string $path = null): ?string {}
+
+        /**
+ * @todo tests
+ * @author inilim
+ * via Path::getVendorDirUsingComposer()
+ */
+    static function getProjectDirUsingComposer(): ?string {}
+
+        /**
+ * @todo tests
+ * @author inilim
+ */
+    static function getVendorDirByPath(?string $path = null): ?string {}
+
+        /**
+ * @todo tests
+ * @author inilim
+ */
+    static function getVendorDirUsingComposer(): ?string {}
+
+        /**
  * @author Inilim
  * advanced pathinfo() function
  * @param string $pathTo
@@ -27,6 +53,11 @@ class Path
     static function info(string $pathTo, bool $throw = true) {}
 
         
+    static function normalize(string $path): string {}
+
+        /**
+ * @deprecated use Path::normalize
+ */
     static function normalizePath(string $path): string {}
 
     }

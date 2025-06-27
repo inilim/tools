@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Zip{function scan($zip){if(!\Inilim\Tool\Method\Zip\__state()-> existsExtZipArchive){throw new \RuntimeException('ext "zip" not found');}if(\is_string($zip)){$rp=\realpath($zip);if(!$rp){throw new \ValueError(\sprintf('File "%s", not found',$zip));}$rp=\Inilim\Tool\Method\Path\normalizePath($rp);$zip=new \ZipArchive();$status=$zip -> open($rp,\ZipArchive :: RDONLY);if($status!==true){throw new \ValueError(\sprintf('File "%s", not open. Code: %s',$rp,$status===false?'false':$status));}}elseif($zip -> filename===''){throw new \ValueError('Uninitialized zip');}$result=[];for($i=0;$i<$zip -> numFiles;$i++){$ri=$zip -> statIndex($i);if($ri===false){continue;}$result[]=$ri;}return $result;}if(!\Inilim\Tool\Zip::__definedIfNot('__state')){
+namespace Inilim\Tool\Method\Zip{function scan($zip){if(!\Inilim\Tool\Method\Zip\__state()-> existsExtZipArchive){throw new \RuntimeException('ext "zip" not found');}if(\is_string($zip)){$rp=\realpath($zip);if(!$rp){throw new \ValueError(\sprintf('File "%s", not found',$zip));}$rp=\Inilim\Tool\Method\Path\normalize($rp);$zip=new \ZipArchive();$status=$zip -> open($rp,\ZipArchive :: RDONLY);if($status!==true){throw new \ValueError(\sprintf('File "%s", not open. Code: %s',$rp,$status===false?'false':$status));}}elseif($zip -> filename===''){throw new \ValueError('Uninitialized zip');}$result=[];for($i=0;$i<$zip -> numFiles;$i++){$ri=$zip -> statIndex($i);if($ri===false){continue;}$result[]=$ri;}return $result;}if(!\Inilim\Tool\Zip::__definedIfNot('__state')){
     function __state(){static $o=null;if($o===null){$o=new class{var $existsExtZipArchive;};$o -> existsExtZipArchive=\extension_loaded('zip');}return $o;}
-    }}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalizePath')){
-    function normalizePath(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
+    }}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
+    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){

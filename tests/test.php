@@ -14,16 +14,39 @@ use Inilim\Tool\Data;
 use Inilim\Tool\Enum;
 use Inilim\Tool\File;
 use Inilim\Tool\Json;
+use Inilim\Tool\Path;
 use Inilim\Tool\Refl;
 use Inilim\Tool\Time;
 use Inilim\Tool\Other;
 use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
+use Composer\InstalledVersions;
 use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
+// dde(InstalledVersions::getRootPackage());
 
+__include('Path::dirVendor');
+__include('Path::normalize');
+__include('Str::deduplicate');
+__include('Str::substr');
+__include('Str::ucfirst');
+__include('Str::upper');
+__include('PF::str_contains');
+__include('Check\php80');
+__include('Path\dirProject');
+
+$a = \Inilim\Tool\Method\Path\dirVendor();
+$b = \Inilim\Tool\Method\Path\dirProject();
+dd($a);
+dde($b);
+
+
+
+
+
+de();
 try {
     $res = File::get('dkawdjawd');
 } catch (\Throwable $e) {
@@ -228,13 +251,6 @@ dde(\Inilim\Tool\Method\Str\kebab('Laravel ❤ Php Framework'));
 
 de();
 
-$multilineValue = <<<'VALUE'
-        <?php
-
-        namespace Illuminate\Tests\Support;
-
-        use Exception;
-        VALUE;
 dde($multilineValue);
 
 // de(get_included_files());

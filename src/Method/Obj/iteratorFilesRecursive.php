@@ -21,7 +21,7 @@ function iteratorFilesRecursive(string $pathToDir, bool $skipDots = true)
     // 
     // ---------------------------------------------
 
-    $dir = \Inilim\Tool\Method\Path\normalizePath($dir);
+    $dir = \Inilim\Tool\Method\Path\normalize($dir);
 
     // ---------------------------------------------
     // 

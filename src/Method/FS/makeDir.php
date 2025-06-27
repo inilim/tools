@@ -20,7 +20,7 @@ function makeDir(
     bool $recursive       = false,
     bool $force           = false,
     $context              = null,
-    ?array $contextParams = null,
+    ?array $contextParams = null
 ): array {
 
     $args = [

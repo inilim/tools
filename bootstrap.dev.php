@@ -15,10 +15,11 @@ if (!\function_exists('__include')) {
     /**
      * @param string $name example "Other::getClassContextFromClosure"
      * @return void
+     * TODO add ...$name
      */
     function __include(string $name)
     {
-        [$class, $func] = \explode('::', $name);
+        [$class, $func] = \preg_split('#(::)|(\\\\)#', $name);
 
         $pathToFile = \sprintf(
             '%s/src/Method/%s/%s.php',

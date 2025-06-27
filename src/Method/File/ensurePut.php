@@ -21,7 +21,7 @@ function ensurePut(
     bool $throw           = false,
     int $mode             = 0755,
     $context              = null,
-    ?array $contextParams = null,
+    ?array $contextParams = null
 ): array {
     $dir = \dirname($filename);
     $d   = null;

@@ -34,7 +34,7 @@ function info(string $pathTo, bool $throw = true)
         return null;
     }
 
-    $t = \Inilim\Tool\Method\Path\normalizePath($t);
+    $t = \Inilim\Tool\Method\Path\normalize($t);
     $pathTo = $t;
     $t = \pathinfo($t, \PATHINFO_ALL);
     $t['extension'] ??= '';
