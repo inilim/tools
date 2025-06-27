@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\File;
+namespace Inilim\Tool\Method\FS;
 
 /**
+ * Create a directory.
  * @todo tests
  * @author Inilim
- * analog function "file_get_contents"
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:?string,exception:?TYPEExceptionV1}
+ * @return array{result:?bool,exception:?TYPEExceptionV1}
  * @throws TYPEExceptionV1
  */
-function get(
-    string $pathToFile,
-    int $offset           = 0,
-    ?int $length          = null,
-    bool $useIncludePath  = false,
+function makeDir(
+    string $path,
     bool $throw           = false,
+    int $mode             = 0755,
+    bool $recursive       = false,
+    bool $force           = false,
     $context              = null,
-    ?array $contextParams = null
+    ?array $contextParams = null,
 ): array {
+
     $args = [
-        'pathToFile'     => $pathToFile,
-        'offset'         => $offset,
-        'length'         => $length,
-        'useIncludePath' => $useIncludePath,
+        'path'           => $path,
+        'mode'           => $mode,
+        'recursive'      => $recursive,
+        'force'          => $force,
         'context'        => $context,
         'contextParams'  => $contextParams,
         'result'         => null,
@@ -45,15 +45,17 @@ function get(
                     $args['context'] = \stream_context_create($args['context'], $args['contextParams']);
                 }
             }
-            // php 8.0.0 Параметр length теперь принимает значение null.
-            if ($args['length'] === null) {
-                $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset']);
+            if ($args['force']) {
+                $args['result'] = @\mkdir($args['path'], $args['mode'], $args['recursive'], $args['context']);
             } else {
-                $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
+                $args['result'] = \mkdir($args['path'], $args['mode'], $args['recursive'], $args['context']);
             }
         },
         // [Handle]
-        static function ($type, $message, $file, $line) use (&$args) {
+        static function ($type, $message, $file, $line, $context) use (&$args) {
+            if ($context['isSuppress']) {
+                return;
+            }
             $args['errors'] ??= [];
             $args['errors'][] = [$message, $type, $file, $line];
         }
@@ -61,7 +63,7 @@ function get(
 
     // Делаем исключения
     if ($args['errors']) {
-        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable('File::get(...)');
+        $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable('FS::makeDir(...)');
         foreach ($args['errors'] as $err) {
             [$message, $type, $file, $line] = $err;
             $args['exception'][] = new \ErrorException($message, $type, $type, $file, $line);

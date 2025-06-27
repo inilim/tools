@@ -23,7 +23,7 @@ function put(
     bool $throw           = false,
     $context              = null,
     ?array $contextParams = null
-) {
+): array {
     $args = [
         'filename'      => $filename,
         'data'          => $data,
@@ -34,10 +34,6 @@ function put(
         'exception'     => null,
         'errors'        => null,
     ];
-
-    // if ($mkdir && !is_dir($dir)) {
-    //     @mkdir($dir, 0777, true);
-    // }
 
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use (&$args) {

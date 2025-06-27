@@ -31,6 +31,18 @@ class File
         /**
  * @todo tests
  * @author Inilim
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @param mixed $data
+ * @param null|resource|array $context
+ * @param null|array $contextParams
+ * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
+ * @throws TYPEExceptionV1
+ */
+    static function ensurePut(string $filename, $data, int $flags = 0, bool $throw = false, int $mode = 0755, $context = null, ?array $contextParams = null): array {}
+
+        /**
+ * @todo tests
+ * @author Inilim
  * analog function "file_get_contents"
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
@@ -96,7 +108,7 @@ class File
  * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
  * @throws TYPEExceptionV1
  */
-    static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null) {}
+    static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
         /**
  * Get contents of a file with shared access.

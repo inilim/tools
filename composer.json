@@ -1,79 +1,78 @@
 {
-    "name": "inilim/tools",
-    "description": "",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Inilim\\Tool\\": "src/"
-        },
-        "files": []
+  "name": "inilim/tools",
+  "description": "",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Inilim\\Tool\\": "src/"
     },
-    "extra": {
-        "exclude-from-files": [
-            "symfony/*",
-            "twig/*",
-            "phpunit/*",
-            "phpstan/*",
-            "myclabs/*"
-        ]
+    "files": []
+  },
+  "extra": {
+    "exclude-from-files": [
+      "symfony/*",
+      "twig/*",
+      "phpunit/*",
+      "phpstan/*",
+      "myclabs/*"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Inilim\\Tool\\Test\\": "tests/",
+      "Inilim\\Tool\\Build\\": "build/src/",
+      "Inilim\\Tool\\Bench\\": "bench/src/"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Inilim\\Tool\\Test\\": "tests/",
-            "Inilim\\Tool\\Build\\": "build/src/",
-            "Inilim\\Tool\\Bench\\": "bench/src/"
-        },
-        "files": []
+    "files": []
+  },
+  "authors": [
+    {
+      "name": "inilim"
     },
-    "authors": [
-        {
-            "name": "inilim"
-        },
-        {
-            "name": "internet community"
-        }
-    ],
-    "require": {
-        "php": ">=7.4",
-        "ext-mbstring": "*"
-    },
-    "suggest": {
-        "ext-zip": "TODO ...",
-        "ext-xml": "TODO ...",
-        "ext-intl": "TODO ..."
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require-dev": {
-        "phpstan/phpstan": "@stable",
-        "inilim/dump": "dev-main",
-        "inilim/ipdo": "dev-main",
-        "phpunit/phpunit": "^9.6",
-        "twig/twig": "^3.11",
-        "mcaskill/composer-exclude-files": "^4.0",
-        "php-code-minifier/php-code-minifier": "^1.2",
-        "dragon-code/benchmark": "^3.1"
-    },
-    "scripts": {
-        "unit": [
-            "php74 vendor/bin/phpunit"
-        ],
-        "unit-tests": [
-            "php74 vendor/bin/phpunit tests"
-        ],
-        "stan": [
-            "php vendor/bin/phpstan"
-        ],
-        "stan-check": [
-            "php vendor/bin/phpstan analyze"
-        ]
-    },
-    "config": {
-        "platform": {
-            "php": "7.4"
-        },
-        "allow-plugins": {
-            "mcaskill/composer-exclude-files": true
-        }
+    {
+      "name": "internet community"
     }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-mbstring": "*"
+  },
+  "suggest": {
+    "ext-zip": "TODO ...",
+    "ext-xml": "TODO ...",
+    "ext-intl": "TODO ..."
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "inilim/dump": "dev-main",
+    "inilim/ipdo": "dev-main",
+    "phpunit/phpunit": "^9.6",
+    "twig/twig": "^3.11",
+    "mcaskill/composer-exclude-files": "^4.0",
+    "php-code-minifier/php-code-minifier": "^1.2",
+    "dragon-code/benchmark": "^3.1"
+  },
+  "scripts": {
+    "unit": [
+      "php74 vendor/bin/phpunit"
+    ],
+    "unit-tests": [
+      "php74 vendor/bin/phpunit tests"
+    ],
+    "stan": [
+      "php vendor/bin/phpstan"
+    ],
+    "stan-check": [
+      "php vendor/bin/phpstan analyze"
+    ]
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "allow-plugins": {
+      "mcaskill/composer-exclude-files": true
+    }
+  }
 }

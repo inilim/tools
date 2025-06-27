@@ -26,6 +26,28 @@ class FS
     static function kbToBytes(int $kb): int {}
 
         /**
+ * Create a directory.
+ * @todo tests
+ * @author Inilim
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @param null|resource|array $context
+ * @return array{result:?bool,exception:?TYPEExceptionV1}
+ * @throws TYPEExceptionV1
+ */
+    static function makeDir(string $path, bool $throw = false, int $mode = 0755, bool $recursive = false, bool $force = false, $context = null, ?array $contextParams = null): array {}
+
+        /**
+ * Create a directory.
+ * @todo tests
+ * @author Inilim
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @param array{path:string,mode?:int,recursive?:bool,force?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
+ * @return array{result:?bool,exception:?TYPEExceptionV1}
+ * @throws TYPEExceptionV1
+ */
+    static function makeDirViaArray(array $params): array {}
+
+        /**
  * Megabytes to Bytes
  */
     static function mbToBytes(int $mb): int {}
