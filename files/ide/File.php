@@ -55,11 +55,12 @@ class File
         /**
  * Get the returned value of a file.
  *
+ * @param string[] $pathToFiles
  * @param mixed[] $data
- * @return mixed
+ * @return array<string,mixed>
  * @throws \Exception
  */
-    static function getInclude(string $pathToFile, array $data = []) {}
+    static function getBulkRequire(array $pathToFiles, array $data = [], bool $once = false): array {}
 
         /**
  * Get the returned value of a file.
