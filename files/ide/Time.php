@@ -6,6 +6,8 @@ class Time
 {
         /**
  * Format a local time/date
+ * analog date('pattern');
+ * @link https://php.net/manual/en/function.date.php
  * @todo tests
  * @return string|false
  */
@@ -20,6 +22,9 @@ class Time
         
     static function hoursToMs(int $hours): int {}
 
+        
+    static function hoursToSec(int $hours): int {}
+
         /**
  * @todo tests
  * @param null|int|\DateInterval $ttl
@@ -28,6 +33,9 @@ class Time
 
         
     static function minutesToMs(int $min): int {}
+
+        
+    static function minutesToSec(int $min): int {}
 
         /**
  * 1 month 30 days
@@ -41,6 +49,9 @@ class Time
 
         
     static function msToSec(int $ms): int {}
+
+        
+    static function secToMs(int $seconds): int {}
 
         
     static function secondsToMs(int $sec): int {}

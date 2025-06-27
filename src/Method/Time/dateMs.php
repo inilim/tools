@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Time;
 
 /**
  * Format a local time/date
+ * analog date('pattern');
+ * @link https://php.net/manual/en/function.date.php
  * @todo tests
  * @return string|false
  */
