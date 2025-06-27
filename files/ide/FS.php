@@ -11,6 +11,17 @@ class FS
     static function chmod(string $path, ?int $mode = null) {}
 
         /**
+ * Ensure a directory exists.
+ * @todo tests
+ * @author Inilim
+ * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @param null|resource|array $context
+ * @return array{result:?bool,exception:?TYPEExceptionV1}
+ * @throws TYPEExceptionV1
+ */
+    static function ensureDirExists(string $path, bool $throw = false, int $mode = 0755, bool $recursive = true, $context = null, ?array $contextParams = null): array {}
+
+        /**
  * Determine if a file or directory exists.
  */
     static function exists(string $path): bool {}
