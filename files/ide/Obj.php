@@ -34,7 +34,7 @@ class Obj
  * @param class-string<T>|T $classOrObj
  * @return T
  */
-    static function sprintfException(string $format, array $values, $classOrObj = \Exception::class, array $args = []): Throwable {}
+    static function sprintfException(string $format = '', array $values = [], $classOrObj = \Exception::class, array $args = []): Throwable {}
 
         /**
  * @deprecated use Arr::from

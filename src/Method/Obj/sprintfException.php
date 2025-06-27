@@ -13,10 +13,10 @@ namespace Inilim\Tool\Method\Obj;
  * @return T
  */
 function sprintfException(
-    string $format,
-    array $values,
-    $classOrObj = \Exception::class,
-    array $args = []
+    string $format = '',
+    array $values  = [],
+    $classOrObj    = \Exception::class,
+    array $args    = []
 ): \Throwable {
     $message = \sprintf($format, ...$values);
     if (\is_object($classOrObj)) {
