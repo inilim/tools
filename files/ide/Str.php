@@ -205,6 +205,11 @@ class Str
     static function iStartsWith(string $haystack, $needles): bool {}
 
         /**
+ * @param (int|string)[] $parts
+ */
+    static function insertBetweenSubstrAfterMerge(string $string, array $parts, string $separator = '/', string $encoding = 'UTF-8'): string {}
+
+        /**
  * Determine if a given string matches a given pattern.
  * @param  string|iterable<string>  $pattern
  */
@@ -226,6 +231,16 @@ class Str
  * @param  string[] $protocols
  */
     static function isUrl(string $value, array $protocols = []): bool {}
+
+        /**
+ * @param iterable<array-key,string> $iterable
+ */
+    static function join(iterable $iterable, string $separator = ''): string {}
+
+        /**
+ * @param iterable<string,mixed> $iterable
+ */
+    static function joinKeys(array $iterable, string $separator = ''): string {}
 
         /**
  * Convert a string to kebab case.

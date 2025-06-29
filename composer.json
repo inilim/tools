@@ -57,13 +57,13 @@
     "unit": [
       "php74 vendor/bin/phpunit"
     ],
-    "unit-tests": [
+    "unit:check": [
       "php74 vendor/bin/phpunit tests"
     ],
     "stan": [
       "php vendor/bin/phpstan"
     ],
-    "stan-check": [
+    "stan:check": [
       "php vendor/bin/phpstan analyze"
     ]
   },

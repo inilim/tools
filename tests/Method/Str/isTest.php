@@ -69,13 +69,13 @@ class isTest extends TestCase
         $this->assertFalse(Str::is('', "\n"));
         $this->assertFalse(Str::is('', "\n\n"));
 
-        $multilineValue = <<<'VALUE'
-        <?php
+        $multilineValue = '
+<?php
 
-        namespace Illuminate\Tests\Support;
+namespace Illuminate\Tests\Support;
 
-        use Exception;
-        VALUE;
+use Exception;
+';
         $multilineValue = Str::unixNewLines($multilineValue);
 
         $this->assertTrue(Str::is($multilineValue, $multilineValue));
@@ -91,17 +91,17 @@ class isTest extends TestCase
         // dde($multilineValue);
         $this->assertTrue(Str::is("<?php\n\nnamespace Illuminate\Tests\*", $multilineValue));
 
-        $this->assertTrue(Str::is(Str::unixNewLines(<<<'PATTERN'
-        <?php
-        *
-        namespace Illuminate\Tests\*
-        PATTERN), $multilineValue));
+        $this->assertTrue(Str::is(Str::unixNewLines('
+<?php
+*
+namespace Illuminate\Tests\*
+'), $multilineValue));
 
-        $this->assertTrue(Str::is(Str::unixNewLines(<<<'PATTERN'
-        <?php
+        $this->assertTrue(Str::is(Str::unixNewLines('
+<?php
 
-        namespace Illuminate\Tests\*
-        PATTERN), $multilineValue));
+namespace Illuminate\Tests\*
+'), $multilineValue));
     }
 }
 

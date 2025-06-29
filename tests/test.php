@@ -27,20 +27,14 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 // dde(InstalledVersions::getRootPackage());
 
-__include('Path::dirVendor');
-__include('Path::normalize');
-__include('Str::deduplicate');
-__include('Str::substr');
-__include('Str::ucfirst');
-__include('Str::upper');
-__include('PF::str_contains');
-__include('Check\php80');
-__include('Path\dirProject');
+__include('Str::insertBetweenSubstrAfterMerge');
 
-$a = \Inilim\Tool\Method\Path\dirVendor();
-$b = \Inilim\Tool\Method\Path\dirProject();
-dd($a);
-dde($b);
+$b = \Inilim\Tool\Method\Str\insertBetweenSubstrAfterMerge(
+    $a = '1234567890',
+    [-5, -5, -5, 5, 5, 5]
+);
+
+de($b);
 
 
 
