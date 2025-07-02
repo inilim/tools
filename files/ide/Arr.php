@@ -185,6 +185,18 @@ class Arr
     static function exists($array, $key): bool {}
 
         /**
+ * @author inilim
+ * @return \Closure(array &$array, int $count, mixed $value):void
+ */
+    static function fillByRef(): Closure {}
+
+        /**
+ * @author inilim
+ * @return \Closure(array &$array, array $keys, mixed $value, bool $overwrite):void
+ */
+    static function fillKeysByRef(): Closure {}
+
+        /**
  * @author laravel
  * Return the first element in an array passing a given truth test.
  *
