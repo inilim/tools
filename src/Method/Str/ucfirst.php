@@ -6,9 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Make a string's first character uppercase.
- * @return string
  */
-function ucfirst(string $string)
+function ucfirst(string $string): string
 {
     return \Inilim\Tool\Method\Str\upper(
         \Inilim\Tool\Method\Str\substr($string, 0, 1)

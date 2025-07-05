@@ -8,10 +8,10 @@ namespace Inilim\Tool\Method\Str;
  * @author laravel
  * Converts a string to array using the first found separator from the provided list.
  * @param string $string  The input string to convert
- * @param array $separators  List of possible separators to check
+ * @param string[] $separators  List of possible separators to check
  * @return string[]
  */
-function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\'])
+function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']): array
 {
     // If string is empty, return empty array early
     if ($string === '') {

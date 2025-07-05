@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Str{function remove($search,$subject,bool $caseSensitive=true){$search=\Inilim\Tool\Method\Arr\from($search);$subject=\Inilim\Tool\Method\Arr\from($subject);return $caseSensitive?\str_replace($search,'',$subject):\str_ireplace($search,'',$subject);}}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('from')){
+namespace Inilim\Tool\Method\Str{function remove($search,$subject,bool $caseSensitive=true){if($search instanceof \Traversable){$search=\Inilim\Tool\Method\Arr\from($search);}if($subject instanceof \Traversable){$subject=\Inilim\Tool\Method\Arr\from($subject);}return $caseSensitive?\str_replace($search,'',$subject):\str_ireplace($search,'',$subject);}}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('from')){
     function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if($items instanceof \Traversable){return \iterator_to_array($items);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}

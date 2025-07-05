@@ -10,7 +10,9 @@ namespace Inilim\Tool\Method\Str;
  */
 function startsWith(string $haystack, $needles): bool
 {
-    if (!\is_iterable($needles)) $needles = [$needles];
+    if (!\is_iterable($needles)) {
+        $needles = [$needles];
+    }
 
     foreach ($needles as $needle) {
         if ((string) $needle !== '' && \Inilim\Tool\Method\PF\str_starts_with($haystack, $needle)) {

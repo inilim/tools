@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Str{function headline(string $value){$parts=\explode(' ',$value);$parts=\sizeof($parts)>1?\array_map('\Inilim\Tool\Method\Str\title',$parts):\array_map('\Inilim\Tool\Method\Str\title',\Inilim\Tool\Method\Str\ucsplit(\implode('_',$parts)));$collapsed=\Inilim\Tool\Method\Str\replace(['-','_',' '],'_',\implode('_',$parts));return \implode(' ',\array_filter(\explode('_',$collapsed)));}if(!\Inilim\Tool\Str::__definedIfNot('replace')){
-    function replace($search,$replace,$subject,bool $caseSensitive=true){$search=\Inilim\Tool\Method\Arr\from($search);$replace=\Inilim\Tool\Method\Arr\from($replace);$subject=\Inilim\Tool\Method\Arr\from($subject);return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
+    function replace($search,$replace,$subject,bool $caseSensitive=true){if($search instanceof \Traversable){$search=\Inilim\Tool\Method\Arr\from($search);}if($replace instanceof \Traversable){$replace=\Inilim\Tool\Method\Arr\from($replace);}if($subject instanceof \Traversable){$subject=\Inilim\Tool\Method\Arr\from($subject);}return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
     }if(!\Inilim\Tool\Str::__definedIfNot('title')){
     function title(string $value):string{return \mb_convert_case($value,\Inilim\Tool\PF :: MB_CASE_TITLE,'UTF-8');}
     }if(!\Inilim\Tool\Str::__definedIfNot('ucsplit')){

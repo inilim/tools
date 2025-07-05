@@ -27,6 +27,18 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 // dde(InstalledVersions::getRootPackage());
 
+
+__include('Str::replace');
+__include('Arr\from');
+
+
+\Inilim\Tool\Method\Str\replace('baz', 'explosion', 'foo bar baz');
+
+
+
+
+
+de();
 __include('Str::insertBetweenSubstrAfterMerge');
 
 $b = \Inilim\Tool\Method\Str\insertBetweenSubstrAfterMerge(

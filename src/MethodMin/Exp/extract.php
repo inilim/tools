@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Exp{function extract(string $haystack,string $patte
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('matchAll')){
     function matchAll(string $pattern,string $subject){\preg_match_all($pattern,$subject,$matches);if(empty($matches[0])){return[];}return $matches[1]?? $matches[0];}
     }if(!\Inilim\Tool\Str::__definedIfNot('replace')){
-    function replace($search,$replace,$subject,bool $caseSensitive=true){$search=\Inilim\Tool\Method\Arr\from($search);$replace=\Inilim\Tool\Method\Arr\from($replace);$subject=\Inilim\Tool\Method\Arr\from($subject);return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
+    function replace($search,$replace,$subject,bool $caseSensitive=true){if($search instanceof \Traversable){$search=\Inilim\Tool\Method\Arr\from($search);}if($replace instanceof \Traversable){$replace=\Inilim\Tool\Method\Arr\from($replace);}if($subject instanceof \Traversable){$subject=\Inilim\Tool\Method\Arr\from($subject);}return $caseSensitive?\str_replace($search,$replace,$subject):\str_ireplace($search,$replace,$subject);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}

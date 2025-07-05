@@ -11,9 +11,9 @@ namespace Inilim\Tool\Method\Path{function getVendorDirByPath(?string $path=null
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
     function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('ucfirst')){
-    function ucfirst(string $string){return \Inilim\Tool\Method\Str\upper(\Inilim\Tool\Method\Str\substr($string,0,1)).\Inilim\Tool\Method\Str\substr($string,1);}
+    function ucfirst(string $string):string{return \Inilim\Tool\Method\Str\upper(\Inilim\Tool\Method\Str\substr($string,0,1)).\Inilim\Tool\Method\Str\substr($string,1);}
     }if(!\Inilim\Tool\Str::__definedIfNot('upper')){
-    function upper(string $value,?string $encoding='UTF-8'){return \mb_strtoupper($value,$encoding);}
+    function upper(string $value,?string $encoding='UTF-8'):string{return \mb_strtoupper($value,$encoding);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){

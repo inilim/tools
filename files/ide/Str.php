@@ -138,6 +138,20 @@ class Str
     static function doesntContain(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
+ * @author laravel
+ * Determine if a given string doesn't end with a given substring.
+ * @param  string|iterable<string>  $needles
+ */
+    static function doesntEndWith(string $haystack, $needles): bool {}
+
+        /**
+ * @author laravel
+ * Determine if a given string doesn't start with a given substring.
+ * @param  string|iterable<string>  $needles
+ */
+    static function doesntStartWith(string $haystack, $needles): bool {}
+
+        /**
  * Determine if a given string ends with a given substring.
  * @param string|iterable<string> $needles
  */
@@ -523,10 +537,10 @@ class Str
  * @author laravel
  * Converts a string to array using the first found separator from the provided list.
  * @param string $string  The input string to convert
- * @param array $separators  List of possible separators to check
+ * @param string[] $separators  List of possible separators to check
  * @return string[]
  */
-    static function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']) {}
+    static function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']): array {}
 
         /**
  * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
@@ -557,9 +571,8 @@ class Str
 
         /**
  * Make a string's first character uppercase.
- * @return string
  */
-    static function ucfirst(string $string) {}
+    static function ucfirst(string $string): string {}
 
         /**
  * Split a string into pieces by uppercase characters.
@@ -580,9 +593,8 @@ class Str
 
         /**
  * Convert the given string to upper-case.
- * @return string
  */
-    static function upper(string $value, ?string $encoding = 'UTF-8') {}
+    static function upper(string $value, ?string $encoding = 'UTF-8'): string {}
 
         /**
  * Get the number of words a string contains.
