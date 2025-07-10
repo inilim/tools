@@ -176,7 +176,7 @@ class Other
  * @author inilim
  * @template T of mixed
  * @param callable():T $callable
- * @return array{result:T,time:int}
+ * @return array{result:T,time:int,memory:int}
  */
     static function timedMsCall(callable $callable): array {}
 

@@ -27,6 +27,19 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 // dde(InstalledVersions::getRootPackage());
 
+__include('Other\timedMsCall');
+__include('Time\unixMs');
+
+
+$a = \Inilim\Tool\Method\Other\timedMsCall(static function () {
+    sleep(1);
+    return [123, 123, 123, 123, 123, 123, 1, 23, 123, 12, 31, 23, 12, 3, 123, 1, 23];
+});
+
+de($a);
+
+
+
 
 __include('Str::replace');
 __include('Arr\from');
