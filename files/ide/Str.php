@@ -249,12 +249,12 @@ class Str
         /**
  * @param iterable<array-key,string> $iterable
  */
-    static function join(iterable $iterable, string $separator = ''): string {}
+    static function join(iterable $iterable, string $separator = ','): string {}
 
         /**
  * @param iterable<string,mixed> $iterable
  */
-    static function joinKeys(array $iterable, string $separator = ''): string {}
+    static function joinKeys(array $iterable, string $separator = ','): string {}
 
         /**
  * Convert a string to kebab case.

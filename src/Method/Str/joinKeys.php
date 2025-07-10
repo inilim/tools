@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * @param iterable<string,mixed> $iterable
  */
-function joinKeys(array $iterable, string $separator = ''): string
+function joinKeys(array $iterable, string $separator = ','): string
 {
     if ($iterable instanceof \Traversable) {
         $iterable = \iterator_to_array($iterable);

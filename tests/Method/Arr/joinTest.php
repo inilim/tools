@@ -10,6 +10,8 @@ class joinTest extends TestCase
 {
     function test()
     {
+        $this->assertSame('a,b,c', Arr::join(['a', 'b', 'c']));
+
         $this->assertSame('a, b, c', Arr::join(['a', 'b', 'c'], ', '));
 
         $this->assertSame('a, b and c', Arr::join(['a', 'b', 'c'], ', ', ' and '));
