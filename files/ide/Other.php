@@ -65,9 +65,9 @@ class Other
 
         /**
  * @author Inilim
- * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "object exception" "enum" "resource" "null" "unknown type" "resource (closed)"
+ * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "exception" "enum" "resource" "null" "unknown type" "resource (closed)"
  * @param mixed $v
- * @return 'null'|'array'|'float'|'enum'|'object exception'|'object'|'bool'|'int'|'string'|'resource'|'resource (closed)'|'unknown type'
+ * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource (closed)'|'unknown type'
  */
     static function getType($v) {}
 
@@ -229,5 +229,11 @@ class Other
  * @return string
  */
     static function unprefixVar(string $name) {}
+
+        /**
+ * @author webmozarts/assert
+ * @param mixed $value
+ */
+    static function valueToString($value): string {}
 
     }

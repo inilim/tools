@@ -74,6 +74,13 @@ class Check
     static function intOrFloatOrString($value): bool {}
 
         /**
+ * @psalm-pure
+ * @psalm-assert countable $value
+ * @param mixed  $value
+ */
+    static function isCountable($value): bool {}
+
+        /**
  * @author Inilim
  * @param mixed $value
  * @phpstan-assert-if-true \IteratorAggregate $value

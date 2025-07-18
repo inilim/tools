@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Assert;
 
 /**
- * @author Inilim
- * @param mixed $value
- * @return void
+ * @author webmozarts/assert
+ * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-function enumCase($value, string $message = '')
+function directory($value, string $message = '')
 {
-    if (!\Inilim\Tool\Method\Enum\isCase($value)) {
+    if (!\is_dir($value)) {
         throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Expected an \UnitEnum. Got: %s',
+            $message ?: 'The path %s is not a directory.',
             \Inilim\Tool\Method\Other\valueToString($value)
         ));
     }

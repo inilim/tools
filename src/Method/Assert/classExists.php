@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Assert;
 
 /**
- * @author Inilim
- * @param mixed $value
- * @return void
+ * @author webmozarts/assert
+ * @psalm-assert class-string $value
+ * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-function enumCase($value, string $message = '')
+function classExists($value, string $message = '')
 {
-    if (!\Inilim\Tool\Method\Enum\isCase($value)) {
+    if (!\class_exists($value)) {
         throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Expected an \UnitEnum. Got: %s',
+            $message ?: 'Expected an existing class name. Got: %s',
             \Inilim\Tool\Method\Other\valueToString($value)
         ));
     }
