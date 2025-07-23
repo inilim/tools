@@ -6,17 +6,16 @@ namespace Inilim\Tool\Method\Assert;
 
 /**
  * @author webmozarts/assert
- * Checks if a value is a valid array key (int or string).
  * @psalm-pure
- * @psalm-assert array-key $value
+ * @psalm-assert numeric $value
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-function validArrayKey($value, string $message = '')
+function integerish($value, string $message = '')
 {
-    if (!\Inilim\Tool\Method\Check\validArrayKey($value)) {
+    if (!\is_numeric($value) || $value != (int) $value) {
         throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Expected string or integer. Got: %s',
+            $message ?: 'Expected an integerish value. Got: %s',
             \Inilim\Tool\Method\Other\getType($value)
         ));
     }

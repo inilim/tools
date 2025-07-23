@@ -27,6 +27,11 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 // dde(InstalledVersions::getRootPackage());
 
+function float() {}
+
+
+dde([] instanceof ArrayAccess);
+
 __include('Other\timedMsCall');
 __include('Time\unixMs');
 

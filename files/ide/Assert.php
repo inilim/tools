@@ -36,6 +36,15 @@ class Assert
 
         /**
  * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert float $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function float($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
  * Does strict comparison, so Assert::inArray(3, ['3']) does not pass the assertion.
  * @psalm-pure
  * @param mixed  $value
@@ -43,6 +52,34 @@ class Assert
  * @throws \InvalidArgumentException
  */
     static function inArray($value, array $values, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert int $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function integer($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert numeric $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function integerish($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-param array<class-string> $classes
+ * @param object|string $value
+ * @param string[]      $classes
+ * @throws \InvalidArgumentException
+ */
+    static function isAnyOf($value, array $classes, string $message = '') {}
 
         /**
  * @psalm-pure
@@ -54,11 +91,51 @@ class Assert
 
         /**
  * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-template ExpectedType of object
+ * @psalm-param class-string<ExpectedType> $class
+ * @psalm-assert ExpectedType $value
+ * @param mixed         $value
+ * @param string|object $class
+ * @throws \InvalidArgumentException
+ */
+    static function isInstanceOf($value, $class, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-param array<class-string> $classes
+ * @param mixed                $value
+ * @param array<object|string> $classes
+ * @throws \InvalidArgumentException
+ */
+    static function isInstanceOfAny($value, array $classes, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert positive-int|0 $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function natural($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
  * @param mixed  $value
  * @param mixed  $expect
  * @throws \InvalidArgumentException
  */
     static function notEq($value, $expect, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert numeric $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function numeric($value, string $message = '') {}
 
         /**
  * @author Inilim
@@ -106,11 +183,29 @@ class Assert
         /**
  * @author webmozarts/assert
  * @psalm-pure
+ * @psalm-assert positive-int $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function positiveInteger($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
  * @psalm-assert string $value
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
     static function string($value, string $message = '') {}
+
+        /**
+ * @author webmozarts/assert
+ * @psalm-pure
+ * @psalm-assert non-empty-string $value
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function stringNotEmpty($value, string $message = '') {}
 
         /**
  * @author webmozarts/assert
