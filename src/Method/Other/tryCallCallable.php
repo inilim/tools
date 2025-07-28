@@ -13,20 +13,20 @@ namespace Inilim\Tool\Method\Other;
  * @param callable(...A):C $callable
  * @param array<A> $args
  * @param D $default
- * @return array{result:C|D,exception:null|\Throwable}
+ * @return array{result:C|D,exception:null|\Throwable,"...":array{C|D,null|\Throwable}}
  */
 function tryCallCallable(callable $callable, array $args = [], $default = null)
 {
     try {
         $result = \call_user_func_array($callable, $args);
     } catch (\Throwable $e) {
-        return [
+        return \Inilim\Tool\Method\Other\_refDots([
             'result'    => $default,
             'exception' => $e,
-        ];
+        ]);
     }
-    return [
+    return \Inilim\Tool\Method\Other\_refDots([
         'result'    => $result,
         'exception' => null,
-    ];
+    ]);
 }

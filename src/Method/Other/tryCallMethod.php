@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Other;
  * @template T of mixed
  * @param T $default
  * @param object|class-string $objectOrClass
- * @return array{result:mixed|T,exception:null|\Throwable}
+ * @return array{result:mixed|T,exception:null|\Throwable,"...":array{mixed|T,null|\Throwable}}
  */
 function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null)
 {

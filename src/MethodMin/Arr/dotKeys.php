@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Arr;
 
-function dotKeys(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dotKeys($value,$prepend.$key.'.'));}else{$results[]=$prepend.$key;}}return $results;}
+function dotKeys(iterable $array,string $prepend=''):array{$results=[];$flatten=static function(iterable $array,string $prefix)use(&$results,&$flatten){foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$flatten($value,$prefix.$key.'.');}else{$results[]=$prefix.$key;}}};$flatten($array,$prepend);return $results;}

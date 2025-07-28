@@ -25,15 +25,43 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
-// dde(InstalledVersions::getRootPackage());
-
-function float() {}
 
 
-dde([] instanceof ArrayAccess);
 
+
+
+__include('Other\_refDots');
 __include('Other\timedMsCall');
 __include('Time\unixMs');
+
+$a = ['privet' => 1];
+
+$res = \Inilim\Tool\Method\Other\_refDots($a);
+
+$res['...'][0] = 111;
+
+// de($res);
+
+$result = \Inilim\Tool\Method\Other\timedMsCall(static function () {
+    return [1, 2, 3, 4, 5];
+});
+
+
+de($result[]);
+
+// dde(InstalledVersions::getRootPackage());
+$json = 'D:\projects\toganash\chat\2433510015.json';
+$json = File::get($json)['result'];
+$arr = Json::tryDecodeAsArray($json);
+
+$arrDot = Arr::dotKeys($arr);
+de(Arr::take($arrDot, 100));
+
+
+
+dde();
+
+
 
 
 $a = \Inilim\Tool\Method\Other\timedMsCall(static function () {

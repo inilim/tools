@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Arr{function dataGetV2($target,$key,$default=null){
     }if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
     function dot(iterable $array,string $prepend=''){$results=[];$flatten=static function(iterable $data,string $prefix)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.'.');}else{$results[$newKey]=$value;}}};$flatten($array,$prepend);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeys')){
-    function dotKeys(iterable $array,string $prepend=''){$results=[];foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$results=\array_merge($results,\Inilim\Tool\Method\Arr\dotKeys($value,$prepend.$key.'.'));}else{$results[]=$prepend.$key;}}return $results;}
+    function dotKeys(iterable $array,string $prepend=''):array{$results=[];$flatten=static function(iterable $array,string $prefix)use(&$results,&$flatten){foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$flatten($value,$prefix.$key.'.');}else{$results[]=$prefix.$key;}}};$flatten($array,$prepend);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeysByPattern')){
     function dotKeysByPattern(iterable $target,string $dotPattern){$regex='#^'.\str_replace('\*','[^\.]+',\preg_quote($dotPattern)).'#';return \array_values(\array_filter(\Inilim\Tool\Method\Arr\dotKeys($target),static fn($key)=>\preg_match($regex,$key)));}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){

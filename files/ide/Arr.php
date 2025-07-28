@@ -126,11 +126,9 @@ class Arr
 
         /**
  * @author inilim
- * получаем ключи dot notation по паттерну | 
- * key.*.key....
  * @return string[]
  */
-    static function dotKeys(iterable $array, string $prepend = '') {}
+    static function dotKeys(iterable $array, string $prepend = ''): array {}
 
         /**
  * @author inilim

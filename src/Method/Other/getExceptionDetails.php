@@ -10,9 +10,9 @@ namespace Inilim\Tool\Method\Other;
  * @param T $e
  * @return array{message:string,line:int,code:int|string,file:string,trace:($traceAsArray is true ? mixed[] : string),class:class-string<T>}
  */
-function getExceptionDetails(\Throwable $e, bool $traceAsArray = false): array
+function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array
 {
-    return [
+    $r = [
         'message' => $e->getMessage(),
         'line'    => $e->getLine(),
         'code'    => $e->getCode(),
@@ -20,4 +20,5 @@ function getExceptionDetails(\Throwable $e, bool $traceAsArray = false): array
         'trace'   => $traceAsArray ? $e->getTrace() : $e->getTraceAsString(),
         'class'   => \get_class($e),
     ];
+    return $dots ? \Inilim\Tool\Method\Other\_refDots($r) : $r;
 }

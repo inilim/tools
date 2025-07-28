@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * @todo to check
  * @author Inilim
  * @param mixed $v
  */

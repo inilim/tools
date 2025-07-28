@@ -5,6 +5,18 @@ namespace Inilim\Tool;
 class Other
 {
         /**
+ * @author inilim
+ * 
+ * @template TValue og mixed
+ * @template TArray of array<int|string,TValue>
+ * @template TDots of array{"...":TValue[]}
+ * 
+ * @param TArray $array
+ * @return array{...TArray, ...TDots}
+ */
+    static function _refDots(array $array): array {}
+
+        /**
  * @author Inilim
  * @return array<array{file:string|null,line:int|null,method:string|null,type:string|null,class:class-string|null,object:object|null,args:mixed[]|null}>
  */
@@ -61,7 +73,7 @@ class Other
  * @param T $e
  * @return array{message:string,line:int,code:int|string,file:string,trace:($traceAsArray is true ? mixed[] : string),class:class-string<T>}
  */
-    static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false): array {}
+    static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array {}
 
         /**
  * @author Inilim
@@ -72,30 +84,35 @@ class Other
     static function getType($v) {}
 
         /**
+ * @todo to check
  * @author Inilim
  * @param class-string|object ...$classes
  */
     static function instanceOfAll(object $obj, ...$classes): bool {}
 
         /**
+ * @todo to check
  * @author Inilim
  * @param (class-string|object)[] $classes
  */
     static function instanceOfAllArray(object $obj, array $classes): bool {}
 
         /**
+ * @todo to check
  * @author Inilim
  * @param class-string|object ...$classes
  */
     static function instanceOfAny(object $obj, ...$classes): bool {}
 
         /**
+ * @todo to check
  * @author Inilim
  * @param (class-string|object)[] $classes
  */
     static function instanceOfAnyArray(object $obj, array $classes): bool {}
 
         /**
+ * @todo to check
  * @author Inilim
  * @param mixed $v
  */
@@ -174,9 +191,13 @@ class Other
 
         /**
  * @author inilim
- * @template T of mixed
- * @param callable():T $callable
- * @return array{result:T,time:int,memory:int}
+ * 
+ * @template R of mixed
+ * @template Time of int
+ * @template Memory of int
+ * 
+ * @param callable():R $callable
+ * @return array{result:R,time:Time,memory:Memory,"...":array{R,Time,Memory}}
  */
     static function timedMsCall(callable $callable): array {}
 
@@ -201,7 +222,7 @@ class Other
  * @param callable(...A):C $callable
  * @param array<A> $args
  * @param D $default
- * @return array{result:C|D,exception:null|\Throwable}
+ * @return array{result:C|D,exception:null|\Throwable,"...":array{C|D,null|\Throwable}}
  */
     static function tryCallCallable(callable $callable, array $args = [], $default = null) {}
 
@@ -210,7 +231,7 @@ class Other
  * @template T of mixed
  * @param T $default
  * @param object|class-string $objectOrClass
- * @return array{result:mixed|T,exception:null|\Throwable}
+ * @return array{result:mixed|T,exception:null|\Throwable,"...":array{mixed|T,null|\Throwable}}
  */
     static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null) {}
 

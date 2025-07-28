@@ -6,9 +6,13 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author inilim
- * @template T of mixed
- * @param callable():T $callable
- * @return array{result:T,time:int,memory:int}
+ * 
+ * @template R of mixed
+ * @template Time of int
+ * @template Memory of int
+ * 
+ * @param callable():R $callable
+ * @return array{result:R,time:Time,memory:Memory,"...":array{R,Time,Memory}}
  */
 function timedMsCall(callable $callable): array
 {
@@ -18,9 +22,9 @@ function timedMsCall(callable $callable): array
     $ms = \Inilim\Tool\Method\Time\unixMs() - $ms;
     $m = \memory_get_usage(true) - $m;
 
-    return [
+    return \Inilim\Tool\Method\Other\_refDots([
         'result' => $result,
         'time'   => $ms,
         'memory' => $m,
-    ];
+    ]);
 }
