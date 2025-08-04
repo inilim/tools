@@ -6,7 +6,7 @@ class PF
 {
         /**
  * @author symfony/polyfill
- * @param callable():bool $callback
+ * @param callable(mixed, int|string):bool $callback
  * @return mixed
  */
     static function array_find(array $array, callable $callback) {}
@@ -115,6 +115,12 @@ class PF
  * @param resource $res
  */
     static function get_resource_id($res): int {}
+
+        /**
+ * @author Ion Bazan <ion.bazan@gmail.com>
+ * @author Pierre Ambroise <pierre27.ambroise@gmail.com>
+ */
+    static function json_validate(string $json, int $depth = 512, int $flags = 0): bool {}
 
         /**
  * @return string

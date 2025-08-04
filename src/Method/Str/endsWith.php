@@ -8,13 +8,21 @@ namespace Inilim\Tool\Method\Str;
  * Determine if a given string ends with a given substring.
  * @param string|iterable<string> $needles
  */
-function endsWith(string $haystack, $needles): bool
+function endsWith(string $haystack, $needles, bool $ignoreCase = false): bool
 {
+    if ($ignoreCase) {
+        $haystack = \mb_strtolower($haystack, 'UTF-8');
+    }
+
     if (!\is_iterable($needles)) {
         $needles = [$needles];
     }
 
     foreach ($needles as $needle) {
+        if ($ignoreCase) {
+            $needle = \mb_strtolower($needle, 'UTF-8');
+        }
+
         if ((string) $needle !== '' && \Inilim\Tool\Method\PF\str_ends_with($haystack, $needle)) {
             return true;
         }

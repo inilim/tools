@@ -82,6 +82,13 @@ class Assert
     static function isAnyOf($value, array $classes, string $message = '') {}
 
         /**
+ * @author webmozarts/assert
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function isCallable($value, string $message = '') {}
+
+        /**
  * @psalm-pure
  * @psalm-assert countable $value
  * @param mixed  $value
@@ -110,6 +117,15 @@ class Assert
  * @throws \InvalidArgumentException
  */
     static function isInstanceOfAny($value, array $classes, string $message = '') {}
+
+        /**
+ * @author inilim
+ * @psalm-pure
+ * @psalm-assert string $value
+ * @param mixed $value
+ * @throws \InvalidArgumentException
+ */
+    static function json($value, string $message = '') {}
 
         /**
  * @author webmozarts/assert

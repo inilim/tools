@@ -47,7 +47,7 @@ class File
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:?string,exception:?TYPEExceptionV1}
+ * @return array{result:null|string,exception:null|TYPEExceptionV1,http_response_header?:string[]}
  * @throws TYPEExceptionV1
  */
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
@@ -87,7 +87,7 @@ class File
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:string|null,exception:null|TYPEExceptionV1}
+ * @return array{result:string|null,exception:null|TYPEExceptionV1,http_response_header?:string[]}
  * @throws TYPEExceptionV1
  */
     static function getViaArray(array $params) {}

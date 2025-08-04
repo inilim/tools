@@ -4,7 +4,9 @@ namespace Inilim\Tool;
 
 class Str
 {
-        
+        /**
+ * @deprecated use PF::str_contains
+ */
     static function _contains(string $haystack, string $needle): bool {}
 
         
@@ -155,7 +157,7 @@ class Str
  * Determine if a given string ends with a given substring.
  * @param string|iterable<string> $needles
  */
-    static function endsWith(string $haystack, $needles): bool {}
+    static function endsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * @return string
@@ -209,14 +211,16 @@ class Str
     static function headline(string $value) {}
 
         /**
+ * @deprecated use Str::endsWith(ignoreCase: true)
  * @param string|iterable<string> $needles
  */
     static function iEndsWith(string $haystack, $needles): bool {}
 
         /**
+ * @deprecated use Str::startsWith(ignoreCase: true)
  * @param string|iterable<string> $needles
  */
-    static function iStartsWith(string $haystack, $needles): bool {}
+    static function iStartsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * @param (int|string)[] $parts
@@ -285,9 +289,8 @@ class Str
 
         /**
  * Limit the number of characters in a string.
- * @return string
  */
-    static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false) {}
+    static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false): string {}
 
         /**
  * Convert the given string to lower-case.
@@ -488,7 +491,7 @@ class Str
  * Determine if a given string starts with a given substring.
  * @param  string|iterable<string>  $needles
  */
-    static function startsWith(string $haystack, $needles): bool {}
+    static function startsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * Convert a value to studly caps case.
@@ -543,7 +546,15 @@ class Str
     static function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']): array {}
 
         /**
- * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
+ * @template T1 of array{nextChunkSize?:int,substrEncoding?:string}
+ * @return \Closure(string &$string, int $chunk, T1 $opts):\Generator<array{
+ * iteration:int,
+ * countChunks:float,
+ * startPos:int,
+ * prevChunk:string|null,
+ * nextChunk:string,
+ * opts:T1
+ * },string>
  */
     static function toCharsGenerator(): Closure {}
 

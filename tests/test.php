@@ -25,10 +25,91 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
+__include('Str\limit');
+__include('Str\toCharsGenerator');
+__include('Str\characterTextSplitter_v0');
+__include('Str\trim');
+__include('Str\length');
+__include('Assert\isCallable');
+__include('Assert\isCallable');
+__include('Assert\positiveInteger');
+__include('Check\positiveInteger');
+
+$str = 'Ollama can be run on CPU-only systems for generating embeddings, although performance will generally be significantly slower compared to systems with dedicated GPUs.
+Key points regarding Ollama embeddings on CPU:
+CPU-only operation is supported:
+Ollama is designed to function on CPU-only hardware, making it accessible for users without powerful GPUs.
+Performance limitations:
+Generating embeddings on the CPU will be considerably slower than on a GPU, especially for larger models or extensive datasets.
+Resource considerations:
+While Ollama can run on a basic CPU, a modern CPU with a higher core count (e.g., 8 cores for models up to 13B) is recommended for better performance.
+Thread management:
+Ollama automatically detects the optimal number of threads for CPU computation, but users can manually set the num_thread parameter in configurations (e.g., in LangChain\'s OllamaEmbeddings) to match the number of physical CPU cores for potential optimization.
+Verification:
+To confirm if Ollama is utilizing the CPU for inference, users can check the output of ollama ps or review the server logs.';
+\Inilim\Tool\Method\Str\characterTextSplitter_v0($str);
+
+
+de();
+__include('Time\patternToMs');
+__include('PF\str_contains');
+__include('Str\concat');
+
+
+
+\Inilim\Tool\Method\Time\patternToMs('1y002m 100ms');
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de();
+
+
+function test(int $sec)
+{
+
+    de(Time::hoursToSec(1) + Time::minutesToSec(31) + 30);
+
+    $allMs = Time::secondsToMs($sec + 1);
+    $partMs = Time::minutesToMs(2);
+    de($partMs);
+    $countParts = intval(\ceil($allMs / $partMs));
+
+    $parts = [];
+    $curMs = 0;
+    Other::iterateWhile(static function ($curIteration) use (&$parts, &$curMs, $partMs) {
+        $parts[] = [
+            'start' => $curMs + ($curIteration > 0 ? 1 : 0),
+            'end'   => $curMs + $partMs,
+        ];
+
+        $curMs += $partMs;
+
+        return true;
+    }, $countParts);
+
+    // 
+    de($parts);
+    de($partMs);
+}
+
+$res = test(5490);
+
+de();
 
 __include('Other\_refDots');
 __include('Other\timedMsCall');

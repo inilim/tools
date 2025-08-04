@@ -107,6 +107,13 @@ class Check
  * @param mixed $value
  * @phpstan-assert-if-true \IteratorAggregate $value
  */
+    static function isJson($value): bool {}
+
+        /**
+ * @author Inilim
+ * @param mixed $value
+ * @phpstan-assert-if-true \IteratorAggregate $value
+ */
     static function iteratorAgg($value): bool {}
 
         /**

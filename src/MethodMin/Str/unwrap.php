@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Str{function unwrap(string $value,string $before,?string $after=null):string{if(\Inilim\Tool\Method\Str\startsWith($value,$before)){$value=\Inilim\Tool\Method\Str\substr($value,\Inilim\Tool\Method\Str\length($before));}if(\Inilim\Tool\Method\Str\endsWith($value,$after ??= $before)){$value=\Inilim\Tool\Method\Str\substr($value,0,-\Inilim\Tool\Method\Str\length($after));}return $value;}if(!\Inilim\Tool\Str::__definedIfNot('endsWith')){
-    function endsWith(string $haystack,$needles):bool{if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_ends_with($haystack,$needle)){return true;}}return false;}
+    function endsWith(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_ends_with($haystack,$needle)){return true;}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('length')){
     function length(string $value,$encoding='UTF-8'):int{return \mb_strlen($value,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('startsWith')){
-    function startsWith(string $haystack,$needles):bool{if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_starts_with($haystack,$needle)){return true;}}return false;}
+    function startsWith(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_starts_with($haystack,$needle)){return true;}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
     function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){

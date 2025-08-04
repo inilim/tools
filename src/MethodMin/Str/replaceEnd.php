@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Str{function replaceEnd(string $search,string $replace,string $subject){if($search===''){return $subject;}if(\Inilim\Tool\Method\Str\endsWith($subject,$search)){return \Inilim\Tool\Method\Str\replaceLast($search,$replace,$subject);}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('endsWith')){
-    function endsWith(string $haystack,$needles):bool{if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_ends_with($haystack,$needle)){return true;}}return false;}
+    function endsWith(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if((string) $needle!==''&&\Inilim\Tool\Method\PF\str_ends_with($haystack,$needle)){return true;}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('replaceLast')){
     function replaceLast(string $search,string $replace,string $subject){if($search===''){return $subject;}$position=\strrpos($subject,$search);if($position!==false){return \substr_replace($subject,$replace,$position,\strlen($search));}return $subject;}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){

@@ -32,7 +32,7 @@ function json(
         return $default;
     }
 
-    if (!\Inilim\Tool\Method\Json\isJson($result['result'])) {
+    if (!\Inilim\Tool\Method\Check\isJson($result['result'])) {
         if ($throw) {
             throw new \JsonException(\sprintf('Content file not json "%s"', $pathToFile));
         }

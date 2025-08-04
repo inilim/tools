@@ -43,7 +43,9 @@ class Json
         
     static function hasError(): bool {}
 
-        
+        /**
+ * @deprecated use Check::isJson()
+ */
     static function isJson(?string $v): bool {}
 
         

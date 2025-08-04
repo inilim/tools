@@ -5,24 +5,51 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
- * @return \Closure(string &$string, int $chunk):\Generator<array{iter:int,pos:int},string>
+ * @template T1 of array{nextChunkSize?:int,substrEncoding?:string}
+ * @return \Closure(string &$string, int $chunk, T1 $opts):\Generator<array{
+ * iteration:int,
+ * countChunks:float,
+ * startPos:int,
+ * prevChunk:string|null,
+ * nextChunk:string,
+ * opts:T1
+ * },string>
  */
 function toCharsGenerator(): \Closure
 {
     if (\func_num_args() !== 0) {
         throw new \InvalidArgumentException('toCharsGenerator()(...) <-- The arguments were passed to the wrong place');
     }
-    return static function (string &$string, int $chunk = 1): \Generator {
-        $len = \mb_strlen($string, 'UTF-8');
-        if ($len > 0) {
-            $iteration = 0;
-            for ($i = 0; $i < $len; ($i += $chunk)) {
-                yield [
-                    'iter' => $iteration,
-                    'pos'  => $i,
-                ] => \mb_substr($string, $i, $chunk, 'UTF-8');
-                $iteration++;
-            }
+
+    return static function (string &$string, int $chunkSize = 1, array $opts = []): \Generator {
+        $opts['encoding'] ??= 'UTF-8';
+        $len = \mb_strlen($string, $opts['encoding']);
+        if ($len <= 0) {
+            return;
+        }
+
+        $countChunks   = \floatval($len / $chunkSize);
+        $iteration     = 0;
+        $chunk         = null;
+        $opts['nextChunkSize'] ??= $chunkSize;
+
+        for ($pos = 0; $pos < $len; ($pos += $chunkSize)) {
+
+            $chunks    = \mb_substr($string, $pos, $chunkSize + $opts['nextChunkSize'], $opts['encoding']);
+            $nextChunk = \mb_substr($chunks, $pos + $chunkSize, $opts['nextChunkSize'], $opts['encoding']);
+            $chunk     = \mb_substr($chunks, $pos, $chunkSize, $opts['encoding']);
+            $chunks    = '';
+
+            yield [
+                'iteration'   => $iteration,
+                'countChunks' => $countChunks,
+                'startPos'    => $pos,
+                'prevChunk'   => $chunk,
+                'nextChunk'   => $nextChunk,
+                'opts'        => $opts,
+            ] => $chunk;
+
+            $iteration++;
         }
     };
 }

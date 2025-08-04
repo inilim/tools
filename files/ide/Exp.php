@@ -12,6 +12,29 @@ class Exp
     static function extract(string $haystack, string $pattern) {}
 
         /**
+ * @author inilim
+ * 
+ * It is not recommended to use it in production.
+ * Exclusively for debugging, testing, and development.
+ * 
+ * @param array<string,string>|string[] $headers
+ * @return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ */
+    static function fgcSend(string $url, string $method = 'GET', ?string $body = null, array $headers = [], array $ctxOptions = []) {}
+
+        /**
+ * @author inilim
+ * 
+ * It is not recommended to use it in production.
+ * Exclusively for debugging, testing, and development.
+ * 
+ * @param mixed[]|string $body
+ * @param array<string,string>|string[] $headers
+ * @return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ */
+    static function fgcSendJsonPost(string $url, $body, array $headers = [], array $ctxOptions = []) {}
+
+        /**
  * @author shaedrich <https://github.com/shaedrich>
  * Formats the input string accodring to the pattern passed in.
  *
@@ -67,5 +90,13 @@ class Exp
  * @return int The Levenshtein distance between the two strings.
  */
     static function mbLevenshtein(string $str1, string $str2): int {}
+
+        /**
+ * @author guzzle/guzzle
+ * Parses the given proxy URL to make it compatible with the format PHP's stream context expects.
+ * 
+ * @return array{proxy:string,auth:null|string}
+ */
+    static function parseProxy(string $url): array {}
 
     }

@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\File;
  * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * @param null|resource|array $context
- * @return array{result:?string,exception:?TYPEExceptionV1}
+ * @return array{result:null|string,exception:null|TYPEExceptionV1,http_response_header?:string[]}
  * @throws TYPEExceptionV1
  */
 function get(
@@ -24,15 +24,17 @@ function get(
     ?array $contextParams = null
 ): array {
     $args = [
-        'pathToFile'     => $pathToFile,
-        'offset'         => $offset,
-        'length'         => $length,
-        'useIncludePath' => $useIncludePath,
-        'context'        => $context,
-        'contextParams'  => $contextParams,
-        'result'         => null,
-        'exception'      => null,
-        'errors'         => null,
+        'pathToFile'           => $pathToFile,
+        'offset'               => $offset,
+        'length'               => $length,
+        'useIncludePath'       => $useIncludePath,
+        'context'              => $context,
+        'contextParams'        => $contextParams,
+        'result'               => null,
+        'result'               => null,
+        'exception'            => null,
+        'errors'               => null,
+        'http_response_header' => null,
     ];
 
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -50,6 +52,10 @@ function get(
                 $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset']);
             } else {
                 $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
+            }
+
+            if (isset($http_response_header)) {
+                $args['http_response_header'] = $http_response_header;
             }
         },
         // [Handle]
@@ -76,11 +82,13 @@ function get(
         return [
             'result'    => null,
             'exception' => $args['exception'],
+            'http_response_header' => $args['http_response_header'],
         ];
     }
 
     return [
         'result'    => $args['result'],
         'exception' => $args['exception'],
+        'http_response_header' => $args['http_response_header'],
     ];
 }

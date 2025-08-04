@@ -5,18 +5,14 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use Str::endsWith(ignoreCase: true)
  * @param string|iterable<string> $needles
  */
 function iEndsWith(string $haystack, $needles): bool
 {
-    if (!\is_iterable($needles)) $needles = [$needles];
-
-    foreach ($needles as &$needle) {
-        $needle = \Inilim\Tool\Method\Str\lower($needle);
-    }
-
     return \Inilim\Tool\Method\Str\endsWith(
-        \Inilim\Tool\Method\Str\lower($haystack),
-        $needles
+        $haystack,
+        $needles,
+        true
     );
 }

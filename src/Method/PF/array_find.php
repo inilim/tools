@@ -6,7 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
- * @param callable():bool $callback
+ * @param callable(mixed, int|string):bool $callback
  * @return mixed
  */
 function array_find(array $array, callable $callback)
