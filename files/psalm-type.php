@@ -1,21 +1,36 @@
 <?php
 
+
+/**
+ * Общие типы
+ * -------------- [Define] -------------- 
+ * @example psalm-type NameType = string
+ * 
+ * @psalm-type Main_1 = \Exception&\ArrayAccess&\Countable
+ * @psalm-type Main_Countable = mixed[]\Countable|\ResourceBundle|\SimpleXMLElement
+ * 
+ */
+class TypeMain {}
+
 /**
  * -------------- [IMPORTS] -------------- 
  * @example psalm-import-type NameType from \ClassName as NewNameType
  * 
- * @psalm-import-type Return_getCollectionThrowable from \TypeObj as _2_Return_getCollectionThrowable
+ * @psalm-import-type Main_1 from \TypeMain as _2_Main_1
  * 
  * 
  * 
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- *    psalm-type THROW_get_0 = _2_Return_getCollectionThrowable&\IteratorAggregate<\ErrorException>
- *    psalm-type THROW_get_0 = _2_Return_getCollectionThrowable<\ErrorException>
- * @psalm-type THROW_get_0 = \Exception&\ArrayAccess&\Countable&\IteratorAggregate<int,\ErrorException>
+ * 
+ * -----File::get()
+ * 
+ * @psalm-type THROW_get_0 = _2_Main_1&\IteratorAggregate<int,\ErrorException>
  * 
  * @psalm-type Return_get = array{result:null|string,exception:null|THROW_get_0,http_response_header?:string[]}
+ * 
+ * 
  */
 class TypeFile {}
 
@@ -34,10 +49,14 @@ class TypeArr {}
  * -------------- [IMPORTS] -------------- 
  * @example psalm-import-type NameType from \ClassName as NewNameType
  * 
+ * @psalm-import-type Main_1 from \TypeMain as _2_Main_1
+ * 
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- * @psalm-type Return_getCollectionThrowable = \Exception&\ArrayAccess&\Countable&\IteratorAggregate
+ * Obj::getCollectionThrowable()
+ * 
+ * @psalm-type Return_getCollectionThrowable = _2_Main_1&\IteratorAggregate<int,\Throwable>
  */
 class TypeObj {}
 
@@ -48,6 +67,49 @@ class TypeObj {}
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- * @psalm-type Return_fgcSend = array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ * Exp::fgcSend()
+ * 
+ * TODO cookies
+ * 
+ * @psalm-type SubParamOptions_multipart = array{name:string,contents:resource|string,filename:string,headers:array<string,string>|string[]}[]
+ * @psalm-type SubParamOptions_auth = string|string[]
+ * @psalm-type SubParamOptions_timeout = int<0,max>|float
+ * @psalm-type SubParamOptions_headers = array<string,string|string[]>|string[]
+ * @psalm-type SubParamOptions_query = string|array<string,string>|string[]
+ * @psalm-type SubParamOptions_verify = string|bool
+ * 
+ * @psalm-type ParamOptions = array{method:string,proxy?:string,debug?:bool,allow_redirects?:bool,allow_redirects.max?:int<1,max>,auth?:SubParamOptions_auth,delay?:int<0,max>,headers?:SubParamOptions_headers,multipart?:SubParamOptions_multipart,query?:SubParamOptions_query,verify?:SubParamOptions_verify,timeout?:SubParamOptions_timeout,version?:float,body?:string}
+ * 
+ * @psalm-type SubReturn_response = array{body:null|string,headers:string[],code:int,size:int,time:int}
+ * @psalm-type SubReturn_request = array{url:string,body:null|string,method:string,headers:string}
+ * 
+ * @psalm-type Return_fgcSend = array{response:SubReturn_response,request:SubReturn_request}
+ * 
+ * 
  */
 class TypeExp {}
+
+
+
+/**
+ * 
+ * -------------- [IMPORTS] -------------- 
+ * @example psalm-import-type NameType from \ClassName as NewNameType
+ * 
+ * -------------- [Define] -------------- 
+ * @example psalm-type NameType = string
+ * 
+ */
+class TypeStr {}
+
+
+/**
+ * 
+ * -------------- [IMPORTS] -------------- 
+ * @example psalm-import-type NameType from \ClassName as NewNameType
+ * 
+ * -------------- [Define] -------------- 
+ * @example psalm-type NameType = string
+ * 
+ */
+class TypePath {}

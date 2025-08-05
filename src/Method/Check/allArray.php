@@ -6,6 +6,9 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
+ * @psalm-assert-if-true iterable<mixed[]> $value
+ * @phpstan-assert-if-true iterable<mixed[]> $value
+ * 
  * @param mixed  $value
  */
 function allArray($value): bool

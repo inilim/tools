@@ -17,7 +17,7 @@ class repeatTest extends TestCase
 
     function testRepeatWhenTimesIsNegative()
     {
-        $this->expectException(\ValueError::class);
+        $this->expectException(\Exception::class);
         Str::repeat('Hello', -2);
     }
 }

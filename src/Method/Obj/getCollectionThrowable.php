@@ -83,3 +83,6 @@ function getCollectionThrowable(
 
     return $e;
 }
+
+
+// $a = getCollectionThrowable();

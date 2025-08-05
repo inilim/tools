@@ -7,9 +7,13 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author webmozarts/assert
  * @psalm-pure
- * @psalm-param array<class-string> $classes
+ * @template T of object
+ * @psalm-assert T|class-string<T> $value
+ * @phpstan-assert T|class-string<T> $value
+ * 
+ * 
  * @param object|string $value
- * @param string[]      $classes
+ * @param class-string<T>[] $classes
  * @throws \InvalidArgumentException
  */
 function isAnyOf($value, array $classes, string $message = '')

@@ -8,6 +8,8 @@ namespace Inilim\Tool\Method\Assert;
  * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert string $value
+ * @phpstan-assert string $value
+ * 
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */

@@ -7,11 +7,13 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author webmozarts/assert
  * @psalm-pure
- * @psalm-template ExpectedType of object
- * @psalm-param class-string<ExpectedType> $class
- * @psalm-assert ExpectedType $value
- * @param mixed         $value
- * @param string|object $class
+ * @template T of object
+ * @psalm-assert T $value
+ * @phpstan-assert T $value
+ * 
+ * 
+ * @param mixed $value
+ * @param T|class-string<T> $class
  * @throws \InvalidArgumentException
  */
 function isInstanceOf($value, $class, string $message = '')

@@ -7,9 +7,12 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author webmozarts/assert
  * @psalm-pure
- * @psalm-param array<class-string> $classes
+ * @template T of object
+ * @psalm-assert T $value
+ * @phpstan-assert T $value
+ * 
  * @param mixed                $value
- * @param array<object|string> $classes
+ * @param array<T|class-string<T>> $classes
  * @throws \InvalidArgumentException
  */
 function isInstanceOfAny($value, array $classes, string $message = '')

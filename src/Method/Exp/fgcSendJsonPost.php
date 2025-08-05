@@ -11,20 +11,25 @@ namespace Inilim\Tool\Method\Exp;
  * Exclusively for debugging, testing, and development.
  * 
  * @param mixed[]|string $body
- * @param array<string,string>|string[] $headers
  * 
+ * @psalm-import-type ParamOptions from \TypeExp
  * @psalm-import-type Return_fgcSend from \TypeExp
+ * 
+ * @param ParamOptions $options
  * @return Return_fgcSend
  */
-function fgcSendJsonPost(string $url, $body, array $headers = [], array $ctxOptions = [])
+function fgcSendJsonPost(string $url, $body, array $options = [])
 {
     if (\is_array($body)) {
-        $body = \json_encode($body);
+        $body = \json_encode($body, \JSON_THROW_ON_ERROR);
     } else {
         \Inilim\Tool\Method\Assert\json($body);
     }
+    /** @var string $body */
+    $options['body']   = &$body;
+    $options['method'] = 'POST';
+    $options['headers'] ??= [];
+    $options['headers'][] = 'content-type: application/json';
 
-    $headers[] = 'content-type: application/json';
-
-    return \Inilim\Tool\Method\Exp\fgcSend($url, 'POST', $body, $headers, $ctxOptions);
+    return \Inilim\Tool\Method\Exp\fgcSend($url, $options);
 }

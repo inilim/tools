@@ -7,7 +7,9 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author webmozarts/assert
  * @psalm-pure
- * @psalm-assert positive-int $value
+ * @psalm-assert int<1,max> $value
+ * @phpstan-assert int<1,max> $value
+ * 
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */

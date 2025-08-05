@@ -8,7 +8,9 @@ namespace Inilim\Tool\Method\Assert;
  * @author webmozarts/assert
  * Checks if a value is a valid array key (int or string).
  * @psalm-pure
- * @psalm-assert array-key $value
+ * @psalm-assert int|string $value
+ * @phpstan-assert int|string $value
+ * 
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */

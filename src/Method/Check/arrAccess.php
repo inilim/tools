@@ -6,8 +6,10 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
- * @param mixed $value
+ * @psalm-assert-if-true \ArrayAccess $value
  * @phpstan-assert-if-true \ArrayAccess $value
+ * 
+ * @param mixed $value
  */
 function arrAccess($value): bool
 {

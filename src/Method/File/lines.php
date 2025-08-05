@@ -7,12 +7,12 @@ namespace Inilim\Tool\Method\File;
 /**
  * Get the contents of a file one line at a time.
  * @return \Closure():\Generator<string>
- * @throws \ValueError
+ * @throws \Exception
  */
 function lines(string $pathToFile): \Closure
 {
     if (! \is_file($pathToFile)) {
-        throw new \ValueError(
+        throw new \Exception(
             "File does not exist at path {$pathToFile}."
         );
     }

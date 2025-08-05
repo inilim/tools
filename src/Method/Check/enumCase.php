@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Enum;
+namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
- * @deprecated use Check::enumCase
  * @template T of mixed
  * @psalm-assert-if-true \UnitEnum $value
  * @phpstan-assert-if-true \UnitEnum $value
  * 
  * @param T $v
  */
-function isCase($v): bool
+function enumCase($v): bool
 {
     if (!\is_object($v) || \PHP_VERSION_ID < 80100) {
         return false;

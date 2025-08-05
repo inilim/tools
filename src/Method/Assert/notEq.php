@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Assert;
 
 /**
  * @author webmozarts/assert
+ * 
  * @param mixed  $value
  * @param mixed  $expect
  * @throws \InvalidArgumentException

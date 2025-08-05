@@ -7,14 +7,13 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author Inilim
  * equal to or greater than
- * @param string $message
+ * 
  * @return void
- * @throws \AssertionError
+ * @throws \InvalidArgumentException
  */
-function php82($message = '')
+function php82(string $message = '')
 {
-    if (\Inilim\Tool\Method\Check\php82()) {
-        return;
+    if (!\Inilim\Tool\Method\Check\php82()) {
+        throw new \InvalidArgumentException($message ?: 'The current version is lower than required "8.2"');
     }
-    throw new \AssertionError($message ?: 'The current version is lower than required "8.2"');
 }

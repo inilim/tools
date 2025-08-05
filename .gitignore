@@ -3,6 +3,7 @@
 # Dirs
 /vendor
 /files/cache/*
+/files/tests/*
 
 # Files
 /composer.lock

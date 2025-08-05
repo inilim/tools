@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Zip;
 /**
  * @todo tests
  * @param string|\ZipArchive $zip path to file-zip OR ZipArchive object
- * @throws \ValueError
+ * @throws \Exception
  * @throws \RuntimeException
  * @return list<array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}>
  */
@@ -18,7 +18,7 @@ function scan($zip)
     if (\is_string($zip)) {
         $rp = \realpath($zip);
         if (!$rp) {
-            throw new \ValueError(\sprintf(
+            throw new \Exception(\sprintf(
                 'File "%s", not found',
                 $zip
             ));
@@ -27,14 +27,14 @@ function scan($zip)
         $zip    = new \ZipArchive;
         $status = $zip->open($rp, \ZipArchive::RDONLY);
         if ($status !== true) {
-            throw new \ValueError(\sprintf(
+            throw new \Exception(\sprintf(
                 'File "%s", not open. Code: %s',
                 $rp,
                 $status === false ? 'false' : $status
             ));
         }
     } elseif ($zip->filename === '') {
-        throw new \ValueError('Uninitialized zip');
+        throw new \Exception('Uninitialized zip');
     }
 
     $result = [];

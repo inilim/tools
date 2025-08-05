@@ -6,8 +6,9 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
- * @param mixed $value
+ * @psalm-assert-if-true \IteratorAggregate $value
  * @phpstan-assert-if-true \IteratorAggregate $value
+ * @param mixed $value
  */
 function iteratorAgg($value): bool
 {

@@ -6,6 +6,9 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
+ * @psalm-assert-if-true int|float $value
+ * @phpstan-assert-if-true int|float $value
+ * 
  * @param mixed  $value
  */
 function intOrFloat($value): bool

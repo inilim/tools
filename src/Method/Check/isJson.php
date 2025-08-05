@@ -6,8 +6,9 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
  * @param mixed $value
- * @phpstan-assert-if-true \IteratorAggregate $value
  */
 function isJson($value): bool
 {

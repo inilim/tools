@@ -15,16 +15,16 @@ function json_validate(string $json, int $depth = 512, int $flags = 0): bool
     }
 
     if (0 !== $flags && \defined('JSON_INVALID_UTF8_IGNORE') && \JSON_INVALID_UTF8_IGNORE !== $flags) {
-        throw new \ValueError('PF::json_validate(): Argument #3 ($flags) must be a valid flag (allowed flags: JSON_INVALID_UTF8_IGNORE)');
+        throw new \Exception('PF::json_validate(): Argument #3 ($flags) must be a valid flag (allowed flags: JSON_INVALID_UTF8_IGNORE)');
     }
 
     if ($depth <= 0) {
-        throw new \ValueError('PF::json_validate(): Argument #2 ($depth) must be greater than 0');
+        throw new \Exception('PF::json_validate(): Argument #2 ($depth) must be greater than 0');
     }
 
     $json_max_depth = 0x7FFFFFFF;
     if ($depth > $json_max_depth) {
-        throw new \ValueError(\sprintf('PF::json_validate(): Argument #2 ($depth) must be less than %d', $json_max_depth));
+        throw new \Exception(\sprintf('PF::json_validate(): Argument #2 ($depth) must be less than %d', $json_max_depth));
     }
 
     \json_decode($json, null, $depth, $flags);

@@ -7,14 +7,13 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author Inilim
  * equal to or greater than
- * @param string $message
+ * 
  * @return void
- * @throws \AssertionError
+ * @throws \InvalidArgumentException
  */
-function php84($message = '')
+function php84(string $message = '')
 {
-    if (\Inilim\Tool\Method\Check\php84()) {
-        return;
+    if (!\Inilim\Tool\Method\Check\php84()) {
+        throw new \InvalidArgumentException($message ?: 'The current version is lower than required "8.4"');
     }
-    throw new \AssertionError($message ?: 'The current version is lower than required "8.4"');
 }

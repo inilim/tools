@@ -6,15 +6,15 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
- * @param mixed $value
+ * @psalm-assert-if-true \ArrayAccess&\Traversable&\Countable $value
  * @phpstan-assert-if-true \ArrayAccess&\Traversable&\Countable $value
+ * 
+ * @param mixed $value
  */
 function arrLike($value): bool
 {
-    if (!\is_object($value)) {
-        return false;
-    }
     if (
+        \is_object($value) &&
         $value instanceof \Traversable &&
         $value instanceof \Countable &&
         $value instanceof \ArrayAccess

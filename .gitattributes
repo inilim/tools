@@ -7,6 +7,7 @@
 /files/template export-ignore
 /files/sql      export-ignore
 /files/other    export-ignore
+/files/tests    export-ignore
 /files/cache    export-ignore
 /build          export-ignore
 /bench          export-ignore

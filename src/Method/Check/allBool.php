@@ -6,6 +6,9 @@ namespace Inilim\Tool\Method\Check;
 
 /**
  * @author Inilim
+ * @psalm-assert-if-true iterable<bool> $value
+ * @phpstan-assert-if-true iterable<bool> $value
+ * 
  * @param mixed  $value
  */
 function allBool($value): bool

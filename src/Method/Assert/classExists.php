@@ -7,11 +7,14 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @author webmozarts/assert
  * @psalm-assert class-string $value
+ * @phpstan-assert class-string $value
+ * 
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
 function classExists($value, string $message = '')
 {
+    \Inilim\Tool\Method\Assert\string($value);
     if (!\class_exists($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'Expected an existing class name. Got: %s',

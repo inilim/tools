@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Check;
 
 /**
+ * @author webmozarts/assert
  * @psalm-pure
- * @psalm-param array<class-string> $classes
+ * @template T of object
+ * @psalm-assert-if-true T|class-string<T> $value
+ * @phpstan-assert-if-true T|class-string<T> $value
+ * 
  * @param object|string $value
- * @param string[]      $classes
+ * @param class-string<T>[] $classes
  */
 function isAnyOf($value, array $classes): bool
 {

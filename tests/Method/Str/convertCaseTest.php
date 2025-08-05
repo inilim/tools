@@ -27,7 +27,7 @@ class convertCaseTest extends TestCase
         $this->assertSame('üöä', Str::convertCase('ÜÖÄ', PF::MB_CASE_LOWER, 'UTF-8'));
 
         // Unsupported Mode
-        // $this->expectException(\ValueError::class);
+        // $this->expectException(\Exception::class);
         // Str::convertCase('Hello', -1);
     }
 }

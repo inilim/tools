@@ -9,13 +9,13 @@ namespace Inilim\Tool\Method\Enum;
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  * @return T
- * @throws \ValueError
+ * @throws \Exception
  */
 function fromName($enum, string $name, bool $caseInsensitive = false)
 {
     $case = \Inilim\Tool\Method\Enum\tryFromName($enum, $name, $caseInsensitive);
     if ($case === null) {
-        throw new \ValueError(\sprintf(
+        throw new \Exception(\sprintf(
             '"%s" is not a valid name for enum "%s"',
             $name,
             \is_string($enum) ? $enum : $enum::class

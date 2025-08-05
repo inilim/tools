@@ -41,13 +41,21 @@ __include('Check\php80');
 //         'num_gpu' => 0,
 //     ],
 // ]));
-$response = \Inilim\Tool\Method\Exp\fgcSend('https://webhook.site/d0bd56bc-8837-4e69-89f9-8621ccb4d8af', 'POST', \json_encode([
-    'model' => 'nomic-embed-text',
-    'input' => 'Llamas are members of the camelid family',
-    'options' => [
-        'num_gpu' => 0,
-    ],
-]));
+
+// redirects_1_to_index
+$response = \Inilim\Tool\Method\Exp\fgcSend('http://http-test.test/index.php', [
+    'method' => 'post',
+    'debug' => true,
+    'body' => \json_encode([
+        'model' => 'nomic-embed-text',
+        'input' => 'Llamas are members of the camelid family',
+        'options' => [
+            'num_gpu' => 0,
+        ],
+    ]),
+]);
+
+// $response['request']['body'];
 // $response = \Inilim\Tool\Method\Exp\fgcSend('https://webhook.site/d0bd56bc-8837-4e69-89f9-8621ccb4d8af');
 
 // fgcSend()
@@ -56,5 +64,7 @@ $response = \Inilim\Tool\Method\Exp\fgcSend('https://webhook.site/d0bd56bc-8837-
 // fgcSendXmlPost()
 // fgcSendGet()
 
+
+// $response = Arr::dot($response);
 
 de($response);

@@ -8,8 +8,12 @@ namespace Inilim\Tool\Method\Assert;
  * @author webmozarts/assert
  * Does strict comparison, so Assert::inArray(3, ['3']) does not pass the assertion.
  * @psalm-pure
- * @param mixed  $value
- * @param array  $values
+ * @template T of mixed
+ * @psalm-assert T $value
+ * @phpstan-assert T $value
+ * 
+ * @param T $value
+ * @param T[] $values
  * @throws \InvalidArgumentException
  */
 function inArray($value, array $values, string $message = '')

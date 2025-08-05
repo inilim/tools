@@ -6,6 +6,9 @@ namespace Inilim\Tool\Method\Assert;
 
 /**
  * @author webmozarts/assert
+ * @psalm-assert callable $value
+ * @phpstan-assert callable $value
+ * 
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
