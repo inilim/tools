@@ -10,8 +10,8 @@ namespace Inilim\Tool\Method\File;
  * @author inilim
  * @param array{pathToFile:string,options?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @throws THROW_get_0
  */
 function unserializeAsArray(array $params)
 {

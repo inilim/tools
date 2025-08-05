@@ -18,7 +18,10 @@ class Exp
  * Exclusively for debugging, testing, and development.
  * 
  * @param array<string,string>|string[] $headers
- * @return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ * return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ * 
+ * @psalm-import-type Return_fgcSend from \TypeExp
+ * @return Return_fgcSend
  */
     static function fgcSend(string $url, string $method = 'GET', ?string $body = null, array $headers = [], array $ctxOptions = []) {}
 
@@ -30,7 +33,9 @@ class Exp
  * 
  * @param mixed[]|string $body
  * @param array<string,string>|string[] $headers
- * @return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
+ * 
+ * @psalm-import-type Return_fgcSend from \TypeExp
+ * @return Return_fgcSend
  */
     static function fgcSendJsonPost(string $url, $body, array $headers = [], array $ctxOptions = []) {}
 

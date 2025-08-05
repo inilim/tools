@@ -6,8 +6,10 @@ class Obj
 {
         /**
  * @author Inilim
- * @phpstan-import-type TYPEgetCollectionThrowable from \TypeObj
- * @return TYPEgetCollectionThrowable
+ * 
+ * @psalm-import-type Return_getCollectionThrowable from \TypeObj
+ * 
+ * @return Return_getCollectionThrowable
  */
     static function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null) {}
 

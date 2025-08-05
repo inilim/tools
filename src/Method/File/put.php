@@ -8,13 +8,13 @@ namespace Inilim\Tool\Method\File;
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-put-contents.php
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
- * @throws TYPEExceptionV1
+ * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @throws THROW_get_0
  */
 function put(
     string $filename,

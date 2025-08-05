@@ -8,11 +8,16 @@ namespace Inilim\Tool\Method\File;
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
+ * 
+ * 
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type Return_get from \TypeFile
+ * 
+ * 
  * @param null|resource|array $context
- * @return array{result:null|string,exception:null|TYPEExceptionV1,http_response_header?:string[]}
- * @throws TYPEExceptionV1
+ * @return Return_get
+ * @throws THROW_get_0
  */
 function get(
     string $pathToFile,
@@ -92,3 +97,11 @@ function get(
         'http_response_header' => $args['http_response_header'],
     ];
 }
+
+
+// $a = get('');
+
+// if (isset($a['exception'])) {
+//     foreach ($a['exception'] as $e) {
+//     }
+// }

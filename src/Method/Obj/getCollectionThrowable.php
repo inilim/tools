@@ -6,8 +6,10 @@ namespace Inilim\Tool\Method\Obj;
 
 /**
  * @author Inilim
- * @phpstan-import-type TYPEgetCollectionThrowable from \TypeObj
- * @return TYPEgetCollectionThrowable
+ * 
+ * @psalm-import-type Return_getCollectionThrowable from \TypeObj
+ * 
+ * @return Return_getCollectionThrowable
  */
 function getCollectionThrowable(
     string $message       = '',

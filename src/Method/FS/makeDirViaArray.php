@@ -8,10 +8,11 @@ namespace Inilim\Tool\Method\FS;
  * Create a directory.
  * @todo tests
  * @author Inilim
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * 
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @param array{path:string,mode?:int,recursive?:bool,force?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:?bool,exception:?TYPEExceptionV1}
- * @throws TYPEExceptionV1
+ * @return array{result:?bool,exception:?THROW_get_0}
+ * @throws THROW_get_0
  */
 function makeDirViaArray(array $params): array
 {

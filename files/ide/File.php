@@ -31,12 +31,12 @@ class File
         /**
  * @todo tests
  * @author Inilim
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
- * @throws TYPEExceptionV1
+ * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @throws THROW_get_0
  */
     static function ensurePut(string $filename, $data, int $flags = 0, bool $throw = false, int $mode = 0755, $context = null, ?array $contextParams = null): array {}
 
@@ -44,11 +44,16 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
+ * 
+ * 
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type Return_get from \TypeFile
+ * 
+ * 
  * @param null|resource|array $context
- * @return array{result:null|string,exception:null|TYPEExceptionV1,http_response_header?:string[]}
- * @throws TYPEExceptionV1
+ * @return Return_get
+ * @throws THROW_get_0
  */
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
@@ -84,13 +89,16 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_get_contents"
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
+ * 
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type Return_get from \TypeFile
+ * 
  * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:string|null,exception:null|TYPEExceptionV1,http_response_header?:string[]}
- * @throws TYPEExceptionV1
+ * @return Return_get
+ * @throws THROW_get_0
  */
-    static function getViaArray(array $params) {}
+    static function getViaArray(array $params): array {}
 
         /**
  * Determine if two files are the same by comparing their hashes.
@@ -101,8 +109,8 @@ class File
  * Get the contents of a file as decoded JSON.
  * @param  mixed  $default
  * @return mixed
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @throws THROW_get_0
  * @throws \JsonException
  */
     static function json(string $pathToFile, int $flags = 0, bool $lock = false, bool $throw = false, $default = null) {}
@@ -111,8 +119,8 @@ class File
  * Get the contents of a file as decoded JSON.
  * @param array{pathToFile:string,flags?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @throws THROW_get_0
  * @throws \JsonException
  */
     static function jsonViaArray(array $params) {}
@@ -128,21 +136,21 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-put-contents.php
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|TYPEExceptionV1} return result -1 if error
- * @throws TYPEExceptionV1
+ * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @throws THROW_get_0
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null): array {}
 
         /**
  * Get contents of a file with shared access.
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @return array{result:?string,exception:?TYPEExceptionV1}
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @return array{result:?string,exception:?THROW_get_0}
+ * @throws THROW_get_0
  */
     static function sharedGet(string $pathToFile, bool $throw = false): array {}
 
@@ -175,8 +183,8 @@ class File
  * @author inilim
  * @param  mixed  $default
  * @return mixed
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @throws THROW_get_0
  */
     static function unserialize(string $pathToFile, array $options = [], bool $lock = false, bool $throw = false, $default = null) {}
 
@@ -186,8 +194,8 @@ class File
  * @author inilim
  * @param array{pathToFile:string,options?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @phpstan-import-type TYPEExceptionV1 from \TypeFile
- * @throws TYPEExceptionV1
+ * @psalm-import-type THROW_get_0 from \TypeFile
+ * @throws THROW_get_0
  */
     static function unserializeAsArray(array $params) {}
 
