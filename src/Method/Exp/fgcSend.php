@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Exp;
 
+use function Inilim\Tool\Method\Assert\boolFalse;
+use function Inilim\Tool\Method\Assert\inArray;
+use function Inilim\Tool\Method\Assert\resOrstr;
+
 /**
  * @author inilim
  * 
@@ -18,6 +22,9 @@ namespace Inilim\Tool\Method\Exp;
  * 
  * @param ParamOptions $options
  * @return Return_fgcSend
+ * 
+ * @throws \InvalidArgumentException from asserts
+ * @throws \RuntimeException from tryFopen
  */
 function fgcSend(string $url, array $options = [])
 {
@@ -41,6 +48,8 @@ function fgcSend(string $url, array $options = [])
         public array $ctxOptsSll  = [];
         public string $method = 'GET';
         public bool $debug    = false;
+        public bool $throw    = false;
+        public bool $contentInit = false;
 
         /**
          * @param string $url
@@ -49,18 +58,40 @@ function fgcSend(string $url, array $options = [])
          */
         function __invoke(&$url, &$options): array
         {
+            try {
+                return $this->wrapInvoke($url, $options);
+            } catch (\Throwable $e) {
+                if ($this->throw) {
+                    throw $e;
+                }
+                de($e->getMessage());
+                $err = [];
+            }
+
+            return [];
+        }
+
+        /**
+         * @param string $url
+         * @param ParamOptions $options
+         * @return Return_fgcSend
+         */
+        function wrapInvoke(&$url, &$options): array
+        {
             $this->url     = &$url;
             $this->options = &$options;
-            $this->debug   = $this->options['debug'] ?? false;
+            $this->debug   = $this->options['debug'] ?? $this->debug;
+            $this->throw   = $this->options['throw'] ?? $this->throw;
             unset($url, $options);
 
+            if (!$this->debug) {
+                unset($this->options['debug'], $this->options['throw']);
+            }
             // de($this);
 
             // ---------------------------------------------
             // 
             // ---------------------------------------------
-            // TODO
-            // 'ignore_errors'   => false, // default: false
 
             $this->processFirstHeaders()
                 ->optMethod()
@@ -68,40 +99,16 @@ function fgcSend(string $url, array $options = [])
                 ->optAllowRedirects()
                 ->optAllowRedirectsMax()
                 ->optVerify()
-                ->optVersion();
-
-            if ($this->options['query'] ?? null) {
-                $this->optQuery();
-            }
-            if ($this->options['auth'] ?? null) {
-                $this->optAuth();
-            }
-            if ($this->options['proxy'] ?? null) {
-                $this->optProxy();
-            }
-            if ($this->options['multipart'] ?? null) {
-                $this->optMultipart();
-            }
-            $this->optBody();
+                ->optVersion()
+                ->optQuery()
+                ->optAuth()
+                ->optProxy()
+                ->optMultipart()
+                ->optFormParams()
+                ->optJson()
+                ->optBody();
 
             de($this);
-
-            if (!$this->debug) {
-                unset(
-                    $this->options['headers'],
-                    $this->options['method'],
-                    $this->options['timeout'],
-                    $this->options['allow_redirects'],
-                    $this->options['allow_redirects.max'],
-                    $this->options['version'],
-                    $this->options['debug'],
-                    $this->options['query'],
-                    $this->options['auth'],
-                    $this->options['proxy'],
-                    $this->options['multipart'],
-                    $this->options['body'],
-                );
-            }
 
             $this->processSecondaryHeaders();
 
@@ -200,14 +207,8 @@ function fgcSend(string $url, array $options = [])
                 ],
                 'request' => [
                     'url'     => $this->url,
-                    'body'    => $this->ctxOptsHttp['content'] ?? null,
-                    'method'  => $this->ctxOptsHttp['method'],
-                    'headers' => $this->ctxOptsHttp['header'],
-                ],
-                'debug' => [
-                    'ctxOpts'    => $this->ctxOpts,
-                    'options'    => $this->options,
-                    'err'        => $this->prepareErrors(),
+                    'method'  => $this->method,
+                    'headers' => $this->headers,
                 ],
             ];
         }
@@ -218,6 +219,10 @@ function fgcSend(string $url, array $options = [])
 
         function prepareErrors(): array
         {
+            if ($this->result['exception'] && $this->throw) {
+                throw $this->result['exception'];
+            }
+
             // ---------------------------------------------
             // TODO нужно ли обрабатывать исключения?
             // ---------------------------------------------
@@ -265,37 +270,56 @@ function fgcSend(string $url, array $options = [])
 
         function optMethod()
         {
+            $method = $this->options['method'] ?? null;
+
+            if (isset($method)) {
+                \Inilim\Tool\Method\Assert\string($method);
+                $method = \strtolower($method);
+                \Inilim\Tool\Method\Assert\inArray(
+                    $method,
+                    ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+                    'method allowed GET,POST,PUT,PATCH,DELETE,OPTIONS'
+                );
+            } else {
+                $method = $this->method;
+            }
+
             /**
-             * регистр важен
+             * INFO регистр важен
              * @see https://www.php.net/manual/ru/context.http.php#101933
              */
-            $this->method = \strtoupper($this->options['method'] ?? $this->method);
 
-            \Inilim\Tool\Method\Assert\inArray(
-                $this->method,
-                ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-                '$method allowed GET,POST,PUT,PATCH,DELETE,OPTIONS'
-            );
+            // INFO PHP: php по умолчанию ставит метод GET
+            $this->ctxOptsHttp['method'] = $this->method = $method;
 
-            // PHP: php по умолчанию ставит метод GET
-            $this->ctxOptsHttp['method'] = &$this->method;
+            if (!$this->debug) {
+                unset($this->options['method']);
+            }
 
             return $this;
         }
 
         function optQuery()
         {
-            $query = $this->options['query'];
-            $query = \is_array($query)
-                ? \http_build_query($query)
-                : $query;
-            /** @var string $query */
+            $query = $this->options['query'] ?? null;
 
-            $parsed = \parse_url($this->url, \PHP_URL_QUERY);
-            if ($parsed) {
-                $this->url .= '&' . $query;
-            } else {
-                $this->url .= '?' . $query;
+            if (isset($query)) {
+                \Inilim\Tool\Method\Assert\strOrArr($query);
+
+                $query = \is_array($query)
+                    ? \http_build_query($query)
+                    : $query;
+
+                $parsed = \parse_url($this->url, \PHP_URL_QUERY);
+                if ($parsed) {
+                    $this->url .= '&' . $query;
+                } else {
+                    $this->url .= '?' . $query;
+                }
+            }
+
+            if (!$this->debug) {
+                unset($this->options['query']);
             }
 
             return $this;
@@ -303,8 +327,19 @@ function fgcSend(string $url, array $options = [])
 
         function optVerify()
         {
-            $verify = $this->options['verify'] ?? false;
-            // Guzzle по дефолту true
+            $verify = $this->options['verify'] ?? null;
+
+            if (isset($verify)) {
+                \Inilim\Tool\Method\Assert\strOrBool($verify);
+            } else {
+                // Guzzle по дефолту true, у нас false
+                $verify = false;
+            }
+
+            /**
+             * @see \vendor\guzzlehttp\guzzle\src\Handler\StreamHandler.php
+             */
+
             if ($verify === false) {
                 /**
                  * в php74 эти параметры не обязательны.
@@ -312,21 +347,19 @@ function fgcSend(string $url, array $options = [])
                  */
                 $this->ctxOptsSll['verify_peer']      = false;
                 $this->ctxOptsSll['verify_peer_name'] = false;
-            } elseif (\is_string($verify)) {
-                /**
-                 * TODO Проверить установку сертификата
-                 * @see \vendor\guzzlehttp\guzzle\src\Handler\StreamHandler.php:add_verify
-                 */
-                if (!\is_file($verify)) {
-                    throw new \RuntimeException('SSL CA bundle not found: ' . $verify);
-                }
+            } elseif ($verify === true) {
+                // INFO в 8 версии Guzzle функция defaultCaBundle будет удалена
+                $this->ctxOptsSll['cafile']                   = \Inilim\Tool\Method\Other\defaultCaBundle();
+                $this->ctxOptsSll['ssl']['verify_peer']       = true;
+                $this->ctxOptsSll['ssl']['verify_peer_name']  = true;
+                $this->ctxOptsSll['ssl']['allow_self_signed'] = false;
+            } else {
+                \Inilim\Tool\Method\Assert\file($verify, 'SSL CA bundle not found: ' . $verify);
+
                 $this->ctxOptsSll['cafile']            = $verify;
                 $this->ctxOptsSll['verify_peer']       = true;
                 $this->ctxOptsSll['verify_peer_name']  = true;
                 $this->ctxOptsSll['allow_self_signed'] = false;
-            } else {
-                // что тут? TODO
-                $verify;
             }
 
             if (!$this->debug) {
@@ -338,15 +371,20 @@ function fgcSend(string $url, array $options = [])
 
         function optAuth()
         {
-            $auth = $this->options['auth'];
-            if (\is_array($auth) && \sizeof($auth) === 2) {
-                $this->addHeaders('authorization', [
-                    'Basic ' . \base64_encode($auth[0] . ':' . $auth[1])
-                ]);
-            } elseif (\is_string($auth)) {
-                $this->addHeaders('authorization', ['Basic ' . $auth]);
-            } else {
-                throw new \InvalidArgumentException('option "auth" must be string[] or string');
+            $auth = $this->options['auth'] ?? null;
+
+            if (isset($auth)) {
+                \Inilim\Tool\Method\Assert\strOrArr($auth);
+
+                if (\is_string($auth)) {
+                    $this->addHeaders('authorization', ['Basic ' . $auth]);
+                } else {
+                    \Inilim\Tool\Method\Assert\allString($auth);
+
+                    $this->addHeaders('authorization', [
+                        'Basic ' . \base64_encode($auth[0] . ':' . $auth[1])
+                    ]);
+                }
             }
 
             if (!$this->debug) {
@@ -358,19 +396,22 @@ function fgcSend(string $url, array $options = [])
 
         function optProxy()
         {
-            \Inilim\Tool\Method\Assert\string($this->options['proxy']);
+            $proxy = $this->options['proxy'] ?? null;
 
-            /**
-             * Если устанавливаются прокси то нужно поставить флаг в true request_fulluri
-             * лично не проверял
-             * @see https://www.php.net/manual/ru/context.http.php#110449
-             */
-            $this->ctxOptsHttp['request_fulluri'] = true;
-            $parsed = \Inilim\Tool\Method\Exp\parseProxy($this->options['proxy']);
-            $this->ctxOptsHttp['proxy'] = $parsed['proxy'];
+            if (isset($proxy)) {
+                \Inilim\Tool\Method\Assert\string($proxy);
+                /**
+                 * Если устанавливаются прокси то нужно поставить флаг в true request_fulluri
+                 * лично не проверял
+                 * @see https://www.php.net/manual/ru/context.http.php#110449
+                 */
+                $this->ctxOptsHttp['request_fulluri'] = true;
+                $parsed = \Inilim\Tool\Method\Exp\parseProxy($this->options['proxy']);
+                $this->ctxOptsHttp['proxy'] = $parsed['proxy'];
 
-            if ($parsed['auth']) {
-                $this->addHeaders('proxy-authorization', [$parsed['auth']]);
+                if ($parsed['auth']) {
+                    $this->addHeaders('proxy-authorization', [$parsed['auth']]);
+                }
             }
 
             if (!$this->debug) {
@@ -390,9 +431,21 @@ function fgcSend(string $url, array $options = [])
             //     'track_redirects' => false
             // ]
 
-            $this->ctxOptsHttp['follow_location'] = isset($this->options['allow_redirects'])
-                ? (int)$this->options['allow_redirects']
-                : 1; // default: 1
+            $allow = $this->options['allow_redirects'] ?? null;
+
+            if (isset($allow)) {
+                \Inilim\Tool\Method\Assert\boolean($allow);
+                $allow = (int)$allow;
+            } else {
+                // default: true
+                $allow = 1;
+            }
+
+            $this->ctxOptsHttp['follow_location'] = $allow;
+
+            if (!$this->debug) {
+                unset($this->options['follow_location']);
+            }
 
             return $this;
         }
@@ -403,9 +456,20 @@ function fgcSend(string $url, array $options = [])
             // Максимальное количество перенаправлений, которым можно следовать.
             // Значение 1 или меньше означает, что перенаправления не выполняются.
 
-            $this->ctxOptsHttp['max_redirects'] = isset($this->options['allow_redirects.max'])
-                ? ($this->options['allow_redirects.max'] + 1)
-                : (5 + 1);
+            $allowMax = $this->options['allow_redirects.max'] ?? null;
+
+            if (isset($allowMax)) {
+                \Inilim\Tool\Method\Assert\integer($allowMax);
+                $allowMax++;
+            } else {
+                $allowMax = 5 + 1;
+            }
+
+            $this->ctxOptsHttp['max_redirects'] = $allowMax;
+
+            if (!$this->debug) {
+                unset($this->options['allow_redirects.max']);
+            }
 
             return $this;
         }
@@ -414,39 +478,40 @@ function fgcSend(string $url, array $options = [])
         {
             // Guzzle default 0 inf
             $timeout = $this->options['timeout'] ?? null;
+
             if (isset($timeout)) {
                 \Inilim\Tool\Method\Assert\positiveFloatOrInt($timeout);
+                $timeout = (float)$timeout;
+            } else {
+                // default
+                $timeout = 10_000.0;
             }
 
-            $this->ctxOptsHttp['timeout'] = isset($this->options['timeout'])
-                ? \abs((float)$this->options['timeout'])
-                : 10_000.0; // типа бесконечность
+            $this->ctxOptsHttp['timeout'] = $timeout;
+
+            if (!$this->debug) {
+                unset($this->options['timeout']);
+            }
 
             return $this;
         }
 
         function optVersion()
         {
-            // PHP: С PHP 8.0.0 значение по умолчанию — 1.1; до этой версии значение по умолчанию равнялось 1.0.
+            $version = $this->options['version'] ?? null;
+
+            if (isset($version)) {
+                \Inilim\Tool\Method\Assert\positiveFloat($version);
+            } else {
+                $version = 1.1;
+            }
+
+            // INFO PHP: С PHP 8.0.0 значение по умолчанию — 1.1; до этой версии значение по умолчанию равнялось 1.0.
             // Guzzle default 1.1
+            $this->ctxOptsHttp['protocol_version'] = $version;
 
-            $this->ctxOptsHttp['protocol_version'] = $this->options['version'] ?? 1.1;
-            return $this;
-        }
-
-        function optBody()
-        {
-            if ($this->method === 'GET' && isset($this->options['body'])) {
-                throw new \InvalidArgumentException('Set body method GET');
-            }
-
-            $body = $this->options['body'] ?? null;
-            if ($body === '') {
-                $body = null;
-            }
-
-            if ($body !== null && $this->method !== 'GET') {
-                $this->ctxOptsHttp['content'] = &$this->options['body'];
+            if (!$this->debug) {
+                unset($this->options['version']);
             }
 
             return $this;
@@ -454,44 +519,184 @@ function fgcSend(string $url, array $options = [])
 
         function optMultipart()
         {
-            foreach ($this->options['multipart'] as $element) {
-                foreach (['contents', 'name'] as $key) {
-                    if (!\array_key_exists($key, $element)) {
-                        throw new \InvalidArgumentException("A '{$key}' key is required from option multipart");
-                    }
+            $multipart = $this->options['multipart'] ?? null;
+
+            // не обьявлен или пустой
+            if (!isset($multipart) || !$multipart) {
+                if (!$this->debug) {
+                    unset($this->options['multipart']);
                 }
+                return $this;
+            }
 
-                // CONTENT
+            \Inilim\Tool\Method\Assert\boolFalse(
+                $this->contentInit,
+                'Only one of body, form_params, json, or multipart can be set in the request.'
+            );
+            \Inilim\Tool\Method\Assert\notInArray(
+                $this->method,
+                ['GET', 'HEAD'],
+                'HTTP method GET,HEAD does not support body'
+            );
 
-                if (\is_string($element['contents'])) {
-                    // $stream = self::tryFopen('php://temp', 'r+');
-                    $stream = '';
-                    if ($element['contents'] !== '') {
-                        \fwrite($stream, $element['contents']);
+            foreach ($multipart as $element) {
+
+                \Inilim\Tool\Method\Assert\keysExists(
+                    $element,
+                    ['contents', 'name'],
+                    'A "contents" and "name" keys is required from option multipart'
+                );
+
+                $content = $element['contents'] ?? null;
+                \Inilim\Tool\Method\Assert\resOrstr($content);
+                /** @var string|resource $content */
+
+                if (\is_string($content)) {
+                    $stream = \Inilim\Tool\Method\Other\tryFopen('php://temp', 'r+');
+                    if ($content !== '') {
+                        \fwrite($stream, $content);
                         \fseek($stream, 0);
                     }
-                } elseif (\is_resource($element['contents'])) {
-                    $stream = $element['contents'];
+                    $content = $stream;
                 } else {
-                    throw new \InvalidArgumentException();
+                    /*
+                    * The 'php://input' is a special stream with quirks and inconsistencies.
+                    * We avoid using that stream by reading it into php://temp
+                    */
+                    if ((\stream_get_meta_data($content)['uri'] ?? '') === 'php://input') {
+                        $stream = \Inilim\Tool\Method\Other\tryFopen('php://temp', 'w+');
+                        \stream_copy_to_stream($content, $stream);
+                        \fseek($stream, 0);
+                        $content = $stream;
+                    }
                 }
+                unset($stream);
 
-                $element['meta_data'] = \stream_get_meta_data($stream);
+                $metaData = \stream_get_meta_data($content);
 
                 // FILENAME Guzzle procedure
 
                 if (empty($element['filename'])) {
-                    $uri = $element['meta_data']['uri'] ?? null;
+                    $uri = $metaData['uri'] ?? null;
                     if ($uri && \is_string($uri) && \substr($uri, 0, 6) !== 'php://' && \substr($uri, 0, 7) !== 'data://') {
                         $element['filename'] = $uri;
                     }
                     unset($uri);
+                } else {
+                    \Inilim\Tool\Method\Assert\string(
+                        $element['filename'],
+                        'element multipart key filename myst be string'
+                    );
                 }
+                // filename string|unset
 
-                $size = \Inilim\Tool\Method\Other\getSizeResource($stream);
+                $size = \Inilim\Tool\Method\Other\getSizeResource($content);
 
                 // 
             } // endforeach
+
+            $this->addHeaders('content-type', ['multipart/form-data']);
+
+            if (!$this->debug) {
+                unset($this->options['multipart']);
+            }
+
+            return $this;
+        }
+
+        function optFormParams()
+        {
+            $params = $this->options['form_params'] ?? null;
+            if (!isset($params)) {
+                if (!$this->debug) {
+                    unset($this->options['multipart']);
+                }
+                return $this;
+            }
+
+            \Inilim\Tool\Method\Assert\boolFalse(
+                $this->contentInit,
+                'Only one of body, form_params, json, or multipart can be set in the request.'
+            );
+            \Inilim\Tool\Method\Assert\notInArray(
+                $this->method,
+                ['GET', 'HEAD'],
+                'HTTP method GET,HEAD does not support body'
+            );
+            \Inilim\Tool\Method\Assert\isArray($params);
+
+            $params = \http_build_query($params, '', '&');
+            $this->setContent($params);
+
+            $this->addHeaders('content-type', ['application/x-www-form-urlencoded']);
+
+            return $this;
+        }
+
+        function optJson()
+        {
+            $json = $this->options['json'] ?? null;
+            if (!isset($json)) {
+                if (!$this->debug) {
+                    unset($this->options['json']);
+                }
+                return $this;
+            }
+
+            \Inilim\Tool\Method\Assert\boolFalse(
+                $this->contentInit,
+                'Only one of body, form_params, json, or multipart can be set in the request.'
+            );
+            \Inilim\Tool\Method\Assert\notInArray(
+                $this->method,
+                ['GET', 'HEAD'],
+                'HTTP method GET,HEAD does not support body'
+            );
+            \Inilim\Tool\Method\Assert\strOrArr($json);
+
+            if (\is_string($json)) {
+                \Inilim\Tool\Method\Assert\json($json);
+            } else {
+                $json = \json_encode($json, \JSON_THROW_ON_ERROR);
+                /** @var string $json */
+            }
+
+            $this->setContent($json);
+            $this->addHeaders('content-type', ['application/json']);
+
+            if (!$this->debug) {
+                unset($this->options['json']);
+            }
+            return $this;
+        }
+
+        function optBody()
+        {
+            $body = $this->options['body'] ?? null;
+
+            if (isset($body)) {
+
+                \Inilim\Tool\Method\Assert\boolFalse(
+                    $this->contentInit,
+                    'Only one of body, form_params, json, or multipart can be set in the request.'
+                );
+                \Inilim\Tool\Method\Assert\notInArray(
+                    $this->method,
+                    ['GET', 'HEAD'],
+                    'HTTP method GET,HEAD does not support body'
+                );
+                \Inilim\Tool\Method\Assert\string($body);
+
+                if (!$this->hasHeader('content-type')) {
+                    $this->addHeaders('content-type', ['']);
+                }
+
+                $this->setContent($body);
+            }
+
+            if (!$this->debug) {
+                unset($this->options['body']);
+            }
 
             return $this;
         }
@@ -514,65 +719,60 @@ function fgcSend(string $url, array $options = [])
             return $this->headers[$name];
         }
 
+        /**
+         * TODO сделай лучше
+         * @param array<string,string|string[]> $headers
+         * @return array<string,string[]>
+         */
+        function prepareHeaders(array $headers): array
+        {
+            $normHeaders = [];
+            foreach ($headers as $name => $values) {
+                \Inilim\Tool\Method\Assert\headerName($name);
+                \Inilim\Tool\Method\Assert\strOrArr($values);
+                $values = \is_string($values) ? [$values] : $values;
+
+                foreach ($values as $value) {
+                    \Inilim\Tool\Method\Assert\headerValue($value);
+                    $header = $this->normalizeHeader($name, $value);
+
+                    if (
+                        /**
+                         * @see host: https://www.php.net/manual/ru/context.http.php#125832
+                         * эти заголовки устанавливаем мы
+                         */
+                        \Inilim\Tool\Method\Str\startsWith($header, ['host:', 'connection:', 'content-length:'], true)
+                    ) {
+                        continue;
+                    }
+
+                    $normHeaders[$name] ??= [];
+                    $normHeaders[$name][] = $value;
+                } // endforeach
+            } // endforeach
+
+            return $normHeaders;
+        }
+
         function processFirstHeaders()
         {
-            $headers = $this->options['headers'] ?? [];
-
-            foreach ($headers as $nameOrIdx => &$header) {
-
-                if (\is_array($header)) {
-                    foreach ($header as $item) {
-                        $headers[] = \is_string($nameOrIdx) ? $this->normalizeHeader($nameOrIdx, $item) : $item;
-                    }
-                    unset($headers[$nameOrIdx]);
-                    continue;
-                }
-
-                if (\is_string($nameOrIdx)) {
-                    $t = \sprintf('%s: %s', $nameOrIdx, $header);
-                } else {
-                    $t = $header;
-                }
-                $header = null;
-
-                [$name, $header] = \explode(':', $t, 2);
-                if (!\is_string($name) || !\is_string($header)) {
-                    throw new \InvalidArgumentException(\sprintf(
-                        'Header invalid "%s"',
-                        $t
-                    ));
-                }
-
-                if (
-                    /**
-                     * @see host: https://www.php.net/manual/ru/context.http.php#125832
-                     * эти заголовки устанавливаем мы
-                     */
-                    \Inilim\Tool\Method\Str\startsWith($t, ['host:', 'connection:', 'content-length:'], true)
-                ) {
-                    unset($headers[$nameOrIdx]);
-                    continue;
-                }
-
-                if ($this->hasHeader($name)) {
-                    throw new \InvalidArgumentException(\sprintf(
-                        'Repeating header "%s"',
-                        $name
-                    ));
-                }
-
-                // ---------------------------------------------
-                // 
-                // ---------------------------------------------
-
-                $this->addHeaders($name, [$header]);
-                unset($headers[$nameOrIdx]);
-            } // endforeach
+            $headers = $this->options['headers'] ?? null;
+            if (isset($headers)) {
+                $this->headers = $this->prepareHeaders($headers);
+            }
 
             if ($this->debug) {
                 unset($this->options['headers']);
             }
 
+            return $this;
+        }
+
+        function setContent(string $content)
+        {
+            \Inilim\Tool\Method\Assert\boolFalse($this->contentInit);
+            $this->contentInit = true;
+            $this->ctxOptsHttp['content'] = $content;
             return $this;
         }
 
@@ -590,9 +790,9 @@ function fgcSend(string $url, array $options = [])
             return $this;
         }
 
-        function normalizeHeader(string $name, string $header): string
+        function normalizeHeader(string $name, string $value): string
         {
-            return \strtolower($name) . ': ' . \trim($header, " \t");
+            return \strtolower($name) . ': ' . \trim($value, " \t");
         }
 
         function processSecondaryHeaders()

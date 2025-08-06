@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Zip;
  */
 function scan($zip)
 {
-    if (!\Inilim\Tool\Method\Zip\__state()->existsExtZipArchive) {
+    if (!\Inilim\Tool\Method\Other\extPhp('zip')) {
         throw new \RuntimeException('ext "zip" not found');
     }
 

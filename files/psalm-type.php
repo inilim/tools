@@ -71,17 +71,18 @@ class TypeObj {}
  * 
  * TODO cookies
  * 
- * @psalm-type SubParamOptions_multipart = array{name:string,contents:resource|string,filename:string,headers:array<string,string>|string[]}[]
+ * @psalm-type SubParamOptions_multipart = array{name:string,contents:resource|string,filename?:string,headers?:array<string,string>|string[]}[]
  * @psalm-type SubParamOptions_auth = string|string[]
  * @psalm-type SubParamOptions_timeout = int<0,max>|float
- * @psalm-type SubParamOptions_headers = array<string,string|string[]>|string[]
+ * @psalm-type SubParamOptions_headers = array<string,string|string[]>
  * @psalm-type SubParamOptions_query = string|array<string,string>|string[]
  * @psalm-type SubParamOptions_verify = string|bool
+ * @psalm-type SubParamOptions_json = string|mixed[]
  * 
- * @psalm-type ParamOptions = array{method:string,proxy?:string,debug?:bool,allow_redirects?:bool,allow_redirects.max?:int<1,max>,auth?:SubParamOptions_auth,delay?:int<0,max>,headers?:SubParamOptions_headers,multipart?:SubParamOptions_multipart,query?:SubParamOptions_query,verify?:SubParamOptions_verify,timeout?:SubParamOptions_timeout,version?:float,body?:string}
+ * @psalm-type ParamOptions = array{method:string,proxy?:string,debug?:bool,allow_redirects?:bool,allow_redirects.max?:int<1,max>,auth?:SubParamOptions_auth,delay?:int<0,max>,headers?:SubParamOptions_headers,multipart?:SubParamOptions_multipart,query?:SubParamOptions_query,verify?:SubParamOptions_verify,timeout?:SubParamOptions_timeout,version?:float,body?:string,form_params?:mixed[],json?:SubParamOptions_json}
  * 
  * @psalm-type SubReturn_response = array{body:null|string,headers:string[],code:int,size:int,time:int}
- * @psalm-type SubReturn_request = array{url:string,body:null|string,method:string,headers:string}
+ * @psalm-type SubReturn_request = array{url:string,method:string,headers:string}
  * 
  * @psalm-type Return_fgcSend = array{response:SubReturn_response,request:SubReturn_request}
  * 

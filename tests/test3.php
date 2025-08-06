@@ -10,6 +10,10 @@ dUsage();
 $doc = new \DOMDocument;
 $doc->load($xml);
 
+$x = new \DOMXPath($doc);
+
+$x->registerPhpFunctions()
+
 d($doc->xmlVersion);
-d($doc->getElementsByTagName());
+// d($doc->getElementsByTagName());
 dUsage();

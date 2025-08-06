@@ -33,6 +33,10 @@ __include('Time\unixMs');
 __include('Str\startsWith');
 __include('PF\str_starts_with');
 __include('Check\php80');
+__include('Assert\strOrArr');
+__include('Check\strOrArr');
+__include('Other\getType');
+__include('Assert\string');
 
 // $response = \Inilim\Tool\Method\Exp\fgcSend('http://127.0.0.1:11434/api/embed', 'PUT', \json_encode([
 //     'model' => 'nomic-embed-text',
@@ -46,6 +50,9 @@ __include('Check\php80');
 $response = \Inilim\Tool\Method\Exp\fgcSend('http://http-test.test/index.php', [
     'method' => 'post',
     'debug' => true,
+    'headers' => [
+        'content-type' => ['dawdw']
+    ],
     'body' => \json_encode([
         'model' => 'nomic-embed-text',
         'input' => 'Llamas are members of the camelid family',
