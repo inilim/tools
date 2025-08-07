@@ -18,15 +18,11 @@ namespace Inilim\Tool\Method\Assert;
  * @phpstan-assert string $value
  * 
  * @param mixed $value
+ * @throws \InvalidArgumentException
  */
-function headerValue($value, string $message = '')
+function httpHeaderValue($value, string $message = '')
 {
-    if (!\is_string($value)) {
-        throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Header value must be a string but %s provided.',
-            \Inilim\Tool\Method\Other\getType($value)
-        ));
-    }
+    \Inilim\Tool\Method\Assert\string($value, $message ?: 'Header value must be a string but %s provided.');
     // The regular expression intentionally does not support the obs-fold production, because as
     // per RFC 7230#3.2.4:
     //
@@ -38,7 +34,7 @@ function headerValue($value, string $message = '')
     // Clients must not send a request with line folding and a server sending folded headers is
     // likely very rare. Line folding is a fairly obscure feature of HTTP/1.1 and thus not accepting
     // folding is not likely to break any legitimate use case.
-    if (!\preg_match('/^[\x20\x09\x21-\x7E\x80-\xFF]*$/D', $value)) {
+    if (!\Inilim\Tool\Method\Check\httpHeaderValue($value)) {
         throw new \InvalidArgumentException(
             \sprintf('"%s" is not valid header value.', $value)
         );

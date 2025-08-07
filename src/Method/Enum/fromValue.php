@@ -19,7 +19,7 @@ function fromValue($enum, $value, bool $caseInsensitive = false)
         throw new \Exception(\sprintf(
             '"%s" is not a valid backing value for enum "%s"',
             $value,
-            \is_string($enum) ? $enum : $enum::class
+            \is_string($enum) ? $enum : \get_class($enum)
         ));
     }
 

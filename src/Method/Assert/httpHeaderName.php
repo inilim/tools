@@ -13,16 +13,11 @@ namespace Inilim\Tool\Method\Assert;
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-function headerName($value, string $message = '')
+function httpHeaderName($value, string $message = '')
 {
-    if (!\is_string($value)) {
-        throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Header name must be a string but %s provided.',
-            \Inilim\Tool\Method\Other\getType($value)
-        ));
-    }
+    \Inilim\Tool\Method\Assert\string($value, $message ?: 'Header name must be a string but %s provided.');
 
-    if (!\preg_match('/^[a-zA-Z0-9\'`#$%&*+.^_|~!-]+$/D', $value)) {
+    if (!\Inilim\Tool\Method\Check\httpHeaderName($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: '"%s" is not valid header name.',
             $value

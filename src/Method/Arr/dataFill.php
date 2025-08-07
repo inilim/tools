@@ -12,9 +12,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function dataFill()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('dataFill()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (&$target, $key, $value) {
         return \Inilim\Tool\Method\Arr\dataSet()($target, $key, $value, false);
     };

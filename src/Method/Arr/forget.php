@@ -11,9 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function forget()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('forget()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, $keys) {
         /**
          * @var (string|int)[]|string|int $keys

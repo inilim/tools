@@ -13,9 +13,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function set(): \Closure
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (array &$array, $key, $value): array {
         /**
@@ -62,9 +60,7 @@ function set(): \Closure
  */
 // function _set()
 // {
-//     if (\func_num_args() !== 0) {
-//         throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');
-//     }
+//     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
 //     return static function (array &$array, $key, $value) {
 //         if ($key === null) {

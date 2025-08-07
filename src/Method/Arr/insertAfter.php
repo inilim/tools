@@ -12,9 +12,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function insertAfter()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('insertAfter()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, $key, array $inserted) {
         if ($key === null || ($offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $key)) === null) {
             $offset = \sizeof($array) - 1;

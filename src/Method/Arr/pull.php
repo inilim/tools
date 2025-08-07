@@ -10,9 +10,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function pull()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('pull()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, $key, $default = null) {
         $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
         \Inilim\Tool\Method\Arr\forget()($array, $key);

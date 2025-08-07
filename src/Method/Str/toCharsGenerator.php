@@ -17,9 +17,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function toCharsGenerator(): \Closure
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('toCharsGenerator()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (string &$string, int $chunkSize = 1, array $opts = []): \Generator {
         $opts['encoding'] ??= 'UTF-8';

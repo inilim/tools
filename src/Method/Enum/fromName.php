@@ -18,7 +18,7 @@ function fromName($enum, string $name, bool $caseInsensitive = false)
         throw new \Exception(\sprintf(
             '"%s" is not a valid name for enum "%s"',
             $name,
-            \is_string($enum) ? $enum : $enum::class
+            \is_string($enum) ? $enum : \get_class($enum)
         ));
     }
 

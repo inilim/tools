@@ -12,9 +12,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function dataSet()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('dataSet()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (&$target, $key, $value, bool $overwrite = true) {
         $segments = \is_array($key) ? $key : \explode('.', $key);
         $dataSet  = \Inilim\Tool\Method\Arr\dataSet();

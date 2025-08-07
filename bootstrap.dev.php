@@ -13,43 +13,49 @@ Dump::init();
 
 if (!\function_exists('__include')) {
     /**
-     * @param string $name example "Other::getClassContextFromClosure"
+     * @param string|string[] $names example "Other::getClassContextFromClosure"
      * @return void
      * TODO add ...$name
      */
-    function __include(string $name)
+    function __include($names)
     {
-        [$class, $func] = \preg_split('#(::)|(\\\\)#', $name);
+        if (\is_string($names)) {
+            $names = [$names];
+        }
 
-        $pathToFile = \sprintf(
-            '%s/src/Method/%s/%s.php',
-            __DIR__,
-            $class,
-            $func,
-        );
+        foreach ($names as $name) {
+            [$class, $func] = \preg_split('#(::)|(\\\\)#', $name);
 
-        if (!\is_file($pathToFile)) {
+            $pathToFile = \sprintf(
+                '%s/src/Method/%s/%s.php',
+                __DIR__,
+                $class,
+                $func,
+            );
 
-            $body = \sprintf(
-                '
+            if (!\is_file($pathToFile)) {
+
+                $body = \sprintf(
+                    '
         %s
         Arg: "%s"
         Файл не найден: "%s"
         %s
         ',
-                \str_repeat('-', 30),
-                $name,
-                $pathToFile,
-                \str_repeat('-', 30),
-            );
-            $body = \explode(PHP_EOL, $body);
-            $body = \array_map('trim', $body);
-            $body = \implode(PHP_EOL, $body);
+                    \str_repeat('-', 30),
+                    $name,
+                    $pathToFile,
+                    \str_repeat('-', 30),
+                );
+                $body = \explode(PHP_EOL, $body);
+                $body = \array_map('trim', $body);
+                $body = \implode(PHP_EOL, $body);
 
-            throw new \Exception($body);
+                throw new \Exception($body);
+            }
+
+            require_once $pathToFile;
         }
-
-        require_once $pathToFile;
     }
 }
 

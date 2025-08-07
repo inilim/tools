@@ -11,9 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function setValueIfEmpty(): \CLosure
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('setValueIfEmpty()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, string $key, $value): bool {
         $cur = \Inilim\Tool\Method\Arr\get($array, $key, -1);
         if (\in_array($cur, [null, '', []], true)) {

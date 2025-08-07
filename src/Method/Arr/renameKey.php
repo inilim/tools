@@ -11,9 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function renameKey(): \CLosure
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('renameKey()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, $oldKey, $newKey) {
         $offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $oldKey);
         if ($offset === null) {

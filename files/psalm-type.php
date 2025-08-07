@@ -42,6 +42,9 @@ class TypeFile {}
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
+ * ---- walkRecursive
+ * @psalm-type Param_2_walkRecursive = callable(mixed $value,string|int $key,string $dotKey,int $depth)
+ * 
  */
 class TypeArr {}
 

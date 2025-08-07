@@ -6,13 +6,14 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @author inilim
- * @return \Closure(object|array &$array, callable $callable):void
+ * @psalm-import-type Param_2_walkRecursive from \TypeArr
+ * 
+ * @return \Closure(object|array &$array,Param_2_walkRecursive $callable):void
  */
 function walkRecursive()
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('walkRecursive()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (&$array, callable $callable) {
         $recursive = null;
         $state     = [
@@ -20,12 +21,12 @@ function walkRecursive()
             'prepend'     => '',
             'changedKeys' => [],
         ];
-        /**
-         * @param object|array $array
-         * @param callable $callable
-         * @param \Closure $recursive
-         */
         $recursive = static function (&$array, $callable, $recursive) use (&$state) {
+            /**
+             * @param object|array $array
+             * @param Param_2_walkRecursive $callable
+             * @param \Closure $recursive
+             */
             foreach ($array as $key => &$value) {
                 $dotKey = $state['prepend'] . $key;
                 if ($state['changedKeys'] && \in_array($dotKey, $state['changedKeys'])) {

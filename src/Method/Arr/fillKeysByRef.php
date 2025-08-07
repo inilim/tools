@@ -10,9 +10,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function fillKeysByRef(): \Closure
 {
-    if (\func_num_args() !== 0) {
-        throw new \InvalidArgumentException('fillKeysByRef()(...) <-- The arguments were passed to the wrong place');
-    }
+    \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
     return static function (array &$array, array $keys, $value, bool $overwrite = true) {
         foreach ($keys as $key) {
             if ($overwrite || !\array_key_exists($key, $array)) {

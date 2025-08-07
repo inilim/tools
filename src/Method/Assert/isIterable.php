@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Assert;
  */
 function isIterable($value, string $message = '')
 {
-    if (\Inilim\Tool\Method\Check\isIterable($value)) {
+    if (!\Inilim\Tool\Method\Check\isIterable($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'Expected an iterable. Got: %s',
             \Inilim\Tool\Method\Other\getType($value)

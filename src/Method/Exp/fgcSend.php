@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Exp;
 
-use function Inilim\Tool\Method\Assert\boolFalse;
-use function Inilim\Tool\Method\Assert\inArray;
-use function Inilim\Tool\Method\Assert\resOrstr;
-
 /**
+ * @build_skip
  * @author inilim
+ * @author guzzle/guzzle
  * 
  * It is not recommended to use it in production.
  * Exclusively for debugging, testing, and development.
@@ -728,12 +726,12 @@ function fgcSend(string $url, array $options = [])
         {
             $normHeaders = [];
             foreach ($headers as $name => $values) {
-                \Inilim\Tool\Method\Assert\headerName($name);
+                \Inilim\Tool\Method\Assert\httpHeaderName($name);
                 \Inilim\Tool\Method\Assert\strOrArr($values);
                 $values = \is_string($values) ? [$values] : $values;
 
                 foreach ($values as $value) {
-                    \Inilim\Tool\Method\Assert\headerValue($value);
+                    \Inilim\Tool\Method\Assert\httpHeaderValue($value);
                     $header = $this->normalizeHeader($name, $value);
 
                     if (

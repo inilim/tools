@@ -22,21 +22,62 @@ use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use Inilim\IPDO\IPDOSQLite;
 
-__include('File\getViaArray');
-__include('Exp\fgcSend');
-__include('Other\valueToString');
-__include('File\get');
-__include('Assert\inArray');
-__include('Other\tryCallWithErrHandler');
-__include('Obj\getCollectionThrowable');
-__include('Time\unixMs');
-__include('Str\startsWith');
-__include('PF\str_starts_with');
-__include('Check\php80');
-__include('Assert\strOrArr');
-__include('Check\strOrArr');
-__include('Other\getType');
-__include('Assert\string');
+use function Inilim\Tool\Method\Check\httpHeaderName;
+
+__include([
+    'File\getViaArray',
+    'Exp\fgcSend',
+    'Other\valueToString',
+    'File\get',
+    'Assert\inArray',
+    'Other\tryCallWithErrHandler',
+    'Obj\getCollectionThrowable',
+    'Time\unixMs',
+    'Str\startsWith',
+    'PF\str_starts_with',
+    'Check\php80',
+    'Assert\strOrArr',
+    'Check\strOrArr',
+    'Other\getType',
+    'Assert\string',
+    'Exp\normalizeHeaders',
+    'Assert\allString',
+    'Assert\isIterable',
+    'Check\isIterable',
+    'Exp\headersFromLines',
+    'Arr\dot',
+    'Arr\walkRecursive',
+    'Assert\__notArgsHere',
+    'PF\str_contains',
+    'Assert\httpHeaderValue',
+    'Check\httpHeaderValue',
+    'Assert\httpHeaderName',
+    'Check\httpHeaderName',
+    'Exp\arrJoin',
+    'Str\contains',
+    'Str\iEndsWithOnce',
+    'Exp\stringContainsInArray',
+]);
+
+
+$headers = [];
+$headers = [
+    'content-type' => ['xml'],
+    ['content-type' => ['text']],
+    'content-type2' => ['content-type' => ['content-type:json']],
+    'X-Foo: Bar',
+    'X-Test: Fail',
+    'Foo' => ['Foo:bar', 'baz', '123'],
+    'X-My' => 'token',
+    'X-My2' => 'X-My2:token',
+];
+
+
+$headers = \Inilim\Tool\Method\Exp\normalizeHeaders($headers);
+
+de($headers);
+
+de();
 
 // $response = \Inilim\Tool\Method\Exp\fgcSend('http://127.0.0.1:11434/api/embed', 'PUT', \json_encode([
 //     'model' => 'nomic-embed-text',

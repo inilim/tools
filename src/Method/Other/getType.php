@@ -6,11 +6,13 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author Inilim
- * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "exception" "enum" "resource" "null" "unknown type" "resource (closed)"
+ * @see https://php.net/manual/en/function.gettype.php
+ * 
  * @param mixed $v
- * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource (closed)'|'unknown type'
+ * @param bool $trueFalseAsSeparateType if true type bool as 'true'|'false'
+ * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type'
  */
-function getType($v)
+function getType($v, bool $trueFalseAsSeparateType = false): string
 {
     $r = \gettype($v);
     switch ($r) {
@@ -21,14 +23,22 @@ function getType($v)
         case 'object':
             if (\PHP_VERSION_ID >= 80100 && $v instanceof \UnitEnum) {
                 return 'enum';
-            } elseif ($v instanceof \Throwable) {
+            }
+            if ($v instanceof \Throwable) {
                 return 'exception';
             }
             return 'object';
         case 'boolean':
+            if ($trueFalseAsSeparateType) {
+                return $v === true ? 'true' : 'false';
+            }
             return 'bool';
         case 'integer':
             return 'int';
+        case 'resource (closed)':
+            return 'resource_closed';
+        case 'unknown type':
+            return 'unknown_type';
         default:
             return $r;
     }

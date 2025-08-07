@@ -10,21 +10,20 @@ namespace Inilim\Tool\Method\Str;
  */
 function contains(string $haystack, $needles, bool $ignoreCase = false): bool
 {
-    if ($ignoreCase) {
-        $haystack = \mb_strtolower($haystack, 'UTF-8');
-    }
-
     if (!\is_iterable($needles)) {
         $needles = (array) $needles;
     }
-
     foreach ($needles as $needle) {
-        if ($ignoreCase) {
-            $needle = \mb_strtolower($needle, 'UTF-8');
-        }
-
-        if ($needle !== '' && \Inilim\Tool\Method\PF\str_contains($haystack, $needle)) {
-            return true;
+        if ($needle !== '') {
+            if ($ignoreCase) {
+                if (\Inilim\Tool\Method\Str\iContainsOnce($haystack, $needle)) {
+                    return true;
+                }
+            } else {
+                if (\Inilim\Tool\Method\PF\str_contains($haystack, $needle)) {
+                    return true;
+                }
+            }
         }
     }
 

@@ -40,7 +40,8 @@
   "suggest": {
     "ext-zip": "TODO ...",
     "ext-xml": "TODO ...",
-    "ext-intl": "TODO ..."
+    "ext-intl": "TODO ...",
+    "ext-json": "TODO ..."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -49,9 +50,7 @@
     "inilim/ipdo": "dev-main",
     "phpunit/phpunit": "^9.6",
     "twig/twig": "^3.11",
-    "mcaskill/composer-exclude-files": "^4.0",
-    "php-code-minifier/php-code-minifier": "^1.2",
-    "dragon-code/benchmark": "^3.1"
+    "mcaskill/composer-exclude-files": "^4.0"
   },
   "scripts": {
     "unit": [
