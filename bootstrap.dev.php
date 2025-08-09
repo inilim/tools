@@ -23,6 +23,10 @@ if (!\function_exists('__include')) {
             $names = [$names];
         }
 
+        if (!$names) {
+            return;
+        }
+
         foreach ($names as $name) {
             [$class, $func] = \preg_split('#(::)|(\\\\)#', $name);
 

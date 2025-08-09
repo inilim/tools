@@ -5,85 +5,64 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
- * @param string[]|array<string,string>|array<string,string[]> $headers
- * @param string[] $expectName
- * @return array<string,string[]>
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type Param_1_normalizeHeaders from \TypeExp
+ * @psalm-import-type Return_normalizeHeaders from \TypeExp
+ * 
+ * @param Param_1_normalizeHeaders $headers
+ * @return Return_normalizeHeaders
  */
-function normalizeHeaders(array $headers, array $expectName = []): array
+function normalizeHeaders(array $headers): array
 {
     if (!$headers) {
         return [];
     }
 
-    d($headers);
-
-    $hasExpectedName = !!$expectName;
-    if ($hasExpectedName) {
-        \Inilim\Tool\Method\Assert\allString($expectName);
-        $expectName = \array_map(static fn($name) => \strtolower($name) . ':', $expectName);
-    }
-
-    $dots = \Inilim\Tool\Method\Arr\dot($headers, '', '|');
-
-    d($dots);
-
-    if (\Inilim\Tool\Method\Exp\stringContainsInArray($dots, ':')) {
-        foreach ($dots as $dotKeys => $item) {
-            if (\is_string($dotKeys) && \Inilim\Tool\Method\PF\str_contains($item, ':')) {
-                $value = \explode(':', $item, 2)[1];
-                $dots[] = $item;
-                $dots[$dotKeys] = $value;
-            }
-        }
-    }
-
-    d($dots);
-
     $lines = [];
-    foreach (
-        $dots as $dotKeys => &$value
-    ) {
-        if (\is_int($dotKeys)) {
-            $header = \strtr($value, [': ' => ':']);
-        } elseif (\Inilim\Tool\Method\PF\str_contains($dotKeys, '|')) {
-            \Inilim\Tool\Method\Assert\httpHeaderValue($value);
-            $names = \preg_replace([
-                '#^(\d+\|)#',
-                '#(\|\d+)$#',
-            ], '', $dotKeys);
-            $names = \preg_split('#\|#', $names, -1, \PREG_SPLIT_NO_EMPTY);
-            foreach ($names as $name) {
-                \Inilim\Tool\Method\Assert\httpHeaderName($name);
-                $dots[] = $name . ':' . $value;
+    $nameCompleted = [];
+    foreach ($headers as $name => &$values) {
+
+        if (isset($nameCompleted[$name])) {
+            continue;
+        }
+
+        if (\is_string($values)) {
+            if (\is_string($name)) {
+                $values = [$values];
+            } else {
+                $lines[] = $values;
+                unset($headers[$name]);
+                continue;
             }
-            continue;
-        } elseif (\Inilim\Tool\Method\PF\str_contains($value, ':')) {
-            \Inilim\Tool\Method\Assert\httpHeaderValue($value);
-            [$name, $value] = \explode(':', $value, 2);
-            \Inilim\Tool\Method\Assert\httpHeaderName($dotKeys);
-            \Inilim\Tool\Method\Assert\httpHeaderName($name);
-            $header = $dotKeys . ':' . $value;
-            $header = $name . ':' . $value;
-        } else {
-            \Inilim\Tool\Method\Assert\httpHeaderValue($value);
-            \Inilim\Tool\Method\Assert\httpHeaderName($dotKeys);
-            $header = $dotKeys . ':' . $value;
         }
 
-        unset($dots[$dotKeys]);
+        \Inilim\Tool\Method\Assert\httpHeaderName($name);
+        /** @var string $name */
 
-        if ($hasExpectedName && \Inilim\Tool\Method\Str\startsWith($header, $expectName, true)) {
-            continue;
+        foreach ($values as $value) {
+            \Inilim\Tool\Method\Assert\httpHeaderValue($value);
         }
 
-        $lines[] = $header;
+        $newName = \strtolower($name);
+        if ($newName !== $name) {
+            $headers[$newName] = $values;
+            unset($headers[$name]);
+        }
+
+        $nameCompleted[$name] = true;
     }
 
-    de($lines);
-
-    if (!$lines) {
-        return [];
+    if ($lines) {
+        foreach (\Inilim\Tool\Method\Exp\headersFromLines($lines) as $name => $values) {
+            $name = \strtolower($name);
+            if (isset($headers[$name])) {
+                $headers[$name] = \array_merge($headers[$name], $values);
+            } else {
+                $headers[$name] = $values;
+            }
+        }
     }
 
-    return \Inilim\Tool\Method\Exp\headersFromLines($lines);
+    return $headers;
 }

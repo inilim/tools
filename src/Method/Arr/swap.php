@@ -18,9 +18,11 @@ function swap(): \Closure
          * @var string|int $keyOne
          * @var string|int $keyTwo
          */
-        if (! \Inilim\Tool\Method\Arr\exists($array, $keyOne) || ! \Inilim\Tool\Method\Arr\exists($array, $keyTwo)) {
-            throw new \InvalidArgumentException('One or both keys do not exist in the array.');
-        }
+        \Inilim\Tool\Method\Assert\keysExists(
+            $array,
+            [$keyOne, $keyTwo],
+            'One or both keys do not exist in the array.'
+        );
 
         // Short-circuit the method if both keys are the same.
         if ($keyOne === $keyTwo) {

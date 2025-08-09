@@ -3,4 +3,3 @@ parameters:
 	paths:
 		- src/Method
 		- src/LazyMethodAbstract.php
-		- files/phpstan-type.php

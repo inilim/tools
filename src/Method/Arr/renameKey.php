@@ -12,6 +12,7 @@ namespace Inilim\Tool\Method\Arr;
 function renameKey(): \CLosure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (array &$array, $oldKey, $newKey) {
         $offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $oldKey);
         if ($offset === null) {

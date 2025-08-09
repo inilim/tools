@@ -1,113 +1,27 @@
 <?php
 
-use Inilim\Tool\Arr;
+use Inilim\Tool\VD;
 use Inilim\Tool\Other;
-use PhpParser\Node\Stmt\Break_;
+use Symfony\Component\Process\Process;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-__include([
-    'Str\limit',
-    'Assert\isNonEmptyArray',
-    'Assert\isArray',
+\__include([
+    // 
 ]);
 
 
-function array_map_optimize(array $array, array $instruction = []): array
-{
-    if (!$array) {
-        return [];
-    }
+$result = Other::timedMsCall(static function () {
 
-    // \Inilim\Tool\Method\Assert\isNonEmptyArray($instruction);
-
-    foreach ($array as &$item) {
-        foreach ($instruction as $fnName => $args) {
-            switch ($fnName) {
-                case 'strtolower':
-                    $item = \strtolower($item);
-                    break;
-                case 'concatLeft':
-                    $item = $args[0] . $item;
-                    break;
-                case 'concatRight':
-                    $item .= $args[0];
-                    break;
-                case 'concatBoth':
-                    $item = $args[0] . $item . $args[1] ?? $args[0];
-                    break;
-            } // endswitch
-        }
-    }
-
-    return $array;
-}
-
-$array = [
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-    'awdawd',
-];
-
-$result = Other::timedMsCall(static function () use ($array) {
-    for ($i = 0; $i < 10_000; $i++) {
-        \array_map(static function ($item) {
-            return \strtolower($item);
-        }, $array);
-
-        // array_map_optimize($array, [
-        //     'strtolower' => [],
-        // ]);
-    }
+    $phpFile = __DIR__ . '/subprocess.php';
+    echo 'start' . PHP_EOL;
+    // $process = new Process(['php', $phpFile]);
+    // $process->run(); // 410ms
+    // \exec('php ' . $phpFile); // 260ms
+    // \shell_exec('php ' . $phpFile); // 250ms 
+    // \passthru('php ' . $phpFile); // 250ms 
+    // \system('php ' . $phpFile); // 250ms 
+    echo 'end' . PHP_EOL;
 });
 
-
-de($result);
+VD::de($result);

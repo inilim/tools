@@ -22,8 +22,6 @@ use Inilim\Tool\Double;
 use Inilim\Tool\Integer;
 use Inilim\IPDO\IPDOSQLite;
 
-use function Inilim\Tool\Method\Check\httpHeaderName;
-
 __include([
     'File\getViaArray',
     'Exp\fgcSend',
@@ -57,21 +55,37 @@ __include([
     'Str\contains',
     'Str\iEndsWithOnce',
     'Exp\stringContainsInArray',
+    'Assert\isArray',
+    'Assert\contains',
+    'Check\contains',
+    'Other\timedMsCall',
+    'Other\_refDots',
 ]);
+
+
+
+
 
 
 $headers = [];
 $headers = [
-    'content-type' => ['xml'],
-    ['content-type' => ['text']],
-    'content-type2' => ['content-type' => ['content-type:json']],
-    'X-Foo: Bar',
-    'X-Test: Fail',
-    'Foo' => ['Foo:bar', 'baz', '123'],
-    'X-My' => 'token',
-    'X-My2' => 'X-My2:token',
+    'name-heade5' => 'value-header6',
+    'name-heade5:value-header7',
+    'name-header' => ['value-header1', 'value-header2'],
+    'name-header2' => ['value-header4'],
+    'name-header3:value-header5',
+    'name-header4:value-header1,value-header2,value-header3',
 ];
+// $dots = \Inilim\Tool\Method\Arr\dot($headers, '', '|');
 
+// $a = \next($dots);
+// current()
+// prev
+// \end($dots);
+
+// \next($dots);
+// $a = \current($dots);
+// dde($a);
 
 $headers = \Inilim\Tool\Method\Exp\normalizeHeaders($headers);
 

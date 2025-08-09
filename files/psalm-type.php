@@ -43,7 +43,9 @@ class TypeFile {}
  * @example psalm-type NameType = string
  * 
  * ---- walkRecursive
- * @psalm-type Param_2_walkRecursive = callable(mixed $value,string|int $key,string $dotKey,int $depth)
+ * @psalm-type Param_1_walkRecursive = object|mixed[]
+ * @psalm-type Param_2_walkRecursive = callable(mixed, string|int, int):void
+ * @psalm-type Return_walkRecursive  = Closure(Param_1_walkRecursive, Param_2_walkRecursive):void
  * 
  */
 class TypeArr {}
@@ -70,7 +72,7 @@ class TypeObj {}
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- * Exp::fgcSend()
+ * ------- fgcSend()
  * 
  * TODO cookies
  * 
@@ -88,6 +90,11 @@ class TypeObj {}
  * @psalm-type SubReturn_request = array{url:string,method:string,headers:string}
  * 
  * @psalm-type Return_fgcSend = array{response:SubReturn_response,request:SubReturn_request}
+ * 
+ * ----- normalizeHeaders
+ * @psalm-type Param_1_normalizeHeaders = array<string,string|string[]>|string[]
+ * @psalm-type Return_normalizeHeaders = array<string,string[]>
+ * 
  * 
  * 
  */

@@ -6,6 +6,7 @@
 /files/tests/*
 
 # Files
+/stan.txt
 /composer.lock
 .htaccess
 .phpunit.result.cache
