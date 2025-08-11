@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Check;
  * @param mixed       $value
  * @param string|null $type    type of resource this should be. @see https://www.php.net/manual/en/function.get-resource-type.php
  */
-function resOrstr($value, ?string $type = null): bool
+function resOrStr($value, ?string $type = null): bool
 {
     if (\is_string($value)) {
         return true;
