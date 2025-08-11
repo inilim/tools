@@ -28,6 +28,8 @@ namespace Inilim\Tool\Method\Exp;
  */
 function fgcSend(string $url, array $options = [])
 {
+    \Inilim\Tool\Method\Assert\boolTrue((bool)\ini_get('allow_url_fopen'), 'Require "allow_url_fopen" ini setting');
+
     $internal = new class() {
         public string $url;
         /**

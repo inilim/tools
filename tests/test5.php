@@ -60,38 +60,35 @@ __include([
     'Check\contains',
     'Other\timedMsCall',
     'Other\_refDots',
+    'Other\tryFopen',
+    'Exp\multipart',
+    'Assert\keysExists',
+    'Arr\hasAll',
+    'Arr\has',
+    'Arr\exists',
+    'Assert\resOrstr',
 ]);
 
 
+$stream = \Inilim\Tool\Method\Other\tryFopen('php://temp', 'r+');
+fwrite($stream, 'Привет еб твою мать');
+fseek($stream, 0);
 
 
+$res = \Inilim\Tool\Method\Exp\multipart([
+    [
+        'name'     => 'qux',
+        'contents' => $stream,
+        'filename' => 'custom_filename.txt'
+    ],
+    [
+        'name'     => 'awdwd',
+        'contents' => $stream,
+        'filename' => 'gergwge.txt'
+    ],
+]);
 
-
-$headers = [];
-$headers = [
-    'name-heade5' => 'value-header6',
-    'name-heade5:value-header7',
-    'name-header' => ['value-header1', 'value-header2'],
-    'name-header2' => ['value-header4'],
-    'name-header3:value-header5',
-    'name-header4:value-header1,value-header2,value-header3',
-];
-// $dots = \Inilim\Tool\Method\Arr\dot($headers, '', '|');
-
-// $a = \next($dots);
-// current()
-// prev
-// \end($dots);
-
-// \next($dots);
-// $a = \current($dots);
-// dde($a);
-
-$headers = \Inilim\Tool\Method\Exp\normalizeHeaders($headers);
-
-de($headers);
-
-de();
+de($res);
 
 // $response = \Inilim\Tool\Method\Exp\fgcSend('http://127.0.0.1:11434/api/embed', 'PUT', \json_encode([
 //     'model' => 'nomic-embed-text',
