@@ -34,7 +34,7 @@ function multipart(array $array, array $options = []): string
 
 
         $content = $element['contents'];
-        \Inilim\Tool\Method\Assert\resOrstr($content, '"contents" must be string or resource');
+        \Inilim\Tool\Method\Assert\resOrStr($content, '"contents" must be string or resource');
         /** @var string|resource $content */
 
         $metaData = null;

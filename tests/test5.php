@@ -66,7 +66,7 @@ __include([
     'Arr\hasAll',
     'Arr\has',
     'Arr\exists',
-    'Assert\resOrstr',
+    'Assert\resOrStr',
 ]);
 
 
