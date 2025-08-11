@@ -355,6 +355,7 @@ if ($switch || false) {
 
                 if (!$methodDep) {
                     de([
+                        __LINE__,
                         '$method'       => $method,
                         '$methodDep'    => $methodDep,
                         '$methodDepStr' => $methodDepStr,
@@ -370,6 +371,7 @@ if ($switch || false) {
                 if ($ast === null) {
                     de([
                         'ast',
+                        __LINE__,
                         '$method'    => $method,
                         '$methodDep' => $methodDep,
                         '$methodDepStr' => $methodDepStr,
@@ -382,6 +384,7 @@ if ($switch || false) {
                 if ($function === null) {
                     de([
                         'метод не найден',
+                        __LINE__,
                         '$method'    => $method,
                         '$methodDep' => $methodDep,
                     ]);

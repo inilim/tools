@@ -55,6 +55,14 @@ class Data
     static function dateTimePatterns(): array {}
 
         /**
+ * @author inilim
+ * @see https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
+ * 
+ * @tags data
+ */
+    static function getMimeTypeByExt(string $extension): ?string {}
+
+        /**
  * @return string[]
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsString()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsArray()
@@ -124,6 +132,19 @@ class Data
  * @return string
  */
     static function magicMethodsAsString(string $separator = '') {}
+
+        /**
+ * @author inilim
+ * @author guzzle/guzzle
+ * @see https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
+ * 
+ * extension => content-type
+ *
+ * @return \Generator<string,string>
+ * 
+ * @tags generator,data
+ */
+    static function mimeTypeAsGenerator(): Generator {}
 
         /**
  * @return int[]

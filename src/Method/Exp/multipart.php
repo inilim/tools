@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Exp;
 
-use function Inilim\Tool\Method\Data\getMimeTypeByExt;
-
 /**
- * @psalm-type Param_1_multipart = array<array{content:resource|string,name:string,headers?:string[]|array<string,string>,filename?:string}>
- * @psalm-type Param_2_multipart = array{boundary?:string}
+ * @build_skip
+ * @psalm-import-type Param_1_multipart from \TypeExp
+ * @psalm-import-type Param_2_multipart from \TypeExp
  *
  * @param Param_1_multipart $array
  * @param Param_2_multipart $options
@@ -34,7 +33,7 @@ function multipart(array $array, array $options = []): string
 
 
         $content = $element['contents'];
-        \Inilim\Tool\Method\Assert\resOrStr($content, '"contents" must be string or resource');
+        \Inilim\Tool\Method\Assert\resOrStr($content, null, '"contents" must be string or resource');
         /** @var string|resource $content */
 
         $metaData = null;
@@ -88,14 +87,6 @@ function multipart(array $array, array $options = []): string
             $headers = [];
         }
 
-        if (!isset($headers['content-length'])) {
-            $size = \Inilim\Tool\Method\Other\getSizeResource($content);
-            if ($size !== -1) {
-                $headers['content-length'] = [(string)$size];
-            }
-            unset($size);
-        }
-
         if (!isset($headers['content-disposition'])) {
             $headers['content-disposition'] = ($filename === '0' || $filename)
                 ? [\sprintf(
@@ -104,6 +95,13 @@ function multipart(array $array, array $options = []): string
                     \basename($filename)
                 )]
                 : ["form-data; name=\"{$name}\""];
+        }
+
+        $size = \Inilim\Tool\Method\Other\getSizeResource($content);
+        if (!isset($headers['content-length'])) {
+            if ($size !== -1) {
+                $headers['content-length'] = [(string)$size];
+            }
         }
 
         if (!isset($headers['content-type'])) {
@@ -118,17 +116,18 @@ function multipart(array $array, array $options = []): string
         // 
         // ---------------------------------------------
 
-        $body .= "--{$boundary}\r\n";
+        $strHeaders = '';
         foreach ($headers as $key => $value) {
             $value = \implode(', ', $value);
-            $body .= "{$key}: {$value}\r\n";
+            $strHeaders .= "{$key}: {$value}\r\n";
         }
-
-        $body .= \trim($body) . "\r\n\r\n";
-        $body .= $content;
+        $strHeaders = "--{$boundary}\r\n" . \trim($strHeaders) . "\r\n\r\n";
+        $body .= $strHeaders;
+        $body .= \fread($content, $size);
         $body .= "\r\n";
-        $body .= "--{$boundary}--\r\n";
     } // endforeach
+
+    $body .= "--{$boundary}--\r\n";
 
     return $body;
 }

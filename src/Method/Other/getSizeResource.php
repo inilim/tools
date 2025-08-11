@@ -12,5 +12,5 @@ function getSizeResource($value): int
 {
     \Inilim\Tool\Method\Assert\resource($value);
     $size = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \fstat($value), null);
-    return \intval($size['size'] ?? -1);
+    return \is_array($size) ? \intval($size['size'] ?? -1) : -1;
 }

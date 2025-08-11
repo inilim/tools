@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('dataGetV2')){
     function dataGetV2($target,$key,$default=null){if($key===null){return $target;}if(\is_array($key)||\is_int($key)||!\Inilim\Tool\Method\Str\contains($key,'*')){return \Inilim\Tool\Method\Arr\dataGet($target,$key,$default);}$keys=\Inilim\Tool\Method\Arr\dotKeysByPattern($target,$key);if(!$keys){return \Inilim\Tool\Method\Arr\value($default);}return \Inilim\Tool\Method\Arr\dataGet(\Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target),$keys)),$key,$default);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
-    function dot(iterable $array,string $prepend=''){$results=[];$flatten=static function(iterable $data,string $prefix)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.'.');}else{$results[$newKey]=$value;}}};$flatten($array,$prepend);return $results;}
+    function dot(iterable $array,string $prepend='',string $separator='.'){$results=[];$flatten=static function(iterable $data,string $prefix,string $separator)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.$separator,$separator);}else{$results[$newKey]=$value;}}};$flatten($array,$prepend,$separator);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeys')){
     function dotKeys(iterable $array,string $prepend=''):array{$results=[];$flatten=static function(iterable $array,string $prefix)use(&$results,&$flatten){foreach($array as $key=>$value){if(\is_array($value)&&!empty($value)){$flatten($value,$prefix.$key.'.');}else{$results[]=$prefix.$key;}}};$flatten($array,$prepend);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('dotKeysByPattern')){
@@ -27,13 +27,17 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('only')){
     function only(array $array,$keys):array{return \array_intersect_key($array,\array_flip((array) $keys));}
     }if(!\Inilim\Tool\Arr::__definedIfNot('set')){
-    function set():\Closure{if(\func_num_args()!==0){throw new \InvalidArgumentException('set()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,$key,$value):array{if($key===null){return $array=$value;}$keys=\explode('.',(string) $key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
+    function set():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$key,$value):array{if($key===null){return $array=$value;}$keys=\explode('.',(string) $key);foreach($keys as $i=>$key){if(\sizeof($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
     }if(!\Inilim\Tool\Arr::__definedIfNot('undot')){
     function undot($array):array{$results=[];$set=\Inilim\Tool\Method\Arr\set();foreach($array as $key=>$value){$set($results,$key,$value);}return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
     function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('contains')){
-    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if($needle!==''&&\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}return false;}
+    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iContainsOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}}return false;}
+    }if(!\Inilim\Tool\Str::__definedIfNot('iContainsOnce')){
+    function iContainsOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')!==false;}
+    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
+    function __notArgsHere(string $fnName,int $countArgs){if($countArgs!==0){$fnName=\basename($fnName);throw new \InvalidArgumentException(\sprintf('%s()(...) OR %s()->__invoke(...) <-- The arguments were passed to the wrong place',$fnName,$fnName));}}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){

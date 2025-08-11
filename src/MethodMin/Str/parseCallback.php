@@ -7,7 +7,9 @@ namespace Inilim\Tool\Method\Str{function parseCallback(string $callback,?string
     }if(!\Inilim\Tool\Str::__definedIfNot('beforeLast')){
     function beforeLast(string $subject,string $search):string{if($search===''){return $subject;}$pos=\mb_strrpos($subject,$search);if($pos===false){return $subject;}return \Inilim\Tool\Method\Str\substr($subject,0,$pos);}
     }if(!\Inilim\Tool\Str::__definedIfNot('contains')){
-    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if($ignoreCase){$haystack=\mb_strtolower($haystack,'UTF-8');}if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($ignoreCase){$needle=\mb_strtolower($needle,'UTF-8');}if($needle!==''&&\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}return false;}
+    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iContainsOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}}return false;}
+    }if(!\Inilim\Tool\Str::__definedIfNot('iContainsOnce')){
+    function iContainsOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')!==false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
     function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('substrCount')){

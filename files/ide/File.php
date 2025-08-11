@@ -128,7 +128,7 @@ class File
         /**
  * Get the contents of a file one line at a time.
  * @return \Closure():\Generator<string>
- * @throws \ValueError
+ * @throws \Exception
  */
     static function lines(string $pathToFile): Closure {}
 

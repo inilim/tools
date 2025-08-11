@@ -12,8 +12,6 @@ namespace Inilim\Tool\Method\Exp;
  * It is not recommended to use it in production.
  * Exclusively for debugging, testing, and development.
  * 
- * TODO multipart
- * 
  * @psalm-import-type Return_fgcSend from \TypeExp
  * @psalm-import-type ParamOptions from \TypeExp
  * @psalm-import-type Return_get from \TypeFile
@@ -573,8 +571,7 @@ function fgcSend(string $url, array $options = [])
                 'HTTP method GET,HEAD does not support body'
             );
 
-            $multipart = \Inilim\Tool\Method\Exp\multipart($multipart);
-
+            $this->setContent(\Inilim\Tool\Method\Exp\multipart($multipart));
             $this->addHeaders('content-type', 'multipart/form-data');
 
             if (!$this->debug) {

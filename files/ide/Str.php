@@ -211,16 +211,20 @@ class Str
     static function headline(string $value) {}
 
         /**
- * @deprecated use Str::endsWith(ignoreCase: true)
- * @param string|iterable<string> $needles
+ * @author inilim
+ * @ext mbstring
  */
-    static function iEndsWith(string $haystack, $needles): bool {}
+    static function iContainsOnce(string $haystack, string $needle): bool {}
 
         /**
- * @deprecated use Str::startsWith(ignoreCase: true)
- * @param string|iterable<string> $needles
+ * @author inilim
  */
-    static function iStartsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
+    static function iEndsWithOnce(string $haystack, string $needle): bool {}
+
+        /**
+ * @author inilim
+ */
+    static function iStartsWithOnce(string $haystack, string $needle): bool {}
 
         /**
  * @param (int|string)[] $parts

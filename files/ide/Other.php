@@ -39,6 +39,25 @@ class Other
     static function compareViaOperator($left, string $operator, $right): bool {}
 
         /**
+ * @author guzzle/guzzle
+ * 
+ * Returns the default cacert bundle for the current system.
+ *
+ * First, the openssl.cafile and curl.cainfo php.ini settings are checked.
+ * If those settings are not configured, then the common locations for
+ * bundles found on Red Hat, CentOS, Fedora, Ubuntu, Debian, FreeBSD, OS X
+ * and Windows are checked. If any of these file locations are found on
+ * disk, they will be utilized.
+ *
+ * Note: the result of this function is cached for subsequent calls.
+ *
+ * @throws \Exception if no bundle can be found.
+ *
+ * INFO defaultCaBundle will be removed in guzzlehttp/guzzle:8.0. This method is not needed in PHP 5.6+.
+ */
+    static function defaultCaBundle(): string {}
+
+        /**
  * @author inilim
  */
     static function extPhp(string $ext, bool $rechecking = false): bool {}
@@ -76,12 +95,20 @@ class Other
     static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array {}
 
         /**
- * @author Inilim
- * Possibles values for the returned string are: "boolean" "integer" "float" "string" "array" "object" "exception" "enum" "resource" "null" "unknown type" "resource (closed)"
- * @param mixed $v
- * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource (closed)'|'unknown type'
+ * @param resource $value
+ * @return int return -1 if failed
  */
-    static function getType($v) {}
+    static function getSizeResource($value): int {}
+
+        /**
+ * @author Inilim
+ * @see https://php.net/manual/en/function.gettype.php
+ * 
+ * @param mixed $v
+ * @param bool $trueFalseAsSeparateType if true type bool as 'true'|'false'
+ * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type'
+ */
+    static function getType($v, bool $trueFalseAsSeparateType = false): string {}
 
         /**
  * @todo to check
@@ -246,12 +273,29 @@ class Other
     static function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL) {}
 
         /**
+ * @author guzzle/guzzle
+ * Safely opens a PHP stream resource using a filename.
+ *
+ * When fopen fails, PHP normally raises a warning. This function adds an
+ * error handler that checks for errors and throws an exception instead.
+ *
+ * @param string $filename File to open
+ * @param string $mode     Mode used to open the file
+ *
+ * @return resource
+ *
+ * @throws \RuntimeException if the file cannot be opened
+ */
+    static function tryFopen(string $filename, string $mode) {}
+
+        /**
  * @author Inilim
  * @return string
  */
     static function unprefixVar(string $name) {}
 
         /**
+ * @author inilim
  * @author webmozarts/assert
  * @param mixed $value
  */

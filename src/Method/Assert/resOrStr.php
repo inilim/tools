@@ -15,9 +15,9 @@ namespace Inilim\Tool\Method\Assert;
  *
  * @throws \InvalidArgumentException
  */
-function resOrstr($value, ?string $type = null, string $message = '')
+function resOrStr($value, ?string $type = null, string $message = '')
 {
-    if ($type !== null && !\Inilim\Tool\Method\Check\resOrstr($value, $type)) {
+    if ($type !== null && !\Inilim\Tool\Method\Check\resOrStr($value, $type)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'Expected resource of type %2$s or string. Got: %s',
             \Inilim\Tool\Method\Other\getType($value),
@@ -25,7 +25,7 @@ function resOrstr($value, ?string $type = null, string $message = '')
         ));
     }
 
-    if (!\Inilim\Tool\Method\Check\resOrstr($value)) {
+    if (!\Inilim\Tool\Method\Check\resOrStr($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'Expected resource or string. Got: %s',
             \Inilim\Tool\Method\Other\getType($value),

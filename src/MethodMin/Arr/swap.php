@@ -2,6 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Arr{function swap():\Closure{if(\func_num_args()!==0){throw new \InvalidArgumentException('swap()(...) <-- The arguments were passed to the wrong place');}return static function(array&$array,$keyOne,$keyTwo){if(!\Inilim\Tool\Method\Arr\exists($array,$keyOne)||!\Inilim\Tool\Method\Arr\exists($array,$keyTwo)){throw new \InvalidArgumentException('One or both keys do not exist in the array.');}if($keyOne===$keyTwo){return;}[$array[$keyOne],$array[$keyTwo]]=[$array[$keyTwo],$array[$keyOne]];};}if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
+namespace Inilim\Tool\Method\Arr{function swap():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$keyOne,$keyTwo){\Inilim\Tool\Method\Assert\keysExists($array,[$keyOne,$keyTwo],'One or both keys do not exist in the array.');if($keyOne===$keyTwo){return;}[$array[$keyOne],$array[$keyTwo]]=[$array[$keyTwo],$array[$keyOne]];};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('has')){
+    function has($array,$keys):bool{$keys=(array) $keys;if(!$array||$keys===[]){return false;}foreach($keys as $key){$subKeyArray=$array;if(\Inilim\Tool\Method\Arr\exists($array,$key)){continue;}foreach(\explode('.',$key)as $segment){if(\Inilim\Tool\Method\Arr\accessible($subKeyArray)&&\Inilim\Tool\Method\Arr\exists($subKeyArray,$segment)){$subKeyArray=$subKeyArray[$segment];}else{return false;}}}return true;}
+    }if(!\Inilim\Tool\Arr::__definedIfNot('hasAll')){
+    function hasAll($array,$keys):bool{$keys=(array) $keys;if(!$array||$keys===[]){return false;}foreach($keys as $key){if(!\Inilim\Tool\Method\Arr\has($array,$key)){return false;}}return true;}
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){
+    function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
+    }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
+    function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
+    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
+    function __notArgsHere(string $fnName,int $countArgs){if($countArgs!==0){$fnName=\basename($fnName);throw new \InvalidArgumentException(\sprintf('%s()(...) OR %s()->__invoke(...) <-- The arguments were passed to the wrong place',$fnName,$fnName));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('isArray')){
+    function isArray($value,string $message=''){if(!\is_array($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a array. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('keysExists')){
+    function keysExists($value,array $keys,string $message=''){\Inilim\Tool\Method\Assert\isArray($value);if(!\Inilim\Tool\Method\Arr\hasAll($value,$keys)){throw new \InvalidArgumentException(\sprintf($message?:'Expected all of: %2$s. Got: %s',\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',\array_keys($value))),\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',$keys))));}}
     }}

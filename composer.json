@@ -52,7 +52,8 @@
     "twig/twig": "^3.11",
     "mcaskill/composer-exclude-files": "^4.0",
     "phpstan/phpstan": "^2.1",
-    "symfony/process": "^5.4"
+    "symfony/process": "^5.4",
+    "php-code-minifier/php-code-minifier": "^1.2"
   },
   "scripts": {
     "unit": [

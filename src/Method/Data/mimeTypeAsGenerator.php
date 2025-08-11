@@ -10,6 +10,8 @@ namespace Inilim\Tool\Method\Data;
  * extension => content-type
  *
  * @return \Generator<string,string>
+ * 
+ * @tags generator,data
  */
 function mimeTypeAsGenerator(): \Generator
 {

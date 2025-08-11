@@ -7,6 +7,8 @@ namespace Inilim\Tool\Method\Exp;
 /**
  * @author inilim
  * 
+ * @build_skip
+ * 
  * It is not recommended to use it in production.
  * Exclusively for debugging, testing, and development.
  * 
@@ -26,10 +28,8 @@ function fgcSendJsonPost(string $url, $body, array $options = [])
         \Inilim\Tool\Method\Assert\json($body);
     }
     /** @var string $body */
-    $options['body']   = &$body;
+    $options['json']   = &$body;
     $options['method'] = 'POST';
-    $options['headers'] ??= [];
-    $options['headers'][] = 'content-type: application/json';
 
     return \Inilim\Tool\Method\Exp\fgcSend($url, $options);
 }

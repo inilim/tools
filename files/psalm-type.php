@@ -95,7 +95,9 @@ class TypeObj {}
  * @psalm-type Param_1_normalizeHeaders = array<string,string|string[]>|string[]
  * @psalm-type Return_normalizeHeaders = array<string,string[]>
  * 
- * 
+ * ----- multipart
+ * @psalm-type Param_1_multipart = array<array{contents:resource|string,name:string,headers?:string[]|array<string,string>,filename?:string}>
+ * @psalm-type Param_2_multipart = array{boundary?:string}
  * 
  */
 class TypeExp {}

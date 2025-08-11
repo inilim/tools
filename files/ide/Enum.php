@@ -33,7 +33,7 @@ class Enum
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  * @return T
- * @throws \ValueError
+ * @throws \Exception
  */
     static function fromName($enum, string $name, bool $caseInsensitive = false) {}
 
@@ -43,7 +43,7 @@ class Enum
  * @param class-string<T>|T $enum
  * @param int|string $value
  * @return T
- * @throws \ValueError
+ * @throws \Exception
  */
     static function fromValue($enum, $value, bool $caseInsensitive = false) {}
 
@@ -100,7 +100,12 @@ class Enum
 
         /**
  * @author Inilim
- * @param mixed $v
+ * @deprecated use Check::enumCase
+ * @template T of mixed
+ * @psalm-assert-if-true \UnitEnum $value
+ * @phpstan-assert-if-true \UnitEnum $value
+ * 
+ * @param T $v
  */
     static function isCase($v): bool {}
 

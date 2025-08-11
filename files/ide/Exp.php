@@ -5,39 +5,20 @@ namespace Inilim\Tool;
 class Exp
 {
         /**
+ * @author inilim
+ * as implode();
+ *
+ * @param mixed[] $array
+ * @param array<string,string|\Closure(mixed,string):string> $typeAs
+ */
+    static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
+
+        /**
  * @author stevebauman <https://github.com/stevebauman>
  * Extract values from the haystack using the given template pattern.
  * @return array<string,string>
  */
     static function extract(string $haystack, string $pattern) {}
-
-        /**
- * @author inilim
- * 
- * It is not recommended to use it in production.
- * Exclusively for debugging, testing, and development.
- * 
- * @param array<string,string>|string[] $headers
- * return array{response:array{body:null|string,headers:string[],code:int,size:int,time:int},request:array{url:string,body:null|string,method:string,headers:string}}
- * 
- * @psalm-import-type Return_fgcSend from \TypeExp
- * @return Return_fgcSend
- */
-    static function fgcSend(string $url, string $method = 'GET', ?string $body = null, array $headers = [], array $ctxOptions = []) {}
-
-        /**
- * @author inilim
- * 
- * It is not recommended to use it in production.
- * Exclusively for debugging, testing, and development.
- * 
- * @param mixed[]|string $body
- * @param array<string,string>|string[] $headers
- * 
- * @psalm-import-type Return_fgcSend from \TypeExp
- * @return Return_fgcSend
- */
-    static function fgcSendJsonPost(string $url, $body, array $headers = [], array $ctxOptions = []) {}
 
         /**
  * @author shaedrich <https://github.com/shaedrich>
@@ -69,6 +50,18 @@ class Exp
     static function hashFile(string $algo, string $pathToFile, int $byteStart = 1024, int $byteEnd = 1024, bool $binary = false) {}
 
         /**
+ * @author guzzle/guzzle
+ * @author inilim
+ * Parses an array of header lines into an associative array of headers.
+ *
+ * @param iterable<string> $lines Header lines array of strings in the following
+ *                        format: "Name: Value"
+ * 
+ * @return array<string,string[]>
+ */
+    static function headersFromLines(iterable $lines): array {}
+
+        /**
  * @author Ashot1995 <https://github.com/Ashot1995>
  * @author inilim
  * @param  string  $value
@@ -97,11 +90,43 @@ class Exp
     static function mbLevenshtein(string $str1, string $str2): int {}
 
         /**
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type Param_1_normalizeHeaders from \TypeExp
+ * @psalm-import-type Return_normalizeHeaders from \TypeExp
+ * 
+ * @param Param_1_normalizeHeaders $headers
+ * @return Return_normalizeHeaders
+ */
+    static function normalizeHeaders(array $headers): array {}
+
+        /**
  * @author guzzle/guzzle
  * Parses the given proxy URL to make it compatible with the format PHP's stream context expects.
  * 
  * @return array{proxy:string,auth:null|string}
  */
     static function parseProxy(string $url): array {}
+
+        /**
+ * @author inilim
+ *
+ * @param string[] $array
+ */
+    static function stringContainsInArray(array $array, string $needle, bool $ignoreCase = false): bool {}
+
+        /**
+ * @author inilim
+ *
+ * @param string[] $array
+ */
+    static function stringEndsWithInArray(array $array, string $needle, bool $ignoreCase = false): bool {}
+
+        /**
+ * @author inilim
+ *
+ * @param string[] $array
+ */
+    static function stringStartsWithInArray(array $array, string $needle, bool $ignoreCase = false): bool {}
 
     }

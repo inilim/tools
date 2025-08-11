@@ -67,15 +67,27 @@ __include([
     'Arr\has',
     'Arr\exists',
     'Assert\resOrStr',
+    'Check\resOrStr',
+    'Other\getSizeResource',
+    'Assert\resource',
+    'Check\resource',
+    'Data\getMimeTypeByExt',
 ]);
 
 
 $stream = \Inilim\Tool\Method\Other\tryFopen('php://temp', 'r+');
 fwrite($stream, 'Привет еб твою мать');
 fseek($stream, 0);
-
+$stream2 = \Inilim\Tool\Method\Other\tryFopen('php://temp', 'r+');
+fwrite($stream2, 'Привет еб твою мать');
+fseek($stream2, 0);
 
 $res = \Inilim\Tool\Method\Exp\multipart([
+    [
+        'name'     => 'qux2',
+        'contents' => 'какой то текст',
+        'filename' => 'custom_filename2.txt'
+    ],
     [
         'name'     => 'qux',
         'contents' => $stream,
@@ -83,7 +95,7 @@ $res = \Inilim\Tool\Method\Exp\multipart([
     ],
     [
         'name'     => 'awdwd',
-        'contents' => $stream,
+        'contents' => $stream2,
         'filename' => 'gergwge.txt'
     ],
 ]);

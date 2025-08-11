@@ -15,11 +15,11 @@ namespace Inilim\Tool\Method\Enum{function strValues($enum):bool{return \Inilim\
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
     function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){
-    function getType($v){$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}elseif($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':return 'bool';case 'integer':return 'int';default:return $r;}}
+    function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
     }if(!\Inilim\Tool\Other::__definedIfNot('isEnum')){
     function isEnum($v):bool{if(\PHP_VERSION_ID<80100){return false;}if(\is_object($v)){return $v instanceof \UnitEnum;}elseif(\is_string($v)){return \enum_exists($v);}return false;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('php81')){
-    function php81(string $message=''){if(\Inilim\Tool\Method\Check\php81()){return;}throw new \AssertionError($message?:'The current version is lower than required "8.1"');}
+    function php81(string $message=''){if(!\Inilim\Tool\Method\Check\php81()){throw new \InvalidArgumentException($message?:'The current version is lower than required "8.1"');}}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php81')){
     function php81():bool{return \PHP_VERSION_ID>=80100?true:false;}
     }}

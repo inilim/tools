@@ -14,6 +14,7 @@ class Arr
     static function _array($array, $key, ?array $default = null): array {}
 
         /**
+ * @todo to Check
  * @author Laravel
  * Determine whether the given value is array accessible.
  * @param mixed $value
@@ -122,7 +123,7 @@ class Arr
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
  */
-    static function dot(iterable $array, string $prepend = '') {}
+    static function dot(iterable $array, string $prepend = '', string $separator = '.') {}
 
         /**
  * @author inilim
@@ -733,9 +734,11 @@ class Arr
 
         /**
  * @author inilim
- * @return \Closure(object|array &$array, callable $callable):void
+ * @psalm-import-type Return_walkRecursive from \TypeArr
+ * 
+ * @return Return_walkRecursive
  */
-    static function walkRecursive() {}
+    static function walkRecursive(): Closure {}
 
         /**
  * Filter the array using the given callback. array_filter
