@@ -234,6 +234,14 @@ class Check
     static function iteratorAgg($value): bool {}
 
         /**
+ * @author Inilim
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * @param mixed $value
+ */
+    static function multiLineString($value): bool {}
+
+        /**
  * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true int<0,max> $value

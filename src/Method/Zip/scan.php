@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Zip;
 function scan($zip)
 {
     if (!\Inilim\Tool\Method\Other\extPhp('zip')) {
-        throw new \RuntimeException('ext "zip" not found');
+        throw new \RuntimeException('Ext "zip" not found');
     }
 
     if (\is_string($zip)) {
