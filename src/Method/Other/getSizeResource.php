@@ -10,7 +10,6 @@ namespace Inilim\Tool\Method\Other;
  */
 function getSizeResource($value): int
 {
-    \Inilim\Tool\Method\Assert\resource($value);
-    $size = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \fstat($value), null);
-    return \is_array($size) ? \intval($size['size'] ?? -1) : -1;
+    $size = \Inilim\Tool\Method\FS\fstat($value);
+    return $size === null ? -1 : \intval($size['size'] ?? -1);
 }

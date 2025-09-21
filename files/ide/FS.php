@@ -27,9 +27,31 @@ class FS
     static function exists(string $path): bool {}
 
         /**
+ * @author inilim
+ */
+    static function fileExists(string $filename): bool {}
+
+        /**
+ * @author inilim
+ * @see https://www.php.net/manual/ru/function.fstat.php
+ * @param resource $stream
+ */
+    static function fstat($stream): ?array {}
+
+        /**
  * Gigabytes to Bytes
  */
     static function gbToBytes(int $gb): int {}
+
+        /**
+ * @author inilim
+ */
+    static function isDir(string $filename): bool {}
+
+        /**
+ * @author inilim
+ */
+    static function isFile(string $filename): bool {}
 
         /**
  * Kilobytes to Bytes
@@ -73,5 +95,12 @@ class FS
  * Move a file to a new location.
  */
     static function move(string $path, string $target): bool {}
+
+        /**
+ * @author inilim
+ * @see https://www.php.net/manual/ru/function.stat.php
+ * @return null|array{dev: int, ino: int, mode: int, nlink: int, uid: int, gid: int, rdev: int, size: int, atime: int, mtime: int, ctime: int, blksize: int, blocks: int}
+ */
+    static function stat(string $filename): ?array {}
 
     }
