@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit>
-<groups>
-    <exclude>
-        <group>inactive</group>
-    </exclude>
-</groups>
+    <groups>
+        <exclude>
+            <group>inactive</group>
+        </exclude>
+    </groups>
+
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Method</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

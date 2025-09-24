@@ -14,6 +14,7 @@ function array_first(array $array)
     if (\Inilim\Tool\Method\Check\php85()) {
         return \array_first($array);
     }
+
     foreach ($array as $value) {
         return $value;
     }

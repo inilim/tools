@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\PF{function mb_ltrim(string $string,?string $characters=null,?string $encoding=null):string{if(\Inilim\Tool\Method\Check\php84()){return \mb_ltrim($string,$characters,$encoding);}return \Inilim\Tool\Method\PF\__mb_internal_trim('{^[%s]+}Du',$string,$characters,$encoding,'mb_ltrim');}if(!\Inilim\Tool\PF::__definedIfNot('__mb_internal_trim')){
+    function __mb_internal_trim(string $regex,string $string,?string $characters,?string $encoding,string $function):string{if(null===$encoding){$encoding=\mb_internal_encoding();}try{$validEncoding=@\mb_check_encoding('',$encoding);}catch(\ValueError $e){throw new \ValueError(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given',$function,$encoding));}if(!$validEncoding){throw new \ValueError(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given',$function,$encoding));}if(''===$characters){return null===$encoding?$string:\mb_convert_encoding($string,$encoding);}if('UTF-8'===$encoding||\in_array(\strtolower($encoding),['utf-8','utf8'],true)){$encoding='UTF-8';}$string=\mb_convert_encoding($string,'UTF-8',$encoding);if(null!==$characters){$characters=\mb_convert_encoding($characters,'UTF-8',$encoding);}if(null===$characters){$characters="\\0 \f\n\r\t\v                 　᠎";}else{$characters=\preg_quote($characters);}$string=\preg_replace(\sprintf($regex,$characters),'',$string);if('UTF-8'===$encoding){return $string;}return \mb_convert_encoding($string,$encoding,'UTF-8');}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php84')){
+    function php84():bool{return \PHP_VERSION_ID>=80400?true:false;}
+    }}

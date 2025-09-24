@@ -6,10 +6,27 @@ class PF
 {
         /**
  * @author symfony/polyfill
+ */
+    static function array_all(array $array, callable $callback): bool {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function array_any(array $array, callable $callback): bool {}
+
+        /**
+ * @author symfony/polyfill
+ * 
  * @param callable(mixed, int|string):bool $callback
  * @return mixed
  */
     static function array_find(array $array, callable $callback) {}
+
+        /**
+ * @author symfony/polyfill
+ * @return null|string|int
+ */
+    static function array_find_key(array $array, callable $callback) {}
 
         /**
  * @template T of mixed
@@ -27,6 +44,11 @@ class PF
  * @return ?T
  */
     static function array_last(array $array) {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function bcdivmod(string $num1, string $num2, ?int $scale = null): ?array {}
 
         /**
  * @author symfony/polyfill
@@ -106,10 +128,25 @@ class PF
     static function fdiv(float $dividend, float $divisor): float {}
 
         /**
+ * @author symfony/polyfill
+ */
+    static function fpow(float $num, float $exponent): float {}
+
+        /**
  * @param mixed $value
  * @return string
  */
     static function get_debug_type($value) {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function get_error_handler(): ?callable {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function get_exception_handler(): ?callable {}
 
         /**
  * @param resource $res
@@ -117,10 +154,47 @@ class PF
     static function get_resource_id($res): int {}
 
         /**
+ * @author symfony/polyfill
+ * 
+ * @return array|false
+ */
+    static function grapheme_str_split(string $string, int $length) {}
+
+        /**
  * @author Ion Bazan <ion.bazan@gmail.com>
  * @author Pierre Ambroise <pierre27.ambroise@gmail.com>
  */
     static function json_validate(string $json, int $depth = 512, int $flags = 0): bool {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_lcfirst(string $string, ?string $encoding = null): string {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_ltrim(string $string, ?string $characters = null, ?string $encoding = null): string {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_rtrim(string $string, ?string $characters = null, ?string $encoding = null): string {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_str_pad(string $string, int $length, string $pad_string = ' ', int $pad_type = \STR_PAD_RIGHT, ?string $encoding = null): string {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_trim(string $string, ?string $characters = null, ?string $encoding = null): string {}
+
+        /**
+ * @author symfony/polyfill
+ */
+    static function mb_ucfirst(string $string, ?string $encoding = null): string {}
 
         /**
  * @return string

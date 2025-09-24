@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @author laravel
+ * 
  * Take the first or last {$limit} items from an array.
  * @template TArray
  * @param TArray $array

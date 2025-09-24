@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  * @template TKey of array-key = array-key
  * @template TValue = mixed
  *
- * @param  array<TKey, TValue>|WeakMap<object, TValue>|Traversable<TKey, TValue>|JsonSerializable|object  $items
+ * @param  array<TKey, TValue>|\WeakMap<object, TValue>|\Traversable<TKey, TValue>|\JsonSerializable|object  $items
  * @return ($items is WeakMap ? list<TValue> : array<TKey, TValue>)
  *
  * @throws \InvalidArgumentException

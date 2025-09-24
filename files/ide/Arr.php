@@ -241,7 +241,7 @@ class Arr
  * @template TKey of array-key = array-key
  * @template TValue = mixed
  *
- * @param  array<TKey, TValue>|WeakMap<object, TValue>|Traversable<TKey, TValue>|JsonSerializable|object  $items
+ * @param  array<TKey, TValue>|\WeakMap<object, TValue>|\Traversable<TKey, TValue>|\JsonSerializable|object  $items
  * @return ($items is WeakMap ? list<TValue> : array<TKey, TValue>)
  *
  * @throws \InvalidArgumentException
@@ -635,6 +635,15 @@ class Arr
     static function sole(array $array, ?callable $callback = null) {}
 
         /**
+ * @author laravel
+ * 
+ * Determine if some items pass the given truth test.
+ *
+ * @param (callable(mixed, array-key): bool) $callback
+ */
+    static function some(iterable $array, callable $callback): bool {}
+
+        /**
  * @template T of (mixed[]|object)[]
  * @param T $arr
  * @return T
@@ -679,6 +688,7 @@ class Arr
 
         /**
  * @author laravel
+ * 
  * Take the first or last {$limit} items from an array.
  * @template TArray
  * @param TArray $array

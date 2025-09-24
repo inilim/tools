@@ -6,19 +6,17 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
- * 
- * @param callable(mixed, int|string):bool $callback
- * @return mixed
+ * @return null|string|int
  */
-function array_find(array $array, callable $callback)
+function array_find_key(array $array, callable $callback)
 {
     if (\Inilim\Tool\Method\Check\php84()) {
-        return \array_find($array, $callback);
+        return \array_find_key($array, $callback);
     }
 
     foreach ($array as $key => $value) {
         if ($callback($value, $key)) {
-            return $value;
+            return $key;
         }
     }
 
