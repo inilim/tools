@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Enum{function typeValues($enum){$case=\Inilim\Tool\Method\Enum\firstValue($enum);$type=\Inilim\Tool\Method\Other\getType($case);if($type==='null'){return null;}return $type;}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
+namespace Inilim\Tool\Method\Enum{function typeValues($enum):?string{$case=\Inilim\Tool\Method\Enum\firstValue($enum);$type=\Inilim\Tool\Method\Other\getType($case);if($type==='null'){return null;}return $type;}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}
     }if(!\Inilim\Tool\Enum::__definedIfNot('firstValue')){
     function firstValue($enum){$case=\Inilim\Tool\Method\Enum\head($enum);return $case -> value ?? null;}

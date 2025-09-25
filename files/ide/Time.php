@@ -5,6 +5,11 @@ namespace Inilim\Tool;
 class Time
 {
         /**
+ * @link https://php.net/manual/en/function.date.php
+ */
+    static function date(string $format, ?int $timestamp = null): ?string {}
+
+        /**
  * Format a local time/date
  * analog date('pattern');
  * @link https://php.net/manual/en/function.date.php

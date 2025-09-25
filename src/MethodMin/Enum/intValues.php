@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Enum{function intValues($enum):bool{return \Inilim\
     }if(!\Inilim\Tool\Enum::__definedIfNot('head')){
     function head($enum){return \Inilim\Tool\Method\Arr\head(\Inilim\Tool\Method\Enum\cases($enum));}
     }if(!\Inilim\Tool\Enum::__definedIfNot('typeValues')){
-    function typeValues($enum){$case=\Inilim\Tool\Method\Enum\firstValue($enum);$type=\Inilim\Tool\Method\Other\getType($case);if($type==='null'){return null;}return $type;}
+    function typeValues($enum):?string{$case=\Inilim\Tool\Method\Enum\firstValue($enum);$type=\Inilim\Tool\Method\Other\getType($case);if($type==='null'){return null;}return $type;}
     }}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('head')){
     function head(iterable $array,?callable $callback=null,$default=null){if($callback===null){if(empty($array)){return \Inilim\Tool\Method\Arr\value($default);}foreach($array as $item){return $item;}return \Inilim\Tool\Method\Arr\value($default);}foreach($array as $key=>$value){if($callback($value,$key)){return $value;}}return \Inilim\Tool\Method\Arr\value($default);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){

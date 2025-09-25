@@ -138,7 +138,7 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]
  */
-    static function names($enum) {}
+    static function names($enum): array {}
 
         /**
  * @author Inilim
@@ -153,7 +153,7 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]|array<string,string|int>
  */
-    static function options($enum) {}
+    static function options($enum): array {}
 
         /**
  * @author Inilim
@@ -185,7 +185,7 @@ class Enum
  * @param class-string<T>|T $enum
  * @return null|('int'|'string')
  */
-    static function typeValues($enum) {}
+    static function typeValues($enum): ?string {}
 
         /**
  * @author Inilim
@@ -193,6 +193,6 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]|int[]
  */
-    static function values($enum) {}
+    static function values($enum): array {}
 
     }

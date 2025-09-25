@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Enum;
  * @param class-string<T>|T $enum
  * @return null|('int'|'string')
  */
-function typeValues($enum)
+function typeValues($enum): ?string
 {
     $case = \Inilim\Tool\Method\Enum\firstValue($enum);
     $type = \Inilim\Tool\Method\Other\getType($case);

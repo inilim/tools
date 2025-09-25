@@ -7,25 +7,22 @@ class ID
         /**
  * uniqid(more_entropy:true)
  * @see https://www.php.net/manual/ru/function.uniqid.php
- * @return string
  */
-    static function uniqEntropy(string $prefix = '') {}
+    static function uniqEntropy(string $prefix = ''): string {}
 
         /**
- * @return string
  */
-    static function uuidFromHex(string $uhex, int $version) {}
+    static function uuidFromHex(string $uhex, int $version): string {}
 
         /**
  * @return array{0:string,1:string,2:string,3:string,4:string}|null
  */
-    static function uuidSplit(string $uuid) {}
+    static function uuidSplit(string $uuid): ?array {}
 
         /**
- * @return string
  * @throws \InvalidArgumentException
  */
-    static function uuidToBytes(string $uuid) {}
+    static function uuidToBytes(string $uuid): string {}
 
         
     static function uuidv4(): string {}

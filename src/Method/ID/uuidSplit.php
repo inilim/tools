@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\ID;
 /**
  * @return array{0:string,1:string,2:string,3:string,4:string}|null
  */
-function uuidSplit(string $uuid)
+function uuidSplit(string $uuid): ?array
 {
     if (\preg_match('/^(?:urn:)?(?:uuid:)?(\{)?([0-9a-f]{8})\-?([0-9a-f]{4})'
         . '\-?([0-9a-f]{4})\-?([0-9a-f]{4})\-?([0-9a-f]{12})(?(1)\}|)$/i', $uuid, $m) !== 1) {

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\ID;
 
 /**
- * @return string
  * @throws \InvalidArgumentException
  */
-function uuidToBytes(string $uuid)
+function uuidToBytes(string $uuid): string
 {
     $spl = \Inilim\Tool\Method\ID\uuidSplit($uuid);
     if ($spl === null) {

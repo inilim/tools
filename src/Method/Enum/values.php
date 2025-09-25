@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Enum;
  * @param class-string<T>|T $enum
  * @return string[]|int[]
  */
-function values($enum)
+function values($enum): array
 {
     return \array_column(\Inilim\Tool\Method\Enum\cases($enum), 'value');
 }

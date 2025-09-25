@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\ID;
 
 /**
- * @return string
  */
-function uuidFromHex(string $uhex, int $version)
+function uuidFromHex(string $uhex, int $version): string
 {
     return \sprintf(
         '%08s-%04s-%04x-%04x-%12s',
