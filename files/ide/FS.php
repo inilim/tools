@@ -31,6 +31,14 @@ class FS
  */
     static function fileExists(string $filename): bool {}
 
+        
+    static function fileModeOctal(string $filename): ?string {}
+
+        /**
+ * @link https://php.net/manual/en/function.fileperms.php
+ */
+    static function filePerms(string $filename): ?int {}
+
         /**
  * @author inilim
  * @see https://www.php.net/manual/ru/function.fstat.php

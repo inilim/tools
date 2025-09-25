@@ -26,6 +26,13 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
+$byte = \substr('п', 1, 1);
+
+// dde(ord('п'));
+dde(mb_ord($byte));
+
+
+de();
 
 __include('PF\mb_str_pad');
 __include('Check\php83');
