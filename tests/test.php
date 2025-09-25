@@ -26,10 +26,15 @@ use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 
-$byte = \substr('п', 1, 1);
+__include('Other\convertStrTerminalColor');
+__include('Other\colorHexToRgb');
+__include('Other\colorHexToAnsi');
 
-// dde(ord('п'));
-dde(mb_ord($byte));
+
+
+
+
+echo \Inilim\Tool\Method\Other\convertStrTerminalColor('Привет', '#4d6bfe', '#fe4dd6');
 
 
 de();

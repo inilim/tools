@@ -31,6 +31,31 @@ class Other
     static function clearClosure(\Closure $cls) {}
 
         /**
+ */
+    static function colorHexToAnsi(string $hex): int {}
+
+        /**
+ * @author google/ai
+ * @todo add assert len $hex 3 or 6
+ *
+ * @return array{red:int,green:int,blue:int}
+ */
+    static function colorHexToRgb(string $hex): array {}
+
+        /**
+ */
+    static function colorRgbToHex(int $red, int $green, int $blue, bool $withGrid = false): string {}
+
+        /**
+ * @author inilim
+ *
+ * @param string $colorHexText
+ * @param string|null $colorHexBackground
+ * @param 'bold'|'un_bold'|'dim'|'un_dim'|'underlined'|'un_underlined'|'blink'|'un_blink'|'reverse'|'un_reverse'|'hidden'|'un_hidden'|null $style
+ */
+    static function colorStrCli(string $text, string $colorHexText, ?string $colorHexBackground = null, ?string $style = null): string {}
+
+        /**
  * @author nette/utils
  * Compares two values in the same way that PHP does. Recognizes operators: >, >=, <, <=, =, ==, ===, !=, !==, <>
  * @param mixed $left
