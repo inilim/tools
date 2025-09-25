@@ -15,13 +15,13 @@ function __mb_internal_trim(string $regex, string $string, ?string $characters, 
 
     try {
         $validEncoding = @\mb_check_encoding('', $encoding);
-    } catch (\ValueError $e) {
-        throw new \ValueError(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given', $function, $encoding));
+    } catch (\Error $e) {
+        throw new \Error(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given', $function, $encoding));
     }
 
     // BC for PHP 7.3 and lower
     if (!$validEncoding) {
-        throw new \ValueError(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given', $function, $encoding));
+        throw new \Error(\sprintf('PF::%s(): Argument #3 ($encoding) must be a valid encoding, "%s" given', $function, $encoding));
     }
 
     if ('' === $characters) {

@@ -204,8 +204,20 @@ class PF
         
     static function str_contains(string $haystack, string $needle): bool {}
 
+        /**
+ * @author Ion Bazan <ion.bazan@gmail.com>
+ * @author Pierre Ambroise <pierre27.ambroise@gmail.com>
+ */
+    static function str_decrement(string $string): string {}
+
         
     static function str_ends_with(string $haystack, string $needle): bool {}
+
+        /**
+ * @author Ion Bazan <ion.bazan@gmail.com>
+ * @author Pierre Ambroise <pierre27.ambroise@gmail.com>
+ */
+    static function str_increment(string $string): string {}
 
         
     static function str_starts_with(string $haystack, string $needle): bool {}

@@ -25,6 +25,23 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
+
+
+__include('PF\mb_str_pad');
+__include('Check\php83');
+
+
+
+\Inilim\Tool\Method\PF\mb_str_pad(...['Hello', 7, '+-', \STR_PAD_BOTH]);
+
+
+
+
+
+
+
+de();
+
 __include('Str\limit');
 __include('Str\toCharsGenerator');
 __include('Str\characterTextSplitter_v0');

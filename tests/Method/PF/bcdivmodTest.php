@@ -46,7 +46,7 @@ class bcdivmodTest extends \Inilim\Tool\Test\TestCase
      */
     function testBcDivModMalformedNumber()
     {
-        $this->expectException(\ValueError::class);
+        $this->expectException(\Error::class);
         $this->expectExceptionMessage('Argument #1 ($num1) is not well-formed');
 
         PF::bcdivmod('a', '1');
@@ -58,7 +58,7 @@ class bcdivmodTest extends \Inilim\Tool\Test\TestCase
      */
     function testBcDivModMalformedNumber2()
     {
-        $this->expectException(\ValueError::class);
+        $this->expectException(\Error::class);
         $this->expectExceptionMessage('Argument #2 ($num2) is not well-formed');
 
         PF::bcdivmod('1', 'a');

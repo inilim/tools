@@ -11,7 +11,7 @@ class mb_trimTest extends \Inilim\Tool\Test\TestCase
 {
     function testMbTrimException()
     {
-        $this->expectException(\ValueError::class);
+        $this->expectException(\Error::class);
         PF::mb_trim("\u{180F}", '', 'NULL');
     }
 

@@ -1,0 +1,80 @@
+<?php
+
+namespace Inilim\Tool\Test\Method\PF;
+
+use Inilim\Tool\PF;
+use Inilim\Tool\VD;
+
+/**
+ */
+class json_validateTest extends \Inilim\Tool\Test\TestCase
+{
+    /**
+     * @dataProvider jsonDataProvider
+     */
+    function testJsonValidate(bool $valid, string $json, string $errorMessage = 'No error', int $depth = 512, int $options = 0)
+    {
+        $this->assertSame($valid, PF::json_validate($json, $depth, $options));
+        $this->assertSame($errorMessage, \json_last_error_msg());
+    }
+
+    /**
+     * @dataProvider jsonInvalidOptionsProvider
+     */
+    function testJsonValidateInvalidOptionsProvided(int $depth, int $flags, string $expectedError)
+    {
+        $this->expectException(\Error::class);
+        $this->expectExceptionMessage($expectedError);
+        PF::json_validate('{}', $depth, $flags);
+    }
+
+    /**
+     * @return iterable<array{0: int, 1: int, 2: string}>
+     */
+    static function jsonInvalidOptionsProvider(): iterable
+    {
+        yield [0, 0, 'PF::json_validate(): Argument #2 ($depth) must be greater than 0'];
+        if (\PHP_INT_MAX > 2147483647) {
+            yield [\PHP_INT_MAX, 0, 'PF::json_validate(): Argument #2 ($depth) must be less than 2147483647'];
+        }
+        if (\defined('JSON_INVALID_UTF8_IGNORE')) {
+            yield [
+                512,
+                \JSON_BIGINT_AS_STRING,
+                'PF::json_validate(): Argument #3 ($flags) must be a valid flag (allowed flags: JSON_INVALID_UTF8_IGNORE)',
+            ];
+        }
+    }
+
+    /**
+     * @return iterable<array{0: bool, 1: string, 2?: string, 3?: int, 4?: int}>
+     */
+    static function jsonDataProvider(): iterable
+    {
+        yield [false, '', 'Syntax error'];
+        yield [false, '.', 'Syntax error'];
+        yield [false, '<?>', 'Syntax error'];
+        yield [false, ';', 'Syntax error'];
+        yield [false, 'руссиш', 'Syntax error'];
+        yield [false, 'blah', 'Syntax error'];
+        yield [false, '{ "": "": "" } }', 'Syntax error'];
+        yield [false, '{ "test": {} "foo": "bar" }, "test2": {"foo" : "bar" }, "test2": {"foo" : "bar" } }', 'Syntax error'];
+        yield [true, '{ "test": { "foo": "bar" } }'];
+        yield [true, '{ "test": { "foo": "" } }'];
+        yield [true, '{ "": { "foo": "" } }'];
+        yield [true, '{ "": { "": "" } }'];
+        yield [true, '{ "test": {"foo": "bar"}, "test2": {"foo" : "bar" }, "test2": {"foo" : "bar" } }'];
+        yield [true, '{ "test": {"foo": "bar"}, "test2": {"foo" : "bar" }, "test3": {"foo" : "bar" } }'];
+        yield [true, '{ "\u0000null": "test" }'];
+        yield [false, '{"key1":"value1", "key2":"value2"}', 'Maximum stack depth exceeded', 1];
+        yield [false, "\"a\xb0b\"", 'Malformed UTF-8 characters, possibly incorrectly encoded'];
+        yield [true, '{ "test": { "foo": "bar" } }', 'No error', 2147483647];
+
+        if (\defined('JSON_INVALID_UTF8_IGNORE')) {
+            yield [true, "\"a\xb0b\"", 'No error', 512, \JSON_INVALID_UTF8_IGNORE];
+        } else {
+            // The $options should not be validated when JSON_INVALID_UTF8_IGNORE is not defined (PHP 7.1)
+            yield [true, '{}', 'No error', 512, 1];
+        }
+    }
+}

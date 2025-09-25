@@ -19,13 +19,13 @@ function mb_ucfirst(string $string, ?string $encoding = null): string
 
     try {
         $validEncoding = @\mb_check_encoding('', $encoding);
-    } catch (\ValueError $e) {
-        throw new \ValueError(\sprintf('PF::mb_ucfirst(): Argument #2 ($encoding) must be a valid encoding, "%s" given', $encoding));
+    } catch (\Error $e) {
+        throw new \Error(\sprintf('PF::mb_ucfirst(): Argument #2 ($encoding) must be a valid encoding, "%s" given', $encoding));
     }
 
     // BC for PHP 7.3 and lower
     if (!$validEncoding) {
-        throw new \ValueError(\sprintf('PF::mb_ucfirst(): Argument #2 ($encoding) must be a valid encoding, "%s" given', $encoding));
+        throw new \Error(\sprintf('PF::mb_ucfirst(): Argument #2 ($encoding) must be a valid encoding, "%s" given', $encoding));
     }
 
     $firstChar = \mb_substr($string, 0, 1, $encoding);

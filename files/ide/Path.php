@@ -60,4 +60,10 @@ class Path
  */
     static function normalizePath(string $path): string {}
 
+        /**
+ * @todo tests
+ * @author inilim
+ */
+    static function realPath(string $path): ?string {}
+
     }

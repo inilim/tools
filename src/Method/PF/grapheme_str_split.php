@@ -16,7 +16,7 @@ function grapheme_str_split(string $string, int $length)
     }
 
     if (0 > $length || 1073741823 < $length) {
-        throw new \ValueError('PF::grapheme_str_split(): Argument #2 ($length) must be greater than 0 and less than or equal to 1073741823.');
+        throw new \Error('PF::grapheme_str_split(): Argument #2 ($length) must be greater than 0 and less than or equal to 1073741823.');
     }
 
     if ('' === $string) {
