@@ -13,6 +13,8 @@ namespace Inilim\Tool\Method\Xml;
  */
 function domToArray(object $el)
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+
     $results = [];
 
     $fn = static function (object $el) use (&$fn) {

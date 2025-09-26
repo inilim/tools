@@ -84,6 +84,19 @@ class Other
 
         /**
  * @author inilim
+ * is not php function \error_clear_last()
+ */
+    static function errorClearLast(): void {}
+
+        /**
+ * @author inilim
+ * is not php function \error_get_last()
+ * @return null|array{type:int,message:string,file:string,line:int}
+ */
+    static function errorGetLast(): ?array {}
+
+        /**
+ * @author inilim
  */
     static function extPhp(string $ext, bool $rechecking = false): bool {}
 
@@ -240,6 +253,20 @@ class Other
  * @return string
  */
     static function requestMethod() {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ * @param resource $resource
+ */
+    static function resourceContentWriteToFile($resource, string $pathToFile): ?string {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ * @param resource $resource
+ */
+    static function resourceContentWriteToTmpFile($resource): ?string {}
 
         /**
  * @author inilim

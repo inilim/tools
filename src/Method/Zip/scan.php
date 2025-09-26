@@ -1,50 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Zip;
 
 /**
  * @todo tests
  * @param string|\ZipArchive $zip path to file-zip OR ZipArchive object
  * @throws \Exception
- * @throws \RuntimeException
+ * @throws \InvalidArgumentException
  * @return list<array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}>
  */
-function scan($zip)
+function scan($zip): array
 {
-    if (!\Inilim\Tool\Method\Other\extPhp('zip')) {
-        throw new \RuntimeException('Ext "zip" not found');
-    }
-
-    if (\is_string($zip)) {
-        $rp = \realpath($zip);
-        if (!$rp) {
-            throw new \Exception(\sprintf(
-                'File "%s", not found',
-                $zip
-            ));
-        }
-        $rp     = \Inilim\Tool\Method\Path\normalize($rp);
-        $zip    = new \ZipArchive;
-        $status = $zip->open($rp, \ZipArchive::RDONLY);
-        if ($status !== true) {
-            throw new \Exception(\sprintf(
-                'File "%s", not open. Code: %s',
-                $rp,
-                $status === false ? 'false' : $status
-            ));
-        }
-    } elseif ($zip->filename === '') {
-        throw new \Exception('Uninitialized zip');
-    }
-
-    $result = [];
-    for ($i = 0; $i < $zip->numFiles; $i++) {
-        $ri = $zip->statIndex($i);
-        if ($ri === false) {
-            continue;
-        }
-        $result[] = $ri;
-    }
-
-    return $result;
+    return \iterator_to_array(\Inilim\Tool\Method\Zip\scanAsGenerator($zip), false);
 }

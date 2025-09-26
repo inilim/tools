@@ -91,6 +91,14 @@ class Assert
     static function enumCase($value, string $message = '') {}
 
         /**
+ * @author Inilim
+ * 
+ * @return void
+ * @throws \InvalidArgumentException
+ */
+    static function extPhp(string $nameExt, string $message = '') {}
+
+        /**
  * @author webmozarts/assert
  * @psalm-assert string $value
  * @phpstan-assert string $value

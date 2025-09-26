@@ -105,6 +105,11 @@ class FS
     static function move(string $path, string $target): bool {}
 
         /**
+ * @return string[]|null
+ */
+    static function phpGlob(string $pattern, int $flags = 0): ?array {}
+
+        /**
  * @author inilim
  * @see https://www.php.net/manual/ru/function.stat.php
  * @return null|array{dev: int, ino: int, mode: int, nlink: int, uid: int, gid: int, rdev: int, size: int, atime: int, mtime: int, ctime: int, blksize: int, blocks: int}

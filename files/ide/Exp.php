@@ -14,6 +14,15 @@ class Exp
     static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
 
         /**
+ * @author inilim
+ * @todo tests
+ * @ext dom zip
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @return null|(array{name:null|string,sheetId:null|string,id:null|string})[]
+ */
+    static function excelGetSheetNames($pathToFileOrZip): ?array {}
+
+        /**
  * @author stevebauman <https://github.com/stevebauman>
  * Extract values from the haystack using the given template pattern.
  * @return array<string,string>
