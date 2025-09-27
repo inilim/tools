@@ -126,3 +126,17 @@ class TypeStr {}
  * 
  */
 class TypePath {}
+
+
+/**
+ * 
+ * -------------- [IMPORTS] -------------- 
+ * @example psalm-import-type NameType from \TypeZip as NewNameType
+ * 
+ * -------------- [Define] -------------- 
+ * @example psalm-type NameType = string
+ * 
+ * @psalm-type ZipStatItem = array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}
+ * 
+ */
+class TypeZip {}

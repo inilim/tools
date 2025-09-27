@@ -5,27 +5,17 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
+ * @psalm-import-type ZipStatItem from \TypeZip
  * @todo tests
- * @param string|\ZipArchive $zip path to file-zip OR ZipArchive object
- * @throws \Exception
+ * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
+ * @return \Generator<int,ZipStatItem>
  * @throws \InvalidArgumentException
- * @return \Generator<int,array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}>
  */
-function scanAsGenerator($zip): \Generator
+function scanAsGenerator($pathToFileOrZip): \Generator
 {
     \Inilim\Tool\Method\Assert\extPhp('zip');
 
-    if (\is_string($zip)) {
-        $zip = \Inilim\Tool\Method\Zip\open($zip, \ZipArchive::RDONLY);
-        if (!$zip) {
-            throw new \Exception(\sprintf(
-                'File "%s", not open',
-                $zip,
-            ));
-        }
-    } elseif ($zip->filename === '') {
-        throw new \Exception('Uninitialized zip');
-    }
+    $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
 
     for ($i = 0; $i < $zip->numFiles; $i++) {
         $ri = $zip->statIndex($i);

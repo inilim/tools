@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Zip;
 
+/**
+ */
 function open(string $filename, int $flags = 0): ?\ZipArchive
 {
     \Inilim\Tool\Method\Assert\extPhp('zip');

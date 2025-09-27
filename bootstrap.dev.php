@@ -8,6 +8,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Inilim\Dump\Dump;
+use Inilim\IPDO\IPDOSQLite;
 
 Dump::init();
 
@@ -59,6 +60,52 @@ if (!\function_exists('__include')) {
             }
 
             require_once $pathToFile;
+        }
+    }
+}
+
+if (!\function_exists('__includeDeep')) {
+    /**
+     * @param string|string[] $names example "Other::getClassContextFromClosure"
+     * @return void
+     * TODO add ...$name
+     */
+    function __includeDeep($names)
+    {
+        if (\is_string($names)) {
+            $names = [$names];
+        }
+
+        if (!$names) {
+            return;
+        }
+
+        $connect = new IPDOSQLite(__DIR__ . '/files/build_dev.sqlite');
+        $connect->connect();
+
+        foreach ($names as $name) {
+            [$class, $func] = \preg_split('#(::)|(\\\\)#', $name);
+
+
+            $id = $connect->exec('SELECT id FROM methods WHERE namespace LIKE "%" || {class} AND name = {func}', [
+                'class' => $class,
+                'func' => $func,
+            ], 1)['id'];
+            /** @var int $id */
+
+            $files = $connect->exec(
+                'SELECT m.path_to_file FROM groups as g
+                JOIN methods as m
+                ON m.id = g.method_id
+                WHERE g.id = {id}',
+                ['id' => $id],
+                2
+            );
+            $files = \array_column($files, 'path_to_file');
+
+            foreach ($files as $file) {
+                require_once $file;
+            }
         }
     }
 }

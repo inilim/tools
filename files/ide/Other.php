@@ -193,6 +193,12 @@ class Other
 
         /**
  * @author inilim
+ * as iterator_to_array, but, without forming an array
+ */
+    static function iteratorToDevNull(\Traversable $iterator): void {}
+
+        /**
+ * @author inilim
  * @template T of object
  * @param T|class-string<T> $scope
  * @param string $method

@@ -14,13 +14,36 @@ class Exp
     static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
 
         /**
+ * @author deepseek
+ * 
+ * @return \Generator<int,string>
+ */
+    static function excelGenerateCellRange(string $range): Generator {}
+
+        /**
  * @author inilim
  * @todo tests
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|(array{name:null|string,sheetId:null|string,id:null|string})[]
+ * @return null|(array{name:null|string,sheetId:null|string,state:null|string,id:null|string})[]
  */
     static function excelGetSheetNames($pathToFileOrZip): ?array {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @ext dom zip
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @return null|array{generator:\Generator<int,array<string,bool|string|int>>,info:array{}}
+ */
+    static function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, int $offset = 0) {}
+
+        /**
+ * @ext zip dom
+ * @param string|\ZipArchive $pathToFileOrZip
+ */
+    static function excelRemoveTmpFiles($pathToFileOrZip): int {}
 
         /**
  * @author stevebauman <https://github.com/stevebauman>
