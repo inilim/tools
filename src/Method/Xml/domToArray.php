@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Xml;
  * @param \DOMNodeList|\DOMNode|\DOMNameSpaceNode $el
  * @return ItemNodeNS[]|ItemNode[]
  */
-function domToArray(object $el)
+function domToArray(object $el): array
 {
     \Inilim\Tool\Method\Assert\extPhp('dom');
 

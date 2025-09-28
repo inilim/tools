@@ -11,6 +11,8 @@ namespace Inilim\Tool\Method\Xml;
  */
 function createElFromStr(string $string, string $encoding = 'UTF-8')
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+
     $doc  = new \DOMDocument('1.0', $encoding);
     $root = @$doc->createElement('root');
     if ($root === false) {

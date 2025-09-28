@@ -23,11 +23,24 @@ class Exp
         /**
  * @author inilim
  * @todo tests
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @ext zip dom
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @param string $id id find from Exp::excelGetSheetsInfo()
+ * @return null|resource
+ */
+    static function excelGetResourceSheetById($pathToFileOrZip, string $id) {}
+
+        /**
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
+ * @author inilim
+ * @todo tests
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|(array{name:null|string,sheetId:null|string,state:null|string,id:null|string})[]
+ * @return null|Param_1_excelGetSheetsInfo[]
  */
-    static function excelGetSheetNames($pathToFileOrZip): ?array {}
+    static function excelGetSheetsInfo($pathToFileOrZip): ?array {}
 
         /**
  * @author inilim

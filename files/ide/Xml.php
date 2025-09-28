@@ -10,7 +10,7 @@ class Xml
  * @return ?\DOMNode
  * @throws \DOMException
  */
-    static function appendChild(\DOMNode $what, \DOMNode $where, bool $throw = false) {}
+    static function appendChild(object $what, object $where, bool $throw = false): ?object {}
 
         /**
  * @return \DOMElement
@@ -25,19 +25,39 @@ class Xml
  * @param \DOMNodeList|\DOMNode|\DOMNameSpaceNode $el
  * @return ItemNodeNS[]|ItemNode[]
  */
-    static function domToArray(object $el) {}
-
-        
-    static function removeNode(\DOMNode $node): bool {}
+    static function domToArray(object $el): array {}
 
         /**
- * @return ?string
+ * @link https://php.net/manual/en/domdocument.load.php
+ * @return null|\DOMDocument
  */
-    static function toHtml(\DOMNode $node) {}
+    static function loadFile(string $filename, int $options = 0): ?object {}
 
         /**
+ * @param \DOMNode $node
+ */
+    static function removeNode(object $node): bool {}
+
+        /**
+ * @param \DOMNode $node
+ */
+    static function toHtml(object $node): ?string {}
+
+        /**
+ * @param \DOMNode $node
  * @return ?string
  */
-    static function toXml(\DOMNode $node, int $options = 0) {}
+    static function toXml(object $node, int $options = 0) {}
+
+        /**
+ * @psalm-import-type Param_1_xpathQueryFromDoc from \TypeXml
+ * @link https://php.net/manual/en/domxpath.query.php
+ * @author inilim
+ * @todo tests
+ * @param \DOMDocument $doc
+ * @param ?\DOMNode $contextNode
+ * @return null|Param_1_xpathQueryFromDoc
+ */
+    static function xpathQueryFromDoc(object $doc, string $expression, ?object $contextNode = null, bool $registerNodeNS = true): ?array {}
 
     }

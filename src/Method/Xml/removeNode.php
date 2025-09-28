@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Xml;
 
-function removeNode(\DOMNode $node): bool
+/**
+ * @param \DOMNode $node
+ */
+function removeNode(object $node): bool
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+    \Inilim\Tool\Method\Assert\isInstanceOf($node, \DOMNode::class);
     if (!$node->ownerDocument) {
         return false;
     }

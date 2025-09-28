@@ -2,26 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Zip{function findByNameFile($pathToFileOrZip,string $fileName,bool $partialMatch=false,bool $ignoreCase=false):array{$needle=\Inilim\Tool\Method\Path\normalize($fileName);$predicate=static function($fileItem)use($needle,$partialMatch,$ignoreCase){$nameItem=\Inilim\Tool\Method\Path\normalize($fileItem['name']);if($partialMatch){return \Inilim\Tool\Method\Str\contains($nameItem,$needle,$ignoreCase);}else{if($ignoreCase){return \Inilim\Tool\Method\Str\casecmp($needle,$nameItem,'UTF-8')===0;}return $needle===$nameItem;}};return \iterator_to_array(\Inilim\Tool\Method\Zip\findByFilterAsGenerator($pathToFileOrZip,$predicate),false);}if(!\Inilim\Tool\Zip::__definedIfNot('findByFilterAsGenerator')){
-    function findByFilterAsGenerator($pathToFileOrZip,callable $predicate,$valueBreak=null):\Generator{foreach(\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip)as $fileItem){$v=$predicate($fileItem);if($v===$valueBreak){return;}if($v){yield $fileItem;}}}
-    }if(!\Inilim\Tool\Zip::__definedIfNot('getObjFrom')){
+namespace Inilim\Tool\Method\Zip{function findFirstByCallable($pathToFileOrZip,callable $predicate):?array{foreach(\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip)as $stat){if($predicate($stat)===true){return $stat;}}return null;}if(!\Inilim\Tool\Zip::__definedIfNot('getObjFrom')){
     function getObjFrom($pathToFileOrZip):\ZipArchive{\Inilim\Tool\Method\Assert\extPhp('zip');$type=\Inilim\Tool\Method\Other\getType($pathToFileOrZip);if($type==='string'){$zip=\Inilim\Tool\Method\Zip\open($pathToFileOrZip);if(!$zip){throw new \InvalidArgumentException(\sprintf('File "%s", not open',$pathToFileOrZip));}}elseif($type==='object'){if(!$pathToFileOrZip instanceof \ZipArchive){throw new \InvalidArgumentException(\sprintf('Expected $pathToFileOrZip a string or \ZipArchive. Got: %s',\get_class($pathToFileOrZip)));}$zip=$pathToFileOrZip;if($zip -> filename===''){throw new \InvalidArgumentException('Uninitialized zip');}}else{throw new \InvalidArgumentException(\sprintf('Expected $pathToFileOrZip a string or \ZipArchive. Got: %s',$type));}return $zip;}
     }if(!\Inilim\Tool\Zip::__definedIfNot('open')){
     function open(string $filename,int $flags=0):?\ZipArchive{\Inilim\Tool\Method\Assert\extPhp('zip');$_filename=\Inilim\Tool\Method\Path\realPath($filename);if(!$_filename){\Inilim\Tool\Method\Other\__setErrorLast(-1,'file not found',$filename,-1);return null;}$_filename=\Inilim\Tool\Method\Path\normalize($_filename);$zip=new \ZipArchive();$status=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>$zip -> open($_filename,$flags),null);if($status!==true){if(\is_int($status)){$errors=[\ZipArchive :: ER_EXISTS=>'File already exists',\ZipArchive :: ER_INCONS=>'Zip archive inconsistent',\ZipArchive :: ER_INVAL=>'Invalid argument',\ZipArchive :: ER_MEMORY=>'Memory allocation failure',\ZipArchive :: ER_NOENT=>'No such file',\ZipArchive :: ER_NOZIP=>'Not a zip archive',\ZipArchive :: ER_OPEN=>'Can\'t open file',\ZipArchive :: ER_READ=>'Read error',\ZipArchive :: ER_SEEK=>'Seek error'];\Inilim\Tool\Method\Other\__setErrorLast(-1,$errors[$status]?? 'zip open failed',$filename,-1);}else{\Inilim\Tool\Method\Other\__setErrorLast(-1,'zip open failed',$filename,-1);}return null;}return $zip;}
     }if(!\Inilim\Tool\Zip::__definedIfNot('scanAsGenerator')){
-    function scanAsGenerator($pathToFileOrZip):\Generator{\Inilim\Tool\Method\Assert\extPhp('zip');$zip=\Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);for($i=0;$i<$zip -> numFiles;$i++){$ri=$zip -> statIndex($i);if($ri===false){continue;}yield $ri;}}
+    function scanAsGenerator($pathToFileOrZip):\Generator{$zip=\Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);for($i=0;$i<$zip -> numFiles;$i++){$ri=$zip -> statIndex($i,\ZipArchive :: FL_UNCHANGED);if($ri===false){continue;}yield $ri;}}
     }}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
     function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
-    }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('casecmp')){
-    function casecmp(string $str1,string $str2,string $encoding='UTF-8'):int{return \strcmp(\mb_strtoupper($str1,$encoding),\mb_strtoupper($str2,$encoding));}
-    }if(!\Inilim\Tool\Str::__definedIfNot('contains')){
-    function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iContainsOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}}return false;}
-    }if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
+    }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('iContainsOnce')){
-    function iContainsOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')!==false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
     function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('ucfirst')){
@@ -40,8 +32,4 @@ namespace Inilim\Tool\Method\Zip{function findByNameFile($pathToFileOrZip,string
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
-    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
-    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
-    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){
-    function str_contains(string $haystack,string $needle):bool{if(\Inilim\Tool\Method\Check\php80()){return \str_contains($haystack,$needle);}return ''===$needle||false!==\strpos($haystack,$needle);}
     }}

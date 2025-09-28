@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
+ * \ZipArchive::open()
+ * @see https://www.php.net/manual/en/ziparchive.open.php
  */
 function open(string $filename, int $flags = 0): ?\ZipArchive
 {
@@ -22,7 +24,10 @@ function open(string $filename, int $flags = 0): ?\ZipArchive
     }
     $_filename = \Inilim\Tool\Method\Path\normalize($_filename);
     $zip = new \ZipArchive;
-    $status = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => $zip->open($_filename, $flags), null);
+    $status = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
+        static fn() => $zip->open($_filename, $flags),
+        null
+    );
     if ($status !== true) {
         if (\is_int($status)) {
             $errors = [

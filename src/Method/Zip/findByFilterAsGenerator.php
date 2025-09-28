@@ -18,7 +18,7 @@ function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBr
     foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $fileItem) {
         $v = $predicate($fileItem);
         if ($v === $valueBreak) return;
-        if ($v) {
+        if ($v === true) {
             yield $fileItem;
         }
     }

@@ -99,6 +99,10 @@ class TypeObj {}
  * @psalm-type Param_1_multipart = array<array{contents:resource|string,name:string,headers?:string[]|array<string,string>,filename?:string}>
  * @psalm-type Param_2_multipart = array{boundary?:string}
  * 
+ * 
+ * ----- excelGetSheetsInfo
+ * @psalm-type Param_1_excelGetSheetsInfo = array{id:?string,name:?string,state:?string}
+ * 
  */
 class TypeExp {}
 
@@ -140,3 +144,17 @@ class TypePath {}
  * 
  */
 class TypeZip {}
+
+/**
+ * 
+ * -------------- [IMPORTS] -------------- 
+ * @example psalm-import-type NameType from \TypeXml as NewNameType
+ * 
+ * -------------- [Define] -------------- 
+ * @example psalm-type NameType = string
+ * 
+ * ----- xpathQueryFromDoc
+ * @psalm-type Param_1_xpathQueryFromDoc = array{doc:\DOMDocument,xpath:\DOMXpath,list:\DOMNodeList}
+ * 
+ */
+class TypeXml {}

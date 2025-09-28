@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Xml{function xpathQueryFromDoc(object $doc,string $expression,?object $contextNode=null,bool $registerNodeNS=true):?array{\Inilim\Tool\Method\Assert\extPhp('dom');\Inilim\Tool\Method\Assert\isInstanceOf($doc,\DOMDocument :: class);if($contextNode){\Inilim\Tool\Method\Assert\isInstanceOf($contextNode,\DOMNode :: class);}return \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($doc,$expression,$contextNode,$registerNodeNS){$xpath=new \DOMXpath($doc);$list=$xpath -> query($expression,$contextNode,$registerNodeNS);if(\is_bool($list)){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('DOMXpath::query("%s") failed',$expression),'',-1);return null;}return['doc'=>$doc,'xpath'=>$xpath,'list'=>$list];},null);}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ?? new class{var?array $error=null;};}
+    }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
+    function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
+    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('isInstanceOf')){
+    function isInstanceOf($value,$class,string $message=''){if(!$value instanceof $class){throw new \InvalidArgumentException(\sprintf($message?:'Expected an instance of %2$s. Got: %s',\Inilim\Tool\Method\Other\getType($value),$class));}}
+    }}

@@ -10,8 +10,12 @@ namespace Inilim\Tool\Method\Xml;
  * @return ?\DOMNode
  * @throws \DOMException
  */
-function appendChild(\DOMNode $what, \DOMNode $where, bool $throw = false)
+function appendChild(object $what, object $where, bool $throw = false): ?object
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+    \Inilim\Tool\Method\Assert\isInstanceOf($what, \DOMNode::class);
+    \Inilim\Tool\Method\Assert\isInstanceOf($where, \DOMNode::class);
+
     $doc = $where->ownerDocument;
     if ($doc === null) {
         if ($throw) {

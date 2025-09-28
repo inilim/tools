@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Zip{function getResourceByIdx(\ZipArchive $zip,int $idx){return \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($zip,$idx){if(\Inilim\Tool\Method\Check\php80()){$resource=$zip -> getStreamIndex($idx,\ZipArchive :: FL_UNCHANGED);}else{$stat=$zip -> statIndex($idx);if($stat===false){return null;}$resource=$zip -> getStream($stat['name']);}if($resource===false){return null;}return $resource;},null);}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
+    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
+    }}

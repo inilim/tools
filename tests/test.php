@@ -42,19 +42,37 @@ __includeDeep([
     'File\put',
     'Exp\excelGenerateCellRange',
     'Exp\excelRemoveTmpFiles',
+    'Exp\excelGetResourceSheetById',
+    'Exp\excelGetSheetsInfo',
 ]);
 
 
 // $res = \Inilim\Tool\Method\Exp\excelGenerateCellRange('D1:F18');
-
-
 // de(\iterator_to_array($res));
 
 $file = 'C:\Users\work\Desktop\excel.xlsx';
 
 
-$gen = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId3', 10, 1);
+$info = \Inilim\Tool\Method\Exp\excelGetSheetsInfo($file);
+if (\Inilim\Tool\Method\Other\errorGetLast()) {
+    de(\Inilim\Tool\Method\Other\errorGetLast());
+}
+de($info);
 
+// $zip = \Inilim\Tool\Method\Zip\getObjFrom($file);
+// de();
+
+// $resource = \Inilim\Tool\Method\Exp\excelGetResourceSheetById($file, 'rId3');
+// if (\Inilim\Tool\Method\Other\errorGetLast()) {
+//     de(\Inilim\Tool\Method\Other\errorGetLast());
+// }
+
+// de(stream_get_meta_data($resource));
+
+$gen = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId3', 10, 1);
+if (\Inilim\Tool\Method\Other\errorGetLast()) {
+    de(\Inilim\Tool\Method\Other\errorGetLast());
+}
 
 if ($gen) {
 

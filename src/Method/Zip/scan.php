@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Zip;
 /**
  * @psalm-import-type ZipStatItem from \TypeZip
  * @todo tests
+ * @link https://php.net/manual/en/ziparchive.statindex.php
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]

@@ -6,7 +6,7 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author Inilim
- * @template TResult of mixed
+ * @template TResult
  * @template TObj of \stdClass
  * @param callable(TObj):TResult $callable
  * @param null|callable(int $levelOrCode,string $message,string $file,int $line,array{exception?:\Throwable,isException:bool,isSuppress:bool,obj:TObj} $context) $handler

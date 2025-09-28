@@ -15,7 +15,7 @@ function excelRemoveTmpFiles($pathToFileOrZip): int
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
     $zipPathToFile = \Inilim\Tool\Method\Path\normalize($zip->filename);
     unset($zip);
-    $fileInfo = \Inilim\Tool\Method\Path\normalize(\sys_get_temp_dir() . '/inilim-tools-' . \md5($zipPathToFile) . '.xml.tmp');
+    $fileInfo = \Inilim\Tool\Method\Path\normalize(\sys_get_temp_dir() . '/inilim-tools-excel' . \md5($zipPathToFile) . '.xml.tmp');
 
     if (!\Inilim\Tool\Method\FS\isFile($fileInfo)) {
         return 0;
@@ -24,10 +24,11 @@ function excelRemoveTmpFiles($pathToFileOrZip): int
     $count = 0;
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use ($fileInfo, &$count) {
-            $doc = new \DOMDocument;
-            if ($doc->load($fileInfo) === false) {
+            $doc = \Inilim\Tool\Method\Xml\loadFile($fileInfo);
+            if ($doc === null) {
                 return;
             }
+
             $items = $doc->getElementsByTagName('item');
             unset($doc);
             $count = 0;

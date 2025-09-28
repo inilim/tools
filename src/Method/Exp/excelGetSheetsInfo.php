@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
  * @author inilim
  * @todo tests
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|(array{name:null|string,sheetId:null|string,state:null|string,id:null|string})[]
+ * @return null|Param_1_excelGetSheetsInfo[]
  */
-function excelGetSheetNames($pathToFileOrZip): ?array
+function excelGetSheetsInfo($pathToFileOrZip): ?array
 {
-    \Inilim\Tool\Method\Assert\extPhp('zip');
     \Inilim\Tool\Method\Assert\extPhp('dom');
 
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
@@ -21,41 +22,37 @@ function excelGetSheetNames($pathToFileOrZip): ?array
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use ($zip) {
 
-            $workbook = null;
-            \Inilim\Tool\Method\Other\iteratorToDevNull(
-                \Inilim\Tool\Method\Zip\findByFilterAsGenerator($zip, static function ($stat) use (&$workbook) {
-                    // TODO регистр?
-                    if (\basename($stat['name']) === 'workbook.xml') {
-                        $workbook = $stat;
-                        return null;
-                    }
+            $zipPathToFile = \Inilim\Tool\Method\Path\normalize($zip->filename);
+
+            $workbook = \Inilim\Tool\Method\Zip\findFirstByCallable($zip, static function ($stat) {
+                // TODO регистр?
+                if (\basename($stat['name']) === 'workbook.xml') {
                     return true;
-                })
-            );
+                }
+            });
 
             if (!$workbook) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'Not found "workbook.xml" from zip',
-                    $zip->filename,
+                    'Not found "workbook.xml" from archive',
+                    $zipPathToFile,
                     -1
                 );
                 return null;
             }
 
-            // ZipArchive::FL_UNCHANGED - Use original data, ignoring changes
-            $resource = $zip->getStreamIndex($workbook['index'], \ZipArchive::FL_UNCHANGED);
-            unset($workbook);
+            $resource = \Inilim\Tool\Method\Zip\getResourceByIdx($zip, $workbook['index']);
 
-            if (!\is_resource($resource)) {
+            if ($resource === null) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'ZipArchive()->getStreamIndex() failed',
-                    $zip->filename,
+                    \sprintf('Zip::getResourceByIdx("%s", %s) failed', $zipPathToFile, $workbook['index']),
+                    $zipPathToFile,
                     -1
                 );
                 return null;
             }
+            unset($workbook);
 
             // TODO может стоит всетаки не читать все, а сохранить во временный файл и загружать из файла
             $content = \stream_get_contents($resource);
@@ -66,7 +63,7 @@ function excelGetSheetNames($pathToFileOrZip): ?array
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
                     'stream_get_contents() failed',
-                    $zip->filename,
+                    $zipPathToFile,
                     -1
                 );
                 return null;
@@ -77,33 +74,30 @@ function excelGetSheetNames($pathToFileOrZip): ?array
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
                     'DOMDocument()->loadXML() failed',
-                    $zip->filename,
+                    $zipPathToFile,
                     -1
                 );
                 return null;
             }
             unset($content);
 
-            $xpath = new \DOMXpath($docWorkbook);
-            $search = $xpath->query('//*[local-name()="sheet"]');
-
-            if (\is_bool($search)) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'DOMXpath()->query() failed',
-                    $zip->filename,
-                    -1
-                );
+            ['list' => $search] = \Inilim\Tool\Method\Xml\xpathQueryFromDoc(
+                $docWorkbook,
+                '//*[local-name()="sheet"]'
+            );
+            unset($docWorkbook);
+            if ($search === null) {
                 return null;
             }
 
+            $search = \Inilim\Tool\Method\Xml\domToArray($search);
             $results = [];
-            foreach (\Inilim\Tool\Method\Xml\domToArray($search) as $item) {
+            foreach ($search as $item) {
                 $results[] = [
-                    'name'    => $item['attributes']['name'] ?? null,
-                    'sheetId' => $item['attributes']['sheetId'] ?? null,
-                    'state'   => $item['attributes']['state'] ?? null,
                     'id'      => $item['attributes']['id'] ?? null,
+                    'name'    => $item['attributes']['name'] ?? null,
+                    'state'   => $item['attributes']['state'] ?? null,
+                    // 'sheetId' => $item['attributes']['sheetId'] ?? null,
                 ];
             }
 

@@ -10,6 +10,8 @@ namespace Inilim\Tool\Method\Xml;
  */
 function createEl(string $qualifiedName, ?string $value = null, string $encoding = 'UTF-8', string $namespace = '')
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+
     $doc  = new \DOMDocument('1.0', $encoding);
     $el   = new \DOMElement($qualifiedName, $value, $namespace);
     $root = @$doc->createElement('root');

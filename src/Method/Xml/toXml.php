@@ -5,14 +5,26 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Xml;
 
 /**
+ * @param \DOMNode $node
  * @return ?string
  */
-function toXml(\DOMNode $node, int $options = 0)
+function toXml(object $node, int $options = 0)
 {
+    \Inilim\Tool\Method\Assert\extPhp('dom');
+    \Inilim\Tool\Method\Assert\isInstanceOf($node, \DOMNode::class);
+
     if ($node instanceof \DOMDocument) {
-        return $node->saveXML(null, $options);
+        $v = $node->saveXML(null, $options);
+        if ($v === false) {
+            return null;
+        }
+        return $v;
     } elseif ($node->ownerDocument === null) {
         return null;
     }
-    return $node->ownerDocument->saveXML($node, $options);
+    $v = $node->ownerDocument->saveXML($node, $options);
+    if ($v === false) {
+        return null;
+    }
+    return $v;
 }

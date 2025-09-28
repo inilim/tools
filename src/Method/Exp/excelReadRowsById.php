@@ -14,7 +14,6 @@ namespace Inilim\Tool\Method\Exp;
  */
 function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, int $offset = 0)
 {
-    \Inilim\Tool\Method\Assert\extPhp('zip');
     \Inilim\Tool\Method\Assert\extPhp('dom');
     \Inilim\Tool\Method\Assert\positiveInteger($countRows);
     \Inilim\Tool\Method\Assert\natural($offset);
@@ -64,92 +63,45 @@ function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, i
 
         function initZipHashFile()
         {
+            // TODO большие файлы это долго
             $this->zipHashFile = \md5_file($this->zipPathToFile);
         }
 
         function __invoke(): bool
         {
-            $resourceWorkbookRels = $this->findWorkbookRels();
-            if ($resourceWorkbookRels === null) {
-                return false;
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            $docWorkbookRels = $this->resourceWorkbookRelsToXml($resourceWorkbookRels);
-            unset($resourceWorkbookRels);
-            if ($docWorkbookRels === null) {
-                return false;
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            $target = $this->findAttrTargetFromXml($docWorkbookRels);
-            unset($docWorkbookRels);
-            if ($target === null) {
-                return false;
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            $find = $this->findStatItemFromZipByAttr($target);
-            unset($target);
-            if ($find === null) {
-                return false;
-            }
-
-            // ---------------------------------------------
-            // лист
-            // ---------------------------------------------
-
-            $resourceSheet = $this->getResourceFromZipByIdx($find['index']);
+            $resourceSheet = \Inilim\Tool\Method\Exp\excelGetResourceSheetById($this->zip, $this->id);
             if ($resourceSheet === null) {
                 return false;
             }
-            $nameSheet = \Inilim\Tool\Method\Path\normalize($find['name']);
-            unset($find);
+            $metadata = \stream_get_meta_data($resourceSheet);
+            $nameSheet = \Inilim\Tool\Method\Path\normalize($metadata['uri']);
+            unset($metadata);
 
             // ---------------------------------------------
             // sharedStrings.xml
             // ---------------------------------------------
 
-            $find = $this->findSharedStrsStatItemFromZip();
-            if ($find === null) {
-                return false;
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            $resourceSharedStrings = $this->getResourceFromZipByIdx($find['index']);
+            $resourceSharedStrings = $this->findSharedStrings();
             if ($resourceSharedStrings === null) {
                 return false;
             }
-            $nameSharedStrings = \Inilim\Tool\Method\Path\normalize($find['name']);
-            unset($find);
-
+            $metadata = \stream_get_meta_data($resourceSharedStrings);
+            $nameSharedStrings = \Inilim\Tool\Method\Path\normalize($metadata['uri']);
+            unset($metadata);
 
             // ---------------------------------------------
             // ресурсы в временные файлы
             // ---------------------------------------------
 
             $tmpDir      = \sys_get_temp_dir();
-            $fileInfo    = \Inilim\Tool\Method\Path\normalize($tmpDir . '/inilim-tools-' . $this->zipHashPathToFile . '.xml.tmp');
+            $fileInfo    = \Inilim\Tool\Method\Path\normalize($tmpDir . '/inilim-tools-excel-' . $this->zipHashPathToFile . '.xml.tmp');
             $this->initZipHashFile();
 
             if (\Inilim\Tool\Method\FS\isFile($fileInfo)) {
                 // Читаем
-                [$doc, $root] = $this->createDocWithRoot();
-                $doc->load($fileInfo);
+                $doc = \Inilim\Tool\Method\Xml\loadFile($fileInfo);
 
-                if ($this->changedExcelFile($doc)) {
+                if ($doc === null || $this->changedExcelFile($doc)) {
                     goto createInfo;
                 }
 
@@ -176,14 +128,14 @@ function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, i
                 ]);
 
                 $hash = \md5($nameSheet);
-                $pathToFileSheetTmp = $tmpDir . '/inilim-tools-' . $hash . '.xml.tmp';
+                $pathToFileSheetTmp = $tmpDir . '/inilim-tools-excel-' . $hash . '.xml.tmp';
                 $this->createElAndAppendToRootDoc($root, 'item', [
                     'path_to_file' => $pathToFileSheetTmp,
                     'hash_path_to_file' => $hash,
                 ]);
 
                 $hash = \md5($nameSharedStrings);
-                $pathToFileSharedStringsTmp = $tmpDir . '/inilim-tools-' . $hash . '.xml.tmp';
+                $pathToFileSharedStringsTmp = $tmpDir . '/inilim-tools-excel-' . $hash . '.xml.tmp';
                 $this->createElAndAppendToRootDoc($root, 'item', [
                     'path_to_file' => $pathToFileSharedStringsTmp,
                     'hash_path_to_file' => $hash,
@@ -321,188 +273,21 @@ function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, i
         /**
          * @return resource|null
          */
-        function findWorkbookRels()
+        function findSharedStrings()
         {
-            $find = null;
-            \Inilim\Tool\Method\Other\iteratorToDevNull(
-                \Inilim\Tool\Method\Zip\findByFilterAsGenerator($this->zip, static function ($stat) use (&$find) {
-                    // TODO регистр?
-                    if (\basename($stat['name']) === 'workbook.xml.rels') {
-                        $find = $stat;
-                        return null;
-                    }
+            // TODO может есть excel файлы в котором нету sharedStrings.xml?
+            $find = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($this->zip, static function ($stat) {
+                // TODO регистр?
+                if (\basename($stat['name']) === 'sharedStrings.xml') {
                     return true;
-                })
-            );
+                }
+            });
 
             if (!$find) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'Not found "workbook.xml.rels" from zip',
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            $resource = $this->zip->getStreamIndex($find['index'], \ZipArchive::FL_UNCHANGED);
-
-            if (!\is_resource($resource)) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'ZipArchive()->getStreamIndex() failed',
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            return $resource;
-        }
-
-        /**
-         * @param resorce $resource
-         */
-        function resourceWorkbookRelsToXml($resource): ?\DOMDocument
-        {
-            // TODO может стоит всетаки не читать все, а сохранить во временный файл и загружать из файла
-            $content = \stream_get_contents($resource);
-            \fclose($resource);
-
-            if (!\is_string($content)) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'stream_get_contents() failed',
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            $docRelWorkbook = new \DOMDocument();
-            if ($docRelWorkbook->loadXML($content) !== true) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'DOMDocument()->loadXML() failed',
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            return $docRelWorkbook;
-        }
-
-        function findAttrTargetFromXml(\DOMDocument $doc): ?\DOMAttr
-        {
-            $xpath = new \DOMXpath($doc);
-            $query = '//*[local-name()="Relationship"][@Id="' . $this->id . '"]';
-            $search = $xpath->query($query);
-
-            if (\is_bool($search)) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    \sprintf('DOMXpath()->query(%s) failed', $query),
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            if ($search->count() !== 1) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    \sprintf('DOMXpath()->query(%s) find over 1', $query),
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            $search = \iterator_to_array($search->getIterator(), false);
-            $search = \Inilim\Tool\Method\PF\array_first($search);
-            /** @var \DOMNode|\DOMNameSpaceNode $search */
-
-            return $search->attributes->getNamedItem('Target');
-        }
-
-        /**
-         * @return ZipStatItem|null
-         */
-        function findStatItemFromZipByAttr(\DOMAttr $target): ?array
-        {
-            $find = null;
-            \Inilim\Tool\Method\Other\iteratorToDevNull(
-                \Inilim\Tool\Method\Zip\findByFilterAsGenerator($this->zip, static function ($stat) use (&$find, $target) {
-                    // TODO регистр?
-                    $name = \Inilim\Tool\Method\Path\normalize($stat['name']);
-                    if (
-                        \Inilim\Tool\Method\PF\str_ends_with($name, $target->value)
-                    ) {
-                        $find = $stat;
-                        return null;
-                    }
-                    return true;
-                })
-            );
-
-            if (!$find) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'Zip::findByFilter() failed',
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            return $find;
-        }
-
-        /**
-         * @return resource|null
-         */
-        function getResourceFromZipByIdx(int $idx)
-        {
-            $res = $this->zip->getStreamIndex($idx, \ZipArchive::FL_UNCHANGED);
-
-            if (!\is_resource($res)) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    \sprintf('ZipArchive()->getStreamIndex(%s) failed', $idx),
-                    $this->zip->filename,
-                    -1
-                );
-                return null;
-            }
-
-            return $res;
-        }
-
-        /**
-         * @return ZipStatItem|null
-         */
-        function findSharedStrsStatItemFromZip(): ?array
-        {
-            $find = null;
-            \Inilim\Tool\Method\Other\iteratorToDevNull(
-                \Inilim\Tool\Method\Zip\findByFilterAsGenerator($this->zip, static function ($stat) use (&$find) {
-                    // TODO регистр?
-                    if (
-                        \basename($stat['name']) === 'sharedStrings.xml'
-                    ) {
-                        $find = $stat;
-                        return null;
-                    }
-                    return true;
-                })
-            );
-
-            if (!$find) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'Zip::findByNameFile() failed',
-                    $this->zip->filename,
+                    'Not found "sharedStrings.xml" from archive',
+                    $this->zipPathToFile,
                     -1
                 );
                 return null;
@@ -539,7 +324,7 @@ function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, i
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
                     \sprintf('Не удалось перевести ресурс в файл "%s"', $pathToFile),
-                    $this->zip->filename,
+                    $this->zipPathToFile,
                     -1
                 );
                 return false;

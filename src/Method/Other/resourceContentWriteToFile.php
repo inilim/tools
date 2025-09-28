@@ -25,11 +25,10 @@ function resourceContentWriteToFile($resource, string $pathToFile): ?string
             // Сохраняем текущую позицию
             $curPos = \ftell($resource);
             \rewind($resource);
-            // Размер буфера для чтения/записи (например, 8 КБ)
-            $bufferSize = 8192;
             while (true) {
                 // Читаем порцию данных из исходного файла
-                $data = \fread($resource, $bufferSize);
+                // Размер буфера для чтения/записи (например, 8 КБ)
+                $data = \fread($resource, 8192);
                 if ($data === false) {
                     break;
                 }
