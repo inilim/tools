@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
+ * @ext zip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
  * @throws \InvalidArgumentException

@@ -13,6 +13,7 @@ namespace Inilim\Tool\Method\Exp;
  */
 function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array
 {
+    // TODO может получится убрать зависимость dom?
     \Inilim\Tool\Method\Assert\extPhp('dom');
 
     $anonObj = new class(

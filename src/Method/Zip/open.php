@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
+ * @ext zip
  * \ZipArchive::open()
  * @see https://www.php.net/manual/en/ziparchive.open.php
  */

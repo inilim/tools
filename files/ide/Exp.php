@@ -25,7 +25,7 @@ class Exp
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|array
  */
-    static function excelConvertSheetToDocXml($pathToFileOrZip, string $sheetId): ?array {}
+    static function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array {}
 
         /**
  * @author deepseek

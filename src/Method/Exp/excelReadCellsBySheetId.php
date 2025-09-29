@@ -18,15 +18,10 @@ use function Inilim\Tool\Method\Other\timedMsCall;
 function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?\Generator
 {
     \Inilim\Tool\Method\Assert\natural($offset);
-    $convertResult = \Inilim\Tool\Method\Exp\excelConvertSheetToDocXml($pathToFileOrZip, $sheetId);
+    $convertResult = \Inilim\Tool\Method\Exp\excelExtractSheetToTmpFile($pathToFileOrZip, $sheetId);
     if ($convertResult === null) {
         return null;
     }
-
-    $xpathSheet = new \DOMXPath($convertResult['sheet']['xml']);
-    $xpathSheet->query('//*[local-name()="c"][position() <= 10]');
-    // $xpathSheet->query('//*[local-name()="c"][position() >= 0 and position() <= 10]');
-    de(123123123);
 
     $anonObj = new class(
         $convertResult,
@@ -53,14 +48,13 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
         {
             $r = $this->convertResult;
             $this->convertResult = [];
-            $xmlSheet = $r['sheet']['xml'];
-            /** @var \DOMDocument $xmlSheet */
-            $xmlSharedStrs = $r['shared_strings']['xml'];
-            /** @var \DOMDocument $xmlSharedStrs */
+            $xmlSheet = new \DOMDocument;
+            $xmlSheet->load($r['sheet']['file']);
+            $xmlSharedStrs = new \DOMDocument;
+            $xmlSharedStrs->load($r['shared_strings']['file']);
 
-            $xpathSheet = new \DOMXPath($xmlSharedStrs);
-            // $this->sharedStringsList = $xmlSharedStrs->getElementsByTagName('t');
-            $sharedStringsList = $xpathSheet->query('//*[local-name()="t"]');
+            // INFO XPath::query бысрее чем DOMDocument::getElementsByTagName
+            $sharedStringsList = (new \DOMXPath($xmlSharedStrs))->query('//*[local-name()="t"]');
             if ($sharedStringsList === false) {
                 $this->setErr('xpath shared strings');
                 return false;
@@ -68,7 +62,6 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
             /** @var \DOMNodeList<\DOMElement> $sharedStringsList */
             $this->sharedStringsList = $sharedStringsList;
 
-            $xpathSheet = new \DOMXPath($xmlSheet);
             if ($this->offset > 0) {
                 // INFO //*[local-name()="c"][position() > 1]
                 $xpath = '//*[local-name()="c"][position() > ' . $this->offset . ']';
@@ -77,7 +70,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                 $xpath = '//*[local-name()="c"]';
             }
 
-            $cells = $xpathSheet->query($xpath);
+            $cells = (new \DOMXPath($xmlSheet))->query($xpath);
             if ($cells === false) {
                 $this->setErr('xpath sheet');
                 return false;
@@ -92,11 +85,8 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
         function getGenerator(): \Generator
         {
             $sharedStrsList = $this->sharedStringsList;
-            $i = 0;
             foreach ($this->cells as $cell) {
-                $i++;
-                d($i);
-                yield $this->defineCell2($cell, $sharedStrsList);
+                yield $this->defineCell($cell, $sharedStrsList);
             } // endforeach(cells)
         }
 
@@ -254,24 +244,6 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'type'      => 'broken',
                     ];
             }
-        }
-
-        function defineCell2(\DOMElement $cellEl, \DOMNodeList $sharedStrsList): array
-        {
-            return [];
-            // $cellStr = \Inilim\Tool\Method\Xml\toXml($cellEl);
-            // d($cellStr);
-            // $cStr = \Inilim\Tool\Method\Str\before($cellStr, '>');
-            // d($cStr);
-            // \preg_match_all('#r="?<id>([a-z]+\d+)"|t="?<type>([a-z]+)"#i', $cStr, $matches, \PREG_SET_ORDER);
-            // de($matches);
-            // $type = $matches['type'];
-            // $cellId = $matches['id'];
-            // $matches = [];
-            // de([
-            //     '$type' => $type,
-            //     '$cellId' => $cellId,
-            // ]);
         }
 
         function setErr(string $format, ...$values)

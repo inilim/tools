@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
- * @ext zip dom
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  */
 function excelRemoveTmpFiles($pathToFileOrZip): int
 {
-    \Inilim\Tool\Method\Assert\extPhp('dom');
-
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
     $zipPathToFile = \Inilim\Tool\Method\Path\normalize($zip->filename);
     unset($zip);

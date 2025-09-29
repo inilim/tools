@@ -18,7 +18,7 @@ function excelReadRowsBySheetId($pathToFileOrZip, string $sheetId, int $countRea
 {
     \Inilim\Tool\Method\Assert\positiveInteger($countReadRows);
     \Inilim\Tool\Method\Assert\natural($offset);
-    $convertResult = \Inilim\Tool\Method\Exp\excelConvertSheetToDocXml($pathToFileOrZip, $sheetId);
+    $convertResult = \Inilim\Tool\Method\Exp\excelExtractSheetToTmpFile($pathToFileOrZip, $sheetId);
     if ($convertResult === null) {
         return null;
     }
@@ -52,10 +52,10 @@ function excelReadRowsBySheetId($pathToFileOrZip, string $sheetId, int $countRea
         {
             $r = $this->convertResult;
             $this->convertResult = [];
-            $xmlSheet = $r['sheet']['xml'];
-            /** @var \DOMDocument $xmlSheet */
-            $xmlSharedStrs = $r['shared_strings']['xml'];
-            /** @var \DOMDocument $xmlSharedStrs */
+            $fileSheet = $r['sheet']['file'];
+            /** @var string $fileSheet */
+            $fileShared = $r['shared_strings']['file'];
+            /** @var string $fileShared */
 
             $rows = $xmlSheet->getElementsByTagName('row');
             $this->findCountRows = $rows->count();

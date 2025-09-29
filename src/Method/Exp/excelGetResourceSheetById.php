@@ -17,6 +17,7 @@ use function Inilim\Tool\Method\Zip\findFirstResourceByCallable;
  */
 function excelGetResourceSheetById($pathToFileOrZip, string $id)
 {
+    // TODO тут можно убрать зависимость dom, используя regex
     \Inilim\Tool\Method\Assert\extPhp('dom');
 
     $anonObj = new class(
