@@ -27,8 +27,8 @@ function excelGenerateCellRange(string $range): \Generator
 
             $startCol = $matches[1];
             $startRow = (int)$matches[2];
-            $endCol = $matches[3];
-            $endRow = (int)$matches[4];
+            $endCol   = $matches[3];
+            $endRow   = (int)$matches[4];
 
 
             // Генерируем ячейки для каждой строки и каждой колонки

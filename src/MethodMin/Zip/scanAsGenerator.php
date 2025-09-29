@@ -21,7 +21,7 @@ namespace Inilim\Tool\Method\Zip{function scanAsGenerator($pathToFileOrZip):\Gen
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
-    function __state():object{static $o=null;return $o ?? new class{var?array $error=null;};}
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){

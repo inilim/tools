@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Xml{function xpathQueryFromDoc(object $doc,string $expression,?object $contextNode=null,bool $registerNodeNS=true):?array{\Inilim\Tool\Method\Assert\extPhp('dom');\Inilim\Tool\Method\Assert\isInstanceOf($doc,\DOMDocument :: class);if($contextNode){\Inilim\Tool\Method\Assert\isInstanceOf($contextNode,\DOMNode :: class);}return \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($doc,$expression,$contextNode,$registerNodeNS){$xpath=new \DOMXpath($doc);$list=$xpath -> query($expression,$contextNode,$registerNodeNS);if(\is_bool($list)){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('DOMXpath::query("%s") failed',$expression),'',-1);return null;}return['doc'=>$doc,'xpath'=>$xpath,'list'=>$list];},null);}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
-    function __state():object{static $o=null;return $o ?? new class{var?array $error=null;};}
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){

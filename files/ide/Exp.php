@@ -19,6 +19,15 @@ class Exp
     static function excelColCharToNum(string $col): int {}
 
         /**
+ * @author inilim
+ * @todo tests
+ * @ext dom zip
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @return null|array
+ */
+    static function excelConvertSheetToDocXml($pathToFileOrZip, string $sheetId): ?array {}
+
+        /**
  * @author deepseek
  * 
  * @return \Generator<int,string>
@@ -51,13 +60,24 @@ class Exp
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Cell_excelReadRowsById from \TypeExp
+ * @ext dom zip
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @return null|\Generator<int,Cell_excelReadRowsById>;
+ */
+    static function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type ZipStatItem from \TypeZip
  * @psalm-import-type Row_excelReadRowsById from \TypeExp
  * @psalm-import-type Cell_excelReadRowsById from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|array{generator:\Generator<int,Cell_excelReadRowsById>,info:array}
+ * @return null|\Generator<int,Row_excelReadRowsById>
  */
-    static function excelReadRowsById($pathToFileOrZip, string $id, int $countReadRows = 100, int $offset = 0) {}
+    static function excelReadRowsBySheetId($pathToFileOrZip, string $sheetId, int $countReadRows = 100, int $offset = 0): ?Generator {}
 
         /**
  * @ext zip dom

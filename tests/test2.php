@@ -6,22 +6,34 @@ use Symfony\Component\Process\Process;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-\__include([
-    // 
+__includeDeep([
+    'Exp\excelGetSheetsInfo',
+    'Exp\excelReadRowsBySheetId',
+    'Other\errorGetLast',
 ]);
 
 
-$result = Other::timedMsCall(static function () {
+$file = 'C:\Users\work\Desktop\TMEM179B.xlsx';
 
-    $phpFile = __DIR__ . '/subprocess.php';
-    echo 'start' . PHP_EOL;
-    // $process = new Process(['php', $phpFile]);
-    // $process->run(); // 410ms
-    // \exec('php ' . $phpFile); // 260ms
-    // \shell_exec('php ' . $phpFile); // 250ms 
-    // \passthru('php ' . $phpFile); // 250ms 
-    // \system('php ' . $phpFile); // 250ms 
-    echo 'end' . PHP_EOL;
-});
+// $info = \Inilim\Tool\Method\Exp\excelGetSheetsInfo($file);
+// if (\Inilim\Tool\Method\Other\errorGetLast()) {
+//     de(\Inilim\Tool\Method\Other\errorGetLast());
+// }
+// de($info);
 
-VD::de($result);
+
+$result = \Inilim\Tool\Method\Exp\excelReadRowsBySheetId($file, 'rId5', 10000);
+if (\Inilim\Tool\Method\Other\errorGetLast()) {
+    de(\Inilim\Tool\Method\Other\errorGetLast());
+}
+
+foreach ($result as $row) {
+    if (\Inilim\Tool\Method\Other\errorGetLast()) {
+        de(\Inilim\Tool\Method\Other\errorGetLast());
+    }
+    // d($row['xml']);
+}
+// de();
+$remove = \Inilim\Tool\Method\Exp\excelRemoveTmpFiles($file);
+
+de($remove);

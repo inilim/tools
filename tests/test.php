@@ -30,40 +30,13 @@ use DragonCode\Benchmark\Benchmark;
 use Inilim\Tool\Test\ForTest\ClassicClass;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
-
-
-
+\ini_set('memory_limit', '5M');
 
 __includeDeep([
-    'Exp\excelReadRowsById',
     'Other\errorGetLast',
-    'PF\str_ends_with',
-    'Xml\toXml',
-    'File\put',
-    'Exp\excelGenerateCellRange',
-    'Exp\excelRemoveTmpFiles',
-    'Exp\excelGetResourceSheetById',
-    'Exp\excelGetSheetsInfo',
+    'Exp\excelReadCellsBySheetId',
+    'Other::timedMsCall',
 ]);
-
-
-function ID_TO_COL_NUM($value)
-{
-    if (!\is_string($value)) {
-        return $value;
-    }
-    [$col, $row] = \preg_split('/(?<=\D)(?=\d)|(?<=\d)(?=\D)/', $value, 2);
-    $result = 0;
-    $length = \strlen($col);
-    for ($i = 0; $i < $length; $i++) {
-        $char = $col[$i];
-        $result = $result * 26 + (\ord($char) - \ord('A') + 1);
-    }
-    return $result;
-}
-
-
-// de(ID_TO_COL_NUM('AE43'));
 
 
 // $res = \Inilim\Tool\Method\Exp\excelGenerateCellRange('D1:F18');
@@ -122,6 +95,10 @@ $connect->createFunction('NEW_TRIM', static function ($value) use ($trim) {
     return \is_string($value) ? $trim($value) : $value;
 }, 1);
 
+$sqlInsert = 'INSERT INTO cells
+(value,raw_value,id,col_num,type,shared_id,row_index) VALUES
+({value},{raw_value},{id},{col_num},{type},{shared_id},{row_index})';
+
 // $connect->getPDO()->sqliteCreateCollation('TEST2', static function () {
 //     dde(func_get_args());
 // });
@@ -150,48 +127,32 @@ $connect->createFunction('NEW_TRIM', static function ($value) use ($trim) {
 // de($res);
 
 
-$result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId11', 16_000);
-// $result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId3', 16_000, 0);
-// $result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId5', 10);
+$result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId($file, 'rId11');
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }
 
 if ($result) {
 
-    d($result['info']);
-    $gen = $result['generator'];
+    $res = Other::timedMsCall(function () use ($result) {
+        Other::iteratorToDevNull($result);
+    });
 
-    $sqlInsert = 'INSERT INTO cells
-        (value,raw_value,id,col_num,type,shared_id,row_index) VALUES
-        ({value},{raw_value},{id},{col_num},{type},{shared_id},{row_index})';
-
-    foreach ($gen as $line => $data) {
-        //
-        // $row = \array_slice($row, 0, 34);
-        de($data);
-        $connect->transaction(static function () use (&$data, $sqlInsert, $connect) {
-            foreach ($data['cells'] as $cell) {
-                // de($cell);
-                $connect->exec($sqlInsert, [
-                    'value' => \in_array($cell['type'], ['string', 'formula'])
-                        ? Str::trim(Str::lower($cell['value']))
-                        : $cell['value'],
-                    'raw_value' => $cell['raw_value'],
-                    'id' => \Inilim\Tool\Method\Str\upper($cell['id']),
-                    'col_num'   => $cell['col_num'],
-                    'type'      => $cell['type'],
-                    'shared_id' => $cell['shared_id'] ?? null,
-                    'row_num'   => $cell['row_num'],
-                ]);
-            }
-        });
-
-        d($line);
-    }
-
-    // $connect->exec('UPDATE cells SET value = NEW_TRIM(MB_LOWER(value))');
-    de('done');
+    de($res);
 }
 
 de(\Inilim\Tool\Method\Other\errorGetLast());
+
+// $connect->transaction(static function () use (&$cell, $sqlInsert, $connect) {
+//     $connect->exec($sqlInsert, [
+//         'value' => \in_array($cell['type'], ['string', 'formula'])
+//             ? Str::trim(Str::lower($cell['value']))
+//             : $cell['value'],
+//         'raw_value' => $cell['raw_value'],
+//         'id' => \Inilim\Tool\Method\Str\upper($cell['id']),
+//         'col_num'   => $cell['col_num'],
+//         'type'      => $cell['type'],
+//         'shared_id' => $cell['shared_id'] ?? null,
+//         'row_num'   => $cell['row_num'],
+//     ]);
+// });

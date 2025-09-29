@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Other;
 function __state(): object
 {
     static $o = null;
-    return $o ?? new class {
+    return $o ??= new class {
         /**
          * last error.
          */
