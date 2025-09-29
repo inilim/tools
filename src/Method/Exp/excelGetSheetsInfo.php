@@ -21,17 +21,16 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
 
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use ($zip) {
-
             $zipPathToFile = \Inilim\Tool\Method\Path\normalize($zip->filename);
 
-            $workbook = \Inilim\Tool\Method\Zip\findFirstByCallable($zip, static function ($stat) {
+            $resource = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($zip, static function ($stat) {
                 // TODO регистр?
                 if (\basename($stat['name']) === 'workbook.xml') {
                     return true;
                 }
             });
 
-            if (!$workbook) {
+            if (!$resource) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
                     'Not found "workbook.xml" from archive',
@@ -40,19 +39,6 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
                 );
                 return null;
             }
-
-            $resource = \Inilim\Tool\Method\Zip\getResourceByIdx($zip, $workbook['index']);
-
-            if ($resource === null) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    \sprintf('Zip::getResourceByIdx("%s", %s) failed', $zipPathToFile, $workbook['index']),
-                    $zipPathToFile,
-                    -1
-                );
-                return null;
-            }
-            unset($workbook);
 
             // TODO может стоит всетаки не читать все, а сохранить во временный файл и загружать из файла
             $content = \stream_get_contents($resource);
@@ -73,7 +59,7 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
             if ($docWorkbook->loadXML($content) !== true) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'DOMDocument()->loadXML() failed',
+                    'DOMDocument::loadXML() failed',
                     $zipPathToFile,
                     -1
                 );

@@ -47,17 +47,42 @@ __includeDeep([
 ]);
 
 
+function ID_TO_COL_NUM($value)
+{
+    if (!\is_string($value)) {
+        return $value;
+    }
+    [$col, $row] = \preg_split('/(?<=\D)(?=\d)|(?<=\d)(?=\D)/', $value, 2);
+    $result = 0;
+    $length = \strlen($col);
+    for ($i = 0; $i < $length; $i++) {
+        $char = $col[$i];
+        $result = $result * 26 + (\ord($char) - \ord('A') + 1);
+    }
+    return $result;
+}
+
+
+// de(ID_TO_COL_NUM('AE43'));
+
+
 // $res = \Inilim\Tool\Method\Exp\excelGenerateCellRange('D1:F18');
 // de(\iterator_to_array($res));
 
-$file = 'C:\Users\work\Desktop\excel.xlsx';
+// $file = 'C:\Users\work\Desktop\excel.xlsx';
+$file = 'C:\Users\work\Desktop\Отчёт о партнёрах_РЭЧ_2025_РФ.xlsx';
 
+// $count = \Inilim\Tool\Method\Exp\excelRemoveTmpFiles($file);
+// if (\Inilim\Tool\Method\Other\errorGetLast()) {
+//     de(\Inilim\Tool\Method\Other\errorGetLast());
+// }
+// de($count);
 
-$info = \Inilim\Tool\Method\Exp\excelGetSheetsInfo($file);
-if (\Inilim\Tool\Method\Other\errorGetLast()) {
-    de(\Inilim\Tool\Method\Other\errorGetLast());
-}
-de($info);
+// $info = \Inilim\Tool\Method\Exp\excelGetSheetsInfo($file);
+// if (\Inilim\Tool\Method\Other\errorGetLast()) {
+//     de(\Inilim\Tool\Method\Other\errorGetLast());
+// }
+// de($info);
 
 // $zip = \Inilim\Tool\Method\Zip\getObjFrom($file);
 // de();
@@ -69,75 +94,104 @@ de($info);
 
 // de(stream_get_meta_data($resource));
 
-$gen = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId3', 10, 1);
+
+// de(\preg_replace('#^([a-z]+)(\d+)$#i', '$1-$2', 'AA21'));
+
+
+$db = __DIR__ . '/test.sqlite';
+d($db);
+if (!\Inilim\Tool\Method\FS\isFile($db)) {
+    \Inilim\Tool\Method\File\put($db, '');
+    $connect = new IPDOSQLite($db);
+    $connect->exec('CREATE TABLE IF NOT EXISTS cells (
+        value TEXT,
+        raw_value TEXT,
+        id NUMERIC UNIQUE ON CONFLICT REPLACE,
+        col_num NUMERIC,
+        type TEXT,
+        shared_id NUMERIC,
+        row_num NUMERIC
+    )');
+}
+$connect ??= new IPDOSQLite($db);
+[$lower, $trim] = Str::__asClosure('lower', 'trim');
+$connect->createFunction('MB_LOWER', static function ($value) use ($lower) {
+    return \is_string($value) ? $lower($value) : $value;
+}, 1);
+$connect->createFunction('NEW_TRIM', static function ($value) use ($trim) {
+    return \is_string($value) ? $trim($value) : $value;
+}, 1);
+
+// $connect->getPDO()->sqliteCreateCollation('TEST2', static function () {
+//     dde(func_get_args());
+// });
+// $connect->getPDO()->sqliteCreateAggregate('TEST2', static function ($context, $rownumber, $value) {
+//     de(func_get_args());
+//     if ($context === null) {
+//         $context = [];
+//     }
+//     $context[] = $value;
+//     return $context;
+// }, static function ($context) {
+//     return \implode(',', $context);
+// });
+
+
+// $connect->exec('UPDATE cells SET value = MB_LOWER(value)');
+
+
+// $res = $connect->exec('SELECT TEST2(id,row_index) FROM cells WHERE row_index = 1', 2);
+// $connect->exec('UPDATE cells SET col_num = ID_TO_COL_NUM(id)');
+
+// de();
+
+// $res = $connect->exec('SELECT quote({value}) as value', ['value' => 'Муниципальное бюджетное дошкольное образовательное учреждение города Кургана «Центр развития ребенкадетский сад № 131 «Ветерок»'], 1);
+
+// de($res);
+
+
+$result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId11', 16_000);
+// $result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId3', 16_000, 0);
+// $result = \Inilim\Tool\Method\Exp\excelReadRowsById($file, 'rId5', 10);
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }
 
-if ($gen) {
+if ($result) {
 
-    d($gen['info']);
-    $gen = $gen['generator'];
+    d($result['info']);
+    $gen = $result['generator'];
 
-    // $headers = $gen->current();
-
-    // $headers = Arr::mapFilter($headers, static function ($header) {
-    //     if (Str::trim($header) === '') {
-    //         return null;
-    //     }
-    //     return true;
-    // });
-    // $countCols = sizeof($headers);
-    // de($countCols);
-
-    $db = __DIR__ . '/test.sqlite';
-    if (!\Inilim\Tool\Method\FS\isFile($db)) {
-        \Inilim\Tool\Method\File\put($db, '');
-        $connect = new IPDOSQLite($db);
-        $connect->exec('CREATE TABLE IF NOT EXISTS cols (
-            col1 TEXT,
-            col2 TEXT,
-            col3 TEXT,
-            col4 TEXT,
-            col5 TEXT,
-            col6 TEXT,
-            col7 TEXT,
-            col8 TEXT,
-            col9 TEXT,
-            col10 TEXT,
-            col11 TEXT,
-            col12 TEXT,
-            col13 TEXT,
-            col14 TEXT,
-            col15 TEXT,
-            col16 TEXT,
-            col17 TEXT,
-            col18 TEXT,
-            col19 TEXT,
-            col20 TEXT,
-            col21 TEXT,
-            col22 TEXT,
-            col23 TEXT,
-            col24 TEXT,
-            col25 TEXT,
-            col26 TEXT,
-            col27 TEXT,
-            col28 TEXT,
-            col29 TEXT,
-            col30 TEXT,
-            col31 TEXT,
-            col32 TEXT,
-            col33 TEXT,
-            col34 TEXT
-        )');
-    }
-    $connect ??= new IPDOSQLite($db);
+    $sqlInsert = 'INSERT INTO cells
+        (value,raw_value,id,col_num,type,shared_id,row_index) VALUES
+        ({value},{raw_value},{id},{col_num},{type},{shared_id},{row_index})';
 
     foreach ($gen as $line => $data) {
         //
         // $row = \array_slice($row, 0, 34);
         de($data);
+        $connect->transaction(static function () use (&$data, $sqlInsert, $connect) {
+            foreach ($data['cells'] as $cell) {
+                // de($cell);
+                $connect->exec($sqlInsert, [
+                    'value' => \in_array($cell['type'], ['string', 'formula'])
+                        ? Str::trim(Str::lower($cell['value']))
+                        : $cell['value'],
+                    'raw_value' => $cell['raw_value'],
+                    'id' => \Inilim\Tool\Method\Str\upper($cell['id']),
+                    'col_num'   => $cell['col_num'],
+                    'type'      => $cell['type'],
+                    'shared_id' => $cell['shared_id'] ?? null,
+                    'row_num'   => $cell['row_num'],
+                ]);
+            }
+        });
+
+        d($line);
     }
+
+    // $connect->exec('UPDATE cells SET value = NEW_TRIM(MB_LOWER(value))');
+    de('done');
 }
 
 de(\Inilim\Tool\Method\Other\errorGetLast());

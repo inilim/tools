@@ -103,6 +103,12 @@ class TypeObj {}
  * ----- excelGetSheetsInfo
  * @psalm-type Param_1_excelGetSheetsInfo = array{id:?string,name:?string,state:?string}
  * 
+ * ----- excelReadRowsById
+ * @psalm-type Cell_excelReadRowsById = array{value:null|string|int|float,raw_value:string|null,id:string,col_num:int,col:string,row_num:int,type:string,shared_id?:int}
+ * @psalm-type Row_excelReadRowsById = array{cells:Cell_excelReadRowsById[],index:int,xml:string,count:int}
+ * 
+ * 
+ * 
  */
 class TypeExp {}
 

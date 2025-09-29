@@ -28,7 +28,7 @@ function getObjFrom($pathToFileOrZip): \ZipArchive
         if (!($pathToFileOrZip instanceof \ZipArchive)) {
             /** @var object $pathToFileOrZip */
             throw new \InvalidArgumentException(\sprintf(
-                'Expected $pathToFileOrZip a string or \ZipArchive. Got: %s',
+                'Expected (arg #0) a string or \ZipArchive. Got: %s',
                 \get_class($pathToFileOrZip)
             ));
         }
@@ -39,7 +39,7 @@ function getObjFrom($pathToFileOrZip): \ZipArchive
         }
     } else {
         throw new \InvalidArgumentException(\sprintf(
-            'Expected $pathToFileOrZip a string or \ZipArchive. Got: %s',
+            'Expected (arg #0) a string or \ZipArchive. Got: %s',
             $type
         ));
     }

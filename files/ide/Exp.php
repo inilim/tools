@@ -14,6 +14,11 @@ class Exp
     static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
 
         /**
+ * Переводим буквенное представление столбца в числовое
+ */
+    static function excelColCharToNum(string $col): int {}
+
+        /**
  * @author deepseek
  * 
  * @return \Generator<int,string>
@@ -46,11 +51,13 @@ class Exp
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Row_excelReadRowsById from \TypeExp
+ * @psalm-import-type Cell_excelReadRowsById from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|array{generator:\Generator<int,array<string,bool|string|int>>,info:array{}}
+ * @return null|array{generator:\Generator<int,Cell_excelReadRowsById>,info:array}
  */
-    static function excelReadRowsById($pathToFileOrZip, string $id, int $countRows = 100, int $offset = 0) {}
+    static function excelReadRowsById($pathToFileOrZip, string $id, int $countReadRows = 100, int $offset = 0) {}
 
         /**
  * @ext zip dom
