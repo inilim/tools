@@ -46,7 +46,6 @@ class Exp
     static function excelGetResourceSheetById($pathToFileOrZip, string $id) {}
 
         /**
- * @psalm-import-type ZipStatItem from \TypeZip
  * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
  * @author inilim
  * @todo tests

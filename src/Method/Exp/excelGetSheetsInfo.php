@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
- * @psalm-import-type ZipStatItem from \TypeZip
  * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
  * @author inilim
  * @todo tests
@@ -104,13 +103,17 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
                 }
 
                 $match = \array_combine($match[1] ?? [], $match[2] ?? []);
-                if ($match === false) {
+                if (
+                    $match === false ||
+                    !\is_string($match['r:id'] ?? null) ||
+                    !\is_string($match['name'] ?? null)
+                ) {
                     continue;
                 }
 
                 $results[] = [
-                    'id'      => $match['r:id'] ?? null,
-                    'name'    => $match['name'] ?? null,
+                    'id'      => $match['r:id'],
+                    'name'    => $match['name'],
                     'state'   => $match['state'] ?? null,
                     // 'sheetId' => $match['sheetId'] ?? null,
                 ];
