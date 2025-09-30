@@ -50,7 +50,7 @@ class Zip
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @ext dom zip
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param callable(ZipStatItem):bool $predicate
  * @return null|resource
@@ -58,6 +58,7 @@ class Zip
     static function findFirstResourceByCallable($pathToFileOrZip, callable $predicate) {}
 
         /**
+ * @ext zip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
  * @throws \InvalidArgumentException
@@ -71,6 +72,7 @@ class Zip
     static function getResourceByIdx(\ZipArchive $zip, int $idx) {}
 
         /**
+ * @ext zip
  * \ZipArchive::open()
  * @see https://www.php.net/manual/en/ziparchive.open.php
  */

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Exp;
 
-use function Inilim\Tool\Method\Other\timedMsCall;
-
 /**
  * @author inilim
  * @todo tests

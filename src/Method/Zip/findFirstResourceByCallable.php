@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\Zip;
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @ext dom zip
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param callable(ZipStatItem):bool $predicate
  * @return null|resource

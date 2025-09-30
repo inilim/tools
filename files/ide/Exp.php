@@ -21,7 +21,7 @@ class Exp
         /**
  * @author inilim
  * @todo tests
- * @ext dom zip
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|array
  */
@@ -38,7 +38,7 @@ class Exp
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @ext zip dom
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param string $id id find from Exp::excelGetSheetsInfo()
  * @return null|resource
@@ -80,7 +80,7 @@ class Exp
     static function excelReadRowsBySheetId($pathToFileOrZip, string $sheetId, int $countReadRows = 100, int $offset = 0): ?Generator {}
 
         /**
- * @ext zip dom
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  */
     static function excelRemoveTmpFiles($pathToFileOrZip): int {}

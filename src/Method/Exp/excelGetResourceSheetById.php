@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Exp;
 
-use function Inilim\Tool\Method\Zip\findFirstResourceByCallable;
-
 /**
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @ext zip dom
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param string $id id find from Exp::excelGetSheetsInfo()
  * @return null|resource
  */
 function excelGetResourceSheetById($pathToFileOrZip, string $id)
 {
-    // TODO тут можно убрать зависимость dom, используя regex
-    \Inilim\Tool\Method\Assert\extPhp('dom');
-
     $anonObj = new class(
         \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip),
         $id
@@ -45,14 +40,14 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
                 return null;
             }
 
-            $docWorkbookRels = $this->resToXml($resourceWorkbookRels);
+            $xml = $this->resToXmlString($resourceWorkbookRels);
             unset($resourceWorkbookRels);
-            if ($docWorkbookRels === null) {
+            if ($xml === null) {
                 return null;
             }
 
-            $fileNameSheet = $this->findSheetFromXml($docWorkbookRels);
-            unset($docWorkbookRels);
+            $fileNameSheet = $this->findSheetFromXmlString($xml);
+            unset($xml);
             if ($fileNameSheet === null) {
                 return null;
             }
@@ -89,7 +84,7 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
         /**
          * @param resorce $res
          */
-        function resToXml($res): ?\DOMDocument
+        function resToXmlString($res): ?string
         {
             // TODO может стоит всетаки не читать все, а сохранить во временный файл и загружать из файла
             $content = \stream_get_contents($res);
@@ -105,39 +100,49 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
                 return null;
             }
 
-            $docRelWorkbook = new \DOMDocument();
-            if ($docRelWorkbook->loadXML($content) !== true) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    'DOMDocument()->loadXML() failed',
-                    $this->zipPathToFile,
-                    -1
-                );
-                return null;
-            }
-
-            return $docRelWorkbook;
+            return $content;
         }
 
-        function findSheetFromXml(\DOMDocument $doc): ?string
+        function findSheetFromXmlString(string $xml): ?string
         {
-            ['list' => $search] = \Inilim\Tool\Method\Xml\xpathQueryFromDoc(
-                $doc,
-                '//*[local-name()="Relationship"][@Id="' . $this->id . '"]'
+            // <Relationship Id="rId11" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet5.xml"/>
+
+            // Id="rId11" — ищет точное совпадение нужного идентификатора.
+            // [^>]* — пропускает любые символы до следующего атрибута, кроме > (чтобы оставаться в пределах одного тега).
+            // Target=" — находит начало искомого атрибута.
+            // ([^"]*) — захватывающая группа, которая извлечёт значение атрибута Target (все символы до следующей кавычки). Это значение можно получить из первой группы совпадения.
+            // Флаг i делает поиск нечувствительным к регистру.
+
+            // `<Relationship Id="rId11" Type="..." Target="worksheets/sheet5.xml"/>`
+            // `<Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/>`
+
+            // $xml = '<Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/><Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/><Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/>';
+            $id = \preg_quote($this->id);
+            $regex = \sprintf(
+                '/' . // start
+                    '<Relationship[^>]*Id="%s"[^>]*Target="([^"]*)"' .
+                    '|' . // или
+                    '<Relationship[^>]*Target="([^"]*)"[^>]*Id="%s"' .
+                    '/i' // end
+                ,
+                $id,
+                $id
             );
-            if ($search === null) {
-                return null;
+            // de($regex);
+            // TODO ебаный preg_match_all результат
+            \preg_match_all($regex, $xml, $match);
+            // \de($match);
+            $m = $match[1] ?? [];
+            $m = \array_filter($m);
+            if (\sizeof($m) === 1) {
+                return $m[0];
             }
-
-            // INFO DOMNodeList()->getIterator() php 8.0
-            if ($search->count() !== 1) {
-                return null;
+            $m = $match[2] ?? [];
+            $m = \array_filter($m);
+            if (\sizeof($m) === 1) {
+                return $m[0];
             }
-
-            $search = $search->item(0);
-            /** @var \DOMNode|\DOMNameSpaceNode $search */
-
-            return $search->attributes->getNamedItem('Target')->value;
+            return null;
         }
 
         /**
@@ -145,6 +150,8 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
          */
         function findSheet(string $fileNameSheet)
         {
+            $fileNameSheet = \Inilim\Tool\Method\Path\normalize($fileNameSheet);
+
             $find = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($this->zip, static function ($stat) use ($fileNameSheet) {
                 // TODO регистр?
                 $name = \Inilim\Tool\Method\Path\normalize($stat['name']);
