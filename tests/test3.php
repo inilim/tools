@@ -26,8 +26,11 @@ $sql2 = 'SELECT j.key as idx, j.value as item
 FROM json_each((SELECT GROUP_CONCAT(value, "") AS full_json FROM parts)) j
 LIMIT 1000,10';
 
+$sql3 = 'SELECT count(*)
+FROM json_each((SELECT GROUP_CONCAT(value, "") AS full_json FROM parts)) j';
+
 try {
-    $res = $connect->exec($sql2, 2);
+    $res = $connect->exec($sql3, 2);
 } catch (\Throwable $e) {
     de($e);
 }

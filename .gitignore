@@ -1,4 +1,7 @@
 # Exts
+/tests/*.sqlite
+/tests/*.json
+/tests/*.txt
 
 # Dirs
 /vendor
