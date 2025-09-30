@@ -9,14 +9,12 @@ namespace Inilim\Tool\Method\Exp;
  * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
  * @author inilim
  * @todo tests
- * @ext dom zip
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|Param_1_excelGetSheetsInfo[]
  */
 function excelGetSheetsInfo($pathToFileOrZip): ?array
 {
-    \Inilim\Tool\Method\Assert\extPhp('dom');
-
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
 
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -55,35 +53,66 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
                 return null;
             }
 
-            $docWorkbook = new \DOMDocument();
-            if ($docWorkbook->loadXML($content) !== true) {
+            // ---------------------------------------------
+            // regex parse
+            // ---------------------------------------------
+
+            // <sheet name="ДП" sheetId="2" r:id="rId13"/>
+            $matchRes = \preg_match_all(
+                '/' .
+                    '<sheet\s[^>]*>' .
+                    '/i',
+                $content,
+                $matchSheet
+            );
+
+            if (!\is_int($matchRes)) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'DOMDocument::loadXML() failed',
+                    'preg_match_all(<sheet/>) failed',
                     $zipPathToFile,
                     -1
                 );
                 return null;
             }
-            unset($content);
 
-            ['list' => $search] = \Inilim\Tool\Method\Xml\xpathQueryFromDoc(
-                $docWorkbook,
-                '//*[local-name()="sheet"]'
-            );
-            unset($docWorkbook);
-            if ($search === null) {
-                return null;
+            if ($matchRes === 0) {
+                return [];
             }
 
-            $search = \Inilim\Tool\Method\Xml\domToArray($search);
+            $matchSheet = $matchSheet[0];
+            $matchSheet = \array_filter($matchSheet);
+            // de($matchSheet);
+
+            // ---------------------------------------------
+            // regex parse item sheet tag
+            // ---------------------------------------------
+
             $results = [];
-            foreach ($search as $item) {
+            foreach ($matchSheet as $sheetTag) {
+                // 
+                $matchRes = \preg_match_all(
+                    '/' .
+                        '([a-z:]+)="([^"]*)"' .
+                        '/i',
+                    $sheetTag,
+                    $match
+                );
+
+                if (!\is_int($matchRes) || $matchRes === 0) {
+                    continue;
+                }
+
+                $match = \array_combine($match[1] ?? [], $match[2] ?? []);
+                if ($match === false) {
+                    continue;
+                }
+
                 $results[] = [
-                    'id'      => $item['attributes']['id'] ?? null,
-                    'name'    => $item['attributes']['name'] ?? null,
-                    'state'   => $item['attributes']['state'] ?? null,
-                    // 'sheetId' => $item['attributes']['sheetId'] ?? null,
+                    'id'      => $match['r:id'] ?? null,
+                    'name'    => $match['name'] ?? null,
+                    'state'   => $match['state'] ?? null,
+                    // 'sheetId' => $match['sheetId'] ?? null,
                 ];
             }
 

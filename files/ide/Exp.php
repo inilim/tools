@@ -50,7 +50,7 @@ class Exp
  * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
  * @author inilim
  * @todo tests
- * @ext dom zip
+ * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|Param_1_excelGetSheetsInfo[]
  */

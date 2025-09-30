@@ -36,6 +36,7 @@ __includeDeep([
     'Other\errorGetLast',
     'Exp\excelReadCellsBySheetId',
     'Other::timedMsCall',
+    'Exp\excelGetSheetsInfo',
 ]);
 
 
@@ -71,33 +72,33 @@ $file = 'C:\Users\work\Desktop\Отчёт о партнёрах_РЭЧ_2025_РФ
 // de(\preg_replace('#^([a-z]+)(\d+)$#i', '$1-$2', 'AA21'));
 
 
-$db = __DIR__ . '/test.sqlite';
-d($db);
-if (!\Inilim\Tool\Method\FS\isFile($db)) {
-    \Inilim\Tool\Method\File\put($db, '');
-    $connect = new IPDOSQLite($db);
-    $connect->exec('CREATE TABLE IF NOT EXISTS cells (
-        value TEXT,
-        raw_value TEXT,
-        id NUMERIC UNIQUE ON CONFLICT REPLACE,
-        col_num NUMERIC,
-        type TEXT,
-        shared_id NUMERIC,
-        row_num NUMERIC
-    )');
-}
-$connect ??= new IPDOSQLite($db);
-[$lower, $trim] = Str::__asClosure('lower', 'trim');
-$connect->createFunction('MB_LOWER', static function ($value) use ($lower) {
-    return \is_string($value) ? $lower($value) : $value;
-}, 1);
-$connect->createFunction('NEW_TRIM', static function ($value) use ($trim) {
-    return \is_string($value) ? $trim($value) : $value;
-}, 1);
+// $db = __DIR__ . '/test.sqlite';
+// d($db);
+// if (!\Inilim\Tool\Method\FS\isFile($db)) {
+//     \Inilim\Tool\Method\File\put($db, '');
+//     $connect = new IPDOSQLite($db);
+//     $connect->exec('CREATE TABLE IF NOT EXISTS cells (
+//         value TEXT,
+//         raw_value TEXT,
+//         id NUMERIC UNIQUE ON CONFLICT REPLACE,
+//         col_num NUMERIC,
+//         type TEXT,
+//         shared_id NUMERIC,
+//         row_num NUMERIC
+//     )');
+// }
+// $connect ??= new IPDOSQLite($db);
+// [$lower, $trim] = Str::__asClosure('lower', 'trim');
+// $connect->createFunction('MB_LOWER', static function ($value) use ($lower) {
+//     return \is_string($value) ? $lower($value) : $value;
+// }, 1);
+// $connect->createFunction('NEW_TRIM', static function ($value) use ($trim) {
+//     return \is_string($value) ? $trim($value) : $value;
+// }, 1);
 
-$sqlInsert = 'INSERT INTO cells
-(value,raw_value,id,col_num,type,shared_id,row_index) VALUES
-({value},{raw_value},{id},{col_num},{type},{shared_id},{row_index})';
+// $sqlInsert = 'INSERT INTO cells
+// (value,raw_value,id,col_num,type,shared_id,row_index) VALUES
+// ({value},{raw_value},{id},{col_num},{type},{shared_id},{row_index})';
 
 // $connect->getPDO()->sqliteCreateCollation('TEST2', static function () {
 //     dde(func_get_args());
@@ -126,7 +127,7 @@ $sqlInsert = 'INSERT INTO cells
 
 // de($res);
 
-
+de();
 $result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId($file, 'rId11');
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
