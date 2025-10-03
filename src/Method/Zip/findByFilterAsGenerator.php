@@ -15,11 +15,12 @@ namespace Inilim\Tool\Method\Zip;
  */
 function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): \Generator
 {
-    foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $fileItem) {
-        $v = $predicate($fileItem);
+    foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $stat) {
+        $t = $stat;
+        $v = $predicate($t);
         if ($v === $valueBreak) return;
         if ($v === true) {
-            yield $fileItem;
+            yield $stat;
         }
     }
 }

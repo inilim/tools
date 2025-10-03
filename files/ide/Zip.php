@@ -5,6 +5,18 @@ namespace Inilim\Tool;
 class Zip
 {
         /**
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Return_extractByCallable from \TypeZip
+ * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
+ * @param ?string $dir default sys_get_temp_dir()
+ * @param callable(ZipStatItem):bool $predicate
+ * @return ?Return_extractByCallable
+ */
+    static function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir = null): ?array {}
+
+        /**
  * @psalm-import-type ZipStatItem from \TypeZip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object

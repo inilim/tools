@@ -276,6 +276,12 @@ class Other
 
         /**
  * @author inilim
+ * @todo tests
+ */
+    static function sqliteLibVersion(): ?string {}
+
+        /**
+ * @author inilim
  * 
  * @template R of mixed
  * @template Time of int

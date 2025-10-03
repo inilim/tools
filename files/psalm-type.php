@@ -152,6 +152,11 @@ class TypePath {}
  * 
  * @psalm-type ZipStatItem = array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}
  * 
+ * 
+ * ----- extractByCallable
+ * @psalm-type Return_extractByCallable = ZipStatItem&array{status:bool,path_to_file?:string}
+ * 
+ * 
  */
 class TypeZip {}
 

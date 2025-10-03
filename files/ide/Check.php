@@ -108,6 +108,11 @@ class Check
 
         /**
  * @author Inilim
+ */
+    static function existSqliteLib(): bool {}
+
+        /**
+ * @author Inilim
  * @psalm-assert-if-true string $value
  * @phpstan-assert-if-true string $value
  * 

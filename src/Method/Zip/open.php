@@ -17,7 +17,7 @@ function open(string $filename, int $flags = 0): ?\ZipArchive
     if (!$_filename) {
         \Inilim\Tool\Method\Other\__setErrorLast(
             -1,
-            'file not found',
+            'File not found',
             $filename,
             -1
         );
@@ -44,14 +44,14 @@ function open(string $filename, int $flags = 0): ?\ZipArchive
             ];
             \Inilim\Tool\Method\Other\__setErrorLast(
                 -1,
-                $errors[$status] ?? 'zip open failed',
+                $errors[$status] ?? 'Zip open failed',
                 $filename,
                 -1
             );
         } else {
             \Inilim\Tool\Method\Other\__setErrorLast(
                 -1,
-                'zip open failed',
+                'Zip open failed',
                 $filename,
                 -1
             );

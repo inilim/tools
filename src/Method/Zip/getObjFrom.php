@@ -17,11 +17,17 @@ function getObjFrom($pathToFileOrZip): \ZipArchive
     $type = \Inilim\Tool\Method\Other\getType($pathToFileOrZip);
 
     if ($type === 'string') {
+        if (!\Inilim\Tool\Method\FS\isFile($pathToFileOrZip)) {
+            throw new \InvalidArgumentException(\sprintf(
+                'File "%s", not exist',
+                $pathToFileOrZip,
+            ));
+        }
         /** @var string $pathToFileOrZip */
         $zip = \Inilim\Tool\Method\Zip\open($pathToFileOrZip);
         if (!$zip) {
             throw new \InvalidArgumentException(\sprintf(
-                'File "%s", not open',
+                'File "%s", open failed',
                 $pathToFileOrZip,
             ));
         }

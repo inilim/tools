@@ -69,6 +69,8 @@ class Exp
     static function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
 
         /**
+ * INFO Используем расширение xmlreader, не потребляет память, но скорость хуже по сравнению с excelReadCellsBySheetId()
+ * INFO PHP7.4 100_000 записей примерно 2 минуты PHP8.4 1.5 минуты
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip

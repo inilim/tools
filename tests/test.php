@@ -32,14 +32,13 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 \ini_set('memory_limit', '5M');
 
+
 __includeDeep([
     'Other\errorGetLast',
     'Exp\excelReadCellsBySheetId',
     'Exp\excelGetSheetsInfo',
     'Exp\excelReadCellsBySheetId_m2',
 ]);
-
-de(\sizeof(get_defined_functions()['internal']));
 
 // $res = \Inilim\Tool\Method\Exp\excelGenerateCellRange('D1:F18');
 // de(\iterator_to_array($res));

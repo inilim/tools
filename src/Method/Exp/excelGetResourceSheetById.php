@@ -163,7 +163,7 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
             if (!$find) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    \sprintf('Zip::findFirstResourceByCallable() find file "%s" failed', $fileNameSheet),
+                    \sprintf('Zip::findFirstResourceByCallable() file "%s" not found', $fileNameSheet),
                     $this->zipPathToFile,
                     -1
                 );

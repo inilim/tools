@@ -92,6 +92,12 @@ class Assert
 
         /**
  * @author Inilim
+ * @throws \InvalidArgumentException
+ */
+    static function existSqliteLib(string $message = '') {}
+
+        /**
+ * @author Inilim
  * 
  * @return void
  * @throws \InvalidArgumentException

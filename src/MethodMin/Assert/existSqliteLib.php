@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Assert{function existSqliteLib(string $message=''){if(!\Inilim\Tool\Method\Check\existSqliteLib()){throw new \InvalidArgumentException($message?:'SQLite library not exist');}}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('sqliteLibVersion')){
+    function sqliteLibVersion():?string{\ob_start();\phpinfo(\INFO_MODULES);$pinfo=\ob_get_clean();\preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i',$pinfo,$match);return $match[1]?? null;}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('existSqliteLib')){
+    function existSqliteLib():bool{return \Inilim\Tool\Method\Other\sqliteLibVersion()!==null;}
+    }}

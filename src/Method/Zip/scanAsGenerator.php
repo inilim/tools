@@ -15,8 +15,8 @@ namespace Inilim\Tool\Method\Zip;
 function scanAsGenerator($pathToFileOrZip): \Generator
 {
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
-
-    for ($i = 0; $i < $zip->numFiles; $i++) {
+    $num = $zip->numFiles;
+    for ($i = 0; $i < $num; $i++) {
         $ri = $zip->statIndex($i, \ZipArchive::FL_UNCHANGED);
         if ($ri === false) {
             continue;

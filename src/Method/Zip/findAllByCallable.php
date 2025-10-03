@@ -16,7 +16,8 @@ function findAllByCallable($pathToFileOrZip, callable $predicate): array
 {
     $results = [];
     foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $stat) {
-        if ($predicate($stat) === true) {
+        $t = $stat;
+        if ($predicate($t) === true) {
             $results[] = $stat;
         }
     }
