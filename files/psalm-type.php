@@ -108,6 +108,10 @@ class TypeObj {}
  * @psalm-type Row_excelReadRowsById = array{cells:Cell_excelReadRowsById[],index:int,xml:string,count:int}
  * 
  * 
+ * ----- excelReadCellsBySheetId_m2
+ * 
+ * @psalm-type Cell_excelReadCellsBySheetId_m2 = array{type:string,id:string,str_idx:?int,xml:string,value:null|bool||string|int|float,raw_value:?string,formula:?string,row_num:int,col_num:int,col_char:string}
+ * @psalm-type DataCell_excelReadCellsBySheetId_m2 = array{type:string,id:string,str_idx:?int,xml:string,value:?string,raw_value:?string,formula:?string,row_num:int,col_num:int,col_char:string}
  * 
  */
 class TypeExp {}

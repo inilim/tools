@@ -7,34 +7,45 @@ use Symfony\Component\Process\Process;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function getComments(string $code): string
+/**
+ * @return string[]
+ */
+function getComments(string $code): array
 {
     $res = \token_get_all($code);
     $res = \array_filter($res, static function ($token) {
         return \in_array($token[0], [\T_COMMENT, \T_DOC_COMMENT]);
     });
-    $res = \array_column($res, 1);
-    return \implode(PHP_EOL, $res);
+    return \array_column($res, 1);
 }
 
 /**
- * @return array<string,string>
+ * @param string[] $comment
+ * @return array<string,string|string[]>
  */
-function parseComment(string $comment): array
+function parseComment(array $comments): array
 {
-    \preg_match_all(
-        '/' .
-            '@([a-z_]+)=([a-z\d_]+)' .
-            '/i',
-        $comment,
-        $match
-    );
-    // de($match);
-    $match = \array_combine($match[1] ?? [], $match[2] ?? []);
-    return $match;
+    foreach ($comments as &$block) {
+        \preg_match_all(
+            '/' .
+                '@([a-z_]+\[?\]?)=([a-z\d_]+)' .
+                '/i',
+            $block,
+            $match
+        );
+        // $match = \array_combine($match[1] ?? [], $match[2] ?? []);
+        // de($match);
+        $match = \array_map(static function ($value1, $value2) {
+            return $value1 . '=' . $value2;
+        }, $match[1], $match[2]);
+        $match = \implode(PHP_EOL, $match);
+        $match = \parse_ini_string($match);
+        $block = $match;
+    }
+    return $comments;
 }
 
-function fn_dir_files(string $dir): Finder
+function data_dir_files(string $dir): Finder
 {
     $dir = \DIR_FILES . '/' . $dir;
     if (!\is_dir($dir)) {
@@ -76,8 +87,7 @@ foreach ($php_bins as $php) {
         throw new \InvalidArgumentException(\sprintf('Неизвестный исполняемый файл php "%s"', $php));
     }
 
-    foreach ($cases as $case) {
-        $case        = $case->getPathname();
+    foreach ($cases as $case => $_) {
         $cli_command = [$php, $case];
         // ---------------------------------------------
         // INFO case test
@@ -94,26 +104,29 @@ foreach ($php_bins as $php) {
         // INFO cli configs
         // ---------------------------------------------
 
-        if (isset($commands['memory_limit'])) {
-            $cli_command[] = \sprintf('--memory_limit="%s"', (string)$commands['memory_limit']);
+        if (\is_string($commands['memory_limit'] ?? null)) {
+            $cli_command[] = \sprintf('--memory_limit="%s"', $commands['memory_limit']);
             unset($commands['memory_limit']);
         }
-        if (isset($commands['time_limit'])) {
-            $cli_command[] = \sprintf('--time_limit="%s"', (string)$commands['time_limit']);
+        if (\is_string($commands['time_limit'] ?? null)) {
+            $cli_command[] = \sprintf('--time_limit="%s"', $commands['time_limit']);
             unset($commands['time_limit']);
         }
 
         // ---------------------------------------------
-        // 
+        // Есть дата провайдер
         // ---------------------------------------------
 
-        // switch (true) {
-        //     case !$commands:
-        //         // 
-        //     case !!$commands:
-        //         foreach ($commands as $command) {
-        //         }
-        // }
+        if (\is_array($commands['data'] ?? null) || \is_string($commands['data'] ?? null)) {
+            $data = $commands['data'];
+            if (\is_string($data)) {
+                $data = [$data];
+            }
+            foreach ($data as $provider) {
+                // 
+            }
+            continue;
+        }
 
 
         // ---------------------------------------------

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
+ * @todo tests
  * Переводим буквенное представление столбца в числовое
  */
 function excelColCharToNum(string $col): int

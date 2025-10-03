@@ -192,9 +192,14 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         goto brokenCell;
                     }
                     $raw_value = $raw_value->textContent;
-                    $value = \Inilim\Tool\Method\Integer\isNumeric($raw_value)
-                        ? (int)$raw_value
-                        : (float)$raw_value;
+                    if (\Inilim\Tool\Method\Integer\isNumeric($raw_value)) {
+                        $value = (int)$raw_value;
+                        $type = 'int';
+                    } else {
+                        $value = (float)$raw_value;
+                        $type = 'float';
+                    }
+
                     return [
                         'value'     => $value,
                         'id'        => $cellId,
@@ -202,7 +207,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'col'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => $raw_value,
-                        'type'      => 'number',
+                        'type'      => $type,
                     ];
                 case '':
                     // пустая ячейка

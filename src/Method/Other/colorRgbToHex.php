@@ -13,16 +13,24 @@ function colorRgbToHex(int $red, int $green, int $blue, bool $withGrid = false):
     $g = \max(0, \min(255, $green));
     $b = \max(0, \min(255, $blue));
 
+    return \sprintf(
+        '%s%X%X%X',
+        ($withGrid ? '#' : ''),
+        $r,
+        $g,
+        $b
+    );
+
     // Convert each decimal component to its hexadecimal equivalent
-    $hexR = \dechex($r);
-    $hexG = \dechex($g);
-    $hexB = \dechex($b);
+    // $hexR = \dechex($r);
+    // $hexG = \dechex($g);
+    // $hexB = \dechex($b);
 
     // Pad single-digit hex values with a leading zero
-    $hexR = \str_pad($hexR, 2, '0', \STR_PAD_LEFT);
-    $hexG = \str_pad($hexG, 2, '0', \STR_PAD_LEFT);
-    $hexB = \str_pad($hexB, 2, '0', \STR_PAD_LEFT);
+    // $hexR = \str_pad($hexR, 2, '0', \STR_PAD_LEFT);
+    // $hexG = \str_pad($hexG, 2, '0', \STR_PAD_LEFT);
+    // $hexB = \str_pad($hexB, 2, '0', \STR_PAD_LEFT);
 
     // Combine the hex values and prefix with '#'
-    return ($withGrid ? '#' : '') . $hexR . $hexG . $hexB;
+    // return ($withGrid ? '#' : '') . $hexR . $hexG . $hexB;
 }

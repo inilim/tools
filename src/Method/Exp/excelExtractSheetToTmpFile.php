@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Exp;
 /**
  * @author inilim
  * @todo tests
+ * TODO переделать
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|array

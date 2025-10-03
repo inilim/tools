@@ -35,10 +35,11 @@ use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 __includeDeep([
     'Other\errorGetLast',
     'Exp\excelReadCellsBySheetId',
-    'Other::timedMsCall',
     'Exp\excelGetSheetsInfo',
+    'Exp\excelReadCellsBySheetId_m2',
 ]);
 
+de(\sizeof(get_defined_functions()['internal']));
 
 // $res = \Inilim\Tool\Method\Exp\excelGenerateCellRange('D1:F18');
 // de(\iterator_to_array($res));
@@ -127,8 +128,7 @@ $file = 'C:\Users\work\Desktop\Отчёт о партнёрах_РЭЧ_2025_РФ
 
 // de($res);
 
-de();
-$result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId($file, 'rId11');
+$result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId_m2($file, 'rId13');
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }

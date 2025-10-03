@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 \error_reporting(\E_ALL);
 \define('DIR_ROOT', __DIR__);
+if (!\defined('TEST_DIR_FILES')) {
+    \define('TEST_DIR_FILES', __DIR__ . '/tests/files');
+}
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -11,6 +14,7 @@ use Inilim\Dump\Dump;
 use Inilim\IPDO\IPDOSQLite;
 
 Dump::init();
+
 
 if (!\function_exists('__include')) {
     /**

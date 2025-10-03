@@ -6,13 +6,13 @@ namespace Inilim\Tool\Method\Exp;
 
 /**
  * @author deepseek
- * 
+ * @todo tests
  * @return \Generator<int,string>
  */
 function excelGenerateCellRange(string $range): \Generator
 {
     if (!\Inilim\Tool\Method\Str\isMatch('/^([A-Z]+)(\d+):([A-Z]+)(\d+)$/i', $range)) {
-        throw new \InvalidArgumentException("Неверный формат диапазона: $range");
+        throw new \InvalidArgumentException("Неверный формат диапазона: $range Пример: A1:C10");
     }
 
     $anonObj = new class() {

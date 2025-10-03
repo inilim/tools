@@ -53,8 +53,9 @@
     "mcaskill/composer-exclude-files": "^4.0",
     "phpstan/phpstan": "^2.1",
     "symfony/process": "^5.4",
-    "php-code-minifier/php-code-minifier": "^1.2",
-    "symfony/finder": "^7.3"
+    "phpmetrics/phpmetrics": "^2.9",
+    "symfony/finder": "^5.4",
+    "inilim/php-code-minifier": "dev-main"
   },
   "scripts": {
     "unit": [
@@ -62,6 +63,9 @@
     ],
     "unit:check": [
       "php74 vendor/bin/phpunit tests"
+    ],
+    "phpmetrics:report": [
+      "php84 ./vendor/bin/phpmetrics --report-html=myreport ./src/Method"
     ],
     "stan": [
       "php74 vendor/bin/phpstan"

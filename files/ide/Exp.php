@@ -14,6 +14,7 @@ class Exp
     static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
 
         /**
+ * @todo tests
  * Переводим буквенное представление столбца в числовое
  */
     static function excelColCharToNum(string $col): int {}
@@ -21,6 +22,7 @@ class Exp
         /**
  * @author inilim
  * @todo tests
+ * TODO переделать
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @return null|array
@@ -29,7 +31,7 @@ class Exp
 
         /**
  * @author deepseek
- * 
+ * @todo tests
  * @return \Generator<int,string>
  */
     static function excelGenerateCellRange(string $range): Generator {}
@@ -65,6 +67,18 @@ class Exp
  * @return null|\Generator<int,Cell_excelReadRowsById>;
  */
     static function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type Cell_excelReadCellsBySheetId_m2 from \TypeExp
+ * @psalm-import-type DataCell_excelReadCellsBySheetId_m2 from \TypeExp
+ * @ext xmlreader zip
+ * @param string|\ZipArchive $pathToFileOrZip
+ * @return null|\Generator<int,Cell_excelReadCellsBySheetId_m2>;
+ */
+    static function excelReadCellsBySheetId_m2($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
 
         /**
  * @author inilim
