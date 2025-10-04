@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
+ * INFO быстрый парсинг, но больше потребление памяти
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @psalm-import-type Cell_excelReadRowsById from \TypeExp
+ * @psalm-import-type Cell_excelReadCellsBySheetId from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|\Generator<int,Cell_excelReadRowsById>;
+ * @return null|\Generator<int,Cell_excelReadCellsBySheetId>;
  */
 function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?\Generator
 {
@@ -25,31 +26,32 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
         $convertResult,
         $offset
     ) {
-        var array $convertResult;
-        var int $countReadRows;
         var int $offset;
         /**
          * @var \DOMNodeList<\DOMElement>
          */
-        var \DOMNodeList $cells;
-        var \DOMNodeList $sharedStringsList;
+        var ?\DOMNodeList $cells;
+        var ?\DOMNodeList $sharedStringsList;
+        var string $fileExcel;
+        var string $fileSharedStrings;
+        var string $fileSheet;
 
         function __construct(
             array $convertResult,
             int $offset
         ) {
-            $this->convertResult = $convertResult;
-            $this->offset        = $offset;
+            $this->fileExcel = $convertResult['info']['excel_file'];
+            $this->fileSheet = $convertResult['sheet']['file'];
+            $this->fileSharedStrings = $convertResult['shared_strings']['file'];
+            $this->offset = $offset;
         }
 
         function __invoke(): bool
         {
-            $r = $this->convertResult;
-            $this->convertResult = [];
             $xmlSheet = new \DOMDocument;
-            $xmlSheet->load($r['sheet']['file']);
+            $xmlSheet->load($this->fileSheet);
             $xmlSharedStrs = new \DOMDocument;
-            $xmlSharedStrs->load($r['shared_strings']['file']);
+            $xmlSharedStrs->load($this->fileSharedStrings);
 
             // INFO XPath::query бысрее чем DOMDocument::getElementsByTagName
             $sharedStringsList = (new \DOMXPath($xmlSharedStrs))->query('//*[local-name()="t"]');
@@ -80,16 +82,28 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
             return true;
         }
 
+        /**
+         * @return \Generator<int,Cell_excelReadCellsBySheetId>
+         */
         function getGenerator(): \Generator
         {
             $sharedStrsList = $this->sharedStringsList;
+            $i = 0;
+            $start = \time();
             foreach ($this->cells as $cell) {
-                yield $this->defineCell($cell, $sharedStrsList);
-            } // endforeach(cells)
+                $cell = $this->defineCell($cell, $sharedStrsList);
+                $cur = \time();
+                $e = \sprintf('Count: %s Start: %s Cur: %s Diff: %s Cell: %s', $i, $start, $cur, ($cur - $start), $cell['id']);
+                echo $e . "\r";
+                yield $cell;
+                $i++;
+            } // endforeach
+            $sharedStrsList = $this->sharedStringsList = $this->cells = null;
         }
 
         /**
-         * @return Cell_excelReadRowsById
+         * TODO доделать выводимиый массив
+         * @return Cell_excelReadCellsBySheetId
          */
         function defineCell(\DOMElement $cellEl, \DOMNodeList $sharedStrsList): array
         {
@@ -128,7 +142,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'raw_value' => $formula,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'type'      => 'formula',
                     ];
@@ -151,10 +165,10 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'raw_value' => $raw_value,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'  => $colChar,
                         'row_num'   => $rowNum,
                         'type'      => 'string',
-                        'shared_id' => $strIdx
+                        'str_idx'   => $strIdx
                     ];
                 case 'e':
                     // error excel
@@ -162,7 +176,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => null,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => \Inilim\Tool\Method\Xml\toXml($cellEl),
                         'type'      => 'error',
@@ -179,7 +193,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => (bool)$raw_value,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => $raw_value,
                         'type'      => 'bool',
@@ -204,7 +218,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => $value,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => $raw_value,
                         'type'      => $type,
@@ -215,7 +229,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => null,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => \Inilim\Tool\Method\Xml\toXml($cellEl),
                         'type'      => 'empty',
@@ -230,7 +244,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => null,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => \Inilim\Tool\Method\Xml\toXml($cellEl),
                         'type'      => 'unknown',
@@ -241,7 +255,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
                         'value'     => null,
                         'id'        => $cellId,
                         'col_num'   => $colNum,
-                        'col'       => $colChar,
+                        'col_char'       => $colChar,
                         'row_num'   => $rowNum,
                         'raw_value' => \Inilim\Tool\Method\Xml\toXml($cellEl),
                         'type'      => 'broken',
@@ -254,7 +268,7 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
             \Inilim\Tool\Method\Other\__setErrorLast(
                 -1,
                 \sprintf($format, ...$values),
-                $this->convertResult['info']['excel_file'],
+                $this->fileExcel,
                 -1
             );
         }
@@ -263,9 +277,10 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
 
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static fn() => $anonObj->__invoke(),
-        static function () {
-            d(func_get_args());
-        }
+        // static function () {
+        //     de(func_get_args());
+        // }
+        null
     );
     /** @var null|bool $result */
 

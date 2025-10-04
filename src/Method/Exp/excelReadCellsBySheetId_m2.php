@@ -89,8 +89,8 @@ function excelReadCellsBySheetId_m2($pathToFileOrZip, string $sheetId, int $offs
         {
             $sheet = $this->sheet;
             $offset = $this->offset;
-            // $i = 0;
-            // $start = \time();
+            $i = 0;
+            $start = \time();
             $el = \XMLReader::ELEMENT;
             while ($sheet->read()) {
                 if ($sheet->nodeType === $el && $sheet->name === 'c') {
@@ -104,11 +104,11 @@ function excelReadCellsBySheetId_m2($pathToFileOrZip, string $sheetId, int $offs
                         continue;
                     }
                     $cell = $this->defineCell($cell);
-                    // $cur = \time();
-                    // $e = \sprintf('Count: %s Start: %s Cur: %s Diff: %s', $i, $start, $cur, ($cur - $start));
-                    // echo $e . "\r";
+                    $cur = \time();
+                    $e = \sprintf('Count: %s Start: %s Cur: %s Diff: %s Cell: %s', $i, $start, $cur, ($cur - $start), $cell['id']);
+                    echo $e . "\r";
                     yield $cell;
-                    // $i++;
+                    $i++;
 
                     // if ($i >= 100_000) {
                     // echo $e . PHP_EOL;

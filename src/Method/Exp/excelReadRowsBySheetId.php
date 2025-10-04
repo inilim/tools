@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
+ * @skip_build
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip

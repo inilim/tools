@@ -128,6 +128,7 @@ $file = 'C:\Users\work\Desktop\Отчёт о партнёрах_РЭЧ_2025_РФ
 // de($res);
 
 $result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId_m2($file, 'rId13');
+// $result = \Inilim\Tool\Method\Exp\excelReadCellsBySheetId($file, 'rId13');
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }
