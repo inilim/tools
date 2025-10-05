@@ -92,6 +92,9 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
             $start = \time();
             foreach ($this->cells as $cell) {
                 $cell = $this->defineCell($cell, $sharedStrsList);
+                if ($cell === null) {
+                    continue;
+                }
                 $cur = \time();
                 $e = \sprintf('Count: %s Start: %s Cur: %s Diff: %s Cell: %s', $i, $start, $cur, ($cur - $start), $cell['id']);
                 echo $e . "\r";
@@ -105,14 +108,21 @@ function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset 
          * TODO доделать выводимиый массив
          * @return Cell_excelReadCellsBySheetId
          */
-        function defineCell(\DOMElement $cellEl, \DOMNodeList $sharedStrsList): array
+        function defineCell(\DOMElement $cellEl, \DOMNodeList $sharedStrsList): ?array
         {
             $type   = $cellEl->getAttribute('t');
-            $type   = \strtolower($type);
+            if ($type === '') {
+                $type = 'empty';
+            } else {
+                $type   = \strtolower($type);
+            }
             $cellId = $cellEl->getAttribute('r');
             $cellId = \strtoupper($cellId);
             // AE43 > AE 43
             [$colChar, $rowNum] = \preg_split('/(?<=\D)(?=\d)|(?<=\d)(?=\D)/', $cellId, 2);
+            if ($colChar === null || $rowNum === null) {
+                return null;
+            }
             $rowNum = (int)$rowNum;
             try {
                 $colNum = \Inilim\Tool\Method\Exp\excelColCharToNum($colChar);

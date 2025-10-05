@@ -228,6 +228,18 @@ class Other
     static function pagination(int $curPage, int $limitOnePage, int $countRecords) {}
 
         /**
+ * @author inilim
+ * @todo tests
+ */
+    static function phpInfo(int $flags = \INFO_ALL): ?string {}
+
+        /**
+ * @author inilim
+ * @todo tests
+ */
+    static function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string {}
+
+        /**
  * @author Inilim
  * @return string
  */
@@ -279,6 +291,13 @@ class Other
  * @todo tests
  */
     static function sqliteLibVersion(): ?string {}
+
+        /**
+ * INFO phpinfo берем из кеш файла
+ * @author inilim
+ * @todo tests
+ */
+    static function sqliteLibVersion_m2(bool $fresh = false): ?string {}
 
         /**
  * @author inilim

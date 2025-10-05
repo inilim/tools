@@ -112,6 +112,12 @@ class Check
     static function existSqliteLib(): bool {}
 
         /**
+ * INFO phpinfo берем из кеш файла
+ * @author Inilim
+ */
+    static function existSqliteLib_m2(): bool {}
+
+        /**
  * @author Inilim
  * @psalm-assert-if-true string $value
  * @phpstan-assert-if-true string $value

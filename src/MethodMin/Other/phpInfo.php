@@ -2,14 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Check{function existSqliteLib():bool{return \Inilim\Tool\Method\Other\sqliteLibVersion()!==null;}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+namespace Inilim\Tool\Method\Other{function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=(string) \func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
-    }if(!\Inilim\Tool\Other::__definedIfNot('phpInfo')){
-    function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=(string) \func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}
-    }if(!\Inilim\Tool\Other::__definedIfNot('sqliteLibVersion')){
-    function sqliteLibVersion():?string{$info=\Inilim\Tool\Method\Other\phpInfo(\INFO_MODULES);if($info===null){return null;}\preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i',$info,$match);return $match[1]?? null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }}

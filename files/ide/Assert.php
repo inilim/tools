@@ -97,6 +97,13 @@ class Assert
     static function existSqliteLib(string $message = '') {}
 
         /**
+ * INFO phpinfo берем из кеш файла
+ * @author Inilim
+ * @throws \InvalidArgumentException
+ */
+    static function existSqliteLib_m2(string $message = '') {}
+
+        /**
  * @author Inilim
  * 
  * @return void

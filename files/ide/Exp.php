@@ -58,13 +58,14 @@ class Exp
     static function excelGetSheetsInfo($pathToFileOrZip): ?array {}
 
         /**
+ * INFO быстрый парсинг, но больше потребление памяти
  * @author inilim
  * @todo tests
  * @psalm-import-type ZipStatItem from \TypeZip
- * @psalm-import-type Cell_excelReadRowsById from \TypeExp
+ * @psalm-import-type Cell_excelReadCellsBySheetId from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @return null|\Generator<int,Cell_excelReadRowsById>;
+ * @return null|\Generator<int,Cell_excelReadCellsBySheetId>;
  */
     static function excelReadCellsBySheetId($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
 
@@ -81,18 +82,6 @@ class Exp
  * @return null|\Generator<int,Cell_excelReadCellsBySheetId_m2>;
  */
     static function excelReadCellsBySheetId_m2($pathToFileOrZip, string $sheetId, int $offset = 0): ?Generator {}
-
-        /**
- * @author inilim
- * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
- * @psalm-import-type Row_excelReadRowsById from \TypeExp
- * @psalm-import-type Cell_excelReadRowsById from \TypeExp
- * @ext dom zip
- * @param string|\ZipArchive $pathToFileOrZip
- * @return null|\Generator<int,Row_excelReadRowsById>
- */
-    static function excelReadRowsBySheetId($pathToFileOrZip, string $sheetId, int $countReadRows = 100, int $offset = 0): ?Generator {}
 
         /**
  * @ext zip

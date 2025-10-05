@@ -245,6 +245,60 @@ class tryCallWithErrHandlerTest extends TestCase
         $this->assertEquals('do_result', $result);
     }
 
+    function test_1()
+    {
+        // проверить что пользовательский обработчик возвращается
+
+        \set_error_handler(static function () {
+            static $id = 'user';
+            return true;
+        }, \E_ALL);
+
+        Other::tryCallWithErrHandler(
+            static function () {},
+            static function () {
+                static $id = 'fn';
+                return true;
+            }
+        );
+
+        $callable = \set_error_handler(static fn() => true);
+        \restore_error_handler();
+        $this->assertInstanceOf(\Closure::class, $callable);
+        $reflectionFunction = new \ReflectionFunction($callable);
+        $staticVariables = $reflectionFunction->getStaticVariables();
+        $this->assertTrue(isset($staticVariables['id']));
+        $this->assertSame('user', $staticVariables['id']);
+
+        // ---------------------------------------------
+        // Вложенный
+        // ---------------------------------------------
+
+        Other::tryCallWithErrHandler(
+            static function () {
+                Other::tryCallWithErrHandler(
+                    static function () {},
+                    static function () {
+                        static $id = 'fn_2';
+                        return true;
+                    }
+                );
+            },
+            static function () {
+                static $id = 'fn_1';
+                return true;
+            }
+        );
+
+        $callable = \set_error_handler(static fn() => true);
+        \restore_error_handler();
+        $this->assertInstanceOf(\Closure::class, $callable);
+        $reflectionFunction = new \ReflectionFunction($callable);
+        $staticVariables = $reflectionFunction->getStaticVariables();
+        $this->assertTrue(isset($staticVariables['id']));
+        $this->assertSame('user', $staticVariables['id']);
+    }
+
     // function test_default_error_handler()
     // {
     //     \error_reporting(\E_ALL);

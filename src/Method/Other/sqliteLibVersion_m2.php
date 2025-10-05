@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * INFO phpinfo берем из кеш файла
  * @author inilim
  * @todo tests
  */
-function sqliteLibVersion(): ?string
+function sqliteLibVersion_m2(bool $fresh = false): ?string
 {
-    $info = \Inilim\Tool\Method\Other\phpInfo(\INFO_MODULES);
+    $info = \Inilim\Tool\Method\Other\phpInfoCache(\INFO_MODULES, $fresh);
     if ($info === null) {
         return null;
     }
