@@ -329,6 +329,13 @@ class Check
     static function positiveInteger($value): bool {}
 
         /**
+ * @author inilim
+ * @psalm-pure
+ * @param mixed  $value
+ */
+    static function regex($value): bool {}
+
+        /**
  * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true resource|string $value

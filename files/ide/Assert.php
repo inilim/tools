@@ -446,6 +446,14 @@ class Assert
     static function positiveInteger($value, string $message = '') {}
 
         /**
+ * @author inilim
+ * @psalm-pure
+ * @param mixed  $value
+ * @throws \InvalidArgumentException
+ */
+    static function regex($value, string $message = '') {}
+
+        /**
  * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert resource|string $value

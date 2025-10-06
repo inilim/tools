@@ -8,6 +8,7 @@ namespace Inilim\Tool\Method\Other;
  * @author inilim
  * @todo tests
  * @param resource $resource
+ * @param string $pathToFile file overwrite
  */
 function resourceContentWriteToFile($resource, string $pathToFile): ?string
 {

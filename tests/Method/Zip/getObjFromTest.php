@@ -24,33 +24,28 @@ class getObjFromTest extends TestCase
 
     function test1()
     {
-        $this->expectException(\InvalidArgumentException::class);
         // not exist file
-        Zip::getObjFrom(__DIR__ . '/' . ID::uuidv7());
+        $this->assertNull(Zip::getObjFrom(__DIR__ . '/' . ID::uuidv7()));
     }
     function test2()
     {
-        $this->expectException(\InvalidArgumentException::class);
         // zip not link to file
-        Zip::getObjFrom(new \ZipArchive);
+        $this->assertNull(Zip::getObjFrom(new \ZipArchive));
     }
     function test3()
     {
-        $this->expectException(\InvalidArgumentException::class);
         // bad object
-        Zip::getObjFrom(new \stdClass);
+        $this->assertNull(Zip::getObjFrom(new \stdClass));
     }
     function test4()
     {
-        $this->expectException(\InvalidArgumentException::class);
         // bad value
-        Zip::getObjFrom('');
+        $this->assertNull(Zip::getObjFrom(''));
     }
     function test5()
     {
-        $this->expectException(\InvalidArgumentException::class);
         // bad value
-        Zip::getObjFrom(null);
+        $this->assertNull(Zip::getObjFrom(null));
     }
 
     /**

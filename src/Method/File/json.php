@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\File;
 /**
  * Get the contents of a file as decoded JSON.
  * @param  mixed  $default
+ * @param  int  $flags json_decode flags
  * @return mixed
  * @psalm-import-type THROW_get_0 from \TypeFile
  * @throws THROW_get_0
@@ -29,13 +30,21 @@ function json(
         if ($throw) {
             throw $result['exception'];
         }
+        \Inilim\Tool\Method\Other\__setErrorLast(
+            -1,
+            \sprintf('Read file "%s" failed', $pathToFile),
+            '',
+            -1
+        );
         return $default;
     }
 
     if (!\Inilim\Tool\Method\Check\isJson($result['result'])) {
+        $m = \sprintf('Content from file "%s" not json', $pathToFile);
         if ($throw) {
-            throw new \JsonException(\sprintf('Content file not json "%s"', $pathToFile));
+            throw new \JsonException($m);
         }
+        \Inilim\Tool\Method\Other\__setErrorLast(-1, $m, '', -1);
         return $default;
     }
 

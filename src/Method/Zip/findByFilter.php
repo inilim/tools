@@ -13,10 +13,11 @@ namespace Inilim\Tool\Method\Zip;
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): array
+function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): ?array
 {
-    return \iterator_to_array(
-        \Inilim\Tool\Method\Zip\findByFilterAsGenerator($pathToFileOrZip, $predicate, $valueBreak),
-        false
-    );
+    $gen = \Inilim\Tool\Method\Zip\findByFilterAsGenerator($pathToFileOrZip, $predicate, $valueBreak);
+    if ($gen === null) {
+        return null;
+    }
+    return \iterator_to_array($gen, false);
 }

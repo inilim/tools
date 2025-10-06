@@ -23,12 +23,10 @@ function getResourceByIdx(\ZipArchive $zip, int $idx)
                 $resource = $zip->getStream($stat['name']);
             }
 
-
-            if ($resource === false) {
-                return null;
-            }
-            return $resource;
+            return $resource === false ? null : $resource;
         },
-        null
+        static function () {
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, (string)\func_get_arg(1), '', -1);
+        }
     );
 }

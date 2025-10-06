@@ -24,7 +24,7 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function findAllByCallable($pathToFileOrZip, callable $predicate): array {}
+    static function findAllByCallable($pathToFileOrZip, callable $predicate): ?array {}
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -35,7 +35,7 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): array {}
+    static function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): ?array {}
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -46,7 +46,7 @@ class Zip
  * @throws \InvalidArgumentException
  * @return \Generator<int,ZipStatItem>
  */
-    static function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): Generator {}
+    static function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): ?Generator {}
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -73,9 +73,9 @@ class Zip
  * @ext zip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
- * @throws \InvalidArgumentException
+ * @return ?\ZipArchive
  */
-    static function getObjFrom($pathToFileOrZip): ZipArchive {}
+    static function getObjFrom($pathToFileOrZip): ?object {}
 
         /**
  * @todo tests
@@ -98,16 +98,16 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function scan($pathToFileOrZip): array {}
+    static function scan($pathToFileOrZip): ?array {}
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
  * @todo tests
  * @link https://php.net/manual/en/ziparchive.statindex.php
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
- * @return \Generator<int,ZipStatItem>
+ * @return ?\Generator<int,ZipStatItem>
  * @throws \InvalidArgumentException
  */
-    static function scanAsGenerator($pathToFileOrZip): Generator {}
+    static function scanAsGenerator($pathToFileOrZip): ?Generator {}
 
     }

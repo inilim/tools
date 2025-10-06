@@ -15,7 +15,7 @@ class scanAsGeneratorTest extends TestCase
     function test1()
     {
         $countCall = 0;
-        foreach (Zip::scanAsGenerator(\TEST_DIR_FILES . '/zip/empty.zip') as $item) {
+        foreach ((Zip::scanAsGenerator(\TEST_DIR_FILES . '/zip/empty.zip') ?? []) as $item) {
             $countCall++;
         }
         $this->assertSame(0, $countCall);

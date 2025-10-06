@@ -15,14 +15,15 @@ namespace Inilim\Tool\Method\Exp;
 function excelGetSheetsInfo($pathToFileOrZip): ?array
 {
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
-
+    if ($zip === null) {
+        return null;
+    }
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use ($zip) {
             $zipPathToFile = \Inilim\Tool\Method\Path\normalize($zip->filename);
 
             $resource = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($zip, static function ($stat) {
-                // TODO регистр?
-                if (\basename($stat['name']) === 'workbook.xml') {
+                if (\strtolower(\basename($stat['name'])) === 'workbook.xml') {
                     return true;
                 }
             });
@@ -30,7 +31,7 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
             if (!$resource) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'Not found "workbook.xml" from archive',
+                    'Not found file "workbook.xml" from archive',
                     $zipPathToFile,
                     -1
                 );

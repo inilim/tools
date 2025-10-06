@@ -13,9 +13,13 @@ namespace Inilim\Tool\Method\Zip;
  * @throws \InvalidArgumentException
  * @return \Generator<int,ZipStatItem>
  */
-function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): \Generator
+function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): ?\Generator
 {
-    foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $stat) {
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
+    if ($gen === null) {
+        return null;
+    }
+    foreach ($gen as $stat) {
         $t = $stat;
         $v = $predicate($t);
         if ($v === $valueBreak) return;

@@ -14,7 +14,11 @@ namespace Inilim\Tool\Method\Zip;
  */
 function findFirstByCallable($pathToFileOrZip, callable $predicate): ?array
 {
-    foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $stat) {
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
+    if ($gen === null) {
+        return null;
+    }
+    foreach ($gen as $stat) {
         $t = $stat;
         if ($predicate($t) === true) {
             return $stat;

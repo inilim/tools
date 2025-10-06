@@ -108,6 +108,7 @@ class File
         /**
  * Get the contents of a file as decoded JSON.
  * @param  mixed  $default
+ * @param  int  $flags json_decode flags
  * @return mixed
  * @psalm-import-type THROW_get_0 from \TypeFile
  * @throws THROW_get_0

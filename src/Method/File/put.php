@@ -38,7 +38,7 @@ function put(
     \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use (&$args) {
             if (\is_array($args['context'])) {
-                // php 8.0.0 Параметры options и params теперь принимают значение null.
+                // INFO php 8.0.0 Параметры options и params теперь принимают значение null.
                 if ($args['contextParams'] === null) {
                     $args['context'] = \stream_context_create($args['context']);
                 } else {
@@ -51,6 +51,7 @@ function put(
         static function ($type, $message, $file, $line) use (&$args) {
             $args['errors'] ??= [];
             $args['errors'][] = [$message, $type, $file, $line];
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, $message, '', -1);
         }
     );
 
@@ -58,7 +59,8 @@ function put(
     if ($args['errors']) {
         $args['exception'] = \Inilim\Tool\Method\Obj\getCollectionThrowable();
         foreach ($args['errors'] as $err) {
-            $args['exception'][] = new \ErrorException($err[0], $err[1], $err[1], $err[2], $err[3]);
+            [$message, $type, $file, $line] = $err;
+            $args['exception'][] = new \ErrorException($message, $type, $type, $file, $line);
         }
         unset($args['errors']);
     }

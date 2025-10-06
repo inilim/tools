@@ -42,10 +42,10 @@ class Exp
  * @psalm-import-type ZipStatItem from \TypeZip
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @param string $id id find from Exp::excelGetSheetsInfo()
+ * @param string $sheetId id find from Exp::excelGetSheetsInfo()
  * @return null|resource
  */
-    static function excelGetResourceSheetById($pathToFileOrZip, string $id) {}
+    static function excelGetResourceSheetById($pathToFileOrZip, string $sheetId) {}
 
         /**
  * @psalm-import-type Param_1_excelGetSheetsInfo from \TypeExp
@@ -118,6 +118,7 @@ class Exp
     static function getSuggestionLevenshtein(array $possibilities, string $value) {}
 
         /**
+ * Хеширование файла на основе размера файла, начала содержимого и конца, экспериментальная альтернатива функции hash_file, дабы ускорить хеширование больших файлов
  * @author inilim
  * @return string
  * @throws \InvalidArgumentException

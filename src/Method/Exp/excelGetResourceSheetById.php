@@ -10,15 +10,16 @@ namespace Inilim\Tool\Method\Exp;
  * @psalm-import-type ZipStatItem from \TypeZip
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
- * @param string $id id find from Exp::excelGetSheetsInfo()
+ * @param string $sheetId id find from Exp::excelGetSheetsInfo()
  * @return null|resource
  */
-function excelGetResourceSheetById($pathToFileOrZip, string $id)
+function excelGetResourceSheetById($pathToFileOrZip, string $sheetId)
 {
-    $anonObj = new class(
-        \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip),
-        $id
-    ) {
+    $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
+    if ($zip === null) {
+        return null;
+    }
+    $anonObj = new class($zip, $sheetId) {
         var \ZipArchive $zip;
         var string $id;
         var string $zipPathToFile;
@@ -62,8 +63,7 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
         {
             $find = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($this->zip, static function ($stat) {
                 // INFO workbook.xml.rels файл где хранятся имена файлов-таблиц внутри архива
-                // TODO регистр?
-                if (\basename($stat['name']) === 'workbook.xml.rels') {
+                if (\strtolower(\basename($stat['name'])) === 'workbook.xml.rels') {
                     return true;
                 }
             });
@@ -71,7 +71,7 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
             if (!$find) {
                 \Inilim\Tool\Method\Other\__setErrorLast(
                     -1,
-                    'Not found "workbook.xml.rels" from archive',
+                    'Not found file "workbook.xml.rels" from archive',
                     $this->zipPathToFile,
                     -1
                 );
@@ -118,6 +118,7 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
 
             // $xml = '<Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/><Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/><Relationship Target="worksheets/sheet5.xml" Type="..." Id="rId11"/>';
             $id = \preg_quote($this->id);
+            // TODO регульрку можно написать и лучше
             $regex = \sprintf(
                 '/' . // start
                     '<Relationship[^>]*Id="%s"[^>]*Target="([^"]*)"' .
@@ -142,6 +143,12 @@ function excelGetResourceSheetById($pathToFileOrZip, string $id)
             if (\sizeof($m) === 1) {
                 return $m[0];
             }
+            \Inilim\Tool\Method\Other\__setErrorLast(
+                -1,
+                \sprintf('Not found "%s" from file "workbook.xml.rels"', $id),
+                $this->zipPathToFile,
+                -1
+            );
             return null;
         }
 

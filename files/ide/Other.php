@@ -276,6 +276,7 @@ class Other
  * @author inilim
  * @todo tests
  * @param resource $resource
+ * @param string $pathToFile file overwrite
  */
     static function resourceContentWriteToFile($resource, string $pathToFile): ?string {}
 

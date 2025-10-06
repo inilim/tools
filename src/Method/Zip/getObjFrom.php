@@ -8,9 +8,9 @@ namespace Inilim\Tool\Method\Zip;
  * @ext zip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
- * @throws \InvalidArgumentException
+ * @return ?\ZipArchive
  */
-function getObjFrom($pathToFileOrZip): \ZipArchive
+function getObjFrom($pathToFileOrZip): ?object
 {
     \Inilim\Tool\Method\Assert\extPhp('zip');
 
@@ -18,37 +18,42 @@ function getObjFrom($pathToFileOrZip): \ZipArchive
 
     if ($type === 'string') {
         if (!\Inilim\Tool\Method\FS\isFile($pathToFileOrZip)) {
-            throw new \InvalidArgumentException(\sprintf(
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, \sprintf(
                 'File "%s", not exist',
                 $pathToFileOrZip,
-            ));
+            ), '', -1);
+            return null;
         }
         /** @var string $pathToFileOrZip */
         $zip = \Inilim\Tool\Method\Zip\open($pathToFileOrZip);
         if (!$zip) {
-            throw new \InvalidArgumentException(\sprintf(
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, \sprintf(
                 'File "%s", open failed',
                 $pathToFileOrZip,
-            ));
+            ), '', -1);
+            return null;
         }
     } elseif ($type === 'object') {
         if (!($pathToFileOrZip instanceof \ZipArchive)) {
             /** @var object $pathToFileOrZip */
-            throw new \InvalidArgumentException(\sprintf(
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, \sprintf(
                 'Expected (arg #0) a string or \ZipArchive. Got: %s',
                 \get_class($pathToFileOrZip)
-            ));
+            ), '', -1);
+            return null;
         }
         $zip = $pathToFileOrZip;
         // TODO не помню зачем это
         if ($zip->filename === '') {
-            throw new \InvalidArgumentException('Uninitialized zip');
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, 'Uninitialized zip', '', -1);
+            return null;
         }
     } else {
-        throw new \InvalidArgumentException(\sprintf(
+        \Inilim\Tool\Method\Other\__setErrorLast(-1, \sprintf(
             'Expected (arg #0) a string or \ZipArchive. Got: %s',
             $type
-        ));
+        ), '', -1);
+        return null;
     }
 
     return $zip;

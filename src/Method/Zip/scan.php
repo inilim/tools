@@ -12,10 +12,11 @@ namespace Inilim\Tool\Method\Zip;
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-function scan($pathToFileOrZip): array
+function scan($pathToFileOrZip): ?array
 {
-    return \iterator_to_array(
-        \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip),
-        false
-    );
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
+    if ($gen === null) {
+        return null;
+    }
+    return \iterator_to_array($gen, false);
 }

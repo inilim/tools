@@ -16,6 +16,9 @@ namespace Inilim\Tool\Method\Zip;
 function findFirstResourceByCallable($pathToFileOrZip, callable $predicate)
 {
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
+    if ($zip === null) {
+        return null;
+    }
     $find = \Inilim\Tool\Method\Zip\findFirstByCallable($zip, $predicate);
     if ($find === null) {
         return null;

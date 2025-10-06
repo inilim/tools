@@ -58,6 +58,7 @@ function makeDir(
             }
             $args['errors'] ??= [];
             $args['errors'][] = [$message, $type, $file, $line];
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, $message, '', -1);
         }
     );
 

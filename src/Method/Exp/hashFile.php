@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Exp;
 
 /**
+ * Хеширование файла на основе размера файла, начала содержимого и конца, экспериментальная альтернатива функции hash_file, дабы ускорить хеширование больших файлов
  * @author inilim
  * @return string
  * @throws \InvalidArgumentException
@@ -22,7 +23,7 @@ function hashFile(
     }
 
     if (!\is_file($pathToFile)) {
-        throw new \Exception(\sprintf('Not found file: "%s"', $pathToFile));
+        throw new \InvalidArgumentException(\sprintf('Not found file: "%s"', $pathToFile));
     }
 
     $size = \filesize($pathToFile);

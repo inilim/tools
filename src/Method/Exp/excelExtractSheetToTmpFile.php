@@ -14,10 +14,11 @@ namespace Inilim\Tool\Method\Exp;
  */
 function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array
 {
-    $anonObj = new class(
-        \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip),
-        $sheetId,
-    ) {
+    $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
+    if ($zip === null) {
+        return null;
+    }
+    $anonObj = new class($zip, $sheetId) {
         var \ZipArchive $zip;
         var string $id;
         var string $zipPathToFile;
@@ -28,10 +29,8 @@ function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array
         var int $createInfoFile = 0;
         var int $refresh = 0;
 
-        function __construct(
-            \ZipArchive $zip,
-            string $id
-        ) {
+        function __construct(\ZipArchive $zip, string $id)
+        {
             $this->id                = $id;
             $this->zip               = $zip;
             $this->zipPathToFile     = \Inilim\Tool\Method\Path\normalize($zip->filename);
@@ -206,14 +205,14 @@ function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array
         {
             // TODO может есть excel файлы в котором нету sharedStrings.xml?
             $find = \Inilim\Tool\Method\Zip\findFirstResourceByCallable($this->zip, static function ($stat) {
-                // TODO регистр?
-                if (\basename($stat['name']) === 'sharedStrings.xml') {
+                // INFO оригинальное имя "sharedStrings.xml"
+                if (\strtolower(\basename($stat['name'])) === 'sharedstrings.xml') {
                     return true;
                 }
             });
 
             if (!$find) {
-                $this->setErr('Not found "sharedStrings.xml" from archive');
+                $this->setErr('Not found file "sharedStrings.xml" from archive');
                 return null;
             }
 

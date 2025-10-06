@@ -12,10 +12,14 @@ namespace Inilim\Tool\Method\Zip;
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-function findAllByCallable($pathToFileOrZip, callable $predicate): array
+function findAllByCallable($pathToFileOrZip, callable $predicate): ?array
 {
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
+    if ($gen === null) {
+        return null;
+    }
     $results = [];
-    foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip) as $stat) {
+    foreach ($gen as $stat) {
         $t = $stat;
         if ($predicate($t) === true) {
             $results[] = $stat;

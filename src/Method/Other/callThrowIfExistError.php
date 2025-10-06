@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Other;
  * @todo tests
  * 
  * @template R
- * @template A of mixed[]
+ * @template A of mixed[]|mixed
  * @template E of \Throwable
  * 
  * @param callable(A ...$args):R $callable
@@ -19,10 +19,13 @@ namespace Inilim\Tool\Method\Other;
  * @param class-string<E> $class
  * @return R
  */
-function callThrowIfExistError(callable $callable, array $args = [], string $class = \Error::class)
+function callThrowIfExistError(callable $callable, $args = [], string $class = \Error::class)
 {
     $beforeErr = \Inilim\Tool\Method\Other\errorGetLast();
     \Inilim\Tool\Method\Other\errorClearLast();
+    if (!\is_array($args)) {
+        $args = [$args];
+    }
     $result = $callable(...$args);
     $afterErr = \Inilim\Tool\Method\Other\errorGetLast();
     if ($beforeErr) {

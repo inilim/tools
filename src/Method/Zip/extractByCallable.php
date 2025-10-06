@@ -17,25 +17,27 @@ namespace Inilim\Tool\Method\Zip;
 function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir = null): ?array
 {
     $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
-
+    if ($zip === null) {
+        return null;
+    }
     $procedure = static function () use ($zip, $predicate, $dir) {
-        if ($dir !== null) {
+        if ($dir === null) {
+            $_dir = \sys_get_temp_dir();
+        } else {
             $_dir = \realpath($dir);
             if ($_dir === false) {
-                \Inilim\Tool\Method\Other\__setErrorLast(
-                    -1,
-                    \sprintf('Dir "%s" not exist', $dir),
-                    '',
-                    -1
-                );
+                \Inilim\Tool\Method\Other\__setErrorLast(-1, \sprintf('Dir "%s" not exist', $dir), '', -1);
                 return null;
             }
-        } else {
-            $_dir = \sys_get_temp_dir();
+        }
+
+        $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($zip);
+        if ($gen === null) {
+            return null;
         }
 
         $results = [];
-        foreach (\Inilim\Tool\Method\Zip\scanAsGenerator($zip) as $stat) {
+        foreach ($gen as $stat) {
             /** @var ZipStatItem $stat */
             $t = $stat;
             if ($predicate($t) !== true) {
@@ -64,5 +66,7 @@ function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir =
         return $results;
     };
 
-    return \Inilim\Tool\Method\Other\tryCallWithErrHandler($procedure, null);
+    return \Inilim\Tool\Method\Other\tryCallWithErrHandler($procedure, static function () {
+        \Inilim\Tool\Method\Other\__setErrorLast(-1, (string)\func_get_arg(1), '', -1);
+    });
 }
