@@ -127,11 +127,19 @@ class File
     static function jsonViaArray(array $params) {}
 
         /**
+ * @deprecated use lines_v2()
  * Get the contents of a file one line at a time.
  * @return \Closure():\Generator<string>
- * @throws \Exception
+ * @throws \InvalidArgumentException
  */
     static function lines(string $pathToFile): Closure {}
+
+        /**
+ * Get the contents of a file one line at a time.
+ * @return \Generator<int,string>
+ * @throws \InvalidArgumentException
+ */
+    static function lines_v2(string $pathToFile): Generator {}
 
         /**
  * @todo tests

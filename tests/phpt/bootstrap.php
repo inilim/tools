@@ -28,7 +28,6 @@ function test_handleError($level_err, $message, $file, $line)
     }
 
     if (\in_array($level_err, [\E_DEPRECATED, \E_USER_DEPRECATED], true)) {
-    } elseif ($level_err === \E_NOTICE) {
     } else {
         $e = new \Error($message);
         $rc = new \ReflectionClass($e);

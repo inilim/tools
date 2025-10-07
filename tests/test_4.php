@@ -10,18 +10,13 @@ require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 
 __includeDeep([
-    'Other\phpInfoCache',
-    'Other\phpInfo',
+    // 'Other\phpInfoCache',
+    // 'Other\phpInfo',
 ]);
 
 // \Inilim\Tool\Method\Other\phpInfoCache();
 
-
-$result = Other::timedMsCall(static function () {
-    for ($i = 0; $i <= 1000; $i++) {
-        // \Inilim\Tool\Method\Other\phpInfo();
-        \Inilim\Tool\Method\Other\phpInfoCache();
-    }
-});
-
-de($result);
+$a = \Closure::fromCallable([Other::class, 'timedMsCall']);
+$ref = new \ReflectionFunction($a);
+dde($ref);
+dde($ref->getClosureScopeClass());
