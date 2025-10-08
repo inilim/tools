@@ -206,4 +206,15 @@ class Exp
  */
     static function stringStartsWithInArray(array $array, string $needle, bool $ignoreCase = false): bool {}
 
+        /**
+ * @author inilim
+ * @todo tests
+ * 
+ * commands "get:file" "get:count" "get:resource" "end"|"close"|"finish"
+ * 
+ * @param ?string $dir default sys_get_temp_dir()
+ * @return null|\Closure(mixed $value,?string $command):false|int|resource|string
+ */
+    static function writeContentToNewFile(?string $dir = null): ?Closure {}
+
     }

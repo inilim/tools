@@ -68,6 +68,15 @@ class Assert
     static function contains($value, string $subString, bool $ingnoreCase = false, string $message = '') {}
 
         /**
+ * @author Inilim
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * 
+ * @param mixed  $value
+ */
+    static function dir($value, string $message = '') {}
+
+        /**
  * @author webmozarts/assert
  * @psalm-assert string $value
  * @phpstan-assert string $value

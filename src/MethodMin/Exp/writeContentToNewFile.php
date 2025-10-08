@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Inilim\Tool\Method\Exp{function writeContentToNewFile(?string $dir=null):?\Closure{if($dir!==null){\Inilim\Tool\Method\Assert\dir($dir);}else{$dir=\sys_get_temp_dir();}$opt=['end'=>false,'count'=>0,'file'=>\Inilim\Tool\Method\Path\normalize($dir.'/inilim-tools-'.\Inilim\Tool\Method\ID\uuidv7().'.tmp'),'resource'=>null];$resource=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\fopen($opt['file'],'wb'),static function($_,$msg){\Inilim\Tool\Method\Other\__setErrorLast(-1,$msg,'',-1);});if(!\is_resource($resource)){return null;}$opt['resource']=$resource;return static function($value,?string $command=null)use(&$opt){if($opt['end']){return $opt['file'];}if($command!==null){switch($command){case 'get:count':return $opt['count'];case 'get:resource':return $opt['resource'];case 'get:file':return $opt['file'];case 'close':case 'end':case 'finish':\fclose($opt['resource']);$opt['resource']=null;$opt['end']=true;return $opt['file'];}return;}$value=(string) $value;$errMsg=null;$status=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\fwrite($opt['resource'],$value),static function($_,$msg)use(&$errMsg){$errMsg=$msg;});if($errMsg!==null){\Inilim\Tool\Method\Other\__setErrorLast(-1,$errMsg,'',-1);$status=false;}else{$opt['count']++;}return $status;};}}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
+    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
+    }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
+    function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
+    }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
+    function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
+    }if(!\Inilim\Tool\Str::__definedIfNot('ucfirst')){
+    function ucfirst(string $string):string{return \Inilim\Tool\Method\Str\upper(\Inilim\Tool\Method\Str\substr($string,0,1)).\Inilim\Tool\Method\Str\substr($string,1);}
+    }if(!\Inilim\Tool\Str::__definedIfNot('upper')){
+    function upper(string $value,?string $encoding='UTF-8'):string{return \mb_strtoupper($value,$encoding);}
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
+    }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
+    function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
+    function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
+    }}namespace Inilim\Tool\Method\ID{if(!\Inilim\Tool\ID::__definedIfNot('uuidFromHex')){
+    function uuidFromHex(string $uhex,int $version):string{return \sprintf('%08s-%04s-%04x-%04x-%12s',\substr($uhex,0,8),\substr($uhex,8,4),\hexdec(\substr($uhex,12,4))&0xfff|$version << 12,\hexdec(\substr($uhex,16,4))&0x3fff|0x8000,\substr($uhex,20,12));}
+    }if(!\Inilim\Tool\ID::__definedIfNot('uuidv7')){
+    function uuidv7():string{$uhex=\substr(\str_pad(\dechex(\Inilim\Tool\Method\Time\unixMs()),12,'0',\STR_PAD_LEFT),-12);$uhex .= \bin2hex(\random_bytes(10));return \Inilim\Tool\Method\ID\uuidFromHex($uhex,7);}
+    }}namespace Inilim\Tool\Method\Time{if(!\Inilim\Tool\Time::__definedIfNot('unixMs')){
+    function unixMs():int{$t=\microtime(false);return \intval(\substr($t,11).\substr($t,2,3));}
+    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('dir')){
+    function dir($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\is_dir($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a directory.',\Inilim\Tool\Method\Other\valueToString($value)));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
+    function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    }}
