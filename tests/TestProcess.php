@@ -3,6 +3,7 @@
 namespace Inilim\Tool\Test;
 
 use Inilim\Tool\PF;
+use Inilim\Tool\Str;
 use Inilim\Tool\Path;
 use Inilim\Tool\Test\DefinePhpBin;
 use Inilim\Tool\Test\Tag\ErrorTag;
@@ -78,7 +79,7 @@ class TestProcess
                 $output = $process->getOutput();
                 $error = $process->getErrorOutput();
             } catch (\Throwable $e) {
-                throw new \RuntimeException(\sprintf('Case run failed "%s" Version php: "%s"', $caseFile, $version));
+                throw new \RuntimeException(\sprintf('Get output failed. Case "%s" Version php: "%s"', $caseFile, $version));
             }
 
             if ($error !== '') {
@@ -90,12 +91,13 @@ class TestProcess
                 ));
             }
 
-            $output = \trim($output);
+            $output = Str::trim($output);
             if ($output === '' || !PF::str_contains($output, '<assert')) {
                 throw new \RuntimeException(\sprintf(
-                    '$output empty or not found <assert /> tag. Case "%s" Version php: "%s".',
+                    '$output empty or not found <assert /> tag. Case "%s" Version php: "%s". $output: %s',
                     $caseFile,
-                    $version
+                    $version,
+                    $this->wrapBlock($output)
                 ));
             }
 
@@ -143,6 +145,7 @@ class TestProcess
 
             $assertResults = \array_merge($assertResults, $this->parseAsserts($output, $caseFile, $version));
 
+            $output = Str::trim($output);
             if ($output !== '') {
                 throw new \RuntimeException(\sprintf(
                     '$output must be empty. Got: "%s". Case "%s" Version php: "%s".',

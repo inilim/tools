@@ -50,7 +50,6 @@ function test_handle_error($level_err, $message, $file, $line)
         'message'         => $message,
         'file'            => $file,
         'line'            => $line,
-        'ms'              => \test_startMs(),
     ];
 
     if ($t['@suppress']) {
