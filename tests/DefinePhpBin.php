@@ -2,6 +2,7 @@
 
 namespace Inilim\Tool\Test;
 
+use Inilim\Tool\Path;
 use Symfony\Component\Process\Process;
 
 class DefinePhpBin
@@ -32,13 +33,16 @@ class DefinePhpBin
             'D:\other\php\php84\php84.exe',
         ];
         foreach ($php_bins as $php) {
+            $php = Path::normalize($php);
             if (!\is_file($php)) {
                 continue;
             }
-            $process = new Process([$php, \sprintf('"%s"', $filePhpVersion)]);
+            // de($filePhpVersion);
+            $process = new Process([$php, \sprintf('%s', $filePhpVersion)]);
             $process->run();
             try {
                 $version = $process->getOutput();
+                // dde($version);
             } catch (\Throwable $e) {
                 continue;
             }

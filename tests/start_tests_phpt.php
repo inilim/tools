@@ -1,145 +1,223 @@
 <?php
 
-use Inilim\Dump\Dump;
-use Inilim\Tool\File;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
+use Inilim\Tool\Str;
+use Inilim\Tool\Other;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-/**
- * @return string[]
- */
-function getComments(string $code): array
-{
-    $res = \token_get_all($code);
-    $res = \array_filter($res, static function ($token) {
-        return \in_array($token[0], [\T_COMMENT, \T_DOC_COMMENT]);
-    });
-    return \array_column($res, 1);
-}
-
-/**
- * @param string[] $comment
- * @return array<string,string|string[]>
- */
-function parseComment(array $comments): array
-{
-    foreach ($comments as &$block) {
-        \preg_match_all(
-            '/' .
-                '@([a-z_]+\[?\]?)=([a-z\d_]+)' .
-                '/i',
-            $block,
-            $match
-        );
-        // $match = \array_combine($match[1] ?? [], $match[2] ?? []);
-        // de($match);
-        $match = \array_map(static function ($value1, $value2) {
-            return $value1 . '=' . $value2;
-        }, $match[1], $match[2]);
-        $match = \implode(PHP_EOL, $match);
-        $match = \parse_ini_string($match);
-        $block = $match;
-    }
-    return $comments;
-}
-
-function data_dir_files(string $dir): Finder
-{
-    $dir = \DIR_FILES . '/' . $dir;
-    if (!\is_dir($dir)) {
-        throw new \InvalidArgumentException();
-    }
-    $finder = new Finder;
-    $finder->in($dir)
-        ->files();
-    return $finder;
-}
-
-Dump::init();
+require_once __DIR__ . '/../src/all.php';
 
 // ---------------------------------------------
-// Проверить наличие исполняемого php бинаря
+// INFO encode env
 // ---------------------------------------------
 
-$php_bins = [
-    'D:\other\OSPanel\modules\PHP-7.4\PHP\php74.exe',
-];
+$t = $_SERVER['__ENV'] ?? '';
+if ($t === '') {
+    exit('');
+}
+$t = json_decode($t, true);
+if (!\is_array($t)) {
+    exit('');
+}
+$_SERVER['__ENV'] = $t;
+unset($t);
 
 // ---------------------------------------------
 // 
 // ---------------------------------------------
 
-$cases = new Finder;
-$cases->in(__DIR__ . '/phpt')
-    ->files()
-    ->name('case*.php')
-    // 
-;
+/**
+ * @return mixed
+ */
+function test_get_param_from_env(string $name, $default = null)
+{
+    return $_SERVER['__ENV'][$name] ?? $default;
+}
+function test_shutdown()
+{
+    echo \sprintf(
+        '<shutdown work_ms="%s" memory_limit="%s" time_limit="%s" timezone="%s" />',
+        \test_startMs() - \START_CASE,
+        \ini_get('memory_limit'),
+        \ini_get('max_execution_time'),
+        \date_default_timezone_get()
+    );
+}
+function test_handle_error($level_err, $message, $file, $line)
+{
+    $t = [
+        'error_reporting' => $t = \error_reporting(),
+        'level_err'       => $level_err,
+        '@suppress'       => !($t & $level_err),
+        'message'         => $message,
+        'file'            => $file,
+        'line'            => $line,
+        'ms'              => \test_startMs(),
+    ];
 
-foreach ($php_bins as $php) {
-    // ---------------------------------------------
-    // INFO bin check
-    // ---------------------------------------------
-
-    if (!\is_executable($php)) {
-        throw new \InvalidArgumentException(\sprintf('Неизвестный исполняемый файл php "%s"', $php));
+    if ($t['@suppress']) {
+        return true;
     }
 
-    foreach ($cases as $case => $_) {
-        $cli_command = [$php, $case];
-        // ---------------------------------------------
-        // INFO case test
-        // ---------------------------------------------
-
-        $code = \file_get_contents($case);
-        $comments = \getComments($code);
-        $code = '';
-        $commands = \parseComment($comments);
-        $comments = '';
-        // de($commands);
-
-        // ---------------------------------------------
-        // INFO cli configs
-        // ---------------------------------------------
-
-        if (\is_string($commands['memory_limit'] ?? null)) {
-            $cli_command[] = \sprintf('--memory_limit="%s"', $commands['memory_limit']);
-            unset($commands['memory_limit']);
-        }
-        if (\is_string($commands['time_limit'] ?? null)) {
-            $cli_command[] = \sprintf('--time_limit="%s"', $commands['time_limit']);
-            unset($commands['time_limit']);
-        }
-
-        // ---------------------------------------------
-        // Есть дата провайдер
-        // ---------------------------------------------
-
-        if (\is_array($commands['data'] ?? null) || \is_string($commands['data'] ?? null)) {
-            $data = $commands['data'];
-            if (\is_string($data)) {
-                $data = [$data];
-            }
-            foreach ($data as $provider) {
-                // 
-            }
-            continue;
-        }
-
-
-        // ---------------------------------------------
-        // INFO exec
-        // ---------------------------------------------
-        // de();
-        $process = new Process($cli_command);
-        $process->run();
-        dd($process->getOutput());
-        dde($process->getErrorOutput());
-
-        // ---------------------------------------------
-        // INFO parse output
-        // ---------------------------------------------
+    if (\in_array($level_err, [\E_DEPRECATED, \E_USER_DEPRECATED], true)) {
+    } else {
+        $e = new \Error($message);
+        $rc = new \ReflectionClass($e);
+        $rpf = $rc->getProperty('file');
+        $rpl = $rc->getProperty('line');
+        $rpf->setAccessible(true);
+        $rpl->setAccessible(true);
+        $rpf->setValue($e, $file);
+        $rpl->setValue($e, $line);
+        throw $e;
     }
+
+    // Не запускаем внутренний обработчик ошибок PHP
+    return true;
+}
+function test_startMs(): int
+{
+    $t = \microtime(false);
+    return \intval(\substr($t, 11) . \substr($t, 2, 3));
+}
+/**
+ * @param mixed $value
+ */
+function test_recursiveExport(&$value): string
+{
+    if ($value === null) {
+        return 'null';
+    }
+
+    if ($value === true) {
+        return 'true';
+    }
+
+    if ($value === false) {
+        return 'false';
+    }
+
+    $type = Other::getType($value);
+
+    if ($type === 'float') {
+        $precisionBackup = \ini_get('precision');
+
+        \ini_set('precision', '-1');
+
+        try {
+            $valueStr = @(string) $value;
+
+            if ((string) @(int) $value === $valueStr) {
+                return $valueStr . '.0';
+            }
+
+            return $valueStr;
+        } finally {
+            \ini_set('precision', $precisionBackup);
+        }
+    }
+
+    if ($type === 'resource_closed') {
+        return 'resource (closed)';
+    }
+
+    if ($type === 'resource') {
+        return \sprintf(
+            'resource(%d) of type (%s)',
+            $value,
+            \get_resource_type($value)
+        );
+    }
+
+    if ($type === 'string') {
+        // Match for most non printable chars somewhat taking multibyte chars into account
+        if (\preg_match('/[^\x09-\x0d\x1b\x20-\xff]/', $value)) {
+            return 'Binary String: 0x' . \bin2hex($value);
+        }
+
+        return "'" .
+            \str_replace(
+                '<lf>',
+                "\n",
+                \str_replace(
+                    ["\r\n", "\n\r", "\r", "\n"],
+                    ['\r\n<lf>', '\n\r<lf>', '\r<lf>', '\n<lf>'],
+                    $value
+                )
+            ) .
+            "'";
+    }
+
+    return \print_r($value, true);
+}
+
+function test_process()
+{
+    echo \sprintf(
+        '<process ini="%s" php_bin="%s" php_version="%s" case="%s" />',
+        \strval(\php_ini_loaded_file()),
+        \PHP_BINARY,
+        \PHP_MAJOR_VERSION . '.' . \PHP_MINOR_VERSION,
+        \strval($_SERVER['__ENV']['case'] ?? '')
+    );
+}
+
+// ---------------------------------------------
+// INFO Assert
+// ---------------------------------------------
+
+function assertSame($expected, $actual, string $message = '')
+{
+    $status = 1;
+    if ($expected !== $actual) {
+        $status = 0;
+    }
+    echo \sprintf(
+        '<assert name="%s" status="%s" message="%s" expected="%s" actual="%s" />',
+        __FUNCTION__,
+        $status,
+        ($message ? \base64_encode($message) : ''),
+        \base64_encode(\test_recursiveExport($expected)),
+        \base64_encode(\test_recursiveExport($actual))
+    );
+}
+
+// ---------------------------------------------
+// INFO запуск теста
+// ---------------------------------------------
+
+\test_process();
+(static function () {
+    $memory_limit = \test_get_param_from_env('memory_limit', '5M');
+    $time_limit = (int)\test_get_param_from_env('time_limit', 5);
+
+    \date_default_timezone_set('UTC');
+    \ini_set('display_errors', 1);
+    \ini_set('memory_limit', $memory_limit);
+    \error_reporting(\E_ALL);
+    \set_time_limit($time_limit);
+    \ini_set('max_execution_time', $time_limit);
+    \set_error_handler('test_handle_error', \E_ALL);
+    \register_shutdown_function('test_shutdown');
+})();
+
+
+\define('START_CASE', \test_startMs());
+try {
+    require_once \test_get_param_from_env('case');
+} catch (\Error $e) {
+    echo \sprintf(
+        '<error message="%s" file="%s" line="%s" />',
+        Str::unixNewLines(\htmlspecialchars($e->getMessage()), ' '),
+        $e->getFile(),
+        $e->getLine()
+    );
+} catch (\Exception $e) {
+    echo \sprintf(
+        '<exception class="%s" message="%s" file="%s" line="%s" code="%s" trace="%s" />',
+        \get_class($e),
+        Str::unixNewLines(\htmlspecialchars($e->getMessage()), ' '),
+        $e->getFile(),
+        $e->getLine(),
+        \base64_encode(\strval($e->getCode())),
+        \base64_encode($e->getTraceAsString())
+    );
 }

@@ -2,12 +2,10 @@
 
 use Inilim\Tool\Exp;
 
+$file = \test_get_param_from_env('file');
 
-require_once __DIR__ . '/../../bootstrap.php';
-
-
-$file = \test_get_cli_arg('file');
+\assertSame(true, \is_string($file));
 
 $results = Exp::excelGetSheetsInfo($file);
 
-echo \json_encode($results);
+\assertSame(true, \is_array($results));
