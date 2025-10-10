@@ -3,11 +3,26 @@
 namespace Inilim\Tool\Test\Method\Other;
 
 use Inilim\Tool\Other;
+use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestCase;
+use Inilim\Tool\Test\TestProcess;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class tryCallWithErrHandlerTest extends TestCase
 {
+    // function test2()
+    // {
+    //     $testProcess = TestProcess::self();
+    //     foreach (CasePhpT::self()->cases([Other::class, 'tryCallWithErrHandler']) as $case) {
+    //         // dd($case);
+    //         $asserts = $testProcess->testWithPhp('7.4', $case);
+    //         foreach ($asserts as $assert) {
+    //             $this->assertProcess($assert);
+    //         }
+    //         // de();
+    //     }
+    // }
+
     /**
      * @dataProvider data
      */

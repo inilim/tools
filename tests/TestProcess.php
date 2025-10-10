@@ -13,6 +13,9 @@ use Inilim\Tool\Test\Tag\ShutdownTag;
 use Inilim\Tool\Test\Tag\ExceptionTag;
 use Symfony\Component\Process\Process;
 
+/**
+ * Тестирование через дочерние процессы
+ */
 class TestProcess
 {
     protected static ?TestProcess $instance = null;
@@ -39,7 +42,11 @@ class TestProcess
 
     function testWithPhp(string $phpVersion, string $caseFile, ?string $iniFile = null)
     {
-        // 
+        $php = $this->definePhpBin->getPhpBin()[$phpVersion] ?? null;
+        if ($php === null) {
+            throw new \RuntimeException(\sprintf('Not found php version "%s"', $phpVersion));
+        }
+        return $this->_test($php, $phpVersion, $caseFile);
     }
 
     /**
@@ -47,122 +54,150 @@ class TestProcess
      */
     function test(string $caseFile, ?string $iniFile = null): array
     {
-        if (!\is_file($caseFile)) {
-            throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
-        }
-
-        $startCaseFile = $this->getStartCaseFile();
-
-        if (!\is_file($startCaseFile)) {
-            throw new \RuntimeException(\sprintf('Not found file start case "%s"', $startCaseFile));
-        }
-
-        $env = [
-            'case' => $caseFile,
-        ];
-
-        $otherCommands = [];
-        if ($iniFile) {
-            if (!\is_file($iniFile)) {
-                throw new \RuntimeException(\sprintf('Not found file ini "%s"', $iniFile));
-            }
-            $iniFile = Path::normalize($iniFile);
-            $env['ini'] = $iniFile;
-            $otherCommands = \array_merge($otherCommands, ['-c', \sprintf("%s", $iniFile)]);
-        }
-
         $assertResults = [];
         foreach ($this->definePhpBin->getPhpBin() as $version => $php) {
-            $process = new Process(\array_merge([$php, $startCaseFile], $otherCommands), null, ['__ENV' => \json_encode($env)]);
-            $process->run();
-            try {
-                $output = $process->getOutput();
-                $error = $process->getErrorOutput();
-            } catch (\Throwable $e) {
-                throw new \RuntimeException(\sprintf('Get output failed. Case "%s" Version php: "%s"', $caseFile, $version));
-            }
-
-            if ($error !== '') {
-                throw new \RuntimeException(\sprintf(
-                    'Case exist error output "%s" Version php: "%s". %s',
-                    $caseFile,
-                    $version,
-                    $this->wrapBlock($error)
-                ));
-            }
-
-            $output = Str::trim($output);
-            if ($output === '' || !PF::str_contains($output, '<assert')) {
-                throw new \RuntimeException(\sprintf(
-                    '$output empty or not found <assert /> tag. Case "%s" Version php: "%s". $output: %s',
-                    $caseFile,
-                    $version,
-                    $this->wrapBlock($output)
-                ));
-            }
-
-            // ---------------------------------------------
-            // Error
-            // ---------------------------------------------
-
-            if (PF::str_contains($output, '<error')) {
-                // TODO парсить и сделать исключение
-            }
-
-            // ---------------------------------------------
-            // Exception
-            // ---------------------------------------------
-
-            if (PF::str_contains($output, '<exception')) {
-                // TODO парсить и сделать обработку
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            // TODO
-            $this->parseShutdown($output, $caseFile, $version);
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            // TODO Добавить проверки
-            $processTag = $this->parseProcess($output, $caseFile, $version);
-
-            if ($version !== $processTag->getPhpVersion()) {
-                // 
-            }
-
-            if ($php !== $processTag->getPhpBin()) {
-                // 
-            }
-
-            // ---------------------------------------------
-            // 
-            // ---------------------------------------------
-
-            $assertResults = \array_merge($assertResults, $this->parseAsserts($output, $caseFile, $version));
-
-            $output = Str::trim($output);
-            if ($output !== '') {
-                throw new \RuntimeException(\sprintf(
-                    '$output must be empty. Got: "%s". Case "%s" Version php: "%s".',
-                    $this->wrapBlock($output),
-                    $caseFile,
-                    $version
-                ));
-            }
+            $assertResults = \array_merge($assertResults, $this->_test($php, $version, $caseFile));
         }
 
         return $assertResults;
     }
 
-    protected function parseException(string &$output, string $caseFile, string $version): ExceptionTag
+    protected function _test(string $php, string $version, string $caseFile): array
+    {
+        if (!\is_file($caseFile)) {
+            throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
+        }
+        $env = [
+            'case' => $caseFile,
+        ];
+        $startCaseFile = $this->getStartCaseFile();
+        if (!\is_file($startCaseFile)) {
+            throw new \RuntimeException(\sprintf('Not found file start case "%s"', $startCaseFile));
+        }
+
+        $process = new Process(\array_merge([$php, $startCaseFile]), null, ['__ENV' => \json_encode($env)]);
+        $process->run();
+        try {
+            $output = $process->getOutput();
+            $error = $process->getErrorOutput();
+        } catch (\Throwable $e) {
+            throw new \RuntimeException(\sprintf('Get output failed. Case "%s" Version php: "%s"', $caseFile, $version));
+        }
+
+        // dde($output);
+
+        if ($error !== '') {
+            throw new \RuntimeException(\sprintf(
+                'Exist error output. Case "%s" Version php: "%s". %s',
+                $caseFile,
+                $version,
+                $this->wrapBlock($error)
+            ));
+        }
+
+        $output = Str::trim($output);
+        if ($output === '' || !PF::str_contains($output, '<assert')) {
+            throw new \RuntimeException(\sprintf(
+                '$output empty or not found <assert /> tag. Case "%s" Version php: "%s". $output: %s',
+                $caseFile,
+                $version,
+                $this->wrapBlock($output)
+            ));
+        }
+
+        // ---------------------------------------------
+        // Error
+        // ---------------------------------------------
+
+        if (PF::str_contains($output, '<error')) {
+            // TODO парсить и сделать исключение
+            $errorTag = $this->parseError($output, $caseFile, $version);
+            if ($errorTag) {
+                // 
+            }
+        }
+
+        // ---------------------------------------------
+        // Exception
+        // ---------------------------------------------
+
+        if (PF::str_contains($output, '<exception')) {
+            // TODO парсить и сделать обработку
+            $exceptionTag = $this->parseException($output, $caseFile, $version);
+        }
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        // TODO
+        $this->parseShutdown($output, $caseFile, $version);
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        // TODO Добавить проверки
+        $processTag = $this->parseProcess($output, $caseFile, $version);
+        // de($processTag);
+        if ($version !== $processTag->getPhpVersion()) {
+            throw new \RuntimeException(\sprintf(
+                'Version php not equal %s !== %s. Case "%s" Version php: "%s".',
+                $version,
+                $processTag->getPhpVersion(),
+                $caseFile,
+                $version
+            ));
+        }
+
+        if ($php !== $processTag->getPhpBin()) {
+            throw new \RuntimeException(\sprintf(
+                'php bin not equal %s !== %s. Case "%s" Version php: "%s".',
+                $php,
+                $processTag->getPhpBin(),
+                $caseFile,
+                $version
+            ));
+        }
+
+        if ($caseFile !== $processTag->getCase()) {
+            throw new \RuntimeException(\sprintf(
+                'Case file not equal %s !== %s. Case "%s" Version php: "%s".',
+                $caseFile,
+                $processTag->getCase(),
+                $caseFile,
+                $version
+            ));
+        }
+        // TODO ini file
+
+        // ---------------------------------------------
+        // 
+        // ---------------------------------------------
+
+        $assertResults = $this->parseAsserts($output, $caseFile, $version);
+        // de($assertResults);
+        $output = Str::trim($output);
+        // dde($output);
+        if ($output !== '') {
+            throw new \RuntimeException(\sprintf(
+                '$output must be empty. Got: "%s". Case "%s" Version php: "%s".',
+                $this->wrapBlock($output),
+                $caseFile,
+                $version
+            ));
+        }
+
+        return $assertResults;
+    }
+
+    protected function parseException(string &$output, string $caseFile, string $version): ?ExceptionTag
     {
         \preg_match('/(<exception\s[^<>]*\>)/', $output, $exception);
         $exception = $exception[1] ?? null;
+        if ($exception === null) {
+            return null;
+        }
         $output = \preg_replace('/(<exception\s[^<>]*\>)/', '', $output);
 
         \preg_match('/class=\"([^\"]*)\"/i', $exception, $class);
@@ -204,10 +239,13 @@ class TestProcess
         return new ExceptionTag($class, $message, $file, $line, $code, $trace);
     }
 
-    protected function parseError(string &$output, string $caseFile, string $version): ErrorTag
+    protected function parseError(string &$output, string $caseFile, string $version): ?ErrorTag
     {
         \preg_match('/(<error\s[^<>]*\>)/', $output, $error);
         $error = $error[1] ?? null;
+        if ($error === null) {
+            return null;
+        }
         $output = \preg_replace('/(<error\s[^<>]*\>)/', '', $output);
 
         \preg_match('/message=\"([^\"]*)\"/i', $error, $message);
@@ -236,7 +274,7 @@ class TestProcess
         return new ErrorTag($message, $file, $line);
     }
 
-    protected function parseShutdown(string &$output, string $caseFile, string $version): ShutdownTag
+    protected function parseShutdown(string &$output, string $caseFile, string $version)
     {
         \preg_match('/(<shutdown\s[^<>]*\>)/', $output, $shutdown);
         $shutdown = $shutdown[1] ?? null;
@@ -315,19 +353,19 @@ class TestProcess
         $assertResults = [];
         foreach ($asserts as $assert) {
 
-            \preg_match('/name=\"([a-z]+)\"/i', $assert, $name);
+            \preg_match('/name=\"([^\"]*)\"/', $assert, $name);
             $name = $name[1] ?? null;
 
             \preg_match('/status=\"(\d)\"/', $assert, $status);
             $status = $status[1] ?? null;
 
-            \preg_match('/message=\"([a-z\d=\/]+)\"/i', $assert, $message);
+            \preg_match('/message=\"([^\"]*)\"/', $assert, $message);
             $message = $message[1] ?? null;
 
-            \preg_match('/expected=\"([a-z\d=\/]+)\"/i', $assert, $expected);
+            \preg_match('/expected=\"([^\"]*)\"/', $assert, $expected);
             $expected = $expected[1] ?? null;
 
-            \preg_match('/actual=\"([a-z\d=\/]+)\"/i', $assert, $actual);
+            \preg_match('/actual=\"([^\"]*)\"/', $assert, $actual);
             $actual = $actual[1] ?? null;
 
             if (\in_array(null, [$name, $status, $message, $expected, $actual], true)) {

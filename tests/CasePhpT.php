@@ -2,10 +2,12 @@
 
 namespace Inilim\Tool\Test;
 
-use Inilim\Tool\Test\DefinePhpBin;
+use Inilim\Tool\Path;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
 
+/**
+ * Ищем тесты по callable
+ */
 class CasePhpT
 {
     protected static ?CasePhpT $instance = null;
@@ -30,10 +32,15 @@ class CasePhpT
         }
         [$class, $method] = $callable;
         $nameClass = \basename($class);
+        $dir = __DIR__ . '/phpt/' . $nameClass . '/' . $method;
+        if (!\is_dir($dir)) {
+            throw new \RuntimeException(\sprintf('Not found dir "%s"', $dir));
+        }
         $finder = new Finder;
-        $finder->in(__DIR__ . '/phpt/' . $nameClass . '/' . $method)->name('*.php');
+        $finder->in($dir)->name('*.php');
 
         foreach ($finder as $file => $_) {
+            $file = Path::normalize($file);
             yield $file;
         }
     }

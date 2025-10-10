@@ -16,6 +16,16 @@ __includeDeep([
 ]);
 
 
+// de(ini_get_all());
+de([
+    'php_ini_loaded_file'   => \php_ini_loaded_file(),
+    'php_ini_scanned_files' => \php_ini_scanned_files(),
+    'get_loaded_extensions' => \get_loaded_extensions(),
+    // 'ini_get_all' => \ini_get_all(),
+    'cli_get_process_title' => \cli_get_process_title(),
+]);
+
+de();
 $a = new DefinePhpBin;
 $a->definePhpBin();
 de($a->getPhpBin());
