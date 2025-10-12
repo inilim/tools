@@ -4,48 +4,106 @@ namespace Inilim\Tool\Test\Tag;
 
 class AssertTag
 {
-    protected string $name;
-    protected string $status;
-    protected string $expected;
-    protected string $actual;
-    protected string $message;
+    protected array $data;
+    protected ProcessTag $processTag;
+    protected ?ExceptionTag $exceptionTag;
 
     function __construct(
-        string $name,
-        string $status,
-        string $expected,
-        string $actual,
-        string $message
+        array $data,
+        ProcessTag $processTag,
+        ?ExceptionTag $exceptionTag
     ) {
-        $this->name     = $name;
-        $this->status   = $status;
-        $this->expected = $expected;
-        $this->actual   = $actual;
-        $this->message  = $message;
+        $this->data  = $data;
+        $this->processTag  = $processTag;
+        $this->exceptionTag  = $exceptionTag;
+    }
+
+    function getExceptionTag(): ?ExceptionTag
+    {
+        return $this->exceptionTag;
+    }
+
+    function getProcessTag(): ProcessTag
+    {
+        return $this->processTag;
+    }
+
+    function getLine(): int
+    {
+        return (int)$this->data['line'];
     }
 
     function getStatus(): bool
     {
-        return $this->status === '1' ? true : false;
+        $s = $this->data['status'];
+        if (\is_bool($s)) {
+            $s = (int)$s;
+        }
+        return $s === 1 ? true : false;
     }
 
     function getMessage(): string
     {
-        return $this->message ? \base64_decode($this->message) : '';
+        return $this->data['message'];
     }
 
     function getExpected(): string
     {
-        return \base64_decode($this->expected);
+        return $this->data['expected'];
     }
 
     function getActual(): string
     {
-        return \base64_decode($this->actual);
+        return $this->data['actual'];
+    }
+
+    function hasActual(): bool
+    {
+        return \array_key_exists('actual', $this->data);
+    }
+
+    function getTypeExpected(): string
+    {
+        return $this->data['expected_type'];
+    }
+
+    function getTypeActual(): string
+    {
+        return $this->data['actual_type'];
+    }
+
+    function hasExpected(): bool
+    {
+        return \array_key_exists('expected', $this->data);
     }
 
     function getName(): string
     {
-        return $this->name;
+        return $this->data['name'];
+    }
+
+    function assertInfo(): string
+    {
+        $info = [
+            'Name' => $this->getName(),
+            'Case::Line' => $this->processTag->getCase() . '::' . $this->getLine(),
+        ];
+        $message = $this->getMessage();
+        if ($message !== '') {
+            $info['Message'] = $message;
+        }
+        if ($this->hasExpected()) {
+            $info['Expected'] = $this->getExpected();
+        }
+        if ($this->hasActual()) {
+            $info['Actual'] = $this->getActual();
+        }
+
+        return \sprintf(
+            '%s%s%s',
+            PHP_EOL . \str_repeat('#', 15) . PHP_EOL,
+            \print_r($info, true),
+            PHP_EOL . \str_repeat('#', 15) . PHP_EOL
+        );
     }
 }

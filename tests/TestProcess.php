@@ -18,79 +18,122 @@ use Symfony\Component\Process\Process;
  */
 class TestProcess
 {
-    protected static ?TestProcess $instance = null;
+    protected string $caseFile;
+    protected string $php;
+    protected string $phpVersion;
+    protected array $dataEnv = [];
+    protected string $memoryLimit = '128M';
+    protected int $timeLimit = 5;
 
-    static function self(): TestProcess
+    function __construct(string $caseFile)
     {
-        return self::$instance ??= new TestProcess;
+        if (!\is_file($caseFile)) {
+            throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
+        }
+        $this->caseFile = $caseFile;
+    }
+
+    /**
+     * @return self
+     */
+    function withPhp(string $phpVersion)
+    {
+        $php = DefinePhpBin::self()->getPhpBin()[$phpVersion] ?? null;
+        if ($php === null) {
+            throw new \RuntimeException(\sprintf('Not found php version "%s"', $phpVersion));
+        }
+        $this->php = $php;
+        $this->phpVersion = $phpVersion;
+        return $this;
+    }
+
+    /**
+     * TODO
+     * @return self
+     */
+    function withIni(string $iniFile)
+    {
+        // 
+        return $this;
+    }
+
+    /**
+     * @param mixed $value
+     * @return self
+     */
+    function withEnv(string $name, $value)
+    {
+        $this->dataEnv[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    function withTimeLimit(int $seconds)
+    {
+        $this->timeLimit = $seconds;
+        return $this;
+    }
+
+    /**
+     * @param string $value 5M 1G ...
+     * @return self
+     */
+    function withMemoryLimit(string $value)
+    {
+        if (!\preg_match('/^\d+[MG]{1}$/', $value)) {
+            throw new \InvalidArgumentException(\sprintf('memoty limit invalid value "%s"', $value));
+        }
+        $this->memoryLimit = $value;
+        return $this;
+    }
+
+    /**
+     * @return AssertTag[]
+     */
+    function run(): array
+    {
+        if (!isset($this->php) || !isset($this->phpVersion)) {
+            throw new \RuntimeException('php and phpVersion required');
+        }
+        return $this->_test();
     }
 
     // ---------------------------------------------
     // 
     // ---------------------------------------------
 
-    protected DefinePhpBin $definePhpBin;
-
-    protected function __construct()
+    protected function _test(): array
     {
-        $this->definePhpBin = new DefinePhpBin;
-        $this->definePhpBin->definePhpBin();
-        if (!$this->definePhpBin->getPhpBin()) {
-            throw new \RuntimeException('Empty php bin');
-        }
-    }
-
-    function testWithPhp(string $phpVersion, string $caseFile, ?string $iniFile = null)
-    {
-        $php = $this->definePhpBin->getPhpBin()[$phpVersion] ?? null;
-        if ($php === null) {
-            throw new \RuntimeException(\sprintf('Not found php version "%s"', $phpVersion));
-        }
-        return $this->_test($php, $phpVersion, $caseFile);
-    }
-
-    /**
-     * @return AssertTag[]
-     */
-    function test(string $caseFile, ?string $iniFile = null): array
-    {
-        $assertResults = [];
-        foreach ($this->definePhpBin->getPhpBin() as $version => $php) {
-            $assertResults = \array_merge($assertResults, $this->_test($php, $version, $caseFile));
-        }
-
-        return $assertResults;
-    }
-
-    protected function _test(string $php, string $version, string $caseFile): array
-    {
-        if (!\is_file($caseFile)) {
-            throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
-        }
         $env = [
-            'case' => $caseFile,
+            'case'         => $this->caseFile,
+            'memory_limit' => $this->memoryLimit,
+            'time_limit'   => $this->timeLimit,
         ];
+        if ($this->dataEnv) {
+            $env = \array_merge($this->dataEnv, $env);
+        }
+
         $startCaseFile = $this->getStartCaseFile();
         if (!\is_file($startCaseFile)) {
             throw new \RuntimeException(\sprintf('Not found file start case "%s"', $startCaseFile));
         }
 
-        $process = new Process(\array_merge([$php, $startCaseFile]), null, ['__ENV' => \json_encode($env)]);
+        $process = new Process(\array_merge([$this->php, $startCaseFile]), null, ['__ENV' => \json_encode($env)]);
         $process->run();
         try {
             $output = $process->getOutput();
             $error = $process->getErrorOutput();
         } catch (\Throwable $e) {
-            throw new \RuntimeException(\sprintf('Get output failed. Case "%s" Version php: "%s"', $caseFile, $version));
+            throw new \RuntimeException(\sprintf('Get output failed. Case "%s" Version php: "%s"', $this->caseFile, $this->phpVersion));
         }
-
-        // dde($output);
 
         if ($error !== '') {
             throw new \RuntimeException(\sprintf(
                 'Exist error output. Case "%s" Version php: "%s". %s',
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion,
                 $this->wrapBlock($error)
             ));
         }
@@ -99,11 +142,48 @@ class TestProcess
         if ($output === '' || !PF::str_contains($output, '<assert')) {
             throw new \RuntimeException(\sprintf(
                 '$output empty or not found <assert /> tag. Case "%s" Version php: "%s". $output: %s',
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion,
                 $this->wrapBlock($output)
             ));
         }
+
+        // ---------------------------------------------
+        // Process tag
+        // ---------------------------------------------
+
+        $processTag = $this->parseProcess($output);
+
+        if ($this->phpVersion !== $processTag->getPhpVersion()) {
+            throw new \RuntimeException(\sprintf(
+                'Version php not equal %s !== %s. Case "%s" Version php: "%s".',
+                $this->phpVersion,
+                $processTag->getPhpVersion(),
+                $this->caseFile,
+                $this->phpVersion
+            ));
+        }
+
+        if ($this->php !== $processTag->getPhpBin()) {
+            throw new \RuntimeException(\sprintf(
+                'php bin not equal %s !== %s. Case "%s" Version php: "%s".',
+                $this->php,
+                $processTag->getPhpBin(),
+                $this->caseFile,
+                $this->phpVersion
+            ));
+        }
+
+        if ($this->caseFile !== $processTag->getCase()) {
+            throw new \RuntimeException(\sprintf(
+                'Case file not equal %s !== %s. Case "%s" Version php: "%s".',
+                $this->caseFile,
+                $processTag->getCase(),
+                $this->caseFile,
+                $this->phpVersion
+            ));
+        }
+        // TODO ini file
 
         // ---------------------------------------------
         // Error
@@ -111,9 +191,9 @@ class TestProcess
 
         if (PF::str_contains($output, '<error')) {
             // TODO парсить и сделать исключение
-            $errorTag = $this->parseError($output, $caseFile, $version);
+            $errorTag = $this->parseError($output, $processTag);
             if ($errorTag) {
-                // 
+                $errorTag->throw();
             }
         }
 
@@ -121,9 +201,10 @@ class TestProcess
         // Exception
         // ---------------------------------------------
 
+        $exceptionTag = null;
         if (PF::str_contains($output, '<exception')) {
             // TODO парсить и сделать обработку
-            $exceptionTag = $this->parseException($output, $caseFile, $version);
+            $exceptionTag = $this->parseException($output);
         }
 
         // ---------------------------------------------
@@ -131,51 +212,13 @@ class TestProcess
         // ---------------------------------------------
 
         // TODO
-        $this->parseShutdown($output, $caseFile, $version);
+        $this->parseShutdown($output);
 
         // ---------------------------------------------
         // 
         // ---------------------------------------------
 
-        // TODO Добавить проверки
-        $processTag = $this->parseProcess($output, $caseFile, $version);
-        // de($processTag);
-        if ($version !== $processTag->getPhpVersion()) {
-            throw new \RuntimeException(\sprintf(
-                'Version php not equal %s !== %s. Case "%s" Version php: "%s".',
-                $version,
-                $processTag->getPhpVersion(),
-                $caseFile,
-                $version
-            ));
-        }
-
-        if ($php !== $processTag->getPhpBin()) {
-            throw new \RuntimeException(\sprintf(
-                'php bin not equal %s !== %s. Case "%s" Version php: "%s".',
-                $php,
-                $processTag->getPhpBin(),
-                $caseFile,
-                $version
-            ));
-        }
-
-        if ($caseFile !== $processTag->getCase()) {
-            throw new \RuntimeException(\sprintf(
-                'Case file not equal %s !== %s. Case "%s" Version php: "%s".',
-                $caseFile,
-                $processTag->getCase(),
-                $caseFile,
-                $version
-            ));
-        }
-        // TODO ini file
-
-        // ---------------------------------------------
-        // 
-        // ---------------------------------------------
-
-        $assertResults = $this->parseAsserts($output, $caseFile, $version);
+        $assertResults = $this->parseAsserts($output, $processTag, $exceptionTag);
         // de($assertResults);
         $output = Str::trim($output);
         // dde($output);
@@ -183,15 +226,15 @@ class TestProcess
             throw new \RuntimeException(\sprintf(
                 '$output must be empty. Got: "%s". Case "%s" Version php: "%s".',
                 $this->wrapBlock($output),
-                $caseFile,
-                $version
+                $this->caseFile,
+                $this->phpVersion
             ));
         }
 
         return $assertResults;
     }
 
-    protected function parseException(string &$output, string $caseFile, string $version): ?ExceptionTag
+    protected function parseException(string &$output): ?ExceptionTag
     {
         \preg_match('/(<exception\s[^<>]*\>)/', $output, $exception);
         $exception = $exception[1] ?? null;
@@ -231,15 +274,15 @@ class TestProcess
             throw new \RuntimeException(\sprintf(
                 'Parse <exception /> tag failed: "%s". Case "%s" Version php: "%s".',
                 $this->wrapBlock(\var_export($t, true)),
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion,
             ));
         }
 
         return new ExceptionTag($class, $message, $file, $line, $code, $trace);
     }
 
-    protected function parseError(string &$output, string $caseFile, string $version): ?ErrorTag
+    protected function parseError(string &$output, ProcessTag $processTag): ?ErrorTag
     {
         \preg_match('/(<error\s[^<>]*\>)/', $output, $error);
         $error = $error[1] ?? null;
@@ -266,23 +309,23 @@ class TestProcess
             throw new \RuntimeException(\sprintf(
                 'Parse <error /> tag failed: "%s". Case "%s" Version php: "%s".',
                 $this->wrapBlock(\var_export($t, true)),
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion,
             ));
         }
 
-        return new ErrorTag($message, $file, $line);
+        return new ErrorTag($message, $file, $line, $processTag);
     }
 
-    protected function parseShutdown(string &$output, string $caseFile, string $version)
+    protected function parseShutdown(string &$output)
     {
         \preg_match('/(<shutdown\s[^<>]*\>)/', $output, $shutdown);
         $shutdown = $shutdown[1] ?? null;
         if (!$shutdown) {
             throw new \RuntimeException(\sprintf(
                 'Not found <shutdown /> tag. Case "%s" Version php: "%s".',
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion
             ));
         }
         $output = \preg_replace('/(<shutdown\s[^<>]*\>)/', '', $output);
@@ -290,101 +333,127 @@ class TestProcess
         // return new ShutdownTag();
     }
 
-    protected function parseProcess(string &$output, string $caseFile, string $version): ProcessTag
+    protected function parseProcess(string &$output): ProcessTag
     {
         \preg_match('/(<process\s[^<>]*\>)/', $output, $process);
         $process = $process[1] ?? null;
         if (!$process) {
             throw new \RuntimeException(\sprintf(
                 'Not found <process /> tag. Case "%s" Version php: "%s".',
-                $caseFile,
-                $version,
+                $this->caseFile,
+                $this->phpVersion
             ));
         }
         $output = \preg_replace('/(<process\s[^<>]*\>)/', '', $output);
 
-        \preg_match('/ini=\"([^\"]*)\"/i', $process, $ini);
-        $ini = $ini[1] ?? null;
+        // \preg_match('/ini=\"([^\"]*)\"/i', $process, $ini);
+        // $ini = $ini[1] ?? null;
 
-        \preg_match('/php_bin=\"([^\"]*)\"/i', $process, $php_bin);
-        $php_bin = $php_bin[1] ?? null;
+        // \preg_match('/php_bin=\"([^\"]*)\"/i', $process, $php_bin);
+        // $php_bin = $php_bin[1] ?? null;
 
-        \preg_match('/php_version=\"([^\"]*)\"/i', $process, $php_version);
-        $php_version = $php_version[1] ?? null;
+        // \preg_match('/php_version=\"([^\"]*)\"/i', $process, $php_version);
+        // $php_version = $php_version[1] ?? null;
 
-        \preg_match('/case=\"([^\"]*)\"/i', $process, $case);
-        $case = $case[1] ?? null;
+        // \preg_match('/case=\"([^\"]*)\"/i', $process, $case);
+        // $case = $case[1] ?? null;
 
-        if (\in_array(null, [$ini, $php_bin, $php_version, $case], true)) {
-            $t = [
-                '$ini' => $ini,
-                '$php_bin' => $php_bin,
-                '$php_version' => $php_version,
-                '$case' => $case,
-            ];
+        // \preg_match('/env=\"([^\"]*)\"/i', $process, $env);
+        // $env = $env[1] ?? null;
+
+        \preg_match('/data=\"([^\"]*)\"/i', $process, $data);
+        $data = $data[1] ?? null;
+
+        if ($data === null) {
             throw new \RuntimeException(\sprintf(
-                'Parse <process /> tag failed: "%s". Case "%s" Version php: "%s".',
-                $this->wrapBlock(\var_export($t, true)),
-                $caseFile,
-                $version,
+                'Parse %s tag failed. Case "%s" Version php: "%s".',
+                $process,
+                $this->caseFile,
+                $this->phpVersion
             ));
         }
 
-        return new ProcessTag($ini, $php_bin, $php_version, $case);
+        $data = @\base64_decode($data, true);
+        $data = \json_decode((string)$data, true);
+
+        if (!\is_array($data)) {
+            throw new \RuntimeException(\sprintf(
+                'Parse %s tag data param not array failed. Case "%s" Version php: "%s".',
+                $process,
+                $this->caseFile,
+                $this->phpVersion
+            ));
+        }
+
+        return new ProcessTag($data);
     }
 
     /**
      * @return AssertTag[]
      */
-    protected function parseAsserts(string &$output, string $caseFile, string $version): array
+    protected function parseAsserts(string &$output, ProcessTag $processTag, ?ExceptionTag $exceptionTag): array
     {
         \preg_match_all('/(<assert\s[^<>]*\>)/', $output, $asserts);
         $asserts = $asserts[1] ?? [];
         if (!$asserts) {
             throw new \RuntimeException(\sprintf(
                 'Not found <assert /> tag. Case "%s" Version php: "%s".',
-                $caseFile,
-                $version
+                $this->caseFile,
+                $this->phpVersion
             ));
         }
         $output = \preg_replace('/(<assert\s[^<>]*\>)/', '', $output);
-        // 
         // new AssertResult();
         $assertResults = [];
         foreach ($asserts as $assert) {
 
-            \preg_match('/name=\"([^\"]*)\"/', $assert, $name);
-            $name = $name[1] ?? null;
+            // \preg_match('/line=\"(-?\d+)\"/', $assert, $line);
+            // $line = $line[1] ?? null;
 
-            \preg_match('/status=\"(\d)\"/', $assert, $status);
-            $status = $status[1] ?? null;
+            // \preg_match('/name=\"([^\"]*)\"/', $assert, $name);
+            // $name = $name[1] ?? null;
 
-            \preg_match('/message=\"([^\"]*)\"/', $assert, $message);
-            $message = $message[1] ?? null;
+            // \preg_match('/status=\"(\d)\"/', $assert, $status);
+            // $status = $status[1] ?? null;
 
-            \preg_match('/expected=\"([^\"]*)\"/', $assert, $expected);
-            $expected = $expected[1] ?? null;
+            // \preg_match('/message=\"([^\"]*)\"/', $assert, $message);
+            // $message = $message[1] ?? null;
 
-            \preg_match('/actual=\"([^\"]*)\"/', $assert, $actual);
-            $actual = $actual[1] ?? null;
+            // \preg_match('/expected=\"([^\"]*)\"/', $assert, $expected);
+            // $expected = $expected[1] ?? null;
 
-            if (\in_array(null, [$name, $status, $message, $expected, $actual], true)) {
-                $t = [
-                    '$name' => $name,
-                    '$status' => $status,
-                    '$message' => $message,
-                    '$expected' => $expected,
-                    '$actual' => $actual,
-                ];
+            // \preg_match('/actual=\"([^\"]*)\"/', $assert, $actual);
+            // $actual = $actual[1] ?? null;
+
+            \preg_match('/data=\"([^\"]*)\"/', $assert, $data);
+            $data = $data[1] ?? null;
+
+            if ($data === null) {
                 throw new \RuntimeException(\sprintf(
-                    'Parse <assert /> tag failed: "%s". Case "%s" Version php: "%s".',
-                    $this->wrapBlock(\var_export($t, true)),
-                    $caseFile,
-                    $version,
+                    'Parse %s tag failed. Case "%s" Version php: "%s".',
+                    $assert,
+                    $this->caseFile,
+                    $this->phpVersion
                 ));
             }
 
-            $assertResults[] = new AssertTag($name, $status, $expected, $actual, $message);
+            $data = @\base64_decode($data, true);
+            $data = \json_decode((string)$data, true);
+
+            if (!\is_array($data)) {
+                throw new \RuntimeException(\sprintf(
+                    'Parse %s tag data param not array failed. Case "%s" Version php: "%s".',
+                    $assert,
+                    $this->caseFile,
+                    $this->phpVersion
+                ));
+            }
+
+            $assertResults[] = new AssertTag(
+                $data,
+                $processTag,
+                $exceptionTag
+            );
         }
 
         return $assertResults;

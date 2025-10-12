@@ -11,6 +11,7 @@
 /files/cache    export-ignore
 /build          export-ignore
 /bench          export-ignore
+/readme         export-ignore
 
 # Files
 /bootstrap.dev.php      export-ignore

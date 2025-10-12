@@ -1,6 +1,7 @@
 <?php
 
 use Inilim\Tool\Other;
+use Inilim\Tool\Test\Assert;
 
 $result = Other::tryCallWithErrHandler(
     static function () {
@@ -10,7 +11,7 @@ $result = Other::tryCallWithErrHandler(
     null
 );
 
-\assertSame('result', $result);
+Assert::same('result', $result);
 
 $result = Other::tryCallWithErrHandler(
     static function () {
@@ -20,4 +21,4 @@ $result = Other::tryCallWithErrHandler(
     null
 );
 
-\assertSame(null, $result);
+Assert::isNull($result);

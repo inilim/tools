@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+use Inilim\Tool\Exp;
 use Inilim\Tool\Other;
+use Inilim\Tool\Test\CasePhpT;
+use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\DefinePhpBin;
+use Symfony\Component\Finder\Finder;
 
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
@@ -14,6 +18,18 @@ __includeDeep([
     // 'Other\phpInfoCache',
     // 'Other\phpInfo',
 ]);
+
+
+$files = new Finder;
+$files->files()->in(__DIR__ . '/files')->name(['*.xlsx']);
+foreach (CasePhpT::self()->cases([Exp::class, 'excelGetSheetsInfo']) as $case) {
+    foreach ($files as $file => $_) {
+        $asserts = (new TestProcess($case))->withPhp('7.4')->withEnv('file', $file)->run();
+        de($asserts);
+        foreach ($asserts as $assert) {
+        }
+    }
+}
 
 
 // de(ini_get_all());

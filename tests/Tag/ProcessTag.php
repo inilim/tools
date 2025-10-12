@@ -6,40 +6,35 @@ use Inilim\Tool\Path;
 
 class ProcessTag
 {
-    protected string $ini;
-    protected string $php_bin;
-    protected string $php_version;
-    protected string $case;
+    protected array $data;
 
-    function __construct(
-        string $ini,
-        string $php_bin,
-        string $php_version,
-        string $case
-    ) {
-        $this->ini         = $ini;
-        $this->php_bin     = $php_bin;
-        $this->php_version = $php_version;
-        $this->case        = $case;
+    function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    function getEnv(): array
+    {
+        return $this->data['env'];
     }
 
     function getIni(): bool
     {
-        return Path::normalize($this->ini);
+        return Path::normalize($this->data['ini']);
     }
 
     function getPhpBin(): string
     {
-        return Path::normalize($this->php_bin);
+        return Path::normalize($this->data['php_bin']);
     }
 
     function getPhpVersion(): string
     {
-        return $this->php_version;
+        return $this->data['php_version'];
     }
 
     function getCase(): string
     {
-        return Path::normalize($this->case);
+        return Path::normalize($this->data['case']);
     }
 }

@@ -1,11 +1,29 @@
 <?php
 
 use Inilim\Tool\Exp;
+use Inilim\Tool\Other;
+use Inilim\Tool\Test\Assert;
+use Inilim\Tool\Test\Internal;
 
-$file = \test_get_param_from_env('file');
+$file = Internal::get_param_from_env('file');
 
-\assertSame(true, \is_string($file));
+Assert::isString($file);
 
 $results = Exp::excelGetSheetsInfo($file);
 
-\assertSame(true, \is_array($results));
+Assert::isNull(Other::errorGetLast());
+Assert::isArray($results);
+
+foreach ($results as $result) {
+    Assert::isArray($result);
+    Assert::count(3, $result);
+
+    Assert::arrayHasKey('id', $result);
+    Assert::isString($result['id']);
+
+    Assert::arrayHasKey('name', $result);
+    Assert::isString($result['name']);
+
+    Assert::arrayHasKey('state', $result);
+    Assert::nullOrString($result['state']);
+}

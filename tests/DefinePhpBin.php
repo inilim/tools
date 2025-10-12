@@ -7,6 +7,19 @@ use Symfony\Component\Process\Process;
 
 class DefinePhpBin
 {
+    protected static ?DefinePhpBin $instance = null;
+
+    static function self(): DefinePhpBin
+    {
+        self::$instance ??= new DefinePhpBin;
+        self::$instance->definePhpBin();
+        return self::$instance;
+    }
+
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
+
     /**
      * @var array<string,string>
      */
@@ -20,7 +33,10 @@ class DefinePhpBin
         return $this->bins;
     }
 
-    function definePhpBin()
+    /**
+     * TODO сделать автопоиск бинарников
+     */
+    protected function definePhpBin()
     {
         $filePhpVersion = __DIR__ . '/getPhpVersion.php';
         if (!\is_file($filePhpVersion)) {

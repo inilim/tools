@@ -12,14 +12,11 @@ class tryCallWithErrHandlerTest extends TestCase
 {
     // function test2()
     // {
-    //     $testProcess = TestProcess::self();
     //     foreach (CasePhpT::self()->cases([Other::class, 'tryCallWithErrHandler']) as $case) {
-    //         // dd($case);
-    //         $asserts = $testProcess->testWithPhp('7.4', $case);
+    //         $asserts = (new TestProcess($case))->withPhp('7.4')->run();
     //         foreach ($asserts as $assert) {
     //             $this->assertProcess($assert);
     //         }
-    //         // de();
     //     }
     // }
 
