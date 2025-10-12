@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Get all of the given array except for a specified array of keys.
  * @template T of array

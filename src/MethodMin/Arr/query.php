@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Arr;
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr;
 
 function query(array $array):string{return \http_build_query($array,'','&',\PHP_QUERY_RFC3986);}

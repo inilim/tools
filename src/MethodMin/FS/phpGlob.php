@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\FS{function phpGlob(string $pattern,int $flags=0):?array{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\glob($pattern,$flags),null);return $value===false?null:$value;}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+declare(strict_types=1);namespace Inilim\Tool\Method\FS{function phpGlob(string $pattern,int $flags=0):?array{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\glob($pattern,$flags),null);return $value===false?null:$value;}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }}

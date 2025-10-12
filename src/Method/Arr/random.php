@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Get one or a specified number of random values from an array.
  * @template TValue
  * @template TKey

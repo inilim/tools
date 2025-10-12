@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer;
 
 /**
@@ -11,7 +13,9 @@ function isIntPhp($v): bool
 {
     if (\Inilim\Tool\Method\Integer\isNumeric($v)) {
         /** @var string $v */
-        if (\strval(\intval($v)) === \strval($v)) return true;
+        if (\strval(\intval($v)) === \strval($v)) {
+            return true;
+        }
         return false;
     }
     return false;

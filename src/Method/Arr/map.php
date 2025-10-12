@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Run a map over each of the items in the array.
  * @template TValue
  * @template TKey

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Determine if all keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|mixed[]  $array

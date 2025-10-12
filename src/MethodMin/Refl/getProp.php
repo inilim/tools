@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Refl{function getProp($objectOrClass,string $name,bool $throw=false){$name=\Inilim\Tool\Method\Other\unprefixVar($name);$ref=\Inilim\Tool\Method\Refl\_class($objectOrClass,$throw);if($ref===null){return null;}try{$prop=$ref -> getProperty($name);if(!\Inilim\Tool\Method\Check\php81()){$prop -> setAccessible(true);}return $prop;}catch(\ReflectionException $e){if($throw){throw $e;}return null;}}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Refl{function getProp($objectOrClass,string $name,bool $throw=false){$name=\Inilim\Tool\Method\Other\unprefixVar($name);$ref=\Inilim\Tool\Method\Refl\_class($objectOrClass,$throw);if($ref===null){return null;}try{$prop=$ref -> getProperty($name);if(!\Inilim\Tool\Method\Check\php81()){$prop -> setAccessible(true);}return $prop;}catch(\ReflectionException $e){if($throw){throw $e;}return null;}}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
     function _class($classOrObj,bool $throw=false){try{return new \ReflectionClass($classOrObj);}catch(\ReflectionException $e){if($throw){throw $e;}return null;}}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('trim')){
     function trim(string $value,?string $charlist=null):string{if($charlist===null){$trimDefaultCharacters=\preg_quote(" \n\r\t\v\x00");return \preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}'.$trimDefaultCharacters.']+|[\s\x{FEFF}\x{200B}\x{200E}'.$trimDefaultCharacters.']+$~u','',$value)?? \trim($value);}return \trim($value,$charlist);}

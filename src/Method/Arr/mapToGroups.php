@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TValue

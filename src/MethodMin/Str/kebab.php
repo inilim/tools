@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function kebab(string $value):string{return \Inilim\Tool\Method\Str\snake($value,'-');}if(!\Inilim\Tool\Str::__definedIfNot('lower')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function kebab(string $value):string{return \Inilim\Tool\Method\Str\snake($value,'-');}if(!\Inilim\Tool\Str::__definedIfNot('lower')){
     function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
     }if(!\Inilim\Tool\Str::__definedIfNot('snake')){
     function snake(string $value,string $delimiter='_'):string{if(!\Inilim\Tool\Method\PF\ctype_lower($value)){$modeU=\Inilim\Tool\Method\Check\php80()?'u':'';$value=\preg_replace('/\s+/'.$modeU,'',\ucwords($value));$value=\Inilim\Tool\Method\Str\lower(\preg_replace('/(.)(?=[A-Z])/'.$modeU,'$1'.$delimiter,$value));}return $value;}

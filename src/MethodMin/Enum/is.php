@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Enum{function is(object $enum,object $needle):bool{\Inilim\Tool\Method\Assert\enumCase($needle);return \Inilim\Tool\Method\Enum\in($enum,[$needle]);}if(!\Inilim\Tool\Enum::__definedIfNot('in')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function is(object $enum,object $needle):bool{\Inilim\Tool\Method\Assert\enumCase($needle);return \Inilim\Tool\Method\Enum\in($enum,[$needle]);}if(!\Inilim\Tool\Enum::__definedIfNot('in')){
     function in(object $enum,array $haystack):bool{\Inilim\Tool\Method\Assert\enumCase($enum);foreach($haystack as $item){if($enum===$item){return true;}}return false;}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}

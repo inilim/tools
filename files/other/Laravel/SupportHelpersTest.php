@@ -8,6 +8,7 @@ use Countable;
 use Error;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Env;
 use Illuminate\Support\Optional;
 use Illuminate\Support\Sleep;
@@ -26,9 +27,20 @@ use Traversable;
 
 class SupportHelpersTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        mkdir(__DIR__ . '/tmp');
+
+        parent::setUp();
+    }
+
     protected function tearDown(): void
     {
         m::close();
+
+        if (is_dir(__DIR__ . '/tmp')) {
+            (new Filesystem)->deleteDirectory(__DIR__ . '/tmp');
+        }
 
         parent::tearDown();
     }
@@ -206,7 +218,172 @@ class SupportHelpersTest extends TestCase
         $this->assertEquals($object, object_get($object, '  '));
     }
 
+    public function testDataGet()
+    {
+        $object = (object) ['users' => ['name' => ['Taylor', 'Otwell']]];
+        $array = [(object) ['users' => [(object) ['name' => 'Taylor']]]];
+        $dottedArray = ['users' => ['first.name' => 'Taylor', 'middle.name' => null]];
+        $arrayAccess = new SupportTestArrayAccess(['price' => 56, 'user' => new SupportTestArrayAccess(['name' => 'John']), 'email' => null]);
 
+        $this->assertSame('Taylor', data_get($object, 'users.name.0'));
+        $this->assertSame('Taylor', data_get($array, '0.users.0.name'));
+        $this->assertNull(data_get($array, '0.users.3'));
+        $this->assertSame('Not found', data_get($array, '0.users.3', 'Not found'));
+        $this->assertSame('Not found', data_get($array, '0.users.3', function () {
+            return 'Not found';
+        }));
+        $this->assertSame('Taylor', data_get($dottedArray, ['users', 'first.name']));
+        $this->assertNull(data_get($dottedArray, ['users', 'middle.name']));
+        $this->assertSame('Not found', data_get($dottedArray, ['users', 'last.name'], 'Not found'));
+        $this->assertEquals(56, data_get($arrayAccess, 'price'));
+        $this->assertSame('John', data_get($arrayAccess, 'user.name'));
+        $this->assertSame('void', data_get($arrayAccess, 'foo', 'void'));
+        $this->assertSame('void', data_get($arrayAccess, 'user.foo', 'void'));
+        $this->assertNull(data_get($arrayAccess, 'foo'));
+        $this->assertNull(data_get($arrayAccess, 'user.foo'));
+        $this->assertNull(data_get($arrayAccess, 'email', 'Not found'));
+    }
+
+    public function testDataGetWithNestedArrays()
+    {
+        $array = [
+            ['name' => 'taylor', 'email' => 'taylorotwell@gmail.com'],
+            ['name' => 'abigail'],
+            ['name' => 'dayle'],
+        ];
+        $arrayIterable = new SupportTestArrayIterable([
+            ['name' => 'taylor', 'email' => 'taylorotwell@gmail.com'],
+            ['name' => 'abigail'],
+            ['name' => 'dayle'],
+        ]);
+
+        $this->assertEquals(['taylor', 'abigail', 'dayle'], data_get($array, '*.name'));
+        $this->assertEquals(['taylorotwell@gmail.com', null, null], data_get($array, '*.email', 'irrelevant'));
+
+        $this->assertEquals(['taylor', 'abigail', 'dayle'], data_get($arrayIterable, '*.name'));
+        $this->assertEquals(['taylorotwell@gmail.com', null, null], data_get($arrayIterable, '*.email', 'irrelevant'));
+
+        $array = [
+            'users' => [
+                ['first' => 'taylor', 'last' => 'otwell', 'email' => 'taylorotwell@gmail.com'],
+                ['first' => 'abigail', 'last' => 'otwell'],
+                ['first' => 'dayle', 'last' => 'rees'],
+            ],
+            'posts' => null,
+        ];
+
+        $this->assertEquals(['taylor', 'abigail', 'dayle'], data_get($array, 'users.*.first'));
+        $this->assertEquals(['taylorotwell@gmail.com', null, null], data_get($array, 'users.*.email', 'irrelevant'));
+        $this->assertSame('not found', data_get($array, 'posts.*.date', 'not found'));
+        $this->assertNull(data_get($array, 'posts.*.date'));
+    }
+
+    public function testDataGetWithDoubleNestedArraysCollapsesResult()
+    {
+        $array = [
+            'posts' => [
+                [
+                    'comments' => [
+                        ['author' => 'taylor', 'likes' => 4],
+                        ['author' => 'abigail', 'likes' => 3],
+                    ],
+                ],
+                [
+                    'comments' => [
+                        ['author' => 'abigail', 'likes' => 2],
+                        ['author' => 'dayle'],
+                    ],
+                ],
+                [
+                    'comments' => [
+                        ['author' => 'dayle'],
+                        ['author' => 'taylor', 'likes' => 1],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals(['taylor', 'abigail', 'abigail', 'dayle', 'dayle', 'taylor'], data_get($array, 'posts.*.comments.*.author'));
+        $this->assertEquals([4, 3, 2, null, null, 1], data_get($array, 'posts.*.comments.*.likes'));
+        $this->assertEquals([], data_get($array, 'posts.*.users.*.name', 'irrelevant'));
+        $this->assertEquals([], data_get($array, 'posts.*.users.*.name'));
+    }
+
+    public function testDataGetFirstLastDirectives()
+    {
+        $array = [
+            'flights' => [
+                [
+                    'segments' => [
+                        ['from' => 'LHR', 'departure' => '9:00', 'to' => 'IST', 'arrival' => '15:00'],
+                        ['from' => 'IST', 'departure' => '16:00', 'to' => 'PKX', 'arrival' => '20:00'],
+                    ],
+                ],
+                [
+                    'segments' => [
+                        ['from' => 'LGW', 'departure' => '8:00', 'to' => 'SAW', 'arrival' => '14:00'],
+                        ['from' => 'SAW', 'departure' => '15:00', 'to' => 'PEK', 'arrival' => '19:00'],
+                    ],
+                ],
+            ],
+            'empty' => [],
+        ];
+
+        $this->assertEquals('LHR', data_get($array, 'flights.0.segments.{first}.from'));
+        $this->assertEquals('PKX', data_get($array, 'flights.0.segments.{last}.to'));
+
+        $this->assertEquals('LHR', data_get($array, 'flights.{first}.segments.{first}.from'));
+        $this->assertEquals('PEK', data_get($array, 'flights.{last}.segments.{last}.to'));
+        $this->assertEquals('PKX', data_get($array, 'flights.{first}.segments.{last}.to'));
+        $this->assertEquals('LGW', data_get($array, 'flights.{last}.segments.{first}.from'));
+
+        $this->assertEquals(['LHR', 'IST'], data_get($array, 'flights.{first}.segments.*.from'));
+        $this->assertEquals(['SAW', 'PEK'], data_get($array, 'flights.{last}.segments.*.to'));
+
+        $this->assertEquals(['LHR', 'LGW'], data_get($array, 'flights.*.segments.{first}.from'));
+        $this->assertEquals(['PKX', 'PEK'], data_get($array, 'flights.*.segments.{last}.to'));
+
+        $this->assertEquals('Not found', data_get($array, 'empty.{first}', 'Not found'));
+        $this->assertEquals('Not found', data_get($array, 'empty.{last}', 'Not found'));
+    }
+
+    public function testDataGetFirstLastDirectivesOnArrayAccessIterable()
+    {
+        $arrayAccessIterable = [
+            'flights' => new SupportTestArrayAccessIterable([
+                [
+                    'segments' => new SupportTestArrayAccessIterable([
+                        ['from' => 'LHR', 'departure' => '9:00', 'to' => 'IST', 'arrival' => '15:00'],
+                        ['from' => 'IST', 'departure' => '16:00', 'to' => 'PKX', 'arrival' => '20:00'],
+                    ]),
+                ],
+                [
+                    'segments' => new SupportTestArrayAccessIterable([
+                        ['from' => 'LGW', 'departure' => '8:00', 'to' => 'SAW', 'arrival' => '14:00'],
+                        ['from' => 'SAW', 'departure' => '15:00', 'to' => 'PEK', 'arrival' => '19:00'],
+                    ]),
+                ],
+            ]),
+            'empty' => new SupportTestArrayAccessIterable([]),
+        ];
+
+        $this->assertEquals('LHR', data_get($arrayAccessIterable, 'flights.0.segments.{first}.from'));
+        $this->assertEquals('PKX', data_get($arrayAccessIterable, 'flights.0.segments.{last}.to'));
+
+        $this->assertEquals('LHR', data_get($arrayAccessIterable, 'flights.{first}.segments.{first}.from'));
+        $this->assertEquals('PEK', data_get($arrayAccessIterable, 'flights.{last}.segments.{last}.to'));
+        $this->assertEquals('PKX', data_get($arrayAccessIterable, 'flights.{first}.segments.{last}.to'));
+        $this->assertEquals('LGW', data_get($arrayAccessIterable, 'flights.{last}.segments.{first}.from'));
+
+        $this->assertEquals(['LHR', 'IST'], data_get($arrayAccessIterable, 'flights.{first}.segments.*.from'));
+        $this->assertEquals(['SAW', 'PEK'], data_get($arrayAccessIterable, 'flights.{last}.segments.*.to'));
+
+        $this->assertEquals(['LHR', 'LGW'], data_get($arrayAccessIterable, 'flights.*.segments.{first}.from'));
+        $this->assertEquals(['PKX', 'PEK'], data_get($arrayAccessIterable, 'flights.*.segments.{last}.to'));
+
+        $this->assertEquals('Not found', data_get($arrayAccessIterable, 'empty.{first}', 'Not found'));
+        $this->assertEquals('Not found', data_get($arrayAccessIterable, 'empty.{last}', 'Not found'));
+    }
 
     public function testDataFill()
     {
@@ -285,94 +462,108 @@ class SupportHelpersTest extends TestCase
         ], $data);
     }
 
-    public function testDataRemove()
+    public function testDataSet()
     {
-        $data = ['foo' => 'bar', 'hello' => 'world'];
+        $data = ['foo' => 'bar'];
 
         $this->assertEquals(
-            ['hello' => 'world'],
-            data_forget($data, 'foo')
+            ['foo' => 'bar', 'baz' => 'boom'],
+            data_set($data, 'baz', 'boom')
         );
 
-        $data = ['foo' => 'bar', 'hello' => 'world'];
-
         $this->assertEquals(
-            ['foo' => 'bar', 'hello' => 'world'],
-            data_forget($data, 'nothing')
+            ['foo' => 'bar', 'baz' => 'kaboom'],
+            data_set($data, 'baz', 'kaboom')
         );
 
-        $data = ['one' => ['two' => ['three' => 'hello', 'four' => ['five']]]];
+        $this->assertEquals(
+            ['foo' => [], 'baz' => 'kaboom'],
+            data_set($data, 'foo.*', 'noop')
+        );
 
         $this->assertEquals(
-            ['one' => ['two' => ['four' => ['five']]]],
-            data_forget($data, 'one.two.three')
+            ['foo' => ['bar' => 'boom'], 'baz' => 'kaboom'],
+            data_set($data, 'foo.bar', 'boom')
+        );
+
+        $this->assertEquals(
+            ['foo' => ['bar' => 'boom'], 'baz' => ['bar' => 'boom']],
+            data_set($data, 'baz.bar', 'boom')
+        );
+
+        $this->assertEquals(
+            ['foo' => ['bar' => 'boom'], 'baz' => ['bar' => ['boom' => ['kaboom' => 'boom']]]],
+            data_set($data, 'baz.bar.boom.kaboom', 'boom')
         );
     }
 
-    public function testDataRemoveWithStar()
+    public function testDataSetWithStar()
     {
-        $data = [
-            'article' => [
-                'title' => 'Foo',
-                'comments' => [
-                    ['comment' => 'foo', 'name' => 'First'],
-                    ['comment' => 'bar', 'name' => 'Second'],
-                ],
-            ],
-        ];
+        $data = ['foo' => 'bar'];
 
         $this->assertEquals(
-            [
-                'article' => [
-                    'title' => 'Foo',
-                    'comments' => [
-                        ['comment' => 'foo'],
-                        ['comment' => 'bar'],
-                    ],
-                ],
-            ],
-            data_forget($data, 'article.comments.*.name')
+            ['foo' => []],
+            data_set($data, 'foo.*.bar', 'noop')
+        );
+
+        $this->assertEquals(
+            ['foo' => [], 'bar' => [['baz' => 'original'], []]],
+            data_set($data, 'bar', [['baz' => 'original'], []])
+        );
+
+        $this->assertEquals(
+            ['foo' => [], 'bar' => [['baz' => 'boom'], ['baz' => 'boom']]],
+            data_set($data, 'bar.*.baz', 'boom')
+        );
+
+        $this->assertEquals(
+            ['foo' => [], 'bar' => ['overwritten', 'overwritten']],
+            data_set($data, 'bar.*', 'overwritten')
         );
     }
 
-    public function testDataRemoveWithDoubleStar()
+    public function testDataSetWithDoubleStar()
     {
         $data = [
             'posts' => [
                 (object) [
                     'comments' => [
-                        (object) ['name' => 'First', 'comment' => 'foo'],
-                        (object) ['name' => 'Second', 'comment' => 'bar'],
+                        (object) ['name' => 'First'],
+                        (object) [],
                     ],
                 ],
                 (object) [
                     'comments' => [
-                        (object) ['name' => 'Third', 'comment' => 'hello'],
-                        (object) ['name' => 'Fourth', 'comment' => 'world'],
+                        (object) [],
+                        (object) ['name' => 'Second'],
                     ],
                 ],
             ],
         ];
 
-        data_forget($data, 'posts.*.comments.*.name');
+        data_set($data, 'posts.*.comments.*.name', 'Filled');
 
         $this->assertEquals([
             'posts' => [
                 (object) [
                     'comments' => [
-                        (object) ['comment' => 'foo'],
-                        (object) ['comment' => 'bar'],
+                        (object) ['name' => 'Filled'],
+                        (object) ['name' => 'Filled'],
                     ],
                 ],
                 (object) [
                     'comments' => [
-                        (object) ['comment' => 'hello'],
-                        (object) ['comment' => 'world'],
+                        (object) ['name' => 'Filled'],
+                        (object) ['name' => 'Filled'],
                     ],
                 ],
             ],
         ], $data);
     }
+
+
+
+
 
     public function testHead()
     {
@@ -889,6 +1080,232 @@ class SupportHelpersTest extends TestCase
         $this->assertSame('x"null"x', env('foo'));
     }
 
+    public function testWriteArrayOfEnvVariablesToFile()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariables([
+            'APP_VIBE' => 'chill',
+            'DB_HOST' => '127:0:0:1',
+            'DB_PORT' => 3306,
+            'BRAND_NEW_PREFIX' => 'fresh value',
+        ], $path);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=chill',
+                '',
+                'DB_CONNECTION=mysql',
+                'DB_HOST="127:0:0:1"',
+                'DB_PORT=3306',
+                '',
+                'BRAND_NEW_PREFIX="fresh value"',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWriteArrayOfEnvVariablesToFileAndOverwrite()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariables([
+            'APP_VIBE' => 'chill',
+            'DB_HOST' => '127:0:0:1',
+            'DB_CONNECTION' => 'sqlite',
+        ], $path, true);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=chill',
+                '',
+                'DB_CONNECTION=sqlite',
+                'DB_HOST="127:0:0:1"',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWillNotOverwriteArrayOfVariables()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            'APP_VIBE=odd',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariables([
+            'APP_VIBE' => 'chill',
+            'DB_HOST' => '127:0:0:1',
+        ], $path);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=odd',
+                '',
+                'DB_CONNECTION=mysql',
+                'DB_HOST="127:0:0:1"',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWriteVariableToFile()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariable('APP_VIBE', 'chill', $path);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=chill',
+                '',
+                'DB_CONNECTION=mysql',
+                'DB_HOST=',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWillNotOverwriteVariable()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            'APP_VIBE=odd',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariable('APP_VIBE', 'chill', $path);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=odd',
+                '',
+                'DB_CONNECTION=mysql',
+                'DB_HOST=',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWriteVariableToFileAndOverwrite()
+    {
+        $filesystem = new Filesystem;
+        $path = __DIR__ . '/tmp/env-test-file';
+        $filesystem->put($path, implode(PHP_EOL, [
+            'APP_NAME=Laravel',
+            'APP_ENV=local',
+            'APP_KEY=base64:randomkey',
+            'APP_DEBUG=true',
+            'APP_URL=http://localhost',
+            'APP_VIBE=odd',
+            '',
+            'DB_CONNECTION=mysql',
+            'DB_HOST=',
+        ]));
+
+        Env::writeVariable('APP_VIBE', 'chill', $path, true);
+
+        $this->assertSame(
+            implode(PHP_EOL, [
+                'APP_NAME=Laravel',
+                'APP_ENV=local',
+                'APP_KEY=base64:randomkey',
+                'APP_DEBUG=true',
+                'APP_URL=http://localhost',
+                'APP_VIBE=chill',
+                '',
+                'DB_CONNECTION=mysql',
+                'DB_HOST=',
+            ]),
+            $filesystem->get($path)
+        );
+    }
+
+    public function testWillThrowAnExceptionIfFileIsMissingWhenTryingToWriteVariables(): void
+    {
+        $this->expectExceptionObject(new RuntimeException('The file [missing-file] does not exist.'));
+
+        Env::writeVariables([
+            'APP_VIBE' => 'chill',
+            'DB_HOST' => '127:0:0:1',
+        ], 'missing-file');
+    }
+
     public function testGetFromSERVERFirst()
     {
         $_ENV['foo'] = 'From $_ENV';
@@ -930,6 +1347,12 @@ class SupportHelpersTest extends TestCase
             ['/%s/', ['a', 'b', 'c'], 'Hi', 'Hi'],
             ['//', [], '', ''],
             ['/%s/', ['a'], '', ''],
+            // non-sequential numeric keys → should still consume in natural order
+            ['/%s/', [2 => 'A', 10 => 'B'], '%s %s', 'A B'],
+            // associative keys → order should be insertion order, not keys/pointer
+            ['/%s/', ['first' => 'A', 'second' => 'B'], '%s %s', 'A B'],
+            // values that are "falsy" but must not be treated as empty by mistake, false->'' , null->''
+            ['/%s/', ['0', 0, false, null], '%s|%s|%s|%s', '0|0||'],
             // The internal pointer of this array is not at the beginning
             ['/%s/', $pointerArray, 'Hi, %s %s', 'Hi, Taylor Otwell'],
         ];
@@ -944,10 +1367,6 @@ class SupportHelpersTest extends TestCase
         );
     }
 }
-
-// ---------------------------------------------
-// 
-// ---------------------------------------------
 
 trait SupportTestTraitOne
 {
@@ -979,11 +1398,69 @@ class SupportTestClassThree extends SupportTestClassTwo
     use SupportTestTraitThree;
 }
 
+trait SupportTestTraitArrayAccess
+{
+    protected array $items = [];
+    public function __construct(array $items)
+    {
+        $this->items = $items;
+    }
 
+    public function offsetExists($offset): bool
+    {
+        return array_key_exists($offset ?? '', $this->items);
+    }
+
+    public function offsetGet($offset): mixed
+    {
+        return $this->items[$offset];
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        $this->items[$offset] = $value;
+    }
+
+    public function offsetUnset($offset): void
+    {
+        unset($this->items[$offset]);
+    }
+}
+
+trait SupportTestTraitArrayIterable
+{
+    protected array $items = [];
+    public function __construct(array $items)
+    {
+        $this->items = $items;
+    }
+
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->items);
+    }
+}
+
+class SupportTestArrayAccess implements ArrayAccess
+{
+    use SupportTestTraitArrayAccess;
+}
+
+class SupportTestArrayIterable implements IteratorAggregate
+{
+    use SupportTestTraitArrayIterable;
+}
+
+class SupportTestArrayAccessIterable implements ArrayAccess, IteratorAggregate
+{
+    use SupportTestTraitArrayAccess, SupportTestTraitArrayIterable {
+        SupportTestTraitArrayAccess::__construct insteadof SupportTestTraitArrayIterable;
+    }
+}
 
 class SupportTestCountable implements Countable
 {
-    function count(): int
+    public function count(): int
     {
         return 0;
     }

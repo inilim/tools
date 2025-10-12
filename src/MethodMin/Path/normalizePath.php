@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Path{function normalizePath(string $path):string{return \Inilim\Tool\Method\Path\normalize($path);}if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Path{function normalizePath(string $path):string{return \Inilim\Tool\Method\Path\normalize($path);}if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}

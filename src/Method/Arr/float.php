@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get a float item from an array using "dot" notation.
  * @param \ArrayAccess|array $array

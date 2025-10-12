@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Execute a callback over each nested chunk of items.
  * @param callable(...mixed):mixed $callback

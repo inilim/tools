@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\File{function getBulkRequire(array $pathToFiles,array $data=[],bool $once=false):array{$result=[];foreach($pathToFiles as $file){$result[$file]=\Inilim\Tool\Method\File\getRequire($file,$data,$once);}return $result;}if(!\Inilim\Tool\File::__definedIfNot('getRequire')){
+declare(strict_types=1);namespace Inilim\Tool\Method\File{function getBulkRequire(array $pathToFiles,array $data=[],bool $once=false):array{$result=[];foreach($pathToFiles as $file){$result[$file]=\Inilim\Tool\Method\File\getRequire($file,$data,$once);}return $result;}if(!\Inilim\Tool\File::__definedIfNot('getRequire')){
     function getRequire(string $pathToFile,array $data=[],bool $once=false){if(\is_file($pathToFile)){$__path=$pathToFile;$__data=$data;$__once=$once;return(static function()use($__path,$__data,$__once){\extract($__data,\EXTR_SKIP);if($__once){return require_once $__path;}return require $__path;})();}throw \Inilim\Tool\Method\Obj\sprintfException('File does not exist at path "%s".',[$pathToFile]);}
     }}namespace Inilim\Tool\Method\Obj{if(!\Inilim\Tool\Obj::__definedIfNot('rewriteLocationException')){
     function rewriteLocationException(\Throwable $e,string $file,int $line):object{$rc=new \ReflectionClass($e);$rpf=$rc -> getProperty('file');$rpl=$rc -> getProperty('line');$rpf -> setAccessible(true);$rpl -> setAccessible(true);$rpf -> setValue($e,$file);$rpl -> setValue($e,$line);return $e;}

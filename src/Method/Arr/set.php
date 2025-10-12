@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @todo check PR _set()
  * @author laravel
  * Set an array item to a given value using "dot" notation.

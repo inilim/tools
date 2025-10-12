@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Filter the array using the given callback. array_filter
  * @template TValue
  * @template TKey

@@ -5,5 +5,6 @@ CREATE TABLE methods (
     code      TEXT    NOT NULL,
     code_raw     TEXT NOT NULL,
     namespace TEXT    NOT NULL,
-    path_to_file TEXT NOT NULL
+    path_to_file TEXT NOT NULL,
+    strict_types INTEGER NOT NULL
 );

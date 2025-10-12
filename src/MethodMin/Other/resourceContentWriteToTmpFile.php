@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Other{function resourceContentWriteToTmpFile($resource):?string{return \Inilim\Tool\Method\Other\resourceContentWriteToFile($resource,\Inilim\Tool\Method\Path\normalize(\sys_get_temp_dir().'/inilim-tools-'.\Inilim\Tool\Method\ID\uuidv4().'.tmp'));}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function resourceContentWriteToTmpFile($resource):?string{return \Inilim\Tool\Method\Other\resourceContentWriteToFile($resource,\Inilim\Tool\Method\Path\normalize(\sys_get_temp_dir().'/inilim-tools-'.\Inilim\Tool\Method\ID\uuidv4().'.tmp'));}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}

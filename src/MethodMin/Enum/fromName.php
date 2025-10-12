@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Enum{function fromName($enum,string $name,bool $caseInsensitive=false){$case=\Inilim\Tool\Method\Enum\tryFromName($enum,$name,$caseInsensitive);if($case===null){throw new \Exception(\sprintf('"%s" is not a valid name for enum "%s"',$name,\is_string($enum)?$enum:\get_class($enum)));}return $case;}if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function fromName($enum,string $name,bool $caseInsensitive=false){$case=\Inilim\Tool\Method\Enum\tryFromName($enum,$name,$caseInsensitive);if($case===null){throw new \Exception(\sprintf('"%s" is not a valid name for enum "%s"',$name,\is_string($enum)?$enum:\get_class($enum)));}return $case;}if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
     function __uniform($value,bool $caseInsensitive){return $caseInsensitive?\Inilim\Tool\Method\Str\lower(\strval($value)):$value;}
     }if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}

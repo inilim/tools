@@ -14,6 +14,7 @@ class Arr
     static function _array($array, $key, ?array $default = null): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @todo to Check
  * @author Laravel
  * Determine whether the given value is array accessible.
@@ -22,22 +23,26 @@ class Arr
     static function accessible($value): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Add an element to an array using "dot" notation if it doesn't exist.
  * @template T of array
  * @param T $array
+ * @param string|int|float  $key
  * @param mixed $value
  * @return T
  */
-    static function add(array $array, string $key, $value) {}
+    static function add(array $array, $key, $value) {}
 
         /**
+ * @deprecated use LarArr::***
  * Determine whether the given value is arrayable.
  * @param  mixed  $value
  */
     static function arrayable($value): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get a boolean item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
@@ -47,8 +52,8 @@ class Arr
     static function boolean($array, $key, ?bool $default = null): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
- * @todo add support \IteratorAggregate
  * Collapse an array of arrays into a single array.
  */
     static function collapse(iterable $array): array {}
@@ -65,6 +70,7 @@ class Arr
     static function containsOneItem(array $array, ?callable $callable = null): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Cross join the given arrays, returning all possible permutations.
  * @param iterable ...$arrays
@@ -73,6 +79,7 @@ class Arr
     static function crossJoin(...$arrays) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Fill in data where it's missing.
  * @template T of array|object
@@ -81,6 +88,7 @@ class Arr
     static function dataFill() {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
@@ -101,6 +109,7 @@ class Arr
     static function dataGetV2($target, $key, $default = null) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Set an item on an array or object using dot notation.
  * @template T of array|object
@@ -109,6 +118,7 @@ class Arr
     static function dataSet() {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Divide an array into two arrays. One with keys and the other with values.
  * @template K
@@ -119,6 +129,7 @@ class Arr
     static function divide(array $array) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
@@ -150,6 +161,7 @@ class Arr
     static function each($array, callable $callback) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Execute a callback over each nested chunk of items.
  * @param callable(...mixed):mixed $callback
@@ -158,6 +170,7 @@ class Arr
     static function eachSpread(array $array, callable $callback) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Get all of the given array except for a specified array of keys.
  * @template T of array
@@ -175,6 +188,7 @@ class Arr
     static function exceptNestedArray(array $array, $keys, int $depth = 1) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Determine if the given key exists in the provided array.
  *
@@ -196,6 +210,7 @@ class Arr
     static function fillKeysByRef(): Closure {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Return the first element in an array passing a given truth test.
  *
@@ -211,6 +226,7 @@ class Arr
     static function first($array, ?callable $callback = null, $default = null) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Flatten a multi-dimensional array into a single level.
  * @param int $depth
@@ -219,6 +235,7 @@ class Arr
     static function flatten(iterable $array, $depth = \INF) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get a float item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
@@ -228,6 +245,7 @@ class Arr
     static function float($array, $key, ?float $default = null): float {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Remove one or many array items from a given array using "dot" notation.
  * @return \Closure(array &$array, (string|int)[]|string|int $keys):void
@@ -235,6 +253,7 @@ class Arr
     static function forget() {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get the underlying array of items from the given argument.
  *
@@ -249,6 +268,7 @@ class Arr
     static function from($items): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Get an item from an array using "dot" notation.
  * @template D
@@ -279,6 +299,7 @@ class Arr
     static function getKeyOffset(array $array, $key) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Check if an item or items exist in an array using "dot" notation.
  *
@@ -288,6 +309,7 @@ class Arr
     static function has($array, $keys): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Determine if all keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|mixed[]  $array
@@ -296,6 +318,7 @@ class Arr
     static function hasAll($array, $keys): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * Determine if any of the keys exist in an array using "dot" notation.
  * @param  \ArrayAccess|array  $array
  * @param  (string|int)[]|int|string|null  $keys
@@ -313,6 +336,7 @@ class Arr
     static function hasValueAny(array $array, $values, bool $strict = false): bool {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Return the first element in an array passing a given truth test.
  * @template TKey
@@ -342,6 +366,7 @@ class Arr
     static function insertBefore() {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get an integer item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
@@ -356,7 +381,9 @@ class Arr
  */
     static function isAssoc(array $array): bool {}
 
-        
+        /**
+ * @deprecated use LarArr::***
+ */
     static function isList(array $array): bool {}
 
         /**
@@ -412,6 +439,7 @@ class Arr
     static function last(iterable $array, ?callable $callback = null, $default = null) {}
 
         /**
+ * @deprecated use LarArr::***
  * Run a map over each of the items in the array.
  * @template TValue
  * @template TKey
@@ -435,6 +463,7 @@ class Arr
     static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false) {}
 
         /**
+ * @deprecated use LarArr::***
  * Run a map over each nested chunk of items.
  *
  * @template TKey
@@ -447,6 +476,7 @@ class Arr
     static function mapSpread(array $array, callable $callback): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TValue
@@ -457,6 +487,7 @@ class Arr
     static function mapToGroups(array $array, callable $callback): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Run an associative map over each of the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TKey
@@ -480,6 +511,7 @@ class Arr
     static function nestedMap(array $array, int $depth, callable $callable): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Get a subset of the items from the given array.
  * @param  (string|int)[]|string|int  $keys
  */
@@ -492,6 +524,7 @@ class Arr
     static function onlyNestedArray(array $array, $keys, int $depth = 1): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * @author Inilim "Changed it a bit"
  * Partition the array into two arrays using the given callback.
@@ -506,6 +539,7 @@ class Arr
     static function partition(iterable $array, callable $callback): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Pluck an array of values from an array.
  * @param  string|array|int|null  $value
@@ -514,6 +548,7 @@ class Arr
     static function pluck(iterable $array, $value, $key = null): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Push an item onto the beginning of an array.
  * @param array $array
  * @param mixed $value
@@ -522,22 +557,26 @@ class Arr
     static function prepend(array $array, $value, $key = null): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Prepend the key names of an associative array.
  */
     static function prependKeysWith(array $array, string $prependWith): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Get a value from the array, and remove it.
  * @return \Closure(array &$array, string|int $key, mixed $default):mixed
  */
     static function pull() {}
 
         /**
+ * @deprecated use LarArr::***
  * Convert the array into a query string.
  */
     static function query(array $array): string {}
 
         /**
+ * @deprecated use LarArr::***
  * Get one or a specified number of random values from an array.
  * @template TValue
  * @template TKey
@@ -552,6 +591,7 @@ class Arr
     static function random(array $array, ?int $number = null, bool $preserveKeys = false) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Filter the array using the negation of the given callback.
  * @param  callable  $callback
@@ -577,6 +617,7 @@ class Arr
     static function resetKeysRecursive(array $array) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Select an array of values from an array.
  *
@@ -587,6 +628,7 @@ class Arr
     static function select(array $array, $keys) {}
 
         /**
+ * @deprecated use LarArr::***
  * @todo check PR _set()
  * @author laravel
  * Set an array item to a given value using "dot" notation.
@@ -624,6 +666,7 @@ class Arr
     static function shuffle(array $array, ?int $seed = null, bool $preserveKeys = true) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get the first item in the collection, but only if exactly one item exists. Otherwise, throw an exception.
  *
@@ -635,6 +678,7 @@ class Arr
     static function sole(array $array, ?callable $callback = null) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * 
  * Determine if some items pass the given truth test.
@@ -651,11 +695,13 @@ class Arr
     static function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $descending = false): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Recursively sort an array by keys and values.
  */
     static function sortRecursive(array $array, int $options = \SORT_REGULAR, bool $descending = false): array {}
 
         /**
+ * @deprecated use LarArr::***
  * Recursively sort an array by keys and values in descending order.
  */
     static function sortRecursiveDesc(array $array, int $options = \SORT_REGULAR): array {}
@@ -671,6 +717,7 @@ class Arr
     static function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false) {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get a string item from an array using "dot" notation.
  * @param \ArrayAccess|array $array
@@ -687,6 +734,7 @@ class Arr
     static function swap(): Closure {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * 
  * Take the first or last {$limit} items from an array.
@@ -706,6 +754,7 @@ class Arr
     static function toObj(iterable $array, object $object) {}
 
         /**
+ * @deprecated use LarArr::***
  * @todo check PR _undot()
  * Convert a flatten "dot" notation array into an expanded array.
  * @param  iterable  $array
@@ -713,6 +762,7 @@ class Arr
     static function undot($array): array {}
 
         /**
+ * @author inilim
  * @template TValue
  * @param TValue[] $array
  * @return TValue[]
@@ -720,6 +770,7 @@ class Arr
     static function unique(array $array): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Return the default value of the given value.
  *
@@ -751,6 +802,7 @@ class Arr
     static function walkRecursive(): Closure {}
 
         /**
+ * @deprecated use LarArr::***
  * Filter the array using the given callback. array_filter
  * @template TValue
  * @template TKey
@@ -761,6 +813,7 @@ class Arr
     static function where(array $array, callable $callback, bool $preserveKeys = true): array {}
 
         /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * @author Inilim "Changed it a bit"
  * Filter items where the value is not null.
@@ -773,6 +826,7 @@ class Arr
 
         /**
  * If the given value is not an array, wrap it in one.
+ * @author inilim
  * @param mixed $value
  */
     static function wrap($value): array {}

@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Refl{function setValueProp($objectOrClass,string $name,$value,bool $throw=false):bool{$prop=\Inilim\Tool\Method\Refl\getProp($objectOrClass,$name,$throw);if($prop===null){return false;}$prop -> setAccessible(true);try{$prop -> setValue($objectOrClass,$value);}catch(\Throwable $e){if($throw){throw $e;}return null;}return true;}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Refl{function setValueProp($objectOrClass,string $name,$value,bool $throw=false):bool{$prop=\Inilim\Tool\Method\Refl\getProp($objectOrClass,$name,$throw);if($prop===null){return false;}$prop -> setAccessible(true);try{$prop -> setValue($objectOrClass,$value);}catch(\Throwable $e){if($throw){throw $e;}return null;}return true;}if(!\Inilim\Tool\Refl::__definedIfNot('_class')){
     function _class($classOrObj,bool $throw=false){try{return new \ReflectionClass($classOrObj);}catch(\ReflectionException $e){if($throw){throw $e;}return null;}}
     }if(!\Inilim\Tool\Refl::__definedIfNot('getProp')){
     function getProp($objectOrClass,string $name,bool $throw=false){$name=\Inilim\Tool\Method\Other\unprefixVar($name);$ref=\Inilim\Tool\Method\Refl\_class($objectOrClass,$throw);if($ref===null){return null;}try{$prop=$ref -> getProperty($name);if(!\Inilim\Tool\Method\Check\php81()){$prop -> setAccessible(true);}return $prop;}catch(\ReflectionException $e){if($throw){throw $e;}return null;}}

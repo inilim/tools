@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer;
 
 /**
@@ -13,7 +15,7 @@ function isBigIntUnsigned($value): bool
     $value = \strval($value);
     /** @var string $value */
     if (\Inilim\Tool\Method\PF\str_starts_with($value, '-')) return false;
-    $len = lenNumeric($value);
+    $len = \Inilim\Tool\Method\Integer\lenNumeric($value);
     if ($len < \Inilim\Tool\Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return true;
     if ($len > \Inilim\Tool\Integer::BIG_INT_MAX_UNSIGNED_LENGHT) return false;
     // длина 20

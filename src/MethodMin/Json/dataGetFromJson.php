@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string $dotKey,$default=null){$t=\Inilim\Tool\Method\Json\tryDecodeAsArray($json,[]);if(!$t){return $default;}return \Inilim\Tool\Method\Arr\dataGetV2($t,$dotKey,$default);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string $dotKey,$default=null){$t=\Inilim\Tool\Method\Json\tryDecodeAsArray($json,[]);if(!$t){return $default;}return \Inilim\Tool\Method\Arr\dataGetV2($t,$dotKey,$default);}if(!\Inilim\Tool\Json::__definedIfNot('decode')){
     function decode(string $v,?bool $associative=null,int $depth=512,int $flags=0){return \json_decode($v,$associative,$depth,$flags);}
     }if(!\Inilim\Tool\Json::__definedIfNot('tryDecodeAsArray')){
     function tryDecodeAsArray(?string $v,$default=null){if($v===null){return $default;}$v=\Inilim\Tool\Method\Json\decode($v,true);if(\is_array($v)){return $v;}return $default;}
@@ -23,7 +21,7 @@ namespace Inilim\Tool\Method\Json{function dataGetFromJson(?string $json,string 
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('from')){
-    function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if($items instanceof \Traversable){return \iterator_to_array($items);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
+    function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if(false){}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif($items instanceof \Traversable){return \iterator_to_array($items);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
     }if(!\Inilim\Tool\Arr::__definedIfNot('only')){
     function only(array $array,$keys):array{return \array_intersect_key($array,\array_flip((array) $keys));}
     }if(!\Inilim\Tool\Arr::__definedIfNot('set')){

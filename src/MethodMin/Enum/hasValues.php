@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Enum{function hasValues($enum):bool{\Inilim\Tool\Method\Assert\php81();if(\is_object($enum)&&$enum instanceof \BackedEnum){return true;}return \Inilim\Tool\Method\Enum\head($enum)instanceof \BackedEnum;}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function hasValues($enum):bool{\Inilim\Tool\Method\Assert\php81();if(\is_object($enum)&&$enum instanceof \BackedEnum){return true;}return \Inilim\Tool\Method\Enum\head($enum)instanceof \BackedEnum;}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}
     }if(!\Inilim\Tool\Enum::__definedIfNot('head')){
     function head($enum){return \Inilim\Tool\Method\Arr\head(\Inilim\Tool\Method\Enum\cases($enum));}

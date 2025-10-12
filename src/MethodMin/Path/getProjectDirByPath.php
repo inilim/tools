@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Path{function getProjectDirByPath(?string $path=null):?string{$dir=\Inilim\Tool\Method\Path\getVendorDirByPath($path);return $dir?\dirname($dir,1):null;}if(!\Inilim\Tool\Path::__definedIfNot('getVendorDirByPath')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Path{function getProjectDirByPath(?string $path=null):?string{$dir=\Inilim\Tool\Method\Path\getVendorDirByPath($path);return $dir?\dirname($dir,1):null;}if(!\Inilim\Tool\Path::__definedIfNot('getVendorDirByPath')){
     function getVendorDirByPath(?string $path=null):?string{static $cacheDirForSelf=null;$self=$path===null;if($self&&$cacheDirForSelf!==null){return $cacheDirForSelf;}$result=null;$path ??= __DIR__;$path=\Inilim\Tool\Method\Path\normalize($path.'/');if(\Inilim\Tool\Method\PF\str_contains($path,'/vendor/')){$path=\Inilim\Tool\Method\Str\beforeLast($path,'/vendor/');$result=\Inilim\Tool\Method\Path\normalize($path.'/vendor');}elseif(\is_dir($path.'vendor')){$result=$path.'vendor';}else{$path=\Inilim\Tool\Method\Path\normalize(\dirname($path).'/');if(\is_dir($path.'vendor')){$result=$path.'vendor';}}if($self&&$result!==null){$cacheDirForSelf=$result;}return $result;}
     }if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}

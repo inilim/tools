@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer;
 
 /**
@@ -24,7 +26,7 @@ function checkBetween($num, $fromTo, $toFrom): bool
     $num    = \intval($num);
 
     if ($fromTo > $toFrom) {
-        list($toFrom, $fromTo) = [$fromTo, $toFrom];
+        [$toFrom, $fromTo] = [$fromTo, $toFrom];
     }
     return $num >= $fromTo && $num <= $toFrom;
 }

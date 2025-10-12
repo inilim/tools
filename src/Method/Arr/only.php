@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Get a subset of the items from the given array.
  * @param  (string|int)[]|string|int  $keys
  */

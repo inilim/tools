@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author laravel
  * Get the first item in the collection, but only if exactly one item exists. Otherwise, throw an exception.
  *

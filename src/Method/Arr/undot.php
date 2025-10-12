@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @todo check PR _undot()
  * Convert a flatten "dot" notation array into an expanded array.
  * @param  iterable  $array

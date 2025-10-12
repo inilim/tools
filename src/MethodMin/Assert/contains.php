@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Assert{function contains($value,string $subString,bool $ingnoreCase=false,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\Inilim\Tool\Method\Check\contains($value,$subString,$ingnoreCase)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a value to contain %2$s. Got: %s',\Inilim\Tool\Method\Other\valueToString($value),\Inilim\Tool\Method\Other\valueToString($subString)));}}if(!\Inilim\Tool\Assert::__definedIfNot('string')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Assert{function contains($value,string $subString,bool $ingnoreCase=false,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\Inilim\Tool\Method\Check\contains($value,$subString,$ingnoreCase)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a value to contain %2$s. Got: %s',\Inilim\Tool\Method\Other\valueToString($value),\Inilim\Tool\Method\Other\valueToString($subString)));}}if(!\Inilim\Tool\Assert::__definedIfNot('string')){
     function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('iContainsOnce')){
     function iContainsOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')!==false;}

@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Arr{function pluck(iterable $array,$value,$key=null):array{$results=[];$value=\is_string($value)?\explode('.',$value):$value;$key=$key===null||\is_array($key)?$key:\explode('.',$key);foreach($array as $item){$itemValue=\Inilim\Tool\Method\Arr\dataGet($item,$value);if($key===null){$results[]=$itemValue;}else{$itemKey=\Inilim\Tool\Method\Arr\dataGet($item,$key);if(\is_object($itemKey)&&\method_exists($itemKey,'__toString')){$itemKey=(string) $itemKey;}$results[$itemKey]=$itemValue;}}return $results;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function pluck(iterable $array,$value,$key=null):array{$results=[];$value=\is_string($value)?\explode('.',$value):$value;$key=$key===null||\is_array($key)?$key:\explode('.',$key);foreach($array as $item){$itemValue=\Inilim\Tool\Method\Arr\dataGet($item,$value);if($key===null){$results[]=$itemValue;}else{$itemKey=\Inilim\Tool\Method\Arr\dataGet($item,$key);if(\is_object($itemKey)&&\method_exists($itemKey,'__toString')){$itemKey=(string) $itemKey;}$results[$itemKey]=$itemValue;}}return $results;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('collapse')){
     function collapse(iterable $array):array{$results=[];foreach($array as $values){if($values instanceof \Traversable){$values=\iterator_to_array($values);}elseif(!\is_array($values)){continue;}$results[]=$values;}return \array_merge([],... $results);}
@@ -11,7 +9,7 @@ namespace Inilim\Tool\Method\Arr{function pluck(iterable $array,$value,$key=null
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('from')){
-    function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if($items instanceof \Traversable){return \iterator_to_array($items);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
+    function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if(false){}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif($items instanceof \Traversable){return \iterator_to_array($items);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
     function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){

@@ -1,6 +1,8 @@
 <?php
 
+{% if strict_types == 1 -%}
 declare(strict_types=1);
+{%- endif -%}
 
 {% for namespace,dep in deps -%}
 namespace {{ namespace }}{

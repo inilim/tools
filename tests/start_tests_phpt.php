@@ -11,16 +11,17 @@ require_once __DIR__ . '/Assert.php';
 // INFO encode env
 // ---------------------------------------------
 
-$t = $_SERVER['__ENV'] ?? '';
-if ($t === '') {
-    exit('');
-}
-$t = json_decode($t, true);
-if (!\is_array($t)) {
-    exit('');
-}
-$_SERVER['__ENV'] = $t;
-unset($t);
+(static function () {
+    $t = $_SERVER['__ENV'] ?? '';
+    if ($t === '') {
+        exit('');
+    }
+    $t = \json_decode($t, true);
+    if (!\is_array($t)) {
+        exit('');
+    }
+    $_SERVER['__ENV'] = $t;
+})();
 
 // ---------------------------------------------
 // INFO запуск теста
@@ -29,7 +30,12 @@ unset($t);
 Internal::process();
 (static function () {
     $memory_limit = Internal::get_param_from_env('memory_limit', '128M');
-    $time_limit = (int)Internal::get_param_from_env('time_limit', 5);
+    $time_limit   = Internal::get_param_from_env('time_limit', 5);
+    $composer_autoload = Internal::get_param_from_env('composer_autoload', false);
+
+    if ($composer_autoload) {
+        require_once __DIR__ . '/../vendor/autoload.php';
+    }
 
     \date_default_timezone_set('UTC');
     \ini_set('display_errors', 1);
@@ -50,6 +56,7 @@ try {
     require_once Internal::get_param_from_env('case');
 } catch (\Error $e) {
     echo \sprintf(
+        // TODO use data
         '<error message="%s" file="%s" line="%s" />',
         Str::unixNewLines(\htmlspecialchars($e->getMessage()), ' '),
         $e->getFile(),
@@ -57,6 +64,7 @@ try {
     );
 } catch (\Exception $e) {
     echo \sprintf(
+        // TODO use data
         '<exception class="%s" message="%s" file="%s" line="%s" code="%s" trace="%s" />',
         \get_class($e),
         Str::unixNewLines(\htmlspecialchars($e->getMessage()), ' '),

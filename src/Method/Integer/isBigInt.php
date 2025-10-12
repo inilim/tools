@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Inilim\Tool\Method\Integer;
 
 /**
@@ -8,7 +10,9 @@ namespace Inilim\Tool\Method\Integer;
  */
 function isBigInt($value): bool
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) return false;
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) {
+        return false;
+    }
     /** @var int|string $value */
     $value = \strval($value);
     /** @var string $value */

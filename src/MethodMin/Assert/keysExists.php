@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Assert{function keysExists($value,array $keys,string $message=''){\Inilim\Tool\Method\Assert\isArray($value);if(!\Inilim\Tool\Method\Arr\hasAll($value,$keys)){throw new \InvalidArgumentException(\sprintf($message?:'Expected all of: %2$s. Got: %s',\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',\array_keys($value))),\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',$keys))));}}if(!\Inilim\Tool\Assert::__definedIfNot('isArray')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Assert{function keysExists($value,array $keys,string $message=''){\Inilim\Tool\Method\Assert\isArray($value);if(!\Inilim\Tool\Method\Arr\hasAll($value,$keys)){throw new \InvalidArgumentException(\sprintf($message?:'Expected all of: %2$s. Got: %s',\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',\array_keys($value))),\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',$keys))));}}if(!\Inilim\Tool\Assert::__definedIfNot('isArray')){
     function isArray($value,string $message=''){if(!\is_array($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a array. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
     }}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}

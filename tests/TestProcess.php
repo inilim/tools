@@ -22,8 +22,6 @@ class TestProcess
     protected string $php;
     protected string $phpVersion;
     protected array $dataEnv = [];
-    protected string $memoryLimit = '128M';
-    protected int $timeLimit = 5;
 
     function __construct(string $caseFile)
     {
@@ -31,6 +29,7 @@ class TestProcess
             throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
         }
         $this->caseFile = $caseFile;
+        $this->dataEnv['case'] = $caseFile;
     }
 
     /**
@@ -42,8 +41,17 @@ class TestProcess
         if ($php === null) {
             throw new \RuntimeException(\sprintf('Not found php version "%s"', $phpVersion));
         }
-        $this->php = $php;
+        $this->php        = $php;
         $this->phpVersion = $phpVersion;
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    function withComposerAutoloadInclude()
+    {
+        $this->dataEnv['composer_autoload'] = true;
         return $this;
     }
 
@@ -72,7 +80,7 @@ class TestProcess
      */
     function withTimeLimit(int $seconds)
     {
-        $this->timeLimit = $seconds;
+        $this->dataEnv['time_limit'] = $seconds;
         return $this;
     }
 
@@ -85,7 +93,7 @@ class TestProcess
         if (!\preg_match('/^\d+[MG]{1}$/', $value)) {
             throw new \InvalidArgumentException(\sprintf('memoty limit invalid value "%s"', $value));
         }
-        $this->memoryLimit = $value;
+        $this->dataEnv['memory_limit'] = $value;
         return $this;
     }
 
@@ -106,21 +114,12 @@ class TestProcess
 
     protected function _test(): array
     {
-        $env = [
-            'case'         => $this->caseFile,
-            'memory_limit' => $this->memoryLimit,
-            'time_limit'   => $this->timeLimit,
-        ];
-        if ($this->dataEnv) {
-            $env = \array_merge($this->dataEnv, $env);
-        }
-
         $startCaseFile = $this->getStartCaseFile();
         if (!\is_file($startCaseFile)) {
             throw new \RuntimeException(\sprintf('Not found file start case "%s"', $startCaseFile));
         }
 
-        $process = new Process(\array_merge([$this->php, $startCaseFile]), null, ['__ENV' => \json_encode($env)]);
+        $process = new Process(\array_merge([$this->php, $startCaseFile]), null, ['__ENV' => \json_encode($this->dataEnv)]);
         $process->run();
         try {
             $output = $process->getOutput();

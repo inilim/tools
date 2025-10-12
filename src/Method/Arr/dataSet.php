@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author Laravel
  * Set an item on an array or object using dot notation.
  * @template T of array|object
@@ -13,6 +14,7 @@ namespace Inilim\Tool\Method\Arr;
 function dataSet()
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (&$target, $key, $value, bool $overwrite = true) {
         $segments = \is_array($key) ? $key : \explode('.', $key);
         $dataSet  = \Inilim\Tool\Method\Arr\dataSet();

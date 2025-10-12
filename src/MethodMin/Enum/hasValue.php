@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Enum{function hasValue($enum,$value,bool $caseInsensitive=false){return \Inilim\Tool\Method\Enum\tryFromValue($enum,$value,$caseInsensitive)!==null;}if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function hasValue($enum,$value,bool $caseInsensitive=false){return \Inilim\Tool\Method\Enum\tryFromValue($enum,$value,$caseInsensitive)!==null;}if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
     function __uniform($value,bool $caseInsensitive){return $caseInsensitive?\Inilim\Tool\Method\Str\lower(\strval($value)):$value;}
     }if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}

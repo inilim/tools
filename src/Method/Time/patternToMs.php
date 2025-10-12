@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Time;
 
-use Inilim\Tool\Time;
-
 /**
  * @todo 
  * @build_skip

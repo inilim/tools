@@ -176,3 +176,15 @@ final class Sql extends LazyMethodAbstract
 {
     protected const NAME = 'Sql', IDX = 22;
 }
+final class LarArr extends LazyMethodAbstract
+{
+    protected const NAME = 'LarArr', IDX = 23;
+}
+final class Lar extends LazyMethodAbstract
+{
+    protected const NAME = 'Lar', IDX = 24;
+}
+final class LarStr extends LazyMethodAbstract
+{
+    protected const NAME = 'LarStr', IDX = 25;
+}

@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\PF{function get_resource_id($res):int{if(\Inilim\Tool\Method\Check\php80()){return \get_resource_id($res);}if(!\is_resource($res)&&null===@\get_resource_type($res)){throw new \TypeError(\sprintf('Argument 1 passed to get_resource_id() must be of the type resource, %s given',\Inilim\Tool\Method\PF\get_debug_type($res)));}return (int) $res;}if(!\Inilim\Tool\PF::__definedIfNot('get_debug_type')){
+declare(strict_types=1);namespace Inilim\Tool\Method\PF{function get_resource_id($res):int{if(\Inilim\Tool\Method\Check\php80()){return \get_resource_id($res);}if(!\is_resource($res)&&null===@\get_resource_type($res)){throw new \TypeError(\sprintf('Argument 1 passed to get_resource_id() must be of the type resource, %s given',\Inilim\Tool\Method\PF\get_debug_type($res)));}return (int) $res;}if(!\Inilim\Tool\PF::__definedIfNot('get_debug_type')){
     function get_debug_type($value){if(\Inilim\Tool\Method\Check\php80()){return \get_debug_type($value);}switch(true){case null===$value:return 'null';case \is_bool($value):return 'bool';case \is_string($value):return 'string';case \is_array($value):return 'array';case \is_int($value):return 'int';case \is_float($value):return 'float';case \is_object($value):break;case $value instanceof \__PHP_Incomplete_Class:return '__PHP_Incomplete_Class';default:if(null===$type=@\get_resource_type($value)){return 'unknown';}if('Unknown'===$type){$type='closed';}return"resource ({$type})";}$class=\get_class($value);if(false===\strpos($class,'@')){return $class;}return((\get_parent_class($class)?:\key(\class_implements($class)))?:'class').'@anonymous';}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}

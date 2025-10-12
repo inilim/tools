@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Assert{function allString($value,string $message=''){\Inilim\Tool\Method\Assert\isIterable($value);foreach($value as $entry){\Inilim\Tool\Method\Assert\string($entry,$message);}}if(!\Inilim\Tool\Assert::__definedIfNot('isIterable')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Assert{function allString($value,string $message=''){\Inilim\Tool\Method\Assert\isIterable($value);foreach($value as $entry){\Inilim\Tool\Method\Assert\string($entry,$message);}}if(!\Inilim\Tool\Assert::__definedIfNot('isIterable')){
     function isIterable($value,string $message=''){if(!\Inilim\Tool\Method\Check\isIterable($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected an iterable. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
     function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}

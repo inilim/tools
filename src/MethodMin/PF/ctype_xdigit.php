@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\PF{function ctype_xdigit($text):bool{if(\Inilim\Tool\Method\Other\funcPhp('ctype_xdigit')){return \ctype_xdigit($text);}$cls=\Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');$text=$cls -> __invoke($text,'ctype_xdigit');return \is_string($text)&&''!==$text&&!\preg_match('/[^A-Fa-f0-9]/',$text);}if(!\Inilim\Tool\PF::__definedIfNot('__resource')){
+declare(strict_types=1);namespace Inilim\Tool\Method\PF{function ctype_xdigit($text):bool{if(\Inilim\Tool\Method\Other\funcPhp('ctype_xdigit')){return \ctype_xdigit($text);}$cls=\Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');$text=$cls -> __invoke($text,'ctype_xdigit');return \is_string($text)&&''!==$text&&!\preg_match('/[^A-Fa-f0-9]/',$text);}if(!\Inilim\Tool\PF::__definedIfNot('__resource')){
     function __resource(string $name){if(\is_file($name=__DIR__.'/../../../files/resources/PF/'.$name.'.php')){return require $name;}return null;}
     }if(!\Inilim\Tool\PF::__definedIfNot('__resourceCache')){
     function __resourceCache(string $name){static $o=null;$o ??=[];if(\array_key_exists($name,$o)){return $o[$name];}return $o[$name]=\Inilim\Tool\Method\PF\__resource($name);}

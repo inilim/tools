@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function replaceEnd(string $search,string $replace,string $subject){if($search===''){return $subject;}if(\Inilim\Tool\Method\Str\endsWith($subject,$search)){return \Inilim\Tool\Method\Str\replaceLast($search,$replace,$subject);}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('endsWith')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function replaceEnd(string $search,string $replace,string $subject){if($search===''){return $subject;}if(\Inilim\Tool\Method\Str\endsWith($subject,$search)){return \Inilim\Tool\Method\Str\replaceLast($search,$replace,$subject);}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('endsWith')){
     function endsWith(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iEndsWithOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_ends_with($haystack,$needle)){return true;}}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('iEndsWithOnce')){
     function iEndsWithOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,-\mb_strlen($needle,'UTF-8'),'UTF-8')!==false;}

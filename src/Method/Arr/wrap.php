@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * If the given value is not an array, wrap it in one.
+ * @author inilim
  * @param mixed $value
  */
 function wrap($value): array

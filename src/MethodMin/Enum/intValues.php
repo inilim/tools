@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Enum{function intValues($enum):bool{return \Inilim\Tool\Method\Enum\typeValues($enum)==='int';}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function intValues($enum):bool{return \Inilim\Tool\Method\Enum\typeValues($enum)==='int';}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}
     }if(!\Inilim\Tool\Enum::__definedIfNot('firstValue')){
     function firstValue($enum){$case=\Inilim\Tool\Method\Enum\head($enum);return $case -> value ?? null;}

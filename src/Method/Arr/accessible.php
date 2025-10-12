@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @todo to Check
  * @author Laravel
  * Determine whether the given value is array accessible.

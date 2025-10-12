@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function isUrl(string $value,array $protocols=[]):bool{$protocolList=empty($protocols)?\strtr(\Inilim\Tool\Method\Data\URLProtocolsAsString('|'),['.'=>'\.','+'=>'\+']):\implode('|',$protocols);$pattern='~^
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function isUrl(string $value,array $protocols=[]):bool{$protocolList=empty($protocols)?\strtr(\Inilim\Tool\Method\Data\URLProtocolsAsString('|'),['.'=>'\.','+'=>'\+']):\implode('|',$protocols);$pattern='~^
             (__PROTOCOLS__)://                                 # protocol
             (((?:[\_\.\pL\pN-]|%[0-9A-Fa-f]{2})+:)?((?:[\_\.\pL\pN-]|%[0-9A-Fa-f]{2})+)@)?  # basic auth
             (

@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Arr{function swap():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$keyOne,$keyTwo){\Inilim\Tool\Method\Assert\keysExists($array,[$keyOne,$keyTwo],'One or both keys do not exist in the array.');if($keyOne===$keyTwo){return;}[$array[$keyOne],$array[$keyTwo]]=[$array[$keyTwo],$array[$keyOne]];};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function swap():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$keyOne,$keyTwo){\Inilim\Tool\Method\Assert\keysExists($array,[$keyOne,$keyTwo],'One or both keys do not exist in the array.');if($keyOne===$keyTwo){return;}[$array[$keyOne],$array[$keyTwo]]=[$array[$keyTwo],$array[$keyOne]];};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}

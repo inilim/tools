@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Get a value from the array, and remove it.
  * @return \Closure(array &$array, string|int $key, mixed $default):mixed
  */

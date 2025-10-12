@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function parseCallback(string $callback,?string $default=null):array{if(\Inilim\Tool\Method\Str\contains($callback,"@anonymous\x00")){if(\Inilim\Tool\Method\Str\substrCount($callback,'@')>1){return[\Inilim\Tool\Method\Str\beforeLast($callback,'@'),\Inilim\Tool\Method\Str\afterLast($callback,'@')];}return[$callback,$default];}return \Inilim\Tool\Method\Str\contains($callback,'@')?\explode('@',$callback,2):[$callback,$default];}if(!\Inilim\Tool\Str::__definedIfNot('afterLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function parseCallback(string $callback,?string $default=null):array{if(\Inilim\Tool\Method\Str\contains($callback,"@anonymous\x00")){if(\Inilim\Tool\Method\Str\substrCount($callback,'@')>1){return[\Inilim\Tool\Method\Str\beforeLast($callback,'@'),\Inilim\Tool\Method\Str\afterLast($callback,'@')];}return[$callback,$default];}return \Inilim\Tool\Method\Str\contains($callback,'@')?\explode('@',$callback,2):[$callback,$default];}if(!\Inilim\Tool\Str::__definedIfNot('afterLast')){
     function afterLast(string $subject,string $search):string{if($search===''){return $subject;}$position=\strrpos($subject,$search);if($position===false){return $subject;}return \substr($subject,$position+\strlen($search));}
     }if(!\Inilim\Tool\Str::__definedIfNot('beforeLast')){
     function beforeLast(string $subject,string $search):string{if($search===''){return $subject;}$pos=\mb_strrpos($subject,$search);if($pos===false){return $subject;}return \Inilim\Tool\Method\Str\substr($subject,0,$pos);}

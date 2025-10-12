@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Path{function getProjectDirUsingComposer():?string{$dir=\Inilim\Tool\Method\Path\getVendorDirUsingComposer();return $dir?\dirname($dir,1):null;}if(!\Inilim\Tool\Path::__definedIfNot('getVendorDirUsingComposer')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Path{function getProjectDirUsingComposer():?string{$dir=\Inilim\Tool\Method\Path\getVendorDirUsingComposer();return $dir?\dirname($dir,1):null;}if(!\Inilim\Tool\Path::__definedIfNot('getVendorDirUsingComposer')){
     function getVendorDirUsingComposer():?string{static $cacheDir=null;if($cacheDir!==null){return $cacheDir;}if(\class_exists($class=\Composer\InstalledVersions :: class,true)&&\method_exists($class,'getRootPackage')&&\is_array($result=$class :: getRootPackage())&&\is_string($result=$result['install_path']?? null)&&\is_string($result=\realpath($result))){return $cacheDir=\Inilim\Tool\Method\Path\normalize($result.'/vendor');}return null;}
     }if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}

@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Assert{function stringNotEmpty($value,string $message=''){\Inilim\Tool\Method\Assert\string($value,$message);\Inilim\Tool\Method\Assert\notEq($value,'',$message);}if(!\Inilim\Tool\Assert::__definedIfNot('notEq')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Assert{function stringNotEmpty($value,string $message=''){\Inilim\Tool\Method\Assert\string($value,$message);\Inilim\Tool\Method\Assert\notEq($value,'',$message);}if(!\Inilim\Tool\Assert::__definedIfNot('notEq')){
     function notEq($value,$expect,string $message=''){if($expect==$value){throw new \InvalidArgumentException(\sprintf($message?:'Expected a different value than %s.',\Inilim\Tool\Method\Other\valueToString($expect)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
     function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}

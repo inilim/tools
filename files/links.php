@@ -187,4 +187,28 @@ return [
         'pathMin'   => $root . '/src/MethodMin/Sql',
         'pathToClass' => $root . '/src/Sql.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\LarArr',
+        'tool'   => $class = \Inilim\Tool\LarArr::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/LarArr',
+        'pathMin'   => $root . '/src/MethodMin/LarArr',
+        'pathToClass' => $root . '/src/LarArr.php',
+    ],
+    [
+        'method' => 'Inilim\Tool\Method\Lar',
+        'tool'   => $class = \Inilim\Tool\Lar::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/Lar',
+        'pathMin'   => $root . '/src/MethodMin/Lar',
+        'pathToClass' => $root . '/src/Lar.php',
+    ],
+    [
+        'method' => 'Inilim\Tool\Method\LarStr',
+        'tool'   => $class = \Inilim\Tool\LarStr::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/LarStr',
+        'pathMin'   => $root . '/src/MethodMin/LarStr',
+        'pathToClass' => $root . '/src/LarStr.php',
+    ],
 ];

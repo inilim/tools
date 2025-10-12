@@ -137,9 +137,9 @@ if ($switch || false) {
     ) {
 
         $sqlAddMethod = 'INSERT INTO methods
-            (name,code,code_raw,namespace,path_to_file)
+            (name,code,code_raw,namespace,path_to_file,strict_types)
             VALUES
-            ({name},{code},{code_raw},{namespace},{path_to_file});';
+            ({name},{code},{code_raw},{namespace},{path_to_file},{strict_types});';
 
         // ---------------------------------------------
         // 
@@ -249,8 +249,18 @@ if ($switch || false) {
                 }
 
                 // ------------------------------------------------------------------
-                // 
+                // проверяем на strict_types
                 // ------------------------------------------------------------------
+                // declare(strict_types=1);
+
+                $strict_types = 0;
+                if (\preg_match('/declare\(strict_types=1\)/i', $code_raw)) {
+                    $strict_types = 1;
+                }
+
+                // ---------------------------------------------
+                // 
+                // ---------------------------------------------
 
                 $dbDev->exec($sqlAddMethod, [
                     'name'         => $name,
@@ -258,6 +268,7 @@ if ($switch || false) {
                     'code_raw'     => $code_raw,
                     'namespace'    => $linksNamespace[$toolNamespace],
                     'path_to_file' => $pathToFile,
+                    'strict_types' => $strict_types,
                 ]);
                 if (!$dbDev->status()) {
                     de([
@@ -558,7 +569,19 @@ if ($switch || false) {
                 $mainNamespace = $method['tool'] = $tool_method[$method['namespace']];
 
                 // ---------------------------------------------
-                // 
+                // Есть ли strict_types
+                // ---------------------------------------------
+
+                $strict_types = 1;
+                foreach ($deps as $dep) {
+                    if ($dep['strict_types'] == 0) {
+                        $strict_types = 0;
+                        break;
+                    }
+                }
+
+                // ---------------------------------------------
+                // гурппируем по namespace
                 // ---------------------------------------------
 
                 $method['isMain'] = true;
@@ -578,6 +601,7 @@ if ($switch || false) {
                 $result = $twig->render('withDepsGroupNamespace.twig', [
                     // 'main' => $method,
                     'deps' => $deps,
+                    'strict_types' => $strict_types,
                 ]);
                 $deps = [];
             }

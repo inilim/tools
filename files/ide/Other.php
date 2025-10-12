@@ -357,6 +357,16 @@ class Other
     static function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL) {}
 
         /**
+ * @author Inilim
+ * @template TResult
+ * @template TObj of \stdClass
+ * @param callable(TObj):TResult $callable
+ * @param null|callable(int $levelOrCode,string $message,string $file,int $line,array{exception?:\Throwable,isException:bool,isSuppress:bool,obj:TObj} $context) $handler
+ * @return ?TResult
+ */
+    static function tryCallWithErrHandler_m2(callable $callable, ?callable $handler = null, int $errorLevels = \E_ALL) {}
+
+        /**
  * @author guzzle/guzzle
  * Safely opens a PHP stream resource using a filename.
  *

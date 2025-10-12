@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function containsAll(string $haystack,iterable $needles,bool $ignoreCase=false):bool{foreach($needles as $needle){if(!\Inilim\Tool\Method\Str\contains($haystack,$needle,$ignoreCase)){return false;}}return true;}if(!\Inilim\Tool\Str::__definedIfNot('contains')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function containsAll(string $haystack,iterable $needles,bool $ignoreCase=false):bool{foreach($needles as $needle){if(!\Inilim\Tool\Method\Str\contains($haystack,$needle,$ignoreCase)){return false;}}return true;}if(!\Inilim\Tool\Str::__definedIfNot('contains')){
     function contains(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=(array) $needles;}foreach($needles as $needle){if($needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iContainsOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_contains($haystack,$needle)){return true;}}}return false;}
     }if(!\Inilim\Tool\Str::__definedIfNot('iContainsOnce')){
     function iContainsOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')!==false;}

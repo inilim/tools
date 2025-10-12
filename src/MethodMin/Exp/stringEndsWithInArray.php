@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Exp{function stringEndsWithInArray(array $array,string $needle,bool $ignoreCase=false):bool{foreach($array as $string){if($ignoreCase){if(\Inilim\Tool\Method\Str\iEndsWithOnce($string,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_ends_with($string,$needle)){return true;}}return false;}}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('iEndsWithOnce')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function stringEndsWithInArray(array $array,string $needle,bool $ignoreCase=false):bool{foreach($array as $string){if($ignoreCase){if(\Inilim\Tool\Method\Str\iEndsWithOnce($string,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_ends_with($string,$needle)){return true;}}return false;}}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('iEndsWithOnce')){
     function iEndsWithOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,-\mb_strlen($needle,'UTF-8'),'UTF-8')!==false;}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}

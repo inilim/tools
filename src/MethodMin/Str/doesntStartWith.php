@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function doesntStartWith(string $haystack,$needles):bool{return!\Inilim\Tool\Method\Str\startsWith($haystack,$needles);}if(!\Inilim\Tool\Str::__definedIfNot('iStartsWithOnce')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function doesntStartWith(string $haystack,$needles):bool{return!\Inilim\Tool\Method\Str\startsWith($haystack,$needles);}if(!\Inilim\Tool\Str::__definedIfNot('iStartsWithOnce')){
     function iStartsWithOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')===0;}
     }if(!\Inilim\Tool\Str::__definedIfNot('startsWith')){
     function startsWith(string $haystack,$needles,bool $ignoreCase=false):bool{if(!\is_iterable($needles)){$needles=[$needles];}foreach($needles as $needle){if((string) $needle!==''){if($ignoreCase){if(\Inilim\Tool\Method\Str\iStartsWithOnce($haystack,$needle)){return true;}}elseif(\Inilim\Tool\Method\PF\str_starts_with($haystack,$needle)){return true;}}}return false;}

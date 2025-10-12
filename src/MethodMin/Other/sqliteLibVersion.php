@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Other{function sqliteLibVersion():?string{$info=\Inilim\Tool\Method\Other\phpInfo(\INFO_MODULES);if($info===null){return null;}\preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i',$info,$match);return $match[1]?? null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function sqliteLibVersion():?string{$info=\Inilim\Tool\Method\Other\phpInfo(\INFO_MODULES);if($info===null){return null;}\preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i',$info,$match);return $match[1]?? null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}

@@ -1,0 +1,13 @@
+<?php
+
+namespace Inilim\Tool\Method\Lar{function dataGet($target,$key,$default=null){if(\is_null($key)){return $target;}$key=\is_array($key)?$key:\explode('.',$key);foreach($key as $i=>$segment){unset($key[$i]);if(\is_null($segment)){return $target;}if($segment==='*'){if($target instanceof Collection){$target=$target -> all();}elseif(!\is_iterable($target)){return \Inilim\Tool\Method\Lar\value($default);}$result=[];foreach($target as $item){$result[]=\Inilim\Tool\Method\Lar\dataGet($item,$key);}return \in_array('*',$key)?collapse($result):$result;}if($segment==='\*'){$segment='*';}elseif($segment==='\{first}'){$segment='{first}';}elseif($segment==='{first}'){$segment=\array_key_first(\is_array($target)?$target:\Inilim\Tool\Method\Arr\from($target));}elseif($segment==='\{last}'){$segment='{last}';}elseif($segment==='{last}'){$segment=\array_key_last(\is_array($target)?$target:\Inilim\Tool\Method\Arr\from($target));}if(\Inilim\Tool\Method\LarArr\accessible($target)&&\Inilim\Tool\Method\LarArr\exists($target,$segment)){$target=$target[$segment];}elseif(\is_object($target)&&isset($target ->{$segment})){$target=$target ->{$segment};}else{return \Inilim\Tool\Method\Lar\value($default);}}return $target;}if(!\Inilim\Tool\Lar::__definedIfNot('value')){
+    function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
+    }}namespace Inilim\Tool\Method\Arr{if(!\Inilim\Tool\Arr::__definedIfNot('from')){
+    function from($items):array{$type=\gettype($items);if($type==='array'){return $items;}elseif($type==='object'){if(false){}elseif(\method_exists($items,'toArray')){return $items -> toArray();}elseif(\method_exists($items,'toJson')){return (array) \json_decode($items -> toJson(),true);}elseif(\Inilim\Tool\Method\Check\php80()&&$items instanceof \WeakMap){return \iterator_to_array($items,false);}elseif($items instanceof \JsonSerializable){return (array) $items -> jsonSerialize();}elseif($items instanceof \Traversable){return \iterator_to_array($items);}else{return (array) $items;}}throw new \InvalidArgumentException('Items cannot be represented by a scalar value.');}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
+    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
+    }}namespace Inilim\Tool\Method\LarArr{if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
+    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
+    function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
+    }}

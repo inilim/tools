@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @author inilim
  * @template TValue
  * @param TValue[] $array
  * @return TValue[]

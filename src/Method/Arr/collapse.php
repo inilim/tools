@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * @author Laravel
- * @todo add support \IteratorAggregate
  * Collapse an array of arrays into a single array.
  */
 function collapse(iterable $array): array

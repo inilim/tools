@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Arr{function float($array,$key,?float $default=null):float{$value=\Inilim\Tool\Method\Arr\get($array,$key,$default);if(!\is_float($value)){throw new \InvalidArgumentException(\sprintf('Array value for key [%s] must be a float, %s found.',$key,\gettype($value)));}return $value;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function float($array,$key,?float $default=null):float{$value=\Inilim\Tool\Method\Arr\get($array,$key,$default);if(!\is_float($value)){throw new \InvalidArgumentException(\sprintf('Array value for key [%s] must be a float, %s found.',$key,\gettype($value)));}return $value;}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
     function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}

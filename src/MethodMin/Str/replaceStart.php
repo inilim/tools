@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str{function replaceStart(string $search,string $replace,string $subject){if($search===''){return $subject;}if(\Inilim\Tool\Method\Str\startsWith($subject,$search)){return \Inilim\Tool\Method\Str\replaceFirst($search,$replace,$subject);}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('iStartsWithOnce')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Str{function replaceStart(string $search,string $replace,string $subject){if($search===''){return $subject;}if(\Inilim\Tool\Method\Str\startsWith($subject,$search)){return \Inilim\Tool\Method\Str\replaceFirst($search,$replace,$subject);}return $subject;}if(!\Inilim\Tool\Str::__definedIfNot('iStartsWithOnce')){
     function iStartsWithOnce(string $haystack,string $needle):bool{return ''===$needle||\mb_stripos($haystack,$needle,0,'UTF-8')===0;}
     }if(!\Inilim\Tool\Str::__definedIfNot('replaceFirst')){
     function replaceFirst(string $search,string $replace,string $subject){if($search===''){return $subject;}$position=\strpos($subject,$search);if($position!==false){return \substr_replace($subject,$replace,$position,\strlen($search));}return $subject;}
