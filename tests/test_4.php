@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Inilim\Tool\PF;
 use Inilim\Tool\Exp;
 use Inilim\Tool\File;
 use Inilim\Tool\Other;
@@ -20,8 +21,55 @@ __includeDeep([
     // 'Other\phpInfo',
 ]);
 
+function str_decrement(string $string): string
+{
+    if (\substr($string, -1) !== '0') {
+        return \implode('', \array_slice(\str_split($string), 0, -1)) . \chr(\ord(\substr($string, -1)) - 1);
+    }
+
+    $carry = '';
+    $decremented = '';
+    for ($i = \strlen($string) - 1; $i >= 0; --$i) {
+        $char = $string[$i];
+        dd($char);
+
+        switch ($char) {
+            case '0':
+                if ('' !== $carry) {
+                    $decremented = $carry . $decremented;
+                    $carry = '';
+                }
+                $carry = '9';
+
+                break;
+            case '1':
+                if ('' !== $carry) {
+                    $decremented = $carry . $decremented;
+                    $carry = '';
+                }
+
+                break;
+            default:
+                if ('' !== $carry) {
+                    $decremented = $carry . $decremented;
+                    $carry = '';
+                }
+
+                if ($char !== '0') {
+                    $decremented = \chr(\ord($char) - 1) . $decremented;
+                }
+        }
+    }
+
+    return $decremented;
+}
 
 
+// de(PF::str_decrement('9999'));
+de(\str_decrement('1999999990'));
+
+
+de();
 $code = File::get('D:\projects\tools\src\Method\Arr\where.php');
 
 $tokens = \token_get_all($code['result']);

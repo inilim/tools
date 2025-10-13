@@ -10,6 +10,21 @@ namespace Inilim\Tool\Method\PF;
  */
 function str_increment(string $string): string
 {
+    if (\Inilim\Tool\Method\Check\php83()) {
+        try {
+            return \str_increment($string);
+        } catch (\ValueError $e) {
+            // INFO сохраняем тип исключений
+            $message = $e->getMessage();
+            if (\Inilim\Tool\Method\PF\str_contains($message, 'ASCII')) {
+                // ASCII
+                throw new \Error('PF::str_increment(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');
+            }
+            // empty
+            throw new \Error('PF::str_increment(): Argument #1 ($string) cannot be empty');
+        }
+    }
+
     if ('' === $string) {
         throw new \Error('PF::str_increment(): Argument #1 ($string) cannot be empty');
     }

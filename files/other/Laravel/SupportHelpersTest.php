@@ -168,25 +168,7 @@ class SupportHelpersTest extends TestCase
         $this->assertFalse(filled($object));
     }
 
-    public function testValue()
-    {
-        $callable = new class
-        {
-            public function __call($method, $arguments)
-            {
-                return $arguments;
-            }
-        };
 
-        $this->assertSame($callable, value($callable, 'foo'));
-        $this->assertSame('foo', value('foo'));
-        $this->assertSame('foo', value(function () {
-            return 'foo';
-        }));
-        $this->assertSame('foo', value(function ($arg) {
-            return $arg;
-        }, 'foo'));
-    }
 
     public function testObjectGet()
     {
@@ -383,83 +365,6 @@ class SupportHelpersTest extends TestCase
 
         $this->assertEquals('Not found', data_get($arrayAccessIterable, 'empty.{first}', 'Not found'));
         $this->assertEquals('Not found', data_get($arrayAccessIterable, 'empty.{last}', 'Not found'));
-    }
-
-    public function testDataFill()
-    {
-        $data = ['foo' => 'bar'];
-
-        $this->assertEquals(['foo' => 'bar', 'baz' => 'boom'], data_fill($data, 'baz', 'boom'));
-        $this->assertEquals(['foo' => 'bar', 'baz' => 'boom'], data_fill($data, 'baz', 'noop'));
-        $this->assertEquals(['foo' => [], 'baz' => 'boom'], data_fill($data, 'foo.*', 'noop'));
-        $this->assertEquals(
-            ['foo' => ['bar' => 'kaboom'], 'baz' => 'boom'],
-            data_fill($data, 'foo.bar', 'kaboom')
-        );
-    }
-
-    public function testDataFillWithStar()
-    {
-        $data = ['foo' => 'bar'];
-
-        $this->assertEquals(
-            ['foo' => []],
-            data_fill($data, 'foo.*.bar', 'noop')
-        );
-
-        $this->assertEquals(
-            ['foo' => [], 'bar' => [['baz' => 'original'], []]],
-            data_fill($data, 'bar', [['baz' => 'original'], []])
-        );
-
-        $this->assertEquals(
-            ['foo' => [], 'bar' => [['baz' => 'original'], ['baz' => 'boom']]],
-            data_fill($data, 'bar.*.baz', 'boom')
-        );
-
-        $this->assertEquals(
-            ['foo' => [], 'bar' => [['baz' => 'original'], ['baz' => 'boom']]],
-            data_fill($data, 'bar.*', 'noop')
-        );
-    }
-
-    public function testDataFillWithDoubleStar()
-    {
-        $data = [
-            'posts' => [
-                (object) [
-                    'comments' => [
-                        (object) ['name' => 'First'],
-                        (object) [],
-                    ],
-                ],
-                (object) [
-                    'comments' => [
-                        (object) [],
-                        (object) ['name' => 'Second'],
-                    ],
-                ],
-            ],
-        ];
-
-        data_fill($data, 'posts.*.comments.*.name', 'Filled');
-
-        $this->assertEquals([
-            'posts' => [
-                (object) [
-                    'comments' => [
-                        (object) ['name' => 'First'],
-                        (object) ['name' => 'Filled'],
-                    ],
-                ],
-                (object) [
-                    'comments' => [
-                        (object) ['name' => 'Filled'],
-                        (object) ['name' => 'Second'],
-                    ],
-                ],
-            ],
-        ], $data);
     }
 
     public function testDataSet()

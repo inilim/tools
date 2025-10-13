@@ -3,7 +3,9 @@
 namespace Inilim\Tool\Test\Method\Arr;
 
 use Inilim\Tool\Arr;
+use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestCase;
+use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\ForTest\TestEnum;
 use Inilim\Tool\Test\ForTest\TestBackedEnum;
 use Inilim\Tool\Test\ForTest\TestToJsonObject;
@@ -24,17 +26,6 @@ class fromTest extends TestCase
         $this->assertSame(['foo' => 'bar'], Arr::from(new TestJsonSerializeObject));
         $this->assertSame(['foo'], Arr::from(new TestJsonSerializeWithScalarValueObject));
 
-        if (PHP_VERSION >= 80000) {
-            $items = new \WeakMap;
-            $items[$temp = new class {}] = 'bar';
-            $this->assertSame(['bar'], Arr::from($items));
-        }
-        if (PHP_VERSION >= 80100) {
-            $this->assertSame(['name' => 'A'], Arr::from(TestEnum::A));
-            $this->assertSame(['name' => 'A', 'value' => 1], Arr::from(TestBackedEnum::A));
-            $this->assertSame(['name' => 'A', 'value' => 'A'], Arr::from(TestStringBackedEnum::A));
-        }
-
         $subject = [new \stdClass, new \stdClass];
         $items = new TestTraversableAndJsonSerializableObject($subject);
         $this->assertSame($subject, Arr::from($items));
@@ -42,5 +33,29 @@ class fromTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Items cannot be represented by a scalar value.');
         Arr::from(123);
+    }
+
+    function testWeakMap()
+    {
+        $dir = CasePhpT::self()->getDir([Arr::class, 'from']);
+        $case = $dir . '/WeakMap.php';
+        foreach (['8.0', '8.1', '8.2', '8.3', '8.4'] as $php) {
+            $asserts = (new TestProcess($case))->withPhp($php)->run();
+            foreach ($asserts as $assert) {
+                $this->assertTag($assert);
+            }
+        }
+    }
+
+    function testEnum()
+    {
+        $dir = CasePhpT::self()->getDir([Arr::class, 'from']);
+        $case = $dir . '/enum.php';
+        foreach (['8.1', '8.2', '8.3', '8.4'] as $php) {
+            $asserts = (new TestProcess($case))->withPhp($php)->run();
+            foreach ($asserts as $assert) {
+                $this->assertTag($assert);
+            }
+        }
     }
 }

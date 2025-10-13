@@ -34,6 +34,13 @@ class LarArr
     static function add($array, $key, $value) {}
 
         /**
+ * Determine whether the given value is arrayable.
+ * @param  mixed  $value
+ * @return bool
+ */
+    static function arrayable($value) {}
+
+        /**
  * Get a boolean item from an array using "dot" notation.
  * @param ArrayAccess|array $array
  * @param string|int|null $key

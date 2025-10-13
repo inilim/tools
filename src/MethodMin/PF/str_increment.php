@@ -1,5 +1,9 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\PF;
-
-function str_increment(string $string):string{if(''===$string){throw new \Error('PF::str_increment(): Argument #1 ($string) cannot be empty');}if(!\preg_match('/^[a-zA-Z0-9]+$/',$string)){throw new \Error('PF::str_increment(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');}if(\is_numeric($string)){$offset=\stripos($string,'e');if(false!==$offset){$char=$string[$offset];++$char;$string[$offset]=$char;++$string;switch($string[$offset]){case 'f':$string[$offset]='e';break;case 'F':$string[$offset]='E';break;case 'g':$string[$offset]='f';break;case 'G':$string[$offset]='F';break;}return (string) $string;}}return (string)++$string;}
+declare(strict_types=1);namespace Inilim\Tool\Method\PF{function str_increment(string $string):string{if(\Inilim\Tool\Method\Check\php83()){try{return \str_increment($string);}catch(\ValueError $e){$message=$e -> getMessage();if(\Inilim\Tool\Method\PF\str_contains($message,'ASCII')){throw new \Error('PF::str_increment(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');}throw new \Error('PF::str_increment(): Argument #1 ($string) cannot be empty');}}if(''===$string){throw new \Error('PF::str_increment(): Argument #1 ($string) cannot be empty');}if(!\preg_match('/^[a-zA-Z0-9]+$/',$string)){throw new \Error('PF::str_increment(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');}if(\is_numeric($string)){$offset=\stripos($string,'e');if(false!==$offset){$char=$string[$offset];++$char;$string[$offset]=$char;++$string;switch($string[$offset]){case 'f':$string[$offset]='e';break;case 'F':$string[$offset]='E';break;case 'g':$string[$offset]='f';break;case 'G':$string[$offset]='F';break;}return (string) $string;}}return (string)++$string;}if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){
+    function str_contains(string $haystack,string $needle):bool{if(\Inilim\Tool\Method\Check\php80()){return \str_contains($haystack,$needle);}return ''===$needle||false!==\strpos($haystack,$needle);}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
+    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
+    }if(!\Inilim\Tool\Check::__definedIfNot('php83')){
+    function php83():bool{return \PHP_VERSION_ID>=80300?true:false;}
+    }}

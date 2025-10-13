@@ -11,6 +11,16 @@ namespace Inilim\Tool\Method\Arr;
  */
 function arrayable($value): bool
 {
+    // return \is_array($value)
+    //     || $value instanceof Arrayable
+    //     || $value instanceof \Traversable
+    //     || $value instanceof Jsonable
+    //     || $value instanceof JsonSerializable;
+
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
+
     $type = \gettype($value);
     if ($type === 'array') {
         /** @var array $value */

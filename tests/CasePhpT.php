@@ -21,11 +21,7 @@ class CasePhpT
     // 
     // ---------------------------------------------
 
-    /**
-     * @param array{0:class-string,1:string} $callable
-     * @return \Generator<int,string>
-     */
-    function cases(array $callable): \Generator
+    function getDir(array $callable): string
     {
         if (!\is_callable($callable)) {
             throw new \RuntimeException(\sprintf('not callable'));
@@ -36,6 +32,16 @@ class CasePhpT
         if (!\is_dir($dir)) {
             throw new \RuntimeException(\sprintf('Not found dir "%s"', $dir));
         }
+        return $dir;
+    }
+
+    /**
+     * @param array{0:class-string,1:string} $callable
+     * @return \Generator<int,string>
+     */
+    function cases(array $callable): \Generator
+    {
+        $dir = $this->getDir($callable);
         $finder = new Finder;
         $finder->in($dir)->name('*.php');
 

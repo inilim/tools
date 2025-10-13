@@ -5,15 +5,19 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Integer;
 
 /**
- * @param mixed $v
+ * @param mixed $value
  */
-function isMediumInt($v): bool
+function isMediumInt($value): bool
 {
-    if (!\Inilim\Tool\Method\Integer\isNumeric($v)) return false;
-    /** @var int|float|string $v */
-    $value = \strval($v);
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) {
+        return false;
+    }
+    /** @var int|float|string $value */
+    $value = \strval($value);
     /** @var string $value */
-    if (\Inilim\Tool\Method\Integer\lenNumeric($value) > \Inilim\Tool\Integer::MEDIUM_INT_MAX_LENGHT) return false;
+    if (\Inilim\Tool\Method\Integer\lenNumeric($value) > \Inilim\Tool\Integer::MEDIUM_INT_MAX_LENGHT) {
+        return false;
+    }
 
     return \Inilim\Tool\Method\Integer\checkBetween(
         $value,

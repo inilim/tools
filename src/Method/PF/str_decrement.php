@@ -10,6 +10,24 @@ namespace Inilim\Tool\Method\PF;
  */
 function str_decrement(string $string): string
 {
+    if (\Inilim\Tool\Method\Check\php83()) {
+        try {
+            return \str_decrement($string);
+        } catch (\ValueError $e) {
+            $message = $e->getMessage();
+            // INFO сохраняем тип исключений
+            if (\Inilim\Tool\Method\PF\str_contains($message, 'ASCII')) {
+                // ASCII
+                throw new \Error('PF::str_decrement(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');
+            } elseif (\Inilim\Tool\Method\PF\str_contains($message, 'range')) {
+                // range
+                throw new \Error(\sprintf('PF::str_decrement(): Argument #1 ($string) "%s" is out of decrement range', $string));
+            }
+            // empty
+            throw new \Error('PF::str_decrement(): Argument #1 ($string) cannot be empty');
+        }
+    }
+
     if ('' === $string) {
         throw new \Error('PF::str_decrement(): Argument #1 ($string) cannot be empty');
     }

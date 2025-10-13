@@ -28,6 +28,7 @@ class TestProcess
         if (!\is_file($caseFile)) {
             throw new \RuntimeException(\sprintf('Not found file case "%s"', $caseFile));
         }
+        $caseFile = Path::normalize($caseFile);
         $this->caseFile = $caseFile;
         $this->dataEnv['case'] = $caseFile;
     }

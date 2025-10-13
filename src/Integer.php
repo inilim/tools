@@ -41,15 +41,26 @@ class Integer extends \Inilim\Tool\LazyMethodAbstract
         // INT UNSIGNED: представляет целые числа от 0 до 4294967295, занимает 4 байта
         INT_MAX = 2147483647,
         INT_MIN = -2147483648,
+        INT_UNSIGNED_MAX = 4294967295,
+        INT_UNSIGNED_MAX_AS_STRING = '4294967295',
+        INT_UNSIGNED_MIN = 0,
         INT_MAX_LENGHT = 10,
         INT_MIN_LENGHT = 10,
         INT_MAX_UNSIGNED_LENGHT = 10,
         INT_MIN_UNSIGNED_LENGHT = 1,
         // BIGINT: представляет целые числа от -9223372036854775808 до 9223372036854775807, занимает 8 байт
         // BIGINT UNSIGNED: представляет целые числа от 0 до 18446744073709551615, занимает 8 байт
+        BIG_INT_MAX = 9223372036854775807,
+        BIG_INT_MAX_AS_STRING = '9223372036854775807',
+        BIG_INT_MIN = -9223372036854775808,
+        BIG_INT_MIN_AS_STRING = '-9223372036854775808',
+        BIG_INT_UNSIGNED_MAX = 18446744073709551615,
+        BIG_INT_UNSIGNED_MAX_AS_STRING = '18446744073709551615',
+        BIG_INT_UNSIGNED_MIN = 0,
         BIG_INT_MAX_LENGHT = 19,
         BIG_INT_MIN_LENGHT = 19,
         BIG_INT_MAX_UNSIGNED_LENGHT = 20,
         BIG_INT_MIN_UNSIGNED_LENGHT = 1,
+
         MAX_LEN_32_BIT = 10;
 }

@@ -145,12 +145,14 @@ class Integer
     static function isIntUnsigned($value): bool {}
 
         /**
- * @param mixed $v
+ * @param mixed $value
  */
-    static function isMediumInt($v): bool {}
+    static function isMediumInt($value): bool {}
 
-        
-    static function isMediumIntUnsigned(mixed $value): bool {}
+        /**
+ * @param mixed $value
+ */
+    static function isMediumIntUnsigned($value): bool {}
 
         /**
  * @param numeric-string|int $num
@@ -243,6 +245,13 @@ class Integer
  * @return string
  */
     static function spellOrdinal($number, ?string $locale = null) {}
+
+        /**
+ * like str_decrement only with support for negative numbers
+ * @author inilim
+ * @throws \InvalidArgumentException
+ */
+    static function strDecrement(string $value): string {}
 
         /**
  * Remove any trailing zero digits after the decimal point of the given number.

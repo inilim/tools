@@ -45,14 +45,17 @@ class DefinePhpBin
 
         $php_bins = [
             'D:\other\OSPanel\modules\PHP-7.4\PHP\php74.exe',
+            'D:\other\OSPanel\modules\PHP-8.0\PHP\php.exe',
+            'D:\other\OSPanel\modules\PHP-8.1\PHP\php.exe',
             'D:\other\OSPanel\modules\PHP-8.2\PHP\php.exe',
+            'D:\other\OSPanel\modules\PHP-8.3\PHP\php.exe',
             'D:\other\php\php84\php84.exe',
         ];
         foreach ($php_bins as $php) {
-            $php = Path::normalize($php);
             if (!\is_file($php)) {
                 continue;
             }
+            $php = Path::normalize($php);
             // de($filePhpVersion);
             $process = new Process([$php, \sprintf('%s', $filePhpVersion)]);
             $process->run();

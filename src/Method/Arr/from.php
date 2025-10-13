@@ -33,10 +33,10 @@ function from($items): array
             return (array) \json_decode($items->toJson(), true);
         } elseif (\Inilim\Tool\Method\Check\php80() && $items instanceof \WeakMap) {
             return \iterator_to_array($items, false);
-        } elseif ($items instanceof \JsonSerializable) {
-            return (array) $items->jsonSerialize();
         } elseif ($items instanceof \Traversable) {
             return \iterator_to_array($items);
+        } elseif ($items instanceof \JsonSerializable) {
+            return (array) $items->jsonSerialize();
         } else {
             return (array) $items;
         }
