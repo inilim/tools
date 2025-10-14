@@ -1,6 +1,6 @@
 <?php
 
-namespace Inilim\Tool\Method\LarArr{function add($array,$key,$value){if(\is_null(\Inilim\Tool\Method\LarArr\get($array,$key))){\Inilim\Tool\Method\LarArr\set()($array,$key,$value);}return $array;}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
+namespace Inilim\Tool\Method\LarArr{function add($array,$key,$value){if(\is_float($key)){$key=(string) $key;}if(\is_null(\Inilim\Tool\Method\LarArr\get($array,$key))){\Inilim\Tool\Method\LarArr\set()($array,$key,$value);}return $array;}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
     function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}

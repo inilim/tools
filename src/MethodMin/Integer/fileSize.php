@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Integer{function fileSize($bytes,int $precision=0,?int $maxPrecision=null,bool $useBinaryPrefix=false){$base=$useBinaryPrefix?1024:1000;$units=$useBinaryPrefix?['B','KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB','RiB','QiB']:['B','KB','MB','GB','TB','PB','EB','ZB','YB','RB','QB'];for($i=0;$bytes/$base>0.9&&$i<\sizeof($units)-1;$i++){$bytes /= $base;}return \sprintf('%s %s',\Inilim\Tool\Method\Integer\format($bytes,$precision,$maxPrecision),$units[$i]);}if(!\Inilim\Tool\Integer::__definedIfNot('__state')){
-    function __state(){static $o=null;return $o ?? new class{var string $locale='en';var string $currency='USD';};}
+    function __state(){static $o=null;return $o ??= new class{var string $locale='en';var string $currency='USD';};}
     }if(!\Inilim\Tool\Integer::__definedIfNot('format')){
     function format($number,?int $precision=null,?int $maxPrecision=null,?string $locale=null){if(!\Inilim\Tool\Method\Other\extPhp('intl')){throw new \RuntimeException('The "intl" PHP extension is required to use the [format] function.');}$formatter=new \NumberFormatter($locale ?? \Inilim\Tool\Method\Integer\__state()-> locale,\NumberFormatter :: DECIMAL);if($maxPrecision!==null){$formatter -> setAttribute(\NumberFormatter :: MAX_FRACTION_DIGITS,$maxPrecision);}elseif($precision!==null){$formatter -> setAttribute(\NumberFormatter :: FRACTION_DIGITS,$precision);}return $formatter -> format($number);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){

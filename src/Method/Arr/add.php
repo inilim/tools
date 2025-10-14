@@ -16,6 +16,10 @@ namespace Inilim\Tool\Method\Arr;
  */
 function add(array $array, $key, $value)
 {
+    // INFO laravel bug
+    if (\is_float($key)) {
+        $key = (string) $key;
+    }
     if (\Inilim\Tool\Method\Arr\get($array, $key) === null) {
         \Inilim\Tool\Method\Arr\set()($array, $key, $value);
     }

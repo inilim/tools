@@ -12,6 +12,10 @@ namespace Inilim\Tool\Method\LarArr;
  */
 function add($array, $key, $value)
 {
+    // INFO laravel bug
+    if (\is_float($key)) {
+        $key = (string) $key;
+    }
     if (\is_null(\Inilim\Tool\Method\LarArr\get($array, $key))) {
         \Inilim\Tool\Method\LarArr\set()($array, $key, $value);
     }

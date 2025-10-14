@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Integer{function abbreviate($number,int $precision=0,?int $maxPrecision=null){return \Inilim\Tool\Method\Integer\forHumans($number,$precision,$maxPrecision,true);}if(!\Inilim\Tool\Integer::__definedIfNot('__state')){
-    function __state(){static $o=null;return $o ?? new class{var string $locale='en';var string $currency='USD';};}
+    function __state(){static $o=null;return $o ??= new class{var string $locale='en';var string $currency='USD';};}
     }if(!\Inilim\Tool\Integer::__definedIfNot('__summarize')){
     function __summarize($number,int $precision=0,?int $maxPrecision=null,array $units=[]){if(!$units){$units=[3=>'K',6=>'M',9=>'B',12=>'T',15=>'Q'];}switch(true){case \floatval($number)===0.0:return $precision>0?\Inilim\Tool\Method\Integer\format(0,$precision,$maxPrecision):'0';case $number<0:return \sprintf('-%s',\Inilim\Tool\Method\Integer\__summarize(\abs($number),$precision,$maxPrecision,$units));case $number>=1000000000000000.0:return \sprintf('%s'.\end($units),\Inilim\Tool\Method\Integer\__summarize($number/1000000000000000.0,$precision,$maxPrecision,$units));}$numberExponent=\floor(\log10($number));$displayExponent=$numberExponent-$numberExponent%3;$number /= \pow(10,$displayExponent);return \trim(\sprintf('%s%s',\Inilim\Tool\Method\Integer\format($number,$precision,$maxPrecision),$units[$displayExponent]?? ''));}
     }if(!\Inilim\Tool\Integer::__definedIfNot('forHumans')){

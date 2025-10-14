@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Integer;
 function __state()
 {
     static $o = null;
-    return $o ?? new class() {
+    return $o ??= new class() {
         /**
          * The current default locale.
          */

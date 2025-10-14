@@ -15,6 +15,7 @@ class addTest extends TestCase
         $this->assertEquals(['surname' => 'Mövsümov'], Arr::add([], 'surname', 'Mövsümov'));
         $this->assertEquals(['developer' => ['name' => 'Ferid']], Arr::add([], 'developer.name', 'Ferid'));
         $this->assertEquals([1 => 'hAz'], Arr::add([], 1, 'hAz'));
+        // INFO почему тут float???
         $this->assertEquals([1 => [1 => 'hAz']], Arr::add([], 1.1, 'hAz'));
 
         // Case where the key already exists

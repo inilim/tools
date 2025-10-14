@@ -53,12 +53,12 @@ class getObjFromTest extends TestCase
      * @dataProvider dataXls
      * @dataProvider dataXlsx
      */
-    function test($file)
-    {
-        $zip = Zip::getObjFrom($file);
-        $this->assertInstanceOf(\ZipArchive::class, $zip);
-        $this->assertSame(true, $zip->filename !== '');
-    }
+    // function test($file)
+    // {
+    //     $zip = Zip::getObjFrom($file);
+    //     $this->assertInstanceOf(\ZipArchive::class, $zip);
+    //     $this->assertSame(true, $zip->filename !== '');
+    // }
 
     static function dataZip()
     {

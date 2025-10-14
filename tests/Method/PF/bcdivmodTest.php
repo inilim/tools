@@ -25,6 +25,8 @@ class bcdivmodTest extends \Inilim\Tool\Test\TestCase
      */
     function testBcDivModDivideByZero()
     {
+        // TODO в версии 74 вместо исключение вылетает ошибка, сам класс DivisionByZeroError::class имеется
+        // https://github.com/symfony/polyfill/issues/548
         $this->expectException(\DivisionByZeroError::class);
 
         PF::bcdivmod('1', '0');
@@ -35,6 +37,8 @@ class bcdivmodTest extends \Inilim\Tool\Test\TestCase
      */
     function testBcDivModDivideByFloatingZero()
     {
+        // TODO в версии 74 вместо исключение вылетает ошибка, сам класс DivisionByZeroError::class имеется
+        // https://github.com/symfony/polyfill/issues/548
         $this->expectException(\DivisionByZeroError::class);
 
         PF::bcdivmod('1', '0.00');

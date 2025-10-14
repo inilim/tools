@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Integer{function spell($number,?string $locale=null,?int $after=null,?int $until=null){if(!\Inilim\Tool\Method\Other\extPhp('intl')){throw new \RuntimeException('The "intl" PHP extension is required to use the [spell] function.');}if($after!==null&&$number<=$after){return \Inilim\Tool\Method\Integer\format($number,null,null,$locale);}if($until!==null&&$number>=$until){return \Inilim\Tool\Method\Integer\format($number,null,null,$locale);}$formatter=new \NumberFormatter($locale ?? \Inilim\Tool\Method\Integer\__state()-> locale,\NumberFormatter :: SPELLOUT);return $formatter -> format($number);}if(!\Inilim\Tool\Integer::__definedIfNot('__state')){
-    function __state(){static $o=null;return $o ?? new class{var string $locale='en';var string $currency='USD';};}
+    function __state(){static $o=null;return $o ??= new class{var string $locale='en';var string $currency='USD';};}
     }if(!\Inilim\Tool\Integer::__definedIfNot('format')){
     function format($number,?int $precision=null,?int $maxPrecision=null,?string $locale=null){if(!\Inilim\Tool\Method\Other\extPhp('intl')){throw new \RuntimeException('The "intl" PHP extension is required to use the [format] function.');}$formatter=new \NumberFormatter($locale ?? \Inilim\Tool\Method\Integer\__state()-> locale,\NumberFormatter :: DECIMAL);if($maxPrecision!==null){$formatter -> setAttribute(\NumberFormatter :: MAX_FRACTION_DIGITS,$maxPrecision);}elseif($precision!==null){$formatter -> setAttribute(\NumberFormatter :: FRACTION_DIGITS,$precision);}return $formatter -> format($number);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){

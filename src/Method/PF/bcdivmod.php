@@ -13,6 +13,8 @@ function bcdivmod(string $num1, string $num2, ?int $scale = null): ?array
         return \bcdivmod($num1, $num2, $scale);
     }
 
+    // TODO в версии 74 вместо исключение вылетает ошибка, сам класс DivisionByZeroError::class имеется
+    // https://github.com/symfony/polyfill/issues/548
     if (null === $quot = \bcdiv($num1, $num2, 0)) {
         return null;
     }
