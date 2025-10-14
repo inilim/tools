@@ -64,6 +64,14 @@ class Other
     static function compareViaOperator($left, string $operator, $right): bool {}
 
         /**
+ * Data from \Composer\InstalledVersions::getInstalledPackages()
+ * @author inilim
+ * @todo tests
+ * @return string[]|mixed[]|null
+ */
+    static function composerInstalledPackages(): ?array {}
+
+        /**
  * Data from \Composer\InstalledVersions::getRootPackage()
  * @author inilim
  * @todo tests

@@ -27,7 +27,7 @@ __includeDeep([
 
 
 
-de(Other::composerRootPackage());
+de([\Composer\InstalledVersions::class, 'getInstalledPackages']());
 // $res = FS::phpGlob(__DIR__);
 // $res = FS::phpGlob('');
 
