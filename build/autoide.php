@@ -135,6 +135,7 @@ foreach ($links as $link) {
     // \shuffle($fileFuncs);
     $fileDoc    = \sprintf(\DIR_ROOT . '/files/ide/%s.php', \basename($link['tool']));
     $alias      = getAlias($link['tool']);
+    $alias      = \array_combine(\array_values($alias), \array_keys($alias));
     // ------------------------------------------------------------------
     // 
     // ------------------------------------------------------------------
@@ -227,6 +228,16 @@ foreach ($links as $link) {
         // Алиасы
         // ------------------------------------------------------------------
 
+        // if ($link['nameClass'] === 'Json') {
+        //     if ($alias) {
+        //         d([
+        //             '$fileFunc' => $fileFunc,
+        //             '$alias' => $alias,
+        //             '$func->name->name' => $func->name->name,
+        //         ]);
+        //     }
+        // }
+
         if (isset($alias[$func->name->name])) {
 
             if (isset($result[$alias[$func->name->name]])) {
@@ -241,8 +252,8 @@ foreach ($links as $link) {
                 'signature' => \str_replace($func->name->name, $alias[$func->name->name], $signature),
                 'doc'       => $doc,
             ];
-        }
-    }
+        } // alias
+    } // foreach ($fileFuncs as $fileFunc)
 
     $body = $twig->render('ide.twig', [
         'link'    => $link,
@@ -256,4 +267,4 @@ foreach ($links as $link) {
     // ------------------------------------------------------------------
     // 
     // ------------------------------------------------------------------
-}
+} // foreach ($links as $link)

@@ -505,6 +505,13 @@ class Str
     static function studly(string $value) {}
 
         /**
+ * Convert a value to studly caps case.
+ * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
+ * @return string
+ */
+    static function pascal(string $value) {}
+
+        /**
  * Returns the portion of the string specified by the start and length parameters.
  * @return string
  */

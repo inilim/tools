@@ -185,8 +185,8 @@ class Other
 
         /**
  * @author Inilim
- * @param callable(int,int):bool $condition
- * @param callable(int,int) $onBreak
+ * @param callable(int $curIteration,int $maxIterations):bool $condition
+ * @param callable(int $curIteration,int $maxIterations) $onBreak
  * @return void
  */
     static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}

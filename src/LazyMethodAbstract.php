@@ -5,7 +5,7 @@ namespace Inilim\Tool;
 abstract class LazyMethodAbstract
 {
     protected const NAME = '',
-        /** @var array<string,string> from => to | example: nameFn => myCustomNewName */
+        /** @var array<string,string> from => to | example: myCustomNewName => nameFn */
         ALIAS            = [],
         IDX              = -1;
 
