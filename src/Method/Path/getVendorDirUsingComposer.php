@@ -18,13 +18,9 @@ function getVendorDirUsingComposer(): ?string
     }
 
     if (
-        \class_exists($class = \Composer\InstalledVersions::class, true)
-        && \method_exists($class, 'getRootPackage')
-        && \is_array($result = $class::getRootPackage())
-        && \is_string(
-            ($result = $result['install_path'] ?? null)
-        )
-        && \is_string($result = \realpath($result))
+        \is_array($result = \Inilim\Tool\Method\Other\composerRootPackage())
+        && \is_string(($result = $result['install_path'] ?? null))
+        && \is_string($result = \Inilim\Tool\Method\Path\realPath($result))
     ) {
         return $cacheDir = \Inilim\Tool\Method\Path\normalize($result . '/vendor');
     }

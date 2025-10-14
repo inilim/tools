@@ -105,6 +105,8 @@ class FS
     static function move(string $path, string $target): bool {}
 
         /**
+ * @link https://php.net/manual/en/function.glob.php
+ * @param \GLOB_* $flags
  * @return string[]|null
  */
     static function phpGlob(string $pattern, int $flags = 0): ?array {}

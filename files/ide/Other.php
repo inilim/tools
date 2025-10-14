@@ -64,6 +64,14 @@ class Other
     static function compareViaOperator($left, string $operator, $right): bool {}
 
         /**
+ * Data from \Composer\InstalledVersions::getRootPackage()
+ * @author inilim
+ * @todo tests
+ * @return mixed[]|null
+ */
+    static function composerRootPackage(): ?array {}
+
+        /**
  * @author guzzle/guzzle
  * 
  * Returns the default cacert bundle for the current system.

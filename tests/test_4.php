@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Inilim\Tool\FS;
 use Inilim\Tool\PF;
 use Inilim\Tool\Arr;
 use Inilim\Tool\Exp;
@@ -24,6 +25,16 @@ __includeDeep([
 ]);
 
 
+
+
+de(Other::composerRootPackage());
+// $res = FS::phpGlob(__DIR__);
+// $res = FS::phpGlob('');
+
+
+dde($res);
+
+de();
 $a = new \DivisionByZeroError;
 
 de();
