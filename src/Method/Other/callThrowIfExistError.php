@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @skip_build
+ * Обертка на callable, выброс исключения если была ошибка
  * 
  * @author inilim
  * @todo tests

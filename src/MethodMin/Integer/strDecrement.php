@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Integer{function strDecrement(string $value):string{if(!\Inilim\Tool\Method\Integer\isNumeric($value)){return \Inilim\Tool\Method\PF\str_decrement($value);}if($value==='0'){return '-'.\Inilim\Tool\Method\PF\str_increment($value);}elseif(\Inilim\Tool\Method\PF\str_starts_with($value,'-')){$value=\ltrim($value,'-');return '-'.\Inilim\Tool\Method\PF\str_increment($value);}return \Inilim\Tool\Method\PF\str_decrement($value);}if(!\Inilim\Tool\Integer::__definedIfNot('isNumeric')){
-    function isNumeric($v):bool{if(!\is_scalar($v)||\is_bool($v)){return false;}if(\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#',\strval($v))){return true;}return false;}
+    function isNumeric($v):bool{$t=\gettype($v);if(!\in_array($t,['string','integer'],true)){return false;}if($t==='integer'||\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#',$v)){return true;}return false;}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }if(!\Inilim\Tool\Check::__definedIfNot('php83')){

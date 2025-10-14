@@ -134,9 +134,16 @@ class Integer
         /**
  * проверка int для php, 32bit или 64bit
  * может ли значение стать integer без изменений
- * @param mixed $v
+ * @param mixed $value
  */
-    static function isIntPhp($v): bool {}
+    static function isIntPhp($value): bool {}
+
+        /**
+ * проверка int для php, 32bit или 64bit
+ * может ли значение стать integer без изменений
+ * @param mixed $value
+ */
+    static function isIntPhp_m2($value): bool {}
 
         /**
  * 0 <> 4_294_967_295
@@ -160,6 +167,7 @@ class Integer
     static function isNegative($num): bool {}
 
         /**
+ * NOT like \is_numeric()
  * функция не проверяет длину значения, будет true даже с bigint и более.
  * @param mixed $v
  */

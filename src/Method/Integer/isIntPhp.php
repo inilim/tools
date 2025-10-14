@@ -7,16 +7,13 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * проверка int для php, 32bit или 64bit
  * может ли значение стать integer без изменений
- * @param mixed $v
+ * @param mixed $value
  */
-function isIntPhp($v): bool
+function isIntPhp($value): bool
 {
-    if (\Inilim\Tool\Method\Integer\isNumeric($v)) {
-        /** @var string $v */
-        if (\strval(\intval($v)) === \strval($v)) {
-            return true;
-        }
+    if (!\Inilim\Tool\Method\Integer\isNumeric($value)) {
         return false;
     }
-    return false;
+    /** @var string $value */
+    return \strval(\intval($value)) === \strval($value) ? true : false;
 }

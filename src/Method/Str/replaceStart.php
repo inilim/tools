@@ -14,7 +14,7 @@ function replaceStart(string $search, string $replace, string $subject)
         return $subject;
     }
 
-    if (\Inilim\Tool\Method\Str\startsWith($subject, $search)) {
+    if (\Inilim\Tool\Method\PF\str_starts_with($subject, $search)) {
         return \Inilim\Tool\Method\Str\replaceFirst($search, $replace, $subject);
     }
 

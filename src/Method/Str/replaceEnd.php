@@ -14,7 +14,7 @@ function replaceEnd(string $search, string $replace, string $subject)
         return $subject;
     }
 
-    if (\Inilim\Tool\Method\Str\endsWith($subject, $search)) {
+    if (\Inilim\Tool\Method\PF\str_ends_with($subject, $search)) {
         return \Inilim\Tool\Method\Str\replaceLast($search, $replace, $subject);
     }
 

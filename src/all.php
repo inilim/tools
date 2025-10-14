@@ -117,7 +117,7 @@ final class Other extends LazyMethodAbstract
 }
 final class Json extends LazyMethodAbstract
 {
-    protected const NAME = 'Json', IDX = 6, ALIAS = ['is' => 'isJson'];
+    protected const NAME = 'Json', IDX = 6, ALIAS = ['isJson' => 'is'];
 }
 final class FS extends LazyMethodAbstract
 {

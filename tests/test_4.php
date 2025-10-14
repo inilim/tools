@@ -21,48 +21,76 @@ __includeDeep([
     // 'Other\phpInfo',
 ]);
 
-function str_decrement(string $string): string
-{
-    if (\substr($string, -1) !== '0') {
-        return \implode('', \array_slice(\str_split($string), 0, -1)) . \chr(\ord(\substr($string, -1)) - 1);
+// 9223372036854775807 + 1000
+// 9223372036854776000
+
+// dd(\strval(\PHP_INT_MIN));
+// dd(\strval(-9223372036854775808));
+// dd(\strval(-9223372036854775807));
+
+dd(\sprintf('%.0f', '1.2'));
+
+
+de();
+// $str_decrement = PF::__asClosure('str_decrement');
+
+$i = 0;
+while (true) {
+    $strI = \strval($i);
+    $i++;
+    // if (($r = $str_decrement($strI)) !== \strval($i)) {
+    if (($r = \str_increment($strI)) !== \strval($i)) {
+        echo \sprintf('str_increment("%s"); // "%s"', $strI, $r) . PHP_EOL;
     }
 
-    $carry = '';
-    $decremented = '';
-    for ($i = \strlen($string) - 1; $i >= 0; --$i) {
-        $char = $string[$i];
-        dd($char);
+    if ($i >= 100_000_000) {
+        break;
+    }
+}
 
-        switch ($char) {
-            case '0':
-                if ('' !== $carry) {
-                    $decremented = $carry . $decremented;
-                    $carry = '';
-                }
-                $carry = '9';
 
-                break;
-            case '1':
-                if ('' !== $carry) {
-                    $decremented = $carry . $decremented;
-                    $carry = '';
-                }
+de();
+function str_increment(string $string): string
+{
+    if ('' === $string) {
+        throw new \ValueError('str_increment(): Argument #1 ($string) cannot be empty');
+    }
 
-                break;
-            default:
-                if ('' !== $carry) {
-                    $decremented = $carry . $decremented;
-                    $carry = '';
-                }
+    if (!\preg_match('/^[a-zA-Z0-9]+$/', $string)) {
+        throw new \ValueError('str_increment(): Argument #1 ($string) must be composed only of alphanumeric ASCII characters');
+    }
 
-                if ($char !== '0') {
-                    $decremented = \chr(\ord($char) - 1) . $decremented;
-                }
+    if (\is_numeric($string)) {
+        $offset = \stripos($string, 'e');
+        if (false !== $offset) {
+            $char = $string[$offset];
+            ++$char;
+            $string[$offset] = $char;
+            ++$string;
+
+            switch ($string[$offset]) {
+                case 'f':
+                    $string[$offset] = 'e';
+                    break;
+                case 'F':
+                    $string[$offset] = 'E';
+                    break;
+                case 'g':
+                    $string[$offset] = 'f';
+                    break;
+                case 'G':
+                    $string[$offset] = 'F';
+                    break;
+            }
+
+            return (string) $string;
         }
     }
 
-    return $decremented;
+    return (string)++$string;
 }
+
+
 
 
 // de(PF::str_decrement('9999'));

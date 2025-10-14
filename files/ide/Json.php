@@ -35,10 +35,16 @@ class Json
     static function getLastErrorMsg() {}
 
         /**
- * gettype - вернет null если json не валидный
+ * вернет null если json не валидный
  * @return ?string
  */
-    static function getTypeFromJson(?string $v) {}
+    static function getNativeTypeFromJson(?string $v): ?string {}
+
+        /**
+ * вернет null если json не валидный
+ * @return ?string
+ */
+    static function getTypeFromJson(?string $v): ?string {}
 
         
     static function hasError(): bool {}
@@ -47,6 +53,11 @@ class Json
  * @deprecated use Check::isJson()
  */
     static function isJson(?string $v): bool {}
+
+        /**
+ * @deprecated use Check::isJson()
+ */
+    static function is(?string $v): bool {}
 
         
     static function isJsonAsArrList(?string $v): bool {}
@@ -59,6 +70,9 @@ class Json
 
         
     static function isJsonAsInteger(?string $v): bool {}
+
+        
+    static function isJsonAsNativeNumeric(?string $v): bool {}
 
         
     static function isJsonAsNumeric(?string $v): bool {}

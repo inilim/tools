@@ -20,18 +20,50 @@ class isNumericTest extends TestCase
         $this->assertTrue(Integer::isNumeric('-1'));
         $this->assertTrue(Integer::isNumeric(-1));
         $this->assertTrue(Integer::isNumeric('-1234567899999999999999999999999999999999999999999999'));
+        $this->assertTrue(Integer::isNumeric('92233720368547758072'));
+        $this->assertTrue(Integer::isNumeric('-92233720368547758072'));
         $this->assertTrue(Integer::isNumeric(\strval(\PHP_INT_MAX)));
         $this->assertTrue(Integer::isNumeric(\PHP_INT_MAX));
         $this->assertTrue(Integer::isNumeric(\strval(\PHP_INT_MIN)));
         $this->assertTrue(Integer::isNumeric(\PHP_INT_MIN));
+
+        // as \is_numeric()
+        $this->assertTrue(Integer::isNumeric("42"));
+        $this->assertTrue(Integer::isNumeric(1337));
+        $this->assertTrue(Integer::isNumeric(0x539));
+        $this->assertTrue(Integer::isNumeric(02471));
+        $this->assertTrue(Integer::isNumeric(0b10100111001));
+        // 
     }
 
     function testFalse()
     {
+        // сверх больше числа конвертируются в float
+        $this->assertFalse(Integer::isNumeric(92233720368547758072));
+        $this->assertFalse(Integer::isNumeric(-92233720368547758072));
+
+        // not as \is_numeric()
+        $this->assertFalse(Integer::isNumeric("0x539"));
+        $this->assertFalse(Integer::isNumeric("02471"));
+        $this->assertFalse(Integer::isNumeric("0b10100111001"));
+        $this->assertFalse(Integer::isNumeric("1337e0"));
+        $this->assertFalse(Integer::isNumeric(1337e0));
+        $this->assertFalse(Integer::isNumeric(9.1));
+        $this->assertFalse(Integer::isNumeric(null));
+        $this->assertFalse(Integer::isNumeric(" 42"));
+        $this->assertFalse(Integer::isNumeric("42 "));
+        $this->assertFalse(Integer::isNumeric("\u{A0}9001"));
+        $this->assertFalse(Integer::isNumeric("9001\u{A0}"));
+        // 
+
+        $this->assertFalse(Integer::isNumeric(1.0));
+        $this->assertFalse(Integer::isNumeric(2.0));
         $this->assertFalse(Integer::isNumeric(1.2));
         $this->assertFalse(Integer::isNumeric('01'));
         $this->assertFalse(Integer::isNumeric('-0'));
         $this->assertFalse(Integer::isNumeric('-01'));
+        $this->assertFalse(Integer::isNumeric('1.0'));
+        $this->assertFalse(Integer::isNumeric('2.0'));
         $this->assertFalse(Integer::isNumeric('1.2'));
         $this->assertFalse(Integer::isNumeric('01.2'));
         $this->assertFalse(Integer::isNumeric('-1.2'));
@@ -42,5 +74,6 @@ class isNumericTest extends TestCase
         $this->assertFalse(Integer::isNumeric(' '));
         $this->assertFalse(Integer::isNumeric(''));
         $this->assertFalse(Integer::isNumeric('-'));
+        $this->assertFalse(Integer::isNumeric("\n"));
     }
 }

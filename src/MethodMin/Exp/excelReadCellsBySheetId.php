@@ -35,7 +35,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelReadCells
     }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
     function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}namespace Inilim\Tool\Method\Integer{if(!\Inilim\Tool\Integer::__definedIfNot('isNumeric')){
-    function isNumeric($v):bool{if(!\is_scalar($v)||\is_bool($v)){return false;}if(\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#',\strval($v))){return true;}return false;}
+    function isNumeric($v):bool{$t=\gettype($v);if(!\in_array($t,['string','integer'],true)){return false;}if($t==='integer'||\preg_match('#^\-?[1-9][0-9]{0,}$|^0$#',$v)){return true;}return false;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
     }if(!\Inilim\Tool\Str::__definedIfNot('isMatch')){
