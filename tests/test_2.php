@@ -1,10 +1,14 @@
 <?php
 
-set_error_handler(static function () {
-    print_r(func_get_args());
-});
+function wordCount(string $string, ?string $characters = null): int
+{
+    if ($characters === null) {
+        return \str_word_count($string, 0);
+    }
+    return \str_word_count($string, 0, $characters);
+}
 
-\bcdiv('1', '0', 0);
+print_r(wordCount('мама'));
 
 // $a = new \DivisionByZeroError;
 // print_r($a);

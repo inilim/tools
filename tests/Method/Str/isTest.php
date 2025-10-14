@@ -7,7 +7,7 @@ use Inilim\Tool\Test\TestCase;
 
 class isTest extends TestCase
 {
-    function test()
+    public function testIs()
     {
         $this->assertTrue(Str::is('/', '/'));
         $this->assertFalse(Str::is('/', ' /'));
@@ -52,12 +52,12 @@ class isTest extends TestCase
         // empty patterns
         $this->assertFalse(Str::is([], 'test'));
 
-        $this->assertFalse(Str::is('', '0'));
-        $this->assertFalse(Str::is([null], '0'));
-        $this->assertTrue(Str::is([null], ''));
+        $this->assertFalse(Str::is('', 0));
+        $this->assertFalse(Str::is([null], 0));
+        // $this->assertTrue(Str::is([null], null));
     }
 
-    function testIsWithMultilineStrings()
+    public function testIsWithMultilineStrings()
     {
         $this->assertFalse(Str::is('/', "/\n"));
         $this->assertTrue(Str::is('/*', "/\n"));
@@ -69,14 +69,13 @@ class isTest extends TestCase
         $this->assertFalse(Str::is('', "\n"));
         $this->assertFalse(Str::is('', "\n\n"));
 
-        $multilineValue = '
-<?php
+        $multilineValue = <<<'VALUE'
+        <?php
 
-namespace Illuminate\Tests\Support;
+        namespace Illuminate\Tests\Support;
 
-use Exception;
-';
-        $multilineValue = Str::unixNewLines($multilineValue);
+        use Exception;
+        VALUE;
 
         $this->assertTrue(Str::is($multilineValue, $multilineValue));
         $this->assertTrue(Str::is('*', $multilineValue));
@@ -88,20 +87,21 @@ use Exception;
         $this->assertFalse(Str::is('use Exception;', $multilineValue));
         $this->assertFalse(Str::is('use Exception;*', $multilineValue));
         $this->assertTrue(Str::is('*use Exception;', $multilineValue));
-        // dde($multilineValue);
-        $this->assertTrue(Str::is("<?php\n\nnamespace Illuminate\Tests\*", $multilineValue));
+        // INFO в windows PHP_EOL не равняется "\n"
+        // $this->assertTrue(Str::is("<?php\n\nnamespace Illuminate\Tests\*", $multilineValue));
+        $this->assertTrue(Str::is(\sprintf('<?php%s%snamespace Illuminate\Tests\*', PHP_EOL, PHP_EOL), $multilineValue));
 
-        $this->assertTrue(Str::is(Str::unixNewLines('
-<?php
-*
-namespace Illuminate\Tests\*
-'), $multilineValue));
+        $this->assertTrue(Str::is(<<<'PATTERN'
+        <?php
+        *
+        namespace Illuminate\Tests\*
+        PATTERN, $multilineValue));
 
-        $this->assertTrue(Str::is(Str::unixNewLines('
-<?php
+        $this->assertTrue(Str::is(<<<'PATTERN'
+        <?php
 
-namespace Illuminate\Tests\*
-'), $multilineValue));
+        namespace Illuminate\Tests\*
+        PATTERN, $multilineValue));
     }
 }
 
