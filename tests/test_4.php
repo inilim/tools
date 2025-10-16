@@ -19,15 +19,35 @@ use function Inilim\Tool\Method\VD\de;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-\ini_set('memory_limit', '5M');
+\ini_set('memory_limit', '15M');
 
-// __includeDeep([
-// 'Other\phpInfoCache',
-// 'Other\phpInfo',
-// ]);
+__includeDeep([
+    // 'Other\phpInfoCache',
+    // 'Other\phpInfo',
+    'Exp::findFromJsonViaSqlite',
+    'File::get',
+    'Other::errorGetLast',
+]);
 
 
-['result' => $json] = File::get('D:\projects\evg\other\afl\main.json');
+['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
+
+
+
+// $result = \json_decode($json, true);
+// $result = Lar::dataGet($result, 'NGRX_STATE.leagues.data.*');
+// $result = \array_filter($result, static fn($v) => $v['city']['name'] === 'Moscow');
+// $result = \array_values($result);
+// \de($result);
+$result = \Inilim\Tool\Method\Exp\findFromJsonViaSqlite($json, static function ($key, &$value, $type, $fullkey) {
+    if ($type === 'object' && \str_starts_with($fullkey, '"NGRX_STATE".leagues.data[')) {
+        $value = \json_decode($value, true);
+        return ($value['city']['name'] ?? '') === 'Moscow';
+    }
+}, 2);
+
+\d($result);
+\dde(\Inilim\Tool\Method\Other\errorGetLast());
 
 $result = Other::timedMsCall(static function () use ($json) {
 

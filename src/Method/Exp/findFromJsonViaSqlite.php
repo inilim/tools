@@ -33,8 +33,9 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                 \Inilim\Tool\Method\Other\__setErrorLast(-1, 'JSON invalid', '', -1);
                 return null;
             }
-            $results = [];
-            $pdo->sqliteCreateFunction('FN_IT', static function ($key, $value, $type, $fullkey) use ($callable, &$results) {
+            unset($results, $stmt);
+            $items = [];
+            $pdo->sqliteCreateFunction('FN_IT', static function ($key, $value, $type, $fullkey) use (&$items, &$limit, $callable) {
                 // TODO $fullkey можно еще обработать, там имеются лишние кавычки
                 $fullkey = \strtr($fullkey, ['$.' => '']);
                 switch ($type) {
@@ -53,29 +54,40 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                         break;
                 }
 
-                // INFO можно изменить $value по ссылке, экономя на map()
-                if ((bool)$callable($key, $value, $type, $fullkey)) {
-                    $results[] = [
+                // INFO можно изменить $value по ссылке, экономя на последующий map()
+                if ($callable($key, $value, $type, $fullkey) === true) {
+                    $items[] = [
                         'key'     => $key,
                         'value'   => $value,
                         'type'    => $type,
                         'fullkey' => $fullkey,
                     ];
+                    $limit--;
+                    if ($limit <= 0) {
+                        throw new \Exception('ok');
+                    }
                     return true;
                 }
                 return false;
             }, 4);
 
+            // INFO Очень важно ставить равенство "FN_IT(...) = 1" иначе выборка начинает глючить
             // INFO "tree.key not null" это весь json, его мы исключаем
-            // TODO нужно как то производить SELECT без получения результата
-            $stmt = $pdo->prepare('SELECT 1 FROM _table, json_tree(_table._value) as tree
-                WHERE
-                    tree.key not null
-                    AND FN_IT(tree.key, tree.value, tree.type, tree.fullkey)
-                LIMIT :limit');
-            $stmt->execute(['limit' => $limit]);
-            $pdo = $stmt =  null;
-            return $results;
+            // INFO LIMIT не работает, функция FN_IT отрабатывет на все строки... Поэтому стоит кастыль ввиде исключения
+            // INFO fetch тоже не работает если использовать FN_IT
+            try {
+                $pdo->query('SELECT 1 FROM _table, json_tree(_table._value) as tree
+                WHERE tree.key not null AND FN_IT(tree.key, tree.value, tree.type, tree.fullkey) = 1');
+            } catch (\Exception $e) {
+                $m = $e->getMessage();
+                unset($e);
+                if ($m !== 'ok') {
+                    \Inilim\Tool\Method\Other\__setErrorLast(-1, $m, '', -1);
+                    return null;
+                }
+            }
+            $pdo = null;
+            return $items;
         },
         static function ($_, $msg) {
             \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
