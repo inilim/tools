@@ -97,6 +97,17 @@ class Exp
     static function extract(string $haystack, string $pattern) {}
 
         /**
+ * @author inilim
+ * Значительно экономит ОЗУ
+ * @ext PDO pdo_sqlite
+ *
+ * @param string $json
+ * @param callable(string $key, string $value, string $type, string $fullkey):bool $callable
+ * @return (array{key:string,value:string,type:string,fullkey:string})[]|null
+ */
+    static function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10): ?array {}
+
+        /**
  * @author shaedrich <https://github.com/shaedrich>
  * Formats the input string accodring to the pattern passed in.
  *
@@ -153,6 +164,13 @@ class Exp
  * @param  array<string,string>  $map
  */
     static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/'): string {}
+
+        /**
+ * @author inilim
+ * @ext PDO pdo_sqlite
+ * Значительно экономит ОЗУ
+ */
+    static function jsonValidateViaSqlite(string $json): bool {}
 
         /**
  * @todo tests

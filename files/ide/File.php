@@ -23,6 +23,7 @@ class File
     static function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $throw = false) {}
 
         /**
+ * @author Laravel
  * Delete the file at a given path.
  * @param  string[]|string  $paths
  */

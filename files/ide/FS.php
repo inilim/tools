@@ -118,4 +118,10 @@ class FS
  */
     static function stat(string $filename): ?array {}
 
+        /**
+ * @author inilim
+ * @param ?resource $context
+ */
+    static function unlink(string $filename, $context = null): bool {}
+
     }

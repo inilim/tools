@@ -31,6 +31,12 @@ class Path
     static function getVendorDirUsingComposer(): ?string {}
 
         /**
+ * @todo tests
+ * @author inilim
+ */
+    static function getVendorDirUsingComposer_m2(): ?string {}
+
+        /**
  * @author Inilim
  * advanced pathinfo() function
  * @param string $pathTo

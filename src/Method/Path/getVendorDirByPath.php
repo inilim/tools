@@ -10,8 +10,6 @@ namespace Inilim\Tool\Method\Path;
  */
 function getVendorDirByPath(?string $path = null): ?string
 {
-    $result = null;
-
     if ($path === null) {
         $path = __DIR__;
     } else {
@@ -24,20 +22,29 @@ function getVendorDirByPath(?string $path = null): ?string
     $path = \Inilim\Tool\Method\Path\normalize($path . '/');
 
     if (\Inilim\Tool\Method\PF\str_contains($path, '/vendor/')) {
-        $path   = \Inilim\Tool\Method\Str\beforeLast($path, '/vendor/');
-        $result = \Inilim\Tool\Method\Path\normalize($path . '/vendor');
-    } else {
-        // проверка в текущей папке
-        if (\is_dir($path . 'vendor')) {
-            $result = $path . 'vendor';
-        } else {
-            $path = \Inilim\Tool\Method\Path\normalize(\dirname($path) . '/');
-            // проверка на уровне выше
-            if (\is_dir($path . 'vendor')) {
-                $result = $path . 'vendor';
-            }
+        // в основном мы будем попадать сюда.
+        $t = \Inilim\Tool\Method\Str\beforeLast($path, '/vendor/');
+        return \Inilim\Tool\Method\Path\normalize($t . '/vendor');
+    } elseif (\Inilim\Tool\Method\PF\str_contains($path, '/src/')) {
+        // Сюда мы попадаем если нас склонировали или скачали
+        $t = \Inilim\Tool\Method\Str\beforeLast($path, '/src/');
+        $t = \Inilim\Tool\Method\Path\normalize($t . '/vendor');
+        if (\is_dir($t)) {
+            return $t;
         }
     }
 
-    return $result;
+    // проверка в текущей папке
+    $t = $path . 'vendor';
+    if (\is_dir($t)) {
+        return $t;
+    } else {
+        $t = \Inilim\Tool\Method\Path\normalize(\dirname($path) . '/vendor');
+        // проверка на уровне выше
+        if (\is_dir($t)) {
+            return $t;
+        }
+    }
+
+    return null;
 }

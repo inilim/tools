@@ -200,6 +200,13 @@ class Other
     static function isEnum($v): bool {}
 
         /**
+ * the function checks whether the library is in the cloning state.
+ * @author inilim
+ * @todo tests
+ */
+    static function itLibClone(): bool {}
+
+        /**
  * @author Inilim
  * @param callable(int $curIteration,int $maxIterations):bool $condition
  * @param callable(int $curIteration,int $maxIterations) $onBreak
