@@ -33,12 +33,10 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                 \Inilim\Tool\Method\Other\__setErrorLast(-1, 'JSON invalid', '', -1);
                 return null;
             }
-            $results = null;
-
-            $FN_FULLKEY = static function ($fullkey) {
-                return \strtr($fullkey, ['$.' => '']);
-            };
-            $FN_TYPE = static function ($type) {
+            $results = [];
+            $pdo->sqliteCreateFunction('FN_IT', static function ($key, $value, $type, $fullkey) use ($callable, &$results) {
+                // TODO $fullkey можно еще обработать, там имеются лишние кавычки
+                $fullkey = \strtr($fullkey, ['$.' => '']);
                 switch ($type) {
                     case 'real':
                         $type = 'float';
@@ -54,29 +52,28 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                         $type = 'bool';
                         break;
                 }
-                return $type;
-            };
 
-            $pdo->sqliteCreateFunction('FN_FULLKEY', $FN_FULLKEY, 1);
-            $pdo->sqliteCreateFunction('FN_TYPE', $FN_TYPE, 1);
-            $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable, $FN_FULLKEY, $FN_TYPE) {
-                return (bool)$callable(
-                    $key,
-                    $value,
-                    $FN_TYPE($type),
-                    $FN_FULLKEY($fullkey)
-                );
+                // INFO можно изменить $value по ссылке, экономя на map()
+                if ((bool)$callable($key, $value, $type, $fullkey)) {
+                    $results[] = [
+                        'key'     => $key,
+                        'value'   => $value,
+                        'type'    => $type,
+                        'fullkey' => $fullkey,
+                    ];
+                    return true;
+                }
+                return false;
             }, 4);
 
-            $stmt = $pdo->prepare('SELECT
-                    tree.key, tree.value, FN_TYPE(tree.type) as type, FN_FULLKEY(tree.fullkey) as fullkey
-                FROM _table, json_tree(_table._value) as tree
+            // INFO "tree.key not null" это весь json, его мы исключаем
+            // TODO нужно как то производить SELECT без получения результата
+            $stmt = $pdo->prepare('SELECT 1 FROM _table, json_tree(_table._value) as tree
                 WHERE
                     tree.key not null
-                    AND FN_IS(tree.key, tree.value, tree.type, tree.fullkey)
+                    AND FN_IT(tree.key, tree.value, tree.type, tree.fullkey)
                 LIMIT :limit');
             $stmt->execute(['limit' => $limit]);
-            $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $pdo = $stmt =  null;
             return $results;
         },

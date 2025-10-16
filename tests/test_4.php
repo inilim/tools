@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 use Inilim\Tool\FS;
 use Inilim\Tool\PF;
-use Inilim\Tool\VD;
 use Inilim\Tool\Arr;
 use Inilim\Tool\Exp;
+use Inilim\Tool\Lar;
 use Inilim\Tool\File;
 use Inilim\Tool\Json;
 use Inilim\Tool\Other;
 use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\DefinePhpBin;
-use Symfony\Component\Finder\Finder;
 
+use Symfony\Component\Finder\Finder;
+use function Inilim\Tool\Method\VD\de;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
@@ -28,17 +29,28 @@ require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 ['result' => $json] = File::get('D:\projects\evg\other\afl\main.json');
 
-$res = Exp::findFromJsonViaSqlite($json, static function ($key, $value, $type, $fullkey) {
-    return \in_array($type, ['bool', 'int', 'float']);
-}, 10);
+$result = Other::timedMsCall(static function () use ($json) {
 
-de($res);
+    // $cls = Exp::__asClosure('findFromJsonViaSqlite');
+    for ($i = 0; $i <= 1_000; $i++) {
+        // $result = \json_decode($json, true);
+        // $result = Lar::dataGet($result, 'NGRX_STATE.leagues.data.*');
+        // $result = \array_filter($result, static fn($v) => $v['city']['name'] === 'Moscow');
+        // $result = \array_values($result);
 
 
+        // $result = Exp::findFromJsonViaSqlite($json, static function ($key, &$value, $type, $fullkey) {
+        //     if ($type === 'object' && \str_starts_with($fullkey, '"NGRX_STATE".leagues.data')) {
+        //         $value = \json_decode($value, true);
+        //         return $value['city']['name'] === 'Moscow';
+        //     }
+        //     return false;
+        // }, 100);
+    }
+});
 
 
-
-
+\de($result);
 
 
 
