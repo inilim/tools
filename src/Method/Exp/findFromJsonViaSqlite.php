@@ -8,10 +8,10 @@ namespace Inilim\Tool\Method\Exp;
  * @author inilim
  * Значительно экономит ОЗУ
  * @ext PDO pdo_sqlite
- *
+ * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @param string $json
- * @param callable(string $key, string $value, string $type, string $fullkey):bool $callable
- * @return (array{key:string,value:string,type:string,fullkey:string})[]|null
+ * @param callable(string|int $key, string|int|float|null $value, string $type, string $fullkey):bool $callable
+ * @return Return_findFromJsonViaSqlite[]|null
  */
 function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10): ?array
 {
@@ -35,6 +35,21 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
             }
             $results = null;
             $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable) {
+                switch ($type) {
+                    case 'real':
+                        $type = 'float';
+                        break;
+                    case 'text':
+                        $type = 'string';
+                        break;
+                    case 'integer':
+                        $type = 'int';
+                        break;
+                    case 'true':
+                    case 'false':
+                        $type = 'bool';
+                        break;
+                }
                 return (bool)$callable($key, $value, $type, \strtr($fullkey, ['$.' => '']));
             }, 4);
             $stmt = $pdo->prepare('SELECT

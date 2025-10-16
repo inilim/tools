@@ -116,6 +116,11 @@ class TypeObj {}
  * @psalm-type Cell_excelReadCellsBySheetId_m2 = array{type:string,id:string,str_idx:?int,xml:string,value:null|bool||string|int|float,raw_value:?string,formula:?string,row_num:int,col_num:int,col_char:string}
  * @psalm-type DataCell_excelReadCellsBySheetId_m2 = array{type:string,id:string,str_idx:?int,xml:string,value:?string,raw_value:?string,formula:?string,row_num:int,col_num:int,col_char:string}
  * 
+ * 
+ * 
+ * ----- findFromJsonViaSqlite
+ * @psalm-type Return_findFromJsonViaSqlite = array{key:string|int,value:string|int|float|null,type:'object'|'array'|'int'|'string'|'float'|'null',fullkey:string}
+ * 
  */
 class TypeExp {}
 

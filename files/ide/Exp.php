@@ -100,10 +100,10 @@ class Exp
  * @author inilim
  * Значительно экономит ОЗУ
  * @ext PDO pdo_sqlite
- *
+ * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @param string $json
- * @param callable(string $key, string $value, string $type, string $fullkey):bool $callable
- * @return (array{key:string,value:string,type:string,fullkey:string})[]|null
+ * @param callable(string|int $key, string|int|float|null $value, string $type, string $fullkey):bool $callable
+ * @return Return_findFromJsonViaSqlite[]|null
  */
     static function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10): ?array {}
 
