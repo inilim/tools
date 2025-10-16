@@ -58,6 +58,16 @@
     "inilim/php-code-minifier": "dev-main"
   },
   "scripts": {
+    "build": [
+        "php build/build.php",
+        "php build/autoide.php"
+    ],
+    "build:ide": [
+        "php build/autoide.php"
+    ],
+    "build:method": [
+        "php build/build.php"
+    ],
     "unit": [
       "php74 vendor/bin/phpunit"
     ],
