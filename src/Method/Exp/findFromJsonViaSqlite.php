@@ -34,7 +34,10 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                 return null;
             }
             $results = null;
-            $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable) {
+            $pdo->sqliteCreateFunction('FN_FULLKEY', static function ($fullkey) {
+                return \strtr($fullkey, ['$.' => '']);
+            }, 1);
+            $pdo->sqliteCreateFunction('FN_TYPE', static function ($type) {
                 switch ($type) {
                     case 'real':
                         $type = 'float';
@@ -50,14 +53,17 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                         $type = 'bool';
                         break;
                 }
-                return (bool)$callable($key, $value, $type, \strtr($fullkey, ['$.' => '']));
+                return $type;
+            }, 1);
+            $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable) {
+                return (bool)$callable($key, $value, $type, $fullkey);
             }, 4);
             $stmt = $pdo->prepare('SELECT
-                    tree.key, tree.value, tree.type, tree.fullkey
+                    tree.key, tree.value, FN_TYPE(tree.type) as type, FN_FULLKEY(tree.fullkey) as fullkey
                 FROM _table, json_tree(_table._value) as tree
                 WHERE
                     tree.key not null
-                    AND FN_IS(tree.key, tree.value, tree.type, tree.fullkey)
+                    AND FN_IS(tree.key, tree.value, FN_TYPE(tree.type), FN_FULLKEY(tree.fullkey))
                 LIMIT :limit');
             $stmt->execute(['limit' => $limit]);
             $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);

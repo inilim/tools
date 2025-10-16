@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Inilim\Tool\FS;
 use Inilim\Tool\PF;
+use Inilim\Tool\VD;
 use Inilim\Tool\Arr;
 use Inilim\Tool\Exp;
 use Inilim\Tool\File;
@@ -25,51 +26,13 @@ require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 // ]);
 
 
-// $.packages[0]."require-dev"."ext-pdo"
-function getValueFromJsonByPattern(string $json)
-{
-    // \Inilim\Tool\Method\Assert\extPhp('PDO');
-    // \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+['result' => $json] = File::get('D:\projects\evg\other\afl\main.json');
 
-    // $file = \tmpfile();
-    // $path = \stream_get_meta_data($file)['uri']; // eg: /tmp/phpFx0513a
-    // dd($path);
+$res = Exp::findFromJsonViaSqlite($json, static function ($key, $value, $type, $fullkey) {
+    return \in_array($type, ['bool', 'int', 'float']);
+}, 10);
 
-    // :memory:
-    // $pdo = new \PDO('sqlite:' . $path, null, null, []);
-    $pdo = new \PDO('sqlite::memory:', null, null, []);
-    $pdo->exec('CREATE TABLE _table (_value TEXT)');
-    $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
-    $stmt->execute(['_value' => $json]);
-    $stmt = $pdo->query('SELECT json_valid(_value) as valid FROM _table');
-    $results = $stmt->fetch(\PDO::FETCH_NUM);
-    if (!isset($results[0]) || $results[0] == 0) {
-        return null;
-    }
-    dd($results);
-    $results = null;
-    $callback = static function ($path) {
-        return \is_string($path) && \preg_match('/^packages\[\d+\]\.name$/', \strtr($path, ['$.' => ''])) ? true : false;
-    };
-    $pdo->sqliteCreateFunction('FN_IS', $callback, 1);
-    $sql = 'SELECT
-            tree.key,tree.value,tree.type,fullkey
-        FROM _table, json_tree(_table._value) as tree
-        WHERE FN_IS(tree.fullkey)';
-    $stmt = $pdo->query($sql);
-    $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    $pdo = $stmt =  null;
-    // \fclose($file);
-    // unlink($path);
-    d($results);
-}
-
-$json = File::get('D:\projects\tools\vendor\composer\installed.json');
-// $json = File::json('D:\projects\tools\vendor\composer\installed.json');
-getValueFromJsonByPattern($json['result']);
-
-
-deUsage();
+de($res);
 
 
 
