@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Exp;
 /**
  * @author inilim
  * @ext PDO pdo_sqlite
- * Значительно экономит ОЗУ
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  */
 function jsonValidateViaSqlite(string $json): bool
 {

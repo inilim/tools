@@ -98,7 +98,7 @@ class Exp
 
         /**
  * @author inilim
- * Значительно экономит ОЗУ
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @ext PDO pdo_sqlite
  * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @param string $json
@@ -168,7 +168,7 @@ class Exp
         /**
  * @author inilim
  * @ext PDO pdo_sqlite
- * Значительно экономит ОЗУ
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  */
     static function jsonValidateViaSqlite(string $json): bool {}
 

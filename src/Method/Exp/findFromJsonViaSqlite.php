@@ -6,7 +6,7 @@ namespace Inilim\Tool\Method\Exp;
 
 /**
  * @author inilim
- * Значительно экономит ОЗУ
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @ext PDO pdo_sqlite
  * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @param string $json
@@ -34,10 +34,11 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                 return null;
             }
             $results = null;
-            $pdo->sqliteCreateFunction('FN_FULLKEY', static function ($fullkey) {
+
+            $FN_FULLKEY = static function ($fullkey) {
                 return \strtr($fullkey, ['$.' => '']);
-            }, 1);
-            $pdo->sqliteCreateFunction('FN_TYPE', static function ($type) {
+            };
+            $FN_TYPE = static function ($type) {
                 switch ($type) {
                     case 'real':
                         $type = 'float';
@@ -54,16 +55,25 @@ function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10
                         break;
                 }
                 return $type;
-            }, 1);
-            $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable) {
-                return (bool)$callable($key, $value, $type, $fullkey);
+            };
+
+            $pdo->sqliteCreateFunction('FN_FULLKEY', $FN_FULLKEY, 1);
+            $pdo->sqliteCreateFunction('FN_TYPE', $FN_TYPE, 1);
+            $pdo->sqliteCreateFunction('FN_IS', static function ($key, $value, $type, $fullkey) use ($callable, $FN_FULLKEY, $FN_TYPE) {
+                return (bool)$callable(
+                    $key,
+                    $value,
+                    $FN_TYPE($type),
+                    $FN_FULLKEY($fullkey)
+                );
             }, 4);
+
             $stmt = $pdo->prepare('SELECT
                     tree.key, tree.value, FN_TYPE(tree.type) as type, FN_FULLKEY(tree.fullkey) as fullkey
                 FROM _table, json_tree(_table._value) as tree
                 WHERE
                     tree.key not null
-                    AND FN_IS(tree.key, tree.value, FN_TYPE(tree.type), FN_FULLKEY(tree.fullkey))
+                    AND FN_IS(tree.key, tree.value, tree.type, tree.fullkey)
                 LIMIT :limit');
             $stmt->execute(['limit' => $limit]);
             $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
