@@ -97,17 +97,6 @@ class Exp
     static function extract(string $haystack, string $pattern) {}
 
         /**
- * @author inilim
- * Значительно экономит ОЗУ, но медленее чем json_decode()
- * @ext PDO pdo_sqlite
- * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
- * @param string $json
- * @param callable(string|int $key, string|int|float|null $value, string $type, string $fullkey):bool $callable
- * @return Return_findFromJsonViaSqlite[]|null
- */
-    static function findFromJsonViaSqlite(string $json, callable $callable, int $limit = 10): ?array {}
-
-        /**
  * @author shaedrich <https://github.com/shaedrich>
  * Formats the input string accodring to the pattern passed in.
  *
@@ -167,6 +156,26 @@ class Exp
 
         /**
  * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @see https://sqlite.org/json1.html#jerr
+ * @author inilim
+ * @ext PDO pdo_sqlite
+ */
+    static function jsonErrorPositionViaSqlite(string $json): ?int {}
+
+        /**
+ * @author inilim
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @see https://sqlite.org/json1.html#jex
+ * @ext PDO pdo_sqlite
+ * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
+ * @param string|string[] $pattern see https://sqlite.org/json1.html#jex
+ * @return mixed
+ * @throws \InvalidArgumentException
+ */
+    static function jsonExtractViaSqlite(string $json, $pattern) {}
+
+        /**
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @author inilim
  * @ext PDO pdo_sqlite
  */
@@ -184,7 +193,7 @@ class Exp
  * @param B $valueBreak
  * @param callable(string|int $key, string|int|float|null|bool $value, string $type, string $fullkey):B $callback
  */
-    static function jsonWalkViaSqlite(string $json, callable $callback, ?int $limit = null, $valueBreak = null, array $types = []): bool {}
+    static function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limit = null, $valueBreak = false, array $types = []): bool {}
 
         /**
  * @todo tests

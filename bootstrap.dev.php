@@ -94,7 +94,14 @@ if (!\function_exists('__includeDeep')) {
             $id = $connect->exec('SELECT id FROM methods WHERE namespace LIKE "%" || {class} AND name = {func}', [
                 'class' => $class,
                 'func' => $func,
-            ], 1)['id'];
+            ], 1)['id'] ?? null;
+            if ($id === null) {
+                \de([
+                    __LINE__,
+                    '$class' => $class,
+                    '$func'  => $func,
+                ]);
+            }
             /** @var int $id */
 
             $files = $connect->exec(

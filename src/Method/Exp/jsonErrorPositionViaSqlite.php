@@ -6,10 +6,11 @@ namespace Inilim\Tool\Method\Exp;
 
 /**
  * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @see https://sqlite.org/json1.html#jerr
  * @author inilim
  * @ext PDO pdo_sqlite
  */
-function jsonValidateViaSqlite(string $json): bool
+function jsonErrorPositionViaSqlite(string $json): ?int
 {
     \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
@@ -22,13 +23,13 @@ function jsonValidateViaSqlite(string $json): bool
         $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
         $stmt->execute(['_value' => $json]);
         unset($json);
-        $stmt = $pdo->query('SELECT json_valid(_value) as valid FROM _table');
+        $stmt = $pdo->query('SELECT json_error_position(_value) as pos FROM _table');
         $results = $stmt->fetch(\PDO::FETCH_NUM);
         $pdo = $stmt = null;
         if (!isset($results[0]) || $results[0] == 0) {
-            return false;
+            return true;
         }
-        return true;
+        return (int)$results[0];
     };
 
     $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
@@ -37,9 +38,8 @@ function jsonValidateViaSqlite(string $json): bool
             \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
         }
     );
-
-    if (!\is_bool($results)) {
-        return false;
+    if ($results === true || !\is_int($results)) {
+        return null;
     }
     return $results;
 }

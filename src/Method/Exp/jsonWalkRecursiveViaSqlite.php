@@ -16,7 +16,7 @@ namespace Inilim\Tool\Method\Exp;
  * @param B $valueBreak
  * @param callable(string|int $key, string|int|float|null|bool $value, string $type, string $fullkey):B $callback
  */
-function jsonWalkViaSqlite(string $json, callable $callback, ?int $limit = null, $valueBreak = null, array $types = []): bool
+function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limit = null, $valueBreak = false, array $types = []): bool
 {
     if ($limit !== null) {
         \Inilim\Tool\Method\Assert\positiveInteger($limit);
@@ -50,7 +50,9 @@ function jsonWalkViaSqlite(string $json, callable $callback, ?int $limit = null,
     $types = \implode(',', $types);
 
     $internal = static function () use ($json, $callback, $limit, $valueBreak, $types) {
-        $pdo = new \PDO('sqlite::memory:', null, null, []);
+        $pdo = new \PDO('sqlite::memory:', null, null, [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+        ]);
         $pdo->exec('CREATE TABLE _table (_value TEXT)');
         $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
         $stmt->execute(['_value' => $json]);
