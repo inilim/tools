@@ -14,9 +14,6 @@ use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\DefinePhpBin;
 
-use Symfony\Component\Finder\Finder;
-use function Inilim\Tool\Method\VD\de;
-
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
 \ini_set('memory_limit', '15M');
@@ -27,13 +24,21 @@ __includeDeep([
     'Exp::findFromJsonViaSqlite',
     'File::get',
     'Other::errorGetLast',
+    'Exp::jsonWalkViaSqlite',
 ]);
 
 
 ['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
 
+\Inilim\Tool\Method\Exp\jsonWalkViaSqlite($json, static function ($key, $value, $type, $fuulkey) {
+    \d($type);
+}, 1, false, ['string']);
 
 
+
+
+
+de();
 // $result = \json_decode($json, true);
 // $result = Lar::dataGet($result, 'NGRX_STATE.leagues.data.*');
 // $result = \array_filter($result, static fn($v) => $v['city']['name'] === 'Moscow');

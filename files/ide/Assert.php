@@ -6,6 +6,20 @@ class Assert
 {
         /**
  * @author webmozarts/assert
+ * @psalm-pure
+ *
+ * @param mixed  $value
+ * @param array  $values
+ * @param string $message
+ *
+ * @return void
+ *
+ * @throws \InvalidArgumentException
+ */
+    static function allInArray($value, $values, $message = '') {}
+
+        /**
+ * @author webmozarts/assert
  * @psalm-assert iterable<string> $value
  * @phpstan-assert iterable<string> $value
  * 

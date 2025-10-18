@@ -166,11 +166,25 @@ class Exp
     static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/'): string {}
 
         /**
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @author inilim
  * @ext PDO pdo_sqlite
- * Значительно экономит ОЗУ, но медленее чем json_decode()
  */
     static function jsonValidateViaSqlite(string $json): bool {}
+
+        /**
+ * @author inilim
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @ext PDO pdo_sqlite
+ * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
+ * @template B of mixed
+ * @param string $json
+ * @param null|positive-int $limit
+ * @param ('object'|'array'|'int'|'string'|'float'|'bool'|'null')[] $types
+ * @param B $valueBreak
+ * @param callable(string|int $key, string|int|float|null|bool $value, string $type, string $fullkey):B $callback
+ */
+    static function jsonWalkViaSqlite(string $json, callable $callback, ?int $limit = null, $valueBreak = null, array $types = []): bool {}
 
         /**
  * @todo tests

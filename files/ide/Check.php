@@ -24,6 +24,14 @@ class Check
 
         /**
  * @author Inilim
+ * @psalm-pure
+ * @param mixed  $value
+ * @param mixed[] $values
+ */
+    static function allInArray($value, array $values): bool {}
+
+        /**
+ * @author Inilim
  * @psalm-assert-if-true iterable<null|mixed[]> $value
  * @phpstan-assert-if-true iterable<null|mixed[]> $value
  * 

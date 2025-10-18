@@ -119,7 +119,7 @@ class TypeObj {}
  * 
  * 
  * ----- findFromJsonViaSqlite
- * @psalm-type Return_findFromJsonViaSqlite = array{key:string|int,value:string|int|float|null,type:'object'|'array'|'int'|'string'|'float'|'null',fullkey:string}
+ * @psalm-type Return_findFromJsonViaSqlite = array{key:string|int,value:string|int|float|null,type:'object'|'array'|'bool'|'int'|'string'|'float'|'null',fullkey:string}
  * 
  */
 class TypeExp {}
