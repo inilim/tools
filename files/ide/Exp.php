@@ -167,12 +167,21 @@ class Exp
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @see https://sqlite.org/json1.html#jex
  * @ext PDO pdo_sqlite
- * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @param string|string[] $pattern see https://sqlite.org/json1.html#jex
  * @return mixed
  * @throws \InvalidArgumentException
  */
     static function jsonExtractViaSqlite(string $json, $pattern) {}
+
+        /**
+ * @author inilim
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @see https://sqlite.org/json1.html#jarraylen
+ * @ext PDO pdo_sqlite
+ * @param string $pattern see https://sqlite.org/json1.html#jarraylen
+ * @throws \InvalidArgumentException
+ */
+    static function jsonLengthViaSqlite(string $json, ?string $pattern = null): ?int {}
 
         /**
  * Значительно экономит ОЗУ, но медленее чем json_decode()

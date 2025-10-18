@@ -26,14 +26,16 @@ __includeDeep([
     'Exp\jsonExtractViaSqlite',
     'Assert\strOrArr',
     'Assert\allString',
+    'Exp\jsonLengthViaSqlite',
 ]);
 
 
 ['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
 
 // \Inilim\Tool\Method\Exp\jsonErrorPositionViaSqlite('{"key": "value", "invalid":}');
-$result = \Inilim\Tool\Method\Exp\jsonExtractViaSqlite('{"a":null,"b":"xyz"}', ['$.a', '$.b'], 'not found');
-
+// $result = \Inilim\Tool\Method\Exp\jsonExtractViaSqlite('{"a":null,"b":"xyz"}', ['$.a', '$.b'], 'not found');
+// $result = \Inilim\Tool\Method\Exp\jsonLengthViaSqlite('{"one":[1,2,3]}', '$.two');
+\Inilim\Tool\Method\Exp\jsonLengthViaSqlite('{"a":2,"c":[4,5,{"f":7}]}');
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }
