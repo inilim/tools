@@ -19,23 +19,44 @@ require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 \ini_set('memory_limit', '15M');
 
 __includeDeep([
-    'File::get',
-    'Other::errorGetLast',
-    'Exp::jsonWalkRecursiveViaSqlite',
-    'Exp::jsonErrorPositionViaSqlite',
-    'Exp\jsonExtractViaSqlite',
-    'Assert\strOrArr',
-    'Assert\allString',
-    'Exp\jsonLengthViaSqlite',
+    // 'File::get',
+    // 'Other::errorGetLast',
+    // 'Exp::jsonWalkRecursiveViaSqlite',
+    // 'Exp::jsonErrorPositionViaSqlite',
+    // 'Exp\jsonExtractViaSqlite',
+    // 'Assert\strOrArr',
+    // 'Assert\allString',
+    // 'Exp\jsonLengthViaSqlite',
+    'Exp\openFileJsonViaSqlite',
 ]);
 
 
-['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
+
+// ['result' => $resultd] = File::get('temp.sqlite');
+
+// dde(\base64_encode($resultd));
+
+// $pdo = new \PDO('sqlite:temp.sqlite', null, null, [
+//     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+// ]);
+// // tables
+// $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
+// // records
+// $pdo->exec('INSERT INTO _table (_name,_value) VALUES ("json","")');
+
+
+\Inilim\Tool\Method\Exp\openFileJsonViaSqlite('D:\projects\evg\other\afl\main.json');
+
+
+
+// ['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
 
 // \Inilim\Tool\Method\Exp\jsonErrorPositionViaSqlite('{"key": "value", "invalid":}');
 // $result = \Inilim\Tool\Method\Exp\jsonExtractViaSqlite('{"a":null,"b":"xyz"}', ['$.a', '$.b'], 'not found');
 // $result = \Inilim\Tool\Method\Exp\jsonLengthViaSqlite('{"one":[1,2,3]}', '$.two');
-\Inilim\Tool\Method\Exp\jsonLengthViaSqlite('{"a":2,"c":[4,5,{"f":7}]}');
+// \Inilim\Tool\Method\Exp\jsonLengthViaSqlite('{"a":2,"c":[4,5,{"f":7}]}');
+
+de();
 if (\Inilim\Tool\Method\Other\errorGetLast()) {
     de(\Inilim\Tool\Method\Other\errorGetLast());
 }

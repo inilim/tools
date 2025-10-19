@@ -24,6 +24,18 @@ class Other
 
         /**
  * @author Inilim
+ * @todo tests
+ * $callback after call clear bind
+ * @template R
+ * @template A
+ * @param \Closure(A):R $callback
+ * @param A ...$args
+ * @return R
+ */
+    static function bindAndCall(object $object, \Closure $callback, ...$args) {}
+
+        /**
+ * @author Inilim
  * @template T of \Closure
  * @param T $cls
  * @return T

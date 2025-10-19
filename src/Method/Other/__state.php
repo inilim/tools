@@ -6,8 +6,7 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author inilim
- * @internal Inilim\Tool\Method\Other
- *
+ * @internal Inilim\Tool\Method\*
  * @return \Inilim\Internal\OtherState
  */
 function __state(): object

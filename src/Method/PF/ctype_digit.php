@@ -15,7 +15,7 @@ function ctype_digit($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_digit')) {
         return \ctype_digit($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
+    $cls = \Inilim\Tool\Method\Other\__resourceCache(__FUNCTION__, 'convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
     $text = $cls->__invoke($text, 'ctype_digit');
     return \is_string($text) && '' !== $text && !\preg_match('/[^0-9]/', $text);

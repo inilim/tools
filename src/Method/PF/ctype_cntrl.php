@@ -15,7 +15,7 @@ function ctype_cntrl($text): bool
     if (\Inilim\Tool\Method\Other\funcPhp('ctype_cntrl')) {
         return \ctype_cntrl($text);
     }
-    $cls = \Inilim\Tool\Method\PF\__resourceCache('convert_int_to_char_for_ctype');
+    $cls = \Inilim\Tool\Method\Other\__resourceCache(__FUNCTION__, 'convert_int_to_char_for_ctype');
     /** @var \Closure $cls */
     $text = $cls->__invoke($text, 'ctype_cntrl');
     return \is_string($text) && '' !== $text && !\preg_match('/[^\x00-\x1f\x7f]/', $text);

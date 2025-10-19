@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
- * @todo tests
+ * @todo tests rename
+ * @ext mbstring
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ * @throws \Exception
  */
 function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
 {
@@ -15,7 +17,11 @@ function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
         throw new \Exception(\sprintf('Not found file: "%s"', $pathToFile));
     }
 
-    $resource = \fopen($pathToFile, 'r');
+    $resource = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
+        static fn() => \fopen($pathToFile, 'r'),
+        null
+    );
+    /** @var resource|false $resource */
 
     if ($resource === false) {
         throw new \Exception(\sprintf('Failed open file: "%s"', $pathToFile));

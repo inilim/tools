@@ -181,9 +181,11 @@ class File
     static function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null): string {}
 
         /**
- * @todo tests
+ * @todo tests rename
+ * @ext mbstring
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ * @throws \Exception
  */
     static function toCharsGenerator(string $pathToFile, int $chunk = 1): Generator {}
 

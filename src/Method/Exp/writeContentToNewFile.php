@@ -54,14 +54,18 @@ function writeContentToNewFile(?string $dir = null): ?\Closure
 
             switch ($command) {
                 case 'get:count':
+                    // выдать количество успешных итераций
                     return $opt['count'];
                 case 'get:resource':
+                    // выдать ресурс
                     return $opt['resource'];
                 case 'get:file':
+                    // выдать путь до файла
                     return $opt['file'];
                 case 'close':
                 case 'end':
                 case 'finish':
+                    // завершить сеанс и выдать путь до файла
                     \fclose($opt['resource']);
                     $opt['resource'] = null;
                     $opt['end']      = true;
