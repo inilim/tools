@@ -48,7 +48,10 @@ class isResObjJsonSqliteTest extends TestCase
 
         \fclose($res);
         FS::unlink($ptf);
-        Exp::closeResObjJsonSqlite($object);
+        Other::bindAndCall($object, function () {
+            $this->pdo = null;
+            FS::unlink($this->tmpFile);
+        });
     }
 
     function testCloseObject()
