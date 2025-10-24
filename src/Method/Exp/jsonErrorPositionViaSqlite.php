@@ -32,12 +32,7 @@ function jsonErrorPositionViaSqlite(string $json): ?int
         return (int)$results[0];
     };
 
-    $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
-        $internal,
-        static function ($_, $msg) {
-            \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
-        }
-    );
+    $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
     if ($results === true || !\is_int($results)) {
         return null;
     }

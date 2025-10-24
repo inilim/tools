@@ -557,6 +557,7 @@ class Str
     static function toArray(string $string, array $separators = [',', '-', '|', ';', ':', '/', '\\']): array {}
 
         /**
+ * @deprecated removed
  * @template T1 of array{nextChunkSize?:int,substrEncoding?:string}
  * @return \Closure(string &$string, int $chunk, T1 $opts):\Generator<array{
  * iteration:int,
@@ -566,6 +567,7 @@ class Str
  * nextChunk:string,
  * opts:T1
  * },string>
+ * @ext mbstring
  */
     static function toCharsGenerator(): Closure {}
 

@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
- * @todo tests rename
- * @deprecated use toCharsGenerator_v2()
+ * @todo rename
  * @ext mbstring
  * @author Inilim
- * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ * @return \Closure():\Generator<array{iter:int,posFrom:int,posTo:int},string>
  * @throws \InvalidArgumentException
  * @throws \Exception
  */
-function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
+function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
 {
     \Inilim\Tool\Method\Assert\file($pathToFile);
     \Inilim\Tool\Method\Assert\positiveInteger($chunk);
@@ -23,10 +22,12 @@ function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
         throw new \Exception(\sprintf('Failed open file: "%s"', $pathToFile));
     }
 
-    $iteration = 0;
-    while (true) {
+    return static function () use ($resource, $chunk) {
+        /** @var resource $resource */
 
-        $r = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use (&$iteration, $resource, $chunk) {
+        $i = 0;
+
+        $internal = static function () use (&$i, $resource, $chunk) {
             $posFrom = \ftell($resource); // берем текущую позицию/указатель
             if ($posFrom === false) {
                 return null;
@@ -57,20 +58,22 @@ function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
             }
 
             return [[
-                'iter'    => $iteration,
+                'iter'    => $i,
                 'posFrom' => $posFrom,
                 'posTo'   => $posTo,
             ], $chars];
-        });
+        };
 
-        if ($r === null) {
-            break;
-        }
+        while (true) {
+            $r = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
+            if ($r === null) {
+                break;
+            }
 
-        yield $r[0] => $r[1];
+            yield $r[0] => $r[1];
+            $i++;
+        } //endwhile
 
-        $iteration++;
-    }
-
-    \Inilim\Tool\Method\File\phpfclose($resource);
+        \Inilim\Tool\Method\File\phpfclose($resource);
+    };
 }

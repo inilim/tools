@@ -10,6 +10,7 @@ use Inilim\Tool\Lar;
 use Inilim\Tool\File;
 use Inilim\Tool\Json;
 use Inilim\Tool\Other;
+use Inilim\Tool\Assert;
 use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\DefinePhpBin;
@@ -30,32 +31,8 @@ __includeDeep([
     // 'Exp\openJsonViaSqlite',
     // 'Other\errorGetLast',
     // 'Other\timedMsCall',
+    'File\toCharsGenerator',
 ]);
-
-
-$resource = Other::resourceFromString_m3('Привет');
-\fseek($resource, 0, \SEEK_END);
-\fwrite($resource, '!!!');
-\fseek($resource, 0);
-dd(\stream_get_contents($resource));
-if (Other::errorGetLast()) {
-    de(Other::errorGetLast());
-}
-de();
-
-
-
-// ['result' => $resultd] = File::get('temp.sqlite');
-
-// dde(\base64_encode($resultd));
-
-// $pdo = new \PDO('sqlite:temp.sqlite', null, null, [
-//     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
-// ]);
-// // tables
-// $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
-// // records
-// $pdo->exec('INSERT INTO _table (_name,_value) VALUES ("json","")');
 
 
 $object = \Inilim\Tool\Method\Exp\openJsonViaSqlite('D:\projects\evg\other\afl\main.json');

@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Data;
 
 /**
  * @return \Closure():string[]
+ * @ext mbstring
  */
 function arabicAlphabetAsClosure()
 {

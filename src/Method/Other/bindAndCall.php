@@ -17,6 +17,7 @@ namespace Inilim\Tool\Method\Other;
 function bindAndCall(object $object, \Closure $callback, ...$args)
 {
     $result = $callback->bindTo($object, $object)->__invoke(...$args);
+    // TODO Deprecated: Unbinding $this of closure is deprecated in
     \Inilim\Tool\Method\Other\clearClosure($callback);
     return $result;
 }

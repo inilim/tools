@@ -13,6 +13,8 @@ namespace Inilim\Tool\Method\File;
  */
 function phpfopen(string $filename, string $mode, bool $use_include_path = false, $context = null)
 {
-    $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn() => \fopen($filename, $mode, $use_include_path, $context));
+    $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(
+        static fn() => \fopen($filename, $mode, $use_include_path, $context)
+    );
     return $result === null ? false : $result;
 }

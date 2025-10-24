@@ -55,7 +55,8 @@
     "symfony/process": "^5.4",
     "phpmetrics/phpmetrics": "^2.9",
     "symfony/finder": "^5.4",
-    "inilim/php-code-minifier": "dev-main"
+    "inilim/php-code-minifier": "dev-main",
+    "mikey179/vfsstream": "^1.6"
   },
   "scripts": {
     "build": [

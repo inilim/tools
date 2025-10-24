@@ -17,6 +17,25 @@ class _refDotsTest extends \Inilim\Tool\Test\TestCase
         $this->assertSame($actual, $result);
     }
 
+    function test1()
+    {
+        // Проверяем ссылки
+        $result = Other::_refDots([123, 'key2', 123.123]);
+
+        $result['...'][0] = 333;
+        $this->assertSame(333, $result[0]);
+        $result['...'][1] = 'new_string';
+        $this->assertSame('new_string', $result[1]);
+
+        // invert
+        $result = Other::_refDots([123, 'key2', 123.123]);
+
+        $result[0] = 333;
+        $this->assertSame(333, $result['...'][0]);
+        $result[1] = 'new_string';
+        $this->assertSame('new_string', $result['...'][1]);
+    }
+
     static function data()
     {
         return [

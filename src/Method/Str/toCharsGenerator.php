@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated removed
  * @template T1 of array{nextChunkSize?:int,substrEncoding?:string}
  * @return \Closure(string &$string, int $chunk, T1 $opts):\Generator<array{
  * iteration:int,
@@ -14,6 +15,7 @@ namespace Inilim\Tool\Method\Str;
  * nextChunk:string,
  * opts:T1
  * },string>
+ * @ext mbstring
  */
 function toCharsGenerator(): \Closure
 {

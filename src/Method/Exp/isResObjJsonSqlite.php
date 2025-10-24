@@ -20,7 +20,18 @@ function isResObjJsonSqlite($value): bool
     ) {
         return false;
     }
+
     return \Inilim\Tool\Method\Other\bindAndCall($value, function () {
-        return ($this->tag ?? '') === \Inilim\Tool\Method\Exp\__tagJsonSqlite();
+        // $file = $this->tmpFile ?? '';
+        // \clearstatcache(false, $file);
+        // $pdo = $this->pdo ?? null;
+
+        return ($this->tag ?? '') === \Inilim\Tool\Method\Exp\__tagJsonSqlite()
+            // &&
+            // \is_string($file) && $file !== '' && \is_file($file)
+            // &&
+            // \is_object($pdo) && \get_class($pdo) === \PDO::class
+            // 
+        ;
     });
 }

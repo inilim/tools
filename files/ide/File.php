@@ -221,12 +221,24 @@ class File
 
         /**
  * @todo tests rename
+ * @deprecated use toCharsGenerator_v2()
  * @ext mbstring
  * @author Inilim
  * @return \Generator<array{iter:int,posFrom:int,posTo:int},string>
+ * @throws \InvalidArgumentException
  * @throws \Exception
  */
     static function toCharsGenerator(string $pathToFile, int $chunk = 1): Generator {}
+
+        /**
+ * @todo rename
+ * @ext mbstring
+ * @author Inilim
+ * @return \Closure():\Generator<array{iter:int,posFrom:int,posTo:int},string>
+ * @throws \InvalidArgumentException
+ * @throws \Exception
+ */
+    static function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): Closure {}
 
         /**
  * Get the contents of a file as serialize.

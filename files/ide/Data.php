@@ -24,6 +24,7 @@ class Data
 
         /**
  * @return \Closure():string[]
+ * @ext mbstring
  */
     static function arabicAlphabetAsClosure() {}
 

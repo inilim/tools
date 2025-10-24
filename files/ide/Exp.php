@@ -15,7 +15,6 @@ class Exp
 
         /**
  * @author inilim
- * @throws \InvalidArgumentException
  */
     static function closeResObjJsonSqlite(object $value): bool {}
 
@@ -200,10 +199,12 @@ class Exp
 
         /**
  * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @see https://sqlite.org/json1.html#the_json_valid_function
  * @author inilim
+ * @param int $flags 1  - is RFC-8259 JSON text | 2  - is JSON5 text | 4  - is probably JSONB | 5  - is RFC-8259 JSON text or JSONB | 6  - is JSON5 text or JSONB ← This is probably the value you want | 8  - is strictly conforming JSONB | 9  - is RFC-8259 or strictly conforming JSONB | 10 - is JSON5 or strictly conforming JSONB
  * @ext PDO pdo_sqlite
  */
-    static function jsonValidateViaSqlite(string $json): bool {}
+    static function jsonValidateViaSqlite(string $json, int $flags = 1): bool {}
 
         /**
  * @author inilim
@@ -246,10 +247,10 @@ class Exp
  * @author inilim
  * Создает временный файл sqlite в котором содержится json из файла $pathToFile, для последующих вызовов связанных функций
  * Значительно экономит ОЗУ, но медленее чем json_decode()
- * @todo add support resource
  * @todo tests
  * @param resource|string $source file or resource
  * @ext PDO pdo_sqlite
+ * @throws \InvalidArgumentException
  */
     static function openJsonViaSqlite($source): ?object {}
 
