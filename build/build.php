@@ -503,6 +503,7 @@ if ($switch || false) {
     foreach ($links as $link) {
         foreach (\glob($link['pathMin'] . '/*.php') as $file) {
             \unlink($file);
+            \clearstatcache(false, $file);
         }
     }
 

@@ -31,12 +31,7 @@ function jsonValidateViaSqlite(string $json): bool
         return true;
     };
 
-    $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
-        $internal,
-        static function ($_, $msg) {
-            \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
-        }
-    );
+    $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
 
     if (!\is_bool($results)) {
         return false;

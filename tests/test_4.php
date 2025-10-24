@@ -27,8 +27,21 @@ __includeDeep([
     // 'Assert\strOrArr',
     // 'Assert\allString',
     // 'Exp\jsonLengthViaSqlite',
-    'Exp\openFileJsonViaSqlite',
+    // 'Exp\openJsonViaSqlite',
+    // 'Other\errorGetLast',
+    // 'Other\timedMsCall',
 ]);
+
+
+$resource = Other::resourceFromString_m3('Привет');
+\fseek($resource, 0, \SEEK_END);
+\fwrite($resource, '!!!');
+\fseek($resource, 0);
+dd(\stream_get_contents($resource));
+if (Other::errorGetLast()) {
+    de(Other::errorGetLast());
+}
+de();
 
 
 
@@ -45,9 +58,11 @@ __includeDeep([
 // $pdo->exec('INSERT INTO _table (_name,_value) VALUES ("json","")');
 
 
-\Inilim\Tool\Method\Exp\openFileJsonViaSqlite('D:\projects\evg\other\afl\main.json');
-
-
+$object = \Inilim\Tool\Method\Exp\openJsonViaSqlite('D:\projects\evg\other\afl\main.json');
+if (\Inilim\Tool\Method\Other\errorGetLast()) {
+    de(\Inilim\Tool\Method\Other\errorGetLast());
+}
+de($object);
 
 // ['result' => $json] = \Inilim\Tool\Method\File\get('D:\projects\evg\other\afl\main.json');
 

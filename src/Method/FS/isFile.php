@@ -9,6 +9,10 @@ namespace Inilim\Tool\Method\FS;
  */
 function isFile(string $filename): bool
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \is_file($filename), null);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function () use ($filename) {
+        $r = \is_file($filename);
+        \clearstatcache(false, $filename);
+        return $r;
+    }, null);
     return $value === null ? false : $value;
 }

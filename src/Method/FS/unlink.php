@@ -10,13 +10,13 @@ namespace Inilim\Tool\Method\FS;
  */
 function unlink(string $filename, $context = null): bool
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function () use ($filename, $context) {
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename, $context) {
         $result = $context ? \unlink($filename, $context) : \unlink($filename);
         if ($result) {
             \clearstatcache(false, $filename);
             return true;
         }
         return false;
-    }, null);
+    });
     return $value === null ? false : $value;
 }

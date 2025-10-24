@@ -29,11 +29,11 @@ function jsonExtractViaSqlite(string $json, $pattern)
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $pdo->exec('CREATE TABLE _table (_value TEXT)');
-        $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
+        $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
+        $stmt = $pdo->prepare('INSERT INTO _table (_name, _value) VALUES ("json", :_value)');
         $stmt->execute(['_value' => $json]);
         unset($json);
-        $sql = 'SELECT json_extract((SELECT _value FROM _table LIMIT 1), %s) as _v';
+        $sql = 'SELECT json_extract((SELECT _value FROM _table WHERE _name = "json"), %s) as _v';
         $list   = [];
         $params = [];
         foreach ($pattern as $idx => $item) {

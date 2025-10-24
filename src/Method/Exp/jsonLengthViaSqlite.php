@@ -22,15 +22,15 @@ function jsonLengthViaSqlite(string $json, ?string $pattern = null): ?int
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $pdo->exec('CREATE TABLE _table (_value TEXT)');
-        $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
+        $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
+        $stmt = $pdo->prepare('INSERT INTO _table (_name,_value) VALUES ("json",:_value)');
         $stmt->execute(['_value' => $json]);
         unset($json);
         if ($pattern) {
-            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table LIMIT 1), :pattern) as _v');
+            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table WHERE _name = "json"), :pattern) as _v');
             $stmt->execute(['pattern' => $pattern]);
         } else {
-            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table LIMIT 1)) as _v');
+            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table WHERE _name = "json")) as _v');
             $stmt->execute();
         }
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);

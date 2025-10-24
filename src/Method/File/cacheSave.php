@@ -54,6 +54,7 @@ function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $thro
                 if (!$status || $unlink) {
                     $obj->step = 'unlink';
                     \unlink($obj->tmp);
+                    \clearstatcache(false, $obj->tmp);
                 }
             },
             // [Handler]
@@ -65,6 +66,7 @@ function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $thro
                     }
                 } elseif (\in_array($obj->step, ['fwrite', 'fclose', 'rename', 'copy'], true)) {
                     @\unlink($obj->tmp);
+                    \clearstatcache(false, $obj->tmp);
                     throw new \ErrorException($message, 0, $type);
                 } else {
                     throw new \ErrorException($message, 0, $type);

@@ -14,6 +14,12 @@ class Exp
     static function arrJoin(array $array, string $separator = '', array $typeAs = []): string {}
 
         /**
+ * @author inilim
+ * @throws \InvalidArgumentException
+ */
+    static function closeResObjJsonSqlite(object $value): bool {}
+
+        /**
  * @todo tests
  * Переводим буквенное представление столбца в числовое
  */
@@ -155,6 +161,15 @@ class Exp
     static function interpolate(string $string, array $map, bool $preserveMissing = true, string $pattern = '/{{\s*(\w+)\s*}}/'): string {}
 
         /**
+ * @author inilim
+ * @psalm-assert-if-true object $value
+ * @phpstan-assert-if-true object $value
+ * проверяет что обьект является ресурсным для методов ***ViaSqlite();
+ * @param mixed $value
+ */
+    static function isResObjJsonSqlite($value): bool {}
+
+        /**
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @see https://sqlite.org/json1.html#jerr
  * @author inilim
@@ -226,6 +241,17 @@ class Exp
  * @return Return_normalizeHeaders
  */
     static function normalizeHeaders(array $headers): array {}
+
+        /**
+ * @author inilim
+ * Создает временный файл sqlite в котором содержится json из файла $pathToFile, для последующих вызовов связанных функций
+ * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * @todo add support resource
+ * @todo tests
+ * @param resource|string $source file or resource
+ * @ext PDO pdo_sqlite
+ */
+    static function openJsonViaSqlite($source): ?object {}
 
         /**
  * @author guzzle/guzzle

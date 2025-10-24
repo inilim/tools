@@ -53,8 +53,8 @@ function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limi
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $pdo->exec('CREATE TABLE _table (_value TEXT)');
-        $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
+        $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
+        $stmt = $pdo->prepare('INSERT INTO _table (_name,_value) VALUES ("json",:_value)');
         $stmt->execute(['_value' => $json]);
         unset($json, $stmt);
         $pdo->sqliteCreateFunction('FN_IT', static function ($key, $value, $type, $fullkey) use (&$limit, $callback, $valueBreak) {

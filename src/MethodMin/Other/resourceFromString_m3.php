@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function resourceFromString_m3(string $string){return \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use($string){$ptf=\sys_get_temp_dir().'/inilim-tools-'.\Inilim\Tool\Method\ID\uuidv4().'.tmp';$stream=\fopen($ptf,'w+');if($stream===false){return false;}if($string!==''){\fwrite($stream,$string);\fseek($stream,0);}return $stream;});}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
+    function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,$message,$file,$line){\Inilim\Tool\Method\Other\__setErrorLast($levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
+    }}namespace Inilim\Tool\Method\ID{if(!\Inilim\Tool\ID::__definedIfNot('uuidFromHex')){
+    function uuidFromHex(string $uhex,int $version):string{return \sprintf('%08s-%04s-%04x-%04x-%12s',\substr($uhex,0,8),\substr($uhex,8,4),\hexdec(\substr($uhex,12,4))&0xfff|$version << 12,\hexdec(\substr($uhex,16,4))&0x3fff|0x8000,\substr($uhex,20,12));}
+    }if(!\Inilim\Tool\ID::__definedIfNot('uuidv4')){
+    function uuidv4():string{return \Inilim\Tool\Method\ID\uuidFromHex(\bin2hex(\random_bytes(16)),4);}
+    }}

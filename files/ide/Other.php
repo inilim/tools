@@ -161,6 +161,12 @@ class Other
     static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array {}
 
         /**
+ * @author Inilim
+ * @param resource $resource
+ */
+    static function getPathFromResource($resource): ?string {}
+
+        /**
  * @param resource $value
  * @return int return -1 if failed
  */
@@ -321,6 +327,30 @@ class Other
  * @param resource $resource
  */
     static function resourceContentWriteToTmpFile($resource): ?string {}
+
+        /**
+ * via php://temp
+ * @author inilim
+ * @todo tests
+ * @return resource|false
+ */
+    static function resourceFromString(string $string) {}
+
+        /**
+ * via tmpfile()
+ * @author inilim
+ * @todo tests
+ * @return resource|false
+ */
+    static function resourceFromString_m2(string $string) {}
+
+        /**
+ * via create file
+ * @author inilim
+ * @todo tests
+ * @return resource|false
+ */
+    static function resourceFromString_m3(string $string) {}
 
         /**
  * @author inilim

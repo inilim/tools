@@ -101,6 +101,7 @@ Dump::init();
 
 foreach (\glob(\DIR_ROOT . '/files/ide/*') as $file) {
     \unlink($file);
+    \clearstatcache(false, $file);
 }
 
 // ------------------------------------------------------------------

@@ -46,6 +46,7 @@ function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false)
                     if (($expiresAt = (int) \fgets($h)) && \time() >= $expiresAt) {
                         \fclose($h);
                         @\unlink($file);
+                        \clearstatcache(false, $file);
                         continue; // return null;
                     }
 

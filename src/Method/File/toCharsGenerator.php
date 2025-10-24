@@ -13,15 +13,8 @@ namespace Inilim\Tool\Method\File;
  */
 function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
 {
-    if (!\is_file($pathToFile)) {
-        throw new \Exception(\sprintf('Not found file: "%s"', $pathToFile));
-    }
-
-    $resource = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
-        static fn() => \fopen($pathToFile, 'r'),
-        null
-    );
-    /** @var resource|false $resource */
+    \Inilim\Tool\Method\Assert\file($pathToFile);
+    $resource = \Inilim\Tool\Method\File\phpfopen($pathToFile, 'r');
 
     if ($resource === false) {
         throw new \Exception(\sprintf('Failed open file: "%s"', $pathToFile));
@@ -29,36 +22,52 @@ function toCharsGenerator(string $pathToFile, int $chunk = 1): \Generator
 
     $iteration = 0;
     while (true) {
-        $posFrom = \ftell($resource); // берем текущую позицию/указатель
-        // ---------------------------------------------
-        // 
-        // ---------------------------------------------
 
-        $chars = \fread($resource, (10 * $chunk));
-        if ($chars === false) {
+        $r = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use (&$iteration, $resource, $chunk) {
+            $posFrom = \ftell($resource); // берем текущую позицию/указатель
+            if ($posFrom === false) {
+                return null;
+            }
+
+            // ---------------------------------------------
+            // 
+            // ---------------------------------------------
+
+            $chars = \fread($resource, (10 * $chunk));
+            if ($chars === false) {
+                return null;
+            }
+            $chars = \mb_substr($chars, 0, $chunk, 'UTF-8'); // из кусочка берем один символ
+            \fseek($resource, ($posFrom + \strlen($chars))); // возвращаемся назад до того символна что взяли
+
+            // ---------------------------------------------
+            // 
+            // ---------------------------------------------
+
+            $posTo = \ftell($resource); // берем текущую позицию/указатель
+            if ($posTo === false) {
+                return null;
+            }
+
+            if ($posFrom === $posTo) {
+                return null;
+            }
+
+            return [[
+                'iter'    => $iteration,
+                'posFrom' => $posFrom,
+                'posTo'   => $posTo,
+            ], $chars];
+        });
+
+        if ($r === null) {
             break;
         }
-        $chars = \mb_substr($chars, 0, $chunk, 'UTF-8'); // из кусочка берем один символ
-        \fseek($resource, ($posFrom + \strlen($chars))); // возвращаемся назад до того символна что взяли
 
-        // ---------------------------------------------
-        // 
-        // ---------------------------------------------
-
-        $posTo = \ftell($resource); // берем текущую позицию/указатель
-
-        if ($posFrom === $posTo) {
-            break;
-        }
-
-        yield [
-            'iter'    => $iteration,
-            'posFrom' => $posFrom,
-            'posTo'   => $posTo,
-        ] => $chars;
+        yield $r[0] => $r[1];
 
         $iteration++;
     }
 
-    \fclose($resource);
+    \Inilim\Tool\Method\File\phpfclose($resource);
 }

@@ -20,16 +20,13 @@ namespace Inilim\Tool\Method\Exp;
 function fileJsonWalkRecursiveViaSqlite($pathToFile, callable $callback, ?int $limit = null, $valueBreak = false, array $types = []): ?string
 {
     if (\is_string($pathToFile)) {
-        $pathToFile = \Inilim\Tool\Method\Exp\openFileJsonViaSqlite($pathToFile);
+        $pathToFile = \Inilim\Tool\Method\Exp\openJsonViaSqlite($pathToFile);
         if ($pathToFile === null) {
             return null;
         }
     } else {
-        $tagHas = \Inilim\Tool\Method\Other\bindAndCall($pathToFile, function () {
-            return ($this->tag ?? '') === \Inilim\Tool\Method\Exp\__tagJsonSqlite();
-        });
-        if (!$tagHas) {
-            throw new \InvalidArgumentException('');
+        if (!\Inilim\Tool\Method\Exp\isResObjJsonSqlite($pathToFile)) {
+            throw new \InvalidArgumentException('The value is not a resource object for a json sqlite file');
         }
     }
     if ($limit !== null) {

@@ -143,6 +143,45 @@ class File
     static function lines_v2(string $pathToFile): Generator {}
 
         /**
+ * Closes an open file pointer
+ * @link https://php.net/manual/en/function.fclose.php
+ * @param resource $stream
+ */
+    static function phpfclose($stream): bool {}
+
+        /**
+ * Opens file or URL
+ * @link https://php.net/manual/en/function.fopen.php
+ * @param resource $stream
+ * @param ?resource $context
+ * @return resource|false
+ */
+    static function phpfopen(string $filename, string $mode, bool $use_include_path = false, $context = null) {}
+
+        /**
+ * Binary-safe file read
+ * @link https://php.net/manual/en/function.fread.php
+ * @param resource $stream
+ * @return string|false
+ */
+    static function phpfread($stream, int $length) {}
+
+        /**
+ * Seeks on a file pointer
+ * @link https://php.net/manual/en/function.fseek.php
+ * @param resource $stream
+ */
+    static function phpfseek($stream, int $offset, int $whence = \SEEK_SET): int {}
+
+        /**
+ * Returns the current position of the file read/write pointer
+ * @link https://php.net/manual/en/function.ftell.php
+ * @param resource $stream
+ * @return int|false
+ */
+    static function phpftell($stream) {}
+
+        /**
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
