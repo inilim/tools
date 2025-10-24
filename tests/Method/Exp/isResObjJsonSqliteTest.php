@@ -30,7 +30,7 @@ class isResObjJsonSqliteTest extends TestCase
         Exp::closeResObjJsonSqlite($object);
     }
 
-    function test2()
+    function testChangeObject()
     {
         $res = \tmpfile();
         \fwrite($res, '{"x":35}');
@@ -51,7 +51,7 @@ class isResObjJsonSqliteTest extends TestCase
         Exp::closeResObjJsonSqlite($object);
     }
 
-    function test3()
+    function testCloseObject()
     {
         $res = \tmpfile();
         \fwrite($res, '{"x":35}');

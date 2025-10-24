@@ -38,9 +38,9 @@ class Other
  * @author Inilim
  * @template T of \Closure
  * @param T $cls
- * @return T
+ * @return ?T
  */
-    static function clearClosure(\Closure $cls) {}
+    static function clearClosure(\Closure $cls): ?Closure {}
 
         /**
  */

@@ -8,9 +8,9 @@ namespace Inilim\Tool\Method\Other;
  * @author Inilim
  * @template T of \Closure
  * @param T $cls
- * @return T
+ * @return ?T
  */
-function clearClosure(\Closure $cls)
+function clearClosure(\Closure $cls): ?\Closure
 {
-    return $cls->bindTo(null, null);
+    return \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn() => $cls->bindTo(null, null));
 }

@@ -89,16 +89,10 @@ function openJsonViaSqlite($source): ?object
             $i++;
         }
         $obj->pdo->exec('BEGIN TRANSACTION;' .
-            'UPDATE _table
-                SET _value = (
-                    SELECT group_concat(_value, "")
-                    FROM _table
-                    WHERE _name != "json"
-                    ORDER BY _name ASC
-                )
-                WHERE _name = "json";' .
-            'DELETE FROM _table
-                WHERE _name != "json";' .
+            'UPDATE _table SET _value = (' .
+            'SELECT group_concat(_value, "") FROM _table WHERE _name != "json" ORDER BY _name ASC' .
+            ') WHERE _name = "json";' .
+            'DELETE FROM _table WHERE _name != "json";' .
             'COMMIT;');
 
         unset($gen, $i, $text);
