@@ -29,10 +29,49 @@ __includeDeep([
     // 'Assert\allString',
     // 'Exp\jsonLengthViaSqlite',
     // 'Exp\openJsonViaSqlite',
-    // 'Other\errorGetLast',
+    'Other\errorGetLast',
     // 'Other\timedMsCall',
-    'File\toCharsGenerator',
+    // 'File\toCharsGenerator',
+    'File\toCharsGenerator_v2',
 ]);
+
+
+$substr = "a\nбв\nгд";
+$substr = \substr($substr, 0, 10);
+
+$r = \preg_match(\sprintf('/.{%s}/su', 1), $substr, $match);
+
+dd(error_get_last());
+de($match);
+
+$res = \tmpfile();
+\fwrite($res, "a\nбв\nгд");
+$ptf = \stream_get_meta_data($res)['uri'];
+
+$callback = \Inilim\Tool\Method\File\toCharsGenerator_v2($ptf);
+foreach ($callback() as $key => $value) {
+    dd([
+        '$key' => $key,
+        '$value' => $value,
+    ]);
+}
+if (\Inilim\Tool\Method\Other\errorGetLast()) {
+    de(\Inilim\Tool\Method\Other\errorGetLast());
+}
+
+de(1323);
+
+$a = "a\nбв\nгд";
+
+$chunk = 1;
+$substr = \substr($a, 2, 10);
+$substr = \preg_match(\sprintf('/.{%s}/us', $chunk), $substr, $match);
+dd($match);
+$substr = $match[0];
+
+dde($substr);
+
+de();
 
 
 $object = \Inilim\Tool\Method\Exp\openJsonViaSqlite('D:\projects\evg\other\afl\main.json');

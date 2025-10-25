@@ -11,6 +11,9 @@ namespace Inilim\Tool\Method\FS;
  */
 function stat(string $filename): ?array
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \stat($filename), null);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename) {
+        \clearstatcache(false, $filename);
+        return \stat($filename);
+    });
     return \is_bool($value) ? null : $value;
 }

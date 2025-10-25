@@ -4,16 +4,18 @@ namespace Inilim\Tool\Test\Method\File;
 
 use Inilim\Tool\File;
 use Inilim\Tool\Test\TestCase;
+use Symfony\Component\Finder\Finder;
 
 class toCharsGenerator_v2Test extends TestCase
 {
     function test()
     {
+        // по дефолтному чанку
         $res = \tmpfile();
         \fwrite($res, 'abcd_абв');
         $ptf = \stream_get_meta_data($res)['uri'];
 
-        $callback = File::toCharsGenerator_v2($ptf, 1);
+        $callback = File::toCharsGenerator_v2($ptf);
         $this->assertInstanceOf(\Closure::class, $callback);
         $this->assertInstanceOf(\Generator::class, $callback());
 
@@ -102,6 +104,7 @@ class toCharsGenerator_v2Test extends TestCase
 
     function test1()
     {
+        // пару символов
         $res = \tmpfile();
         \fwrite($res, 'abcd_абв');
         $ptf = \stream_get_meta_data($res)['uri'];
@@ -155,11 +158,112 @@ class toCharsGenerator_v2Test extends TestCase
         $this->assertTrue(empty($array));
     }
 
+    function test2()
+    {
+        // проверка текста с переносом строки
+        $res = \tmpfile();
+        \fwrite($res, "a\nа");
+        $ptf = \stream_get_meta_data($res)['uri'];
+
+        $callback = File::toCharsGenerator_v2($ptf);
+
+        $array = [];
+        foreach ($callback() as $info => $text) {
+            $array[] = [$info, $text];
+        }
+
+        \fclose($res);
+        @\unlink($ptf);
+
+        foreach ($array as $idx => [$info, $text]) {
+            $this->assertSame(0, $info['iter']);
+            $this->assertSame(0, $info['posFrom']);
+            $this->assertSame(1, $info['posTo']);
+            $this->assertSame('a', $text);
+            unset($array[$idx]);
+            break;
+        }
+
+        foreach ($array as $idx => [$info, $text]) {
+            $this->assertSame(1, $info['iter']);
+            $this->assertSame(1, $info['posFrom']);
+            $this->assertSame(2, $info['posTo']);
+            $this->assertSame("\n", $text);
+            unset($array[$idx]);
+            break;
+        }
+
+        foreach ($array as $idx => [$info, $text]) {
+            $this->assertSame(2, $info['iter']);
+            $this->assertSame(2, $info['posFrom']);
+            $this->assertSame(4, $info['posTo']);
+            $this->assertSame('а', $text);
+            unset($array[$idx]);
+            break;
+        }
+
+        $this->assertTrue(empty($array));
+    }
+
+    function testRealFile()
+    {
+        $finder = (new Finder)->in(\dirname(__DIR__, 2) . '/files')->files();
+
+        foreach ($finder as $ptf => $_) {
+            $contentHash = \md5_file($ptf);
+            $callback = File::toCharsGenerator_v2($ptf, 11);
+
+            $txtHash = '';
+            foreach ($callback() as $substr) {
+                $txtHash .= $substr;
+            }
+            $txtHash = \md5($txtHash);
+            $this->assertSame($contentHash, $txtHash);
+        }
+    }
+
+    function testRealFile2()
+    {
+        $finder = (new Finder)->in(\dirname(__DIR__, 2) . '/files')->files();
+
+        foreach ($finder as $ptf => $_) {
+            $contentHash = \md5_file($ptf);
+            $callback = File::toCharsGenerator_v2($ptf, 22);
+
+            $txtHash = '';
+            foreach ($callback() as $substr) {
+                $txtHash .= $substr;
+            }
+            $txtHash = \md5($txtHash);
+            $this->assertSame($contentHash, $txtHash);
+        }
+    }
+
+    function testBrokenString()
+    {
+        // если в строке встречаются разорванная суррогатная пара
+        $brokenString = \substr('бвгд', 0, 3);
+        $res = \tmpfile();
+        \fwrite($res, $brokenString);
+        $ptf = \stream_get_meta_data($res)['uri'];
+        $callback = File::toCharsGenerator_v2($ptf);
+
+        $txt = '';
+        foreach ($callback() as $substr) {
+            $txt .= $substr;
+        }
+
+        \fclose($res);
+        @\unlink($ptf);
+
+        $this->assertSame($brokenString, $txt);
+    }
+
     function testEmpty()
     {
         $res = \tmpfile();
         $ptf = \stream_get_meta_data($res)['uri'];
-        $callback = File::toCharsGenerator_v2($ptf, 1);
+        $callback = File::toCharsGenerator_v2($ptf);
 
         $array = [];
         foreach ($callback() as $text) {

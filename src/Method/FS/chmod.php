@@ -14,5 +14,5 @@ function chmod(string $path, ?int $mode = null)
         return \chmod($path, $mode);
     }
 
-    return \substr(\sprintf('%o', \fileperms($path)), -4);
+    return \substr(\sprintf('%o', \Inilim\Tool\Method\FS\filePerms($path)), -4);
 }

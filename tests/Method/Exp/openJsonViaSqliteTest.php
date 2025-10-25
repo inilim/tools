@@ -5,6 +5,7 @@ namespace Inilim\Tool\Test\Method\Exp;
 use Inilim\Tool\FS;
 use Inilim\Tool\Exp;
 use Inilim\Tool\Other;
+use org\bovigo\vfs\vfsStream;
 use Inilim\Tool\Test\TestCase;
 
 /**
@@ -73,6 +74,7 @@ class openJsonViaSqliteTest extends TestCase
 
     function testResourceValidJson()
     {
+
         $res = \tmpfile();
         \fwrite($res, '{"x":35}');
         $ptf = \stream_get_meta_data($res)['uri'];

@@ -1,5 +1,11 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\FS;
-
-function exists(string $path):bool{return \file_exists($path);}
+declare(strict_types=1);namespace Inilim\Tool\Method\FS{function exists(string $filename):bool{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use($filename){\clearstatcache(false,$filename);return \file_exists($filename);});return \is_bool($value)?$value:false;}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
+    function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,$message,$file,$line){\Inilim\Tool\Method\Other\__setErrorLast($levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
+    }}

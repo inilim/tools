@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\File;
 
 /**
- * @todo rename
+ * @todo rename / убрать зависимость mbstring
  * @ext mbstring
  * @author Inilim
  * @return \Closure():\Generator<array{iter:int,posFrom:int,posTo:int},string>
@@ -37,12 +37,23 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
             // 
             // ---------------------------------------------
 
-            $chars = \fread($resource, (10 * $chunk));
-            if ($chars === false) {
+            // INFO берем с запасом, из-за многобайтовых символов
+            $substr = \fread($resource, (10 * $chunk));
+            if ($substr === false) {
                 return null;
             }
-            $chars = \mb_substr($chars, 0, $chunk, 'UTF-8'); // из кусочка берем один символ
-            \fseek($resource, ($posFrom + \strlen($chars))); // возвращаемся назад до того символна что взяли
+            // 
+            // INFO модификатор s - singleline/dotall, точка по умолчанию игнорирует переносы строк, модификатор это исправляет
+            // INFO если в строке будут разрывные символы "суррогаты" то regex выдаст ошибку
+            // $status = \preg_match(\sprintf('/.{%s}/su', $chunk), $substr, $match); // из кусочка берем чанк символов
+            // if ($status === false) {
+            //     return null;
+            // }
+            // $substr = $match[0];
+            //
+            $substr = \mb_substr($substr, 0, $chunk, 'UTF-8'); // из кусочка берем чанк символов
+            // 
+            \fseek($resource, ($posFrom + \strlen($substr))); // возвращаемся назад до того символна что взяли
 
             // ---------------------------------------------
             // 
@@ -53,6 +64,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
                 return null;
             }
 
+            // feof
             if ($posFrom === $posTo) {
                 return null;
             }
@@ -61,7 +73,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
                 'iter'    => $i,
                 'posFrom' => $posFrom,
                 'posTo'   => $posTo,
-            ], $chars];
+            ], $substr];
         };
 
         while (true) {

@@ -22,12 +22,13 @@ class FS
     static function ensureDirExists(string $path, bool $throw = false, int $mode = 0755, bool $recursive = true, $context = null, ?array $contextParams = null): array {}
 
         /**
- * Determine if a file or directory exists.
+ * @link https://php.net/manual/en/function.file-exists.php
  */
-    static function exists(string $path): bool {}
+    static function exists(string $filename): bool {}
 
         /**
  * @author inilim
+ * @deprecated use exists()
  */
     static function fileExists(string $filename): bool {}
 

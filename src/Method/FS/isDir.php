@@ -9,10 +9,9 @@ namespace Inilim\Tool\Method\FS;
  */
 function isDir(string $filename): bool
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function () use ($filename) {
-        $r = \is_dir($filename);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename) {
         \clearstatcache(false, $filename);
-        return $r;
-    }, null);
+        return \is_dir($filename);
+    });
     return $value === null ? false : $value;
 }

@@ -231,7 +231,7 @@ class File
     static function toCharsGenerator(string $pathToFile, int $chunk = 1): Generator {}
 
         /**
- * @todo rename
+ * @todo rename / убрать зависимость mbstring
  * @ext mbstring
  * @author Inilim
  * @return \Closure():\Generator<array{iter:int,posFrom:int,posTo:int},string>

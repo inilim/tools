@@ -9,7 +9,10 @@ namespace Inilim\Tool\Method\FS;
  */
 function filePerms(string $filename): ?int
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \fileperms($filename), null);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename) {
+        \clearstatcache(false, $filename);
+        return \fileperms($filename);
+    });
     /** @var int|false $value */
     return $value === false ? null : $value;
 }

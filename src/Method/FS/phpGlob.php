@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\FS;
  */
 function phpGlob(string $pattern, int $flags = 0): ?array
 {
-    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \glob($pattern, $flags), null);
+    $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn() => \glob($pattern, $flags));
     /** @var array|false $value */
     return $value === false ? null : $value;
 }
