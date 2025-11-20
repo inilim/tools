@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\PF;
 
 /**
- * @template T of mixed
- * @param T[] $array
- * @return ?T
+ * @template T
+ * @param array<T> $array
+ * @return (
+ *      $array is array{} ? null :
+ *      $array is non-empty-array ? T :
+ *      ?T
+ * )
  */
 function array_last(array $array)
 {

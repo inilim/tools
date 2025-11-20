@@ -29,9 +29,13 @@ class PF
     static function array_find_key(array $array, callable $callback) {}
 
         /**
- * @template T of mixed
- * @param T[] $array
- * @return ?T
+ * @template T
+ * @param array<T> $array
+ * @return (
+ *      $array is array{} ? null :
+ *      $array is non-empty-array ? T :
+ *      ?T
+ * )
  */
     static function array_first(array $array) {}
 
@@ -39,9 +43,13 @@ class PF
     static function array_is_list(array $array): bool {}
 
         /**
- * @template T of mixed
- * @param T[] $array
- * @return ?T
+ * @template T
+ * @param array<T> $array
+ * @return (
+ *      $array is array{} ? null :
+ *      $array is non-empty-array ? T :
+ *      ?T
+ * )
  */
     static function array_last(array $array) {}
 
