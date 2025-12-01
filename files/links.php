@@ -211,4 +211,12 @@ return [
         'pathMin'   => $root . '/src/MethodMin/LarStr',
         'pathToClass' => $root . '/src/LarStr.php',
     ],
+    [
+        'method' => 'Inilim\Tool\Method\LarExp',
+        'tool'   => $class = \Inilim\Tool\LarExp::class,
+        'nameClass'   => \basename($class),
+        'path'   => $root . '/src/Method/LarExp',
+        'pathMin'   => $root . '/src/MethodMin/LarExp',
+        'pathToClass' => $root . '/src/LarExp.php',
+    ],
 ];

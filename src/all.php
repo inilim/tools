@@ -188,3 +188,7 @@ final class LarStr extends LazyMethodAbstract
 {
     protected const NAME = 'LarStr', IDX = 25;
 }
+final class LarExp extends LazyMethodAbstract
+{
+    protected const NAME = 'LarExp', IDX = 26;
+}

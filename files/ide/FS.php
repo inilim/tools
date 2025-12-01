@@ -68,6 +68,13 @@ class FS
     static function kbToBytes(int $kb): int {}
 
         /**
+ * Gets file modification time | filemtime()
+ * @author inilim
+ * @link https://php.net/manual/en/function.filemtime.php
+ */
+    static function mTime(string $filename): int {}
+
+        /**
  * Create a directory.
  * @todo tests
  * @author Inilim
