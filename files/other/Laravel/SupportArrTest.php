@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\ItemNotFoundException;
 use Illuminate\Support\MultipleItemsFoundException;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use WeakMap;
@@ -18,6 +19,43 @@ include_once 'Enums.php';
 
 class SupportArrTest extends TestCase
 {
+    public function testAccessible(): void
+    {
+        $this->assertTrue(Arr::accessible([]));
+        $this->assertTrue(Arr::accessible([1, 2]));
+        $this->assertTrue(Arr::accessible(['a' => 1, 'b' => 2]));
+        $this->assertTrue(Arr::accessible(new Collection));
+
+        $this->assertFalse(Arr::accessible(null));
+        $this->assertFalse(Arr::accessible('abc'));
+        $this->assertFalse(Arr::accessible(new stdClass));
+        $this->assertFalse(Arr::accessible((object) ['a' => 1, 'b' => 2]));
+        $this->assertFalse(Arr::accessible(123));
+        $this->assertFalse(Arr::accessible(12.34));
+        $this->assertFalse(Arr::accessible(true));
+        $this->assertFalse(Arr::accessible(new \DateTime));
+        $this->assertFalse(Arr::accessible(static fn() => null));
+    }
+
+    public function testArrayable(): void
+    {
+        $this->assertTrue(Arr::arrayable([]));
+        $this->assertTrue(Arr::arrayable(new TestArrayableObject));
+        $this->assertTrue(Arr::arrayable(new TestJsonableObject));
+        $this->assertTrue(Arr::arrayable(new TestJsonSerializeObject));
+        $this->assertTrue(Arr::arrayable(new TestTraversableAndJsonSerializableObject));
+
+        $this->assertFalse(Arr::arrayable(null));
+        $this->assertFalse(Arr::arrayable('abc'));
+        $this->assertFalse(Arr::arrayable(new stdClass));
+        $this->assertFalse(Arr::arrayable((object) ['a' => 1, 'b' => 2]));
+        $this->assertFalse(Arr::arrayable(123));
+        $this->assertFalse(Arr::arrayable(12.34));
+        $this->assertFalse(Arr::arrayable(true));
+        $this->assertFalse(Arr::arrayable(new \DateTime));
+        $this->assertFalse(Arr::arrayable(static fn() => null));
+    }
+
     public function testAdd()
     {
         $array = Arr::add(['name' => 'Desk'], 'price', 100);
@@ -135,6 +173,7 @@ class SupportArrTest extends TestCase
         $this->assertSame([[]], Arr::crossJoin());
     }
 
+    #[IgnoreDeprecations]
     public function testDivide(): void
     {
         // Test dividing an empty array
@@ -168,6 +207,11 @@ class SupportArrTest extends TestCase
         $this->assertEquals([['one' => 1, 2 => 'second'], 'one'], $values);
 
         // Test dividing an array where the values are arrays
+        [$keys, $values] = Arr::divide(['' => ['one' => 1, 2 => 'second'], 1 => 'one']);
+        $this->assertEquals([null, 1], $keys);
+        $this->assertEquals([['one' => 1, 2 => 'second'], 'one'], $values);
+
+        // Test dividing an array where the values are arrays (with null key)
         [$keys, $values] = Arr::divide([null => ['one' => 1, 2 => 'second'], 1 => 'one']);
         $this->assertEquals([null, 1], $keys);
         $this->assertEquals([['one' => 1, 2 => 'second'], 'one'], $values);
@@ -338,6 +382,15 @@ class SupportArrTest extends TestCase
             }
         })();
         $this->assertNull(Arr::first($cursor));
+    }
+
+    public function testFirstWorksWithArrayObject()
+    {
+        $arrayObject = new ArrayObject([0, 10, 20]);
+
+        $result = Arr::first($arrayObject, fn($value) => $value === 0);
+
+        $this->assertSame(0, $result);
     }
 
     public function testJoin()
@@ -1019,6 +1072,7 @@ class SupportArrTest extends TestCase
         $this->assertEquals(['1-a-0', '2-b-1'], $result);
     }
 
+    #[IgnoreDeprecations]
     public function testPrepend()
     {
         $array = Arr::prepend(['one', 'two', 'three', 'four'], 'zero');
@@ -1026,6 +1080,9 @@ class SupportArrTest extends TestCase
 
         $array = Arr::prepend(['one' => 1, 'two' => 2], 0, 'zero');
         $this->assertEquals(['zero' => 0, 'one' => 1, 'two' => 2], $array);
+
+        $array = Arr::prepend(['one' => 1, 'two' => 2], 0, '');
+        $this->assertEquals(['' => 0, 'one' => 1, 'two' => 2], $array);
 
         $array = Arr::prepend(['one' => 1, 'two' => 2], 0, null);
         $this->assertEquals([null => 0, 'one' => 1, 'two' => 2], $array);
@@ -1044,6 +1101,18 @@ class SupportArrTest extends TestCase
 
         $array = Arr::prepend(['one', 'two'], ['zero'], 'key');
         $this->assertEquals(['key' => ['zero'], 'one', 'two'], $array);
+
+        $array = Arr::prepend(['one', 'two'], ['zero'], '');
+        $this->assertEquals(['one', 'two', '' => ['zero']], $array);
+
+        $array = Arr::prepend(['one', 'two', '' => 'three'], ['zero'], '');
+        $this->assertEquals(['one', 'two', '' => ['zero']], $array);
+
+        $array = Arr::prepend(['one', 'two'], ['zero'], null);
+        $this->assertEquals(['one', 'two', null => ['zero']], $array);
+
+        $array = Arr::prepend(['one', 'two', '' => 'three'], ['zero'], null);
+        $this->assertEquals(['one', 'two', null => ['zero']], $array);
     }
 
     public function testPull()
@@ -1494,6 +1563,114 @@ class SupportArrTest extends TestCase
         });
 
         $this->assertEquals(['10' => 1, 20 => 2], $array);
+    }
+
+    public function testForget()
+    {
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        Arr::forget($array, null);
+        $this->assertEquals(['products' => ['desk' => ['price' => 100]]], $array);
+
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        Arr::forget($array, []);
+        $this->assertEquals(['products' => ['desk' => ['price' => 100]]], $array);
+
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        Arr::forget($array, 'products.desk');
+        $this->assertEquals(['products' => []], $array);
+
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        Arr::forget($array, 'products.desk.price');
+        $this->assertEquals(['products' => ['desk' => []]], $array);
+
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        Arr::forget($array, 'products.final.price');
+        $this->assertEquals(['products' => ['desk' => ['price' => 100]]], $array);
+
+        $array = ['shop' => ['cart' => [150 => 0]]];
+        Arr::forget($array, 'shop.final.cart');
+        $this->assertEquals(['shop' => ['cart' => [150 => 0]]], $array);
+
+        $array = ['products' => ['desk' => ['price' => ['original' => 50, 'taxes' => 60]]]];
+        Arr::forget($array, 'products.desk.price.taxes');
+        $this->assertEquals(['products' => ['desk' => ['price' => ['original' => 50]]]], $array);
+
+        $array = ['products' => ['desk' => ['price' => ['original' => 50, 'taxes' => 60]]]];
+        Arr::forget($array, 'products.desk.final.taxes');
+        $this->assertEquals(['products' => ['desk' => ['price' => ['original' => 50, 'taxes' => 60]]]], $array);
+
+        $array = ['products' => ['desk' => ['price' => 50], '' => 'something']];
+        Arr::forget($array, ['products.amount.all', 'products.desk.price']);
+        $this->assertEquals(['products' => ['desk' => [], '' => 'something']], $array);
+
+        // Only works on first level keys
+        $array = ['joe@example.com' => 'Joe', 'jane@example.com' => 'Jane'];
+        Arr::forget($array, 'joe@example.com');
+        $this->assertEquals(['jane@example.com' => 'Jane'], $array);
+
+        // Does not work for nested keys
+        $array = ['emails' => ['joe@example.com' => ['name' => 'Joe'], 'jane@localhost' => ['name' => 'Jane']]];
+        Arr::forget($array, ['emails.joe@example.com', 'emails.jane@localhost']);
+        $this->assertEquals(['emails' => ['joe@example.com' => ['name' => 'Joe']]], $array);
+
+        $array = ['name' => 'hAz', '1' => 'test', 2 => 'bAz'];
+        Arr::forget($array, 1);
+        $this->assertEquals(['name' => 'hAz', 2 => 'bAz'], $array);
+
+        $array = [2 => [1 => 'products', 3 => 'users']];
+        Arr::forget($array, 2.3);
+        $this->assertEquals([2 => [1 => 'products']], $array);
+    }
+
+    public function testFrom()
+    {
+        $this->assertSame(['foo' => 'bar'], Arr::from(['foo' => 'bar']));
+        $this->assertSame(['foo' => 'bar'], Arr::from((object) ['foo' => 'bar']));
+        $this->assertSame(['foo' => 'bar'], Arr::from(new TestArrayableObject));
+        $this->assertSame(['foo' => 'bar'], Arr::from(new TestJsonableObject));
+        $this->assertSame(['foo' => 'bar'], Arr::from(new TestJsonSerializeObject));
+        $this->assertSame(['foo'], Arr::from(new TestJsonSerializeWithScalarValueObject));
+
+        $this->assertSame(['name' => 'A'], Arr::from(TestEnum::A));
+        $this->assertSame(['name' => 'A', 'value' => 1], Arr::from(TestBackedEnum::A));
+        $this->assertSame(['name' => 'A', 'value' => 'A'], Arr::from(TestStringBackedEnum::A));
+
+        $subject = [new stdClass, new stdClass];
+        $items = new TestTraversableAndJsonSerializableObject($subject);
+        $this->assertSame($subject, Arr::from($items));
+
+        $items = new WeakMap;
+        $items[$temp = new class {}] = 'bar';
+        $this->assertSame(['bar'], Arr::from($items));
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Items cannot be represented by a scalar value.');
+        Arr::from(123);
+    }
+
+    public function testWrap()
+    {
+        $string = 'a';
+        $array = ['a'];
+        $object = new stdClass;
+        $object->value = 'a';
+        $this->assertEquals(['a'], Arr::wrap($string));
+        $this->assertEquals($array, Arr::wrap($array));
+        $this->assertEquals([$object], Arr::wrap($object));
+        $this->assertEquals([], Arr::wrap(null));
+        $this->assertEquals([null], Arr::wrap([null]));
+        $this->assertEquals([null, null], Arr::wrap([null, null]));
+        $this->assertEquals([''], Arr::wrap(''));
+        $this->assertEquals([''], Arr::wrap(['']));
+        $this->assertEquals([false], Arr::wrap(false));
+        $this->assertEquals([false], Arr::wrap([false]));
+        $this->assertEquals([0], Arr::wrap(0));
+
+        $obj = new stdClass;
+        $obj->value = 'a';
+        $obj = unserialize(serialize($obj));
+        $this->assertEquals([$obj], Arr::wrap($obj));
+        $this->assertSame($obj, Arr::wrap($obj)[0]);
     }
 
     public function testSortByMany()
