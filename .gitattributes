@@ -20,3 +20,5 @@
 /phpunit.xml            export-ignore
 /phpstan.neon           export-ignore
 /README.md              export-ignore
+/.cursorignore          export-ignore
+/.agentignore          export-ignore
