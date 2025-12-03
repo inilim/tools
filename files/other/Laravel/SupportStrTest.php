@@ -563,6 +563,17 @@ class SupportStrTest extends TestCase
         $this->assertEquals('foo-bar-baz', Str::wrap('-bar-', 'foo', 'baz'));
     }
 
+    public function testWrapEdgeCases()
+    {
+        $this->assertSame('[]mid[]', Str::wrap('mid', '[]'));
+        $this->assertSame('(mid', Str::wrap('mid', '(', ''));
+        $this->assertSame('<mid<', Str::wrap('mid', '<'));
+        $this->assertSame('value', Str::wrap('value', ''));
+        $this->assertSame('[][]', Str::wrap('', '[]'));
+        $this->assertSame('«値»', Str::wrap('値', '«', '»'));
+        $this->assertSame('🧪X🧪', Str::wrap('X', '🧪'));
+    }
+
     public function testUnwrap()
     {
         $this->assertEquals('value', Str::unwrap('"value"', '"'));
@@ -986,13 +997,13 @@ class SupportStrTest extends TestCase
         $this->assertSame('foo bar', Str::trim(' foo bar ', ' '));
         $this->assertSame('foo  bar', Str::trim('-foo  bar_', '-_'));
 
-        $this->assertSame('foo    bar', Str::trim(' foo    bar '));
+        $this->assertSame('foo    bar', Str::trim(' foo    bar '));
 
-        $this->assertSame('123', Str::trim('   123    '));
+        $this->assertSame('123', Str::trim('   123    '));
         $this->assertSame('だ', Str::trim('だ'));
         $this->assertSame('ム', Str::trim('ム'));
-        $this->assertSame('だ', Str::trim('   だ    '));
-        $this->assertSame('ム', Str::trim('   ム    '));
+        $this->assertSame('だ', Str::trim('   だ    '));
+        $this->assertSame('ム', Str::trim('   ム    '));
 
         $this->assertSame(
             'foo bar',
@@ -1024,13 +1035,13 @@ class SupportStrTest extends TestCase
 
     public function testLtrim()
     {
-        $this->assertSame('foo    bar ', Str::ltrim(' foo    bar '));
+        $this->assertSame('foo    bar ', Str::ltrim(' foo    bar '));
 
-        $this->assertSame('123    ', Str::ltrim('   123    '));
+        $this->assertSame('123    ', Str::ltrim('   123    '));
         $this->assertSame('だ', Str::ltrim('だ'));
         $this->assertSame('ム', Str::ltrim('ム'));
-        $this->assertSame('だ    ', Str::ltrim('   だ    '));
-        $this->assertSame('ム    ', Str::ltrim('   ム    '));
+        $this->assertSame('だ    ', Str::ltrim('   だ    '));
+        $this->assertSame('ム    ', Str::ltrim('   ム    '));
 
         $this->assertSame(
             'foo bar
@@ -1054,13 +1065,13 @@ class SupportStrTest extends TestCase
 
     public function testRtrim()
     {
-        $this->assertSame(' foo    bar', Str::rtrim(' foo    bar '));
+        $this->assertSame(' foo    bar', Str::rtrim(' foo    bar '));
 
-        $this->assertSame('   123', Str::rtrim('   123    '));
+        $this->assertSame('   123', Str::rtrim('   123    '));
         $this->assertSame('だ', Str::rtrim('だ'));
         $this->assertSame('ム', Str::rtrim('ム'));
-        $this->assertSame('   だ', Str::rtrim('   だ    '));
-        $this->assertSame('   ム', Str::rtrim('   ム    '));
+        $this->assertSame('   だ', Str::rtrim('   だ    '));
+        $this->assertSame('   ム', Str::rtrim('   ム    '));
 
         $this->assertSame(
             '
@@ -1092,12 +1103,12 @@ class SupportStrTest extends TestCase
             php
             framework
         '));
-        $this->assertSame('laravel php framework', Str::squish('   laravel   php   framework   '));
-        $this->assertSame('123', Str::squish('   123    '));
+        $this->assertSame('laravel php framework', Str::squish('   laravel   php   framework   '));
+        $this->assertSame('123', Str::squish('   123    '));
         $this->assertSame('だ', Str::squish('だ'));
         $this->assertSame('ム', Str::squish('ム'));
-        $this->assertSame('だ', Str::squish('   だ    '));
-        $this->assertSame('ム', Str::squish('   ム    '));
+        $this->assertSame('だ', Str::squish('   だ    '));
+        $this->assertSame('ム', Str::squish('   ム    '));
         $this->assertSame('laravel php framework', Str::squish('laravelㅤㅤㅤphpㅤframework'));
         $this->assertSame('laravel php framework', Str::squish('laravelᅠᅠᅠᅠᅠᅠᅠᅠᅠᅠphpᅠᅠframework'));
     }
@@ -1267,6 +1278,12 @@ class SupportStrTest extends TestCase
         $this->assertSame('Laravel – The PHP Framework for Web Artisans', Str::substrReplace('Laravel Framework', '– The PHP Framework for Web Artisans', 8));
     }
 
+    public function testSubstrReplaceWithMultibyte()
+    {
+        $this->assertSame('kengä', Str::substrReplace('kenkä', 'ng', -3, 2));
+        $this->assertSame('kenga', Str::substrReplace('kenka', 'ng', -3, 2));
+    }
+
     public function testTake()
     {
         $this->assertSame('ab', Str::take('abcdef', 2));
@@ -1292,6 +1309,16 @@ class SupportStrTest extends TestCase
         $this->assertSame('Laravel framework', Str::ucfirst('laravel framework'));
         $this->assertSame('Мама', Str::ucfirst('мама'));
         $this->assertSame('Мама мыла раму', Str::ucfirst('мама мыла раму'));
+    }
+
+    public function testUcwords()
+    {
+        $this->assertSame('Laravel', Str::ucwords('laravel'));
+        $this->assertSame('Laravel Framework', Str::ucwords('laravel framework'));
+        $this->assertSame('Laravel-Framework', Str::ucwords('laravel-framework', '-'));
+        $this->assertSame('Мама', Str::ucwords('мама'));
+        $this->assertSame('Мама Мыла Раму', Str::ucwords('мама мыла раму'));
+        $this->assertSame('JJ Watt', Str::ucwords('JJ watt'));
     }
 
     public function testUcsplit()
@@ -1877,8 +1904,16 @@ class SupportStrTest extends TestCase
     public function testPlural(): void
     {
         $this->assertSame('Laracon', Str::plural('Laracon', 1));
+        $this->assertSame('Laracon', Str::plural('Laracon', [2025]));
+
         $this->assertSame('Laracons', Str::plural('Laracon', 3));
+        $this->assertSame('Laracons', Str::plural('Laracon', [2024, 2025]));
+
+        $this->assertSame('1 Laracon', Str::plural('Laracon', 1, prependCount: true));
+        $this->assertSame('1 Laracon', Str::plural('Laracon', [2025], prependCount: true));
+
         $this->assertSame('1,000 Laracons', Str::plural('Laracon', 1000, prependCount: true));
+        $this->assertSame('2 Laracons', Str::plural('Laracon', [2024, 2025], prependCount: true));
     }
 
     public function testPluralPascal(): void
