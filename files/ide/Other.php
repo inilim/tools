@@ -35,6 +35,12 @@ class Other
     static function bindAndCall(object $object, \Closure $callback, ...$args) {}
 
         /**
+ * @author inilim
+ * @param class-string $class
+ */
+    static function classPhp(string $class, bool $rechecking = false, bool $autoload = true): bool {}
+
+        /**
  * @author Inilim
  * @template T of \Closure
  * @param T $cls
@@ -364,6 +370,12 @@ class Other
  * @todo tests
  */
     static function sqliteLibVersion_m2(bool $fresh = false): ?string {}
+
+        /**
+ * @author https://github.com/kylekatarnls
+ * @todo tests
+ */
+    static function throwValueErrorIfAvailable($message = '', $code = 0, \Throwable $previous = null): void {}
 
         /**
  * @author inilim
