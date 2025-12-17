@@ -121,6 +121,12 @@ class TypeObj {}
  * ----- findFromJsonViaSqlite
  * @psalm-type Return_findFromJsonViaSqlite = array{key:string|int,value:string|int|float|null,type:'object'|'array'|'bool'|'int'|'string'|'float'|'null',fullkey:string}
  * 
+ * 
+ * 
+ * ----- tokenCalculator
+ * @psalm-type Return_tokenCalculator = array{tokens:int[],count:int}
+ * 
+ * 
  */
 class TypeExp {}
 

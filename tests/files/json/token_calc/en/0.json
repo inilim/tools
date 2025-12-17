@@ -1,0 +1,350 @@
+[
+    {
+        "text": "Maecenas lobortis imperdiet lacus nec ultricies. Pellentesque ullamcorper condimentum ex vitae vulputate. Vestibulum ac dui ultricies, feugiat ipsum sit amet, sagittis urna. Proin eu nisi congue, blandit justo id, ultrices mi. Nunc euismod velit eget arcu lacinia facilisis. Morbi sed odio et est venenatis rutrum. Nam sed ligula eleifend, sagittis enim mattis, sodales ante. Vestibulum non luctus quam. Curabitur ac aliquet tortor, vel egestas diam. Vestibulum dapibus, eros non interdum imperdiet, ligula nunc imperdiet augue, id porttitor erat augue et magna. Mauris non diam massa. Proin sodales commodo lorem ac consectetur. Etiam ullamcorper nunc rutrum ex feugiat, nec consequat quam gravida. Suspendisse finibus massa in mi ultricies venenatis. Nullam viverra cursus lacinia.",
+        "tokens": [
+            30635, 762, 28043, 41253, 371, 285, 17190, 94942, 44979, 355, 19591,
+            37232, 45439, 13, 89008, 21938, 593, 78108, 6133, 716, 9955, 3904,
+            372, 506, 64220, 11981, 631, 349, 13, 56988, 581, 16903, 1645, 294,
+            2005, 37232, 45439, 11, 1172, 773, 10574, 27439, 2503, 28311, 11,
+            30811, 1468, 285, 66967, 64, 13, 1322, 258, 15925, 69252, 390,
+            38768, 11, 50531, 275, 82943, 887, 11, 37232, 1238, 9686, 13, 452,
+            1371, 15925, 2191, 347, 72648, 70763, 15952, 84, 326, 40488, 689,
+            58424, 9667, 13, 8613, 8385, 11163, 87834, 1880, 1826, 11457, 268,
+            3689, 55719, 10952, 13, 31074, 11163, 29413, 5724, 10732, 333, 408,
+            11, 30811, 1468, 285, 60602, 27537, 285, 11, 24905, 3916, 40524, 13,
+            56988, 581, 16903, 2536, 326, 670, 355, 90939, 13, 13182, 40027,
+            324, 1645, 43391, 295, 16831, 269, 11, 9231, 384, 7114, 300, 13047,
+            13, 56988, 581, 16903, 82621, 34495, 11, 43219, 2536, 958, 67, 372,
+            17190, 94942, 11, 29413, 5724, 308, 1371, 17190, 94942, 19861, 361,
+            11, 887, 2700, 83, 1960, 2781, 266, 19861, 361, 1880, 60017, 13,
+            34492, 285, 2536, 13047, 71942, 13, 1322, 258, 24905, 3916, 79424,
+            93485, 1645, 36240, 13, 19421, 5038, 78108, 6133, 716, 308, 1371,
+            55719, 10952, 506, 1172, 773, 10574, 11, 19591, 85987, 90939, 29059,
+            4849, 13, 328, 13048, 15760, 1913, 34495, 71942, 304, 9686, 37232,
+            45439, 11457, 268, 3689, 13, 18576, 309, 18434, 14210, 24018, 355,
+            326, 40488, 689, 13
+        ],
+        "count": 230
+    },
+    {
+        "text": "Ut purus nibh, posuere sed vestibulum at, posuere at justo. Suspendisse lobortis luctus accumsan. Pellentesque posuere in velit sed efficitur. Nulla quis metus sit amet diam gravida convallis. Integer ullamcorper magna nec gravida elementum. Nam ac libero luctus, tristique orci nec, consectetur nunc. In pretium arcu sed urna dictum, id suscipit ante cursus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed mollis lobortis ipsum, et mollis odio vulputate ac. Integer vehicula, metus a tristique lacinia, tellus ex tincidunt mi, sed consequat quam est consequat augue. Suspendisse ac orci in turpis eleifend placerat. Pellentesque varius imperdiet tellus, eu porta mauris hendrerit vel. In lobortis mi eros, quis porta mauris gravida ut.",
+        "tokens": [
+            61220, 4087, 355, 31385, 71, 11, 1153, 84, 486, 11163, 92034, 16903,
+            520, 11, 1153, 84, 486, 520, 82943, 13, 328, 13048, 15760, 41253,
+            371, 285, 326, 670, 355, 1046, 6370, 276, 13, 89008, 21938, 593,
+            1153, 84, 486, 304, 72648, 11163, 3369, 19195, 324, 13, 18576, 64,
+            49580, 2322, 355, 2503, 28311, 13047, 29059, 4849, 5804, 96244, 13,
+            4540, 78108, 6133, 716, 60017, 19591, 29059, 4849, 2449, 372, 13,
+            31074, 1645, 80586, 326, 670, 355, 11, 490, 97496, 477, 5979, 19591,
+            11, 36240, 308, 1371, 13, 763, 4509, 2411, 15952, 84, 11163, 66967,
+            64, 6587, 372, 11, 887, 4582, 80757, 275, 40524, 24018, 355, 13,
+            3308, 20697, 306, 60388, 12583, 15983, 437, 447, 1008, 326, 1960,
+            64, 5801, 17187, 824, 390, 392, 689, 91127, 11, 824, 304, 1512, 437,
+            1461, 268, 6043, 437, 13, 36378, 55509, 285, 41253, 371, 285, 27439,
+            11, 1880, 55509, 285, 87834, 11981, 631, 349, 1645, 13, 4540, 5275,
+            292, 5724, 11, 2322, 355, 264, 490, 97496, 326, 40488, 689, 11,
+            3371, 355, 506, 259, 2910, 57143, 9686, 11, 11163, 85987, 90939,
+            1826, 85987, 19861, 361, 13, 328, 13048, 15760, 1645, 477, 5979,
+            304, 13535, 57996, 10732, 333, 408, 72796, 266, 13, 89008, 21938,
+            593, 4244, 355, 17190, 94942, 3371, 355, 11, 15925, 62090, 99078,
+            285, 85479, 38149, 275, 9231, 13, 763, 41253, 371, 285, 9686, 43219,
+            11, 49580, 62090, 99078, 285, 29059, 4849, 8791, 13
+        ],
+        "count": 231
+    },
+    {
+        "text": "Integer in lacus ut nisi feugiat efficitur id et risus. Nullam finibus pretium mattis. Etiam vulputate massa at scelerisque ultricies. Morbi elementum justo vel convallis blandit. Praesent aliquam viverra dolor. Mauris neque neque, efficitur quis semper eu, consectetur non felis. Sed pharetra sagittis sem, ac tempus libero imperdiet sed. Nunc non neque arcu. Suspendisse lacinia dapibus orci quis rhoncus. Etiam dignissim fermentum nulla, a blandit ex placerat ac. Vestibulum vitae ex nunc. Fusce pharetra porttitor laoreet. Sed vulputate augue eu lobortis tincidunt.",
+        "tokens": [
+            3570, 304, 44979, 355, 8791, 69252, 1172, 773, 10574, 3369, 19195,
+            324, 887, 1880, 10025, 355, 13, 18576, 309, 1913, 34495, 4509, 2411,
+            27537, 285, 13, 19421, 5038, 11981, 631, 349, 71942, 520, 1156,
+            8023, 96643, 37232, 45439, 13, 8613, 8385, 2449, 372, 82943, 9231,
+            5804, 96244, 50531, 275, 13, 41465, 288, 306, 43391, 309, 18434,
+            14210, 24578, 13, 34492, 285, 841, 593, 841, 593, 11, 3369, 19195,
+            324, 49580, 5347, 716, 15925, 11, 36240, 2536, 18515, 285, 13,
+            36378, 1343, 548, 2221, 30811, 1468, 285, 5347, 11, 1645, 2798, 355,
+            80586, 17190, 94942, 11163, 13, 452, 1371, 2536, 841, 593, 15952,
+            84, 13, 328, 13048, 15760, 326, 40488, 689, 82621, 34495, 477, 5979,
+            49580, 22408, 263, 57440, 13, 19421, 5038, 28677, 1056, 318, 68736,
+            372, 61550, 11, 264, 50531, 275, 506, 72796, 266, 1645, 13, 56988,
+            581, 16903, 64220, 506, 308, 1371, 13, 94400, 346, 1343, 548, 2221,
+            2700, 83, 1960, 1208, 461, 295, 13, 36378, 11981, 631, 349, 19861,
+            361, 15925, 41253, 371, 285, 259, 2910, 57143, 13
+        ],
+        "count": 170
+    },
+    {
+        "text": "Nulla eget enim a leo egestas luctus. Proin sit amet elit urna. Morbi ac lorem non mi cursus aliquam at ut mi. Quisque efficitur purus non lorem ultricies, imperdiet fermentum ligula suscipit. Pellentesque in auctor justo. Suspendisse pharetra lorem vel luctus ultrices. Morbi felis ex, hendrerit vel tortor ac, volutpat eleifend turpis. Mauris convallis augue tortor, sit amet rutrum sem viverra id. Mauris blandit libero at lectus elementum, a euismod leo varius. Donec aliquet imperdiet enim, feugiat egestas libero mollis ac. Morbi purus diam, pretium non porta vel, rhoncus eget nisl.",
+        "tokens": [
+            3360, 64, 70763, 60602, 264, 89601, 384, 7114, 300, 326, 670, 355,
+            13, 1322, 258, 2503, 28311, 31160, 66967, 64, 13, 8613, 8385, 1645,
+            93485, 2536, 9686, 24018, 355, 43391, 309, 520, 8791, 9686, 13,
+            3489, 96643, 3369, 19195, 324, 4087, 355, 2536, 93485, 37232, 45439,
+            11, 17190, 94942, 68736, 372, 29413, 5724, 4582, 80757, 275, 13,
+            89008, 21938, 593, 304, 264, 80322, 82943, 13, 328, 13048, 15760,
+            1343, 548, 2221, 93485, 9231, 326, 670, 355, 37232, 1238, 13, 8613,
+            8385, 18515, 285, 506, 11, 85479, 38149, 275, 9231, 16831, 269,
+            1645, 11, 4499, 332, 4781, 10732, 333, 408, 13535, 57996, 13, 34492,
+            285, 5804, 96244, 19861, 361, 16831, 269, 11, 2503, 28311, 55719,
+            10952, 5347, 18434, 14210, 887, 13, 34492, 285, 50531, 275, 80586,
+            520, 16920, 355, 2449, 372, 11, 264, 15925, 2191, 347, 89601, 4244,
+            355, 13, 28457, 66, 43391, 295, 17190, 94942, 60602, 11, 1172, 773,
+            10574, 384, 7114, 300, 80586, 55509, 285, 1645, 13, 8613, 8385,
+            4087, 355, 13047, 11, 4509, 2411, 2536, 62090, 9231, 11, 22408, 263,
+            57440, 70763, 308, 23265, 13
+        ],
+        "count": 177
+    },
+    {
+        "text": "Morbi a sodales purus. Nullam pharetra libero non neque condimentum vestibulum. Etiam eu nisl scelerisque, facilisis mauris ut, iaculis ex. Praesent vel dictum dolor. Pellentesque ornare tempor justo, at placerat nulla rutrum vel. Nulla quis sagittis odio, eu scelerisque arcu. Suspendisse facilisis tellus eu nisi pellentesque rutrum.",
+        "tokens": [
+            42778, 8385, 264, 24905, 3916, 4087, 355, 13, 18576, 309, 1343, 548,
+            2221, 80586, 2536, 841, 593, 9955, 3904, 372, 92034, 16903, 13,
+            19421, 5038, 15925, 308, 23265, 1156, 8023, 96643, 11, 58424, 9667,
+            99078, 285, 8791, 11, 602, 582, 65130, 506, 13, 41465, 288, 306,
+            9231, 6587, 372, 24578, 13, 89008, 21938, 593, 40545, 548, 19502,
+            82943, 11, 520, 72796, 266, 61550, 55719, 10952, 9231, 13, 18576,
+            64, 49580, 30811, 1468, 285, 87834, 11, 15925, 1156, 8023, 96643,
+            15952, 84, 13, 328, 13048, 15760, 58424, 9667, 3371, 355, 15925,
+            69252, 281, 616, 21938, 593, 55719, 10952, 13
+        ],
+        "count": 98
+    },
+    {
+        "text": "The Sandman Soundtrack | The Kingdom of Dreams (Main Title Theme) - David Buckley | WaterTower",
+        "tokens": [
+            791, 8847, 1543, 14936, 13432, 765, 578, 15422, 315, 53718, 320,
+            6334, 11106, 16847, 8, 482, 6941, 94403, 765, 10164, 96924
+        ],
+        "count": 21
+    },
+    {
+        "text": "When applications need to transfer cryptographic identifiers into other systems, for example within JSON, they often need to encode them into a safe format. This can however leak information about the secret, unless the encoding is done with a “constant time” algorithm, such as implemented by the paragonie/constant_time_encoding library.",
+        "tokens": [
+            4599, 8522, 1205, 311, 8481, 90229, 48316, 1139, 1023, 6067, 11,
+            369, 3187, 2949, 4823, 11, 814, 3629, 1205, 311, 16559, 1124, 1139,
+            264, 6220, 3645, 13, 1115, 649, 4869, 24237, 2038, 922, 279, 6367,
+            11, 7389, 279, 11418, 374, 2884, 449, 264, 1054, 18568, 892, 863,
+            12384, 11, 1778, 439, 11798, 555, 279, 1370, 6241, 648, 14, 18568,
+            3084, 38713, 6875, 13
+        ],
+        "count": 63
+    },
+    {
+        "text": "An astute observer might have noticed that some of the functions in the above snippet from the library have a leading backslash, whereas some do not. Adding the backslash is commonly done in security-sensitive code to make sure that a malicious library is not able to “sneak in” fake implementations into the namespace of the security-sensitive library. We should therefore add a leading backslash to the extension_loaded() and sodium_bin2hex() calls as well to make sure we are actually using the Sodium extension and nothing else. We will take a closer look at the following change which is an excerpt from our PR #64.",
+        "tokens": [
+            2127, 12025, 1088, 22842, 2643, 617, 14000, 430, 1063, 315, 279,
+            5865, 304, 279, 3485, 44165, 505, 279, 6875, 617, 264, 6522, 1203,
+            51356, 11, 20444, 1063, 656, 539, 13, 31470, 279, 1203, 51356, 374,
+            17037, 2884, 304, 4868, 57767, 2082, 311, 1304, 2771, 430, 264,
+            39270, 6875, 374, 539, 3025, 311, 1054, 82, 818, 587, 304, 863,
+            12700, 39437, 1139, 279, 4573, 315, 279, 4868, 57767, 6875, 13,
+            1226, 1288, 9093, 923, 264, 6522, 1203, 51356, 311, 279, 9070,
+            50305, 368, 323, 39695, 22569, 17, 17757, 368, 6880, 439, 1664, 311,
+            1304, 2771, 584, 527, 3604, 1701, 279, 83541, 9070, 323, 4400, 775,
+            13, 1226, 690, 1935, 264, 12401, 1427, 520, 279, 2768, 2349, 902,
+            374, 459, 50565, 505, 1057, 8743, 674, 1227, 13
+        ],
+        "count": 125
+    },
+    {
+        "text": "I recently added domain exclusion lists and paywalled content filtering to Scour. This blog post describes a small but useful SQL(ite) query optimization I came across between the first and final drafts of these features: using an uncorrelated scalar subquery to skip a correlated subquery (if you don't know what that means, I'll explain it below).",
+        "tokens": [
+            40, 6051, 3779, 8106, 42308, 11725, 323, 2343, 86, 4841, 2262,
+            30770, 311, 2522, 414, 13, 1115, 5117, 1772, 16964, 264, 2678, 719,
+            5505, 8029, 7, 635, 8, 3319, 26329, 358, 3782, 4028, 1990, 279,
+            1176, 323, 1620, 64692, 315, 1521, 4519, 25, 1701, 459, 653, 6133,
+            9920, 17722, 1207, 1663, 311, 10936, 264, 49393, 1207, 1663, 320,
+            333, 499, 1541, 956, 1440, 1148, 430, 3445, 11, 358, 3358, 10552,
+            433, 3770, 570
+        ],
+        "count": 73
+    },
+    {
+        "text": "The first NOT EXISTS clause does not reference any column in items, so SQLite can evaluate it once and reuse the boolean result for all of the rows. This \"uncorrelated scalar subquery\" is extremely cheap to evaluate and, when it returns true, lets us short-circuit and skip the more expensive correlated subquery that checks each item's domain against the exclusion list.",
+        "tokens": [
+            791, 1176, 4276, 35939, 22381, 1587, 539, 5905, 904, 3330, 304,
+            3673, 11, 779, 29434, 649, 15806, 433, 3131, 323, 27068, 279, 2777,
+            1121, 369, 682, 315, 279, 7123, 13, 1115, 330, 1371, 269, 9920,
+            17722, 1207, 1663, 1, 374, 9193, 12136, 311, 15806, 323, 11, 994,
+            433, 4780, 837, 11, 15714, 603, 2875, 1824, 38368, 323, 10936, 279,
+            810, 11646, 49393, 1207, 1663, 430, 12621, 1855, 1537, 596, 8106,
+            2403, 279, 42308, 1160, 13
+        ],
+        "count": 75
+    },
+    {
+        "text": "To test the performance of each of these queries, I replaced the SELECT * with SELECT COUNT(*) and used a simple bash script to invoke the sqlite3 binary 100 times for each query on my laptop. Starting up the sqlite3 process each time adds overhead, but we're comparing relative differences. At the time of this benchmark, the last week had 235,975 items, 144,229 of which were in English. The two example users I tested this for below only look for English content.",
+        "tokens": [
+            1271, 1296, 279, 5178, 315, 1855, 315, 1521, 20126, 11, 358, 12860,
+            279, 19638, 353, 449, 19638, 24945, 29771, 323, 1511, 264, 4382,
+            28121, 5429, 311, 20466, 279, 22775, 18, 8026, 220, 1041, 3115, 369,
+            1855, 3319, 389, 856, 21288, 13, 28757, 709, 279, 22775, 18, 1920,
+            1855, 892, 11621, 32115, 11, 719, 584, 2351, 27393, 8844, 12062, 13,
+            2468, 279, 892, 315, 420, 29531, 11, 279, 1566, 2046, 1047, 220,
+            12422, 11, 24609, 3673, 11, 220, 8929, 11, 14378, 315, 902, 1051,
+            304, 6498, 13, 578, 1403, 3187, 3932, 358, 12793, 420, 369, 3770,
+            1193, 1427, 369, 6498, 2262, 13
+        ],
+        "count": 101
+    },
+    {
+        "text": "When using SQL subqueries to filter down result sets, it's worth thinking about whether each subquery is really needed for most users or most queries. If the check is needed most of the time, this approach won't help. However if the per-row check isn't always needed, using an uncorrelated scalar subquery to short-circuit a condition can dramatically speed up the average case with practically zero overhead.",
+        "tokens": [
+            4599, 1701, 8029, 1207, 43935, 311, 4141, 1523, 1121, 7437, 11, 433,
+            596, 5922, 7422, 922, 3508, 1855, 1207, 1663, 374, 2216, 4460, 369,
+            1455, 3932, 477, 1455, 20126, 13, 1442, 279, 1817, 374, 4460, 1455,
+            315, 279, 892, 11, 420, 5603, 2834, 956, 1520, 13, 4452, 422, 279,
+            824, 20115, 1817, 4536, 956, 2744, 4460, 11, 1701, 459, 653, 6133,
+            9920, 17722, 1207, 1663, 311, 2875, 1824, 38368, 264, 3044, 649,
+            29057, 4732, 709, 279, 5578, 1162, 449, 32367, 7315, 32115, 13
+        ],
+        "count": 83
+    },
+    {
+        "text": "Currency items can be found as drops from monsters or chests, bought directly from different vendors in town, or received through the use of the vendor recipe system by trading specific configurations of items to any town vendor. Currency items play a large role in the player to player trading system, with rare orbs able to be traded for powerful equipment, or even for other types of orbs that a player might want for crafting. Currency may be applied by right clicking the currency item, then left clicking the target item. Holding Shift allows repeated use without right clicking. Socket and quality currencies may be applied repeatedly by holding Ctrl and left-click.",
+        "tokens": [
+            27418, 3673, 649, 387, 1766, 439, 21701, 505, 26872, 477, 84418, 11,
+            11021, 6089, 505, 2204, 29629, 304, 6424, 11, 477, 4036, 1555, 279,
+            1005, 315, 279, 21390, 11363, 1887, 555, 11380, 3230, 33483, 315,
+            3673, 311, 904, 6424, 21390, 13, 29553, 3673, 1514, 264, 3544, 3560,
+            304, 279, 2851, 311, 2851, 11380, 1887, 11, 449, 9024, 99505, 3025,
+            311, 387, 31207, 369, 8147, 7241, 11, 477, 1524, 369, 1023, 4595,
+            315, 99505, 430, 264, 2851, 2643, 1390, 369, 45167, 13, 29553, 1253,
+            387, 9435, 555, 1314, 18965, 279, 11667, 1537, 11, 1243, 2163,
+            18965, 279, 2218, 1537, 13, 55777, 27608, 6276, 11763, 1005, 2085,
+            1314, 18965, 13, 21628, 323, 4367, 36702, 1253, 387, 9435, 19352,
+            555, 10168, 38114, 323, 2163, 29218, 13
+        ],
+        "count": 123
+    },
+    {
+        "text": "Breach enemies can drop Breach Splinters of their Breach element. 100 Breach Splinters can be combined to form a Breachstone. A Blessing can be used to upgrade Breach unique items, as well as transform Breachstones into the Flawless variant.",
+        "tokens": [
+            33, 23430, 14207, 649, 6068, 11681, 613, 52298, 51040, 315, 872,
+            11681, 613, 2449, 13, 220, 1041, 11681, 613, 52298, 51040, 649, 387,
+            11093, 311, 1376, 264, 11681, 613, 11046, 13, 362, 44361, 287, 649,
+            387, 1511, 311, 14234, 11681, 613, 5016, 3673, 11, 439, 1664, 439,
+            5276, 11681, 613, 33610, 1139, 279, 3061, 675, 1752, 11678, 13
+        ],
+        "count": 58
+    },
+    {
+        "text": "Harbinger currency items are usually dropped as shards by Harbingers. Shards of both Harbinger currencies and basic currencies can be dropped this way. Scrolls can be found in the endgame Harbinger encounter Infused Beachhead and can be used to upgrade Harbinger unique items.",
+        "tokens": [
+            27588, 65, 5248, 11667, 3673, 527, 6118, 12504, 439, 75210, 555,
+            5340, 7278, 388, 13, 1443, 2402, 315, 2225, 5340, 65, 5248, 36702,
+            323, 6913, 36702, 649, 387, 12504, 420, 1648, 13, 79329, 649, 387,
+            1766, 304, 279, 842, 5924, 5340, 65, 5248, 13123, 15268, 2656,
+            13011, 2025, 323, 649, 387, 1511, 311, 14234, 5340, 65, 5248, 5016,
+            3673, 13
+        ],
+        "count": 60
+    },
+    {
+        "text": "Vendor prices are a base value for comparisons, player market value will vary. Since players can't downgrade one Orb of Fusing into eight Orbs of Alteration, they may be willing to sell them for less. High-level players will tend to forgo picking up less valuable currencies in favour of more efficiently clearing maps, instead relying on player trading to acquire currencies such as Scrolls of Wisdom and Orbs of Transmutation in bulk. Don't forget that barter trading is not just what it is worth, it is also what you are willing to pay.",
+        "tokens": [
+            45791, 7729, 527, 264, 2385, 907, 369, 36595, 11, 2851, 3157, 907,
+            690, 13592, 13, 8876, 4311, 649, 956, 91457, 832, 44088, 315, 435,
+            985, 1139, 8223, 2582, 1302, 315, 43951, 367, 11, 814, 1253, 387,
+            10032, 311, 4662, 1124, 369, 2753, 13, 5234, 11852, 4311, 690, 8541,
+            311, 369, 3427, 21816, 709, 2753, 15525, 36702, 304, 12617, 315,
+            810, 30820, 33850, 14370, 11, 4619, 39661, 389, 2851, 11380, 311,
+            21953, 36702, 1778, 439, 79329, 315, 57201, 323, 2582, 1302, 315,
+            4149, 32071, 304, 20155, 13, 4418, 956, 10894, 430, 3703, 466,
+            11380, 374, 539, 1120, 1148, 433, 374, 5922, 11, 433, 374, 1101,
+            1148, 499, 527, 10032, 311, 2343, 13
+        ],
+        "count": 111
+    },
+    {
+        "text": "With ShadeOfColor, you can convert any file into an image (-crypt) and later recover the original file (-decrypt). The output looks like a normal PNG, but it actually carries your data inside its pixels.",
+        "tokens": [
+            2409, 80918, 2173, 1668, 11, 499, 649, 5625, 904, 1052, 1139, 459,
+            2217, 10505, 49225, 8, 323, 3010, 11993, 279, 4113, 1052, 10505,
+            74395, 570, 578, 2612, 5992, 1093, 264, 4725, 42739, 11, 719, 433,
+            3604, 24266, 701, 828, 4871, 1202, 16128, 13
+        ],
+        "count": 43
+    },
+    {
+        "text": "Hugging Face AI Sheets is an open-source tool for building, enriching, and transforming datasets using AI models with no code. The tool can be deployed locally or on the Hub. It lets you use thousands of open models from the Hugging Face Hub via Inference Providers or local models, including gpt-oss from OpenAI!",
+        "tokens": [
+            39, 36368, 19109, 15592, 61572, 374, 459, 1825, 31874, 5507, 369,
+            4857, 11, 31518, 287, 11, 323, 46890, 30525, 1701, 15592, 4211, 449,
+            912, 2082, 13, 578, 5507, 649, 387, 27167, 24392, 477, 389, 279,
+            27636, 13, 1102, 15714, 499, 1005, 9214, 315, 1825, 4211, 505, 279,
+            473, 36368, 19109, 27636, 4669, 763, 2251, 71029, 477, 2254, 4211,
+            11, 2737, 342, 418, 12, 3746, 505, 5377, 15836, 0
+        ],
+        "count": 68
+    },
+    {
+        "text": "Docker, Inc. (“Docker”) is committed to protecting the privacy of your information. We provide this Privacy Policy to inform users of our policies and procedures regarding the collection, use and disclosure of information and/or personal data received from users of our websites (“Website”), services, applications, or software (“Services”). This Privacy Policy does not apply to data that we receive through other means, including offline and as part of employment relationships. This Privacy Policy may be updated from time to time for any reason, at our sole discretion. We will notify you of any material changes to our Privacy Policy by posting the new Privacy Policy on our Website. You are advised to consult this Privacy Policy regularly for any changes. By using or accessing the Docker Services, you are accepting the practices described in this Privacy Policy, and you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. If you have any questions or comments about this Privacy Policy or our use of your personally identifiable information, please contact us using this form https://preferences.docker.com/privacy/.",
+        "tokens": [
+            35, 13973, 11, 4953, 13, 27179, 35, 13973, 33611, 374, 11411, 311,
+            22973, 279, 12625, 315, 701, 2038, 13, 1226, 3493, 420, 19406,
+            11216, 311, 6179, 3932, 315, 1057, 10396, 323, 16346, 9002, 279,
+            4526, 11, 1005, 323, 28957, 315, 2038, 323, 5255, 4443, 828, 4036,
+            505, 3932, 315, 1057, 13335, 27179, 31151, 56955, 3600, 11, 8522,
+            11, 477, 3241, 27179, 11271, 65312, 1115, 19406, 11216, 1587, 539,
+            3881, 311, 828, 430, 584, 5371, 1555, 1023, 3445, 11, 2737, 27258,
+            323, 439, 961, 315, 14740, 12135, 13, 1115, 19406, 11216, 1253, 387,
+            6177, 505, 892, 311, 892, 369, 904, 2944, 11, 520, 1057, 13612,
+            32022, 13, 1226, 690, 15820, 499, 315, 904, 3769, 4442, 311, 1057,
+            19406, 11216, 555, 17437, 279, 502, 19406, 11216, 389, 1057, 16406,
+            13, 1472, 527, 26160, 311, 8666, 420, 19406, 11216, 15870, 369, 904,
+            4442, 13, 3296, 1701, 477, 32888, 279, 41649, 8471, 11, 499, 527,
+            25694, 279, 12659, 7633, 304, 420, 19406, 11216, 11, 323, 499, 527,
+            93501, 311, 1057, 8863, 315, 701, 2038, 439, 743, 13544, 304, 420,
+            19406, 11216, 1457, 323, 439, 31011, 555, 603, 13, 1442, 499, 617,
+            904, 4860, 477, 6170, 922, 420, 19406, 11216, 477, 1057, 1005, 315,
+            701, 16102, 72450, 2038, 11, 4587, 3729, 603, 1701, 420, 1376, 3788,
+            1129, 62089, 92231, 916, 14, 47921, 12196
+        ],
+        "count": 218
+    },
+    {
+        "text": "3.1(a) Cookies – Docker may use cookies to make interactions with the Website easy and meaningful. When you visit the Website, Docker’s servers send a cookie to your computer. Standing alone, cookies do not personally identify you. They merely recognize your Web browser. Unless you choose to identify yourself to Docker, either by responding to a promotional offer, opening an account, or filling out a Web form, you remain anonymous to Docker. Docker uses cookies that are session-based and persistent-based. Session cookies exist only during one session. They disappear from your computer when you close your browser software or turn off your computer. Persistent cookies remain on your computer after you close your browser or turn off your computer. If you have chosen to identify yourself to Docker, Docker uses session cookies containing encrypted information to allow Docker to uniquely identify you. Each time you log into the Services, a session cookie containing an encrypted, unique identifier that is tied to your account is placed on your browser. These session cookies allow Docker to uniquely identify you when you are logged into the Services and to process your online transactions and requests. Session cookies are required to use the Services. Docker may use persistent cookies that only Docker can read and use to identify browsers that have previously visited the Website. When you purchase the Services or provide Docker with personal information, a unique identifier is assigned to you. This unique identifier is associated with a persistent cookie that Docker places on your Web browser. Docker is especially careful about the security and confidentiality of the information stored in persistent cookies. For example, Docker does not store account numbers or passwords in persistent cookies. You may refuse to accept cookies by activating the setting on your browser which allows you to refuse the setting of cookies. If you disable your Web browser’s ability to accept cookies, you will be able to navigate the Website, but you will not be able to successfully use the Services. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies when you log on to our site. Docker may use information from session and persistent cookies in combination with Data About Docker Customers to provide you with information about Docker and the Services.",
+        "tokens": [
+            18, 13, 16, 2948, 8, 27085, 1389, 41649, 1253, 1005, 8443, 311,
+            1304, 22639, 449, 279, 16406, 4228, 323, 23222, 13, 3277, 499, 4034,
+            279, 16406, 11, 41649, 753, 16692, 3708, 264, 12829, 311, 701, 6500,
+            13, 46327, 7636, 11, 8443, 656, 539, 16102, 10765, 499, 13, 2435,
+            16632, 15641, 701, 5000, 7074, 13, 11115, 499, 5268, 311, 10765,
+            6261, 311, 41649, 11, 3060, 555, 30438, 311, 264, 35382, 3085, 11,
+            8736, 459, 2759, 11, 477, 21973, 704, 264, 5000, 1376, 11, 499,
+            7293, 22939, 311, 41649, 13, 41649, 5829, 8443, 430, 527, 3882,
+            6108, 323, 26048, 6108, 13, 9343, 8443, 3073, 1193, 2391, 832, 3882,
+            13, 2435, 32153, 505, 701, 6500, 994, 499, 3345, 701, 7074, 3241,
+            477, 2543, 1022, 701, 6500, 13, 67644, 8443, 7293, 389, 701, 6500,
+            1306, 499, 3345, 701, 7074, 477, 2543, 1022, 701, 6500, 13, 1442,
+            499, 617, 12146, 311, 10765, 6261, 311, 41649, 11, 41649, 5829,
+            3882, 8443, 8649, 25461, 2038, 311, 2187, 41649, 311, 42329, 10765,
+            499, 13, 9062, 892, 499, 1515, 1139, 279, 8471, 11, 264, 3882,
+            12829, 8649, 459, 25461, 11, 5016, 13110, 430, 374, 17791, 311, 701,
+            2759, 374, 9277, 389, 701, 7074, 13, 4314, 3882, 8443, 2187, 41649,
+            311, 42329, 10765, 499, 994, 499, 527, 14042, 1139, 279, 8471, 323,
+            311, 1920, 701, 2930, 14463, 323, 7540, 13, 9343, 8443, 527, 2631,
+            311, 1005, 279, 8471, 13, 41649, 1253, 1005, 26048, 8443, 430, 1193,
+            41649, 649, 1373, 323, 1005, 311, 10765, 33957, 430, 617, 8767,
+            12263, 279, 16406, 13, 3277, 499, 7782, 279, 8471, 477, 3493, 41649,
+            449, 4443, 2038, 11, 264, 5016, 13110, 374, 12893, 311, 499, 13,
+            1115, 5016, 13110, 374, 5938, 449, 264, 26048, 12829, 430, 41649,
+            7634, 389, 701, 5000, 7074, 13, 41649, 374, 5423, 16994, 922, 279,
+            4868, 323, 65295, 315, 279, 2038, 9967, 304, 26048, 8443, 13, 1789,
+            3187, 11, 41649, 1587, 539, 3637, 2759, 5219, 477, 34816, 304,
+            26048, 8443, 13, 1472, 1253, 26122, 311, 4287, 8443, 555, 72192,
+            279, 6376, 389, 701, 7074, 902, 6276, 499, 311, 26122, 279, 6376,
+            315, 8443, 13, 1442, 499, 11404, 701, 5000, 7074, 753, 5845, 311,
+            4287, 8443, 11, 499, 690, 387, 3025, 311, 21546, 279, 16406, 11,
+            719, 499, 690, 539, 387, 3025, 311, 7946, 1005, 279, 8471, 13,
+            11115, 499, 617, 24257, 701, 7074, 6376, 779, 430, 433, 690, 26122,
+            8443, 11, 1057, 1887, 690, 4360, 8443, 994, 499, 1515, 389, 311,
+            1057, 2816, 13, 41649, 1253, 1005, 2038, 505, 3882, 323, 26048,
+            8443, 304, 10824, 449, 2956, 10180, 41649, 40689, 311, 3493, 499,
+            449, 2038, 922, 41649, 323, 279, 8471, 13
+        ],
+        "count": 430
+    }
+]

@@ -374,6 +374,8 @@ class Other
         /**
  * @author https://github.com/kylekatarnls
  * @todo tests
+ * @throws \InvalidArgumentException
+ * @throws \ValueError
  */
     static function throwValueErrorIfAvailable($message = '', $code = 0, \Throwable $previous = null): void {}
 

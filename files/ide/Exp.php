@@ -284,6 +284,18 @@ class Exp
     static function stringStartsWithInArray(array $array, string $needle, bool $ignoreCase = false): bool {}
 
         /**
+ * @author https://token-calculator.net/token-calculator
+ * @see https://huggingface.co/microsoft/Phi-3-small-8k-instruct/blob/main/cl100k_base.tiktoken
+ * @psalm-import-type Return_tokenCalculator from \TypeExp
+ * скорость чуть ниже m2, но не требует RAM
+ * 
+ * 
+ * BPE cl100k_base
+ * @return \Closure(string):Return_tokenCalculator
+ */
+    static function tokenCalcCL100KBase(bool $withoutArrayTokens = false): Closure {}
+
+        /**
  * @author inilim
  * @todo tests
  * 

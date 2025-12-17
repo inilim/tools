@@ -7,15 +7,16 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @return mixed
  */
-function __resourceCache(string $class, string $name)
+function __resourceCache(string $namespace, string $name)
 {
     static $o = null;
     $o ??= [];
-    $_class = \basename(\dirname(\strtr($class, '\\', '/')));
-    $o[$_class] ??= [];
-    if (\array_key_exists($name, $o[$_class])) {
-        return $o[$_class][$name];
+    // __FUNCTION__ => Inilim\Tool\Method\Other\__resource => Other
+    $class = \basename(\dirname(\strtr($namespace, '\\', '/')));
+    $o[$class] ??= [];
+    if (\array_key_exists($name, $o[$class])) {
+        return $o[$class][$name];
     }
 
-    return $o[$_class][$name] = \Inilim\Tool\Method\Other\__resource($class, $name);
+    return $o[$class][$name] = \Inilim\Tool\Method\Other\__resource($namespace, $name);
 }

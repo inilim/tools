@@ -19,7 +19,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function openJsonViaSql
     }if(!\Inilim\Tool\Str::__definedIfNot('upper')){
     function upper(string $value,?string $encoding='UTF-8'):string{return \mb_strtoupper($value,$encoding);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__resource')){
-    function __resource(string $class,string $name){$_class=\basename(\dirname(\strtr($class,'\\','/')));$name=\sprintf('%s/../../../files/resources/%s/%s.php',__DIR__,$_class,$name);if(\is_file($name)){return require $name;}return null;}
+    function __resource(string $namespace,string $name){$class=\basename(\dirname(\strtr($namespace,'\\','/')));$name=\sprintf('%s/../../../files/resources/%s/%s.php',__DIR__,$class,$name);if(\is_file($name)){return require $name;}return null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
