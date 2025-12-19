@@ -13,24 +13,22 @@ namespace Inilim\Tool\Method\Exp;
  * 
  * 
  * BPE cl100k_base
- * @return \Closure(string):Return_tokenCalculator
+ * @return \Closure(string $text,bool $withoutArrayTokens):Return_tokenCalculator
  */
-function tokenCalcCL100KBase(bool $withoutArrayTokens = false): \Closure
+function tokenCalcCL100KBase(): \Closure
 {
-    $o = new class(__FUNCTION__, $withoutArrayTokens) {
+    $o = new class(__FUNCTION__) {
         /**
          * @var array<int,int>
          */
         public array $ranks;
-        public bool $withoutArrayTokens;
 
         // ---------------------------------------------
         // 
         // ---------------------------------------------
 
-        function __construct(string $namespace, bool $withoutArrayTokens)
+        function __construct(string $namespace)
         {
-            $this->withoutArrayTokens = $withoutArrayTokens;
             // 100_256
             $this->ranks = \Inilim\Tool\Method\Other\__resource($namespace, 'cl100k_base.tiktoken.crc32.array');
             // $this->ranks = \json_decode(\file_get_contents('D:\projects\tools\files\resources\Exp\cl100k_base.tiktoken.crc32.json'), true);
@@ -39,9 +37,8 @@ function tokenCalcCL100KBase(bool $withoutArrayTokens = false): \Closure
         /**
          * Кодирование текста в массив ID токенов
          */
-        function encode(string $text): array
+        function encode(string $text, bool $withoutArrayTokens = false): array
         {
-            $withoutArrayTokens = $this->withoutArrayTokens;
             $count = 0;
             $tokens = [];
 
@@ -123,8 +120,8 @@ function tokenCalcCL100KBase(bool $withoutArrayTokens = false): \Closure
         }
     };
 
-    return static function (string $text) use ($o): array {
-        [$tokens, $count] = $o->encode($text);
+    return static function (string $text, bool $withoutArrayTokens = false) use ($o): array {
+        [$tokens, $count] = $o->encode($text, $withoutArrayTokens);
         return [
             'tokens' => $tokens,
             'count'  => $count,

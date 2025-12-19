@@ -17,5 +17,5 @@ namespace Inilim\Tool\Method\Exp;
  */
 function tokenCalcCL100KBaseOnce(string $text, bool $withoutArrayTokens = false): array
 {
-    return \Inilim\Tool\Method\Exp\tokenCalcCL100KBase($withoutArrayTokens)($text);
+    return \Inilim\Tool\Method\Exp\tokenCalcCL100KBase()($text, $withoutArrayTokens);
 }

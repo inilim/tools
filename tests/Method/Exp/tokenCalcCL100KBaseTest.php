@@ -18,13 +18,13 @@ class tokenCalcCL100KBaseTest extends TestCase
         $finder = new Finder;
         $finder->in(\realpath(__DIR__ . '/../../files/json/token_calc'))->files()->name('*.json');
 
-        $fnWith = Exp::tokenCalcCL100KBase(false);
+        $fnWith = Exp::tokenCalcCL100KBase();
         foreach ($finder as $ptf => $_) {
             $data = \json_decode(\file_get_contents($ptf), true);
             foreach ($data as $idx => $item) {
                 /** @var array{text:string,tokens:int[],count:int} $item */
 
-                ['tokens' => $tokens, 'count' => $count] = $fnWith($item['text']);
+                ['tokens' => $tokens, 'count' => $count] = $fnWith($item['text'], false);
 
                 $this->assertSame(
                     $item['tokens'],
@@ -47,13 +47,13 @@ class tokenCalcCL100KBaseTest extends TestCase
         $finder = new Finder;
         $finder->in(\realpath(__DIR__ . '/../../files/json/token_calc'))->files()->name('*.json');
 
-        $fnWith = Exp::tokenCalcCL100KBase(true);
+        $fnWith = Exp::tokenCalcCL100KBase();
         foreach ($finder as $ptf => $_) {
             $data = \json_decode(\file_get_contents($ptf), true);
             foreach ($data as $idx => $item) {
                 /** @var array{text:string,tokens:int[],count:int} $item */
 
-                ['tokens' => $tokens, 'count' => $count] = $fnWith($item['text']);
+                ['tokens' => $tokens, 'count' => $count] = $fnWith($item['text'], true);
 
                 $this->assertSame(
                     [],
