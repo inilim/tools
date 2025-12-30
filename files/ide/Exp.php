@@ -287,7 +287,8 @@ class Exp
  * @author https://token-calculator.net/token-calculator
  * @see https://huggingface.co/microsoft/Phi-3-small-8k-instruct/blob/main/cl100k_base.tiktoken
  * @psalm-import-type Return_tokenCalculator from \TypeExp
- * скорость чуть ниже m2, но не требует RAM
+ * INFO скорость чуть ниже m2, но не требует RAM
+ * INFO есть погрешность с скриптом на сайте
  * 
  * 
  * BPE cl100k_base
