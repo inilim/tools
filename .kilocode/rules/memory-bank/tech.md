@@ -22,6 +22,14 @@
 - PHP Metrics (анализ кода)
 - Symfony Process (выполнение процессов)
 - Symfony Finder (поиск файлов)
+- phpunit/phpunit: ^9.6
+- twig/twig: ^3.11
+- mcaskill/composer-exclude-files: ^4.0
+- phpstan/phpstan: ^2.1
+- symfony/process: ^5.4
+- phpmetrics/phpmetrics: ^2.9
+- symfony/finder: ^5.4
+- inilim/php-code-minifier: dev-main
 
 ## Архитектурные паттерны
 - Ленивая загрузка функций
@@ -38,10 +46,15 @@
 
 ## Зависимости
 - Основная библиотека не имеет внешних зависимостей
-- Для разработки: PHPUnit, PHPStan, Twig, PHP Metrics, Symfony Process, Symfony Finder и другие инструменты
+- Для разработки: PHPUnit, PHPStan, Twig, PHP Metrics, Symfony Process, Symfony Finder, php-code-minifier и другие инструменты
 - Рекомендуемые расширения для оптимальной работы
 
 ## Поддерживаемые версии PHP
 - Минимальная версия: PHP 7.4
 - Поддержка современных версий PHP
 - Обратная совместимость с более старыми версиями где возможно
+
+## Composer конфигурация
+- Автозагрузка PSR-4 для пространства имен Inilim\Tool\
+- dev зависимости для тестирования и анализа кода
+- Скрипты для сборки, тестирования и анализа
