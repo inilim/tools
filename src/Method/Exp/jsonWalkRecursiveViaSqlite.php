@@ -53,6 +53,11 @@ function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limi
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
+        // TODO Можно еще упростить!!!!!
+        //     WITH _table as (SELECT :json as _value)
+        // SELECT tree.* FROM _table, json_tree(_table._value) as tree
+        // WHERE tree.key not null
+        // TODO через fibers можно реализовать генератор
         $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
         $stmt = $pdo->prepare('INSERT INTO _table (_name,_value) VALUES ("json",:_value)');
         $stmt->execute(['_value' => $json]);
