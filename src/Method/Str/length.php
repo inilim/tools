@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Return the length of the given string.
  * @param string|null $encoding
+ * @ext mbstring
  */
 function length(string $value, $encoding = 'UTF-8'): int
 {
