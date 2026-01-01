@@ -169,9 +169,10 @@ class Exp
     static function isResObjJsonSqlite($value): bool {}
 
         /**
- * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * Значительно экономит ОЗУ, но медленее чем json_decode() minimum sqlite version 3.42.0
  * @see https://sqlite.org/json1.html#jerr
  * @author inilim
+ * @todo tests
  * @ext PDO pdo_sqlite
  */
     static function jsonErrorPositionViaSqlite(string $json): ?int {}

@@ -1,21 +1,15 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function isResObjJsonSqlite($value):bool{if(!\is_object($value)||!\Inilim\Tool\Method\PF\str_starts_with(\get_class($value),'class@anonymous')){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function(){return($this -> tag ?? '')===\Inilim\Tool\Method\Exp\__tagJsonSqlite();});}if(!\Inilim\Tool\Exp::__definedIfNot('__tagJsonSqlite')){
-    function __tagJsonSqlite():string{return 'open-file-json-sqlite';}
-    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function sqliteLibVersion_m3():?string{\Inilim\Tool\Method\Assert\extPhp('PDO');\Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');$internal=static function(){$pdo=new \PDO('sqlite::memory:',null,null,[\PDO :: ATTR_ERRMODE=>\PDO :: ERRMODE_EXCEPTION]);$stmt=$pdo -> query('SELECT sqlite_version()',\PDO :: FETCH_NUM);$result=$stmt -> fetch();$pdo=$stmt=null;if(\is_array($result)){return $result[0]?? null;}return null;};$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);return \is_string($result)?$result:null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
-    }if(!\Inilim\Tool\Other::__definedIfNot('bindAndCall')){
-    function bindAndCall(object $object,\Closure $callback,... $args){$result=$callback -> bindTo($object,$object)-> __invoke(... $args);\Inilim\Tool\Method\Other\clearClosure($callback);return $result;}
-    }if(!\Inilim\Tool\Other::__definedIfNot('clearClosure')){
-    function clearClosure(\Closure $cls):?\Closure{return \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn()=>$cls -> bindTo(null,null));}
+    }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
     function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
-    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
-    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
-    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_starts_with')){
-    function str_starts_with(string $haystack,string $needle):bool{if(\Inilim\Tool\Method\Check\php80()){return \str_starts_with($haystack,$needle);}return 0===\strncmp($haystack,$needle,\strlen($needle));}
+    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
+    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }}
