@@ -17,6 +17,7 @@ function jsonErrorPositionViaSqlite(string $json): ?int
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
     // TODO PDO вроде бы может брать sqlite из ОС а не из php
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
+    // TODO json_error_position был встроен в версии 3.42.0
     if (!\version_compare($curVer ?? '0.0.0', '3.42.0', '>=')) {
         if ($curVer === null) {
             throw new \InvalidArgumentException('SQLite library version is not defined');
