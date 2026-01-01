@@ -211,7 +211,6 @@ class Exp
  * @author inilim
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @ext PDO pdo_sqlite
- * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @template B of mixed
  * @param string $json
  * @param null|positive-int $limit
