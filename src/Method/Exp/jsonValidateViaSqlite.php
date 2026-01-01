@@ -36,7 +36,7 @@ function jsonValidateViaSqlite(string $json, int $flags = 1): bool
         } else {
             $stmt = $pdo->prepare('SELECT json_valid(:json) as v');
         }
-        $stmt->execute(['json' => $json]);
+        $stmt->execute(['json' => &$json]);
         unset($json);
         $result = $stmt->fetch(\PDO::FETCH_NUM);
         $pdo = $stmt = null;

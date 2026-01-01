@@ -14,39 +14,44 @@ namespace Inilim\Tool\Method\Exp;
  */
 function jsonLengthViaSqlite(string $json, ?string $pattern = null): ?int
 {
-    if (!\Inilim\Tool\Method\Exp\jsonValidateViaSqlite($json)) {
-        throw new \InvalidArgumentException('JSON invalid');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
+    \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
+    // TODO json_array_length был встроен в версии 3.38.0
+    if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
+        if ($curVer === null) {
+            throw new \InvalidArgumentException('SQLite library version is not defined');
+        }
+        throw new \InvalidArgumentException(\sprintf('Your SQLite %s library version is lower than 3.38.0', $curVer));
     }
 
     $internal = static function () use ($json, $pattern) {
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $pdo->exec('CREATE TABLE _table (_name TEXT, _value TEXT)');
-        $stmt = $pdo->prepare('INSERT INTO _table (_name,_value) VALUES ("json",:_value)');
-        $stmt->execute(['_value' => $json]);
-        unset($json);
         if ($pattern) {
-            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table WHERE _name = "json"), :pattern) as _v');
-            $stmt->execute(['pattern' => $pattern]);
+            $stmt = $pdo->prepare('SELECT json_array_length(:json, :pattern) as v');
+            $stmt->execute([
+                'json' => &$json,
+                'pattern' => $pattern
+            ]);
         } else {
-            $stmt = $pdo->prepare('SELECT json_array_length((SELECT _value FROM _table WHERE _name = "json")) as _v');
-            $stmt->execute();
+            $stmt = $pdo->prepare('SELECT json_array_length(:json) as v');
+            $stmt->execute([
+                'json' => &$json,
+            ]);
         }
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $result = $result['_v'] ?? null;
+        unset($json);
+        $result = $stmt->fetch(\PDO::FETCH_NUM);
+        $pdo = $stmt = null;
+        $result = $result[0] ?? null;
         if (\Inilim\Tool\Method\Integer\isNumeric($result)) {
             return (int)$result;
         }
         return null;
     };
 
-    $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
-        $internal,
-        static function ($_, $msg) {
-            \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
-        }
-    );
+    $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
 
     if ($result === null || !\is_int($result)) {
         return null;
