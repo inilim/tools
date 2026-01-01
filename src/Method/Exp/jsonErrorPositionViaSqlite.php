@@ -29,7 +29,7 @@ function jsonErrorPositionViaSqlite(string $json): ?int
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $stmt = $pdo->prepare('SELECT json_error_position(:json) as pos');
+        $stmt = $pdo->prepare('SELECT json_error_position(:json) as p');
         $stmt->execute(['json' => $json]);
         unset($json);
         $result = $stmt->fetch(\PDO::FETCH_NUM);

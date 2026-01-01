@@ -32,9 +32,9 @@ function jsonValidateViaSqlite(string $json, int $flags = 1): bool
         ]);
         if (\version_compare($curVer, '3.45.0', '>=')) {
             // TODO В SQLite 3.45.0 у json_valid() появился необязательный второй аргумент flags, который уточняет, что считать «валидным JSON» (например, разрешать JSON5/JSONB).
-            $stmt = $pdo->prepare(\sprintf('SELECT json_valid(:json,%s) as valid', $flags));
+            $stmt = $pdo->prepare(\sprintf('SELECT json_valid(:json,%s) as v', $flags));
         } else {
-            $stmt = $pdo->prepare('SELECT json_valid(:json) as valid');
+            $stmt = $pdo->prepare('SELECT json_valid(:json) as v');
         }
         $stmt->execute(['json' => $json]);
         unset($json);
