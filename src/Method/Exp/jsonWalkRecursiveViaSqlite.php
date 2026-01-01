@@ -23,7 +23,7 @@ function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limi
     \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
-    // TODO json_valid был встроен в версии 3.38.0
+    // TODO json_tree был встроен в версии 3.38.0
     if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
         if ($curVer === null) {
             throw new \InvalidArgumentException('SQLite library version is not defined');
