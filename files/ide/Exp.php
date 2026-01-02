@@ -190,14 +190,6 @@ class Exp
 
         /**
  * @author inilim
- * @ext PDO pdo_sqlite
- * @see https://sqlite.org/json1.html#jins
- * @param string $json
- */
-    static function jsonInsertViaSqlite(string $json): string {}
-
-        /**
- * @author inilim
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @see https://sqlite.org/json1.html#jarraylen
  * @ext PDO pdo_sqlite
