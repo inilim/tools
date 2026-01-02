@@ -15,8 +15,8 @@ namespace Inilim\Tool\Method\Exp;
  */
 function jsonExtractViaSqlite(string $json, $pattern)
 {
-    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\strOrArr($pattern);
     if (!\is_array($pattern)) {
         $pattern = [$pattern];

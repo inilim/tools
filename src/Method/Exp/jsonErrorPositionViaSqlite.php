@@ -13,8 +13,8 @@ namespace Inilim\Tool\Method\Exp;
  */
 function jsonErrorPositionViaSqlite(string $json): ?int
 {
-    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
     // TODO PDO вроде бы может брать sqlite из ОС а не из php
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
     // TODO json_error_position был встроен в версии 3.42.0

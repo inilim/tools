@@ -13,8 +13,8 @@ namespace Inilim\Tool\Method\Exp;
  */
 function jsonValidateViaSqlite(string $json, int $flags = 1): bool
 {
-    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\inArray($flags, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
     // TODO json_valid был встроен в версии 3.38.0

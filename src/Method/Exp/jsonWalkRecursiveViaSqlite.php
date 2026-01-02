@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Exp;
 
 /**
  * @author inilim
+ * INFO win. если json строка занимает 5mb, то парсинг json через sqlite будет стоить 12-15mb суммарно.
+ * INFO win. в php84 отслеживание ОЗУ что потребляет sqlite php более не отслеживает!
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @ext PDO pdo_sqlite
  * @template B of mixed
@@ -20,8 +22,8 @@ function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limi
     if ($limit !== null) {
         \Inilim\Tool\Method\Assert\positiveInteger($limit);
     }
-    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
     // TODO json_tree был встроен в версии 3.38.0
     if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
@@ -30,7 +32,6 @@ function jsonWalkRecursiveViaSqlite(string $json, callable $callback, ?int $limi
         }
         throw new \InvalidArgumentException(\sprintf('Your SQLite %s library version is lower than 3.38.0', $curVer));
     }
-
 
     if ($types) {
         \Inilim\Tool\Method\Assert\allInArray($types, ['bool', 'string', 'int', 'float', 'null', 'object', 'array']);
