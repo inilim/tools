@@ -1,0 +1,8 @@
+/build
+/vendor
+/bench
+/src/MethodMin
+/files/cache
+/files/sql
+/files/template
+/tests/files

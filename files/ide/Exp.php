@@ -169,9 +169,10 @@ class Exp
     static function isResObjJsonSqlite($value): bool {}
 
         /**
- * Значительно экономит ОЗУ, но медленее чем json_decode()
+ * Значительно экономит ОЗУ, но медленее чем json_decode() minimum sqlite version 3.42.0
  * @see https://sqlite.org/json1.html#jerr
  * @author inilim
+ * @todo tests
  * @ext PDO pdo_sqlite
  */
     static function jsonErrorPositionViaSqlite(string $json): ?int {}
@@ -208,9 +209,10 @@ class Exp
 
         /**
  * @author inilim
+ * INFO win. если json строка занимает 5mb, то парсинг json через sqlite будет стоить 12-15mb суммарно.
+ * INFO win. в php84 отслеживание ОЗУ что потребляет sqlite php более не отслеживает!
  * Значительно экономит ОЗУ, но медленее чем json_decode()
  * @ext PDO pdo_sqlite
- * @psalm-import-type Return_findFromJsonViaSqlite from \TypeExp
  * @template B of mixed
  * @param string $json
  * @param null|positive-int $limit
@@ -287,7 +289,8 @@ class Exp
  * @author https://token-calculator.net/token-calculator
  * @see https://huggingface.co/microsoft/Phi-3-small-8k-instruct/blob/main/cl100k_base.tiktoken
  * @psalm-import-type Return_tokenCalculator from \TypeExp
- * скорость чуть ниже m2, но не требует RAM
+ * INFO скорость чуть ниже m2, но не требует RAM
+ * INFO есть погрешность с скриптом на сайте
  * 
  * 
  * BPE cl100k_base

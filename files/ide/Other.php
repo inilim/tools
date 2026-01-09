@@ -372,6 +372,14 @@ class Other
     static function sqliteLibVersion_m2(bool $fresh = false): ?string {}
 
         /**
+ * INFO version берем из обьекта \PDO
+ * @author inilim
+ * @todo tests
+ * @ext pdo pdo_sqlite
+ */
+    static function sqliteLibVersion_m3(): ?string {}
+
+        /**
  * @author https://github.com/kylekatarnls
  * @todo tests
  * @throws \InvalidArgumentException

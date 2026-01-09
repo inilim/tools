@@ -13,31 +13,43 @@ namespace Inilim\Tool\Method\Exp;
  */
 function jsonValidateViaSqlite(string $json, int $flags = 1): bool
 {
-    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
     \Inilim\Tool\Method\Assert\inArray($flags, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
+    // TODO json_valid был встроен в версии 3.38.0
+    if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
+        if ($curVer === null) {
+            throw new \InvalidArgumentException('SQLite library version is not defined');
+        }
+        throw new \InvalidArgumentException(\sprintf('Your SQLite %s library version is lower than 3.38.0', $curVer));
+    }
+    /** @var string $curVer */
 
-    $internal = static function () use ($json, $flags) {
+    $internal = static function () use ($json, $flags, $curVer) {
         $pdo = new \PDO('sqlite::memory:', null, null, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
-        $pdo->exec('CREATE TABLE _table (_value TEXT)');
-        $stmt = $pdo->prepare('INSERT INTO _table (_value) VALUES (:_value)');
-        $stmt->execute(['_value' => $json]);
+        if (\version_compare($curVer, '3.45.0', '>=')) {
+            // TODO В SQLite 3.45.0 у json_valid() появился необязательный второй аргумент flags, который уточняет, что считать «валидным JSON» (например, разрешать JSON5/JSONB).
+            $stmt = $pdo->prepare(\sprintf('SELECT json_valid(:json,%s) as v', $flags));
+        } else {
+            $stmt = $pdo->prepare('SELECT json_valid(:json) as v');
+        }
+        $stmt->execute(['json' => &$json]);
         unset($json);
-        $stmt = $pdo->query(\sprintf('SELECT json_valid(_value,%s) as valid FROM _table', $flags));
-        $results = $stmt->fetch(\PDO::FETCH_NUM);
+        $result = $stmt->fetch(\PDO::FETCH_NUM);
         $pdo = $stmt = null;
-        if (!isset($results[0]) || $results[0] == 0) {
+        if (!isset($result[0]) || $result[0] == 0) {
             return false;
         }
         return true;
     };
 
-    $results = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
+    $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
 
-    if (!\is_bool($results)) {
+    if (!\is_bool($result)) {
         return false;
     }
-    return $results;
+    return $result;
 }

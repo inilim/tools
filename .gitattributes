@@ -3,6 +3,7 @@
 
 # Dirs
 /.git*          export-ignore
+/.kilocode      export-ignore
 /tests          export-ignore
 /files/template export-ignore
 /files/sql      export-ignore

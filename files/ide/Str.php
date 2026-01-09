@@ -288,8 +288,16 @@ class Str
         /**
  * Return the length of the given string.
  * @param string|null $encoding
+ * @ext mbstring
  */
     static function length(string $value, $encoding = 'UTF-8'): int {}
+
+        /**
+ * @author inilim
+ * Return the length of the given string.
+ * Without mbstring
+ */
+    static function length_m2(string $value): int {}
 
         /**
  * Limit the number of characters in a string.

@@ -15,8 +15,8 @@ namespace Inilim\Tool\Method\Other;
 function tryCallWithErrHandler_m2(callable $callable, ?callable $handler = null, int $errorLevels = \E_ALL)
 {
     if ($handler === null) {
-        $handler = static function ($levelOrCode, $message, $file, $line) {
-            \Inilim\Tool\Method\Other\__setErrorLast($levelOrCode, $message, $file, $line);
+        $handler = static function ($levelOrCode, string $message, string $file, int $line) {
+            \Inilim\Tool\Method\Other\__setErrorLast((int)$levelOrCode, $message, $file, $line);
         };
     }
     return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable, $handler, $errorLevels);
