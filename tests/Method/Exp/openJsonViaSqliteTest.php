@@ -24,6 +24,7 @@ class openJsonViaSqliteTest extends TestCase
         $this->assertStringContainsString('JSON', Other::errorGetLast()['message']);
         \fclose($res);
         FS::unlink($ptf);
+        Other::errorClearLast();
     }
 
     function testFileBrokenJson()
@@ -37,6 +38,7 @@ class openJsonViaSqliteTest extends TestCase
         $this->assertStringContainsString('JSON', Other::errorGetLast()['message']);
         \fclose($res);
         FS::unlink($ptf);
+        Other::errorClearLast();
     }
 
     function testFileValidJson()
@@ -70,6 +72,7 @@ class openJsonViaSqliteTest extends TestCase
         \fclose($res);
         FS::unlink($ptf);
         Exp::closeResObjJsonSqlite($object);
+        Other::errorClearLast();
     }
 
     function testResourceValidJson()
@@ -104,23 +107,27 @@ class openJsonViaSqliteTest extends TestCase
         \fclose($res);
         FS::unlink($ptf);
         Exp::closeResObjJsonSqlite($object);
+        Other::errorClearLast();
     }
 
     function testExc()
     {
         $this->expectException(\InvalidArgumentException::class);
         Exp::openJsonViaSqlite('not found file');
+        Other::errorClearLast();
     }
 
     function testExc2()
     {
         $this->expectException(\InvalidArgumentException::class);
         Exp::openJsonViaSqlite(\fopen('php://temp', 'r+'));
+        Other::errorClearLast();
     }
 
     function testExc3()
     {
         $this->expectException(\InvalidArgumentException::class);
         Exp::openJsonViaSqlite(null);
+        Other::errorClearLast();
     }
 }

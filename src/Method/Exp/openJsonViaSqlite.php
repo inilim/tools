@@ -15,6 +15,13 @@ namespace Inilim\Tool\Method\Exp;
  */
 function openJsonViaSqlite($source): ?object
 {
+    \Inilim\Tool\Method\Assert\extPhp('PDO');
+    \Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');
+
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
+
     $type = \gettype($source);
     if ($type === 'string') {
         /** @var string $source */
@@ -27,6 +34,23 @@ function openJsonViaSqlite($source): ?object
     } else {
         throw new \InvalidArgumentException('$source allow file or open resource');
     }
+
+    // ---------------------------------------------
+    // Проверка версии sqlite
+    // ---------------------------------------------
+
+    $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
+    // TODO json_valid был встроен в версии 3.38.0
+    if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
+        if ($curVer === null) {
+            throw new \InvalidArgumentException('SQLite library version is not defined');
+        }
+        throw new \InvalidArgumentException(\sprintf('Your SQLite %s library version is lower than 3.38.0', $curVer));
+    }
+
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
 
     $class = __FUNCTION__;
 
@@ -88,6 +112,7 @@ function openJsonViaSqlite($source): ?object
             $obj->stmt->execute(['_value' => $text]);
             $i++;
         }
+
         $obj->pdo->exec('BEGIN TRANSACTION;' .
             'UPDATE _table SET _value = (' .
             'SELECT group_concat(_value, "") FROM _table WHERE _name != "json" ORDER BY _name ASC' .
@@ -113,21 +138,29 @@ function openJsonViaSqlite($source): ?object
         return $obj;
     };
 
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
+
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         $internal,
         static function ($_, $msg, $_1, $_2, $context) {
-            \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
             if ($context['isException']) {
                 $obj = $context['obj'];
                 $obj->pdo = $obj->stmt = null;
                 \Inilim\Tool\Method\FS\unlink($obj->tmpFile);
             }
+            \Inilim\Tool\Method\Other\__setErrorLast(-1, $msg, '', -1);
         }
     );
 
     if (!\is_object($result)) {
         return null;
     }
+
+    // ---------------------------------------------
+    // 
+    // ---------------------------------------------
 
     $object = new class {
         protected $tag; // onlyread

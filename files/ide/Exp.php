@@ -294,9 +294,9 @@ class Exp
  * 
  * 
  * BPE cl100k_base
- * @return \Closure(string):Return_tokenCalculator
+ * @return \Closure(string $text,bool $withoutArrayTokens):Return_tokenCalculator
  */
-    static function tokenCalcCL100KBase(bool $withoutArrayTokens = false): Closure {}
+    static function tokenCalcCL100KBase(): Closure {}
 
         /**
  * @author inilim

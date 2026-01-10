@@ -2,6 +2,7 @@
 /tests/*.sqlite
 /tests/*.json
 /tests/*.txt
+/files/*.txt
 
 # Dirs
 /vendor

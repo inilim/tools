@@ -1,6 +1,6 @@
 ## Юнит тесты
-Для запуска тестов используй cli "unit-tests"
+Для запуска тестов используй cli "phpunit"
 Пример:
 ```bash
-unit-tests tests/Method/Arr/rangeTest.php
+phpunit tests/Method/Arr/rangeTest.php
 ```

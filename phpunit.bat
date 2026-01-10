@@ -1,0 +1,1 @@
+php74 ./cli-tools/phpunit.php %*
