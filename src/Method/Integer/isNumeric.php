@@ -7,6 +7,8 @@ namespace Inilim\Tool\Method\Integer;
 /**
  * NOT like \is_numeric()
  * функция не проверяет длину значения, будет true даже с bigint и более.
+ * @psalm-assert-if-true string|int $v
+ * @phpstan-assert-if-true string|int $v
  * @param mixed $v
  */
 function isNumeric($v): bool

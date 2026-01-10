@@ -1,5 +1,6 @@
 # Exts
 /tests/*.sqlite
+/tests/*.sqlite-journal
 /tests/*.json
 /tests/*.txt
 /files/*.txt
@@ -15,3 +16,4 @@
 .htaccess
 .phpunit.result.cache
 /files/build_dev.sqlite
+/files/build_dev.sqlite-journal

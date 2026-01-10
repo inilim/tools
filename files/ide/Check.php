@@ -253,6 +253,23 @@ class Check
     static function iteratorAgg($value): bool {}
 
         /**
+ * Validate whether a given input is a Luhn number.
+ *
+ * @see https://en.wikipedia.org/wiki/Luhn_algorithm
+ *
+ * @author Alexander Gorshkov <mazanax@yandex.ru>
+ * @author Danilo Correa <danilosilva87@gmail.com>
+ * @author Henrique Moody <henriquemoody@gmail.com>
+ * @author Inilim
+ * 
+ * @psalm-assert-if-true string|int $value
+ * @phpstan-assert-if-true string|int $value
+ * 
+ * @param mixed $value
+ */
+    static function luhnNumber($value): bool {}
+
+        /**
  * @author Inilim
  * @psalm-assert-if-true string $value
  * @phpstan-assert-if-true string $value
