@@ -25,7 +25,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function writeContentTo
     }if(!\Inilim\Tool\ID::__definedIfNot('uuidv7')){
     function uuidv7():string{$uhex=\substr(\str_pad(\dechex(\Inilim\Tool\Method\Time\unixMs()),12,'0',\STR_PAD_LEFT),-12);$uhex .= \bin2hex(\random_bytes(10));return \Inilim\Tool\Method\ID\uuidFromHex($uhex,7);}
     }}namespace Inilim\Tool\Method\Time{if(!\Inilim\Tool\Time::__definedIfNot('unixMs')){
-    function unixMs():int{$t=\microtime(false);return \intval(\substr($t,11).\substr($t,2,3));}
+    function unixMs():int{$t=(string) \microtime(false);return \intval(\substr($t,11).\substr($t,2,3));}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('dir')){
     function dir($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\is_dir($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a directory.',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
