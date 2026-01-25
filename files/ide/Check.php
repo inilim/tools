@@ -354,11 +354,14 @@ class Check
     static function positiveInteger($value): bool {}
 
         /**
+ * check is valid regex
  * @author inilim
  * @psalm-pure
- * @param mixed  $value
+ * @psalm-assert-if-true string $regex
+ * @phpstan-assert-if-true string $regex
+ * @param mixed  $regex
  */
-    static function regex($value): bool {}
+    static function regex($regex): bool {}
 
         /**
  * @author webmozarts/assert
@@ -403,6 +406,17 @@ class Check
  * @param mixed $value
  */
     static function strOrBool($value): bool {}
+
+        /**
+ * @author inilim
+ * @psalm-pure
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * 
+ * 
+ * @param mixed $value
+ */
+    static function uuidv7($value): bool {}
 
         /**
  * @author webmozarts/assert
