@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\LarArr;
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
  *
  * @param  array  $array
- * @return bool
+ * @return ($array is list ? false : true)
  */
 function isAssoc(array $array)
 {

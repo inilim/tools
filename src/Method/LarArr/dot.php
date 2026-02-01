@@ -27,5 +27,8 @@ function dot($array, $prepend = '')
 
     $flatten($array, $prepend);
 
+    // Destroy self-referencing closure to avoid memory leak...
+    $flatten = null;
+
     return $results;
 }

@@ -5,10 +5,13 @@ namespace Inilim\Tool\Method\LarArr;
 /**
  * Recursively sort an array by keys and values.
  *
- * @param  array  $array
- * @param  int  $options
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @param  int-mask-of<SORT_REGULAR|SORT_NUMERIC|SORT_STRING|SORT_LOCALE_STRING|SORT_NATURAL|SORT_FLAG_CASE>  $options
  * @param  bool  $descending
- * @return array
+ * @return array<TKey, TValue>
  */
 function sortRecursive($array, $options = \SORT_REGULAR, $descending = false)
 {

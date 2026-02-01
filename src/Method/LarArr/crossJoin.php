@@ -5,8 +5,10 @@ namespace Inilim\Tool\Method\LarArr;
 /**
  * Cross join the given arrays, returning all possible permutations.
  *
- * @param  iterable  ...$arrays
- * @return array
+ * @template TValue
+ *
+ * @param  iterable<TValue>  ...$arrays
+ * @return array<int, array<array-key, TValue>>
  */
 function crossJoin(...$arrays)
 {

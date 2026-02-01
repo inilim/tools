@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\LarArr;
  * An array is a "list" if all array keys are sequential integers starting from 0 with no gaps in between.
  *
  * @param  array  $array
- * @return bool
+ * @return ($array is list ? true : false)
  */
 function isList($array)
 {

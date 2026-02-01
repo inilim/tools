@@ -60,16 +60,21 @@ class LarArr
         /**
  * Cross join the given arrays, returning all possible permutations.
  *
- * @param  iterable  ...$arrays
- * @return array
+ * @template TValue
+ *
+ * @param  iterable<TValue>  ...$arrays
+ * @return array<int, array<array-key, TValue>>
  */
     static function crossJoin(...$arrays) {}
 
         /**
  * Divide an array into two arrays. One with keys and the other with values.
  *
- * @param  array  $array
- * @return array
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @return array{TKey[], TValue[]}
  */
     static function divide($array) {}
 
@@ -99,6 +104,16 @@ class LarArr
  * @return array
  */
     static function except($array, $keys) {}
+
+        /**
+ * Get all of the given array except for a specified array of values.
+ *
+ * @param  array  $array
+ * @param  mixed  $values
+ * @param  bool  $strict
+ * @return array
+ */
+    static function exceptValues($array, $values, $strict = false) {}
 
         /**
  * Determine if the given key exists in the provided array.
@@ -211,7 +226,7 @@ class LarArr
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
  *
  * @param  array  $array
- * @return bool
+ * @return ($array is list ? false : true)
  */
     static function isAssoc(array $array) {}
 
@@ -221,7 +236,7 @@ class LarArr
  * An array is a "list" if all array keys are sequential integers starting from 0 with no gaps in between.
  *
  * @param  array  $array
- * @return bool
+ * @return ($array is list ? true : false)
  */
     static function isList($array) {}
 
@@ -296,6 +311,16 @@ class LarArr
     static function only($array, $keys) {}
 
         /**
+ * Get a subset of the items from the given array by value.
+ *
+ * @param  array  $array
+ * @param  mixed  $values
+ * @param  bool  $strict
+ * @return array
+ */
+    static function onlyValues($array, $values, $strict = false) {}
+
+        /**
  * Partition the array into two arrays using the given callback.
  *
  * @template TKey of array-key
@@ -364,9 +389,12 @@ class LarArr
         /**
  * Filter the array using the negation of the given callback.
  *
- * @param  array  $array
- * @param  callable  $callback
- * @return array
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @param  callable(TValue, TKey): bool  $callback
+ * @return array<TKey, TValue>
  */
     static function reject($array, callable $callback) {}
 
@@ -410,19 +438,26 @@ class LarArr
         /**
  * Recursively sort an array by keys and values.
  *
- * @param  array  $array
- * @param  int  $options
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @param  int-mask-of<SORT_REGULAR|SORT_NUMERIC|SORT_STRING|SORT_LOCALE_STRING|SORT_NATURAL|SORT_FLAG_CASE>  $options
  * @param  bool  $descending
- * @return array
+ * @return array<TKey, TValue>
  */
     static function sortRecursive($array, $options = \SORT_REGULAR, $descending = false) {}
 
         /**
  * Recursively sort an array by keys and values in descending order.
  *
- * @param  array  $array
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @param  int-mask-of<SORT_REGULAR|SORT_NUMERIC|SORT_STRING|SORT_LOCALE_STRING|SORT_NATURAL|SORT_FLAG_CASE>  $options
  * @param  int  $options
- * @return array
+ * @return array<TKey, TValue>
  */
     static function sortRecursiveDesc($array, $options = \SORT_REGULAR) {}
 
@@ -446,16 +481,16 @@ class LarArr
         /**
  * Conditionally compile classes from an array into a CSS class list.
  *
- * @param  array|string  $array
- * @return string
+ * @param  array<string, bool>|array<int, string|int>|string  $array
+ * @return ($array is array<string, false> ? '' : ($array is '' ? '' : ($array is array{} ? '' : non-empty-string)))
  */
     static function toCssClasses($array) {}
 
         /**
  * Conditionally compile styles from an array into a style list.
  *
- * @param  array|string  $array
- * @return string
+ * @param  array<string, bool>|array<int, string|int>|string  $array
+ * @return ($array is array<string, false> ? '' : ($array is '' ? '' : ($array is array{} ? '' : non-empty-string)))
  */
     static function toCssStyles($array) {}
 
@@ -470,9 +505,12 @@ class LarArr
         /**
  * Filter the array using the given callback.
  *
- * @param  array  $array
- * @param  callable  $callback
- * @return array
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue>  $array
+ * @param  callable(TValue, TKey): bool  $callback
+ * @return array<TKey, TValue>
  */
     static function where($array, callable $callback) {}
 
@@ -487,8 +525,10 @@ class LarArr
         /**
  * If the given value is not an array and not null, wrap it in one.
  *
- * @param  mixed  $value
- * @return array
+ * @template TValue
+ *
+ * @param  TValue  $value
+ * @return ($value is null ? array{} : ($value is array ? TValue : array{TValue}))
  */
     static function wrap($value) {}
 
