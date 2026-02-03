@@ -9,11 +9,19 @@ namespace Inilim\Tool\Method\File;
  * @return \Generator<int,string>
  * @throws \InvalidArgumentException
  */
-function lines_v2(string $pathToFile): \Generator
+function lines_v2(string $pathToFile, int $startLine = 0): \Generator
 {
     \Inilim\Tool\Method\Assert\file($pathToFile);
+    if ($startLine !== 0) {
+        \Inilim\Tool\Method\Assert\positiveInteger($startLine);
+    }
     $file = new \SplFileObject($pathToFile);
     $file->setFlags(\SplFileObject::DROP_NEW_LINE);
+
+    if ($startLine !== 0) {
+        $file->seek($startLine);
+    }
+
     while (! $file->eof()) {
         yield $file->fgets();
     }

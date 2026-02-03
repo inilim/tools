@@ -140,7 +140,7 @@ class File
  * @return \Generator<int,string>
  * @throws \InvalidArgumentException
  */
-    static function lines_v2(string $pathToFile): Generator {}
+    static function lines_v2(string $pathToFile, int $startLine = 0): Generator {}
 
         /**
  * Closes an open file pointer
