@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\File;
 
+use function Inilim\Tool\Method\Check\php85;
+
 /**
  * @todo tests
  * @author Inilim
@@ -59,8 +61,13 @@ function get(
                 $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
             }
 
-            if (isset($http_response_header)) {
-                $args['http_response_header'] = $http_response_header;
+            if (\Inilim\Tool\Method\Check\php84()) {
+                $args['http_response_header'] = \http_get_last_response_headers();
+            } else {
+                // Deprecated: The predefined locally scoped $http_response_header variable is deprecated, call http_get_last_response_headers()
+                if (isset($http_response_header)) {
+                    $args['http_response_header'] = $http_response_header;
+                }
             }
         },
         // [Handle]
