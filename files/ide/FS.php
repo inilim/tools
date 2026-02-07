@@ -120,6 +120,12 @@ class FS
     static function phpGlob(string $pattern, int $flags = 0): ?array {}
 
         /**
+ * @link https://php.net/manual/en/function.rmdir.php
+ * @param null|resource $context
+ */
+    static function phprmdir(string $directory, $context = null): bool {}
+
+        /**
  * @author inilim
  * @see https://www.php.net/manual/ru/function.stat.php
  * @return null|array{dev: int, ino: int, mode: int, nlink: int, uid: int, gid: int, rdev: int, size: int, atime: int, mtime: int, ctime: int, blksize: int, blocks: int}
