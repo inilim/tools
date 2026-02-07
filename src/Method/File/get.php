@@ -61,12 +61,14 @@ function get(
                 $args['result'] = \file_get_contents($args['pathToFile'], $args['useIncludePath'], $args['context'], $args['offset'], $args['length']);
             }
 
+            // Наличие самой переменной, вызывает ошибки Deprecated, обработчик может не успеть ее отловить.
+            $nameHRH = 'http_response_header';
             if (\Inilim\Tool\Method\Check\php84()) {
-                $args['http_response_header'] = \http_get_last_response_headers();
+                $args[$nameHRH] = \http_get_last_response_headers();
             } else {
                 // Deprecated: The predefined locally scoped $http_response_header variable is deprecated, call http_get_last_response_headers()
-                if (isset($http_response_header)) {
-                    $args['http_response_header'] = $http_response_header;
+                if (isset($$nameHRH)) {
+                    $args[$nameHRH] = $$nameHRH;
                 }
             }
         },
