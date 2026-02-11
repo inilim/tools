@@ -9,5 +9,6 @@ namespace Inilim\Tool\Method\FS;
  */
 function mbToBytes(int $mb): int
 {
-    return 8_388_608 * $mb;
+    // 1_000_000
+    return 1_000_000 * $mb;
 }

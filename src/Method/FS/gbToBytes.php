@@ -9,5 +9,5 @@ namespace Inilim\Tool\Method\FS;
  */
 function gbToBytes(int $gb): int
 {
-    return 8_589_934_592 * $gb;
+    return 1_000_000_000 * $gb;
 }

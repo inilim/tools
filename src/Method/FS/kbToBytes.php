@@ -9,5 +9,5 @@ namespace Inilim\Tool\Method\FS;
  */
 function kbToBytes(int $kb): int
 {
-    return 1_024 * $kb;
+    return 1_000 * $kb;
 }
