@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Convert the given string to upper-case.
+ * 
+ * @return ($value is '' ? '' : non-empty-string&uppercase-string)
  */
 function upper(string $value, ?string $encoding = 'UTF-8'): string
 {

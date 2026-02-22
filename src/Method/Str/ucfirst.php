@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Make a string's first character uppercase.
+ * 
+ * @return ($string is '' ? '' : non-empty-string)
  */
 function ucfirst(string $string): string
 {

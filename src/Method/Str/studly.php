@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Convert a value to studly caps case.
  * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
- * @return string
+ * @return ($value is '' ? '' : string)
  */
 function studly(string $value)
 {

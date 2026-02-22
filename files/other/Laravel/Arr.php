@@ -186,10 +186,10 @@ class Arr
 
         $flatten = function ($data, $prefix) use (&$results, &$flatten): void {
             foreach ($data as $key => $value) {
-                $newKey = $prefix.$key;
+                $newKey = $prefix . $key;
 
                 if (is_array($value) && ! empty($value)) {
-                    $flatten($value, $newKey.'.');
+                    $flatten($value, $newKey . '.');
                 } else {
                     $results[$newKey] = $value;
                 }
@@ -687,7 +687,7 @@ class Arr
 
         $finalItem = array_pop($array);
 
-        return implode($glue, $array).$finalGlue.$finalItem;
+        return implode($glue, $array) . $finalGlue . $finalItem;
     }
 
     /**
@@ -711,7 +711,7 @@ class Arr
      */
     public static function prependKeysWith($array, $prependWith)
     {
-        return static::mapWithKeys($array, fn ($item, $key) => [$prependWith.$key => $item]);
+        return static::mapWithKeys($array, fn($item, $key) => [$prependWith . $key => $item]);
     }
 
     /**
@@ -1252,7 +1252,7 @@ class Arr
      */
     public static function reject($array, callable $callback)
     {
-        return static::where($array, fn ($value, $key) => ! $callback($value, $key));
+        return static::where($array, fn($value, $key) => ! $callback($value, $key));
     }
 
     /**
@@ -1289,7 +1289,7 @@ class Arr
      */
     public static function whereNotNull($array)
     {
-        return static::where($array, fn ($value) => ! is_null($value));
+        return static::where($array, fn($value) => ! is_null($value));
     }
 
     /**

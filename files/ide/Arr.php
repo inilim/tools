@@ -827,8 +827,13 @@ class Arr
 
         /**
  * If the given value is not an array, wrap it in one.
+ * 
+ * @template TKey of array-key = array-key
+ * @template TValue
+ * 
  * @author inilim
- * @param mixed $value
+ * @param  array<TKey, TValue>|TValue  $value
+ * @return ($value is array ? array<TKey, TValue> : array{TValue})
  */
     static function wrap($value): array {}
 

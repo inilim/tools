@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Replace text within a portion of a string.
+ *
  * @param  string|string[]  $string
  * @param  string|string[]  $replace
  * @param  int|int[]  $offset
@@ -15,8 +16,10 @@ namespace Inilim\Tool\Method\Str;
 function substrReplace($string, $replace, $offset = 0, $length = null)
 {
     if ($length === null) {
-        $length = \strlen($string);
+        $length = \Inilim\Tool\Method\Str\length($string);
     }
 
-    return \substr_replace($string, $replace, $offset, $length);
+    return \mb_substr($string, 0, $offset)
+        . $replace
+        . \mb_substr(\mb_substr($string, $offset), $length);
 }

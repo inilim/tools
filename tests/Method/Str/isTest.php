@@ -75,7 +75,7 @@ class isTest extends TestCase
         namespace Illuminate\Tests\Support;
 
         use Exception;
-        VALUE;
+VALUE;
 
         $this->assertTrue(Str::is($multilineValue, $multilineValue));
         $this->assertTrue(Str::is('*', $multilineValue));
@@ -95,13 +95,13 @@ class isTest extends TestCase
         <?php
         *
         namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
+PATTERN, $multilineValue));
 
         $this->assertTrue(Str::is(<<<'PATTERN'
         <?php
 
         namespace Illuminate\Tests\*
-        PATTERN, $multilineValue));
+PATTERN, $multilineValue));
     }
 }
 

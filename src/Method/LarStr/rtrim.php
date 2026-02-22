@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Str;
+namespace Inilim\Tool\Method\LarStr;
 
 /**
  * Remove all whitespace from the end of a string.
@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Str;
  * @param  string|null  $charlist
  * @return string
  */
-function rtrim(string $value, ?string $charlist = null): string
+function rtrim($value, $charlist = null)
 {
     if ($charlist === null) {
         $rtrimDefaultCharacters = \preg_quote(" \n\r\t\v\0");

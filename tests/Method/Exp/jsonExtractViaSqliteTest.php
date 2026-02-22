@@ -38,7 +38,7 @@ class jsonExtractViaSqliteTest extends TestCase
 
     function testInvalidJson()
     {
-        $this->assertSame(null, Other::errorGetLast());
+        Other::errorClearLast();
         $this->assertSame(null, Exp::jsonExtractViaSqlite('"a":null}', '$.a'));
         $this->assertSame(true, \is_array(Other::errorGetLast()));
     }

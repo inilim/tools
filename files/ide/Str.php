@@ -148,8 +148,12 @@ class Str
 
         /**
  * @author laravel
+ * 
  * Determine if a given string doesn't start with a given substring.
+ * 
  * @param  string|iterable<string>  $needles
+ * @return ($needles is array{} ? true : ($haystack is non-empty-string ? bool : true))
+ * @phpstan-assert-if-false =non-empty-string $haystack
  */
     static function doesntStartWith(string $haystack, $needles): bool {}
 
@@ -271,6 +275,8 @@ class Str
 
         /**
  * Make a string's first character lowercase.
+ * 
+ * @return ($string is '' ? '' : non-empty-string)
  */
     static function lcfirst(string $string): string {}
 
@@ -312,9 +318,12 @@ class Str
 
         /**
  * Remove all whitespace from the beginning of a string.
+ *
+ * @param  string  $value
+ * @param  string|null  $charlist
  * @return string
  */
-    static function ltrim(string $value, ?string $charlist = null) {}
+    static function ltrim(string $value, ?string $charlist = null): string {}
 
         /**
  * Masks a portion of a string with a repeated character.
@@ -457,10 +466,12 @@ class Str
 
         /**
  * Replace the patterns matching the given regular expression.
- * @param string[]|string $replace
- * @param \Closure|string $replace
- * @param string[]|string $subject
- * @return string|string[]|null
+ *
+ * @param  string|string[]  $pattern
+ * @param  (\Closure(array): string)|string[]|string  $replace
+ * @param  string[]|string  $subject
+ * @param  int  $limit
+ * @return ($subject is array ? string[]|null : string|null)
  */
     static function replaceMatches($pattern, $replace, $subject, int $limit = -1) {}
 
@@ -478,9 +489,12 @@ class Str
 
         /**
  * Remove all whitespace from the end of a string.
+ *
+ * @param  string  $value
+ * @param  string|null  $charlist
  * @return string
  */
-    static function rtrim(string $value, ?string $charlist = null) {}
+    static function rtrim(string $value, ?string $charlist = null): string {}
 
         /**
  * @todo проблема с php74 preg_replace отдает null из-за модификатора "u"
@@ -496,26 +510,32 @@ class Str
 
         /**
  * Begin a string with a single instance of a given value.
+ * 
+ * @return ($value is '' ? ($prefix is '' ? '' : non-empty-string): non-empty-string)
  */
     static function start(string $value, string $prefix): string {}
 
         /**
  * Determine if a given string starts with a given substring.
+ * 
  * @param  string|iterable<string>  $needles
+ * @return ($needles is array{} ? false : ($haystack is non-empty-string ? bool : false))
+ *
+ * @phpstan-assert-if-true =non-empty-string $haystack
  */
     static function startsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
  * Convert a value to studly caps case.
  * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
- * @return string
+ * @return ($value is '' ? '' : string)
  */
     static function studly(string $value) {}
 
         /**
  * Convert a value to studly caps case.
  * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
- * @return string
+ * @return ($value is '' ? '' : string)
  */
     static function pascal(string $value) {}
 
@@ -532,6 +552,7 @@ class Str
 
         /**
  * Replace text within a portion of a string.
+ *
  * @param  string|string[]  $string
  * @param  string|string[]  $replace
  * @param  int|int[]  $offset
@@ -542,6 +563,10 @@ class Str
 
         /**
  * Swap multiple keywords in a string with other keywords.
+ *
+ * @param  array<string, string>  $map
+ * @param  string  $subject
+ * @return string
  */
     static function swap(array $map, string $subject): string {}
 
@@ -598,17 +623,23 @@ class Str
 
         /**
  * Remove all whitespace from both ends of a string.
+ *
+ * @param  string  $value
+ * @param  string|null  $charlist
+ * @return string
  */
     static function trim(string $value, ?string $charlist = null): string {}
 
         /**
  * Make a string's first character uppercase.
+ * 
+ * @return ($string is '' ? '' : non-empty-string)
  */
     static function ucfirst(string $string): string {}
 
         /**
  * Split a string into pieces by uppercase characters.
- * @return string[]
+ * @return ($string is '' ? array{} : string[])
  */
     static function ucsplit(string $string): array {}
 
@@ -625,11 +656,15 @@ class Str
 
         /**
  * Convert the given string to upper-case.
+ * 
+ * @return ($value is '' ? '' : non-empty-string&uppercase-string)
  */
     static function upper(string $value, ?string $encoding = 'UTF-8'): string {}
 
         /**
  * Get the number of words a string contains.
+ * 
+ * @return non-negative-int
  */
     static function wordCount(string $string, ?string $characters = null): int {}
 

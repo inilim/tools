@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Str;
+namespace Inilim\Tool\Method\LarStr;
 
 /**
  * Remove all whitespace from the beginning of a string.
@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Str;
  * @param  string|null  $charlist
  * @return string
  */
-function ltrim(string $value, ?string $charlist = null): string
+function ltrim($value, $charlist = null)
 {
     if ($charlist === null) {
         $ltrimDefaultCharacters = \preg_quote(" \n\r\t\v\0");

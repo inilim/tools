@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Make a string's first character lowercase.
+ * 
+ * @return ($string is '' ? '' : non-empty-string)
  */
 function lcfirst(string $string): string
 {

@@ -6,7 +6,11 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Determine if a given string starts with a given substring.
+ * 
  * @param  string|iterable<string>  $needles
+ * @return ($needles is array{} ? false : ($haystack is non-empty-string ? bool : false))
+ *
+ * @phpstan-assert-if-true =non-empty-string $haystack
  */
 function startsWith(string $haystack, $needles, bool $ignoreCase = false): bool
 {

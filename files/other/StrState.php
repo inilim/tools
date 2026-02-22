@@ -7,6 +7,8 @@ namespace Inilim\Internal;
  */
 class StrState
 {
+    const INVISIBLE_CHARACTERS = '';
+
     /**
      * The callback that should be used to generate random strings.
      * @var callable|null

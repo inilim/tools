@@ -6,10 +6,12 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Replace the patterns matching the given regular expression.
- * @param string[]|string $replace
- * @param \Closure|string $replace
- * @param string[]|string $subject
- * @return string|string[]|null
+ *
+ * @param  string|string[]  $pattern
+ * @param  (\Closure(array): string)|string[]|string  $replace
+ * @param  string[]|string  $subject
+ * @param  int  $limit
+ * @return ($subject is array ? string[]|null : string|null)
  */
 function replaceMatches($pattern, $replace, $subject, int $limit = -1)
 {

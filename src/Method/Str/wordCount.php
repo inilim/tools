@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Get the number of words a string contains.
+ * 
+ * @return non-negative-int
  */
 function wordCount(string $string, ?string $characters = null): int
 {

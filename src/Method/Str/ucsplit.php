@@ -6,7 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Split a string into pieces by uppercase characters.
- * @return string[]
+ * @return ($string is '' ? array{} : string[])
  */
 function ucsplit(string $string): array
 {
