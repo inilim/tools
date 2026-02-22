@@ -6,8 +6,13 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * If the given value is not an array, wrap it in one.
+ * 
+ * @template TKey of array-key = array-key
+ * @template TValue
+ * 
  * @author inilim
- * @param mixed $value
+ * @param  array<TKey, TValue>|TValue  $value
+ * @return ($value is array ? array<TKey, TValue> : array{TValue})
  */
 function wrap($value): array
 {
