@@ -15,7 +15,7 @@ function countValues(array $array): array
     $ret_array = [];
     foreach ($array as $value) {
         foreach ($ret_array as $key2 => $value2) {
-            if (strtolower($key2) == strtolower($value)) {
+            if (\strtolower($key2) == \strtolower($value)) {
                 $ret_array[$key2]++;
                 continue 2;
             }

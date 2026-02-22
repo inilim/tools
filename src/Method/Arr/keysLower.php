@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param T $array
  * @return T
  */
-function keysLower(array $array)
+function keysLower(array $array): array
 {
     return \array_change_key_case($array, \CASE_LOWER);
 }

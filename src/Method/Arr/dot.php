@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Arr;
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
  */
-function dot(iterable $array, string $prepend = '', string $separator = '.')
+function dot(iterable $array, string $prepend = '', string $separator = '.'): array
 {
     $results = [];
 

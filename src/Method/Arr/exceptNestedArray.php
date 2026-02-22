@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param  (string|int)[]|string|int $keys
  * @return array
  */
-function exceptNestedArray(array $array, $keys, int $depth = 1)
+function exceptNestedArray(array $array, $keys, int $depth = 1): array
 {
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,

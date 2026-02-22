@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Arr;
  * key.*.key....
  * @return string[]
  */
-function dotKeysByPattern(iterable $target, string $dotPattern)
+function dotKeysByPattern(iterable $target, string $dotPattern): array
 {
     $regex = '#^' . \str_replace('\*', '[^\.]+', \preg_quote($dotPattern)) . '#';
     return \array_values(

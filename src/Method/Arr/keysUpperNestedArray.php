@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param mixed[] $array
  * @return mixed[]
  */
-function keysUpperNestedArray(array $array, int $depth = 1)
+function keysUpperNestedArray(array $array, int $depth = 1): array
 {
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,

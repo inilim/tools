@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
  */
-function dataSet()
+function dataSet(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 

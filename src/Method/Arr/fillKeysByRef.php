@@ -11,6 +11,7 @@ namespace Inilim\Tool\Method\Arr;
 function fillKeysByRef(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (array &$array, array $keys, $value, bool $overwrite = true) {
         foreach ($keys as $key) {
             if ($overwrite || !\array_key_exists($key, $array)) {

@@ -10,9 +10,10 @@ namespace Inilim\Tool\Method\Arr;
  * If $key is null (or does not exist), it is inserted at the end.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
  */
-function insertAfter()
+function insertAfter(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (array &$array, $key, array $inserted) {
         if ($key === null || ($offset = \Inilim\Tool\Method\Arr\getKeyOffset($array, $key)) === null) {
             $offset = \sizeof($array) - 1;

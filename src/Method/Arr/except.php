@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param (string|int)[]|string|int $keys
  * @return T
  */
-function except(array $array, $keys)
+function except(array $array, $keys): array
 {
     \Inilim\Tool\Method\Arr\forget()($array, $keys);
     return $array;

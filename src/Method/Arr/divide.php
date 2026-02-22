@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param array<K,V> $array
  * @return array{K[],V[]}
  */
-function divide(array $array)
+function divide(array $array): array
 {
     return [\array_keys($array), \array_values($array)];
 }

@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param callable(TValue,TKey,TOffset):mixed $callback
  * @return array<TKey,TValue>
  */
-function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false)
+function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false): array
 {
     $i      = 0;
     $result = [];

@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\Arr;
  * @param array $array
  * @return array
  */
-function keysLowerNestedArray(array $array, int $depth = 1)
+function keysLowerNestedArray(array $array, int $depth = 1): array
 {
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,

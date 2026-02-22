@@ -10,6 +10,7 @@ namespace Inilim\Tool\Method\Arr;
 function renameDotKey(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (array &$array, string $oldKey, string $newKey): bool {
         $tArr   = \Inilim\Tool\Method\Arr\dot($array);
         $result = \Inilim\Tool\Method\Arr\renameKey()($tArr, $oldKey, $newKey);
