@@ -1,7 +1,7 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function exceptNestedArray(array $array,$keys,int $depth=1){return \Inilim\Tool\Method\Arr\nestedMap($array,$depth,static function($value)use($keys){return \Inilim\Tool\Method\Arr\except($value,$keys);});}if(!\Inilim\Tool\Arr::__definedIfNot('except')){
-    function except(array $array,$keys){\Inilim\Tool\Method\Arr\forget()($array,$keys);return $array;}
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function exceptNestedArray(array $array,$keys,int $depth=1):array{return \Inilim\Tool\Method\Arr\nestedMap($array,$depth,static function($value)use($keys){return \Inilim\Tool\Method\Arr\except($value,$keys);});}if(!\Inilim\Tool\Arr::__definedIfNot('except')){
+    function except(array $array,$keys):array{\Inilim\Tool\Method\Arr\forget()($array,$keys);return $array;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
     function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('forget')){

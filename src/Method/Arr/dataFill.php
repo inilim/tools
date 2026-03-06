@@ -14,6 +14,7 @@ namespace Inilim\Tool\Method\Arr;
 function dataFill(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
+
     return static function (&$target, $key, $value) {
         return \Inilim\Tool\Method\Arr\dataSet()($target, $key, $value, false);
     };

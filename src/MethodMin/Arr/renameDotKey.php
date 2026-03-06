@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function renameDotKey():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,string $oldKey,string $newKey):bool{$tArr=\Inilim\Tool\Method\Arr\dot($array);$result=\Inilim\Tool\Method\Arr\renameKey()($tArr,$oldKey,$newKey);$array=\Inilim\Tool\Method\Arr\undot($tArr);return $result;};}if(!\Inilim\Tool\Arr::__definedIfNot('dot')){
-    function dot(iterable $array,string $prepend='',string $separator='.'){$results=[];$flatten=static function(iterable $data,string $prefix,string $separator)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.$separator,$separator);}else{$results[$newKey]=$value;}}};$flatten($array,$prepend,$separator);return $results;}
+    function dot(iterable $array,string $prepend='',string $separator='.'):array{$results=[];$flatten=static function(iterable $data,string $prefix,string $separator)use(&$results,&$flatten){foreach($data as $key=>$value){$newKey=$prefix.$key;if(\is_array($value)&&!empty($value)){$flatten($value,$newKey.$separator,$separator);}else{$results[$newKey]=$value;}}};$flatten($array,$prepend,$separator);return $results;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('getKeyOffset')){
     function getKeyOffset(array $array,$key){$value=\array_search(\key([$key=>null]),\array_keys($array),true);return $value===false?null:$value;}
     }if(!\Inilim\Tool\Arr::__definedIfNot('renameKey')){

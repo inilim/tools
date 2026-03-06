@@ -14,6 +14,7 @@ namespace Inilim\Tool\Method\Other;
  */
 function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL)
 {
+    // callFromBox
     $use = [
         'handler'   => $handler,
         'exception' => null,

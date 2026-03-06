@@ -54,6 +54,14 @@ class FS
 
         /**
  * @author inilim
+ * @link https://php.net/manual/en/function.fileinode.php
+ * 
+ * Gets file inode
+ */
+    static function inode(string $filename): ?int {}
+
+        /**
+ * @author inilim
  */
     static function isDir(string $filename): bool {}
 

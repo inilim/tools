@@ -1,7 +1,7 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function keysUpperNestedArray(array $array,int $depth=1){return \Inilim\Tool\Method\Arr\nestedMap($array,$depth,static function(array $value){return \Inilim\Tool\Method\Arr\keysUpper($value);});}if(!\Inilim\Tool\Arr::__definedIfNot('keysUpper')){
-    function keysUpper(array $array){return \array_change_key_case($array,\CASE_UPPER);}
+declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function keysUpperNestedArray(array $array,int $depth=1):array{return \Inilim\Tool\Method\Arr\nestedMap($array,$depth,static function(array $value){return \Inilim\Tool\Method\Arr\keysUpper($value);});}if(!\Inilim\Tool\Arr::__definedIfNot('keysUpper')){
+    function keysUpper(array $array):array{return \array_change_key_case($array,\CASE_UPPER);}
     }if(!\Inilim\Tool\Arr::__definedIfNot('nestedMap')){
     function nestedMap(array $array,int $depth,callable $callable):array{$internal=static function(array&$array,$key,int $depth,callable $callable)use(&$internal):array{if($depth<=0){return $callable($array,$key);}foreach($array as $idx=>$item){if(\is_array($item)){$array[$idx]=$internal($item,$idx,$depth-1,$callable);}}return $array;};return $internal($array,null,$depth,$callable);}
     }}

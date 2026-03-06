@@ -85,7 +85,7 @@ class Arr
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
  */
-    static function dataFill() {}
+    static function dataFill(): Closure {}
 
         /**
  * @deprecated use LarArr::***
@@ -115,7 +115,7 @@ class Arr
  * @template T of array|object
  * @return \Closure(T &$target, string|string[] $key, mixed $value):T
  */
-    static function dataSet() {}
+    static function dataSet(): Closure {}
 
         /**
  * @deprecated use LarArr::***
@@ -126,7 +126,7 @@ class Arr
  * @param array<K,V> $array
  * @return array{K[],V[]}
  */
-    static function divide(array $array) {}
+    static function divide(array $array): array {}
 
         /**
  * @deprecated use LarArr::***
@@ -134,7 +134,7 @@ class Arr
  * Flatten a multi-dimensional associative array with dots.
  * @return array<string,mixed>
  */
-    static function dot(iterable $array, string $prepend = '', string $separator = '.') {}
+    static function dot(iterable $array, string $prepend = '', string $separator = '.'): array {}
 
         /**
  * @author inilim
@@ -148,7 +148,7 @@ class Arr
  * key.*.key....
  * @return string[]
  */
-    static function dotKeysByPattern(iterable $target, string $dotPattern) {}
+    static function dotKeysByPattern(iterable $target, string $dotPattern): array {}
 
         /**
  * Execute a callback over each item.
@@ -178,14 +178,14 @@ class Arr
  * @param (string|int)[]|string|int $keys
  * @return T
  */
-    static function except(array $array, $keys) {}
+    static function except(array $array, $keys): array {}
 
         /**
  * @author inilim
  * @param  (string|int)[]|string|int $keys
  * @return array
  */
-    static function exceptNestedArray(array $array, $keys, int $depth = 1) {}
+    static function exceptNestedArray(array $array, $keys, int $depth = 1): array {}
 
         /**
  * @deprecated use LarArr::***
@@ -355,7 +355,7 @@ class Arr
  * If $key is null (or does not exist), it is inserted at the end.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
  */
-    static function insertAfter() {}
+    static function insertAfter(): Closure {}
 
         /**
  * @author nette/utils
@@ -363,7 +363,7 @@ class Arr
  * If $key is null (or does not exist), it is inserted at the beginning.
  * @return \Closure(array &$array, string|int|null $key, array $inserted):void
  */
-    static function insertBefore() {}
+    static function insertBefore(): Closure {}
 
         /**
  * @deprecated use LarArr::***
@@ -404,27 +404,27 @@ class Arr
  * @param T $array
  * @return T
  */
-    static function keysLower(array $array) {}
+    static function keysLower(array $array): array {}
 
         /**
  * @param array $array
  * @return array
  */
-    static function keysLowerNestedArray(array $array, int $depth = 1) {}
+    static function keysLowerNestedArray(array $array, int $depth = 1): array {}
 
         /**
  * @template T of array
  * @param T $array
  * @return T
  */
-    static function keysUpper(array $array) {}
+    static function keysUpper(array $array): array {}
 
         /**
  * @author inilim
  * @param mixed[] $array
  * @return mixed[]
  */
-    static function keysUpperNestedArray(array $array, int $depth = 1) {}
+    static function keysUpperNestedArray(array $array, int $depth = 1): array {}
 
         /**
  * @author laravel
@@ -461,7 +461,7 @@ class Arr
  * @param callable(TValue,TKey,TOffset):mixed $callback
  * @return array<TKey,TValue>
  */
-    static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false) {}
+    static function mapFilter(array $array, callable $callback, $filteringValue = null, bool $preserveKeys = false): array {}
 
         /**
  * @deprecated use LarArr::***
@@ -568,7 +568,7 @@ class Arr
  * Get a value from the array, and remove it.
  * @return \Closure(array &$array, string|int $key, mixed $default):mixed
  */
-    static function pull() {}
+    static function pull(): Closure {}
 
         /**
  * @deprecated use LarArr::***
@@ -615,7 +615,7 @@ class Arr
  * @author inilim
  * @return array
  */
-    static function resetKeysRecursive(array $array) {}
+    static function resetKeysRecursive(array $array): array {}
 
         /**
  * @deprecated use LarArr::***
