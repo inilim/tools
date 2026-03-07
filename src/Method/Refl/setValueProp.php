@@ -17,7 +17,9 @@ function setValueProp($objectOrClass, string $name, $value, bool $throw = false)
         return false;
     }
 
-    $prop->setAccessible(true);
+    if (!\Inilim\Tool\Method\Check\php81()) {
+        $prop->setAccessible(true);
+    }
 
     try {
         $prop->setValue($objectOrClass, $value);
@@ -25,7 +27,7 @@ function setValueProp($objectOrClass, string $name, $value, bool $throw = false)
         if ($throw) {
             throw $e;
         }
-        return null;
+        return false;
     }
     return true;
 }

@@ -44,8 +44,10 @@ class Internal
             $rc = new \ReflectionClass($e);
             $rpf = $rc->getProperty('file');
             $rpl = $rc->getProperty('line');
-            $rpf->setAccessible(true);
-            $rpl->setAccessible(true);
+            if (\PHP_VERSION_ID < 80100) {
+                $rpf->setAccessible(true);
+                $rpl->setAccessible(true);
+            }
             $rpf->setValue($e, $file);
             $rpl->setValue($e, $line);
             throw $e;

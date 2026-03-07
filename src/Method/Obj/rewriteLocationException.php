@@ -16,8 +16,10 @@ function rewriteLocationException(\Throwable $e, string $file, int $line): objec
     $rpf = $rc->getProperty('file');
     $rpl = $rc->getProperty('line');
 
-    $rpf->setAccessible(true);
-    $rpl->setAccessible(true);
+    if (!\Inilim\Tool\Method\Check\php81()) {
+        $rpf->setAccessible(true);
+        $rpl->setAccessible(true);
+    }
 
     $rpf->setValue($e, $file);
     $rpl->setValue($e, $line);
