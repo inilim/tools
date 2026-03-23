@@ -39,6 +39,30 @@ class Obj
     static function sprintfException(string $format = '', array $values = [], $classOrObj = \Exception::class, array $args = []): Throwable {}
 
         /**
+ * @author inilim
+ *
+ * @param array $values
+ * @return \InvalidArgumentException
+ */
+    static function sprintfInvalidArgumentException(string $format = '', array $values = [], array $args = []): InvalidArgumentException {}
+
+        /**
+ * @author inilim
+ *
+ * @param array $values
+ * @return \LogicException
+ */
+    static function sprintfLogicException(string $format = '', array $values = [], array $args = []): LogicException {}
+
+        /**
+ * @author inilim
+ *
+ * @param array $values
+ * @return \RuntimeException
+ */
+    static function sprintfRuntimeException(string $format = '', array $values = [], array $args = []): RuntimeException {}
+
+        /**
  * @deprecated use Arr::from
  * @author mohammadrasoulasghari <https://github.com/mohammadrasoulasghari>
  * Convert a Traversable to an array, or return the original value if not Traversable.
