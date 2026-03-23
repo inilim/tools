@@ -61,8 +61,13 @@ class Time
         
     static function secondsToMs(int $sec): int {}
 
-        
+        /**
+ * @deprecated use Time::sleepMs()
+ */
     static function sleepMilSecs(int $v): int {}
+
+        
+    static function sleepMs(int $v): int {}
 
         
     static function sleepRndMilSecs(int $min, int $max): int {}

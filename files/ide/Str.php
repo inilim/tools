@@ -332,13 +332,12 @@ class Str
 
         /**
  * @author laravel
+ * 
  * Get the string matching the given pattern.
  *
- * @param  string  $pattern
- * @param  string  $subject
  * @return string[]
  */
-    static function matchAll(string $pattern, string $subject) {}
+    static function matchAll(string $pattern, string $subject): array {}
 
         /**
  * @return string
