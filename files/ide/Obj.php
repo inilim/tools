@@ -74,6 +74,7 @@ class Obj
 
         /**
  * @author inilim
+ * 
  * @template T of mixed
  * @param \Traversable<T> $obj
  * @return T[]

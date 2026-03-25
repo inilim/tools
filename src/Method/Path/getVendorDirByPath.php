@@ -29,19 +29,19 @@ function getVendorDirByPath(?string $path = null): ?string
         // Сюда мы попадаем если нас склонировали или скачали
         $t = \Inilim\Tool\Method\Str\beforeLast($path, '/src/');
         $t = \Inilim\Tool\Method\Path\normalize($t . '/vendor');
-        if (\is_dir($t)) {
+        if (\Inilim\Tool\Method\FS\isDir($t)) {
             return $t;
         }
     }
 
     // проверка в текущей папке
     $t = $path . 'vendor';
-    if (\is_dir($t)) {
+    if (\Inilim\Tool\Method\FS\isDir($t)) {
         return $t;
     } else {
         $t = \Inilim\Tool\Method\Path\normalize(\dirname($path) . '/vendor');
         // проверка на уровне выше
-        if (\is_dir($t)) {
+        if (\Inilim\Tool\Method\FS\isDir($t)) {
             return $t;
         }
     }
