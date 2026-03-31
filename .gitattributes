@@ -22,4 +22,5 @@
 /phpstan.neon           export-ignore
 /README.md              export-ignore
 /.cursorignore          export-ignore
-/.agentignore          export-ignore
+/.agentignore           export-ignore
+/.kilocodeignore        export-ignore

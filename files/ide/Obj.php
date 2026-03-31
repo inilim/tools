@@ -22,6 +22,18 @@ class Obj
     static function iteratorFilesRecursive(string $pathToDir, bool $skipDots = true) {}
 
         /**
+ * @author inilim
+ * 
+ * @desc Такой итератор реализует функциональность «заглядывания вперед и занад» (peek/lookback).
+ * @template TValue
+ * @template TKey
+ *
+ * @param iterable<TKey,TValue> $iterator
+ * @return \Generator<TKey,array{before:TValue|null,current:TValue,after:TValue|null}>
+ */
+    static function peekBackIterator(iterable $iterator): Generator {}
+
+        /**
  * @template T of \Throwable
  * @param T $e
  * @return T
