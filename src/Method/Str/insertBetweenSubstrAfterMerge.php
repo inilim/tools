@@ -13,6 +13,7 @@ function insertBetweenSubstrAfterMerge(
     string $separator = '/',
     string $encoding  = 'UTF-8'
 ): string {
+    \Inilim\Tool\Method\Assert\extPhp('mbstring');
     $result      = '';
     $posPositive = 0;
     $posNegative = 0;

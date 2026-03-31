@@ -14,6 +14,7 @@ namespace Inilim\Tool\Method\File;
  */
 function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
 {
+    \Inilim\Tool\Method\Assert\extPhp('mbstring');
     \Inilim\Tool\Method\Assert\file($pathToFile);
     \Inilim\Tool\Method\Assert\positiveInteger($chunk);
     $resource = \Inilim\Tool\Method\File\phpfopen($pathToFile, 'r');

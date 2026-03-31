@@ -16,6 +16,7 @@ namespace Inilim\Tool\Method\Exp;
  */
 function mbLevenshtein(string $str1, string $str2): int
 {
+    \Inilim\Tool\Method\Assert\extPhp('mbstring');
     $len1 = \mb_strlen($str1, 'UTF-8');
     $len2 = \mb_strlen($str2, 'UTF-8');
 

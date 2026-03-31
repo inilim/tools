@@ -13,6 +13,7 @@ namespace Inilim\Tool\Method\Exp;
  */
 function initials(string $value, string $separator = '')
 {
+    \Inilim\Tool\Method\Assert\extPhp('mbstring');
     $value = \Inilim\Tool\Method\Str\trim($value);
     $value = \Inilim\Tool\Method\Str\unixNewLines($value, " ");
     return \implode($separator, \array_map(

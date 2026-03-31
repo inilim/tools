@@ -19,6 +19,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function toCharsGenerator(): \Closure
 {
+    \Inilim\Tool\Method\Assert\extPhp('mbstring');
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (string &$string, int $chunkSize = 1, array $opts = []): \Generator {
