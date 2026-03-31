@@ -5,6 +5,7 @@
 /.git*          export-ignore
 /.kilocode      export-ignore
 /tests          export-ignore
+/cli-tools      export-ignore
 /files/template export-ignore
 /files/sql      export-ignore
 /files/other    export-ignore
