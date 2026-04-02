@@ -14,5 +14,6 @@ namespace Inilim\Tool\Method\Check;
  */
 function isIterable($value): bool
 {
-    return \is_array($value) || $value instanceof \Traversable;
+    // return \is_array($value) || $value instanceof \Traversable;
+    return \is_iterable($value);
 }
