@@ -14,5 +14,5 @@ namespace Inilim\Tool\Method\Check;
  */
 function isNonEmptyArray($value): bool
 {
-    return \is_array($value) && !!$value;
+    return \is_array($value) && $value !== [];
 }
