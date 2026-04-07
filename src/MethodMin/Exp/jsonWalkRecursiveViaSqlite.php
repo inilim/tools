@@ -28,7 +28,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonWalkRecurs
     }if(!\Inilim\Tool\Assert::__definedIfNot('positiveInteger')){
     function positiveInteger($value,string $message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('isIterable')){
-    function isIterable($value):bool{return \is_array($value)||$value instanceof \Traversable;}
+    function isIterable($value):bool{return \is_iterable($value);}
     }if(!\Inilim\Tool\Check::__definedIfNot('positiveInteger')){
     function positiveInteger($value):bool{return \is_int($value)&&$value>0;}
     }}

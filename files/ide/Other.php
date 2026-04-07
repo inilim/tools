@@ -130,6 +130,17 @@ class Other
     static function errorGetLast(): ?array {}
 
         /**
+ * @api
+ * @author https://github.com/thesis-php/exceptionally
+ *
+ * @template T
+ * @param callable(): (T|false) $function
+ * @return T
+ * @throws \ErrorException
+ */
+    static function exceptionally(callable $function, int $errorLevels = \E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED) {}
+
+        /**
  * @author inilim
  */
     static function extPhp(string $ext, bool $rechecking = false): bool {}
