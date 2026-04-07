@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Obj;
 
+use function Inilim\Tool\Method\Path\realPath;
+
 /**
  * @todo tests
  * @author inilim
@@ -12,8 +14,8 @@ namespace Inilim\Tool\Method\Obj;
  */
 function iteratorFilesRecursive(string $pathToDir, bool $skipDots = true)
 {
-    $dir = \realpath($pathToDir);
-    if ($dir === false || !\is_dir($dir)) {
+    $dir = \Inilim\Tool\Method\Path\realPath($pathToDir);
+    if ($dir === null || !\is_dir($dir)) {
         throw new \InvalidArgumentException(\sprintf('Not found dir "%s"', $pathToDir));
     }
 
