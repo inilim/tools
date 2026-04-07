@@ -14,10 +14,12 @@ function isEnum($v): bool
     if (\PHP_VERSION_ID < 80100) {
         return false;
     }
-
-    if (\is_object($v)) {
+    $t = \gettype($v);
+    if ($t === 'object') {
+        /** @var object $v */
         return $v instanceof \UnitEnum;
-    } elseif (\is_string($v)) {
+    } elseif ($t === 'string') {
+        /** @var string $v */
         return \enum_exists($v);
     }
     return false;

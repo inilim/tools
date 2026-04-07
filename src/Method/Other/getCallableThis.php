@@ -7,9 +7,8 @@ namespace Inilim\Tool\Method\Other;
 /**
  * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
- * @return ?object
  */
-function getCallableThis(callable $callable)
+function getCallableThis(callable $callable): ?object
 {
     $type = \gettype($callable);
     if ($type === 'object') {

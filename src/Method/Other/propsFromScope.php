@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Other;
  * @param string[] $props
  * @return array<string,mixed>
  */
-function propsFromScope($scope, array $props)
+function propsFromScope($scope, array $props): array
 {
     if (!$props) {
         return [];

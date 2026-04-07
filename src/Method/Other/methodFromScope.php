@@ -10,11 +10,11 @@ namespace Inilim\Tool\Method\Other;
  * @param T|class-string<T> $scope
  * @param string $method
  * @param mixed[] $args
- * @return mixed[]
+ * @return mixed
  */
 function methodFromScope($scope, string $method, array $args = [])
 {
-    return (function ($method, $args) {
+    return (function (string $method, array $args) {
         if (\method_exists(self::class, $method)) {
             return self::$method(...$args);
         }

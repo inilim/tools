@@ -153,15 +153,15 @@ class Other
         /**
  * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
- * @return ?object
  */
-    static function getCallableThis(callable $callable) {}
+    static function getCallableThis(callable $callable): ?object {}
 
         /**
  * @author Inilim
+ * 
  * @return null|class-string
  */
-    static function getClosureScopeClass(\Closure $cls) {}
+    static function getClosureScopeClass(\Closure $cls): ?string {}
 
         /**
  * @author Internet
@@ -195,7 +195,7 @@ class Other
  * 
  * @param mixed $v
  * @param bool $trueFalseAsSeparateType if true type bool as 'true'|'false'
- * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type'
+ * @return ($trueFalseAsSeparateType is true ? 'null'|'array'|'float'|'enum'|'exception'|'object'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type' : 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource_closed'|'unknown_type')
  */
     static function getType($v, bool $trueFalseAsSeparateType = false): string {}
 
@@ -245,9 +245,8 @@ class Other
  * @author Inilim
  * @param callable(int $curIteration,int $maxIterations):bool $condition
  * @param callable(int $curIteration,int $maxIterations) $onBreak
- * @return void
  */
-    static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null) {}
+    static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null): void {}
 
         /**
  * @author inilim
@@ -261,7 +260,7 @@ class Other
  * @param T|class-string<T> $scope
  * @param string $method
  * @param mixed[] $args
- * @return mixed[]
+ * @return mixed
  */
     static function methodFromScope($scope, string $method, array $args = []) {}
 
@@ -283,7 +282,7 @@ class Other
  * isFirst:bool
  * }
  */
-    static function pagination(int $curPage, int $limitOnePage, int $countRecords) {}
+    static function pagination(int $curPage, int $limitOnePage, int $countRecords): array {}
 
         /**
  * @author inilim
@@ -298,8 +297,8 @@ class Other
     static function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string {}
 
         /**
+ * php://input
  * @author Inilim
- * @return string
  */
     static function phpInput(): string {}
 
@@ -310,7 +309,7 @@ class Other
  * @param string[] $props
  * @return array<string,mixed>
  */
-    static function propsFromScope($scope, array $props) {}
+    static function propsFromScope($scope, array $props): array {}
 
         /**
  * @author Internet
@@ -320,9 +319,16 @@ class Other
 
         /**
  * @author Symfony
+ * @deprecated use requestHeaders_m2
  * @return array<string,string>
  */
-    static function requestHeadersV2(?array $_server = null) {}
+    static function requestHeadersV2(?array $_server = null): array {}
+
+        /**
+ * @author Symfony
+ * @return array<string,string>
+ */
+    static function requestHeaders_m2(?array $_server = null): array {}
 
         /**
  * @author Internet
@@ -396,7 +402,7 @@ class Other
  * @throws \InvalidArgumentException
  * @throws \ValueError
  */
-    static function throwValueErrorIfAvailable($message = '', $code = 0, \Throwable $previous = null): void {}
+    static function throwValueErrorIfAvailable($message = '', $code = 0, ?\Throwable $previous = null): void {}
 
         /**
  * @author inilim
@@ -433,7 +439,7 @@ class Other
  * @param D $default
  * @return array{result:C|D,exception:null|\Throwable,"...":array{C|D,null|\Throwable}}
  */
-    static function tryCallCallable(callable $callable, array $args = [], $default = null) {}
+    static function tryCallCallable(callable $callable, array $args = [], $default = null): array {}
 
         /**
  * @author Inilim
@@ -442,7 +448,7 @@ class Other
  * @param object|class-string $objectOrClass
  * @return array{result:mixed|T,exception:null|\Throwable,"...":array{mixed|T,null|\Throwable}}
  */
-    static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null) {}
+    static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null): array {}
 
         /**
  * @author Inilim

@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Other;
  * 
  * @param mixed $v
  * @param bool $trueFalseAsSeparateType if true type bool as 'true'|'false'
- * @return 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type'
+ * @return ($trueFalseAsSeparateType is true ? 'null'|'array'|'float'|'enum'|'exception'|'object'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type' : 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource_closed'|'unknown_type')
  */
 function getType($v, bool $trueFalseAsSeparateType = false): string
 {

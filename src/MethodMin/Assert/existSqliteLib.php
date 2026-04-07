@@ -5,7 +5,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Assert{function existSqlite
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('phpInfo')){
-    function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=(string) \func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}
+    function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=\func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('sqliteLibVersion')){
     function sqliteLibVersion():?string{$info=\Inilim\Tool\Method\Other\phpInfo(\INFO_MODULES);if($info===null){return null;}\preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i',$info,$match);return $match[1]?? null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){

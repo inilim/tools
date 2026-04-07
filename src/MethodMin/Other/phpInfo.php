@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Other{function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=(string) \func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function phpInfo(int $flags=\INFO_ALL):?string{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($flags){$curLvl=\ob_get_level();\ob_start();if($curLvl===\ob_get_level()){return null;}\phpinfo($flags);return \ob_get_clean();},static function(){$message=\func_get_arg(1);\Inilim\Tool\Method\Other\__setErrorLast(-1,$message,'',-1);});return \is_string($result)?$result:null;}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}

@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Other;
  * @param object|class-string $objectOrClass
  * @return array{result:mixed|T,exception:null|\Throwable,"...":array{mixed|T,null|\Throwable}}
  */
-function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null)
+function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null): array
 {
     return \Inilim\Tool\Method\Other\tryCallCallable([$objectOrClass, $methodName], $args, $default);
 }

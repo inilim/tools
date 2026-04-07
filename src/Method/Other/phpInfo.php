@@ -21,7 +21,8 @@ function phpInfo(int $flags = \INFO_ALL): ?string
             return \ob_get_clean();
         },
         static function () {
-            $message = (string)\func_get_arg(1);
+            $message = \func_get_arg(1);
+            /** @var string $message */
             \Inilim\Tool\Method\Other\__setErrorLast(-1, $message, '', -1);
         }
     );

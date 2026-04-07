@@ -22,7 +22,7 @@ namespace Inilim\Tool\Method\Other;
  * isFirst:bool
  * }
  */
-function pagination(int $curPage, int $limitOnePage, int $countRecords)
+function pagination(int $curPage, int $limitOnePage, int $countRecords): array
 {
     $obj = new class
     {

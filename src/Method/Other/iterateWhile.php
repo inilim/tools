@@ -8,20 +8,19 @@ namespace Inilim\Tool\Method\Other;
  * @author Inilim
  * @param callable(int $curIteration,int $maxIterations):bool $condition
  * @param callable(int $curIteration,int $maxIterations) $onBreak
- * @return void
  */
-function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null)
+function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null): void
 {
     if ($maxIterations < 1) {
         if ($onBreak) {
-            \call_user_func($onBreak, 0, $maxIterations);
+            $onBreak(0, $maxIterations);
         }
         return;
     }
 
     $curIteration = 0;
     while (true) {
-        if (\call_user_func($condition, $curIteration, $maxIterations) === false) {
+        if ($condition($curIteration, $maxIterations) === false) {
             break;
         }
 
@@ -34,6 +33,6 @@ function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $on
     }
 
     if ($onBreak) {
-        \call_user_func($onBreak, $curIteration, $maxIterations);
+        $onBreak($curIteration, $maxIterations);
     }
 }

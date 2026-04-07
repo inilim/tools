@@ -6,10 +6,9 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author Symfony
- * @deprecated use requestHeaders_m2
  * @return array<string,string>
  */
-function requestHeadersV2(?array $_server = null): array
+function requestHeaders_m2(?array $_server = null): array
 {
     $_server ??= $_SERVER;
     $headers = [];

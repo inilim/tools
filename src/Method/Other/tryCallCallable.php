@@ -15,10 +15,10 @@ namespace Inilim\Tool\Method\Other;
  * @param D $default
  * @return array{result:C|D,exception:null|\Throwable,"...":array{C|D,null|\Throwable}}
  */
-function tryCallCallable(callable $callable, array $args = [], $default = null)
+function tryCallCallable(callable $callable, array $args = [], $default = null): array
 {
     try {
-        $result = \call_user_func_array($callable, $args);
+        $result = $callable(...$args);
     } catch (\Throwable $e) {
         return \Inilim\Tool\Method\Other\_refDots([
             'result'    => $default,

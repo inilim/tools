@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Other;
 
 /**
+ * php://input
  * @author Inilim
- * @return string
  */
 function phpInput(): string
 {
@@ -14,9 +14,5 @@ function phpInput(): string
         static fn() => \file_get_contents('php://input'),
         null
     );
-
-    if (\is_string($value)) {
-        return $value;
-    }
-    return '';
+    return \is_string($value) ? $value : '';
 }

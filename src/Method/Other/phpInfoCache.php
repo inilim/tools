@@ -34,7 +34,8 @@ function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string
             }
         },
         static function () {
-            $message = (string)\func_get_arg(1);
+            $message = \func_get_arg(1);
+            /** @var string $message */
             \Inilim\Tool\Method\Other\__setErrorLast(-1, $message, '', -1);
         }
     );
