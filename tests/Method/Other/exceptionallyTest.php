@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Inilim\Tool\Other;
 
-final class ExceptionallyTest extends \Inilim\Tool\Test\TestCase
+final class exceptionallyTest extends \Inilim\Tool\Test\TestCase
 {
     /**
      * @withoutErrorHandler

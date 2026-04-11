@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\Obj;
 
-use function Inilim\Tool\Method\Path\realPath;
-
 /**
  * @todo tests
  * @author inilim
