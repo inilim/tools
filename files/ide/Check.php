@@ -336,6 +336,13 @@ class Check
     static function php85(): bool {}
 
         /**
+ * @author Inilim
+ * 
+ * equal to or greater than
+ */
+    static function php86(): bool {}
+
+        /**
  * @psalm-pure
  * @psalm-assert-if-true float $value
  * @phpstan-assert-if-true float $value

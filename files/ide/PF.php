@@ -59,6 +59,21 @@ class PF
     static function bcdivmod(string $num1, string $num2, ?int $scale = null): ?array {}
 
         /**
+ * @author kylekatarnls <kylekatarnls@gmail.com>
+ * 
+ * @template Value
+ * @template Minimum
+ * @template Maximum
+ *
+ * @param Value   $value
+ * @param Minimum $min
+ * @param Maximum $max
+ *
+ * @return Value|Minimum|Maximum
+ */
+    static function clamp($value, $min, $max) {}
+
+        /**
  * @author symfony/polyfill
  * Returns TRUE if every character in text is either a letter or a digit, FALSE otherwise.
  * @see https://php.net/ctype-alnum

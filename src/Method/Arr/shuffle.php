@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * Shuffle the given array and return the result.
+ * Shuffle the given array and _return the result.
  * @param mixed[] $array
  * @return mixed[]
  */
