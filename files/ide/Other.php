@@ -17,6 +17,14 @@ class Other
     static function _refDots(array $array): array {}
 
         /**
+ * @author https://github.com/shipfastlabs/agent-detector/
+ * @author inilim
+ * 
+ * @return array{status:bool,name:?string}
+ */
+    static function agentDetector(): array {}
+
+        /**
  * @author Inilim
  * @return array<array{file:string|null,line:int|null,method:string|null,type:string|null,class:class-string|null,object:object|null,args:mixed[]|null}>
  */

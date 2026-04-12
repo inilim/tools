@@ -312,9 +312,9 @@ class Str
 
         /**
  * Convert the given string to lower-case.
- * @return string
+ * @ext mbstring
  */
-    static function lower(string $value, ?string $encoding = 'UTF-8') {}
+    static function lower(string $value, ?string $encoding = 'UTF-8'): string {}
 
         /**
  * Remove all whitespace from the beginning of a string.

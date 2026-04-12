@@ -6,9 +6,9 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Convert the given string to lower-case.
- * @return string
+ * @ext mbstring
  */
-function lower(string $value, ?string $encoding = 'UTF-8')
+function lower(string $value, ?string $encoding = 'UTF-8'): string
 {
     return \mb_strtolower($value, $encoding);
 }

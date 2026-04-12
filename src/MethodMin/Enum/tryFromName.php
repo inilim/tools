@@ -5,7 +5,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function tryFromName($
     }if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('lower')){
-    function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
+    function lower(string $value,?string $encoding='UTF-8'):string{return \mb_strtolower($value,$encoding);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('isEnum')){
     function isEnum($v):bool{if(\PHP_VERSION_ID<80100){return false;}$t=\gettype($v);if($t==='object'){return $v instanceof \UnitEnum;}elseif($t==='string'){return \enum_exists($v);}return false;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('php81')){

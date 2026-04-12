@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);namespace Inilim\Tool\Method\Str{function snake(string $value,string $delimiter='_'):string{if(!\Inilim\Tool\Method\PF\ctype_lower($value)){$modeU=\Inilim\Tool\Method\Check\php80()?'u':'';$value=\preg_replace('/\s+/'.$modeU,'',\ucwords($value));$value=\Inilim\Tool\Method\Str\lower(\preg_replace('/(.)(?=[A-Z])/'.$modeU,'$1'.$delimiter,$value));}return $value;}if(!\Inilim\Tool\Str::__definedIfNot('lower')){
-    function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
+    function lower(string $value,?string $encoding='UTF-8'):string{return \mb_strtolower($value,$encoding);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__resource')){
     function __resource(string $namespace,string $name){$class=\basename(\dirname(\strtr($namespace,'\\','/')));$name=\sprintf('%s/../../../files/resources/%s/%s.php',__DIR__,$class,$name);if(\is_file($name)){return require $name;}return null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('__resourceCache')){

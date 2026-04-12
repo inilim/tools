@@ -7,7 +7,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function fromValue($en
     }if(!\Inilim\Tool\Enum::__definedIfNot('tryFromValue')){
     function tryFromValue($enum,$value,bool $caseInsensitive=false){$backed=false;foreach(\Inilim\Tool\Method\Enum\cases($enum)as $enum){if(!$backed&&!$backed=$enum instanceof \BackedEnum){return null;}if(\Inilim\Tool\Method\Enum\__uniform($enum -> value,$caseInsensitive)===\Inilim\Tool\Method\Enum\__uniform($value,$caseInsensitive)){return $enum;}}return null;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('lower')){
-    function lower(string $value,?string $encoding='UTF-8'){return \mb_strtolower($value,$encoding);}
+    function lower(string $value,?string $encoding='UTF-8'):string{return \mb_strtolower($value,$encoding);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('isEnum')){
     function isEnum($v):bool{if(\PHP_VERSION_ID<80100){return false;}$t=\gettype($v);if($t==='object'){return $v instanceof \UnitEnum;}elseif($t==='string'){return \enum_exists($v);}return false;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('php81')){

@@ -23,6 +23,16 @@ class Data
     static function URLProtocolsAsString(string $separator = ''): string {}
 
         /**
+ * @author https://github.com/shipfastlabs/agent-detector/
+ * @author vercel/detect-agent
+ * @author https://github.com/pulumi/pulumi/blob/7db25a5b6c31ba4ddca523d8761c7153ca38c3e4/pkg/cmd/pulumi/metadata/metadata.go
+ * @author inilim
+ * 
+ * @return \Generator<string,string[]>
+ */
+    static function agentsEnvVars(): Generator {}
+
+        /**
  * @return \Closure():string[]
  * @ext mbstring
  */
