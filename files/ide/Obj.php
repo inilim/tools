@@ -36,7 +36,7 @@ class Obj
         /**
  * @author inilim
  * 
- * @return \Generator<int.int>
+ * @return \Generator<int,int>
  * @throws \ErrorException
  */
     static function rangeInt(int $start, int $end, int $step = 1): Generator {}

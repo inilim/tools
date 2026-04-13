@@ -660,7 +660,7 @@ class Arr
     static function setValueIfNull(): Closure {}
 
         /**
- * Shuffle the given array and return the result.
+ * Shuffle the given array and _return the result.
  * @param mixed[] $array
  * @return mixed[]
  */

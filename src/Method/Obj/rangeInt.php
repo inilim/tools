@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Obj;
 /**
  * @author inilim
  * 
- * @return \Generator<int.int>
+ * @return \Generator<int,int>
  * @throws \ErrorException
  */
 function rangeInt(int $start, int $end, int $step = 1): \Generator
