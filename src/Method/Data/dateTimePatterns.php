@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Data;
 
 /**
- * @return array<string,string>
+ * @template TKey of 'COOKIE'|'ISO8601'|'RFC822'|'RFC850'|'RFC1036'|'RFC1123'|'RFC7231'|'RFC2822'|'RFC3339'|'RFC3339_EXTENDED'|'RSS'|'W3C'|'ISO8601_EXPANDED'|'SQL_FORMAT'
+ * @return array<TKey,string>
  */
 function dateTimePatterns(): array
 {
     $t = [
         'COOKIE'           => \DateTimeInterface::COOKIE,
-        'ISO8601'          => \DateTimeInterface::ISO8601,
+        'ISO8601'          => 'Y-m-d\TH:i:sO', // \DateTimeInterface::ISO8601, depricate
         'RFC822'           => \DateTimeInterface::RFC822,
         'RFC850'           => \DateTimeInterface::RFC850,
         'RFC1036'          => \DateTimeInterface::RFC1036,
@@ -22,11 +23,9 @@ function dateTimePatterns(): array
         'RFC3339_EXTENDED' => \DateTimeInterface::RFC3339_EXTENDED,
         'RSS'              => \DateTimeInterface::RSS,
         'W3C'              => \DateTimeInterface::W3C,
+        'SQL_FORMAT'       => 'Y-m-d H:i:s',
+        'ISO8601_EXPANDED' => 'X-m-d\TH:i:sP', // \DateTimeInterface::ISO8601_EXPANDED; php82
     ];
-
-    if (\Inilim\Tool\Method\Check\php82()) {
-        $t['ISO8601_EXPANDED'] = \DateTimeInterface::ISO8601_EXPANDED;
-    }
 
     return $t;
 }

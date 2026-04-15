@@ -61,7 +61,8 @@ class Data
     static function cyrillicAlphabetAsString(string $separator = "", bool $upper = false) {}
 
         /**
- * @return array<string,string>
+ * @template TKey of 'COOKIE'|'ISO8601'|'RFC822'|'RFC850'|'RFC1036'|'RFC1123'|'RFC7231'|'RFC2822'|'RFC3339'|'RFC3339_EXTENDED'|'RSS'|'W3C'|'ISO8601_EXPANDED'|'SQL_FORMAT'
+ * @return array<TKey,string>
  */
     static function dateTimePatterns(): array {}
 
