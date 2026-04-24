@@ -182,6 +182,13 @@ class Str
     static function finish(string $value, string $cap): string {}
 
         /**
+ * @author deepseek
+ * Преобразовать полноширинные цифры в обычные
+ * @todo tests
+ */
+    static function fullwidthToHalfwidth(string $str): string {}
+
+        /**
  * count segments url path
  */
     static function getCountSegmentsPath(string $path): int {}

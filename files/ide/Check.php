@@ -135,6 +135,15 @@ class Check
     static function file($value): bool {}
 
         /**
+ * @author deepseek
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * @param mixed $value
+ * @todo tests
+ */
+    static function hasFullwidthDigits($value): bool {}
+
+        /**
  * @author inilim
  * @psalm-assert string $value
  * @phpstan-assert string $value
