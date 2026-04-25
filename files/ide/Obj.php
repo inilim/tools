@@ -35,6 +35,15 @@ class Obj
 
         /**
  * @author inilim
+ *
+ * @param string|string[] $pattern
+ * @param string|string[] $subject
+ * @return \Generator<int,array{0:string[]|array<array{0:string,1:int}>,1:\Closure(string):void}>
+ */
+    static function pregReplaceCallbackGenerator($pattern, $subject, int $limit = -1, int $flags = 0): Generator {}
+
+        /**
+ * @author inilim
  * 
  * @return \Generator<int,int>
  * @throws \ErrorException

@@ -1,0 +1,7 @@
+<?php
+
+declare(strict_types=1);namespace Inilim\Tool\Method\Obj{function pregReplaceCallbackGenerator($pattern,$subject,int $limit=-1,int $flags=0):\Generator{\Inilim\Tool\Method\Assert\php81();$callback=static function(array $matches)use($flags):string{if($flags&\PREG_OFFSET_CAPTURE){$result=$matches[0][0];}else{$result=$matches[0];}$change=static function(string $newResult)use(&$result):void{$result=$newResult;};\Fiber :: suspend([$matches,$change]);return $result;};$fiber=new \Fiber(static function($pattern,\Closure $callback,$subject,int $limit,int $flags){$count=0;return \preg_replace_callback($pattern,$callback,$subject,$limit,$count,$flags);});$value=$fiber -> start($pattern,$callback,$subject,$limit,$flags);while(!$fiber -> isTerminated()){yield $value;$value=$fiber -> resume();}return $fiber -> getReturn();}}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('php81')){
+    function php81(string $message=''){if(!\Inilim\Tool\Method\Check\php81()){throw new \InvalidArgumentException($message?:'The current version is lower than required "8.1"');}}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php81')){
+    function php81():bool{return \PHP_VERSION_ID>=80100?true:false;}
+    }}
