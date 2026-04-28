@@ -5,6 +5,18 @@ namespace Inilim\Tool;
 class Obj
 {
         /**
+ * @author inilim
+ * 
+ * @template TValue
+ * @template TKey
+ *
+ * @param iterable<TKey,TValue> $iterable
+ * @param positive-int $size
+ * @return ($preserve_keys is true ? \Generator<TKey,TValue> : \Generator<int,TValue>)
+ */
+    static function chunkIterator(iterable $iterable, int $size, bool $preserve_keys = true): Generator {}
+
+        /**
  * @author Inilim
  * 
  * @psalm-import-type Return_getCollectionThrowable from \TypeObj
