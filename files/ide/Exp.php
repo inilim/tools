@@ -19,6 +19,13 @@ class Exp
     static function closeResObjJsonSqlite(object $value): bool {}
 
         /**
+ * @author inilim
+ * 
+ * @return string[]
+ */
+    static function defineLang(string $text): array {}
+
+        /**
  * @todo tests
  * Переводим буквенное представление столбца в числовое
  */

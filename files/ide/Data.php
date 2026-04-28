@@ -194,6 +194,17 @@ class Data
     static function numericEntitiesAsString(string $separator = ',') {}
 
         /**
+ * @see https://www.regular-expressions.info/refunicodescript.html
+ * 
+ * 147 position
+ * 
+ * @example 'latin' => '\p{Latin}';
+ * 
+ * @return \Generator<string,string>
+ */
+    static function regexLang(): Generator {}
+
+        /**
  * @return \Closure():string[]
  */
     static function symbolsAsClosure() {}
