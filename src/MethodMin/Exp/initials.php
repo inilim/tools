@@ -5,7 +5,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function initials(strin
     }if(!\Inilim\Tool\Str::__definedIfNot('trim')){
     function trim(string $value,?string $charlist=null):string{if($charlist===null){$trimDefaultCharacters=\preg_quote(" \n\r\t\v\x00");$c=\Inilim\Tool\Method\Str\__state():: INVISIBLE_CHARACTERS;return \preg_replace('~^[\s'.$c.$trimDefaultCharacters.']+|[\s'.$c.$trimDefaultCharacters.']+$~u','',$value)?? \trim($value);}return \trim($value,$charlist);}
     }if(!\Inilim\Tool\Str::__definedIfNot('unixNewLines')){
-    function unixNewLines(string $s,string $replacement="\n"):string{return \preg_replace("#\r\n?| | #",$replacement,$s);}
+    function unixNewLines(string $s,string $replacement="\n"):string{return \preg_replace("/\r\n|\n|\r|".\base64_decode('4oCo',true)."|".\base64_decode('4oCp',true)."/",$replacement,$s);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){

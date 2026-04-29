@@ -10,5 +10,14 @@ namespace Inilim\Tool\Method\Str;
  */
 function unixNewLines(string $s, string $replacement = "\n"): string
 {
-    return \preg_replace("#\r\n?|\u{2028}|\u{2029}#", $replacement, $s);
+    // "Warning: preg_replace(): Compilation failed: PCRE2 does not support \F, \L, \l, \N{name}, \U, or \u at offset 2"
+    // "\u{2028}" > "4oCo"
+    // "\u{2029}" > "4oCp"
+    // после билдера, символы "\u{...}" преобразуются, нужно разбиратся, хз кто виноват, минификатор или еще кто.
+    // base64_decode кастыль для решения проблемы
+    return \preg_replace(
+        "/\r\n|\n|\r|" . \base64_decode('4oCo', true) . "|" . \base64_decode('4oCp', true) . "/",
+        $replacement,
+        $s
+    );
 }

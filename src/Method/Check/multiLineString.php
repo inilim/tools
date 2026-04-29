@@ -12,5 +12,9 @@ namespace Inilim\Tool\Method\Check;
  */
 function multiLineString($value): bool
 {
-    return \is_string($value) && \preg_match("#\r\n?|\u{2028}|\u{2029}#", $value) === 1;
+    return \is_string($value) && \preg_match(
+        // @see Inilim\Tool\Method\Str\unixNewLines
+        "/\r\n|\n|\r|" . \base64_decode('4oCo', true) . "|" . \base64_decode('4oCp', true) . "/",
+        $value
+    ) === 1;
 }
