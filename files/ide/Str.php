@@ -509,6 +509,13 @@ class Str
     static function snake(string $value, string $delimiter = '_'): string {}
 
         /**
+ * @author inilim
+ * as mb_str_split, without ext mbstring
+ * @return \Generator<int,string>
+ */
+    static function split(string $string, int $length = 1): Generator {}
+
+        /**
  * Remove all "extra" blank space from the given string.
  * @return string
  */
