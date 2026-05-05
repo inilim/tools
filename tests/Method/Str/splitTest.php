@@ -6,7 +6,7 @@ use Inilim\Tool\Str;
 
 /**
  */
-class StrSplitTest extends \Inilim\Tool\Test\TestCase
+class splitTest extends \Inilim\Tool\Test\TestCase
 {
     /**
      * Проверяет, что генератор возвращает правильные части для пустой строки.

@@ -35,6 +35,14 @@ class Obj
 
         /**
  * @author inilim
+ * @param iterable ...$iterables
+ * @return \Generator
+ * @throws \InvalidArgumentException
+ */
+    static function multipleIteratorMap(iterable ...$iterables): Generator {}
+
+        /**
+ * @author inilim
  * 
  * @desc Такой итератор реализует функциональность «заглядывания вперед и занад» (peek/lookback).
  * @template TValue
