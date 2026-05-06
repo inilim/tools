@@ -8,6 +8,7 @@ namespace Inilim\Tool\Method\Data;
  * @author https://github.com/shipfastlabs/agent-detector/
  * @author vercel/detect-agent
  * @author https://github.com/pulumi/pulumi/blob/7db25a5b6c31ba4ddca523d8761c7153ca38c3e4/pkg/cmd/pulumi/metadata/metadata.go
+ * 
  * @author inilim
  * 
  * @return \Generator<string,string[]>
@@ -39,4 +40,6 @@ function agentsEnvVars(): \Generator
     yield 'copilot'     => ['COPILOT_CLI', 'COPILOT_MODEL', 'COPILOT_ALLOW_ALL', 'COPILOT_GITHUB_TOKEN'];
     yield 'antigravity' => ['ANTIGRAVITY_AGENT'];
     yield 'goose'       => ['GOOSE_PROVIDER'];
+    yield 'pi'          => ['PI_CODING_AGENT'];
+    yield 'kiro'        => ['KIRO_AGENT_PATH'];
 }
