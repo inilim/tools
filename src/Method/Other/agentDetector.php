@@ -8,39 +8,82 @@ namespace Inilim\Tool\Method\Other;
  * @author https://github.com/shipfastlabs/agent-detector/
  * @author inilim
  * 
+ * @ext mbstring
+ * 
  * @return array{status:bool,name:?string}
  */
 function agentDetector(): array
 {
-    // TODO может взять сразу весь массив? getenv прожорлив
-    // $env = \getenv();
-    $aiAgent = \getenv('AI_AGENT');
-    if (\is_string($aiAgent) && ($aiAgent = \Inilim\Tool\Method\LarStr\trim($aiAgent)) !== '') {
-        $normalized = \preg_replace('/(\-|\_)(cli|ai|agent)$/', '', \Inilim\Tool\Method\Str\lower($aiAgent));
-        return ['status' => true, 'name' => $normalized];
-    }
+    $class = new class {
 
-    foreach (\Inilim\Tool\Method\Data\agentsEnvVars() as $agent => $envVars) {
-        foreach ($envVars as $envVar) {
-            if (\getenv($envVar) !== false) {
-                // Для claude-code: если установлен CLAUDE_CODE_IS_COWORK, то это cowork
-                // if ($agent === 'claude' && \getenv('CLAUDE_CODE_IS_COWORK') !== false) {
-                //     return ['status' => true, 'name' => 'cowork'];
-                // }
-                return ['status' => true, 'name' => $agent];
-            }
+        function detect(): array
+        {
+            return $this->fromAiAgentEnvVar()
+                ?? $this->fromKnownEnvVars()
+                ?? $this->fromFileSystem()
+                ?? ['status' => false, 'name' => null];
         }
+
+        function fromAiAgentEnvVar(): ?array
+        {
+            $aiAgent = \getenv('AI_AGENT');
+
+            if ($aiAgent === false) {
+                return null;
+            }
+
+            $aiAgent = \trim($aiAgent);
+
+            if ($aiAgent === '') {
+                return null;
+            }
+
+            if (\in_array($aiAgent, ['github-copilot', 'github-copilot-cli'], true)) {
+                return ['status' => true, 'name' => 'copilot'];
+            }
+            if (\Inilim\Tool\Method\PF\str_starts_with($aiAgent, 'claude-code')) {
+                return ['status' => true, 'name' => 'claude'];
+            }
+            return ['status' => true, 'name' => $aiAgent];
+        }
+
+        function fromKnownEnvVars(): ?array
+        {
+            foreach (\Inilim\Tool\Method\Data\agentsEnvVars() as $agent => $envVars) {
+                foreach ($envVars as $envVar) {
+                    if (\getenv($envVar) === false) {
+                        continue;
+                    }
+
+                    if ($agent === 'claude') {
+                        return [
+                            'status' => true,
+                            'name'   => \getenv('CLAUDE_CODE_IS_COWORK') !== false ? 'cowork' : 'claude',
+                        ];
+                    }
+
+                    return ['status' => true, 'name' => $agent];
+                }
+            }
+
+
+            return null;
+        }
+
+        function fromFileSystem(): ?array
+        {
+            if (\Inilim\Tool\Method\FS\isFile('/opt/.devin')) {
+                return ['status' => true, 'name' => 'dewin'];
+            }
+            return null;
+        }
+    };
+
+    $result = $class->detect();
+
+    if ($result['status']) {
+        $result['name'] = \preg_replace('/(\-|\_)(cli|ai|agent)$/', '', \Inilim\Tool\Method\Str\lower($result['name']));
     }
 
-    // Дополнительная проверка для Cursor CLI по роли расширения
-    // if (\getenv('CURSOR_EXTENSION_HOST_ROLE') === 'agent-exec') {
-    //     return ['status' => true, 'name' => 'cursor'];
-    // }
-
-    // 3. Проверка наличия файла Devin (как в оригинале)
-    if (\Inilim\Tool\Method\FS\isFile('/opt/.devin')) {
-        return ['status' => true, 'name' => 'devin'];
-    }
-
-    return ['status' => false, 'name' => null];
+    return $result;
 }

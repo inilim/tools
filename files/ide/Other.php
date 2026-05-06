@@ -20,6 +20,8 @@ class Other
  * @author https://github.com/shipfastlabs/agent-detector/
  * @author inilim
  * 
+ * @ext mbstring
+ * 
  * @return array{status:bool,name:?string}
  */
     static function agentDetector(): array {}

@@ -333,20 +333,23 @@ class agentDetectorTest extends \Inilim\Tool\Test\TestCase
         $this->assertSame($expected, $result['name']);
     }
 
-    public static function knownAgentsProvider(): array
+    public static function knownAgentsProvider(): \Generator
     {
-        return [
-            'cursor'       => ['CURSOR_AGENT', '1', 'cursor'],
-            'gemini'       => ['GEMINI_CLI', 'true', 'gemini'],
-            'codex'        => ['CODEX_SANDBOX', 'true', 'codex'],
-            'augment'      => ['AUGMENT_AGENT', 'true', 'augment'],
-            'opencode'     => ['OPENCODE_CLIENT', 'true', 'opencode'],
-            'amp'          => ['AMP_CURRENT_THREAD_ID', 'thread-id', 'amp'],
-            'copilot'      => ['COPILOT_CLI', '1', 'copilot'],
-            'claude'       => ['CLAUDECODE', '1', 'claude'],
-            'replit'       => ['REPL_ID', 'id', 'replit'],
-            'antigravity'  => ['ANTIGRAVITY_AGENT', '1', 'antigravity'],
-        ];
+
+        yield 'cursor'       => ['CURSOR_AGENT', '1', 'cursor'];
+        yield 'gemini'       => ['GEMINI_CLI', 'true', 'gemini'];
+        yield 'codex'        => ['CODEX_SANDBOX', 'true', 'codex'];
+        yield 'codex_2'      => ['CODEX_CI', 'true', 'codex'];
+        yield 'v0'           => ['AI_AGENT', 'v0', 'v0'];
+        yield 'augment'      => ['AUGMENT_AGENT', 'true', 'augment'];
+        yield 'opencode'     => ['OPENCODE_CLIENT', 'true', 'opencode'];
+        yield 'amp'          => ['AMP_CURRENT_THREAD_ID', 'thread-id', 'amp'];
+        yield 'copilot'      => ['COPILOT_CLI', '1', 'copilot'];
+        yield 'claude'       => ['CLAUDECODE', '1', 'claude'];
+        yield 'replit'       => ['REPL_ID', 'id', 'replit'];
+        yield 'antigravity'  => ['ANTIGRAVITY_AGENT', '1', 'antigravity'];
+        yield 'pi'           => ['PI_CODING_AGENT', 'true', 'pi'];
+        yield 'kiro'         => ['KIRO_AGENT_PATH', '/usr/local/bin/kiro-cli', 'kiro'];
     }
 
     /** @test */
