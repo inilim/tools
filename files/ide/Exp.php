@@ -306,6 +306,43 @@ class Exp
     static function tokenCalcCL100KBase(): Closure {}
 
         /**
+ * Binary vector to array
+ * @return float[]
+ */
+    static function vec_binVecToArray(string $vector): array {}
+
+        /**
+ * Cosine similarity on array vectors.
+ * @param float[] $vectorA
+ * @param float[] $vectorB
+ */
+    static function vec_cosineSimilarity(array $vectorA, array $vectorB): float {}
+
+        /**
+ * Cosine similarity on binary vectors.
+ */
+    static function vec_cosineSimilarityBin(string $binVectorA, string $binVectorB): float {}
+
+        /**
+ * @param float[] $vectorA
+ * @param float[] $vectorB
+ */
+    static function vec_dotProduct(array $vectorA, array $vectorB): float {}
+
+        /**
+ * Normalized vector to binary.
+ * @param float[] $vector
+ */
+    static function vec_normalVecToBin(array $vector): string {}
+
+        /**
+ * Normalize a vector.
+ * @param float[] $vector
+ * @return array{0:float[],1:float}
+ */
+    static function vec_normalize(array $vector): array {}
+
+        /**
  * @author inilim
  * @todo tests
  * 
