@@ -525,6 +525,17 @@ class Arr
     static function onlyNestedArray(array $array, $keys, int $depth = 1): array {}
 
         /**
+ * @author inilim
+ * @template T
+ *
+ * @param T $array
+ * @param (string|int)[]|string|int $keys
+ * @return T
+ * @throws \Exception
+ */
+    static function onlyOrFail(array $array, $keys): array {}
+
+        /**
  * @deprecated use LarArr::***
  * @author Laravel
  * @author Inilim "Changed it a bit"
