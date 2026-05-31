@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Other{function itLibClone():bool{$dir=__DIR__;if(!\Inilim\Tool\Method\PF\str_contains($dir,'/src/')){\Inilim\Tool\Method\Other\__setErrorLast(-1,'The library\'s file structure is broken','',-1);return false;}$dir=\Inilim\Tool\Method\Str\beforeLast($dir,'/src/');$dir=\Inilim\Tool\Method\Path\normalize($dir.'/tests');return \Inilim\Tool\Method\FS\isDir($dir);}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Other{function itLibClone():bool{$dir=\Inilim\Tool\Method\Path\normalize(__DIR__);if(!\Inilim\Tool\Method\PF\str_contains($dir,'/src/')){\Inilim\Tool\Method\Other\__setErrorLast(-1,'The library\'s file structure is broken','',-1);return false;}if(!\Inilim\Tool\Method\PF\str_contains($dir,'/vendor/')){return false;}$dir=\Inilim\Tool\Method\Str\beforeLast($dir,'/src/');return \Inilim\Tool\Method\FS\isDir($dir.'/.git');}if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}

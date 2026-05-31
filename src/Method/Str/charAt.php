@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Get the character at the specified index.
+ * @ext mbstring
  * @return string|false
  */
 function charAt(string $subject, int $index)

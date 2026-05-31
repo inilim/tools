@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Pad both sides of a string with another.
+ * @ext mbstring
  */
 function padBoth(string $value, int $length, string $pad = ' '): string
 {

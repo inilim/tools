@@ -9,6 +9,7 @@ namespace Inilim\Tool\Method\Exp;
  * @author youkidearitai <https://github.com/youkidearitai>
  * Implementation levenshtein distance algorithm.
  *
+ * @ext mbstring
  * @param string $str1 The first string.
  * @param string $str2 The second string.
  *

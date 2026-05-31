@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * @ext mbstring
  */
 function mb_str_pad(string $string, int $length, string $pad_string = ' ', int $pad_type = \STR_PAD_RIGHT, ?string $encoding = null): string
 {

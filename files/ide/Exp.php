@@ -153,6 +153,7 @@ class Exp
         /**
  * @author Ashot1995 <https://github.com/Ashot1995>
  * @author inilim
+ * @ext mbstring
  * @param  string  $value
  * @param  string  $separator
  * @return string
@@ -234,6 +235,7 @@ class Exp
  * @author youkidearitai <https://github.com/youkidearitai>
  * Implementation levenshtein distance algorithm.
  *
+ * @ext mbstring
  * @param string $str1 The first string.
  * @param string $str2 The second string.
  *

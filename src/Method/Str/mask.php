@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Masks a portion of a string with a repeated character.
+ * @ext mbstring
  */
 function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string
 {

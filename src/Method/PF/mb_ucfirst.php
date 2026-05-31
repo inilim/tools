@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * @ext mbstring
  */
 function mb_ucfirst(string $string, ?string $encoding = null): string
 {

@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * @ext mbstring
  */
 function __mb_internal_trim(string $regex, string $string, ?string $characters, ?string $encoding, string $function): string
 {

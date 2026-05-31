@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * @author inilim
+ * @ext mbstring
  */
 function iEndsWithOnce(string $haystack, string $needle): bool
 {

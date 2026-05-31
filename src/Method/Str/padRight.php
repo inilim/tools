@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Pad the right side of a string with another.
+ * @ext mbstring
  */
 function padRight(string $value, int $length, string $pad = ' '): string
 {

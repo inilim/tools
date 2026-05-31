@@ -5,6 +5,7 @@ namespace Inilim\Tool\Method\LarStr;
 /**
  * Capitalize the first character of each word in a string.
  *
+ * @ext mbstring
  * @param  string  $string
  * @param  string  $separators
  * @return ($string is '' ? '' : non-empty-string)

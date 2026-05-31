@@ -34,7 +34,6 @@ class Other
 
         /**
  * @author Inilim
- * $callback after call clear bind
  * @template R
  * @template A
  * @param \Closure(A):R $callback
@@ -244,7 +243,8 @@ class Other
     static function isEnum($v): bool {}
 
         /**
- * the function checks whether the library is in the cloning state.
+ * [EN] the function checks whether the library is in the cloning state.
+ * [RU] функция проверяет, находится ли библиотека в состоянии клонирования.
  * @author inilim
  * @todo tests
  */
@@ -343,7 +343,7 @@ class Other
  * @author Internet
  * @return string
  */
-    static function requestMethod() {}
+    static function requestMethod(): string {}
 
         /**
  * @author inilim

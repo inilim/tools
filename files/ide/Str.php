@@ -35,6 +35,7 @@ class Str
  * Convert the given string to APA-style title case.
  *
  * See: https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case
+ * @ext mbstring
  * @return string
  */
     static function apa(string $value) {}
@@ -46,6 +47,7 @@ class Str
 
         /**
  * Get the portion of a string before the last occurrence of a given value.
+ * @ext mbstring
  */
     static function beforeLast(string $subject, string $search): string {}
 
@@ -67,11 +69,13 @@ class Str
 
         /**
  * mb_strcasecmp
+ * @ext mbstring
  */
     static function casecmp(string $str1, string $str2, string $encoding = 'UTF-8'): int {}
 
         /**
  * Get the character at the specified index.
+ * @ext mbstring
  * @return string|false
  */
     static function charAt(string $subject, int $index) {}
@@ -102,6 +106,7 @@ class Str
 
         /**
  * Convert the case of a string.
+ * @ext mbstring
  * @return string
  */
     static function convertCase(string $string, int $mode = \Inilim\Tool\PF::MB_CASE_FOLD, ?string $encoding = 'UTF-8') {}
@@ -171,6 +176,7 @@ class Str
         /**
  * Extracts an excerpt from text that matches the first instance of a phrase.
  * 
+ * @ext mbstring
  * @param array{radius?:int,omission?:string} $options
  * @return string|null
  */
@@ -229,21 +235,25 @@ class Str
 
         /**
  * @author inilim
+ * @ext mbstring
  */
     static function iEndsWithOnce(string $haystack, string $needle): bool {}
 
         /**
  * @author inilim
+ * @ext mbstring
  */
     static function iStartsWithOnce(string $haystack, string $needle): bool {}
 
         /**
+ * @ext mbstring
  * @param (int|string)[] $parts
  */
     static function insertBetweenSubstrAfterMerge(string $string, array $parts, string $separator = '/', string $encoding = 'UTF-8'): string {}
 
         /**
  * Determine if a given string matches a given pattern.
+ * @ext mbstring
  * @param  string|iterable<string>  $pattern
  */
     static function is($pattern, string $value, $ignoreCase = false): bool {}
@@ -314,6 +324,7 @@ class Str
 
         /**
  * Limit the number of characters in a string.
+ * @ext mbstring
  */
     static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false): string {}
 
@@ -334,6 +345,7 @@ class Str
 
         /**
  * Masks a portion of a string with a repeated character.
+ * @ext mbstring
  */
     static function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string {}
 
@@ -365,16 +377,19 @@ class Str
 
         /**
  * Pad both sides of a string with another.
+ * @ext mbstring
  */
     static function padBoth(string $value, int $length, string $pad = ' '): string {}
 
         /**
  * Pad the left side of a string with another.
+ * @ext mbstring
  */
     static function padLeft(string $value, int $length, string $pad = ' '): string {}
 
         /**
  * Pad the right side of a string with another.
+ * @ext mbstring
  */
     static function padRight(string $value, int $length, string $pad = ' '): string {}
 
@@ -403,6 +418,7 @@ class Str
 
         /**
  * Find the multi-byte safe position of the first occurrence of a given substring in a string.
+ * @ext mbstring
  * @return int|false
  */
     static function position(string $haystack, string $needle, int $offset = 0, ?string $encoding = 'UTF-8') {}
@@ -554,6 +570,7 @@ class Str
 
         /**
  * Returns the portion of the string specified by the start and length parameters.
+ * @ext mbstring
  * @return string
  */
     static function substr(string $string, int $start, ?int $length = null, string $encoding = 'UTF-8') {}
@@ -566,6 +583,7 @@ class Str
         /**
  * Replace text within a portion of a string.
  *
+ * @ext mbstring
  * @param  string|string[]  $string
  * @param  string|string[]  $replace
  * @param  int|int[]  $offset
@@ -590,6 +608,7 @@ class Str
 
         /**
  * Convert the given string to proper case.
+ * @ext mbstring
  */
     static function title(string $value): string {}
 
@@ -670,6 +689,7 @@ class Str
         /**
  * Convert the given string to upper-case.
  * 
+ * @ext mbstring
  * @return ($value is '' ? '' : non-empty-string&uppercase-string)
  */
     static function upper(string $value, ?string $encoding = 'UTF-8'): string {}

@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Exp;
 /**
  * @author Ashot1995 <https://github.com/Ashot1995>
  * @author inilim
+ * @ext mbstring
  * @param  string  $value
  * @param  string  $separator
  * @return string

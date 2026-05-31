@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Limit the number of characters in a string.
+ * @ext mbstring
  */
 function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false): string
 {

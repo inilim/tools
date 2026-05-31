@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * @ext mbstring
  */
 function mb_rtrim(string $string, ?string $characters = null, ?string $encoding = null): string
 {

@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Get the portion of a string before the last occurrence of a given value.
+ * @ext mbstring
  */
 function beforeLast(string $subject, string $search): string
 {

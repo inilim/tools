@@ -8,6 +8,7 @@ namespace Inilim\Tool\Method\Str;
  * Convert the given string to APA-style title case.
  *
  * See: https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case
+ * @ext mbstring
  * @return string
  */
 function apa(string $value)

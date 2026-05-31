@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Find the multi-byte safe position of the first occurrence of a given substring in a string.
+ * @ext mbstring
  * @return int|false
  */
 function position(string $haystack, string $needle, int $offset = 0, ?string $encoding = 'UTF-8')

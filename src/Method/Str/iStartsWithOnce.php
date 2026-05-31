@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * @author inilim
+ * @ext mbstring
  */
 function iStartsWithOnce(string $haystack, string $needle): bool
 {

@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Convert the given string to proper case.
+ * @ext mbstring
  */
 function title(string $value): string
 {

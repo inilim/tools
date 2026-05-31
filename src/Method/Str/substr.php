@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Returns the portion of the string specified by the start and length parameters.
+ * @ext mbstring
  * @return string
  */
 function substr(string $string, int $start, ?int $length = null, string $encoding = 'UTF-8')

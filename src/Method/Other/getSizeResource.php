@@ -10,6 +10,7 @@ namespace Inilim\Tool\Method\Other;
  */
 function getSizeResource($value): int
 {
+    // TODO add Assert
     $size = \Inilim\Tool\Method\FS\fstat($value);
     return $size === null ? -1 : \intval($size['size'] ?? -1);
 }

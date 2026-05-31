@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * Determine if a given string matches a given pattern.
+ * @ext mbstring
  * @param  string|iterable<string>  $pattern
  */
 function is($pattern, string $value, $ignoreCase = false): bool

@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * @ext mbstring
  */
 function mb_lcfirst(string $string, ?string $encoding = null): string
 {

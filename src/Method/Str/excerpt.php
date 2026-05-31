@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Extracts an excerpt from text that matches the first instance of a phrase.
  * 
+ * @ext mbstring
  * @param array{radius?:int,omission?:string} $options
  * @return string|null
  */

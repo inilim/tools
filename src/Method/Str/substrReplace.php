@@ -7,6 +7,7 @@ namespace Inilim\Tool\Method\Str;
 /**
  * Replace text within a portion of a string.
  *
+ * @ext mbstring
  * @param  string|string[]  $string
  * @param  string|string[]  $replace
  * @param  int|int[]  $offset

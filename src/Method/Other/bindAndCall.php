@@ -6,7 +6,6 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author Inilim
- * $callback after call clear bind
  * @template R
  * @template A
  * @param \Closure(A):R $callback

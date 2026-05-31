@@ -6,6 +6,7 @@ namespace Inilim\Tool\Method\Str;
 
 /**
  * mb_strcasecmp
+ * @ext mbstring
  */
 function casecmp(string $str1, string $str2, string $encoding = 'UTF-8'): int
 {
