@@ -29,7 +29,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return array
          */
-        function getAll($curPage, $limitOnePage, $countRecords)
+        function getAll(int $curPage, int $limitOnePage, int $countRecords): array
         {
             $limitOnePage = \abs($limitOnePage);
             $countRecords = \abs($countRecords);
@@ -52,7 +52,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return int|null
          */
-        function next($curPage, $countPages)
+        function next(int $curPage, int $countPages): ?int
         {
             $curPage    = $this->getValidCurPage($curPage, $countPages);
             $countPages = $this->prepareCountPages($countPages);
@@ -65,7 +65,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return int|null
          */
-        function prev($curPage, $countPages)
+        function prev(int $curPage, int $countPages): ?int
         {
             $curPage = $this->getValidCurPage($curPage, $countPages);
             if ($curPage === 1) {
@@ -78,7 +78,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
          * Получить общее количество страниц
          * @return int<1,max>
          */
-        function getCountPages($limitOnePage, $countRecords)
+        function getCountPages(int $limitOnePage, int $countRecords): int
         {
             $limitOnePage = \abs($limitOnePage);
             if ($limitOnePage === 0) {
@@ -98,7 +98,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
          * расчитываем offset для sql запроса
          * @return int<0,max>
          */
-        function offset($curPage,  $countPages,  $limitOnePage)
+        function offset(int $curPage,  int $countPages,  int $limitOnePage): int
         {
             $curPage      = $this->getValidCurPage($curPage, $countPages);
             $limitOnePage = \abs($limitOnePage);
@@ -109,7 +109,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return int<1,max>
          */
-        function getValidCurPage($curPage,  $countPages)
+        function getValidCurPage(int $curPage, int $countPages): int
         {
             $curPage   = $this->prepareCurPage($curPage);
             if ($curPage === 1) {
@@ -122,7 +122,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return bool
          */
-        function isLast($curPage, $countPages)
+        function isLast(int $curPage, int $countPages): bool
         {
             $countPages = $this->prepareCountPages($countPages);
             $curPage    = $this->prepareCurPage($curPage);
@@ -132,7 +132,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
         /**
          * @return bool
          */
-        function isFirst($curPage)
+        function isFirst(int $curPage): bool
         {
             return $this->prepareCurPage($curPage) === 1;
         }
@@ -141,7 +141,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
          * @protected
          * @return int<1,max>
          */
-        function prepareCurPage($curPage)
+        function prepareCurPage(int $curPage): int
         {
             return $curPage <= 0 ? 1 : $curPage;
         }
@@ -150,7 +150,7 @@ function pagination(int $curPage, int $limitOnePage, int $countRecords): array
          * @protected
          * @return int<1,max>
          */
-        function prepareCountPages($countPages)
+        function prepareCountPages(int $countPages): int
         {
             $countPages = \abs($countPages);
             return $countPages === 0 ? 1 : $countPages;
