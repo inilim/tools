@@ -34,7 +34,6 @@ class Other
 
         /**
  * @author Inilim
- * @todo tests
  * $callback after call clear bind
  * @template R
  * @template A

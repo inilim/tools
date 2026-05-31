@@ -25,9 +25,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function openJsonViaSql
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('bindAndCall')){
-    function bindAndCall(object $object,\Closure $callback,... $args){$result=$callback -> bindTo($object,$object)-> __invoke(... $args);\Inilim\Tool\Method\Other\clearClosure($callback);return $result;}
-    }if(!\Inilim\Tool\Other::__definedIfNot('clearClosure')){
-    function clearClosure(\Closure $cls):?\Closure{return \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn()=>$cls -> bindTo(null,null));}
+    function bindAndCall(object $object,\Closure $callback,... $args){return $callback -> bindTo($object,$object)(... $args);}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getPathFromResource')){
