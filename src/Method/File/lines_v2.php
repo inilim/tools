@@ -19,10 +19,11 @@ function lines_v2(string $pathToFile, int $startLine = 0): \Generator
     $file->setFlags(\SplFileObject::DROP_NEW_LINE);
 
     if ($startLine !== 0) {
-        $file->seek($startLine);
+        $file->seek($startLine - 1);
     }
 
     while (! $file->eof()) {
-        yield $file->fgets();
+        yield $startLine => $file->fgets();
+        $startLine++;
     }
 }
