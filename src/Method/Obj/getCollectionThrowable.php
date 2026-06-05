@@ -19,22 +19,28 @@ function getCollectionThrowable(
     ?\Throwable $previous = null
 ) {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable {
-        protected $a = [];
+        /**
+         * @var array<int|string,\Throwable>
+         */
+        protected array $a = [];
 
         /**
-         * @param \Throwable[] $exceptions
-         * @param \Throwable|null $previous
          */
-        function __construct($message, $code, $line, $file, $previous)
+        function __construct(string $message, int $code, ?int $line, ?string $file, ?\Throwable $previous)
         {
             parent::__construct($message, $code, $previous);
             $this->line = $line ?? -1;
             $this->file = $file ?? '';
         }
 
-        function getIterator(): \Traversable
+        /**
+         * @return \Generator<int|string,\Throwable>
+         */
+        function getIterator(): \Generator
         {
-            return new \ArrayIterator($this->a);
+            foreach ($this->a as $k => $e) {
+                yield $k => $e;
+            }
         }
 
         #[\ReturnTypeWillChange]
@@ -42,23 +48,21 @@ function getCollectionThrowable(
         {
             return isset($this->a[$offset]);
         }
-        /**
-         * @return ?\Throwable
-         */
+
         #[\ReturnTypeWillChange]
-        function offsetGet($offset)
+        function offsetGet($offset): ?\Throwable
         {
             return $this->a[$offset] ?? null;
         }
+
         /**
          * @param \Throwable $e
-         * @return void
          */
         #[\ReturnTypeWillChange]
-        function offsetSet($offset, $e)
+        function offsetSet($offset, $e): void
         {
             if (!($e instanceof \Throwable)) {
-                throw new \InvalidArgumentException('Value must be of type object<\Throwable>');
+                throw new \InvalidArgumentException('Value must be of type \Throwable');
             }
             if ($offset === null) {
                 $this->a[] = $e;
@@ -66,22 +70,18 @@ function getCollectionThrowable(
                 $this->a[$offset] = $e;
             }
         }
-        /**
-         * @return void
-         */
+
         #[\ReturnTypeWillChange]
-        function offsetUnset($offset)
+        function offsetUnset($offset): void
         {
             unset($this->a[$offset]);
         }
 
         function count(): int
         {
-            return \sizeof($this->a);
+            return \count($this->a);
         }
     };
-
-    return $e;
 }
 
 
