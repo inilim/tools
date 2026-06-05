@@ -61,7 +61,7 @@ class TypeArr {}
  * 
  * Obj::getCollectionThrowable()
  * 
- * @psalm-type Return_getCollectionThrowable = _2_Main_1&\IteratorAggregate<int,\Throwable>
+ * @psalm-type Return_getCollectionThrowable = _2_Main_1&\IteratorAggregate<int|string,\Throwable>
  */
 class TypeObj {}
 

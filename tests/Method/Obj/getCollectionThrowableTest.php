@@ -26,11 +26,15 @@ class getCollectionThrowableTest extends \Inilim\Tool\Test\TestCase
         $this->assertTrue($iterator instanceof \Generator);
 
         $arr = [];
-        $arr[] = $e[] = new \Exception;
-        $arr[] = $e[] = new \Exception;
-        $arr[5] = $e[5] = new \Exception;
+        $arr[]      = $e[] = new \Exception;
+        $arr[]      = $e[] = new \Exception;
+        $arr[5]     = $e[5] = new \Exception;
         $arr['key'] = $e['key'] = new \Exception;
+
         $e['remove'] = new \Exception;
+
+        $this->assertNull($e[2]);
+        $this->assertNull($e['foo']);
 
         // true
         $this->assertTrue($e[0] instanceof \Throwable);
@@ -45,6 +49,7 @@ class getCollectionThrowableTest extends \Inilim\Tool\Test\TestCase
         $this->assertFalse(isset($e[2]));
         $this->assertFalse(isset($e[6]));
 
+        $this->assertSame(5, \count($e));
         // unset
         $this->assertTrue(isset($e['remove']));
         unset($e['remove']);
