@@ -4,7 +4,6 @@ namespace Inilim\Tool\Test\Method\Other;
 
 use Inilim\Tool\Other;
 use Inilim\Tool\Test\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class paginationTest extends TestCase
 {
