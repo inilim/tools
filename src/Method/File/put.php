@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\File;
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @return array{result:int<0,max>,exception:null}|array{result:-1,exception:THROW_get_0}
  * @throws THROW_get_0
  */
 function put(

@@ -24,10 +24,13 @@ function cacheSave(string $pathToFile, $value, ?int $lifetime = null, bool $thro
                     if ($h = \fopen($obj->tmp, 'x')) break;
                 }
 
+                /** @var false|resource $h */
+
                 if ($h === false) {
                     \trigger_error('', \E_USER_ERROR);
                 }
 
+                // 1 year in seconds
                 $ser       = (($lifetime ?? 31_556_952) + \time()) . "\n" . \serialize($value);
                 $obj->step = 'fwrite';
                 \fwrite($h, $ser);

@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\File;
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @return array{result:-1,exception:THROW_get_0}|array{result:int<0,max>,exception:null}
  * @throws THROW_get_0
  */
 function ensurePut(
@@ -25,7 +25,7 @@ function ensurePut(
 ): array {
     $dir = \dirname($filename);
     $d   = null;
-    if (!\is_dir($dir)) {
+    if (!\Inilim\Tool\Method\FS\isDir($dir)) {
         $d = \Inilim\Tool\Method\FS\makeDir($dir, false, $mode, true);
     }
 

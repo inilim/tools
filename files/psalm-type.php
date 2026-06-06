@@ -28,7 +28,7 @@ class TypeMain {}
  * 
  * @psalm-type THROW_get_0 = _2_Main_1&\IteratorAggregate<int,\ErrorException>
  * 
- * @psalm-type Return_get = array{result:null|string,exception:null|THROW_get_0,http_response_header?:string[]}
+ * @psalm-type Return_get = array{result:string,exception:null,http_response_header?:string[]}|array{result:null,exception:THROW_get_0,http_response_header?:string[]}
  * 
  * 
  */

@@ -8,8 +8,9 @@ namespace Inilim\Tool\Method\File;
  * @todo tests
  * @template TValue of string
  * @template TKey of string|int
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @param TValue|iterable<TKey,TValue> $pathToFile
- * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|\Throwable}
+ * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|THROW_get_0}
  */
 function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false)
 {
