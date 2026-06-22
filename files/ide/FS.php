@@ -88,7 +88,7 @@ class FS
  * @author Inilim
  * @psalm-import-type THROW_get_0 from \TypeFile
  * @param null|resource|array $context
- * @return array{result:?bool,exception:?THROW_get_0}
+ * @return array{result:bool,exception:null}|array{result:null,exception:THROW_get_0}
  * @throws THROW_get_0
  */
     static function makeDir(string $path, bool $throw = false, int $mode = 0755, bool $recursive = false, bool $force = false, $context = null, ?array $contextParams = null): array {}

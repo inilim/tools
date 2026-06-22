@@ -3,20 +3,22 @@
 declare(strict_types=1);namespace Inilim\Tool\Method\File{function sharedGet(string $pathToFile,bool $throw=false):array{$args=['pathToFile'=>$pathToFile,'result'=>null,'e'=>null,'errors'=>null];\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use(&$args){$handle=\fopen($args['pathToFile'],'rb');if($handle){try{if(\flock($handle,\LOCK_SH)){\clearstatcache(true,$args['pathToFile']);$args['result']=\fread($handle,\filesize($args['pathToFile'])?:1);\flock($handle,\LOCK_UN);}}finally{\fclose($handle);}}},static function($type,$message,$file,$line)use(&$args){$args['errors']??=[];$args['errors'][]=[$message,$type,$file,$line];});if($args['errors']){$args['e']=\Inilim\Tool\Method\Obj\getCollectionThrowable();foreach($args['errors']as $err){$args['e'][]=new \ErrorException($err[0],$err[1],$err[1],$err[2],$err[3]);}unset($args['errors']);}if($args['result']===false||$args['result']===null){if($throw&&$args['e']){throw $args['e'];}return['result'=>null,'exception'=>$args['e']];}return['result'=>$args['result'],'exception'=>$args['e']];}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }}namespace Inilim\Tool\Method\Obj{if(!\Inilim\Tool\Obj::__definedIfNot('getCollectionThrowable')){
-    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null)
+    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null): object
 {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable
     {
-        protected $a = [];
-        function __construct($message, $code, $line, $file, $previous)
+        protected array $a = [];
+        function __construct(string $message, int $code, ?int $line, ?string $file, ?\Throwable $previous)
         {
             parent::__construct($message, $code, $previous);
             $this->line = $line ?? -1;
             $this->file = $file ?? '';
         }
-        function getIterator(): \Traversable
+        function getIterator(): \Generator
         {
-            return new \ArrayIterator($this->a);
+            foreach ($this->a as $k => $e) {
+                yield $k => $e;
+            }
         }
         #[\ReturnTypeWillChange]
         function offsetExists($offset): bool
@@ -24,15 +26,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\File{function sharedGet(str
             return isset($this->a[$offset]);
         }
         #[\ReturnTypeWillChange]
-        function offsetGet($offset)
+        function offsetGet($offset): ?\Throwable
         {
             return $this->a[$offset] ?? null;
         }
         #[\ReturnTypeWillChange]
-        function offsetSet($offset, $e)
+        function offsetSet($offset, $e): void
         {
             if (!$e instanceof \Throwable) {
-                throw new \InvalidArgumentException('Value must be of type object<\Throwable>');
+                throw new \InvalidArgumentException('Value must be of type \Throwable');
             }
             if ($offset === null) {
                 $this->a[] = $e;
@@ -41,15 +43,14 @@ declare(strict_types=1);namespace Inilim\Tool\Method\File{function sharedGet(str
             }
         }
         #[\ReturnTypeWillChange]
-        function offsetUnset($offset)
+        function offsetUnset($offset): void
         {
             unset($this->a[$offset]);
         }
         function count(): int
         {
-            return \sizeof($this->a);
+            return \count($this->a);
         }
     };
-    return $e;
 }
     }}

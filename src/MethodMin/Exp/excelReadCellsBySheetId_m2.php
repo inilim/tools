@@ -77,20 +77,22 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelReadCells
     }if(!\Inilim\Tool\Zip::__definedIfNot('scanAsGenerator')){
     function scanAsGenerator($pathToFileOrZip):?\Generator{$zip=\Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);if($zip===null){return null;}$num=$zip -> numFiles;for($i=0;$i<$num;$i++){$ri=$zip -> statIndex($i,\ZipArchive :: FL_UNCHANGED);if($ri===false){continue;}yield $ri;}}
     }}namespace Inilim\Tool\Method\Obj{if(!\Inilim\Tool\Obj::__definedIfNot('getCollectionThrowable')){
-    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null)
+    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null): object
 {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable
     {
-        protected $a = [];
-        function __construct($message, $code, $line, $file, $previous)
+        protected array $a = [];
+        function __construct(string $message, int $code, ?int $line, ?string $file, ?\Throwable $previous)
         {
             parent::__construct($message, $code, $previous);
             $this->line = $line ?? -1;
             $this->file = $file ?? '';
         }
-        function getIterator(): \Traversable
+        function getIterator(): \Generator
         {
-            return new \ArrayIterator($this->a);
+            foreach ($this->a as $k => $e) {
+                yield $k => $e;
+            }
         }
         #[\ReturnTypeWillChange]
         function offsetExists($offset): bool
@@ -98,15 +100,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelReadCells
             return isset($this->a[$offset]);
         }
         #[\ReturnTypeWillChange]
-        function offsetGet($offset)
+        function offsetGet($offset): ?\Throwable
         {
             return $this->a[$offset] ?? null;
         }
         #[\ReturnTypeWillChange]
-        function offsetSet($offset, $e)
+        function offsetSet($offset, $e): void
         {
             if (!$e instanceof \Throwable) {
-                throw new \InvalidArgumentException('Value must be of type object<\Throwable>');
+                throw new \InvalidArgumentException('Value must be of type \Throwable');
             }
             if ($offset === null) {
                 $this->a[] = $e;
@@ -115,16 +117,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelReadCells
             }
         }
         #[\ReturnTypeWillChange]
-        function offsetUnset($offset)
+        function offsetUnset($offset): void
         {
             unset($this->a[$offset]);
         }
         function count(): int
         {
-            return \sizeof($this->a);
+            return \count($this->a);
         }
     };
-    return $e;
 }
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}

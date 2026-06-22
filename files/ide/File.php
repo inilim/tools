@@ -8,8 +8,9 @@ class File
  * @todo tests
  * @template TValue of string
  * @template TKey of string|int
+ * @psalm-import-type THROW_get_0 from \TypeFile
  * @param TValue|iterable<TKey,TValue> $pathToFile
- * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|\Throwable}
+ * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|THROW_get_0}
  */
     static function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false) {}
 
@@ -36,7 +37,7 @@ class File
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @return array{result:-1,exception:THROW_get_0}|array{result:int<0,max>,exception:null}
  * @throws THROW_get_0
  */
     static function ensurePut(string $filename, $data, int $flags = 0, bool $throw = false, int $mode = 0755, $context = null, ?array $contextParams = null): array {}
@@ -190,7 +191,7 @@ class File
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<-1,max>,exception:null|THROW_get_0} return result -1 if error
+ * @return array{result:int<0,max>,exception:null}|array{result:-1,exception:THROW_get_0}
  * @throws THROW_get_0
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null): array {}
@@ -198,7 +199,7 @@ class File
         /**
  * Get contents of a file with shared access.
  * @psalm-import-type THROW_get_0 from \TypeFile
- * @return array{result:?string,exception:?THROW_get_0}
+ * @return array{result:string,exception:null}|array{result:null,exception:THROW_get_0}
  * @throws THROW_get_0
  */
     static function sharedGet(string $pathToFile, bool $throw = false): array {}

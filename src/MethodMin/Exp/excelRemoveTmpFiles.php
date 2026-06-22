@@ -39,20 +39,22 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelRemoveTmp
     }if(!\Inilim\Tool\Zip::__definedIfNot('open')){
     function open(string $filename,int $flags=0):?\ZipArchive{\Inilim\Tool\Method\Assert\extPhp('zip');$_filename=\Inilim\Tool\Method\Path\realPath($filename);if(!$_filename){\Inilim\Tool\Method\Other\__setErrorLast(-1,'File not found',$filename,-1);return null;}$_filename=\Inilim\Tool\Method\Path\normalize($_filename);$zip=new \ZipArchive();$status=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>$zip -> open($_filename,$flags),null);if($status!==true){if(\is_int($status)){$errors=[\ZipArchive :: ER_EXISTS=>'File already exists',\ZipArchive :: ER_INCONS=>'Zip archive inconsistent',\ZipArchive :: ER_INVAL=>'Invalid argument',\ZipArchive :: ER_MEMORY=>'Memory allocation failure',\ZipArchive :: ER_NOENT=>'No such file',\ZipArchive :: ER_NOZIP=>'Not a zip archive',\ZipArchive :: ER_OPEN=>'Can\'t open file',\ZipArchive :: ER_READ=>'Read error',\ZipArchive :: ER_SEEK=>'Seek error'];\Inilim\Tool\Method\Other\__setErrorLast(-1,$errors[$status]?? 'Zip open failed',$filename,-1);}else{\Inilim\Tool\Method\Other\__setErrorLast(-1,'Zip open failed',$filename,-1);}return null;}return $zip;}
     }}namespace Inilim\Tool\Method\Obj{if(!\Inilim\Tool\Obj::__definedIfNot('getCollectionThrowable')){
-    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null)
+    function getCollectionThrowable(string $message = '', int $code = 0, ?int $line = null, ?string $file = null, ?\Throwable $previous = null): object
 {
     return new class($message, $code, $line, $file, $previous) extends \Exception implements \ArrayAccess, \IteratorAggregate, \Countable
     {
-        protected $a = [];
-        function __construct($message, $code, $line, $file, $previous)
+        protected array $a = [];
+        function __construct(string $message, int $code, ?int $line, ?string $file, ?\Throwable $previous)
         {
             parent::__construct($message, $code, $previous);
             $this->line = $line ?? -1;
             $this->file = $file ?? '';
         }
-        function getIterator(): \Traversable
+        function getIterator(): \Generator
         {
-            return new \ArrayIterator($this->a);
+            foreach ($this->a as $k => $e) {
+                yield $k => $e;
+            }
         }
         #[\ReturnTypeWillChange]
         function offsetExists($offset): bool
@@ -60,15 +62,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelRemoveTmp
             return isset($this->a[$offset]);
         }
         #[\ReturnTypeWillChange]
-        function offsetGet($offset)
+        function offsetGet($offset): ?\Throwable
         {
             return $this->a[$offset] ?? null;
         }
         #[\ReturnTypeWillChange]
-        function offsetSet($offset, $e)
+        function offsetSet($offset, $e): void
         {
             if (!$e instanceof \Throwable) {
-                throw new \InvalidArgumentException('Value must be of type object<\Throwable>');
+                throw new \InvalidArgumentException('Value must be of type \Throwable');
             }
             if ($offset === null) {
                 $this->a[] = $e;
@@ -77,16 +79,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelRemoveTmp
             }
         }
         #[\ReturnTypeWillChange]
-        function offsetUnset($offset)
+        function offsetUnset($offset): void
         {
             unset($this->a[$offset]);
         }
         function count(): int
         {
-            return \sizeof($this->a);
+            return \count($this->a);
         }
     };
-    return $e;
 }
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}

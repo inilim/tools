@@ -37,6 +37,11 @@ class Time
     static function lifeTime($ttl, int $default = 3600): int {}
 
         
+    static function minToMs(int $min): int {}
+
+        /**
+ * @deprecated use Time::minToMs()
+ */
     static function minutesToMs(int $min): int {}
 
         
@@ -52,13 +57,35 @@ class Time
  */
     static function monthsSec(int $months): int {}
 
+        /**
+ * @param ?\DateTimeZone $timezone default UTC
+ */
+    static function msToDt(int $ms, ?\DateTimeZone $timezone = null): DateTime {}
+
+        /**
+ * @param ?\DateTimeZone $timezone default UTC
+ */
+    static function msToDtImMut(int $ms, ?\DateTimeZone $timezone = null): DateTimeImmutable {}
+
         
     static function msToSec(int $ms): int {}
+
+        /**
+ * @param ?\DateTimeZone $timezone default UTC
+ */
+    static function secToDt(int $sec, ?\DateTimeZone $timezone = null): DateTime {}
+
+        /**
+ * @param ?\DateTimeZone $timezone default UTC
+ */
+    static function secToDtImMut(int $sec, ?\DateTimeZone $timezone = null): DateTimeImmutable {}
 
         
     static function secToMs(int $seconds): int {}
 
-        
+        /**
+ * @deprecated use Time::secToMs()
+ */
     static function secondsToMs(int $sec): int {}
 
         /**
