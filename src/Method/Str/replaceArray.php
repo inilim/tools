@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated LarStr
  * Replace a given value in the string sequentially with an array. |
  * 
  * $string = 'The event will take place between ? and ?'; |

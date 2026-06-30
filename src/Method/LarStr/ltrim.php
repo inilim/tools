@@ -14,7 +14,7 @@ function ltrim($value, $charlist = null)
     if ($charlist === null) {
         $ltrimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
-        return \preg_replace('~^[\s' . \Inilim\Tool\Method\Str\__state()::INVISIBLE_CHARACTERS . $ltrimDefaultCharacters . ']+~u', '', $value) ?? \ltrim($value);
+        return \preg_replace('~^[\s' . \Inilim\Tool\Method\LarStr\__state()::INVISIBLE_CHARACTERS . $ltrimDefaultCharacters . ']+~u', '', $value) ?? \ltrim($value);
     }
 
     return \ltrim($value, $charlist);

@@ -14,7 +14,7 @@ function trim($value, $charlist = null)
     if ($charlist === null) {
         $trimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
-        $c = \Inilim\Tool\Method\Str\__state()::INVISIBLE_CHARACTERS;
+        $c = \Inilim\Tool\Method\LarStr\__state()::INVISIBLE_CHARACTERS;
         return \preg_replace('~^[\s' . $c . $trimDefaultCharacters . ']+|[\s' . $c . $trimDefaultCharacters . ']+$~u', '', $value) ?? \trim($value);
     }
 

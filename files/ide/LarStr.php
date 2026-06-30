@@ -5,6 +5,14 @@ namespace Inilim\Tool;
 class LarStr
 {
         /**
+ * Convert a value to camel case.
+ *
+ * @param  string  $value
+ * @return ($value is '' ? '' : string)
+ */
+    static function camel($value) {}
+
+        /**
  * Cap a string with a single instance of a given value.
  *
  * @param  string  $value
@@ -72,6 +80,16 @@ class LarStr
     static function replace($search, $replace, $subject, $caseSensitive = true) {}
 
         /**
+ * Replace a given value in the string sequentially with an array.
+ *
+ * @param  string  $search
+ * @param  iterable<string>  $replace
+ * @param  string  $subject
+ * @return string
+ */
+    static function replaceArray($search, $replace, $subject) {}
+
+        /**
  * Remove all whitespace from the end of a string.
  *
  * @param  string  $value
@@ -119,6 +137,15 @@ class LarStr
  * @return ($string is '' ? '' : string)
  */
     static function toBase64($string): string {}
+
+        /**
+ * Convert the given value to a string or return the given fallback on failure.
+ *
+ * @param  mixed  $value
+ * @param  string  $fallback
+ * @return string
+ */
+    static function toStringOr($value, $fallback) {}
 
         /**
  * Remove all whitespace from both ends of a string.

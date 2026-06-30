@@ -62,6 +62,7 @@ class Str
     static function betweenFirst(string $subject, string $from, string $to): string {}
 
         /**
+ * @deprecated LarStr
  * Convert a value to camel case.
  * @return string
  */
@@ -463,6 +464,7 @@ class Str
     static function replace($search, $replace, $subject, bool $caseSensitive = true) {}
 
         /**
+ * @deprecated LarStr
  * Replace a given value in the string sequentially with an array. |
  * 
  * $string = 'The event will take place between ? and ?'; |
