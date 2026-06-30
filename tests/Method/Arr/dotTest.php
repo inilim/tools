@@ -4,7 +4,6 @@ namespace Inilim\Tool\Test\Method\Arr;
 
 use Inilim\Tool\Arr;
 use Inilim\Tool\Test\TestCase;
-use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 class dotTest extends TestCase
 {
