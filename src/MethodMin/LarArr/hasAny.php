@@ -1,7 +1,7 @@
 <?php
 
 namespace Inilim\Tool\Method\LarArr{function hasAny($array,$keys){if(\is_null($keys)){return false;}$keys=(array) $keys;if(!$array){return false;}if($keys===[]){return false;}foreach($keys as $key){if(\Inilim\Tool\Method\LarArr\has($array,$key)){return true;}}return false;}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
-    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('has')){

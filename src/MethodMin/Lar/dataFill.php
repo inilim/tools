@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Lar{function dataFill():\Closure{\Inilim\Tool\Metho
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
     function __notArgsHere(string $fnName,int $countArgs){if($countArgs!==0){$fnName=\basename($fnName);throw new \InvalidArgumentException(\sprintf('%s()(...) OR %s()->__invoke(...) <-- The arguments were passed to the wrong place',$fnName,$fnName));}}
     }}namespace Inilim\Tool\Method\LarArr{if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
-    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
     }}

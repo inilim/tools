@@ -1,7 +1,7 @@
 <?php
 
 namespace Inilim\Tool\Method\LarArr{function forget():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(&$array,$keys){$original=&$array;$keys=(array) $keys;if(\count($keys)===0){return;}foreach($keys as $key){if(\Inilim\Tool\Method\LarArr\exists($array,$key)){unset($array[$key]);continue;}$parts=\explode('.',$key);$array=&$original;while(\count($parts)>1){$part=\array_shift($parts);if(isset($array[$part])&&\Inilim\Tool\Method\LarArr\accessible($array[$part])){$array=&$array[$part];}else{continue 2;}}unset($array[\array_shift($parts)]);}};}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
-    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){

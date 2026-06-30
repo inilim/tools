@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Lar{function dataGet($target,$key,$default=null){if
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}namespace Inilim\Tool\Method\LarArr{if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
-    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('collapse')){
     function collapse($array){$results=[];foreach($array as $values){if($values instanceof \Traversable){$values=\iterator_to_array($values);}elseif(is_array($values)){$results[]=$values;}}return \array_merge([],... $results);}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){

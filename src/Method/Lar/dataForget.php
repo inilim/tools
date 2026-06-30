@@ -10,24 +10,26 @@ function dataForget(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
-    return static function (&$target, $key) {
+    $forget = \Inilim\Tool\Method\LarArr\forget();
+    $data_forget = static function (&$target, $key) use (&$data_forget, $forget) {
+        /** @var \Closure $data_forget */
         $segments = \is_array($key) ? $key : \explode('.', $key);
 
         if (($segment = \array_shift($segments)) === '*' && \Inilim\Tool\Method\LarArr\accessible($target)) {
             if ($segments) {
                 foreach ($target as &$inner) {
-                    \Inilim\Tool\Method\Lar\dataForget()($inner, $segments);
+                    $data_forget($inner, $segments);
                 }
             }
         } elseif (\Inilim\Tool\Method\LarArr\accessible($target)) {
             if ($segments && \Inilim\Tool\Method\LarArr\exists($target, $segment)) {
-                \Inilim\Tool\Method\Lar\dataForget()($target[$segment], $segments);
+                $data_forget($target[$segment], $segments);
             } else {
-                \Inilim\Tool\Method\LarArr\forget()($target, $segment);
+                $forget($target, $segment);
             }
         } elseif (\is_object($target)) {
             if ($segments && isset($target->{$segment})) {
-                \Inilim\Tool\Method\Lar\dataForget()($target->{$segment}, $segments);
+                $data_forget($target->{$segment}, $segments);
             } elseif (isset($target->{$segment})) {
                 unset($target->{$segment});
             }
@@ -35,4 +37,10 @@ function dataForget(): \Closure
 
         return $target;
     };
+
+    return $data_forget;
 }
+
+
+// INFO
+// функция работает в двух режимах, если передать ключ строку, то функция корректно отработает звездочки, если передать ключи массивом, то обработка звездочек не будет

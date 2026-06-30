@@ -19,9 +19,8 @@ class LarArr
  * Determine whether the given value is array accessible.
  *
  * @param  mixed  $value
- * @return bool
  */
-    static function accessible($value) {}
+    static function accessible($value): bool {}
 
         /**
  * Add an element to an array using "dot" notation if it doesn't exist.

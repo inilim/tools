@@ -1,7 +1,7 @@
 <?php
 
 namespace Inilim\Tool\Method\LarArr{function pluck($array,$value,$key=null){$results=[];$value=\is_string($value)?\explode('.',$value):$value;$key=\is_null($key)||\is_array($key)||$key instanceof \Closure?$key:\explode('.',$key);foreach($array as $item){$itemValue=$value instanceof \Closure?$value($item):\Inilim\Tool\Method\Lar\dataGet($item,$value);if(\is_null($key)){$results[]=$itemValue;}else{$itemKey=$key instanceof \Closure?$key($item):\Inilim\Tool\Method\Lar\dataGet($item,$key);if(\is_object($itemKey)&&\method_exists($itemKey,'__toString')){$itemKey=(string) $itemKey;}$results[$itemKey]=$itemValue;}}return $results;}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
-    function accessible($value){return \is_array($value)||$value instanceof \ArrayAccess;}
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('collapse')){
     function collapse($array){$results=[];foreach($array as $values){if($values instanceof \Traversable){$values=\iterator_to_array($values);}elseif(is_array($values)){$results[]=$values;}}return \array_merge([],... $results);}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
