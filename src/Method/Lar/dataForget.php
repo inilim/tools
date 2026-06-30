@@ -11,8 +11,9 @@ function dataForget(): \Closure
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     $forget = \Inilim\Tool\Method\LarArr\forget();
-    $data_forget = static function (&$target, $key) use (&$data_forget, $forget) {
-        /** @var \Closure $data_forget */
+    $data_forget = static function (&$target, $key) use ($forget) {
+        $data_forget = \Inilim\Tool\Method\Lar\dataForget();
+
         $segments = \is_array($key) ? $key : \explode('.', $key);
 
         if (($segment = \array_shift($segments)) === '*' && \Inilim\Tool\Method\LarArr\accessible($target)) {

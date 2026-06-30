@@ -82,9 +82,10 @@ class LarArr
  *
  * @param  iterable  $array
  * @param  string  $prepend
+ * @param  int  $depth
  * @return array
  */
-    static function dot($array, $prepend = '') {}
+    static function dot($array, $prepend = '', $depth = \INF) {}
 
         /**
  * Determine if all items pass the given truth test.
@@ -516,8 +517,11 @@ class LarArr
         /**
  * Filter items where the value is not null.
  *
- * @param  array  $array
- * @return array
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @param  array<TKey, TValue|null>  $array
+ * @return array<TKey, TValue>
  */
     static function whereNotNull($array) {}
 

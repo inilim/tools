@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Inilim\Tool\Method\File;
 
-use function Inilim\Tool\Method\Check\php85;
-
 /**
  * @todo tests
  * @author Inilim
@@ -37,7 +35,6 @@ function get(
         'useIncludePath'       => $useIncludePath,
         'context'              => $context,
         'contextParams'        => $contextParams,
-        'result'               => null,
         'result'               => null,
         'exception'            => null,
         'errors'               => null,

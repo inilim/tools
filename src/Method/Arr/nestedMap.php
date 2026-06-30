@@ -29,5 +29,9 @@ function nestedMap(array $array, int $depth, callable $callable): array
         return $array;
     };
 
-    return $internal($array, null, $depth, $callable);
+    $result = $internal($array, null, $depth, $callable);
+
+    $internal = null;
+
+    return $result;
 }

@@ -25,5 +25,8 @@ function unpuckTraversableRecursive(\Traversable $obj): array
     };
 
     $internal($obj);
+
+    $internal = null;
+
     return $result;
 }

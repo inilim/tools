@@ -24,5 +24,7 @@ function dotKeys(iterable $array, string $prepend = ''): array
 
     $flatten($array, $prepend);
 
+    $flatten = null;
+
     return $results;
 }

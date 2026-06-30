@@ -28,5 +28,7 @@ function dot(iterable $array, string $prepend = '', string $separator = '.'): ar
 
     $flatten($array, $prepend, $separator);
 
+    $flatten = null;
+
     return $results;
 }

@@ -126,5 +126,7 @@ function domToArray(object $el): array
         $results[] = $fn($el);
     }
 
+    $fn = null;
+
     return $results;
 }

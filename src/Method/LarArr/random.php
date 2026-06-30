@@ -2,25 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Inilim\Tool\Method\Arr;
+namespace Inilim\Tool\Method\LarArr;
 
 /**
  * Get one or a specified number of random values from an array.
- * @template TValue
- * @template TKey
- * @param  array<TKey,TValue>  $array
+ *
+ * @build_skip
+ * @param  array  $array
  * @param  int|null  $number
  * @param  bool  $preserveKeys
- *
- * @return TValue|TValue[]|array<TKey,TValue>
+ * @return ($number is null ? mixed : array)
  *
  * @throws \InvalidArgumentException
  */
-function random(array $array, ?int $number = null, bool $preserveKeys = false)
+function random($array, $number = null, $preserveKeys = false)
 {
-    $requested = $number === null ? 1 : $number;
+    $requested = \is_null($number) ? 1 : $number;
 
-    $count = \sizeof($array);
+    $count = \count($array);
 
     if ($requested > $count) {
         throw new \InvalidArgumentException(
@@ -28,24 +27,25 @@ function random(array $array, ?int $number = null, bool $preserveKeys = false)
         );
     }
 
-    if ($number === null) {
-        return $array[\array_rand($array)];
+    if (empty($array) || (! \is_null($number) && $number <= 0)) {
+        return \is_null($number) ? null : [];
     }
 
-    if ((int) $number === 0) {
-        return [];
-    }
+    // TODO
+    $keys = (new Randomizer)->pickArrayKeys($array, $requested);
 
-    $keys = \array_rand($array, $number);
+    if (\is_null($number)) {
+        return $array[$keys[0]];
+    }
 
     $results = [];
 
     if ($preserveKeys) {
-        foreach ((array) $keys as $key) {
+        foreach ($keys as $key) {
             $results[$key] = $array[$key];
         }
     } else {
-        foreach ((array) $keys as $key) {
+        foreach ($keys as $key) {
             $results[] = $array[$key];
         }
     }
