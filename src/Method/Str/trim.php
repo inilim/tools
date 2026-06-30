@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated LarStr
  * Remove all whitespace from both ends of a string.
  *
  * @param  string  $value

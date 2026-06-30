@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated LarStr
  * Replace the given value in the given string.
  * @param string|iterable<string> $search
  * @param string|iterable<string> $replace

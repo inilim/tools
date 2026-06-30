@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated LarStr
  * Returns the portion of the string specified by the start and length parameters.
  * @ext mbstring
  * @return string

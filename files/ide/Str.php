@@ -183,6 +183,7 @@ class Str
     static function excerpt(string $text, string $phrase = '', array $options = []) {}
 
         /**
+ * @deprecated LarStr
  * Cap a string with a single instance of a given value.
  */
     static function finish(string $value, string $cap): string {}
@@ -222,6 +223,7 @@ class Str
     static function getSegmentsPath(string $path): array {}
 
         /**
+ * @deprecated LarStr::...
  * Convert the given string to proper case for each word.
  * @return string
  */
@@ -329,12 +331,14 @@ class Str
     static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false): string {}
 
         /**
+ * @deprecated LarStr::...
  * Convert the given string to lower-case.
  * @ext mbstring
  */
     static function lower(string $value, ?string $encoding = 'UTF-8'): string {}
 
         /**
+ * @deprecated LarStr
  * Remove all whitespace from the beginning of a string.
  *
  * @param  string  $value
@@ -449,6 +453,7 @@ class Str
     static function repeat(string $string, int $times): string {}
 
         /**
+ * @deprecated LarStr
  * Replace the given value in the given string.
  * @param string|iterable<string> $search
  * @param string|iterable<string> $replace
@@ -510,6 +515,7 @@ class Str
     static function reverse(string $value) {}
 
         /**
+ * @deprecated LarStr
  * Remove all whitespace from the end of a string.
  *
  * @param  string  $value
@@ -555,6 +561,8 @@ class Str
     static function startsWith(string $haystack, $needles, bool $ignoreCase = false): bool {}
 
         /**
+ * @deprecated use LarStr::studly()
+ * 
  * Convert a value to studly caps case.
  * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
  * @return ($value is '' ? '' : string)
@@ -562,6 +570,8 @@ class Str
     static function studly(string $value) {}
 
         /**
+ * @deprecated use LarStr::studly()
+ * 
  * Convert a value to studly caps case.
  * @todo почемуто не отрабатывает callable как строка с namespace. function_exists выдает false, хотя функция входит в бандл
  * @return ($value is '' ? '' : string)
@@ -569,6 +579,7 @@ class Str
     static function pascal(string $value) {}
 
         /**
+ * @deprecated LarStr
  * Returns the portion of the string specified by the start and length parameters.
  * @ext mbstring
  * @return string
@@ -607,6 +618,7 @@ class Str
     static function take(string $string, int $limit): string {}
 
         /**
+ * @deprecated LarStr
  * Convert the given string to proper case.
  * @ext mbstring
  */
@@ -654,6 +666,7 @@ class Str
     static function translatePhpUrlConstantToKey(int $constant): string {}
 
         /**
+ * @deprecated LarStr
  * Remove all whitespace from both ends of a string.
  *
  * @param  string  $value
@@ -663,6 +676,7 @@ class Str
     static function trim(string $value, ?string $charlist = null): string {}
 
         /**
+ * @deprecated LarStr
  * Make a string's first character uppercase.
  * 
  * @return ($string is '' ? '' : non-empty-string)
@@ -670,6 +684,7 @@ class Str
     static function ucfirst(string $string): string {}
 
         /**
+ * @deprecated LarStr
  * Split a string into pieces by uppercase characters.
  * @return ($string is '' ? array{} : string[])
  */
@@ -687,6 +702,7 @@ class Str
     static function unwrap(string $value, string $before, ?string $after = null): string {}
 
         /**
+ * @deprecated LarStr
  * Convert the given string to upper-case.
  * 
  * @ext mbstring
