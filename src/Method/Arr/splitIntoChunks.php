@@ -31,15 +31,7 @@ function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, 
     }
 
     if ($removeEmptyChunks) {
-        if (\Inilim\Tool\Method\Check\php80()) {
-            $result = \array_filter($result, null);
-        } else {
-            foreach ($result as $idx => $item) {
-                if ($item === []) {
-                    unset($result[$idx]);
-                }
-            }
-        }
+        $result = \Inilim\Tool\Method\PF\array_filter($result);
     }
 
     return $result;

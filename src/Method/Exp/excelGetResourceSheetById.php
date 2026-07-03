@@ -134,12 +134,12 @@ function excelGetResourceSheetById($pathToFileOrZip, string $sheetId)
             \preg_match_all($regex, $xml, $match);
             // \de($match);
             $m = $match[1] ?? [];
-            $m = \array_filter($m);
+            $m = \Inilim\Tool\Method\PF\array_filter($m);
             if (\sizeof($m) === 1) {
                 return $m[0];
             }
             $m = $match[2] ?? [];
-            $m = \array_filter($m);
+            $m = \Inilim\Tool\Method\PF\array_filter($m);
             if (\sizeof($m) === 1) {
                 return $m[0];
             }

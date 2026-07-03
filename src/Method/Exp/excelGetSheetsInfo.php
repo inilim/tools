@@ -81,7 +81,8 @@ function excelGetSheetsInfo($pathToFileOrZip): ?array
             }
 
             $matchSheet = $matchSheet[0];
-            $matchSheet = \array_filter($matchSheet);
+            $matchSheet = \Inilim\Tool\Method\PF\array_filter($matchSheet);
+
             // de($matchSheet);
 
             // ---------------------------------------------

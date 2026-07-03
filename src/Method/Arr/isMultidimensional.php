@@ -17,5 +17,4 @@ function isMultidimensional(array $array): bool
         }
     }
     return false;
-    // return \sizeof(\array_filter($array, 'is_array')) > 0;
 }

@@ -21,7 +21,7 @@ function patternToMs(string $pattern): int
 
     // $types = \Inilim\Tool\Method\Str\concat($ms, $s, $m, $d, $w, $mo, $y, $h);
     // $types = \explode('|', $types);
-    // $types = \array_filter($types);
+    // $types = \Inilim\Tool\Method\PF\array_filter($types);
     // \usort($types, function ($a, $b) {
     //     return strlen($b) - strlen($a);
     // });

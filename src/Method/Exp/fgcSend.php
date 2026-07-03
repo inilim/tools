@@ -140,7 +140,7 @@ function fgcSend(string $url, array $options = [])
                     $args = ['severity', 'message', 'message_code', 'bytes_transferred', 'bytes_max'];
 
                     \fprintf(\STDOUT, '<%s> [%s] ', $ident, $map[$code]);
-                    foreach (\array_filter($passed) as $i => $v) {
+                    foreach (\Inilim\Tool\Method\PF\array_filter($passed) as $i => $v) {
                         \fwrite(\STDOUT, $args[$i] . ': "' . $v . '" ');
                     }
                     \fwrite(\STDOUT, "\n");

@@ -19,5 +19,5 @@ function headline($value)
 
     $collapsed = \Inilim\Tool\Method\LarStr\replace(['-', '_', ' '], '_', \implode('_', $parts));
 
-    return \implode(' ', \array_filter(\explode('_', $collapsed)));
+    return \implode(' ', \Inilim\Tool\Method\PF\array_filter(\explode('_', $collapsed)));
 }

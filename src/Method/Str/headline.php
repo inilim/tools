@@ -20,5 +20,5 @@ function headline(string $value)
 
     $collapsed = \Inilim\Tool\Method\Str\replace(['-', '_', ' '], '_', \implode('_', $parts));
 
-    return \implode(' ', \array_filter(\explode('_', $collapsed)));
+    return \implode(' ', \Inilim\Tool\Method\PF\array_filter(\explode('_', $collapsed)));
 }
