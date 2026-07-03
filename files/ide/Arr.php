@@ -844,7 +844,7 @@ class Arr
  * @template TValue
  * 
  * @author inilim
- * @param  array<TKey, TValue>|TValue  $value
+ * @param  array<TKey,TValue>|TValue  $value
  * @return ($value is array ? array<TKey, TValue> : array{TValue})
  */
     static function wrap($value): array {}

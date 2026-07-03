@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function select(array $array, $keys)
 {
-    $keys = \Inilim\Tool\Method\Arr\wrap($keys);
+    $keys = \Inilim\Tool\Method\LarArr\wrap($keys);
 
     return \Inilim\Tool\Method\Arr\map($array, static function ($item) use ($keys) {
         $result = [];

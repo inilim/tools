@@ -14,22 +14,19 @@ function walkRecursive(): \Closure
 {
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
-    return static function (&$array, callable $callable) {
+    return static function (iterable &$array, callable $callable) {
         $depth = 0;
-        $recursive = static function (&$array, $callable, $recursive) use (&$depth) {
-            /**
-             * @param object|mixed[] $array
-             */
+        $fn = static function (iterable &$array, callable $callable, \Closure $fn) use (&$depth) {
             foreach ($array as $key => &$value) {
                 $callable($value, $key, $depth);
                 if (\is_iterable($value)) {
                     $depth++;
-                    $recursive($value, $callable, $recursive);
+                    $fn($value, $callable, $fn);
                     $depth--;
                 }
             }
         };
 
-        $recursive($array, $callable, $recursive);
+        $fn($array, $callable, $fn);
     };
 }

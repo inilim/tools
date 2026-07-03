@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Other;
  */
 function toCssClasses(array $array): string
 {
-    $classList = \Inilim\Tool\Method\Arr\wrap($array);
+    $classList = \Inilim\Tool\Method\LarArr\wrap($array);
 
     $classes = [];
 

@@ -43,9 +43,8 @@ class TypeFile {}
  * @example psalm-type NameType = string
  * 
  * ---- walkRecursive
- * @psalm-type Param_1_walkRecursive = object|mixed[]
  * @psalm-type Param_2_walkRecursive = callable(mixed, string|int, int):void
- * @psalm-type Return_walkRecursive  = Closure(Param_1_walkRecursive, Param_2_walkRecursive):void
+ * @psalm-type Return_walkRecursive  = \Closure(iterable, Param_2_walkRecursive):void
  * 
  */
 class TypeArr {}
