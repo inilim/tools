@@ -623,7 +623,10 @@ class Arr
 
         /**
  * @author inilim
- * @return array
+ * @template V
+ * @template K
+ * @param array<K,V> $array
+ * @return V[]
  */
     static function resetKeysRecursive(array $array): array {}
 
@@ -683,8 +686,7 @@ class Arr
  *
  * @return mixed
  *
- * @throws \Illuminate\Support\ItemNotFoundException
- * @throws \Illuminate\Support\MultipleItemsFoundException
+ * @throws \Exception
  */
     static function sole(array $array, ?callable $callback = null) {}
 
@@ -719,13 +721,13 @@ class Arr
 
         /**
  * @author inilim
- * @template V of mixed
- * @template K of int|string
+ * @template V
+ * @template K
  *
  * @param array<K,V> $array
- * @return array<int,array<K,V>>
+ * @return ($preserveKeys is true ? array<int,array<K,V>> : array<int,V[]>)
  */
-    static function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false) {}
+    static function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false): array {}
 
         /**
  * @deprecated use LarArr::***

@@ -14,8 +14,7 @@ function keysUpperNestedArray(array $array, int $depth = 1): array
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,
         $depth,
-        static function (array $value) {
-            return \Inilim\Tool\Method\Arr\keysUpper($value);
-        }
+        // @deps(\Inilim\Tool\Method\Arr\keysUpper)
+        '\Inilim\Tool\Method\Arr\keysUpper'
     );
 }

@@ -15,7 +15,7 @@ function exceptNestedArray(array $array, $keys, int $depth = 1): array
         $array,
         $depth,
         static function ($value) use ($keys) {
-            return \Inilim\Tool\Method\Arr\except($value, $keys);
+            return \Inilim\Tool\Method\LarArr\except($value, $keys);
         }
     );
 }

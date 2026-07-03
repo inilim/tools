@@ -6,16 +6,17 @@ namespace Inilim\Tool\Method\Arr;
 
 /**
  * @author inilim
- * @template V of mixed
- * @template K of int|string
+ * @template V
+ * @template K
  *
  * @param array<K,V> $array
- * @return array<int,array<K,V>>
+ * @return ($preserveKeys is true ? array<int,array<K,V>> : array<int,V[]>)
  */
-function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false)
+function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, bool $removeEmptyChunks = false): array
 {
-    if (!$array || $chunks < 1) return [];
-    // return \array_chunk($array, \ceil(\sizeof($array) / \abs($chunks)), $preserveKeys);
+    if ($array === [] || $chunks < 1) {
+        return [];
+    }
 
     $i = 0;
     $result = \array_fill(0, $chunks, []);
@@ -30,7 +31,15 @@ function splitIntoChunks(array $array, int $chunks, bool $preserveKeys = false, 
     }
 
     if ($removeEmptyChunks) {
-        $result = \array_filter($result, null);
+        if (\Inilim\Tool\Method\Check\php80()) {
+            $result = \array_filter($result, null);
+        } else {
+            foreach ($result as $idx => $item) {
+                if ($item === []) {
+                    unset($result[$idx]);
+                }
+            }
+        }
     }
 
     return $result;

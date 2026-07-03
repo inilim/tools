@@ -13,8 +13,7 @@ function keysLowerNestedArray(array $array, int $depth = 1): array
     return \Inilim\Tool\Method\Arr\nestedMap(
         $array,
         $depth,
-        static function (array $value) {
-            return \Inilim\Tool\Method\Arr\keysLower($value);
-        }
+        // @deps(\Inilim\Tool\Method\Arr\keysLower)
+        '\Inilim\Tool\Method\Arr\keysLower'
     );
 }

@@ -14,7 +14,7 @@ function onlyNestedArray(array $array, $keys, int $depth = 1): array
         $array,
         $depth,
         static function (array $value) use ($keys) {
-            return \Inilim\Tool\Method\Arr\only($value, $keys);
+            return \Inilim\Tool\Method\LarArr\only($value, $keys);
         }
     );
 }

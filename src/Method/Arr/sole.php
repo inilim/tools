@@ -11,8 +11,7 @@ namespace Inilim\Tool\Method\Arr;
  *
  * @return mixed
  *
- * @throws \Illuminate\Support\ItemNotFoundException
- * @throws \Illuminate\Support\MultipleItemsFoundException
+ * @throws \Exception
  */
 function sole(array $array, ?callable $callback = null)
 {

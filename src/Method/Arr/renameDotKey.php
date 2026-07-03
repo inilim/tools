@@ -12,9 +12,9 @@ function renameDotKey(): \Closure
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (array &$array, string $oldKey, string $newKey): bool {
-        $tArr   = \Inilim\Tool\Method\Arr\dot($array);
+        $tArr   = \Inilim\Tool\Method\LarArr\dot($array);
         $result = \Inilim\Tool\Method\Arr\renameKey()($tArr, $oldKey, $newKey);
-        $array  = \Inilim\Tool\Method\Arr\undot($tArr);
+        $array  = \Inilim\Tool\Method\LarArr\undot($tArr);
         return $result;
     };
 }
