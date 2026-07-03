@@ -332,6 +332,12 @@ class Str
     static function limit(string $value, int $limit = 100, string $end = '...', bool $preserveWords = false): string {}
 
         /**
+ * @return \Generator<int,string>
+ * @throws \InvalidArgumentException
+ */
+    static function lines(string $content, int $startLine = 0): Generator {}
+
+        /**
  * @deprecated LarStr::...
  * Convert the given string to lower-case.
  * @ext mbstring

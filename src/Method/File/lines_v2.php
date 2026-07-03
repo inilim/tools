@@ -27,3 +27,5 @@ function lines_v2(string $pathToFile, int $startLine = 0): \Generator
         $startLine++;
     }
 }
+
+// TODO добавить такую же функцию для строк и стримов
