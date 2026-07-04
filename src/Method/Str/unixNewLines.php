@@ -16,6 +16,7 @@ function unixNewLines(string $s, string $replacement = "\n"): string
     // после билдера, символы "\u{...}" преобразуются, нужно разбиратся, хз кто виноват, минификатор или еще кто.
     // base64_decode кастыль для решения проблемы
     return \preg_replace(
+        // \r\n|\n|\r|\u{2028}|\u{2029}
         "/\r\n|\n|\r|" . \base64_decode('4oCo', true) . "|" . \base64_decode('4oCp', true) . "/",
         $replacement,
         $s
