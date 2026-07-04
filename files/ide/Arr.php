@@ -299,6 +299,16 @@ class Arr
     static function getKeyOffset(array $array, $key) {}
 
         /**
+ * @author nette/utils
+ * 
+ * Returns reference to array item. If the index does not exist, new one is created with value null.
+ * @template T
+ * @return \Closure(array<T>,array-key|array-key[]):?T
+ * @throws \InvalidArgumentException if traversed item is not an array
+ */
+    static function getRef(): Closure {}
+
+        /**
  * @deprecated use LarArr::***
  * @author laravel
  * Check if an item or items exist in an array using "dot" notation.
