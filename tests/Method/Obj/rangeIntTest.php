@@ -47,6 +47,7 @@ class rangeIntTest extends \Inilim\Tool\Test\TestCase
             [1, 10, 2],
             [1, 10, 3],
             [10, 1, 3],
+            [1, 0, 1],
             [1, 1, 1],
             [1, 5, 2],
             [1, 1, 2],
