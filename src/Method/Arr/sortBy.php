@@ -14,7 +14,7 @@ function sortBy(array $arr, string $by, int $options = \SORT_REGULAR, bool $desc
     $t = [];
     foreach ($arr as $key => $value) {
         if (\is_array($value) || \is_object($value)) {
-            $t[$key] = \Inilim\Tool\Method\Arr\dataGet($value, $by);
+            $t[$key] = \Inilim\Tool\Method\Lar\dataGet($value, $by);
         } else {
             $t[$key] = null;
         }

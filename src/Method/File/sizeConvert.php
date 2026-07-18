@@ -11,6 +11,8 @@ namespace Inilim\Tool\Method\File;
  * 
  * @throws \Exception
  * @throws \InvalidArgumentException
+ * 
+ * @ext intl
  */
 function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null): string
 {

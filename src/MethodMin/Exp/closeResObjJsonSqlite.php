@@ -1,9 +1,9 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function closeResObjJsonSqlite(object $value):bool{if(!\Inilim\Tool\Method\Exp\isResObjJsonSqlite($value)){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function(){if($this -> tag===''){return false;}$this -> tag='';$this -> pdo=null;return \Inilim\Tool\Method\FS\unlink($this -> tmpFile);});}if(!\Inilim\Tool\Exp::__definedIfNot('__tagJsonSqlite')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function closeResObjJsonSqlite(object $value):bool{if(!\Inilim\Tool\Method\Exp\isResObjJsonSqlite($value)){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function():bool{if($this -> tag===''){return false;}$this -> tag='';$this -> pdo=null;return \Inilim\Tool\Method\FS\unlink($this -> tmpFile);});}if(!\Inilim\Tool\Exp::__definedIfNot('__tagJsonSqlite')){
     function __tagJsonSqlite():string{return 'open-file-json-sqlite';}
     }if(!\Inilim\Tool\Exp::__definedIfNot('isResObjJsonSqlite')){
-    function isResObjJsonSqlite($value):bool{if(!\is_object($value)||!\Inilim\Tool\Method\PF\str_starts_with(\get_class($value),'class@anonymous')){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function(){return($this -> tag ?? '')===\Inilim\Tool\Method\Exp\__tagJsonSqlite();});}
+    function isResObjJsonSqlite($value):bool{if(false===\is_object($value)||false===\Inilim\Tool\Method\PF\str_starts_with(\get_class($value),'class@anonymous')){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function():bool{return($this -> tag ?? '')===\Inilim\Tool\Method\Exp\__tagJsonSqlite();});}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){

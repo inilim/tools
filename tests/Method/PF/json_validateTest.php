@@ -3,7 +3,6 @@
 namespace Inilim\Tool\Test\Method\PF;
 
 use Inilim\Tool\PF;
-use Inilim\Tool\VD;
 
 /**
  */

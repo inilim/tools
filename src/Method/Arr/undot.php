@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Arr;
 function undot($array): array
 {
     $results = [];
-    $set = \Inilim\Tool\Method\Arr\set();
+    $set = \Inilim\Tool\Method\LarArr\set();
     foreach ($array as $key => $value) {
         $set($results, $key, $value);
     }

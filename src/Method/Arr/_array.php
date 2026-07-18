@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function _array($array, $key, ?array $default = null): array
 {
-    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    $value = \Inilim\Tool\Method\LarArr\get($array, $key, $default);
 
     if (!\is_array($value)) {
         throw new \InvalidArgumentException(

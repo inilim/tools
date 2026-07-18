@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author Laravel
  * Fill in data where it's missing.
  * @template T of array|object
@@ -16,6 +16,6 @@ function dataFill(): \Closure
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (&$target, $key, $value) {
-        return \Inilim\Tool\Method\Arr\dataSet()($target, $key, $value, false);
+        return \Inilim\Tool\Method\Lar\dataSet()($target, $key, $value, false);
     };
 }

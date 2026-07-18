@@ -12,7 +12,7 @@ function closeResObjJsonSqlite(object $value): bool
     if (!\Inilim\Tool\Method\Exp\isResObjJsonSqlite($value)) {
         return false;
     }
-    return \Inilim\Tool\Method\Other\bindAndCall($value, function () {
+    return \Inilim\Tool\Method\Other\bindAndCall($value, function (): bool {
         if ($this->tag === '') {
             return false;
         }

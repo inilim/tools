@@ -13,10 +13,10 @@ namespace Inilim\Tool\Method\Str;
 function remove($search, $subject, bool $caseSensitive = true)
 {
     if ($search instanceof \Traversable) {
-        $search  = \Inilim\Tool\Method\Arr\from($search);
+        $search  = \Inilim\Tool\Method\LarArr\from($search);
     }
     if ($subject instanceof \Traversable) {
-        $subject = \Inilim\Tool\Method\Arr\from($subject);
+        $subject = \Inilim\Tool\Method\LarArr\from($subject);
     }
 
     return $caseSensitive

@@ -23,12 +23,12 @@ function has($array, $keys): bool
     foreach ($keys as $key) {
         $subKeyArray = $array;
 
-        if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
+        if (\Inilim\Tool\Method\LarArr\exists($array, $key)) {
             continue;
         }
 
         foreach (\explode('.', $key) as $segment) {
-            if (\Inilim\Tool\Method\Arr\accessible($subKeyArray) && \Inilim\Tool\Method\Arr\exists($subKeyArray, $segment)) {
+            if (\Inilim\Tool\Method\LarArr\accessible($subKeyArray) && \Inilim\Tool\Method\LarArr\exists($subKeyArray, $segment)) {
                 $subKeyArray = $subKeyArray[$segment];
             } else {
                 return false;

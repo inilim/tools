@@ -10,5 +10,5 @@ namespace Inilim\Tool\Method\Arr;
  */
 function sortRecursiveDesc(array $array, int $options = \SORT_REGULAR): array
 {
-    return \Inilim\Tool\Method\Arr\sortRecursive($array, $options, true);
+    return \Inilim\Tool\Method\LarArr\sortRecursive($array, $options, true);
 }

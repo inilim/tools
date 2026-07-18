@@ -15,6 +15,6 @@ namespace Inilim\Tool\Method\Arr;
  */
 function except(array $array, $keys): array
 {
-    \Inilim\Tool\Method\Arr\forget()($array, $keys);
+    \Inilim\Tool\Method\LarArr\forget()($array, $keys);
     return $array;
 }

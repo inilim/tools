@@ -3,9 +3,7 @@
 namespace Inilim\Tool\Test\Method\LarArr;
 
 use Inilim\Tool\LarArr;
-use Inilim\Tool\Test\CasePhpT;
 use Inilim\Tool\Test\TestCase;
-use Inilim\Tool\Test\TestProcess;
 use Inilim\Tool\Test\ForTest\ClassArrayAccessIteratorAggregate;
 
 class accessibleTest extends TestCase

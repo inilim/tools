@@ -17,27 +17,27 @@ namespace Inilim\Tool\Method\Arr;
  */
 function get($array, $key, $default = null)
 {
-    if (!\Inilim\Tool\Method\Arr\accessible($array)) {
-        return \Inilim\Tool\Method\Arr\value($default);
+    if (!\Inilim\Tool\Method\LarArr\accessible($array)) {
+        return \Inilim\Tool\Method\Lar\value($default);
     }
 
     if ($key === null) {
         return $array;
     }
 
-    if (\Inilim\Tool\Method\Arr\exists($array, $key)) {
+    if (\Inilim\Tool\Method\LarArr\exists($array, $key)) {
         return $array[$key];
     }
 
     if (\strpos(\strval($key), '.') === false) {
-        return $array[$key] ?? \Inilim\Tool\Method\Arr\value($default);
+        return $array[$key] ?? \Inilim\Tool\Method\Lar\value($default);
     }
 
     foreach (\explode('.', \strval($key)) as $segment) {
-        if (\Inilim\Tool\Method\Arr\accessible($array) && \Inilim\Tool\Method\Arr\exists($array, $segment)) {
+        if (\Inilim\Tool\Method\LarArr\accessible($array) && \Inilim\Tool\Method\LarArr\exists($array, $segment)) {
             $array = $array[$segment];
         } else {
-            return \Inilim\Tool\Method\Arr\value($default);
+            return \Inilim\Tool\Method\Lar\value($default);
         }
     }
 

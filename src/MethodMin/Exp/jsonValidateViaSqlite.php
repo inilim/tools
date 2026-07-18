@@ -5,7 +5,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonValidateVi
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
-    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
     }if(!\Inilim\Tool\Other::__definedIfNot('sqliteLibVersion_m3')){
@@ -17,7 +17,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonValidateVi
     }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
     function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
-    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('inArray')){
     function inArray($value,array $values,string $message=''){if(!\in_array($value,$values,true)){throw new \InvalidArgumentException(\sprintf($message?:'Expected one of: %2$s. Got: %s',\Inilim\Tool\Method\Other\valueToString($value),\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',$values))));}}
     }}

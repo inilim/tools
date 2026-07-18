@@ -19,5 +19,5 @@ function getArrayableItems($items): array
     } elseif (\is_scalar($items) || (\Inilim\Tool\Method\Check\php81() && $items instanceof \UnitEnum)) {
         return \Inilim\Tool\Method\LarArr\wrap($items);
     }
-    return \Inilim\Tool\Method\Arr\from($items);
+    return \Inilim\Tool\Method\LarArr\from($items);
 }

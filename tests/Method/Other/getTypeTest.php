@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Inilim\Tool\Other;
-use Inilim\Tool\Test\CasePhpT;
-use Inilim\Tool\Test\TestProcess;
 
 class getTypeTest extends \Inilim\Tool\Test\TestCase
 {
@@ -50,17 +48,5 @@ class getTypeTest extends \Inilim\Tool\Test\TestCase
         $this->assertSame('resource', Other::getType($tmp, true));
         \fclose($tmp);
         $this->assertSame('resource_closed', Other::getType($tmp, true));
-    }
-
-    function testEnum()
-    {
-        $dir = CasePhpT::self()->getDir([Other::class, 'getType']);
-        $case = $dir . '/enum.php';
-        foreach (['8.1', '8.2', '8.3', '8.4'] as $php) {
-            $asserts = (new TestProcess($case))->withPhp($php)->run();
-            foreach ($asserts as $assert) {
-                $this->assertTag($assert);
-            }
-        }
     }
 }

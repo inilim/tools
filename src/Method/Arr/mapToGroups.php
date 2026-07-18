@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @deprecated use LarArr::***
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TValue
@@ -16,7 +15,7 @@ namespace Inilim\Tool\Method\Arr;
 function mapToGroups(array $array, callable $callback): array
 {
     return \array_reduce(
-        \Inilim\Tool\Method\Arr\map($array, $callback),
+        \Inilim\Tool\Method\LarArr\map($array, $callback),
         static function ($groups, $pair) {
             $groups[\key($pair)][] = \reset($pair);
             return $groups;

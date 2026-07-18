@@ -14,14 +14,14 @@ namespace Inilim\Tool\Method\Exp;
 function isResObjJsonSqlite($value): bool
 {
     if (
-        !\is_object($value)
+        false === \is_object($value)
         ||
-        !\Inilim\Tool\Method\PF\str_starts_with(\get_class($value), 'class@anonymous')
+        false === \Inilim\Tool\Method\PF\str_starts_with(\get_class($value), 'class@anonymous')
     ) {
         return false;
     }
 
-    return \Inilim\Tool\Method\Other\bindAndCall($value, function () {
+    return \Inilim\Tool\Method\Other\bindAndCall($value, function (): bool {
         // $file = $this->tmpFile ?? '';
         // \clearstatcache(false, $file);
         // $pdo = $this->pdo ?? null;

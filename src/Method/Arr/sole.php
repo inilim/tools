@@ -16,7 +16,7 @@ namespace Inilim\Tool\Method\Arr;
 function sole(array $array, ?callable $callback = null)
 {
     if ($callback) {
-        $array = \Inilim\Tool\Method\Arr\where($array, $callback);
+        $array = \Inilim\Tool\Method\LarArr\where($array, $callback);
     }
 
     $count = \sizeof($array);
@@ -29,5 +29,5 @@ function sole(array $array, ?callable $callback = null)
         throw new \Exception('Multiple items found: ' . $count);
     }
 
-    return \Inilim\Tool\Method\Arr\first($array);
+    return \Inilim\Tool\Method\LarArr\first($array);
 }

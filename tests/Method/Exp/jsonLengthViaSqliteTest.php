@@ -31,6 +31,7 @@ class jsonLengthViaSqliteTest extends TestCase
 
     function testInvalidJson()
     {
+        Other::errorClearLast();
         $this->assertSame(null, Other::errorGetLast());
         $this->assertSame(null, Exp::jsonLengthViaSqlite('[1,2,3,4'));
         $this->assertSame(true, \is_array(Other::errorGetLast()));

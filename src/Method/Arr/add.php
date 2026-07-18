@@ -20,8 +20,8 @@ function add(array $array, $key, $value)
     if (\is_float($key)) {
         $key = (string) $key;
     }
-    if (\Inilim\Tool\Method\Arr\get($array, $key) === null) {
-        \Inilim\Tool\Method\Arr\set()($array, $key, $value);
+    if (\Inilim\Tool\Method\LarArr\get($array, $key) === null) {
+        \Inilim\Tool\Method\LarArr\set()($array, $key, $value);
     }
 
     return $array;

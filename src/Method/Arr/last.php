@@ -19,7 +19,7 @@ function last(iterable $array, ?callable $callback = null, $default = null)
 {
     if ($callback === null) {
         return empty($array)
-            ? \Inilim\Tool\Method\Arr\value($default)
+            ? \Inilim\Tool\Method\Lar\value($default)
             : \Inilim\Tool\Method\PF\array_last($array);
     }
 

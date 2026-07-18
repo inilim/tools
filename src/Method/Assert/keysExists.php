@@ -18,7 +18,7 @@ namespace Inilim\Tool\Method\Assert;
 function keysExists($value, array $keys, string $message = '')
 {
     \Inilim\Tool\Method\Assert\isArray($value);
-    if (!\Inilim\Tool\Method\Arr\hasAll($value, $keys)) {
+    if (!\Inilim\Tool\Method\LarArr\hasAll($value, $keys)) {
         // @deps(\Inilim\Tool\Method\Other\valueToString)
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'Expected all of: %2$s. Got: %s',

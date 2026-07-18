@@ -17,7 +17,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function mapSpread(array $array, callable $callback): array
 {
-    return \Inilim\Tool\Method\Arr\map($array, static function ($chunk, $key) use ($callback) {
+    return \Inilim\Tool\Method\LarArr\map($array, static function ($chunk, $key) use ($callback) {
         $chunk[] = $key;
         return $callback(...$chunk);
     });

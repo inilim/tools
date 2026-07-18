@@ -17,7 +17,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelGetSheets
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
-    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
@@ -39,7 +39,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function excelGetSheets
     }if(!\Inilim\Tool\Zip::__definedIfNot('scanAsGenerator')){
     function scanAsGenerator($pathToFileOrZip):?\Generator{$zip=\Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);if($zip===null){return null;}$num=$zip -> numFiles;for($i=0;$i<$num;$i++){$ri=$zip -> statIndex($i,\ZipArchive :: FL_UNCHANGED);if($ri===false){continue;}yield $ri;}}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
-    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
     function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
     }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('array_filter')){

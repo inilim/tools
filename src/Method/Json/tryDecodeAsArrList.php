@@ -15,7 +15,7 @@ function tryDecodeAsArrList(?string $v, $default = null)
         return $default;
     }
     $v = \Inilim\Tool\Method\Json\decode($v);
-    if (\is_array($v) && \Inilim\Tool\Method\Arr\isList($v)) {
+    if (\is_array($v) && \Inilim\Tool\Method\LarArr\isList($v)) {
         return $v;
     }
     return $default;

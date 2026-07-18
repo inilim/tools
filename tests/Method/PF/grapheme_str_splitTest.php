@@ -31,7 +31,7 @@ class grapheme_str_splitTest extends \Inilim\Tool\Test\TestCase
         }
 
         // Fixed in https://github.com/PCRE2Project/pcre2/issues/410
-        if (defined('PCRE_VERSION_MAJOR') && 10 < PCRE_VERSION_MAJOR && 44 < PCRE_VERSION_MINOR) {
+        if (\defined('PCRE_VERSION_MAJOR') && 10 < \PCRE_VERSION_MAJOR && 44 < \PCRE_VERSION_MINOR) {
             $cases[] = ['👭🏻👰🏿‍♂️', 2, ['👭🏻', '👰🏿‍♂️']];
         }
 

@@ -27,7 +27,7 @@ function flatten(iterable $array, $depth = \INF)
         } else {
             $values = $depth === 1
                 ? \array_values($item)
-                : \Inilim\Tool\Method\Arr\flatten($item, $depth - 1);
+                : \Inilim\Tool\Method\LarArr\flatten($item, $depth - 1);
 
             foreach ($values as $value) {
                 $result[] = $value;

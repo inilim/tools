@@ -10,7 +10,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function prependKeysWith(array $array, string $prependWith): array
 {
-    return \Inilim\Tool\Method\Arr\mapWithKeys(
+    return \Inilim\Tool\Method\LarArr\mapWithKeys(
         $array,
         static fn($item, $key) => [$prependWith . $key => $item]
     );

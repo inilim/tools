@@ -23,7 +23,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Zip{function findByFilterAs
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
-    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
@@ -33,5 +33,5 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Zip{function findByFilterAs
     }}namespace Inilim\Tool\Method\FS{if(!\Inilim\Tool\FS::__definedIfNot('isFile')){
     function isFile(string $filename):bool{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use($filename){\clearstatcache(false,$filename);return \is_file($filename);});return $value===null?false:$value;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
-    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }}

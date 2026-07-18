@@ -195,7 +195,7 @@ function excelExtractSheetToTmpFile($pathToFileOrZip, string $sheetId): ?array
          */
         function changedExcelFile(array &$aInfo): bool
         {
-            return \Inilim\Tool\Method\Arr\dataGet($aInfo, 'zip.{first}.hash_file') !== $this->zipHashFile;
+            return \Inilim\Tool\Method\Lar\dataGet($aInfo, 'zip.{first}.hash_file') !== $this->zipHashFile;
         }
 
         /**

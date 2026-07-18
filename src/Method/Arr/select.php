@@ -17,14 +17,14 @@ function select(array $array, $keys)
 {
     $keys = \Inilim\Tool\Method\LarArr\wrap($keys);
 
-    return \Inilim\Tool\Method\Arr\map($array, static function ($item) use ($keys) {
+    return \Inilim\Tool\Method\LarArr\map($array, static function ($item) use ($keys) {
         $result = [];
 
         foreach ($keys as $key) {
             if ($key === null) {
                 continue;
             }
-            if (\Inilim\Tool\Method\Arr\accessible($item) && \Inilim\Tool\Method\Arr\exists($item, $key)) {
+            if (\Inilim\Tool\Method\LarArr\accessible($item) && \Inilim\Tool\Method\LarArr\exists($item, $key)) {
                 $result[$key] = $item[$key];
             } elseif (\is_object($item) && isset($item->{$key})) {
                 $result[$key] = $item->{$key};

@@ -12,5 +12,5 @@ namespace Inilim\Tool\Method\Arr;
  */
 function reject(array $array, callable $callback): array
 {
-    return \Inilim\Tool\Method\Arr\where($array, static fn($value, $key) => ! $callback($value, $key));
+    return \Inilim\Tool\Method\LarArr\where($array, static fn($value, $key) => ! $callback($value, $key));
 }

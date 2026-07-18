@@ -1,15 +1,19 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Arr{function pull():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$key,$default=null){$value=\Inilim\Tool\Method\Arr\get($array,$key,$default);\Inilim\Tool\Method\Arr\forget()($array,$key);return $value;};}if(!\Inilim\Tool\Arr::__definedIfNot('accessible')){
-    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
-    }if(!\Inilim\Tool\Arr::__definedIfNot('exists')){
-    function exists($array,$key):bool{if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}return \array_key_exists($key,$array);}
-    }if(!\Inilim\Tool\Arr::__definedIfNot('forget')){
-    function forget(){\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$keys){$original=&$array;$keys=(array) $keys;if(!$keys){return;}foreach($keys as $key){$key=(string) $key;if(\Inilim\Tool\Method\Arr\exists($array,$key)){unset($array[$key]);continue;}$parts=\explode('.',$key);$array=&$original;while(\sizeof($parts)>1){$part=\array_shift($parts);if(isset($array[$part])&&\is_array($array[$part])){$array=&$array[$part];}else{continue 2;}}unset($array[\array_shift($parts)]);}};}
-    }if(!\Inilim\Tool\Arr::__definedIfNot('get')){
-    function get($array,$key,$default=null){if(!\Inilim\Tool\Method\Arr\accessible($array)){return \Inilim\Tool\Method\Arr\value($default);}if($key===null){return $array;}if(\Inilim\Tool\Method\Arr\exists($array,$key)){return $array[$key];}if(\strpos(\strval($key),'.')===false){return $array[$key]?? \Inilim\Tool\Method\Arr\value($default);}foreach(\explode('.',\strval($key))as $segment){if(\Inilim\Tool\Method\Arr\accessible($array)&&\Inilim\Tool\Method\Arr\exists($array,$segment)){$array=$array[$segment];}else{return \Inilim\Tool\Method\Arr\value($default);}}return $array;}
-    }if(!\Inilim\Tool\Arr::__definedIfNot('value')){
-    function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
-    }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
+namespace Inilim\Tool\Method\Arr{function pull():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(array&$array,$key,$default=null){$value=\Inilim\Tool\Method\LarArr\get($array,$key,$default);\Inilim\Tool\Method\LarArr\forget()($array,$key);return $value;};}}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
     function __notArgsHere(string $fnName,int $countArgs){if($countArgs!==0){$fnName=\basename($fnName);throw new \InvalidArgumentException(\sprintf('%s()(...) OR %s()->__invoke(...) <-- The arguments were passed to the wrong place',$fnName,$fnName));}}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){
+    function php80():bool{return \PHP_VERSION_ID>=80000?true:false;}
+    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('str_contains')){
+    function str_contains(string $haystack,string $needle):bool{if(\Inilim\Tool\Method\Check\php80()){return \str_contains($haystack,$needle);}return ''===$needle||false!==\strpos($haystack,$needle);}
+    }}namespace Inilim\Tool\Method\LarArr{if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
+    function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('forget')){
+    function forget():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(&$array,$keys){$original=&$array;$keys=(array) $keys;if(\count($keys)===0){return;}foreach($keys as $key){if(\Inilim\Tool\Method\LarArr\exists($array,$key)){unset($array[$key]);continue;}$parts=\explode('.',$key);$array=&$original;while(\count($parts)>1){$part=\array_shift($parts);if(isset($array[$part])&&\Inilim\Tool\Method\LarArr\accessible($array[$part])){$array=&$array[$part];}else{continue 2;}}unset($array[\array_shift($parts)]);}};}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('get')){
+    function get($array,$key,$default=null){if(!\Inilim\Tool\Method\LarArr\accessible($array)){return \Inilim\Tool\Method\Lar\value($default);}if(\is_null($key)){return $array;}if(\Inilim\Tool\Method\LarArr\exists($array,$key)){return $array[$key];}if(!\Inilim\Tool\Method\PF\str_contains($key,'.')){return \Inilim\Tool\Method\Lar\value($default);}foreach(\explode('.',$key)as $segment){if(\Inilim\Tool\Method\LarArr\accessible($array)&&\Inilim\Tool\Method\LarArr\exists($array,$segment)){$array=$array[$segment];}else{return \Inilim\Tool\Method\Lar\value($default);}}return $array;}
+    }}namespace Inilim\Tool\Method\Lar{if(!\Inilim\Tool\Lar::__definedIfNot('value')){
+    function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
     }}

@@ -7,7 +7,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonLengthViaS
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
-    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&!$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
+    function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('sqliteLibVersion_m3')){
     function sqliteLibVersion_m3():?string{\Inilim\Tool\Method\Assert\extPhp('PDO');\Inilim\Tool\Method\Assert\extPhp('pdo_sqlite');$internal=static function(){$pdo=new \PDO('sqlite::memory:',null,null,[\PDO :: ATTR_ERRMODE=>\PDO :: ERRMODE_EXCEPTION]);$stmt=$pdo -> query('SELECT sqlite_version()',\PDO :: FETCH_NUM);$result=$stmt -> fetch();$pdo=$stmt=null;if(\is_array($result)){return $result[0]?? null;}return null;};$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);return \is_string($result)?$result:null;}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
@@ -15,5 +15,5 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonLengthViaS
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
     function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
-    function extPhp(string $nameExt,string $message=''){if(!\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }}

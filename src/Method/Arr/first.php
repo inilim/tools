@@ -22,14 +22,14 @@ function first($array, ?callable $callback = null, $default = null)
 {
     if ($callback === null) {
         if (empty($array)) {
-            return \Inilim\Tool\Method\Arr\value($default);
+            return \Inilim\Tool\Method\Lar\value($default);
         }
 
         foreach ($array as $item) {
             return $item;
         }
 
-        return \Inilim\Tool\Method\Arr\value($default);
+        return \Inilim\Tool\Method\Lar\value($default);
     }
 
     foreach ($array as $key => $value) {
@@ -38,5 +38,5 @@ function first($array, ?callable $callback = null, $default = null)
         }
     }
 
-    return \Inilim\Tool\Method\Arr\value($default);
+    return \Inilim\Tool\Method\Lar\value($default);
 }

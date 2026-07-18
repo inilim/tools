@@ -16,7 +16,7 @@ namespace Inilim\Tool\Method\Str;
  */
 function replaceArray(string $search, $replace, string $subject)
 {
-    $replace = \Inilim\Tool\Method\Arr\from($replace);
+    $replace = \Inilim\Tool\Method\LarArr\from($replace);
 
     $segments = \explode($search, $subject);
     $result   = \array_shift($segments);

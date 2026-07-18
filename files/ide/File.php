@@ -217,6 +217,8 @@ class File
  * 
  * @throws \Exception
  * @throws \InvalidArgumentException
+ * 
+ * @ext intl
  */
     static function sizeConvert($bytes, int $precision = 0, ?int $maxPrecision = null): string {}
 

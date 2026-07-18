@@ -15,13 +15,13 @@ namespace Inilim\Tool\Method\Str;
 function replace($search, $replace, $subject, bool $caseSensitive = true)
 {
     if ($search instanceof \Traversable) {
-        $search  = \Inilim\Tool\Method\Arr\from($search);
+        $search  = \Inilim\Tool\Method\LarArr\from($search);
     }
     if ($replace instanceof \Traversable) {
-        $replace = \Inilim\Tool\Method\Arr\from($replace);
+        $replace = \Inilim\Tool\Method\LarArr\from($replace);
     }
     if ($subject instanceof \Traversable) {
-        $subject = \Inilim\Tool\Method\Arr\from($subject);
+        $subject = \Inilim\Tool\Method\LarArr\from($subject);
     }
 
     return $caseSensitive

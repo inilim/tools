@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
+ * @deprecated use LarArr::***
  * Determines if an array is associative.
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
  */

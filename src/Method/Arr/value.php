@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author laravel
  * Return the default value of the given value.
  *

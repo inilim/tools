@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @deprecated use LarArr::***
  * @author laravel
  * Return the first element in an array passing a given truth test.
  * @template TKey
@@ -20,14 +19,14 @@ function head(iterable $array, ?callable $callback = null, $default = null)
 {
     if ($callback === null) {
         if (empty($array)) {
-            return \Inilim\Tool\Method\Arr\value($default);
+            return \Inilim\Tool\Method\Lar\value($default);
         }
 
         foreach ($array as $item) {
             return $item;
         }
 
-        return \Inilim\Tool\Method\Arr\value($default);
+        return \Inilim\Tool\Method\Lar\value($default);
     }
 
     foreach ($array as $key => $value) {
@@ -36,5 +35,5 @@ function head(iterable $array, ?callable $callback = null, $default = null)
         }
     }
 
-    return \Inilim\Tool\Method\Arr\value($default);
+    return \Inilim\Tool\Method\Lar\value($default);
 }

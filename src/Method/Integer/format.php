@@ -12,6 +12,8 @@ namespace Inilim\Tool\Method\Integer;
  * @param  int|null  $maxPrecision
  * @param  string|null  $locale
  * @return string|false
+ * 
+ * @ext intl
  */
 function format($number, ?int $precision = null, ?int $maxPrecision = null, ?string $locale = null)
 {

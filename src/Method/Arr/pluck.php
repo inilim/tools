@@ -20,7 +20,7 @@ function pluck(iterable $array, $value, $key = null): array
     $key   = $key === null || \is_array($key) ? $key                  : \explode('.', $key);
 
     foreach ($array as $item) {
-        $itemValue = \Inilim\Tool\Method\Arr\dataGet($item, $value);
+        $itemValue = \Inilim\Tool\Method\Lar\dataGet($item, $value);
 
         // If the key is "null", we will just append the value to the array and keep
         // looping. Otherwise we will key the array using the value of the key we
@@ -28,7 +28,7 @@ function pluck(iterable $array, $value, $key = null): array
         if ($key === null) {
             $results[] = $itemValue;
         } else {
-            $itemKey = \Inilim\Tool\Method\Arr\dataGet($item, $key);
+            $itemKey = \Inilim\Tool\Method\Lar\dataGet($item, $key);
 
             if (\is_object($itemKey) && \method_exists($itemKey, '__toString')) {
                 $itemKey = (string) $itemKey;

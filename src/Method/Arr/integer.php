@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function integer($array, $key, ?int $default = null): int
 {
-    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    $value = \Inilim\Tool\Method\LarArr\get($array, $key, $default);
 
     if (!\is_int($value)) {
         throw new \InvalidArgumentException(

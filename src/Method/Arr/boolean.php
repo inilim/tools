@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function boolean($array, $key, ?bool $default = null): bool
 {
-    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    $value = \Inilim\Tool\Method\LarArr\get($array, $key, $default);
 
     if (!\is_bool($value)) {
         throw new \InvalidArgumentException(

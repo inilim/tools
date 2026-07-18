@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Assert;
  */
 function extPhp(string $nameExt, string $message = '')
 {
-    if (!\Inilim\Tool\Method\Other\extPhp($nameExt)) {
+    if (false === \Inilim\Tool\Method\Other\extPhp($nameExt)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'PHP Extension "%s" not found',
             $nameExt

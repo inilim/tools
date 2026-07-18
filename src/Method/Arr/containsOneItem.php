@@ -11,7 +11,7 @@ namespace Inilim\Tool\Method\Arr;
 function containsOneItem(array $array, ?callable $callable = null): bool
 {
     if ($callable) {
-        return \sizeof(\Inilim\Tool\Method\Arr\where($array, $callable)) === 1;
+        return \sizeof(\Inilim\Tool\Method\LarArr\where($array, $callable)) === 1;
     }
 
     return \sizeof($array) === 1;

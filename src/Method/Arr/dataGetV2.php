@@ -19,17 +19,17 @@ function dataGetV2($target, $key, $default = null)
     }
 
     if (\is_array($key) || \is_int($key) || !\Inilim\Tool\Method\Str\contains($key, '*')) {
-        return \Inilim\Tool\Method\Arr\dataGet($target, $key, $default);
+        return \Inilim\Tool\Method\Lar\dataGet($target, $key, $default);
     }
 
     $keys = \Inilim\Tool\Method\Arr\dotKeysByPattern($target, $key);
 
     if (!$keys) {
-        return \Inilim\Tool\Method\Arr\value($default);
+        return \Inilim\Tool\Method\Lar\value($default);
     }
 
-    return \Inilim\Tool\Method\Arr\dataGet(
-        \Inilim\Tool\Method\Arr\undot(\Inilim\Tool\Method\Arr\only(\Inilim\Tool\Method\Arr\dot($target), $keys)),
+    return \Inilim\Tool\Method\Lar\dataGet(
+        \Inilim\Tool\Method\LarArr\undot(\Inilim\Tool\Method\LarArr\only(\Inilim\Tool\Method\LarArr\dot($target), $keys)),
         $key,
         $default
     );

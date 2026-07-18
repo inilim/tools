@@ -14,8 +14,8 @@ function setValueIfNull(): \Closure
     \Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__, \func_num_args());
 
     return static function (array &$array, $key, $value): bool {
-        if (\Inilim\Tool\Method\Arr\has($array, $key) && \Inilim\Tool\Method\Arr\get($array, $key) === null) {
-            \Inilim\Tool\Method\Arr\set()($array, $key, $value);
+        if (\Inilim\Tool\Method\LarArr\has($array, $key) && \Inilim\Tool\Method\LarArr\get($array, $key) === null) {
+            \Inilim\Tool\Method\LarArr\set()($array, $key, $value);
             return true;
         }
         return false;

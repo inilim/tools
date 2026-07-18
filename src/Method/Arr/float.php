@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function float($array, $key, ?float $default = null): float
 {
-    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    $value = \Inilim\Tool\Method\LarArr\get($array, $key, $default);
 
     if (!\is_float($value)) {
         throw new \InvalidArgumentException(

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Arr;
 
 /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author Laravel
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
@@ -31,18 +31,18 @@ function dataGet($target, $key, $default = null)
 
         if ($segment === '*') {
             if (\is_object($target)) {
-                $target = \Inilim\Tool\Method\Arr\from($target);
+                $target = \Inilim\Tool\Method\LarArr\from($target);
             } elseif (!\is_iterable($target)) {
-                return \Inilim\Tool\Method\Arr\value($default);
+                return \Inilim\Tool\Method\Lar\value($default);
             }
 
             $result = [];
 
             foreach ($target as $item) {
-                $result[] = \Inilim\Tool\Method\Arr\dataGet($item, $key);
+                $result[] = \Inilim\Tool\Method\Lar\dataGet($item, $key);
             }
 
-            return \in_array('*', $key) ? \Inilim\Tool\Method\Arr\collapse($result) : $result;
+            return \in_array('*', $key) ? \Inilim\Tool\Method\LarArr\collapse($result) : $result;
         }
 
         // var_dump(0 == '\*'); // true php74 EPIC
@@ -52,19 +52,19 @@ function dataGet($target, $key, $default = null)
         } elseif ($segment === '\{first}') {
             $segment = '{first}';
         } elseif ($segment === '{first}') {
-            $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\from($target));
+            $segment = \array_key_first(\is_array($target) ? $target : \Inilim\Tool\Method\LarArr\from($target));
         } elseif ($segment === '\{last}') {
             $segment = '{last}';
         } elseif ($segment === '{last}') {
-            $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\Arr\from($target));
+            $segment = \array_key_last(\is_array($target) ? $target : \Inilim\Tool\Method\LarArr\from($target));
         }
 
-        if (\Inilim\Tool\Method\Arr\accessible($target) && \Inilim\Tool\Method\Arr\exists($target, $segment)) {
+        if (\Inilim\Tool\Method\LarArr\accessible($target) && \Inilim\Tool\Method\LarArr\exists($target, $segment)) {
             $target = $target[$segment];
         } elseif (\is_object($target) && isset($target->{$segment})) {
             $target = $target->{$segment};
         } else {
-            return \Inilim\Tool\Method\Arr\value($default);
+            return \Inilim\Tool\Method\Lar\value($default);
         }
     }
 

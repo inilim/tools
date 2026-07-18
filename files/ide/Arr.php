@@ -79,7 +79,7 @@ class Arr
     static function crossJoin(...$arrays) {}
 
         /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author Laravel
  * Fill in data where it's missing.
  * @template T of array|object
@@ -88,7 +88,7 @@ class Arr
     static function dataFill(): Closure {}
 
         /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author Laravel
  * Get an item from an array or object using "dot" notation.
  * @param array|object $target
@@ -109,7 +109,7 @@ class Arr
     static function dataGetV2($target, $key, $default = null) {}
 
         /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author Laravel
  * Set an item on an array or object using dot notation.
  * @template T of array|object
@@ -161,7 +161,6 @@ class Arr
     static function each($array, callable $callback) {}
 
         /**
- * @deprecated use LarArr::***
  * @author Laravel
  * Execute a callback over each nested chunk of items.
  * @param callable(...mixed):mixed $callback
@@ -346,7 +345,6 @@ class Arr
     static function hasValueAny(array $array, $values, bool $strict = false): bool {}
 
         /**
- * @deprecated use LarArr::***
  * @author laravel
  * Return the first element in an array passing a given truth test.
  * @template TKey
@@ -386,6 +384,7 @@ class Arr
     static function integer($array, $key, ?int $default = null): int {}
 
         /**
+ * @deprecated use LarArr::***
  * Determines if an array is associative.
  * An array is "associative" if it doesn't have sequential numerical keys beginning with zero.
  */
@@ -487,7 +486,6 @@ class Arr
     static function mapSpread(array $array, callable $callback): array {}
 
         /**
- * @deprecated use LarArr::***
  * Run a grouping map over the items.
  * The callback should return an associative array with a single key/value pair.
  * @template TValue
@@ -514,6 +512,7 @@ class Arr
 
         /**
  * @see /../../tests/Method/Arr/nestedMapTest.php
+ * 
  * @author inilim
  * @param mixed[] $array
  * @param callable(array $node, int|string|null $keyNode):array $callable
@@ -793,7 +792,7 @@ class Arr
     static function unique(array $array): array {}
 
         /**
- * @deprecated use LarArr::***
+ * @deprecated use Lar::***
  * @author laravel
  * Return the default value of the given value.
  *

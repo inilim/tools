@@ -41,7 +41,7 @@ function openJsonViaSqlite($source): ?object
 
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
     // TODO json_valid был встроен в версии 3.38.0
-    if (!\version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
+    if (false === \version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
         if ($curVer === null) {
             throw new \InvalidArgumentException('SQLite library version is not defined');
         }
@@ -128,7 +128,7 @@ function openJsonViaSqlite($source): ?object
 
         $obj->stmt = $obj->pdo->query('SELECT json_valid(_value) as valid FROM _table WHERE _name = "json"');
         $results = $obj->stmt->fetch(\PDO::FETCH_NUM);
-        if (!isset($results[0]) || $results[0] == 0) {
+        if (false === isset($results[0]) || $results[0] == 0) {
             \Inilim\Tool\Method\Other\__setErrorLast(-1, 'JSON invalid', '', -1);
             $obj->pdo = $obj->stmt = null;
             \Inilim\Tool\Method\FS\unlink($obj->tmpFile);
@@ -154,7 +154,7 @@ function openJsonViaSqlite($source): ?object
         }
     );
 
-    if (!\is_object($result)) {
+    if (false === \is_object($result)) {
         return null;
     }
 

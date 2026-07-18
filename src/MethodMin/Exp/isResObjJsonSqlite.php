@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function isResObjJsonSqlite($value):bool{if(!\is_object($value)||!\Inilim\Tool\Method\PF\str_starts_with(\get_class($value),'class@anonymous')){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function(){return($this -> tag ?? '')===\Inilim\Tool\Method\Exp\__tagJsonSqlite();});}if(!\Inilim\Tool\Exp::__definedIfNot('__tagJsonSqlite')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function isResObjJsonSqlite($value):bool{if(false===\is_object($value)||false===\Inilim\Tool\Method\PF\str_starts_with(\get_class($value),'class@anonymous')){return false;}return \Inilim\Tool\Method\Other\bindAndCall($value,function():bool{return($this -> tag ?? '')===\Inilim\Tool\Method\Exp\__tagJsonSqlite();});}if(!\Inilim\Tool\Exp::__definedIfNot('__tagJsonSqlite')){
     function __tagJsonSqlite():string{return 'open-file-json-sqlite';}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('bindAndCall')){
     function bindAndCall(object $object,\Closure $callback,... $args){return $callback -> bindTo($object,$object)(... $args);}

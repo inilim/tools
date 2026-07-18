@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Arr;
  */
 function string($array, $key, ?string $default = null): string
 {
-    $value = \Inilim\Tool\Method\Arr\get($array, $key, $default);
+    $value = \Inilim\Tool\Method\LarArr\get($array, $key, $default);
 
     if (!\is_string($value)) {
         throw new \InvalidArgumentException(
