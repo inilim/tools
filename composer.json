@@ -46,7 +46,6 @@
   "prefer-stable": true,
   "require-dev": {
     "inilim/dump": "dev-main",
-    "inilim/ipdo": "dev-main",
     "phpunit/phpunit": "^9.6",
     "twig/twig": "^3.11",
     "mcaskill/composer-exclude-files": "^4.0",
@@ -55,7 +54,8 @@
     "phpmetrics/phpmetrics": "^2.9",
     "symfony/finder": "^5.4",
     "inilim/php-code-minifier": "dev-main",
-    "mikey179/vfsstream": "^1.6"
+    "mikey179/vfsstream": "^1.6",
+    "inilim/ipdo": "^0.0.20260822"
   },
   "scripts": {
     "build": [

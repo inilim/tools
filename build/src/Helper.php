@@ -17,6 +17,9 @@ class Helper
         return $subject;
     }
 
+    /**
+     * @return class-string[]
+     */
     static function getDepsFromDoc(string $codeRaw): array
     {
         if (\str_contains($codeRaw, '@deps(')) {
@@ -25,6 +28,7 @@ class Helper
 
             if (!$depsMatches) {
                 de([
+                    __FILE__,
                     __LINE__,
                     '$codeRaw' => $codeRaw,
                 ]);

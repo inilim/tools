@@ -2,33 +2,41 @@
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-use PhpParser\Parser;
-use Twig\Environment;
-use PhpParser\NodeFinder;
+use Inilim\IPDO\Exception\IPDOException;
+use Inilim\IPDO\IPDO;
 use Inilim\IPDO\IPDOSQLite;
-use PhpParser\NodeTraverser;
-use PhpParser\ParserFactory;
-use Inilim\Tool\Build\Helper;
-use PhpParser\Node\Stmt\Class_;
-use PhpCodeMinifier\PhpMinifier;
-use Twig\Loader\FilesystemLoader;
-use PhpParser\Node\Stmt\Function_;
-use PhpCodeMinifier\MinifierFactory;
 use Inilim\Tool\Build\CommentVisitor;
-use PhpParser\PrettyPrinter\Standard;
+use Inilim\Tool\Build\Helper;
+use PhpCodeMinifier\MinifierFactory;
+use PhpCodeMinifier\PhpMinifier;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\Function_;
+use PhpParser\NodeFinder;
+use PhpParser\NodeTraverser;
+use PhpParser\Parser;
+use PhpParser\ParserFactory;
+use PhpParser\PrettyPrinter\Standard;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
+
+/**
+ * @psalm-type TYPE_TBL_METHOD = array{id:int,name:string,code:string,code_raw:string,namespace:string,path_to_file:string,strict_types:int}
+ * @psalm-type TYPE_CLASS_LINK = array{method:string,tool:class-string,nameClass:string,path:string,pathMin:string,pathToClass:string}
+ * @psalm-type TYPE_TBL_GROUP = array{id:int,method_id:int}
+ */
 
 // ---------------------------------------------
 // 
 // ---------------------------------------------
 
+/** @var TYPE_CLASS_LINK[] $links */
 $links = include __DIR__ . '/links.php';
-/**
- * @var array{method:string,tool:string,nameClass:string,path:string,pathMin:string,pathToClass:string} $links
- */
+/** @var array<class-string,string> $linksNamespace */
 $linksNamespace = \array_column($links, 'method', 'tool');
-$linksDir       = \array_column($links, 'path', 'tool');
+/** @var array<class-string,string> $linksDir */
+$linksDir = \array_column($links, 'path', 'tool');
 $ignoreFilesPattern = [
     '#^example.example#i',
     '#^example*#i',
@@ -37,6 +45,7 @@ $ignoreFilesPattern = [
 // ---------------------------------------------
 // 
 // ---------------------------------------------
+
 
 $switch          = true;
 $parser          = (new ParserFactory())->createForHostVersion();
@@ -72,19 +81,9 @@ if ($switch || false) {
     $dbDev->exec(
         \file_get_contents($pathToSqlFiles . 'methods.sql')
     );
-    if (!$dbDev->status()) {
-        de([
-            'не удалось создать таблицу methods'
-        ]);
-    }
     $dbDev->exec(
         \file_get_contents($pathToSqlFiles . 'idx_methods_name.sql')
     );
-    if (!$dbDev->status()) {
-        de([
-            'не удалось создать индекс idx_methods_name'
-        ]);
-    }
 
     // ---------------------------------------------
     // 
@@ -93,27 +92,12 @@ if ($switch || false) {
     $dbDev->exec(
         \file_get_contents($pathToSqlFiles . 'groups.sql')
     );
-    if (!$dbDev->status()) {
-        de([
-            'не удалось создать таблицу groups'
-        ]);
-    }
     $dbDev->exec(
         \file_get_contents($pathToSqlFiles . 'idx_groups_method_id.sql')
     );
-    if (!$dbDev->status()) {
-        de([
-            'не удалось создать индекс idx_groups_method_id'
-        ]);
-    }
     $dbDev->exec(
         \file_get_contents($pathToSqlFiles . 'idx_groups_id.sql')
     );
-    if (!$dbDev->status()) {
-        de([
-            'не удалось создать индекс idx_groups_id'
-        ]);
-    }
 
     d('Create DB tables');
 }
@@ -136,6 +120,10 @@ if ($switch || false) {
         NodeTraverser $traverser
     ) {
 
+        /** @var array<class-string,string> $linksDir */
+        /** @var array<class-string,string> $linksNamespace */
+        /** @var string[] $ignoreFilesPattern */
+
         $sqlAddMethod = 'INSERT INTO methods
             (name,code,code_raw,namespace,path_to_file,strict_types)
             VALUES
@@ -148,6 +136,8 @@ if ($switch || false) {
         foreach ($linksDir as $toolNamespace => $dir) {
             unset($linksDir[$toolNamespace]);
             $files = \glob($dir . '\*.php');
+            /** @var string[] $files */
+
             // \shuffle($files);
             foreach ($files as $idx => $pathToFile) {
 
@@ -207,7 +197,7 @@ if ($switch || false) {
                 $function = $nodeFinder->findFirstInstanceOf($ast, Function_::class);
 
                 unset($ast);
-                if ($function === null) {
+                if (null === $function) {
                     de([
                         '$nameFile' => $nameFile
                     ]);
@@ -263,17 +253,19 @@ if ($switch || false) {
                 // 
                 // ---------------------------------------------
 
-                $dbDev->exec($sqlAddMethod, [
-                    'name'         => $name,
-                    'code'         => $code,
-                    'code_raw'     => $code_raw,
-                    'namespace'    => $linksNamespace[$toolNamespace],
-                    'path_to_file' => $pathToFile,
-                    'strict_types' => $strict_types,
-                ]);
-                if (!$dbDev->status()) {
+                try {
+                    $dbDev->exec($sqlAddMethod, [
+                        'name'         => $name,
+                        'code'         => $code,
+                        'code_raw'     => $code_raw,
+                        'namespace'    => $linksNamespace[$toolNamespace],
+                        'path_to_file' => $pathToFile,
+                        'strict_types' => $strict_types,
+                    ]);
+                } catch (IPDOException $e) {
                     de([
                         'не удалось добавить метод',
+                        $e->getMessage(),
                         $name
                     ]);
                 }
@@ -314,13 +306,14 @@ if ($switch || false) {
         Parser $parser,
         NodeFinder $nodeFinder
     ) {
-        // $methods = $dbDev->exec('SELECT * FROM methods WHERE name = "isTinyInt"', 2);
-        $methods = $dbDev->exec('SELECT * FROM methods', 2);
-        // \shuffle($methods);
+        // $methodsIterator = $dbDev->exec('SELECT * FROM methods WHERE name = "isTinyInt"', [], IPDO::FETCH_GENERATOR_ASSOC);
+        $methodsIterator = $dbDev->exec('SELECT * FROM methods', [], IPDO::FETCH_GENERATOR_ASSOC);
         $groupID = 1;
 
-        foreach ($methods as $idx => $method) {
-            unset($methods[$idx]);
+        foreach ($methodsIterator as $idx => $method) {
+            unset($methodsIterator[$idx]);
+
+            /** @var TYPE_TBL_METHOD $method */
             // d('method: ' . $method['name']);
             // de($method['code']);
 
@@ -338,12 +331,17 @@ if ($switch || false) {
             // ---------------------------------------------
 
             $depsAs = \array_merge($depsAs, Helper::getDepsFromDoc($method['code_raw']));
+            /** @var class-string[] $depsAs */
 
             while (true) {
 
-                if (!$depsAs) break;
+                if ([] === $depsAs) break;
+
+                /** @var class-string[] $depsAs */
+
 
                 $methodDepStr = \array_shift($depsAs);
+                /** @var class-string $methodDepStr */
 
                 if (\in_array($methodDepStr, $deps)) {
                     continue;
@@ -365,7 +363,7 @@ if ($switch || false) {
                     1
                 );
 
-                if (!$methodDep) {
+                if ([] === $methodDep) {
                     de([
                         __LINE__,
                         '$method'       => $method,
@@ -374,13 +372,16 @@ if ($switch || false) {
                     ]);
                 }
 
+                /** @var TYPE_TBL_METHOD $methodDep */
+
+
                 // ---------------------------------------------
                 // 
                 // ---------------------------------------------
 
                 $ast = $parser->parse('<?php' . PHP_EOL . $methodDep['code']);
 
-                if ($ast === null) {
+                if (null === $ast) {
                     de([
                         'ast',
                         __LINE__,
@@ -393,7 +394,7 @@ if ($switch || false) {
                 $function = $nodeFinder->findFirstInstanceOf($ast, Function_::class);
                 unset($ast);
 
-                if ($function === null) {
+                if (null === $function) {
                     de([
                         'метод не найден',
                         __LINE__,
@@ -404,7 +405,7 @@ if ($switch || false) {
 
                 $tDeps = $nodeFinder->findInstanceOf($function, FullyQualified::class);
                 unset($function);
-                $tDeps = \array_filter($tDeps, static function (FullyQualified $f) {
+                $tDeps = \array_filter($tDeps, static function (FullyQualified $f): bool {
                     return \stripos($f->name, 'inilim\\Tool\\Method') === 0;
                 });
 
@@ -422,7 +423,7 @@ if ($switch || false) {
                 // 
                 // ---------------------------------------------
 
-                if ($tDeps) {
+                if ([] !== $tDeps) {
                     $depsAs = \array_merge($depsAs, $tDeps);
                 }
                 $tDeps = [];
@@ -430,11 +431,11 @@ if ($switch || false) {
                 // ---------------------------------------------
                 // 
                 // ---------------------------------------------
-            } // endwhile
+            } // while
 
             // de($deps);
 
-            if (!$deps) continue;
+            if ([] === $deps) continue;
 
             // ---------------------------------------------
             // Добавляем в БД группу зависимостей
@@ -455,18 +456,25 @@ if ($switch || false) {
                     'namespace' => \dirname($dep),
                 ], 1)['id'];
 
-                $dbDev->exec('INSERT INTO groups (id, method_id) VALUES ({id}, {method_id})', [
-                    // 'id'        => $groupID,
-                    'id'        => $method['id'],
-                    'method_id' => $methodID,
-                ]);
+                /** @var int $methodID */
 
-                if (!$dbDev->status()) {
+                try {
+                    $dbDev->exec('INSERT INTO groups (id, method_id) VALUES ({id}, {method_id})', [
+                        // 'id'        => $groupID,
+                        'id'        => $method['id'],
+                        'method_id' => $methodID,
+                    ]);
+                } catch (IPDOException $e) {
                     de([
                         'Не удалось добавить запись для groups',
+                        __LINE__,
+                        $e->getMessage(),
+                        '$method' => $method,
+                        '$methodID' => $methodID,
+                        '$dep' => $dep,
                     ]);
                 }
-            } // endforeach $deps
+            } // foreach $deps
 
             if (!$dbDev->commit()) {
                 de([
@@ -482,7 +490,7 @@ if ($switch || false) {
             // ---------------------------------------------
 
             $groupID++;
-        } // endforeach $methods
+        } // foreach $methodsIterator
 
         // ---------------------------------------------
         // 
@@ -526,13 +534,16 @@ if ($switch || false) {
         array $links
     ) {
 
-        $methods        = $dbDev->exec('SELECT * FROM methods', 2);
-        $methods        = \array_map(static function ($m) {
+        $methods = $dbDev->exec('SELECT * FROM methods', 2);
+        $methods = \array_map(static function (array $m): array {
             unset($m['code_raw']);
             return $m;
         }, $methods);
-        $tool_method    = \array_column($links, 'tool', 'method');
+        /** @var TYPE_TBL_METHOD[] $methods */
+        $tool_method = \array_column($links, 'tool', 'method');
+        /** @var array<string,class-string> $tool_method */
         $pathMin_method = \array_column($links, 'pathMin', 'method');
+        /** @var array<string,string> $pathMin_method */
 
         // \shuffle($methods);
 
@@ -544,12 +555,13 @@ if ($switch || false) {
             // 
             // ------------------------------------------------------------------
 
+            /** @var TYPE_TBL_GROUP[] $group */
             $group = $dbDev->exec('SELECT * FROM groups WHERE id = {id} AND method_id != {id}', [
                 'id' => $method['id'],
             ], 2);
 
             $result = '';
-            if (!$group) {
+            if ([] === $group) {
                 // Нет зависимостей
                 $method['tool'] = $tool_method[$method['namespace']];
 
@@ -557,6 +569,7 @@ if ($switch || false) {
             } else {
                 // Есть зависимости
 
+                /** @var TYPE_TBL_METHOD[] $deps */
                 $deps = $dbDev->exec('SELECT * FROM methods WHERE id IN ({deps})', [
                     'deps' => \array_column($group, 'method_id')
                 ], 2);
