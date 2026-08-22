@@ -108,7 +108,7 @@ foreach (\glob(\DIR_ROOT . '/files/ide/*') as $file) {
 // 
 // ------------------------------------------------------------------
 
-$links      = include \DIR_ROOT . '/files/links.php';
+$links       = include __DIR__ . '/links.php';
 
 $parser      = (new ParserFactory())->createForHostVersion();
 $traverser   = new NodeTraverser;

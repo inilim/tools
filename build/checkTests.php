@@ -8,7 +8,7 @@ use Inilim\Tool\Path;
 
 require_once \dirname(__DIR__) . '/bootstrap.dev.php';
 
-$links = include \DIR_ROOT . '/files/links.php';
+$links = include __DIR__ . '/links.php';
 
 $notFoundTest = 0;
 $foundTest    = 0;

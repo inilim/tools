@@ -23,7 +23,7 @@ use PhpParser\Node\Name\FullyQualified;
 // 
 // ---------------------------------------------
 
-$links = include \DIR_ROOT . '/files/links.php';
+$links = include __DIR__ . '/links.php';
 /**
  * @var array{method:string,tool:string,nameClass:string,path:string,pathMin:string,pathToClass:string} $links
  */
