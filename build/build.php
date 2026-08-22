@@ -17,6 +17,7 @@ use PhpParser\NodeTraverser;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
+use Symfony\Component\Finder\Finder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -48,13 +49,13 @@ $ignoreFilesPattern = [
 
 
 $switch          = true;
-$parser          = (new ParserFactory())->createForHostVersion();
+$parser          = (new ParserFactory)->createForHostVersion();
 $traverser       = new NodeTraverser();
 $traverser->addVisitor(new CommentVisitor);
 $nodeFinder      = new NodeFinder;
 $pretty          = new Standard;
 $pathToDb        = \DIR_ROOT . '/files/build_dev.sqlite';
-$pathToSqlFiles  = \DIR_ROOT . '/files/sql/';
+$pathToSqlFiles  = \DIR_ROOT . '/files/sql';
 $dbDev           = new IPDOSQLite($pathToDb);
 $phpCodeMinifier = MinifierFactory::create();
 $twig = new Environment(
@@ -68,39 +69,43 @@ $twig = new Environment(
 );
 
 // ---------------------------------------------
-// Создание таблиц
+// Пересоздание базы данных
 // ---------------------------------------------
 
 if ($switch || false) {
     \file_put_contents($pathToDb, '');
 
     // ---------------------------------------------
-    // 
+    // methods
     // ---------------------------------------------
 
     $dbDev->exec(
-        \file_get_contents($pathToSqlFiles . 'methods.sql')
+        \file_get_contents($pathToSqlFiles . '/methods.sql')
     );
     $dbDev->exec(
-        \file_get_contents($pathToSqlFiles . 'idx_methods_name.sql')
+        \file_get_contents($pathToSqlFiles . '/idx_methods_name.sql')
     );
 
     // ---------------------------------------------
-    // 
+    // groups
     // ---------------------------------------------
 
     $dbDev->exec(
-        \file_get_contents($pathToSqlFiles . 'groups.sql')
+        \file_get_contents($pathToSqlFiles . '/groups.sql')
     );
     $dbDev->exec(
-        \file_get_contents($pathToSqlFiles . 'idx_groups_method_id.sql')
+        \file_get_contents($pathToSqlFiles . '/idx_groups_method_id.sql')
     );
     $dbDev->exec(
-        \file_get_contents($pathToSqlFiles . 'idx_groups_id.sql')
+        \file_get_contents($pathToSqlFiles . '/idx_groups_id.sql')
     );
 
     d('Create DB tables');
 }
+unset(
+    $pathToSqlFiles,
+    $pathToDb
+);
 
 // ------------------------------------------------------------------
 // Первичный сбор методов
@@ -135,20 +140,16 @@ if ($switch || false) {
 
         foreach ($linksDir as $toolNamespace => $dir) {
             unset($linksDir[$toolNamespace]);
-            $files = \glob($dir . '\*.php');
-            /** @var string[] $files */
+
+            $files = (new Finder)->files()->in($dir)->name('*.php');
 
             // \shuffle($files);
-            foreach ($files as $idx => $pathToFile) {
+            foreach ($files as $spl) {
 
-                // ---------------------------------------------
-                // 
-                // ---------------------------------------------
-
+                $pathToFile = $spl->getRealPath();
                 $code = \file_get_contents($pathToFile);
 
                 if (\str_contains($code, '@skip_build') || \str_contains($code, '@build_skip')) {
-                    unset($files[$idx]);
                     continue;
                 }
 
@@ -156,7 +157,6 @@ if ($switch || false) {
                 // 
                 // ---------------------------------------------
 
-                unset($files[$idx]);
                 $results  = [];
                 $nameFile = \basename($pathToFile);
                 $name     = \str_replace('.php', '', $nameFile);
@@ -314,8 +314,6 @@ if ($switch || false) {
             unset($methodsIterator[$idx]);
 
             /** @var TYPE_TBL_METHOD $method */
-            // d('method: ' . $method['name']);
-            // de($method['code']);
 
             // ---------------------------------------------
             // Ищем зависимости
@@ -509,14 +507,25 @@ if ($switch || false) {
 // ------------------------------------------------------------------
 
 if ($switch || false) {
-    foreach ($links as $link) {
-        foreach (\glob($link['pathMin'] . '/*.php') as $file) {
-            \unlink($file);
-            \clearstatcache(false, $file);
-        }
-    }
+    (static function (
+        array $links
+    ) {
+        /** @var TYPE_CLASS_LINK[] $links */
 
-    d('Clear old bundles');
+        foreach ($links as $link) {
+            $iter = (new Finder)->files()->in($link['pathMin'])->name('*.php');
+            foreach ($iter as $spl) {
+                $file = $spl->getRealPath();
+                unset($spl);
+                \unlink($file);
+                \clearstatcache(false, $file);
+            }
+        }
+
+        d('Clear old bundles');
+    })->__invoke(
+        $links
+    );
 }
 
 // ---------------------------------------------
@@ -533,6 +542,7 @@ if ($switch || false) {
         Environment $twig,
         array $links
     ) {
+        /** @var TYPE_CLASS_LINK[] $links */
 
         $methods = $dbDev->exec('SELECT * FROM methods', 2);
         $methods = \array_map(static function (array $m): array {
@@ -664,6 +674,8 @@ if ($switch || false) {
         Parser $parser,
         Standard $pretty
     ) {
+        /** @var TYPE_CLASS_LINK[] $links */
+
         $pathToFile   = \DIR_ROOT . '/src/all.php';
         // $exists       = \is_file($pathToFile);
         // $countClasses = \sizeof($links);

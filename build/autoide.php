@@ -108,13 +108,12 @@ foreach (\glob(\DIR_ROOT . '/files/ide/*') as $file) {
 // 
 // ------------------------------------------------------------------
 
-$links       = include __DIR__ . '/links.php';
-
-$parser      = (new ParserFactory())->createForHostVersion();
-$traverser   = new NodeTraverser;
+$links = include __DIR__ . '/links.php';
+$parser = (new ParserFactory())->createForHostVersion();
+$traverser = new NodeTraverser;
 $traverser->addVisitor(new NameResolver);
 $nodeFinder = new NodeFinder;
-$pretty          = new Standard;
+$pretty = new Standard;
 $twig = new Environment(
     new FilesystemLoader(\DIR_ROOT . '/files/template'),
     [
