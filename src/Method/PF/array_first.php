@@ -9,8 +9,8 @@ namespace Inilim\Tool\Method\PF;
  * @param array<T> $array
  * @return (
  *      $array is array{} ? null :
- *      $array is non-empty-array ? T :
- *      ?T
+ *      ($array is non-empty-array ? T :
+ *      ?T)
  * )
  */
 function array_first(array $array)

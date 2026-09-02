@@ -6,11 +6,21 @@ class PF
 {
         /**
  * @author symfony/polyfill
+ * 
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
  */
     static function array_all(array $array, callable $callback): bool {}
 
         /**
  * @author symfony/polyfill
+ * 
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
  */
     static function array_any(array $array, callable $callback): bool {}
 
@@ -54,14 +64,22 @@ class PF
         /**
  * @author symfony/polyfill
  * 
- * @param callable(mixed, int|string):bool $callback
- * @return mixed
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
+ * @return TValue|null
  */
     static function array_find(array $array, callable $callback) {}
 
         /**
  * @author symfony/polyfill
- * @return null|string|int
+ * 
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
+ * @return TKey|null
  */
     static function array_find_key(array $array, callable $callback) {}
 
@@ -70,8 +88,8 @@ class PF
  * @param array<T> $array
  * @return (
  *      $array is array{} ? null :
- *      $array is non-empty-array ? T :
- *      ?T
+ *      ($array is non-empty-array ? T :
+ *      ?T)
  * )
  */
     static function array_first(array $array) {}
@@ -84,8 +102,8 @@ class PF
  * @param array<T> $array
  * @return (
  *      $array is array{} ? null :
- *      $array is non-empty-array ? T :
- *      ?T
+ *      ($array is non-empty-array ? T :
+ *      ?T)
  * )
  */
     static function array_last(array $array) {}

@@ -6,7 +6,12 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
- * @return null|string|int
+ * 
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
+ * @return TKey|null
  */
 function array_find_key(array $array, callable $callback)
 {

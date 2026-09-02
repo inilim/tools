@@ -6,6 +6,11 @@ namespace Inilim\Tool\Method\PF;
 
 /**
  * @author symfony/polyfill
+ * 
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
  */
 function array_all(array $array, callable $callback): bool
 {

@@ -7,8 +7,11 @@ namespace Inilim\Tool\Method\PF;
 /**
  * @author symfony/polyfill
  * 
- * @param callable(mixed, int|string):bool $callback
- * @return mixed
+ * @template TKey of int|string
+ * @template TValue
+ * @param array<TKey, TValue> $array
+ * @param (callable(TValue $value, TKey $key): bool)|(callable(TValue $value): bool) $callback
+ * @return TValue|null
  */
 function array_find(array $array, callable $callback)
 {
