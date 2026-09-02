@@ -544,16 +544,16 @@ if ($switch || false) {
     ) {
         /** @var TYPE_CLASS_LINK[] $links */
 
+        /** @var TYPE_TBL_METHOD[] $methods */
         $methods = $dbDev->exec('SELECT * FROM methods', 2);
         $methods = \array_map(static function (array $m): array {
             unset($m['code_raw']);
             return $m;
         }, $methods);
-        /** @var TYPE_TBL_METHOD[] $methods */
-        $tool_method = \array_column($links, 'tool', 'method');
         /** @var array<string,class-string> $tool_method */
-        $pathMin_method = \array_column($links, 'pathMin', 'method');
+        $tool_method = \array_column($links, 'tool', 'method');
         /** @var array<string,string> $pathMin_method */
+        $pathMin_method = \array_column($links, 'pathMin', 'method');
 
         // \shuffle($methods);
 
