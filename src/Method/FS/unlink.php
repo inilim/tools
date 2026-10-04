@@ -18,5 +18,5 @@ function unlink(string $filename, $context = null): bool
         }
         return false;
     });
-    return $value === null ? false : $value;
+    return null === $value ? false : $value;
 }

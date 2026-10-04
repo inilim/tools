@@ -1,8 +1,6 @@
 <?php
 
-namespace Inilim\Tool\Method\LarArr{function push():\Closure{return static function($array,$key,... $values){$target=\Inilim\Tool\Method\LarArr\_array($array,$key,[]);\array_push($target,... $values);return \Inilim\Tool\Method\LarArr\set()($array,$key,$target);};}if(!\Inilim\Tool\LarArr::__definedIfNot('_array')){
-    function _array($array,$key,?array $default=null){$value=\Inilim\Tool\Method\LarArr\get($array,$key,$default);if(!\is_array($value)){throw new \InvalidArgumentException(\sprintf('Array value for key [%s] must be an array, %s found.',$key,\gettype($value)));}return $value;}
-    }if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
+namespace Inilim\Tool\Method\LarArr{function push():\Closure{return static function($array,$key,... $values){$target=\Inilim\Tool\Method\LarArr\_array($array,$key,[]);\array_push($target,... $values);return \Inilim\Tool\Method\LarArr\set()($array,$key,$target);};}if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
     function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
     function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
@@ -10,6 +8,8 @@ namespace Inilim\Tool\Method\LarArr{function push():\Closure{return static funct
     function get($array,$key,$default=null){if(!\Inilim\Tool\Method\LarArr\accessible($array)){return \Inilim\Tool\Method\Lar\value($default);}if(\is_null($key)){return $array;}if(\Inilim\Tool\Method\LarArr\exists($array,$key)){return $array[$key];}if(!\Inilim\Tool\Method\PF\str_contains($key,'.')){return \Inilim\Tool\Method\Lar\value($default);}foreach(\explode('.',$key)as $segment){if(\Inilim\Tool\Method\LarArr\accessible($array)&&\Inilim\Tool\Method\LarArr\exists($array,$segment)){$array=$array[$segment];}else{return \Inilim\Tool\Method\Lar\value($default);}}return $array;}
     }if(!\Inilim\Tool\LarArr::__definedIfNot('set')){
     function set():\Closure{\Inilim\Tool\Method\Assert\__notArgsHere(__FUNCTION__,\func_num_args());return static function(&$array,$key,$value){if(\is_null($key)){return $array=$value;}$keys=\explode('.',$key);foreach($keys as $i=>$key){if(\count($keys)===1){break;}unset($keys[$i]);if(!isset($array[$key])||!\is_array($array[$key])){$array[$key]=[];}$array=&$array[$key];}$array[\array_shift($keys)]=$value;return $array;};}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('_array')){
+    function _array($array,$key,?array $default=null){$value=\Inilim\Tool\Method\LarArr\get($array,$key,$default);if(!\is_array($value)){throw new \InvalidArgumentException(\sprintf('Array value for key [%s] must be an array, %s found.',$key,\gettype($value)));}return $value;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('__notArgsHere')){
     function __notArgsHere(string $fnName,int $countArgs){if($countArgs!==0){$fnName=\basename($fnName);throw new \InvalidArgumentException(\sprintf('%s()(...) OR %s()->__invoke(...) <-- The arguments were passed to the wrong place',$fnName,$fnName));}}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php80')){

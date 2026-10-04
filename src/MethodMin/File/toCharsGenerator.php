@@ -4,11 +4,7 @@ declare(strict_types=1);namespace Inilim\Tool\Method\File{function toCharsGenera
     function phpfclose($stream):bool{$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn()=>\fclose($stream));return $result===null?false:$result;}
     }if(!\Inilim\Tool\File::__definedIfNot('phpfopen')){
     function phpfopen(string $filename,string $mode,bool $use_include_path=false,$context=null){$result=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn()=>\fopen($filename,$mode,$use_include_path,$context));return $result===null?false:$result;}
-    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
-    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
-    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
-    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
-    }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
@@ -18,6 +14,10 @@ declare(strict_types=1);namespace Inilim\Tool\Method\File{function toCharsGenera
     function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
     }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
     function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('file')){

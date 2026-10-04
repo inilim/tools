@@ -12,6 +12,7 @@
 /files/tests/*
 
 # Files
+/build.out
 /stan.txt
 /composer.lock
 .htaccess

@@ -146,4 +146,13 @@ class FS
  */
     static function unlink(string $filename, $context = null): bool {}
 
+        /**
+ * @author inilim
+ * 
+ * @template T as string
+ * @param T[] $filenames
+ * @return array<T,bool>
+ */
+    static function unlink_m2(array $filenames): array {}
+
     }

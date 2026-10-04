@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Zip{function findByFilter($pathToFileOrZip,callable $predicate,$valueBreak=null):?array{$gen=\Inilim\Tool\Method\Zip\findByFilterAsGenerator($pathToFileOrZip,$predicate,$valueBreak);if($gen===null){return null;}return \iterator_to_array($gen,false);}if(!\Inilim\Tool\Zip::__definedIfNot('findByFilterAsGenerator')){
+namespace Inilim\Tool\Method\Zip{function findByFilter($pathToFileOrZip,callable $predicate,$valueBreak=null):?array{$gen=\Inilim\Tool\Method\Zip\findByFilterAsGenerator($pathToFileOrZip,$predicate,$valueBreak);if($gen===null){return null;}return \iterator_to_array($gen,false);}if(!\Inilim\Tool\Zip::__definedIfNot('findByFilterAsGenerator')){
     function findByFilterAsGenerator($pathToFileOrZip,callable $predicate,$valueBreak=null):?\Generator{$gen=\Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);if($gen===null){return null;}foreach($gen as $stat){$t=$stat;$v=$predicate($t);if($v===$valueBreak){return;}if($v===true){yield $stat;}}}
     }if(!\Inilim\Tool\Zip::__definedIfNot('getObjFrom')){
     function getObjFrom($pathToFileOrZip):?object{\Inilim\Tool\Method\Assert\extPhp('zip');$type=\Inilim\Tool\Method\Other\getType($pathToFileOrZip);if($type==='string'){if(!\Inilim\Tool\Method\FS\isFile($pathToFileOrZip)){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('File "%s", not exist',$pathToFileOrZip),'',-1);return null;}$zip=\Inilim\Tool\Method\Zip\open($pathToFileOrZip);if(!$zip){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('File "%s", open failed',$pathToFileOrZip),'',-1);return null;}}elseif($type==='object'){if(!$pathToFileOrZip instanceof \ZipArchive){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('Expected (arg #0) a string or \ZipArchive. Got: %s',\get_class($pathToFileOrZip)),'',-1);return null;}$zip=$pathToFileOrZip;if($zip -> filename===''){\Inilim\Tool\Method\Other\__setErrorLast(-1,'Uninitialized zip','',-1);return null;}}else{\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('Expected (arg #0) a string or \ZipArchive. Got: %s',$type),'',-1);return null;}return $zip;}
@@ -9,22 +9,12 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Zip{function findByFilter($
     }if(!\Inilim\Tool\Zip::__definedIfNot('scanAsGenerator')){
     function scanAsGenerator($pathToFileOrZip):?\Generator{$zip=\Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);if($zip===null){return null;}$num=$zip -> numFiles;for($i=0;$i<$num;$i++){$ri=$zip -> statIndex($i,\ZipArchive :: FL_UNCHANGED);if($ri===false){continue;}yield $ri;}}
     }}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
-    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
+    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\LarStr\substr($path,1,1)){$path=\Inilim\Tool\Method\LarStr\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
     function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
-    function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('ucfirst')){
-    function ucfirst(string $string):string{return \Inilim\Tool\Method\Str\upper(\Inilim\Tool\Method\Str\substr($string,0,1)).\Inilim\Tool\Method\Str\substr($string,1);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('upper')){
-    function upper(string $value,?string $encoding='UTF-8'):string{return \mb_strtoupper($value,$encoding);}
-    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
-    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
-    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
-    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
-    }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
@@ -32,8 +22,18 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Zip{function findByFilter($
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
     function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }}namespace Inilim\Tool\Method\FS{if(!\Inilim\Tool\FS::__definedIfNot('isFile')){
     function isFile(string $filename):bool{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use($filename){\clearstatcache(false,$filename);return \is_file($filename);});return $value===null?false:$value;}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    }}namespace Inilim\Tool\Method\LarStr{if(!\Inilim\Tool\LarStr::__definedIfNot('substr')){
+    function substr($string,$start,$length=null,$encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
+    }if(!\Inilim\Tool\LarStr::__definedIfNot('ucfirst')){
+    function ucfirst($string){return \Inilim\Tool\Method\LarStr\upper(\Inilim\Tool\Method\LarStr\substr($string,0,1)).\Inilim\Tool\Method\LarStr\substr($string,1);}
+    }if(!\Inilim\Tool\LarStr::__definedIfNot('upper')){
+    function upper($value){return \mb_strtoupper($value,'UTF-8');}
     }}

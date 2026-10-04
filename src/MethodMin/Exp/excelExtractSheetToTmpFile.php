@@ -15,22 +15,12 @@ namespace Inilim\Tool\Method\Exp{function excelExtractSheetToTmpFile($pathToFile
     }if(!\Inilim\Tool\File::__definedIfNot('sharedGet')){
     function sharedGet(string $pathToFile,bool $throw=false):array{$args=['pathToFile'=>$pathToFile,'result'=>null,'e'=>null,'errors'=>null];\Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use(&$args){$handle=\fopen($args['pathToFile'],'rb');if($handle){try{if(\flock($handle,\LOCK_SH)){\clearstatcache(true,$args['pathToFile']);$args['result']=\fread($handle,\filesize($args['pathToFile'])?:1);\flock($handle,\LOCK_UN);}}finally{\fclose($handle);}}},static function($type,$message,$file,$line)use(&$args){$args['errors']??=[];$args['errors'][]=[$message,$type,$file,$line];});if($args['errors']){$args['e']=\Inilim\Tool\Method\Obj\getCollectionThrowable();foreach($args['errors']as $err){$args['e'][]=new \ErrorException($err[0],$err[1],$err[1],$err[2],$err[3]);}unset($args['errors']);}if($args['result']===false||$args['result']===null){if($throw&&$args['e']){throw $args['e'];}return['result'=>null,'exception'=>$args['e']];}return['result'=>$args['result'],'exception'=>$args['e']];}
     }}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
-    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\Str\substr($path,1,1)){$path=\Inilim\Tool\Method\Str\ucfirst($path);}return $path;}
+    function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\LarStr\substr($path,1,1)){$path=\Inilim\Tool\Method\LarStr\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
     function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('substr')){
-    function substr(string $string,int $start,?int $length=null,string $encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('ucfirst')){
-    function ucfirst(string $string):string{return \Inilim\Tool\Method\Str\upper(\Inilim\Tool\Method\Str\substr($string,0,1)).\Inilim\Tool\Method\Str\substr($string,1);}
-    }if(!\Inilim\Tool\Str::__definedIfNot('upper')){
-    function upper(string $value,?string $encoding='UTF-8'):string{return \mb_strtoupper($value,$encoding);}
-    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
-    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
-    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
-    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
-    }if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
     function extPhp(string $ext,bool $rechecking=false):bool{static $o=null;$o ??=[];if(isset($o[$ext])&&false===$rechecking){return $o[$ext];}return $o[$ext]=\extension_loaded($ext);}
     }if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
@@ -40,6 +30,10 @@ namespace Inilim\Tool\Method\Exp{function excelExtractSheetToTmpFile($pathToFile
     function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if($use['handler']===null){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
     }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
     function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if($handler===null){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
     }}namespace Inilim\Tool\Method\FS{if(!\Inilim\Tool\FS::__definedIfNot('isFile')){
     function isFile(string $filename):bool{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use($filename){\clearstatcache(false,$filename);return \is_file($filename);});return $value===null?false:$value;}
     }}namespace Inilim\Tool\Method\Zip{if(!\Inilim\Tool\Zip::__definedIfNot('findFirstByCallable')){
@@ -137,4 +131,10 @@ namespace Inilim\Tool\Method\Exp{function excelExtractSheetToTmpFile($pathToFile
     function dataGet($target,$key,$default=null){if(\is_null($key)){return $target;}$key=\is_array($key)?$key:\explode('.',$key);foreach($key as $i=>$segment){unset($key[$i]);if(\is_null($segment)){return $target;}if($segment==='*'){if(\is_object($target)){$target=\Inilim\Tool\Method\LarArr\from($target);}elseif(!\is_iterable($target)){return \Inilim\Tool\Method\Lar\value($default);}$result=[];foreach($target as $item){$result[]=\Inilim\Tool\Method\Lar\dataGet($item,$key);}return \in_array('*',$key)?\Inilim\Tool\Method\LarArr\collapse($result):$result;}if($segment==='\*'){$segment='*';}elseif($segment==='\{first}'){$segment='{first}';}elseif($segment==='{first}'){$segment=\array_key_first(\is_array($target)?$target:\Inilim\Tool\Method\LarArr\from($target));}elseif($segment==='\{last}'){$segment='{last}';}elseif($segment==='{last}'){$segment=\array_key_last(\is_array($target)?$target:\Inilim\Tool\Method\LarArr\from($target));}if(\Inilim\Tool\Method\LarArr\accessible($target)&&\Inilim\Tool\Method\LarArr\exists($target,$segment)){$target=$target[$segment];}elseif(\is_object($target)&&isset($target ->{$segment})){$target=$target ->{$segment};}else{return \Inilim\Tool\Method\Lar\value($default);}}return $target;}
     }if(!\Inilim\Tool\Lar::__definedIfNot('value')){
     function value($value,... $args){return $value instanceof \Closure?$value(... $args):$value;}
+    }}namespace Inilim\Tool\Method\LarStr{if(!\Inilim\Tool\LarStr::__definedIfNot('substr')){
+    function substr($string,$start,$length=null,$encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
+    }if(!\Inilim\Tool\LarStr::__definedIfNot('ucfirst')){
+    function ucfirst($string){return \Inilim\Tool\Method\LarStr\upper(\Inilim\Tool\Method\LarStr\substr($string,0,1)).\Inilim\Tool\Method\LarStr\substr($string,1);}
+    }if(!\Inilim\Tool\LarStr::__definedIfNot('upper')){
+    function upper($value){return \mb_strtoupper($value,'UTF-8');}
     }}

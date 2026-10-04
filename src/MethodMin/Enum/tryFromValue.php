@@ -1,9 +1,9 @@
 <?php
 
-declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function tryFromValue($enum,$value,bool $caseInsensitive=false){$backed=false;foreach(\Inilim\Tool\Method\Enum\cases($enum)as $enum){if(!$backed&&!$backed=$enum instanceof \BackedEnum){return null;}if(\Inilim\Tool\Method\Enum\__uniform($enum -> value,$caseInsensitive)===\Inilim\Tool\Method\Enum\__uniform($value,$caseInsensitive)){return $enum;}}return null;}if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
-    function __uniform($value,bool $caseInsensitive){return $caseInsensitive?\Inilim\Tool\Method\Str\lower(\strval($value)):$value;}
-    }if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
+declare(strict_types=1);namespace Inilim\Tool\Method\Enum{function tryFromValue($enum,$value,bool $caseInsensitive=false){$backed=false;foreach(\Inilim\Tool\Method\Enum\cases($enum)as $enum){if(!$backed&&!$backed=$enum instanceof \BackedEnum){return null;}if(\Inilim\Tool\Method\Enum\__uniform($enum -> value,$caseInsensitive)===\Inilim\Tool\Method\Enum\__uniform($value,$caseInsensitive)){return $enum;}}return null;}if(!\Inilim\Tool\Enum::__definedIfNot('cases')){
     function cases($enum){\Inilim\Tool\Method\Assert\php81();if(\Inilim\Tool\Method\Other\isEnum($enum)){return $enum :: cases();}throw new \InvalidArgumentException('Must be of type \UnitEnum');}
+    }if(!\Inilim\Tool\Enum::__definedIfNot('__uniform')){
+    function __uniform($value,bool $caseInsensitive){return $caseInsensitive?\Inilim\Tool\Method\Str\lower(\strval($value)):$value;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('lower')){
     function lower(string $value,?string $encoding='UTF-8'):string{return \mb_strtolower($value,$encoding);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('isEnum')){

@@ -1,2 +1,1 @@
-php build/build.php & php build/autoide.php
-pause
+(php build\build.php & php build\autoide.php) > build.out 2>&1

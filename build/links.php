@@ -36,13 +36,21 @@ $root = \dirname(__DIR__);
 foreach ($clasess as $class) {
     $nameClass = \basename($class);
 
+    // 'method' => 'Inilim\Tool\Method\File',
+    // 'tool'   => $class = \Inilim\Tool\File::class,
+    // 'nameClass'   => \basename($class),
+
+    // 'path'   => $root . '/src/Method/File',
+    // 'pathMin'   => $root . '/src/MethodMin/File',
+    // 'pathToClass' => $root . '/src/File.php',
+
     $array[] = [
         'method'      => \sprintf('Inilim\Tool\Method\%s', $nameClass),
         'tool'        => $class,
         'nameClass'   => $nameClass,
         'path'        => \sprintf('%s/src/Method/%s', $root, $nameClass),
         'pathMin'     => \sprintf('%s/src/MethodMin/%s', $root, $nameClass),
-        'pathToClass' => \sprintf('%s/src/%s', $root, $nameClass),
+        'pathToClass' => \sprintf('%s/src/%s.php', $root, $nameClass),
     ];
 }
 

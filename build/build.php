@@ -310,8 +310,7 @@ if ($switch || false) {
         $methodsIterator = $dbDev->exec('SELECT * FROM methods', [], IPDO::FETCH_GENERATOR_ASSOC);
         $groupID = 1;
 
-        foreach ($methodsIterator as $idx => $method) {
-            unset($methodsIterator[$idx]);
+        foreach ($methodsIterator as $method) {
 
             /** @var TYPE_TBL_METHOD $method */
 
@@ -513,6 +512,10 @@ if ($switch || false) {
         /** @var TYPE_CLASS_LINK[] $links */
 
         foreach ($links as $link) {
+            if (!\is_dir($link['pathMin'])) {
+                continue;
+            }
+
             $iter = (new Finder)->files()->in($link['pathMin'])->name('*.php');
             foreach ($iter as $spl) {
                 $file = $spl->getRealPath();
@@ -739,7 +742,7 @@ if ($switch || false) {
 
             $class = $nodeFinder->findFirstInstanceOf($ast, Class_::class);
             unset($ast);
-            if ($class === null) {
+            if (null === $class) {
                 de([
                     __LINE__,
                     $link,

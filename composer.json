@@ -55,18 +55,18 @@
     "symfony/finder": "^5.4",
     "inilim/php-code-minifier": "dev-main",
     "mikey179/vfsstream": "^1.6",
-    "inilim/ipdo": "^0.0.20260822"
+    "inilim/ipdo": "0.0.*"
   },
   "scripts": {
     "build": [
-        "php build/build.php",
-        "php build/autoide.php"
+      "php build/build.php",
+      "php build/autoide.php"
     ],
     "build:ide": [
-        "php build/autoide.php"
+      "php build/autoide.php"
     ],
     "build:method": [
-        "php build/build.php"
+      "php build/build.php"
     ],
     "unit": [
       "php74 vendor/bin/phpunit"
