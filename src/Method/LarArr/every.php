@@ -11,5 +11,15 @@ namespace Inilim\Tool\Method\LarArr;
  */
 function every($array, callable $callback)
 {
-    return \Inilim\Tool\Method\PF\array_all($array, $callback);
+    if (\is_array($array)) {
+        return \Inilim\Tool\Method\PF\array_all($array, $callback);
+    }
+
+    foreach ($array as $key => $value) {
+        if (! $callback($value, $key)) {
+            return false;
+        }
+    }
+
+    return true;
 }

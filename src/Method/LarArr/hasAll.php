@@ -17,11 +17,5 @@ function hasAll($array, $keys)
         return false;
     }
 
-    foreach ($keys as $key) {
-        if (! \Inilim\Tool\Method\LarArr\has($array, $key)) {
-            return false;
-        }
-    }
-
-    return true;
+    return \Inilim\Tool\Method\PF\array_all($keys, static fn($key) => \Inilim\Tool\Method\LarArr\has($array, $key));
 }

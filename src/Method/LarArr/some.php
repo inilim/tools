@@ -11,5 +11,15 @@ namespace Inilim\Tool\Method\LarArr;
  */
 function some($array, callable $callback)
 {
-    return \Inilim\Tool\Method\PF\array_any($array, $callback);
+    if (\is_array($array)) {
+        return \Inilim\Tool\Method\PF\array_any($array, $callback);
+    }
+
+    foreach ($array as $key => $value) {
+        if ($callback($value, $key)) {
+            return true;
+        }
+    }
+
+    return false;
 }

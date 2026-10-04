@@ -5,9 +5,11 @@ namespace Inilim\Tool\Method\LarArr;
 /**
  * Prepend the key names of an associative array.
  *
- * @param array $array
- * @param string $prependWith
- * @return array
+ * @template TValue
+ *
+ * @param  array<TValue>  $array
+ * @param  string  $prependWith
+ * @return array<string, TValue>
  */
 function prependKeysWith($array, $prependWith)
 {

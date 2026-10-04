@@ -25,11 +25,5 @@ function hasAny($array, $keys)
         return false;
     }
 
-    foreach ($keys as $key) {
-        if (\Inilim\Tool\Method\LarArr\has($array, $key)) {
-            return true;
-        }
-    }
-
-    return false;
+    return \Inilim\Tool\Method\PF\array_any($keys, static fn($key) => \Inilim\Tool\Method\LarArr\has($array, $key));
 }
