@@ -12,8 +12,8 @@ namespace Inilim\Tool\Method\LarStr;
 function trim($value, $charlist = null)
 {
     if ($charlist === null) {
-        // $trimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
-        $trimDefaultCharacters = " \n\r\t\v\0";
+        // без preg_quote выдает "PHP Warning:  preg_replace(): Null byte in regex ..."
+        $trimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
         $c = \Inilim\Tool\Method\LarStr\__state()::INVISIBLE_CHARACTERS;
         $whitespace = '[\s' . $c . $trimDefaultCharacters . ']';

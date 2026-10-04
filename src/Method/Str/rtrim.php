@@ -15,6 +15,7 @@ namespace Inilim\Tool\Method\Str;
 function rtrim(string $value, ?string $charlist = null): string
 {
     if ($charlist === null) {
+        // без preg_quote выдает "PHP Warning:  preg_replace(): Null byte in regex ..."
         $rtrimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
         return \preg_replace('~[\s' . \Inilim\Tool\Method\Str\__state()::INVISIBLE_CHARACTERS . $rtrimDefaultCharacters . ']+$~u', '', $value) ?? \rtrim($value);

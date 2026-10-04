@@ -15,6 +15,7 @@ namespace Inilim\Tool\Method\Str;
 function trim(string $value, ?string $charlist = null): string
 {
     if ($charlist === null) {
+        // без preg_quote выдает "PHP Warning:  preg_replace(): Null byte in regex ..."
         $trimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
         $c = \Inilim\Tool\Method\Str\__state()::INVISIBLE_CHARACTERS;

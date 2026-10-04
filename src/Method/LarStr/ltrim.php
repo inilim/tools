@@ -12,6 +12,7 @@ namespace Inilim\Tool\Method\LarStr;
 function ltrim($value, $charlist = null)
 {
     if ($charlist === null) {
+        // без preg_quote выдает "PHP Warning:  preg_replace(): Null byte in regex ..."
         $ltrimDefaultCharacters = \preg_quote(" \n\r\t\v\0");
 
         $c = \Inilim\Tool\Method\LarStr\__state()::INVISIBLE_CHARACTERS;

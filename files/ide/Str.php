@@ -279,6 +279,27 @@ class Str
     static function isUrl(string $value, array $protocols = []): bool {}
 
         /**
+ * @author https://github.com/voku/portable-ascii
+ * 
+ * Checks if a string is 7-bit ASCII.
+ *
+ * EXAMPLE: <code>
+ * Str::is_ascii('白'); // false
+ * </code>
+ *
+ * @param string $str <p>The string to check.</p>
+ *
+ * @psalm-pure
+ *
+ * @return bool
+ *              <p>
+ *              <strong>true</strong> if it is ASCII<br>
+ *              <strong>false</strong> otherwise
+ *              </p>
+ */
+    static function is_ascii(string $str): bool {}
+
+        /**
  * @param iterable<array-key,string> $iterable
  */
     static function join(iterable $iterable, string $separator = ','): string {}
@@ -294,6 +315,8 @@ class Str
     static function kebab(string $value): string {}
 
         /**
+ * @deprecated use LarStr
+ * 
  * Make a string's first character lowercase.
  * 
  * @return ($string is '' ? '' : non-empty-string)
@@ -312,6 +335,7 @@ class Str
     static function lenEqual(string $str, $equal): bool {}
 
         /**
+ * @deprecated use LarStr
  * Return the length of the given string.
  * @param string|null $encoding
  * @ext mbstring
@@ -355,6 +379,8 @@ class Str
     static function ltrim(string $value, ?string $charlist = null): string {}
 
         /**
+ * @deprecated use LarStr
+ * 
  * Masks a portion of a string with a repeated character.
  * @ext mbstring
  */
@@ -552,6 +578,8 @@ class Str
     static function squish(string $value) {}
 
         /**
+ * @deprecated use LarStr
+ * 
  * Begin a string with a single instance of a given value.
  * 
  * @return ($value is '' ? ($prefix is '' ? '' : non-empty-string): non-empty-string)
@@ -600,6 +628,8 @@ class Str
     static function substrCount(string $haystack, string $needle, int $offset = 0, ?int $length = null): int {}
 
         /**
+ * @deprecated use LarStr
+ * 
  * Replace text within a portion of a string.
  *
  * @ext mbstring
@@ -726,6 +756,7 @@ class Str
     static function wordCount(string $string, ?string $characters = null): int {}
 
         /**
+ * @deprecated use LarStr
  * Wrap a string to a given number of characters.
  */
     static function wordWrap(string $string, int $characters = 75, string $break = "\n", bool $cut_long_words = false): string {}

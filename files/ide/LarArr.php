@@ -158,7 +158,7 @@ class LarArr
         /**
  * Remove one or many array items from a given array using "dot" notation.
  *
- * @return \Closure(array $array,array|string|int|float $keys)
+ * @return \Closure(array $array, array|string|int|float $keys):void
  */
     static function forget(): Closure {}
 
@@ -355,9 +355,11 @@ class LarArr
         /**
  * Prepend the key names of an associative array.
  *
- * @param array $array
- * @param string $prependWith
- * @return array
+ * @template TValue
+ *
+ * @param  array<TValue>  $array
+ * @param  string  $prependWith
+ * @return array<string, TValue>
  */
     static function prependKeysWith($array, $prependWith) {}
 

@@ -11,7 +11,5 @@ namespace Inilim\Tool\Method\Obj{function iteratorFilesRecursive(string $pathToD
     }}namespace Inilim\Tool\Method\LarStr{if(!\Inilim\Tool\LarStr::__definedIfNot('substr')){
     function substr($string,$start,$length=null,$encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\LarStr::__definedIfNot('ucfirst')){
-    function ucfirst($string){return \Inilim\Tool\Method\LarStr\upper(\Inilim\Tool\Method\LarStr\substr($string,0,1)).\Inilim\Tool\Method\LarStr\substr($string,1);}
-    }if(!\Inilim\Tool\LarStr::__definedIfNot('upper')){
-    function upper($value){return \mb_strtoupper($value,'UTF-8');}
+    function ucfirst($string){return \mb_ucfirst($string,'UTF-8');}
     }}

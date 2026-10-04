@@ -13,11 +13,33 @@ class LarStr
     static function camel($value) {}
 
         /**
+ * Determine if a given string contains a given substring.
+ *
+ * @param  string  $haystack
+ * @param  string|iterable<string>  $needles
+ * @param  bool  $ignoreCase
+ * @return ($needles is array{} ? false : ($haystack is non-empty-string ? bool : false))
+ * 
+ * @ext mbstring
+ */
+    static function contains($haystack, $needles, $ignoreCase = false) {}
+
+        /**
+ * Determine if a given string contains all array values.
+ *
+ * @param  string  $haystack
+ * @param  iterable<string>  $needles
+ * @param  bool  $ignoreCase
+ * @return ($needles is array{} ? false : ($haystack is non-empty-string ? bool : false))
+ */
+    static function containsAll($haystack, $needles, $ignoreCase = false) {}
+
+        /**
  * Cap a string with a single instance of a given value.
  *
  * @param  string  $value
  * @param  string  $cap
- * @return string
+ * @return ($value is '' ? ($cap is '' ? '' : non-empty-string) : non-empty-string)
  */
     static function finish($value, $cap) {}
 
@@ -50,6 +72,35 @@ class LarStr
     static function initials($value, $capitalize = false) {}
 
         /**
+ * Determine if a given string is 7 bit ASCII.
+ *
+ * @param  string  $value
+ * @return bool
+ */
+    static function isAscii($value) {}
+
+        /**
+ * Make a string's first character lowercase.
+ *
+ * @param  string  $string
+ * @return ($string is '' ? '' : non-empty-string)
+ * 
+ * @ext mbstring
+ */
+    static function lcfirst($string) {}
+
+        /**
+ * Return the length of the given string.
+ *
+ * @param  string  $value
+ * @param  string|null  $encoding
+ * @return non-negative-int
+ * 
+ * @ext mbstring
+ */
+    static function length($value, $encoding = null) {}
+
+        /**
  * Convert the given string to lower-case.
  *
  * @param  string  $value
@@ -67,6 +118,28 @@ class LarStr
  * @return string
  */
     static function ltrim($value, $charlist = null) {}
+
+        /**
+ * Masks a portion of a string with a repeated character.
+ *
+ * @param  string  $string
+ * @param  string  $character
+ * @param  int  $index
+ * @param  int|null  $length
+ * @param  string  $encoding
+ * @return string
+ * 
+ * @ext mbstring
+ */
+    static function mask($string, $character, $index, $length = null, $encoding = 'UTF-8') {}
+
+        /**
+ * Remove all non-numeric characters from a string.
+ *
+ * @param  string|string[]  $value
+ * @return ($value is string ? string : string[])
+ */
+    static function numbers($value) {}
 
         /**
  * Replace the given value in the given string.
@@ -99,6 +172,15 @@ class LarStr
     static function rtrim($value, $charlist = null) {}
 
         /**
+ * Begin a string with a single instance of a given value.
+ *
+ * @param  string  $value
+ * @param  string  $prefix
+ * @return ($value is '' ? ($prefix is '' ? '' : non-empty-string): non-empty-string)
+ */
+    static function start($value, $prefix) {}
+
+        /**
  * Convert a value to studly caps case.
  *
  * @param  string  $value
@@ -119,6 +201,19 @@ class LarStr
  * @ext mbstring
  */
     static function substr($string, $start, $length = null, $encoding = 'UTF-8') {}
+
+        /**
+ * Replace text within a portion of a string.
+ *
+ * @param  string|string[]  $string
+ * @param  string|string[]  $replace
+ * @param  int|int[]  $offset
+ * @param  int|int[]|null  $length
+ * @return string|string[]
+ * 
+ * @ext mbstring
+ */
+    static function substrReplace($string, $replace, $offset = 0, $length = null) {}
 
         /**
  * Convert the given string to proper case.
@@ -161,6 +256,8 @@ class LarStr
  *
  * @param  string  $string
  * @return ($string is '' ? '' : non-empty-string)
+ * 
+ * @ext mbstring
  */
     static function ucfirst($string) {}
 
@@ -192,5 +289,16 @@ class LarStr
  * @ext mbstring
  */
     static function upper($value) {}
+
+        /**
+ * Wrap a string to a given number of characters.
+ *
+ * @param  string  $string
+ * @param  int  $characters
+ * @param  string  $break
+ * @param  bool  $cutLongWords
+ * @return string
+ */
+    static function wordWrap($string, $characters = 75, $break = "\n", $cutLongWords = false) {}
 
     }
