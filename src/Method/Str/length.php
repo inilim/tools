@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use LarStr
  * Return the length of the given string.
  * @param string|null $encoding
  * @ext mbstring

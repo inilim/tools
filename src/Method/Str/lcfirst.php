@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use LarStr
+ * 
  * Make a string's first character lowercase.
  * 
  * @return ($string is '' ? '' : non-empty-string)

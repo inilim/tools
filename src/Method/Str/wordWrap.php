@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use LarStr
  * Wrap a string to a given number of characters.
  */
 function wordWrap(string $string, int $characters = 75, string $break = "\n", bool $cut_long_words = false): string

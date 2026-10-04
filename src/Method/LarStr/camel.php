@@ -11,5 +11,5 @@ namespace Inilim\Tool\Method\LarStr;
 function camel($value)
 {
     $c = &\Inilim\Tool\Method\LarStr\__state()->camelCache;
-    return $c[$value] ?? $c[$value] = \lcfirst(\Inilim\Tool\Method\LarStr\studly($value));
+    return $c[$value] ?? $c[$value] = \Inilim\Tool\Method\LarStr\lcfirst(\Inilim\Tool\Method\LarStr\studly($value));
 }

@@ -3,14 +3,14 @@
 namespace Inilim\Tool\Method\LarStr;
 
 /**
- * Make a string's first character uppercase.
+ * Make a string's first character lowercase.
  *
  * @param  string  $string
  * @return ($string is '' ? '' : non-empty-string)
  * 
  * @ext mbstring
  */
-function ucfirst($string)
+function lcfirst($string)
 {
-    return \mb_ucfirst($string, 'UTF-8');
+    return \mb_lcfirst($string, 'UTF-8');
 }

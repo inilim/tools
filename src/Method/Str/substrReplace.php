@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use LarStr
+ * 
  * Replace text within a portion of a string.
  *
  * @ext mbstring

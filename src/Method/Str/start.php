@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Str;
 
 /**
+ * @deprecated use LarStr
+ * 
  * Begin a string with a single instance of a given value.
  * 
  * @return ($value is '' ? ($prefix is '' ? '' : non-empty-string): non-empty-string)

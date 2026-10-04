@@ -27,5 +27,5 @@ function replace($search, $replace, $subject, $caseSensitive = true)
 
     return $caseSensitive
         ? \str_replace($search, $replace, $subject)
-        : \str_ireplace($search, $replace, $subject);
+        : \Inilim\Tool\Method\LarStr\__replaceWhileIgnoringCase($search, $replace, $subject);
 }

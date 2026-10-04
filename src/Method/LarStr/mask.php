@@ -1,16 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Inilim\Tool\Method\Str;
+namespace Inilim\Tool\Method\LarStr;
 
 /**
- * @deprecated use LarStr
- * 
  * Masks a portion of a string with a repeated character.
+ *
+ * @param  string  $string
+ * @param  string  $character
+ * @param  int  $index
+ * @param  int|null  $length
+ * @param  string  $encoding
+ * @return string
+ * 
  * @ext mbstring
  */
-function mask(string $string, string $character, int $index, ?int $length = null, string $encoding = 'UTF-8'): string
+function mask($string, $character, $index, $length = null, $encoding = 'UTF-8')
 {
     if ($character === '') {
         return $string;
@@ -29,9 +33,9 @@ function mask(string $string, string $character, int $index, ?int $length = null
         $startIndex = $index < -$strlen ? 0 : $strlen + $index;
     }
 
-    $start      = \mb_substr($string, 0, $startIndex, $encoding);
+    $start = \mb_substr($string, 0, $startIndex, $encoding);
     $segmentLen = \mb_strlen($segment, $encoding);
-    $end        = \mb_substr($string, $startIndex + $segmentLen);
+    $end = \mb_substr($string, $startIndex + $segmentLen, null, $encoding);
 
     return $start . \str_repeat(\mb_substr($character, 0, 1, $encoding), $segmentLen) . $end;
 }
