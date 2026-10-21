@@ -604,7 +604,7 @@ class Arr
  * @param  int|null  $number
  * @param  bool  $preserveKeys
  *
- * @return TValue|TValue[]|array<TKey,TValue>
+ * @return ($number is null ? TValue : ($preserveKeys is true ? array<TKey,TValue> : TValue[]))
  *
  * @throws \InvalidArgumentException
  */
