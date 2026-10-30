@@ -1,0 +1,19 @@
+{
+    "require": {
+        "twig/twig": "^3.30",
+        "inilim/php-code-minifier": "dev-main",
+        "inilim/dump": "dev-main",
+        "inilim/ipdo": "0.0.*",
+        "phpstan/phpstan": "^2.3",
+        "symfony/process": "^8.0",
+        "symfony/finder": "^8.0",
+        "mikey179/vfsstream": "^1.6"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "8.4"
+        }
+    }
+}

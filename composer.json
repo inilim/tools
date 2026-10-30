@@ -8,14 +8,6 @@
     },
     "files": []
   },
-  "extra": {
-    "exclude-from-files": [
-      "twig/*",
-      "phpunit/*",
-      "phpstan/*",
-      "myclabs/*"
-    ]
-  },
   "autoload-dev": {
     "psr-4": {
       "Inilim\\Tool\\Test\\": "tests/",
@@ -36,26 +28,23 @@
     "php": ">=7.4",
     "ext-mbstring": "*"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "mcaskill/composer-exclude-files": "^4.0"
+  },
+  "extra": {
+    "exclude-from-files": [
+      "twig/*",
+      "phpunit/*",
+      "phpstan/*",
+      "myclabs/*"
+    ]
+  },
   "suggest": {
     "ext-zip": "TODO ...",
     "ext-xml": "TODO ...",
     "ext-intl": "TODO ...",
     "ext-json": "TODO ..."
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require-dev": {
-    "inilim/dump": "dev-main",
-    "phpunit/phpunit": "^9.6",
-    "twig/twig": "^3.11",
-    "mcaskill/composer-exclude-files": "^4.0",
-    "phpstan/phpstan": "^2.1",
-    "symfony/process": "^5.4",
-    "phpmetrics/phpmetrics": "^2.9",
-    "symfony/finder": "^5.4",
-    "inilim/php-code-minifier": "dev-main",
-    "mikey179/vfsstream": "^1.6",
-    "inilim/ipdo": "0.0.*"
   },
   "scripts": {
     "build": [

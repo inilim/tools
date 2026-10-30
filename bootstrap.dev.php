@@ -9,6 +9,7 @@ if (!\defined('TEST_DIR_FILES')) {
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/dev/vendor/autoload.php';
 
 use Inilim\Dump\Dump;
 use Inilim\IPDO\IPDOSQLite;

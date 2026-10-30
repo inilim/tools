@@ -141,6 +141,10 @@ if ($switch || false) {
         foreach ($linksDir as $toolNamespace => $dir) {
             unset($linksDir[$toolNamespace]);
 
+            if (!\is_dir($dir)) {
+                dd(\sprintf('Нету папки "%s" скорее всего она была пустой', $dir));
+                continue;
+            }
             $files = (new Finder)->files()->in($dir)->name('*.php');
 
             // \shuffle($files);
