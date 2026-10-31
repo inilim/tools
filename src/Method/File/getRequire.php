@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\File;
  */
 function getRequire(string $pathToFile, array $data = [], bool $once = false)
 {
-    if (\is_file($pathToFile)) {
+    if (\Inilim\Tool\Method\FS\isFile($pathToFile)) {
         $__path = $pathToFile;
         $__data = $data;
         $__once = $once;

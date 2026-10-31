@@ -23,7 +23,7 @@ function tryCallWithErrHandler(callable $callable, ?callable $handler, int $erro
     ];
     $wrapHandler = static function ($levelOrCode, $message, $file, $line, $context = []) use (&$use) {
         // возвращаем true чтобы глушить внутренний обработчик ошибок
-        if ($use['handler'] === null) {
+        if (null === $use['handler']) {
             return true;
         }
 

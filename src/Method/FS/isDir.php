@@ -11,7 +11,8 @@ function isDir(string $filename): bool
 {
     $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename) {
         \clearstatcache(false, $filename);
-        return \is_dir($filename);
+        $t = \is_dir($filename);
+        return null === $t ? false : $t;
     });
-    return $value === null ? false : $value;
+    return \is_bool($value) ? $value : false;
 }

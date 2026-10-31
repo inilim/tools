@@ -14,7 +14,7 @@ namespace Inilim\Tool\Method\Assert;
 function dir($value, string $message = '')
 {
     \Inilim\Tool\Method\Assert\string($value);
-    if (!\is_dir($value)) {
+    if (!\Inilim\Tool\Method\FS\isDir($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'The path %s is not a directory.',
             \Inilim\Tool\Method\Other\valueToString($value)

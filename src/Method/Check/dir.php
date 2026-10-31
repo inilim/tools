@@ -13,5 +13,5 @@ namespace Inilim\Tool\Method\Check;
  */
 function dir($value): bool
 {
-    return \is_string($value) && \is_dir($value);
+    return \is_string($value) && \Inilim\Tool\Method\FS\isDir($value);
 }

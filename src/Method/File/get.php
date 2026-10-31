@@ -11,13 +11,13 @@ namespace Inilim\Tool\Method\File;
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * 
  * 
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @psalm-import-type Return_get from \TypeFile
  * 
  * 
  * @param null|resource|array $context
  * @return Return_get
- * @throws THROW_get_0
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
 function get(
     string $pathToFile,

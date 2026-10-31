@@ -57,7 +57,7 @@ function defaultCaBundle(): string
     ];
 
     foreach ($cafiles as $filename) {
-        if (\is_file($filename)) {
+        if (\Inilim\Tool\Method\FS\isFile($filename)) {
             return $cached = $filename;
         }
     }

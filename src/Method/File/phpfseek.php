@@ -12,5 +12,5 @@ namespace Inilim\Tool\Method\File;
 function phpfseek($stream, int $offset, int $whence = \SEEK_SET): int
 {
     $result = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn() => \fseek($stream, $offset, $whence));
-    return $result === null ? -1 : $result;
+    return \is_int($result) ? $result : -1;
 }

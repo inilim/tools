@@ -2,14 +2,30 @@
 
 declare(strict_types=1);namespace Inilim\Tool\Method\File{function lines_v2(string $pathToFile,int $startLine=0):\Generator{\Inilim\Tool\Method\Assert\file($pathToFile);if($startLine!==0){\Inilim\Tool\Method\Assert\positiveInteger($startLine);}$file=new \SplFileObject($pathToFile);$file -> setFlags(\SplFileObject :: DROP_NEW_LINE);if($startLine!==0){$file -> seek($startLine-1);}while(!$file -> eof()){yield $startLine=>$file -> fgets();$startLine++;}}}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){
     function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){
+    function tryCallWithErrHandler(callable $callable,?callable $handler,int $errorLevels=\E_ALL){$use=['handler'=>$handler,'exception'=>null,'result'=>null,'obj'=>new \stdClass()];$wrapHandler=static function($levelOrCode,$message,$file,$line,$context=[])use(&$use){if(null===$use['handler']){return true;}$context['isException']=isset($context['exception']);$context['isSuppress']=$context['isException']?false:!(\error_reporting()&$levelOrCode);$context['obj']=$use['obj'];try{$handlerResult=$use['handler']($levelOrCode,$message,$file,$line,$context);}catch(\Throwable $e){$use['exception']=$e;throw $e;}return $handlerResult!==false?true:false;};\set_error_handler($wrapHandler,$errorLevels);try{$use['result']=$callable($use['obj']);}catch(\Throwable $e){\restore_error_handler();if($use['exception']){throw $use['exception'];}$wrapHandler -> __invoke($e -> getCode(),$e -> getMessage(),$e -> getFile(),$e -> getLine(),['exception'=>$e]);return $use['result'];}\restore_error_handler();return $use['result'];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler_m2')){
+    function tryCallWithErrHandler_m2(callable $callable,?callable $handler=null,int $errorLevels=\E_ALL){if(null===$handler){$handler=static function($levelOrCode,string $message,string $file,int $line){\Inilim\Tool\Method\Other\__setErrorLast((int) $levelOrCode,$message,$file,$line);};}return \Inilim\Tool\Method\Other\tryCallWithErrHandler($callable,$handler,$errorLevels);}
     }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
     function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__setErrorLast')){
+    function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
+    }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
+    function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
+    }}namespace Inilim\Tool\Method\FS{if(!\Inilim\Tool\FS::__definedIfNot('isFile')){
+    function isFile(string $filename):bool{$value=\Inilim\Tool\Method\FS\isFile_m2([$filename]);return \Inilim\Tool\Method\PF\array_first($value);}
+    }if(!\Inilim\Tool\FS::__definedIfNot('isFile_m2')){
+    function isFile_m2($filenames):array{\is_string($filenames)&&$filenames=[$filenames];$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function()use(&$filenames){$results=[];foreach($filenames as $filename){\clearstatcache(false,$filename);$t=\is_file($filename);$results[$filename]=null===$t?false:$t;}return $results;});return \is_array($value)?$value:[];}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('file')){
-    function file($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\is_file($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a file.',\Inilim\Tool\Method\Other\valueToString($value)));}}
+    function file($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\Inilim\Tool\Method\FS\isFile($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a file.',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('positiveInteger')){
     function positiveInteger($value,string $message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
     function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
-    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('positiveInteger')){
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php85')){
+    function php85():bool{return \PHP_VERSION_ID>=80500?true:false;}
+    }if(!\Inilim\Tool\Check::__definedIfNot('positiveInteger')){
     function positiveInteger($value):bool{return \is_int($value)&&$value>0;}
+    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('array_first')){
+    function array_first(array $array){if(\Inilim\Tool\Method\Check\php85()){return \array_first($array);}foreach($array as $value){return $value;}return null;}
     }}

@@ -28,7 +28,7 @@ function isResObjJsonSqlite($value): bool
 
         return ($this->tag ?? '') === \Inilim\Tool\Method\Exp\__tagJsonSqlite()
             // &&
-            // \is_string($file) && $file !== '' && \is_file($file)
+            // \is_string($file) && $file !== '' && \Inilim\Tool\Method\FS\isFile($file)
             // &&
             // \is_object($pdo) && \get_class($pdo) === \PDO::class
             // 

@@ -21,5 +21,5 @@ function phprmdir(string $directory, $context = null): bool
             return \rmdir($directory);
         }
     );
-    return $value === null ? false : $value;
+    return \is_bool($value) ? $value : false;
 }

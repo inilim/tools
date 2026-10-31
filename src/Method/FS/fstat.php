@@ -13,5 +13,5 @@ function fstat($stream): ?array
 {
     \Inilim\Tool\Method\Assert\resource($stream);
     $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static fn() => \fstat($stream));
-    return \is_bool($value) ? null : $value;
+    return \is_array($value) ? $value : null;
 }

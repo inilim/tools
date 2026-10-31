@@ -13,15 +13,28 @@ class FS
     }
 
         /**
+ * @deprecated use ensureDirExists_v2()
+ * 
+ * Ensure a directory exists.
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @param null|resource|array $context
+ * @return array{result:?bool,exception:?TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
+ */
+    static function ensureDirExists(string $path, bool $throw = false, int $mode = 0755, bool $recursive = true, $context = null, ?array $contextParams = null): array {
+        throw new \Exception;
+    }
+
+        /**
  * Ensure a directory exists.
  * @todo tests
  * @author Inilim
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param null|resource|array $context
- * @return array{result:?bool,exception:?THROW_get_0}
- * @throws THROW_get_0
+ * @return array{result:?bool,exception:?TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
-    static function ensureDirExists(string $path, bool $throw = false, int $mode = 0755, bool $recursive = true, $context = null, ?array $contextParams = null): array {
+    static function ensureDirExists_v2(string $directory, int $permissions = 0755, bool $recursive = true, $context = null, ?array $contextParams = null, bool $throw = false): array {
         throw new \Exception;
     }
 
@@ -33,7 +46,6 @@ class FS
     }
 
         /**
- * @author inilim
  * @deprecated use exists()
  */
     static function fileExists(string $filename): bool {
@@ -93,6 +105,17 @@ class FS
     }
 
         /**
+ * @author inilim
+ * 
+ * @template T of string
+ * @param T|T[] $filenames
+ * @return array<T,bool>
+ */
+    static function isFile_m2($filenames): array {
+        throw new \Exception;
+    }
+
+        /**
  * Kilobytes to Bytes
  */
     static function kbToBytes(int $kb): int {
@@ -109,13 +132,15 @@ class FS
     }
 
         /**
+ * @deprecated use makeDir_v2
+ * 
  * Create a directory.
  * @todo tests
  * @author Inilim
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param null|resource|array $context
- * @return array{result:bool,exception:null}|array{result:null,exception:THROW_get_0}
- * @throws THROW_get_0
+ * @return array{result:bool,exception:null}|array{result:null,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function makeDir(string $path, bool $throw = false, int $mode = 0755, bool $recursive = false, bool $force = false, $context = null, ?array $contextParams = null): array {
         throw new \Exception;
@@ -126,12 +151,25 @@ class FS
  * @todo tests
  * @author Inilim
  * 
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param array{path:string,mode?:int,recursive?:bool,force?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
- * @return array{result:?bool,exception:?THROW_get_0}
- * @throws THROW_get_0
+ * @return array{result:?bool,exception:?TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function makeDirViaArray(array $params): array {
+        throw new \Exception;
+    }
+
+        /**
+ * Create a directory.
+ * @todo tests
+ * @author Inilim
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @param null|resource|array $context
+ * @return array{result:bool,exception:null}|array{result:null,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
+ */
+    static function makeDir_v2(string $directory, int $permissions = 0755, bool $recursive = false, $context = null, ?array $contextParams = null, bool $force = false, bool $throw = false): array {
         throw new \Exception;
     }
 

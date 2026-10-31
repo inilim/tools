@@ -15,7 +15,7 @@ namespace Inilim\Tool\Method\Assert;
 function file($value, string $message = '')
 {
     \Inilim\Tool\Method\Assert\string($value);
-    if (!\is_file($value)) {
+    if (!\Inilim\Tool\Method\FS\isFile($value)) {
         throw new \InvalidArgumentException(\sprintf(
             $message ?: 'The path %s is not a file.',
             \Inilim\Tool\Method\Other\valueToString($value)

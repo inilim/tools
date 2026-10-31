@@ -7,12 +7,12 @@ namespace Inilim\Tool\Method\File;
 /**
  * @todo tests
  * @author Inilim
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:-1,exception:THROW_get_0}|array{result:int<0,max>,exception:null}
- * @throws THROW_get_0
+ * @return array{result:-1,exception:TYPE_EXCEPTION_ITERATOR}|array{result:int<0,max>,exception:null}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
 function ensurePut(
     string $filename,
@@ -26,7 +26,7 @@ function ensurePut(
     $dir = \dirname($filename);
     $d   = null;
     if (!\Inilim\Tool\Method\FS\isDir($dir)) {
-        $d = \Inilim\Tool\Method\FS\makeDir($dir, false, $mode, true);
+        $d = \Inilim\Tool\Method\FS\makeDir_v2($dir, $mode, true);
     }
 
     $f =  \Inilim\Tool\Method\File\put(

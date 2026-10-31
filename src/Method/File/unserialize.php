@@ -10,8 +10,8 @@ namespace Inilim\Tool\Method\File;
  * @author inilim
  * @param  mixed  $default
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
 function unserialize(
     string $pathToFile,

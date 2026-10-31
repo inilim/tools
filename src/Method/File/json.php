@@ -9,8 +9,8 @@ namespace Inilim\Tool\Method\File;
  * @param  mixed  $default
  * @param  int  $flags json_decode flags
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  * @throws \JsonException
  */
 function json(

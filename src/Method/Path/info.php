@@ -26,8 +26,8 @@ namespace Inilim\Tool\Method\Path;
  */
 function info(string $pathTo, bool $throw = true)
 {
-    $t = \realpath($pathTo);
-    if ($t === false) {
+    $t = \Inilim\Tool\Method\Path\realPath($pathTo);
+    if (null === $t) {
         if ($throw) {
             throw new \Exception(\sprintf('"%s" not found', $pathTo));
         }
@@ -41,7 +41,7 @@ function info(string $pathTo, bool $throw = true)
     return [
         'pathDir'    => $t['dirname'],
         'nameDir'    => \basename($t['dirname']),
-        'isFile'     => $isFile = \is_file($pathTo),
+        'isFile'     => $isFile = \Inilim\Tool\Method\FS\isFile($pathTo),
         'isDir'      => !$isFile,
         'isLink'     => \is_link($pathTo),
         'ext'        => $t['extension'],

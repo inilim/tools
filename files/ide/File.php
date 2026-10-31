@@ -8,9 +8,9 @@ class File
  * @todo tests
  * @template TValue of string
  * @template TKey of string|int
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param TValue|iterable<TKey,TValue> $pathToFile
- * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|THROW_get_0}
+ * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|TYPE_EXCEPTION_ITERATOR}
  */
     static function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false) {
         throw new \Exception;
@@ -39,12 +39,12 @@ class File
         /**
  * @todo tests
  * @author Inilim
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:-1,exception:THROW_get_0}|array{result:int<0,max>,exception:null}
- * @throws THROW_get_0
+ * @return array{result:-1,exception:TYPE_EXCEPTION_ITERATOR}|array{result:int<0,max>,exception:null}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function ensurePut(string $filename, $data, int $flags = 0, bool $throw = false, int $mode = 0755, $context = null, ?array $contextParams = null): array {
         throw new \Exception;
@@ -57,13 +57,13 @@ class File
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * 
  * 
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @psalm-import-type Return_get from \TypeFile
  * 
  * 
  * @param null|resource|array $context
  * @return Return_get
- * @throws THROW_get_0
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function get(string $pathToFile, int $offset = 0, ?int $length = null, bool $useIncludePath = false, bool $throw = false, $context = null, ?array $contextParams = null): array {
         throw new \Exception;
@@ -109,12 +109,12 @@ class File
  * analog function "file_get_contents"
  * @see https://www.php.net/manual/ru/function.file-get-contents.php
  * 
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @psalm-import-type Return_get from \TypeFile
  * 
  * @param array{pathToFile:string,offset?:int,lenght?:int,useIncludePath?:bool,throw?:bool,context?:resource|array,contextParams?:array} $params
  * @return Return_get
- * @throws THROW_get_0
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function getViaArray(array $params): array {
         throw new \Exception;
@@ -132,8 +132,8 @@ class File
  * @param  mixed  $default
  * @param  int  $flags json_decode flags
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  * @throws \JsonException
  */
     static function json(string $pathToFile, int $flags = 0, bool $lock = false, bool $throw = false, $default = null) {
@@ -144,8 +144,8 @@ class File
  * Get the contents of a file as decoded JSON.
  * @param array{pathToFile:string,flags?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  * @throws \JsonException
  */
     static function jsonViaArray(array $params) {
@@ -224,23 +224,38 @@ class File
  * @todo tests
  * @author Inilim
  * analog function "file_put_contents"
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @see https://www.php.net/manual/ru/function.file-put-contents.php
  * @param mixed $data
  * @param null|resource|array $context
  * @param null|array $contextParams
- * @return array{result:int<0,max>,exception:null}|array{result:-1,exception:THROW_get_0}
- * @throws THROW_get_0
+ * @return array{result:int<0,max>,exception:null}|array{result:-1,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function put(string $filename, $data, int $flags = 0, bool $throw = false, $context = null, ?array $contextParams = null): array {
         throw new \Exception;
     }
 
         /**
+ * @todo tests
+ * @author Inilim
+ * analog function "file_put_contents"
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @see https://www.php.net/manual/ru/function.file-put-contents.php
+ * 
+ * @param array{filename:string,data:mixed,flags?:int,context?:resource,contextParams?:array,throw?:bool} $params
+ * @return array{result:int<0,max>,exception:null}|array{result:-1,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
+ */
+    static function putViaArray(array $params): array {
+        throw new \Exception;
+    }
+
+        /**
  * Get contents of a file with shared access.
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @return array{result:string,exception:null}|array{result:null,exception:THROW_get_0}
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @return array{result:string,exception:null}|array{result:null,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function sharedGet(string $pathToFile, bool $throw = false): array {
         throw new \Exception;
@@ -299,8 +314,8 @@ class File
  * @author inilim
  * @param  mixed  $default
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function unserialize(string $pathToFile, array $options = [], bool $lock = false, bool $throw = false, $default = null) {
         throw new \Exception;
@@ -312,8 +327,8 @@ class File
  * @author inilim
  * @param array{pathToFile:string,options?:int,lock?:bool,throw?:bool,default?:mixed} $params
  * @return mixed
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
     static function unserializeAsArray(array $params) {
         throw new \Exception;

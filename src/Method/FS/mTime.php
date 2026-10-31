@@ -15,5 +15,5 @@ function mTime(string $filename): int
         \clearstatcache(false, $filename);
         return \filemtime($filename);
     });
-    return $value ? $value : -1;
+    return \is_int($value) ? $value : -1;
 }

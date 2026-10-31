@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\FS;
 
 /**
+ * @deprecated use ensureDirExists_v2()
+ * 
  * Ensure a directory exists.
- * @todo tests
- * @author Inilim
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param null|resource|array $context
- * @return array{result:?bool,exception:?THROW_get_0}
- * @throws THROW_get_0
+ * @return array{result:?bool,exception:?TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
 function ensureDirExists(
     string $path,
@@ -21,18 +21,5 @@ function ensureDirExists(
     $context              = null,
     ?array $contextParams = null
 ): array {
-
-    if (\is_dir($path)) {
-        return ['result' => true, 'exception' => null];
-    }
-
-    return \Inilim\Tool\Method\FS\makeDir(
-        $path,
-        $throw,
-        $mode,
-        $recursive,
-        false,
-        $context,
-        $contextParams
-    );
+    return \Inilim\Tool\Method\FS\ensureDirExists_v2($path, $mode, $recursive, $context, $contextParams, $throw);
 }

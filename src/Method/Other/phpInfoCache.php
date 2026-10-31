@@ -16,6 +16,7 @@ function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string
             if ($fresh) {
                 goto fresh;
             }
+            \clearstatcache(false, $pathToFile);
             if (\is_file($pathToFile)) {
                 $result = \file_get_contents($pathToFile);
                 if ($result === false) {

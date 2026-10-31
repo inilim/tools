@@ -8,9 +8,9 @@ namespace Inilim\Tool\Method\File;
  * @todo tests
  * @template TValue of string
  * @template TKey of string|int
- * @psalm-import-type THROW_get_0 from \TypeFile
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
  * @param TValue|iterable<TKey,TValue> $pathToFile
- * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|THROW_get_0}
+ * @return array{result:($pathToFile is iterable ? array<TKey,mixed> : mixed),exception:null|TYPE_EXCEPTION_ITERATOR}
  */
 function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false)
 {
@@ -41,6 +41,8 @@ function cacheRead($pathToFile, bool $throw = false, bool $abortIfErr = false)
                     // ---------------------------------------------
                     // Procedure
                     // ---------------------------------------------
+
+                    \clearstatcache(false, $file);
                     if (!\is_file($file) || !$h = @\fopen($file, 'r')) {
                         continue; // return null;
                     }

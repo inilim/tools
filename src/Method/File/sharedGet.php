@@ -6,9 +6,9 @@ namespace Inilim\Tool\Method\File;
 
 /**
  * Get contents of a file with shared access.
- * @psalm-import-type THROW_get_0 from \TypeFile
- * @return array{result:string,exception:null}|array{result:null,exception:THROW_get_0}
- * @throws THROW_get_0
+ * @psalm-import-type TYPE_EXCEPTION_ITERATOR from \TypeFile
+ * @return array{result:string,exception:null}|array{result:null,exception:TYPE_EXCEPTION_ITERATOR}
+ * @throws TYPE_EXCEPTION_ITERATOR
  */
 function sharedGet(string $pathToFile, bool $throw = false): array
 {

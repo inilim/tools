@@ -15,5 +15,5 @@ function stat(string $filename): ?array
         \clearstatcache(false, $filename);
         return \stat($filename);
     });
-    return \is_bool($value) ? null : $value;
+    return \is_array($value) ? $value : null;
 }

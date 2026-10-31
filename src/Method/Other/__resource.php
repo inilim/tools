@@ -12,7 +12,7 @@ function __resource(string $namespace, string $name)
     // __FUNCTION__ => Inilim\Tool\Method\Other\__resource => Other
     $class = \basename(\dirname(\strtr($namespace, '\\', '/')));
     $name = \sprintf('%s/../../../files/resources/%s/%s.php', __DIR__, $class, $name);
-    if (\is_file($name)) {
+    if (\Inilim\Tool\Method\FS\isFile($name)) {
         return require $name;
     }
 

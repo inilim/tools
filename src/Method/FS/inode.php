@@ -16,5 +16,5 @@ function inode(string $filename): ?int
         \clearstatcache(false, $filename);
         return \fileinode($filename);
     });
-    return $value === false ? null : $value;
+    return \is_int($value) ? $value : null;
 }

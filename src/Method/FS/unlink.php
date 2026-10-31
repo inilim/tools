@@ -10,6 +10,9 @@ namespace Inilim\Tool\Method\FS;
  */
 function unlink(string $filename, $context = null): bool
 {
+    if (null !== $context) {
+        \Inilim\Tool\Method\Assert\resource($context);
+    }
     $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2(static function () use ($filename, $context) {
         $result = $context ? \unlink($filename, $context) : \unlink($filename);
         if ($result) {

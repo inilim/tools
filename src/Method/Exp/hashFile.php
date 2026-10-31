@@ -22,7 +22,7 @@ function hashFile(
         throw new \InvalidArgumentException('$byteStart and $byteEnd must be greater than 0');
     }
 
-    if (!\is_file($pathToFile)) {
+    if (!\Inilim\Tool\Method\FS\isFile($pathToFile)) {
         throw new \InvalidArgumentException(\sprintf('Not found file: "%s"', $pathToFile));
     }
 

@@ -13,5 +13,5 @@ namespace Inilim\Tool\Method\Check;
  */
 function file($value): bool
 {
-    return \is_string($value) && \is_file($value);
+    return \is_string($value) && \Inilim\Tool\Method\FS\isFile($value);
 }

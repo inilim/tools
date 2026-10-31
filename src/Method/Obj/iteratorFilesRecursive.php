@@ -13,7 +13,7 @@ namespace Inilim\Tool\Method\Obj;
 function iteratorFilesRecursive(string $pathToDir, bool $skipDots = true)
 {
     $dir = \Inilim\Tool\Method\Path\realPath($pathToDir);
-    if ($dir === null || !\is_dir($dir)) {
+    if ($dir === null || !\Inilim\Tool\Method\FS\isDir($dir)) {
         throw new \InvalidArgumentException(\sprintf('Not found dir "%s"', $pathToDir));
     }
 

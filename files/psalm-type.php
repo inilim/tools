@@ -6,7 +6,7 @@
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- * @psalm-type Main_1 = \Exception&\ArrayAccess&\Countable
+ * @psalm-type TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE = \Exception&\ArrayAccess&\Countable
  * @psalm-type Main_Countable = mixed[]\Countable|\ResourceBundle|\SimpleXMLElement
  * 
  */
@@ -16,7 +16,7 @@ class TypeMain {}
  * -------------- [IMPORTS] -------------- 
  * @example psalm-import-type NameType from \ClassName as NewNameType
  * 
- * @psalm-import-type Main_1 from \TypeMain as _2_Main_1
+ * @psalm-import-type TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE from \TypeMain as _2_TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE
  * 
  * 
  * 
@@ -26,9 +26,9 @@ class TypeMain {}
  * 
  * -----File::get()
  * 
- * @psalm-type THROW_get_0 = _2_Main_1&\IteratorAggregate<int,\ErrorException>
+ * @psalm-type TYPE_EXCEPTION_ITERATOR = _2_TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE&\IteratorAggregate<int,\ErrorException>
  * 
- * @psalm-type Return_get = array{result:string,exception:null,http_response_header?:string[]}|array{result:null,exception:THROW_get_0,http_response_header?:string[]}
+ * @psalm-type Return_get = array{result:string,exception:null,http_response_header?:string[]}|array{result:null,exception:TYPE_EXCEPTION_ITERATOR,http_response_header?:string[]}
  * 
  * 
  */
@@ -53,14 +53,14 @@ class TypeArr {}
  * -------------- [IMPORTS] -------------- 
  * @example psalm-import-type NameType from \ClassName as NewNameType
  * 
- * @psalm-import-type Main_1 from \TypeMain as _2_Main_1
+ * @psalm-import-type TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE from \TypeMain as _2_TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE
  * 
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
  * Obj::getCollectionThrowable()
  * 
- * @psalm-type Return_getCollectionThrowable = _2_Main_1&\IteratorAggregate<int|string,\Throwable>
+ * @psalm-type Return_getCollectionThrowable = _2_TYPE_EXCEPTION_ARRAYACCESS_COUNTABLE&\IteratorAggregate<int|string,\Throwable>
  */
 class TypeObj {}
 
