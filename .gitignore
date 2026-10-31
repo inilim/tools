@@ -8,6 +8,7 @@
 # Dirs
 /vendor
 /.sandbox
+/.aicoder
 /files/cache/*
 /files/tests/*
 
