@@ -11,14 +11,18 @@ class Enum
  * @return T[]
  * @throws \InvalidArgumentException
  */
-    static function cases($enum) {}
+    static function cases($enum) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  */
-    static function count($enum): int {}
+    static function count($enum): int {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -26,7 +30,9 @@ class Enum
  * @param class-string<T>|T $enum
  * @return null|string|int
  */
-    static function firstValue($enum) {}
+    static function firstValue($enum) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -35,7 +41,9 @@ class Enum
  * @return T
  * @throws \Exception
  */
-    static function fromName($enum, string $name, bool $caseInsensitive = false) {}
+    static function fromName($enum, string $name, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -45,14 +53,18 @@ class Enum
  * @return T
  * @throws \Exception
  */
-    static function fromValue($enum, $value, bool $caseInsensitive = false) {}
+    static function fromValue($enum, $value, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  */
-    static function hasName($enum, string $name, bool $caseInsensitive = false) {}
+    static function hasName($enum, string $name, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -60,14 +72,18 @@ class Enum
  * @param class-string<T>|T $enum
  * @param int|string $value
  */
-    static function hasValue($enum, $value, bool $caseInsensitive = false) {}
+    static function hasValue($enum, $value, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  */
-    static function hasValues($enum): bool {}
+    static function hasValues($enum): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -75,28 +91,36 @@ class Enum
  * @param class-string<T>|T $enum
  * @return T
  */
-    static function head($enum) {}
+    static function head($enum) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum[] $haystack
  */
-    static function in(object $enum, array $haystack): bool {}
+    static function in(object $enum, array $haystack): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  */
-    static function intValues($enum): bool {}
+    static function intValues($enum): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum $needle
  */
-    static function is(object $enum, object $needle): bool {}
+    static function is(object $enum, object $needle): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -107,14 +131,18 @@ class Enum
  * 
  * @param T $v
  */
-    static function isCase($v): bool {}
+    static function isCase($v): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum $needle
  */
-    static function isNot(object $enum, object $needle): bool {}
+    static function isNot(object $enum, object $needle): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -122,7 +150,9 @@ class Enum
  * @param class-string<T>|T $enum
  * @return T
  */
-    static function last($enum) {}
+    static function last($enum) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -130,7 +160,9 @@ class Enum
  * @param class-string<T>|T $enum
  * @return null|string|int
  */
-    static function lastValue($enum) {}
+    static function lastValue($enum) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -138,14 +170,18 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]
  */
-    static function names($enum): array {}
+    static function names($enum): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param \UnitEnum $enum
  * @param \UnitEnum[] $haystack
  */
-    static function notIn(object $enum, array $haystack): bool {}
+    static function notIn(object $enum, array $haystack): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -153,14 +189,18 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]|array<string,string|int>
  */
-    static function options($enum): array {}
+    static function options($enum): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @template T of \UnitEnum
  * @param class-string<T>|T $enum
  */
-    static function strValues($enum): bool {}
+    static function strValues($enum): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -168,7 +208,9 @@ class Enum
  * @param class-string<T>|T $enum
  * @return ?T
  */
-    static function tryFromName($enum, string $name, bool $caseInsensitive = false) {}
+    static function tryFromName($enum, string $name, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -177,7 +219,9 @@ class Enum
  * @param int|string $value
  * @return ?T
  */
-    static function tryFromValue($enum, $value, bool $caseInsensitive = false) {}
+    static function tryFromValue($enum, $value, bool $caseInsensitive = false) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -185,7 +229,9 @@ class Enum
  * @param class-string<T>|T $enum
  * @return null|('int'|'string')
  */
-    static function typeValues($enum): ?string {}
+    static function typeValues($enum): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -193,6 +239,8 @@ class Enum
  * @param class-string<T>|T $enum
  * @return string[]|int[]
  */
-    static function values($enum): array {}
+    static function values($enum): array {
+        throw new \Exception;
+    }
 
     }

@@ -14,7 +14,9 @@ class Other
  * @param TArray $array
  * @return array{...TArray, ...TDots}
  */
-    static function _refDots(array $array): array {}
+    static function _refDots(array $array): array {
+        throw new \Exception;
+    }
 
         /**
  * @author https://github.com/shipfastlabs/agent-detector/
@@ -24,13 +26,17 @@ class Other
  * 
  * @return array{status:bool,name:?string}
  */
-    static function agentDetector(): array {}
+    static function agentDetector(): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @return array<array{file:string|null,line:int|null,method:string|null,type:string|null,class:class-string|null,object:object|null,args:mixed[]|null}>
  */
-    static function backtrace(int $limit = 0, int $reset = 0, int $flags = \DEBUG_BACKTRACE_IGNORE_ARGS, bool $reverse = true) {}
+    static function backtrace(int $limit = 0, int $reset = 0, int $flags = \DEBUG_BACKTRACE_IGNORE_ARGS, bool $reverse = true) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -40,13 +46,17 @@ class Other
  * @param A ...$args
  * @return R
  */
-    static function bindAndCall(object $object, \Closure $callback, ...$args) {}
+    static function bindAndCall(object $object, \Closure $callback, ...$args) {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @param class-string $class
  */
-    static function classPhp(string $class, bool $rechecking = false, bool $autoload = true): bool {}
+    static function classPhp(string $class, bool $rechecking = false, bool $autoload = true): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -54,11 +64,15 @@ class Other
  * @param T $cls
  * @return ?T
  */
-    static function clearClosure(\Closure $cls): ?Closure {}
+    static function clearClosure(\Closure $cls): ?Closure {
+        throw new \Exception;
+    }
 
         /**
  */
-    static function colorHexToAnsi(string $hex): int {}
+    static function colorHexToAnsi(string $hex): int {
+        throw new \Exception;
+    }
 
         /**
  * @author google/ai
@@ -66,11 +80,15 @@ class Other
  *
  * @return array{red:int,green:int,blue:int}
  */
-    static function colorHexToRgb(string $hex): array {}
+    static function colorHexToRgb(string $hex): array {
+        throw new \Exception;
+    }
 
         /**
  */
-    static function colorRgbToHex(int $red, int $green, int $blue, bool $withGrid = false): string {}
+    static function colorRgbToHex(int $red, int $green, int $blue, bool $withGrid = false): string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -79,7 +97,9 @@ class Other
  * @param string|null $colorHexBackground
  * @param 'bold'|'un_bold'|'dim'|'un_dim'|'underlined'|'un_underlined'|'blink'|'un_blink'|'reverse'|'un_reverse'|'hidden'|'un_hidden'|null $style
  */
-    static function colorStrCli(string $text, string $colorHexText, ?string $colorHexBackground = null, ?string $style = null): string {}
+    static function colorStrCli(string $text, string $colorHexText, ?string $colorHexBackground = null, ?string $style = null): string {
+        throw new \Exception;
+    }
 
         /**
  * @author nette/utils
@@ -87,7 +107,9 @@ class Other
  * @param mixed $left
  * @param mixed $right
  */
-    static function compareViaOperator($left, string $operator, $right): bool {}
+    static function compareViaOperator($left, string $operator, $right): bool {
+        throw new \Exception;
+    }
 
         /**
  * Data from \Composer\InstalledVersions::getInstalledPackages()
@@ -95,7 +117,9 @@ class Other
  * @todo tests
  * @return string[]|mixed[]|null
  */
-    static function composerInstalledPackages(): ?array {}
+    static function composerInstalledPackages(): ?array {
+        throw new \Exception;
+    }
 
         /**
  * Data from \Composer\InstalledVersions::getRootPackage()
@@ -103,7 +127,9 @@ class Other
  * @todo tests
  * @return mixed[]|null
  */
-    static function composerRootPackage(): ?array {}
+    static function composerRootPackage(): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @author guzzle/guzzle
@@ -122,20 +148,26 @@ class Other
  *
  * INFO defaultCaBundle will be removed in guzzlehttp/guzzle:8.0. This method is not needed in PHP 5.6+.
  */
-    static function defaultCaBundle(): string {}
+    static function defaultCaBundle(): string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * is not php function \error_clear_last()
  */
-    static function errorClearLast(): void {}
+    static function errorClearLast(): void {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * is not php function \error_get_last()
  * @return null|array{type:int,message:string,file:string,line:int}
  */
-    static function errorGetLast(): ?array {}
+    static function errorGetLast(): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @api
@@ -146,36 +178,48 @@ class Other
  * @return T
  * @throws \ErrorException
  */
-    static function exceptionally(callable $function, int $errorLevels = \E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED) {}
+    static function exceptionally(callable $function, int $errorLevels = \E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED) {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  */
-    static function extPhp(string $ext, bool $rechecking = false): bool {}
+    static function extPhp(string $ext, bool $rechecking = false): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  */
-    static function funcPhp(string $function, bool $rechecking = false): bool {}
+    static function funcPhp(string $function, bool $rechecking = false): bool {
+        throw new \Exception;
+    }
 
         /**
  * @tests tests/Method/Other/getCallableThisTest.php
  * @author inilim
  */
-    static function getCallableThis(callable $callable): ?object {}
+    static function getCallableThis(callable $callable): ?object {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * @return null|class-string
  */
-    static function getClosureScopeClass(\Closure $cls): ?string {}
+    static function getClosureScopeClass(\Closure $cls): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author Internet
  * @return ?callable
  */
-    static function getErrorHandler() {}
+    static function getErrorHandler() {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -183,19 +227,25 @@ class Other
  * @param T $e
  * @return array{message:string,line:int,code:int|string,file:string,trace:($traceAsArray is true ? mixed[] : string),class:class-string<T>}
  */
-    static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array {}
+    static function getExceptionDetails(\Throwable $e, bool $traceAsArray = false, bool $dots = false): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param resource $resource
  */
-    static function getPathFromResource($resource): ?string {}
+    static function getPathFromResource($resource): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @param resource $value
  * @return int return -1 if failed
  */
-    static function getSizeResource($value): int {}
+    static function getSizeResource($value): int {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -205,42 +255,54 @@ class Other
  * @param bool $trueFalseAsSeparateType if true type bool as 'true'|'false'
  * @return ($trueFalseAsSeparateType is true ? 'null'|'array'|'float'|'enum'|'exception'|'object'|'true'|'false'|'int'|'string'|'resource'|'resource_closed'|'unknown_type' : 'null'|'array'|'float'|'enum'|'exception'|'object'|'bool'|'int'|'string'|'resource'|'resource_closed'|'unknown_type')
  */
-    static function getType($v, bool $trueFalseAsSeparateType = false): string {}
+    static function getType($v, bool $trueFalseAsSeparateType = false): string {
+        throw new \Exception;
+    }
 
         /**
  * @todo to check
  * @author Inilim
  * @param class-string|object ...$classes
  */
-    static function instanceOfAll(object $obj, ...$classes): bool {}
+    static function instanceOfAll(object $obj, ...$classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @todo to check
  * @author Inilim
  * @param (class-string|object)[] $classes
  */
-    static function instanceOfAllArray(object $obj, array $classes): bool {}
+    static function instanceOfAllArray(object $obj, array $classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @todo to check
  * @author Inilim
  * @param class-string|object ...$classes
  */
-    static function instanceOfAny(object $obj, ...$classes): bool {}
+    static function instanceOfAny(object $obj, ...$classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @todo to check
  * @author Inilim
  * @param (class-string|object)[] $classes
  */
-    static function instanceOfAnyArray(object $obj, array $classes): bool {}
+    static function instanceOfAnyArray(object $obj, array $classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @todo to check
  * @author Inilim
  * @param mixed $v
  */
-    static function isEnum($v): bool {}
+    static function isEnum($v): bool {
+        throw new \Exception;
+    }
 
         /**
  * [EN] the function checks whether the library is in the cloning state.
@@ -248,20 +310,26 @@ class Other
  * @author inilim
  * @todo tests
  */
-    static function itLibClone(): bool {}
+    static function itLibClone(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @param callable(int $curIteration,int $maxIterations):bool $condition
  * @param callable(int $curIteration,int $maxIterations) $onBreak
  */
-    static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null): void {}
+    static function iterateWhile(callable $condition, int $maxIterations = 5, ?callable $onBreak = null): void {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * as iterator_to_array, but, without forming an array
  */
-    static function iteratorToDevNull(\Traversable $iterator): void {}
+    static function iteratorToDevNull(\Traversable $iterator): void {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -271,7 +339,9 @@ class Other
  * @param mixed[] $args
  * @return mixed
  */
-    static function methodFromScope($scope, string $method, array $args = []) {}
+    static function methodFromScope($scope, string $method, array $args = []) {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -291,25 +361,33 @@ class Other
  * isFirst:bool
  * }
  */
-    static function pagination(int $curPage, int $limitOnePage, int $countRecords): array {}
+    static function pagination(int $curPage, int $limitOnePage, int $countRecords): array {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @todo tests
  */
-    static function phpInfo(int $flags = \INFO_ALL): ?string {}
+    static function phpInfo(int $flags = \INFO_ALL): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @todo tests
  */
-    static function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string {}
+    static function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string {
+        throw new \Exception;
+    }
 
         /**
  * php://input
  * @author Inilim
  */
-    static function phpInput(): string {}
+    static function phpInput(): string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -318,32 +396,42 @@ class Other
  * @param string[] $props
  * @return array<string,mixed>
  */
-    static function propsFromScope($scope, array $props): array {}
+    static function propsFromScope($scope, array $props): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Internet
  * @return array<string,string>
  */
-    static function requestHeaders(?array $_server = null) {}
+    static function requestHeaders(?array $_server = null) {
+        throw new \Exception;
+    }
 
         /**
  * @author Symfony
  * @deprecated use requestHeaders_m2
  * @return array<string,string>
  */
-    static function requestHeadersV2(?array $_server = null): array {}
+    static function requestHeadersV2(?array $_server = null): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Symfony
  * @return array<string,string>
  */
-    static function requestHeaders_m2(?array $_server = null): array {}
+    static function requestHeaders_m2(?array $_server = null): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Internet
  * @return string
  */
-    static function requestMethod(): string {}
+    static function requestMethod(): string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -351,14 +439,18 @@ class Other
  * @param resource $resource
  * @param string $pathToFile file overwrite
  */
-    static function resourceContentWriteToFile($resource, string $pathToFile): ?string {}
+    static function resourceContentWriteToFile($resource, string $pathToFile): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @todo tests
  * @param resource $resource
  */
-    static function resourceContentWriteToTmpFile($resource): ?string {}
+    static function resourceContentWriteToTmpFile($resource): ?string {
+        throw new \Exception;
+    }
 
         /**
  * via php://temp
@@ -366,7 +458,9 @@ class Other
  * @todo tests
  * @return resource|false
  */
-    static function resourceFromString(string $string) {}
+    static function resourceFromString(string $string) {
+        throw new \Exception;
+    }
 
         /**
  * via tmpfile()
@@ -374,7 +468,9 @@ class Other
  * @todo tests
  * @return resource|false
  */
-    static function resourceFromString_m2(string $string) {}
+    static function resourceFromString_m2(string $string) {
+        throw new \Exception;
+    }
 
         /**
  * via create file
@@ -382,20 +478,26 @@ class Other
  * @todo tests
  * @return resource|false
  */
-    static function resourceFromString_m3(string $string) {}
+    static function resourceFromString_m3(string $string) {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @todo tests
  */
-    static function sqliteLibVersion(): ?string {}
+    static function sqliteLibVersion(): ?string {
+        throw new \Exception;
+    }
 
         /**
  * INFO phpinfo берем из кеш файла
  * @author inilim
  * @todo tests
  */
-    static function sqliteLibVersion_m2(bool $fresh = false): ?string {}
+    static function sqliteLibVersion_m2(bool $fresh = false): ?string {
+        throw new \Exception;
+    }
 
         /**
  * INFO version берем из обьекта \PDO
@@ -403,7 +505,9 @@ class Other
  * @todo tests
  * @ext pdo pdo_sqlite
  */
-    static function sqliteLibVersion_m3(): ?string {}
+    static function sqliteLibVersion_m3(): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author https://github.com/kylekatarnls
@@ -411,7 +515,9 @@ class Other
  * @throws \InvalidArgumentException
  * @throws \ValueError
  */
-    static function throwValueErrorIfAvailable($message = '', $code = 0, ?\Throwable $previous = null): void {}
+    static function throwValueErrorIfAvailable($message = '', $code = 0, ?\Throwable $previous = null): void {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -423,19 +529,25 @@ class Other
  * @param callable():R $callable
  * @return array{result:R,time:Time,memory:Memory,"...":array{R,Time,Memory}}
  */
-    static function timedMsCall(callable $callable): array {}
+    static function timedMsCall(callable $callable): array {
+        throw new \Exception;
+    }
 
         /**
  * @author laravel
  * Conditionally compile classes from an array into a CSS class list.
  */
-    static function toCssClasses(array $array): string {}
+    static function toCssClasses(array $array): string {
+        throw new \Exception;
+    }
 
         /**
  * @author Laravel
  * Conditionally compile styles from an array into a style list.
  */
-    static function toCssStyles(array $array): string {}
+    static function toCssStyles(array $array): string {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -448,7 +560,9 @@ class Other
  * @param D $default
  * @return array{result:C|D,exception:null|\Throwable,"...":array{C|D,null|\Throwable}}
  */
-    static function tryCallCallable(callable $callable, array $args = [], $default = null): array {}
+    static function tryCallCallable(callable $callable, array $args = [], $default = null): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -457,7 +571,9 @@ class Other
  * @param object|class-string $objectOrClass
  * @return array{result:mixed|T,exception:null|\Throwable,"...":array{mixed|T,null|\Throwable}}
  */
-    static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null): array {}
+    static function tryCallMethod($objectOrClass, string $methodName, array $args = [], $default = null): array {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -467,7 +583,9 @@ class Other
  * @param null|callable(int $levelOrCode,string $message,string $file,int $line,array{exception?:\Throwable,isException:bool,isSuppress:bool,obj:TObj} $context) $handler
  * @return ?TResult
  */
-    static function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL) {}
+    static function tryCallWithErrHandler(callable $callable, ?callable $handler, int $errorLevels = \E_ALL) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -477,7 +595,9 @@ class Other
  * @param null|callable(int $levelOrCode,string $message,string $file,int $line,array{exception?:\Throwable,isException:bool,isSuppress:bool,obj:TObj} $context) $handler
  * @return ?TResult
  */
-    static function tryCallWithErrHandler_m2(callable $callable, ?callable $handler = null, int $errorLevels = \E_ALL) {}
+    static function tryCallWithErrHandler_m2(callable $callable, ?callable $handler = null, int $errorLevels = \E_ALL) {
+        throw new \Exception;
+    }
 
         /**
  * @author guzzle/guzzle
@@ -493,19 +613,25 @@ class Other
  *
  * @throws \RuntimeException if the file cannot be opened
  */
-    static function tryFopen(string $filename, string $mode) {}
+    static function tryFopen(string $filename, string $mode) {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @return string
  */
-    static function unprefixVar(string $name) {}
+    static function unprefixVar(string $name) {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  * @author webmozarts/assert
  * @param mixed $value
  */
-    static function valueToString($value): string {}
+    static function valueToString($value): string {
+        throw new \Exception;
+    }
 
     }

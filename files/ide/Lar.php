@@ -9,13 +9,17 @@ class Lar
  *
  * @return \Closure(mixed $target, string|array $key, mixed $value):mixed
  */
-    static function dataFill(): Closure {}
+    static function dataFill(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Remove / unset an item from an array or object using "dot" notation.
  * @return \Closure(mixed $target, string|array|int|null $key):mixed
  */
-    static function dataForget(): Closure {}
+    static function dataForget(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Get an item from an array or object using "dot" notation.
@@ -25,14 +29,18 @@ class Lar
  * @param  mixed  $default
  * @return mixed
  */
-    static function dataGet($target, $key, $default = null) {}
+    static function dataGet($target, $key, $default = null) {
+        throw new \Exception;
+    }
 
         /**
  * Set an item on an array or object using dot notation.
  *
  * @return \Closure(mixed $target, string|array $key, mixed $value, bool $overwrite = true):mixed
  */
-    static function dataSet(): Closure {}
+    static function dataSet(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * @author laravel
@@ -45,6 +53,8 @@ class Lar
  * @param  TArgs  ...$args
  * @return TValue
  */
-    static function value($value, ...$args) {}
+    static function value($value, ...$args) {
+        throw new \Exception;
+    }
 
     }

@@ -16,7 +16,9 @@ class Assert
  *
  * @throws \InvalidArgumentException
  */
-    static function allInArray($value, $values, $message = '') {}
+    static function allInArray($value, $values, $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -26,7 +28,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function allString($value, string $message = '') {}
+    static function allString($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -37,7 +41,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function boolFalse($value, string $message = '') {}
+    static function boolFalse($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -48,7 +54,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function boolTrue($value, string $message = '') {}
+    static function boolTrue($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -59,7 +67,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function boolean($value, string $message = '') {}
+    static function boolean($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -69,7 +79,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function classExists($value, string $message = '') {}
+    static function classExists($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -79,7 +91,9 @@ class Assert
  *
  * @throws \InvalidArgumentException
  */
-    static function contains($value, string $subString, bool $ingnoreCase = false, string $message = '') {}
+    static function contains($value, string $subString, bool $ingnoreCase = false, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -88,7 +102,9 @@ class Assert
  * 
  * @param mixed  $value
  */
-    static function dir($value, string $message = '') {}
+    static function dir($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -99,7 +115,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function directory($value, string $message = '') {}
+    static function directory($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -111,20 +129,26 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function enumCase($value, string $message = '') {}
+    static function enumCase($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * @throws \InvalidArgumentException
  */
-    static function existSqliteLib(string $message = '') {}
+    static function existSqliteLib(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * INFO phpinfo берем из кеш файла
  * @author Inilim
  * @throws \InvalidArgumentException
  */
-    static function existSqliteLib_m2(string $message = '') {}
+    static function existSqliteLib_m2(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -132,7 +156,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function extPhp(string $nameExt, string $message = '') {}
+    static function extPhp(string $nameExt, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -142,7 +168,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function file($value, string $message = '') {}
+    static function file($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -154,7 +182,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function float($value, string $message = '') {}
+    static function float($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author guzzle/guzzle
@@ -165,7 +195,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function httpHeaderName($value, string $message = '') {}
+    static function httpHeaderName($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @see https://datatracker.ietf.org/doc/html/rfc7230#section-3.2
@@ -183,7 +215,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function httpHeaderValue($value, string $message = '') {}
+    static function httpHeaderValue($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -197,7 +231,9 @@ class Assert
  * @param T[] $values
  * @throws \InvalidArgumentException
  */
-    static function inArray($value, array $values, string $message = '') {}
+    static function inArray($value, array $values, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -209,7 +245,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function integer($value, string $message = '') {}
+    static function integer($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -220,7 +258,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function integerish($value, string $message = '') {}
+    static function integerish($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -234,7 +274,9 @@ class Assert
  * @param class-string<T>[] $classes
  * @throws \InvalidArgumentException
  */
-    static function isAnyOf($value, array $classes, string $message = '') {}
+    static function isAnyOf($value, array $classes, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -246,7 +288,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function isArray($value, string $message = '') {}
+    static function isArray($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -256,7 +300,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function isCallable($value, string $message = '') {}
+    static function isCallable($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-pure
@@ -267,7 +313,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function isCountable($value, string $message = '') {}
+    static function isCountable($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -281,7 +329,9 @@ class Assert
  * @param T|class-string<T> $class
  * @throws \InvalidArgumentException
  */
-    static function isInstanceOf($value, $class, string $message = '') {}
+    static function isInstanceOf($value, $class, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -294,7 +344,9 @@ class Assert
  * @param array<T|class-string<T>> $classes
  * @throws \InvalidArgumentException
  */
-    static function isInstanceOfAny($value, array $classes, string $message = '') {}
+    static function isInstanceOfAny($value, array $classes, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -305,7 +357,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function isIterable($value, string $message = '') {}
+    static function isIterable($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -316,7 +370,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function isNonEmptyArray($value, string $message = '') {}
+    static function isNonEmptyArray($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -327,7 +383,9 @@ class Assert
  * @param mixed $value
  * @throws \InvalidArgumentException
  */
-    static function json($value, string $message = '') {}
+    static function json($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -340,7 +398,9 @@ class Assert
  * @param K[] $keys
  * @throws \InvalidArgumentException
  */
-    static function keysExists($value, array $keys, string $message = '') {}
+    static function keysExists($value, array $keys, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -351,7 +411,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function natural($value, string $message = '') {}
+    static function natural($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -360,7 +422,9 @@ class Assert
  * @param mixed  $expect
  * @throws \InvalidArgumentException
  */
-    static function notEq($value, $expect, string $message = '') {}
+    static function notEq($value, $expect, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -375,7 +439,9 @@ class Assert
  * @param T2[] $values
  * @throws \InvalidArgumentException
  */
-    static function notInArray($value, array $values, string $message = '') {}
+    static function notInArray($value, array $values, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -386,7 +452,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function numeric($value, string $message = '') {}
+    static function numeric($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -395,7 +463,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function php80(string $message = '') {}
+    static function php80(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -404,7 +474,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function php81(string $message = '') {}
+    static function php81(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -413,7 +485,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function php82(string $message = '') {}
+    static function php82(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -422,7 +496,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function php83(string $message = '') {}
+    static function php83(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -431,7 +507,9 @@ class Assert
  * @return void
  * @throws \InvalidArgumentException
  */
-    static function php84(string $message = '') {}
+    static function php84(string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -443,7 +521,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function positiveFloat($value, string $message = '') {}
+    static function positiveFloat($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -455,7 +535,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function positiveFloatOrInt($value, string $message = '') {}
+    static function positiveFloatOrInt($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -466,7 +548,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function positiveInteger($value, string $message = '') {}
+    static function positiveInteger($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -474,7 +558,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function regex($value, string $message = '') {}
+    static function regex($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -487,7 +573,9 @@ class Assert
  *
  * @throws \InvalidArgumentException
  */
-    static function resOrStr($value, ?string $type = null, string $message = '') {}
+    static function resOrStr($value, ?string $type = null, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -500,7 +588,9 @@ class Assert
  *
  * @throws \InvalidArgumentException
  */
-    static function resource($value, ?string $type = null, string $message = '') {}
+    static function resource($value, ?string $type = null, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -516,7 +606,9 @@ class Assert
  * 
  * @throws \InvalidArgumentException
  */
-    static function same($value, $expect, string $message = '') {}
+    static function same($value, $expect, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -527,7 +619,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function strOrArr($value, string $message = '') {}
+    static function strOrArr($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -538,7 +632,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function strOrBool($value, string $message = '') {}
+    static function strOrBool($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -549,7 +645,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function string($value, string $message = '') {}
+    static function string($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -560,7 +658,9 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function stringNotEmpty($value, string $message = '') {}
+    static function stringNotEmpty($value, string $message = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -572,6 +672,8 @@ class Assert
  * @param mixed  $value
  * @throws \InvalidArgumentException
  */
-    static function validArrayKey($value, string $message = '') {}
+    static function validArrayKey($value, string $message = '') {
+        throw new \Exception;
+    }
 
     }

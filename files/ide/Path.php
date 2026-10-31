@@ -9,32 +9,42 @@ class Path
  * @author inilim
  * via Path::getVendorDirByPath()
  */
-    static function getProjectDirByPath(?string $path = null): ?string {}
+    static function getProjectDirByPath(?string $path = null): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @todo tests
  * @author inilim
  * via Path::getVendorDirUsingComposer()
  */
-    static function getProjectDirUsingComposer(): ?string {}
+    static function getProjectDirUsingComposer(): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @todo tests
  * @author inilim
  */
-    static function getVendorDirByPath(?string $path = null): ?string {}
+    static function getVendorDirByPath(?string $path = null): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @todo tests
  * @author inilim
  */
-    static function getVendorDirUsingComposer(): ?string {}
+    static function getVendorDirUsingComposer(): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @todo tests
  * @author inilim
  */
-    static function getVendorDirUsingComposer_m2(): ?string {}
+    static function getVendorDirUsingComposer_m2(): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -56,19 +66,27 @@ class Path
  * }|null
  * @throws \Exception
  */
-    static function info(string $pathTo, bool $throw = true) {}
+    static function info(string $pathTo, bool $throw = true) {
+        throw new \Exception;
+    }
 
         
-    static function normalize(string $path): string {}
+    static function normalize(string $path): string {
+        throw new \Exception;
+    }
 
         /**
  * @deprecated use Path::normalize
  */
-    static function normalizePath(string $path): string {}
+    static function normalizePath(string $path): string {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
  */
-    static function realPath(string $path): ?string {}
+    static function realPath(string $path): ?string {
+        throw new \Exception;
+    }
 
     }

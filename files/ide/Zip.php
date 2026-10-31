@@ -14,7 +14,9 @@ class Zip
  * @param callable(ZipStatItem):bool $predicate
  * @return ?Return_extractByCallable
  */
-    static function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir = null): ?array {}
+    static function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir = null): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -24,7 +26,9 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function findAllByCallable($pathToFileOrZip, callable $predicate): ?array {}
+    static function findAllByCallable($pathToFileOrZip, callable $predicate): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -35,7 +39,9 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): ?array {}
+    static function findByFilter($pathToFileOrZip, callable $predicate, $valueBreak = null): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -46,7 +52,9 @@ class Zip
  * @throws \InvalidArgumentException
  * @return \Generator<int,ZipStatItem>
  */
-    static function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): ?Generator {}
+    static function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): ?Generator {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -56,7 +64,9 @@ class Zip
  * @throws \InvalidArgumentException
  * @return null|ZipStatItem
  */
-    static function findFirstByCallable($pathToFileOrZip, callable $predicate): ?array {}
+    static function findFirstByCallable($pathToFileOrZip, callable $predicate): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -67,7 +77,9 @@ class Zip
  * @param callable(ZipStatItem):bool $predicate
  * @return null|resource
  */
-    static function findFirstResourceByCallable($pathToFileOrZip, callable $predicate) {}
+    static function findFirstResourceByCallable($pathToFileOrZip, callable $predicate) {
+        throw new \Exception;
+    }
 
         /**
  * @ext zip
@@ -75,20 +87,26 @@ class Zip
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
  * @return ?\ZipArchive
  */
-    static function getObjFrom($pathToFileOrZip): ?object {}
+    static function getObjFrom($pathToFileOrZip): ?object {
+        throw new \Exception;
+    }
 
         /**
  * @todo tests
  * @return null|resource
  */
-    static function getResourceByIdx(\ZipArchive $zip, int $idx) {}
+    static function getResourceByIdx(\ZipArchive $zip, int $idx) {
+        throw new \Exception;
+    }
 
         /**
  * @ext zip
  * \ZipArchive::open()
  * @see https://www.php.net/manual/en/ziparchive.open.php
  */
-    static function open(string $filename, int $flags = 0): ?ZipArchive {}
+    static function open(string $filename, int $flags = 0): ?ZipArchive {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -98,7 +116,9 @@ class Zip
  * @throws \InvalidArgumentException
  * @return ZipStatItem[]
  */
-    static function scan($pathToFileOrZip): ?array {}
+    static function scan($pathToFileOrZip): ?array {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type ZipStatItem from \TypeZip
@@ -108,6 +128,8 @@ class Zip
  * @return ?\Generator<int,ZipStatItem>
  * @throws \InvalidArgumentException
  */
-    static function scanAsGenerator($pathToFileOrZip): ?Generator {}
+    static function scanAsGenerator($pathToFileOrZip): ?Generator {
+        throw new \Exception;
+    }
 
     }

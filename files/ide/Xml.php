@@ -10,13 +10,17 @@ class Xml
  * @return ?\DOMNode
  * @throws \DOMException
  */
-    static function appendChild(object $what, object $where, bool $throw = false): ?object {}
+    static function appendChild(object $what, object $where, bool $throw = false): ?object {
+        throw new \Exception;
+    }
 
         /**
  * @return \DOMElement
  * @throws \DOMException
  */
-    static function createEl(string $qualifiedName, ?string $value = null, string $encoding = 'UTF-8', string $namespace = '') {}
+    static function createEl(string $qualifiedName, ?string $value = null, string $encoding = 'UTF-8', string $namespace = '') {
+        throw new \Exception;
+    }
 
         /**
  * @template Attrs of array<string,string>
@@ -25,29 +29,39 @@ class Xml
  * @param \DOMNodeList|\DOMNode|\DOMNameSpaceNode $el
  * @return ItemNodeNS[]|ItemNode[]
  */
-    static function domToArray(object $el): array {}
+    static function domToArray(object $el): array {
+        throw new \Exception;
+    }
 
         /**
  * @link https://php.net/manual/en/domdocument.load.php
  * @return null|\DOMDocument
  */
-    static function loadFile(string $filename, int $options = 0): ?object {}
+    static function loadFile(string $filename, int $options = 0): ?object {
+        throw new \Exception;
+    }
 
         /**
  * @param \DOMNode $node
  */
-    static function removeNode(object $node): bool {}
+    static function removeNode(object $node): bool {
+        throw new \Exception;
+    }
 
         /**
  * @param \DOMNode $node
  */
-    static function toHtml(object $node): ?string {}
+    static function toHtml(object $node): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @param \DOMNode $node
  * @return ?string
  */
-    static function toXml(object $node, int $options = 0) {}
+    static function toXml(object $node, int $options = 0) {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-import-type Param_1_xpathQueryFromDoc from \TypeXml
@@ -58,6 +72,8 @@ class Xml
  * @param ?\DOMNode $contextNode
  * @return null|Param_1_xpathQueryFromDoc
  */
-    static function xpathQueryFromDoc(object $doc, string $expression, ?object $contextNode = null, bool $registerNodeNS = true): ?array {}
+    static function xpathQueryFromDoc(object $doc, string $expression, ?object $contextNode = null, bool $registerNodeNS = true): ?array {
+        throw new \Exception;
+    }
 
     }

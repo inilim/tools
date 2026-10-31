@@ -10,7 +10,9 @@ class LarStr
  * @param  string  $value
  * @return ($value is '' ? '' : string)
  */
-    static function camel($value) {}
+    static function camel($value) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if a given string contains a given substring.
@@ -22,7 +24,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function contains($haystack, $needles, $ignoreCase = false) {}
+    static function contains($haystack, $needles, $ignoreCase = false) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if a given string contains all array values.
@@ -32,7 +36,9 @@ class LarStr
  * @param  bool  $ignoreCase
  * @return ($needles is array{} ? false : ($haystack is non-empty-string ? bool : false))
  */
-    static function containsAll($haystack, $needles, $ignoreCase = false) {}
+    static function containsAll($haystack, $needles, $ignoreCase = false) {
+        throw new \Exception;
+    }
 
         /**
  * Cap a string with a single instance of a given value.
@@ -41,7 +47,9 @@ class LarStr
  * @param  string  $cap
  * @return ($value is '' ? ($cap is '' ? '' : non-empty-string) : non-empty-string)
  */
-    static function finish($value, $cap) {}
+    static function finish($value, $cap) {
+        throw new \Exception;
+    }
 
         /**
  * Decode the given Base64 encoded string.
@@ -50,7 +58,9 @@ class LarStr
  * @param  bool  $strict
  * @return ($strict is true ? ($string is '' ? '' : string|false) : ($string is '' ? '' : string))
  */
-    static function fromBase64($string, $strict = false) {}
+    static function fromBase64($string, $strict = false) {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given string to proper case for each word.
@@ -58,7 +68,9 @@ class LarStr
  * @param  string  $value
  * @return string
  */
-    static function headline($value) {}
+    static function headline($value) {
+        throw new \Exception;
+    }
 
         /**
  * Get the "initials" representing each word in the provided string, optionally capitalizing.
@@ -69,7 +81,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function initials($value, $capitalize = false) {}
+    static function initials($value, $capitalize = false) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if a given string is 7 bit ASCII.
@@ -77,7 +91,9 @@ class LarStr
  * @param  string  $value
  * @return bool
  */
-    static function isAscii($value) {}
+    static function isAscii($value) {
+        throw new \Exception;
+    }
 
         /**
  * Make a string's first character lowercase.
@@ -87,7 +103,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function lcfirst($string) {}
+    static function lcfirst($string) {
+        throw new \Exception;
+    }
 
         /**
  * Return the length of the given string.
@@ -98,7 +116,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function length($value, $encoding = null) {}
+    static function length($value, $encoding = null) {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given string to lower-case.
@@ -108,7 +128,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function lower($value) {}
+    static function lower($value) {
+        throw new \Exception;
+    }
 
         /**
  * Remove all whitespace from the beginning of a string.
@@ -117,7 +139,9 @@ class LarStr
  * @param  string|null  $charlist
  * @return string
  */
-    static function ltrim($value, $charlist = null) {}
+    static function ltrim($value, $charlist = null) {
+        throw new \Exception;
+    }
 
         /**
  * Masks a portion of a string with a repeated character.
@@ -131,7 +155,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function mask($string, $character, $index, $length = null, $encoding = 'UTF-8') {}
+    static function mask($string, $character, $index, $length = null, $encoding = 'UTF-8') {
+        throw new \Exception;
+    }
 
         /**
  * Remove all non-numeric characters from a string.
@@ -139,7 +165,9 @@ class LarStr
  * @param  string|string[]  $value
  * @return ($value is string ? string : string[])
  */
-    static function numbers($value) {}
+    static function numbers($value) {
+        throw new \Exception;
+    }
 
         /**
  * Replace the given value in the given string.
@@ -150,7 +178,9 @@ class LarStr
  * @param  bool  $caseSensitive
  * @return ($subject is string ? string : string[])
  */
-    static function replace($search, $replace, $subject, $caseSensitive = true) {}
+    static function replace($search, $replace, $subject, $caseSensitive = true) {
+        throw new \Exception;
+    }
 
         /**
  * Replace a given value in the string sequentially with an array.
@@ -160,7 +190,9 @@ class LarStr
  * @param  string  $subject
  * @return string
  */
-    static function replaceArray($search, $replace, $subject) {}
+    static function replaceArray($search, $replace, $subject) {
+        throw new \Exception;
+    }
 
         /**
  * Remove all whitespace from the end of a string.
@@ -169,7 +201,9 @@ class LarStr
  * @param  string|null  $charlist
  * @return string
  */
-    static function rtrim($value, $charlist = null) {}
+    static function rtrim($value, $charlist = null) {
+        throw new \Exception;
+    }
 
         /**
  * Begin a string with a single instance of a given value.
@@ -178,7 +212,9 @@ class LarStr
  * @param  string  $prefix
  * @return ($value is '' ? ($prefix is '' ? '' : non-empty-string): non-empty-string)
  */
-    static function start($value, $prefix) {}
+    static function start($value, $prefix) {
+        throw new \Exception;
+    }
 
         /**
  * Convert a value to studly caps case.
@@ -187,7 +223,9 @@ class LarStr
  * @param  bool  $normalize  When true, all-uppercase words (e.g. acronyms) are lowercased before conversion so "CBOR" becomes "Cbor" instead of "CBOR".
  * @return ($value is '' ? '' : string)
  */
-    static function studly($value, bool $normalize = false) {}
+    static function studly($value, bool $normalize = false) {
+        throw new \Exception;
+    }
 
         /**
  * Returns the portion of the string specified by the start and length parameters.
@@ -200,7 +238,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function substr($string, $start, $length = null, $encoding = 'UTF-8') {}
+    static function substr($string, $start, $length = null, $encoding = 'UTF-8') {
+        throw new \Exception;
+    }
 
         /**
  * Replace text within a portion of a string.
@@ -213,7 +253,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function substrReplace($string, $replace, $offset = 0, $length = null) {}
+    static function substrReplace($string, $replace, $offset = 0, $length = null) {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given string to proper case.
@@ -223,7 +265,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function title($value) {}
+    static function title($value) {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given string to Base64 encoding.
@@ -231,7 +275,9 @@ class LarStr
  * @param  string  $string
  * @return ($string is '' ? '' : string)
  */
-    static function toBase64($string): string {}
+    static function toBase64($string): string {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given value to a string or return the given fallback on failure.
@@ -240,7 +286,9 @@ class LarStr
  * @param  string  $fallback
  * @return string
  */
-    static function toStringOr($value, $fallback) {}
+    static function toStringOr($value, $fallback) {
+        throw new \Exception;
+    }
 
         /**
  * Remove all whitespace from both ends of a string.
@@ -249,7 +297,9 @@ class LarStr
  * @param  string|null  $charlist
  * @return string
  */
-    static function trim($value, $charlist = null) {}
+    static function trim($value, $charlist = null) {
+        throw new \Exception;
+    }
 
         /**
  * Make a string's first character uppercase.
@@ -259,7 +309,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function ucfirst($string) {}
+    static function ucfirst($string) {
+        throw new \Exception;
+    }
 
         /**
  * Split a string into pieces by uppercase characters.
@@ -267,7 +319,9 @@ class LarStr
  * @param  string  $string
  * @return ($string is '' ? array{} : string[])
  */
-    static function ucsplit($string) {}
+    static function ucsplit($string) {
+        throw new \Exception;
+    }
 
         /**
  * Capitalize the first character of each word in a string.
@@ -278,7 +332,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function ucwords($string, $separators = " \t\r\n\f\v") {}
+    static function ucwords($string, $separators = " \t\r\n\f\v") {
+        throw new \Exception;
+    }
 
         /**
  * Convert the given string to upper-case.
@@ -288,7 +344,9 @@ class LarStr
  * 
  * @ext mbstring
  */
-    static function upper($value) {}
+    static function upper($value) {
+        throw new \Exception;
+    }
 
         /**
  * Wrap a string to a given number of characters.
@@ -299,6 +357,8 @@ class LarStr
  * @param  bool  $cutLongWords
  * @return string
  */
-    static function wordWrap($string, $characters = 75, $break = "\n", $cutLongWords = false) {}
+    static function wordWrap($string, $characters = 75, $break = "\n", $cutLongWords = false) {
+        throw new \Exception;
+    }
 
     }

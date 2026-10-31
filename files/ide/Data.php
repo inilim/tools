@@ -7,20 +7,28 @@ class Data
         /**
  * @return string[]
  */
-    static function URLProtocolsAsArray() {}
+    static function URLProtocolsAsArray() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function URLProtocolsAsClosure(): Closure {}
+    static function URLProtocolsAsClosure(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * @return \Generator<string>
  */
-    static function URLProtocolsAsGenerator(): Generator {}
+    static function URLProtocolsAsGenerator(): Generator {
+        throw new \Exception;
+    }
 
         
-    static function URLProtocolsAsString(string $separator = ''): string {}
+    static function URLProtocolsAsString(string $separator = ''): string {
+        throw new \Exception;
+    }
 
         /**
  * @author https://github.com/shipfastlabs/agent-detector/
@@ -31,41 +39,55 @@ class Data
  * 
  * @return \Generator<string,string[]>
  */
-    static function agentsEnvVars(): Generator {}
+    static function agentsEnvVars(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  * @ext mbstring
  */
-    static function arabicAlphabetAsClosure() {}
+    static function arabicAlphabetAsClosure() {
+        throw new \Exception;
+    }
 
         /**
  * [ 'А' => '%D0%90' ...]
  * 
  * @return \Closure():array<string,string>
  */
-    static function cyrillicAlphabetAndUrlEncodeAsClosure(bool $upper = false) {}
+    static function cyrillicAlphabetAndUrlEncodeAsClosure(bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return string[]
  */
-    static function cyrillicAlphabetAsArray(bool $upper = false) {}
+    static function cyrillicAlphabetAsArray(bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function cyrillicAlphabetAsClosure(bool $upper = false) {}
+    static function cyrillicAlphabetAsClosure(bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return string
  */
-    static function cyrillicAlphabetAsString(string $separator = "", bool $upper = false) {}
+    static function cyrillicAlphabetAsString(string $separator = "", bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @template TKey of 'COOKIE'|'ISO8601'|'RFC822'|'RFC850'|'RFC1036'|'RFC1123'|'RFC7231'|'RFC2822'|'RFC3339'|'RFC3339_EXTENDED'|'RSS'|'W3C'|'ISO8601_EXPANDED'|'SQL_FORMAT'
  * @return array<TKey,string>
  */
-    static function dateTimePatterns(): array {}
+    static function dateTimePatterns(): array {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -73,7 +95,9 @@ class Data
  * 
  * @tags data
  */
-    static function getMimeTypeByExt(string $extension): ?string {}
+    static function getMimeTypeByExt(string $extension): ?string {
+        throw new \Exception;
+    }
 
         /**
  * @return string[]
@@ -82,7 +106,9 @@ class Data
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
  */
-    static function htmlEntitiesAsArray() {}
+    static function htmlEntitiesAsArray() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
@@ -91,7 +117,9 @@ class Data
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
  */
-    static function htmlEntitiesAsClosure() {}
+    static function htmlEntitiesAsClosure() {
+        throw new \Exception;
+    }
 
         /**
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsString()
@@ -100,7 +128,9 @@ class Data
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
  * @return \Generator<string>
  */
-    static function htmlEntitiesAsGenerator(): Generator {}
+    static function htmlEntitiesAsGenerator(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return string
@@ -109,42 +139,58 @@ class Data
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsClosure()
  * @see \Inilim\Tool\Method\Data\htmlEntitiesAsGenerator()
  */
-    static function htmlEntitiesAsString(string $separator = ',') {}
+    static function htmlEntitiesAsString(string $separator = ',') {
+        throw new \Exception;
+    }
 
         /**
  * @return string[]
  */
-    static function latinAlphabetAsArray(bool $upper = false) {}
+    static function latinAlphabetAsArray(bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function latinAlphabetAsClosure(bool $upper = false) {}
+    static function latinAlphabetAsClosure(bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return string
  */
-    static function latinAlphabetAsString(string $separator = "", bool $upper = false) {}
+    static function latinAlphabetAsString(string $separator = "", bool $upper = false) {
+        throw new \Exception;
+    }
 
         /**
  * @return string[]
  */
-    static function magicMethodsAsArray() {}
+    static function magicMethodsAsArray() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function magicMethodsAsClosure() {}
+    static function magicMethodsAsClosure() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Generator<string>
  */
-    static function magicMethodsAsGenerator(): Generator {}
+    static function magicMethodsAsGenerator(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return string
  */
-    static function magicMethodsAsString(string $separator = '') {}
+    static function magicMethodsAsString(string $separator = '') {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -157,42 +203,58 @@ class Data
  * 
  * @tags generator,data
  */
-    static function mimeTypeAsGenerator(): Generator {}
+    static function mimeTypeAsGenerator(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return int[]
  */
-    static function numbersAsArray() {}
+    static function numbersAsArray() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():int[]
  */
-    static function numbersAsClosure() {}
+    static function numbersAsClosure() {
+        throw new \Exception;
+    }
 
         /**
  * @return string
  */
-    static function numbersAsString(string $separator = '') {}
+    static function numbersAsString(string $separator = '') {
+        throw new \Exception;
+    }
 
         /**
  * @return string[]
  */
-    static function numericEntitiesAsArray() {}
+    static function numericEntitiesAsArray() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function numericEntitiesAsClosure() {}
+    static function numericEntitiesAsClosure() {
+        throw new \Exception;
+    }
 
         /**
  * @return \Generator<string>
  */
-    static function numericEntitiesAsGenerator(): Generator {}
+    static function numericEntitiesAsGenerator(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return string
  */
-    static function numericEntitiesAsString(string $separator = ',') {}
+    static function numericEntitiesAsString(string $separator = ',') {
+        throw new \Exception;
+    }
 
         /**
  * @see https://www.regular-expressions.info/refunicodescript.html
@@ -203,11 +265,15 @@ class Data
  * 
  * @return \Generator<string,string>
  */
-    static function regexLang(): Generator {}
+    static function regexLang(): Generator {
+        throw new \Exception;
+    }
 
         /**
  * @return \Closure():string[]
  */
-    static function symbolsAsClosure() {}
+    static function symbolsAsClosure() {
+        throw new \Exception;
+    }
 
     }

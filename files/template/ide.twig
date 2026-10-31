@@ -6,7 +6,9 @@ class {{ link.nameClass }}
 {
     {% for method in methods %}
     {{ method.doc|raw }}
-    static {{ method.signature|raw }}
+    static {{ method.signature|raw }} {
+        throw new \Exception;
+    }
 
     {% endfor %}
 }

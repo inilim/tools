@@ -13,14 +13,18 @@ class LarArr
  *
  * @throws \InvalidArgumentException
  */
-    static function _array($array, $key, ?array $default = null) {}
+    static function _array($array, $key, ?array $default = null) {
+        throw new \Exception;
+    }
 
         /**
  * Determine whether the given value is array accessible.
  *
  * @param  mixed  $value
  */
-    static function accessible($value): bool {}
+    static function accessible($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * Add an element to an array using "dot" notation if it doesn't exist.
@@ -30,14 +34,18 @@ class LarArr
  * @param  mixed  $value
  * @return array
  */
-    static function add($array, $key, $value) {}
+    static function add($array, $key, $value) {
+        throw new \Exception;
+    }
 
         /**
  * Determine whether the given value is arrayable.
  * @param  mixed  $value
  * @return bool
  */
-    static function arrayable($value) {}
+    static function arrayable($value) {
+        throw new \Exception;
+    }
 
         /**
  * Get a boolean item from an array using "dot" notation.
@@ -46,7 +54,9 @@ class LarArr
  *
  * @throws \InvalidArgumentException
  */
-    static function boolean($array, $key, ?bool $default = null): bool {}
+    static function boolean($array, $key, ?bool $default = null): bool {
+        throw new \Exception;
+    }
 
         /**
  * Collapse an array of arrays into a single array.
@@ -54,7 +64,9 @@ class LarArr
  * @param  iterable  $array
  * @return array
  */
-    static function collapse($array) {}
+    static function collapse($array) {
+        throw new \Exception;
+    }
 
         /**
  * Cross join the given arrays, returning all possible permutations.
@@ -64,7 +76,9 @@ class LarArr
  * @param  iterable<TValue>  ...$arrays
  * @return array<int, array<array-key, TValue>>
  */
-    static function crossJoin(...$arrays) {}
+    static function crossJoin(...$arrays) {
+        throw new \Exception;
+    }
 
         /**
  * Divide an array into two arrays. One with keys and the other with values.
@@ -75,7 +89,9 @@ class LarArr
  * @param  array<TKey, TValue>  $array
  * @return array{TKey[], TValue[]}
  */
-    static function divide($array) {}
+    static function divide($array) {
+        throw new \Exception;
+    }
 
         /**
  * Flatten a multi-dimensional associative array with dots.
@@ -85,7 +101,9 @@ class LarArr
  * @param  int  $depth
  * @return array
  */
-    static function dot($array, $prepend = '', $depth = \INF) {}
+    static function dot($array, $prepend = '', $depth = \INF) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if all items pass the given truth test.
@@ -94,7 +112,9 @@ class LarArr
  * @param  (callable(mixed, array-key): bool)  $callback
  * @return bool
  */
-    static function every($array, callable $callback) {}
+    static function every($array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Get all of the given array except for a specified array of keys.
@@ -103,7 +123,9 @@ class LarArr
  * @param  array|string|int|float  $keys
  * @return array
  */
-    static function except($array, $keys) {}
+    static function except($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Get all of the given array except for a specified array of values.
@@ -113,7 +135,9 @@ class LarArr
  * @param  bool  $strict
  * @return array
  */
-    static function exceptValues($array, $values, $strict = false) {}
+    static function exceptValues($array, $values, $strict = false) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if the given key exists in the provided array.
@@ -122,7 +146,9 @@ class LarArr
  * @param  string|int|float  $key
  * @return bool
  */
-    static function exists($array, $key) {}
+    static function exists($array, $key) {
+        throw new \Exception;
+    }
 
         /**
  * Return the first element in an array passing a given truth test.
@@ -136,7 +162,9 @@ class LarArr
  * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
  * @return TValue|TFirstDefault
  */
-    static function first($array, ?callable $callback = null, $default = null) {}
+    static function first($array, ?callable $callback = null, $default = null) {
+        throw new \Exception;
+    }
 
         /**
  * Flatten a multi-dimensional array into a single level.
@@ -145,7 +173,9 @@ class LarArr
  * @param  int  $depth
  * @return array
  */
-    static function flatten($array, $depth = \INF) {}
+    static function flatten($array, $depth = \INF) {
+        throw new \Exception;
+    }
 
         /**
  * Get a float item from an array using "dot" notation.
@@ -153,14 +183,18 @@ class LarArr
  * @param string|int|null $key
  * @throws \InvalidArgumentException
  */
-    static function float($array, $key, ?float $default = null): float {}
+    static function float($array, $key, ?float $default = null): float {
+        throw new \Exception;
+    }
 
         /**
  * Remove one or many array items from a given array using "dot" notation.
  *
  * @return \Closure(array $array, array|string|int|float $keys):void
  */
-    static function forget(): Closure {}
+    static function forget(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Get the underlying array of items from the given argument.
@@ -173,7 +207,9 @@ class LarArr
  *
  * @throws \InvalidArgumentException
  */
-    static function from($items) {}
+    static function from($items) {
+        throw new \Exception;
+    }
 
         /**
  * Get an item from an array using "dot" notation.
@@ -183,7 +219,9 @@ class LarArr
  * @param  mixed  $default
  * @return mixed
  */
-    static function get($array, $key, $default = null) {}
+    static function get($array, $key, $default = null) {
+        throw new \Exception;
+    }
 
         /**
  * Check if an item or items exist in an array using "dot" notation.
@@ -192,7 +230,9 @@ class LarArr
  * @param  string|array  $keys
  * @return bool
  */
-    static function has($array, $keys) {}
+    static function has($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if all keys exist in an array using "dot" notation.
@@ -201,7 +241,9 @@ class LarArr
  * @param  string|array  $keys
  * @return bool
  */
-    static function hasAll($array, $keys) {}
+    static function hasAll($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if any of the keys exist in an array using "dot" notation.
@@ -210,7 +252,9 @@ class LarArr
  * @param  string|array  $keys
  * @return bool
  */
-    static function hasAny($array, $keys) {}
+    static function hasAny($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Get an integer item from an array using "dot" notation.
@@ -218,7 +262,9 @@ class LarArr
  * @param string|int|null $key
  * @throws \InvalidArgumentException
  */
-    static function integer($array, $key, ?int $default = null): int {}
+    static function integer($array, $key, ?int $default = null): int {
+        throw new \Exception;
+    }
 
         /**
  * Determines if an array is associative.
@@ -228,7 +274,9 @@ class LarArr
  * @param  array  $array
  * @return ($array is list ? false : true)
  */
-    static function isAssoc(array $array) {}
+    static function isAssoc(array $array) {
+        throw new \Exception;
+    }
 
         /**
  * Determines if an array is a list.
@@ -238,7 +286,9 @@ class LarArr
  * @param  array  $array
  * @return ($array is list ? true : false)
  */
-    static function isList($array) {}
+    static function isList($array) {
+        throw new \Exception;
+    }
 
         /**
  * Join all items using a string. The final items can use a separate glue string.
@@ -248,7 +298,9 @@ class LarArr
  * @param  string  $finalGlue
  * @return string
  */
-    static function join($array, $glue, $finalGlue = '') {}
+    static function join($array, $glue, $finalGlue = '') {
+        throw new \Exception;
+    }
 
         /**
  * Return the last element in an array passing a given truth test.
@@ -262,7 +314,9 @@ class LarArr
  * @param  TLastDefault|(\Closure(): TLastDefault)  $default
  * @return TValue|TLastDefault
  */
-    static function last($array, ?callable $callback = null, $default = null) {}
+    static function last($array, ?callable $callback = null, $default = null) {
+        throw new \Exception;
+    }
 
         /**
  * Run a map over each of the items in the array.
@@ -271,7 +325,9 @@ class LarArr
  * @param  callable  $callback
  * @return array
  */
-    static function map(array $array, callable $callback) {}
+    static function map(array $array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Run a map over each nested chunk of items.
@@ -283,7 +339,9 @@ class LarArr
  * @param  callable(mixed...): TValue  $callback
  * @return array<TKey, TValue>
  */
-    static function mapSpread(array $array, callable $callback) {}
+    static function mapSpread(array $array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Run an associative map over each of the items.
@@ -299,7 +357,9 @@ class LarArr
  * @param  callable(TValue, TKey): array<TMapWithKeysKey, TMapWithKeysValue>  $callback
  * @return array
  */
-    static function mapWithKeys(array $array, callable $callback) {}
+    static function mapWithKeys(array $array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Get a subset of the items from the given array.
@@ -308,7 +368,9 @@ class LarArr
  * @param  array|string  $keys
  * @return array
  */
-    static function only($array, $keys) {}
+    static function only($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Get a subset of the items from the given array by value.
@@ -318,7 +380,9 @@ class LarArr
  * @param  bool  $strict
  * @return array
  */
-    static function onlyValues($array, $values, $strict = false) {}
+    static function onlyValues($array, $values, $strict = false) {
+        throw new \Exception;
+    }
 
         /**
  * Partition the array into two arrays using the given callback.
@@ -330,7 +394,9 @@ class LarArr
  * @param  callable(TValue, TKey): bool  $callback
  * @return array<int<0, 1>, array<TKey, TValue>>
  */
-    static function partition($array, callable $callback) {}
+    static function partition($array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Pluck an array of values from an array.
@@ -340,7 +406,9 @@ class LarArr
  * @param  string|array|\Closure|null  $key
  * @return array
  */
-    static function pluck($array, $value, $key = null) {}
+    static function pluck($array, $value, $key = null) {
+        throw new \Exception;
+    }
 
         /**
  * Push an item onto the beginning of an array.
@@ -350,7 +418,9 @@ class LarArr
  * @param  mixed  $key
  * @return array
  */
-    static function prepend($array, $value, $key = null) {}
+    static function prepend($array, $value, $key = null) {
+        throw new \Exception;
+    }
 
         /**
  * Prepend the key names of an associative array.
@@ -361,14 +431,18 @@ class LarArr
  * @param  string  $prependWith
  * @return array<string, TValue>
  */
-    static function prependKeysWith($array, $prependWith) {}
+    static function prependKeysWith($array, $prependWith) {
+        throw new \Exception;
+    }
 
         /**
  * Get a value from the array, and remove it.
  *
  * @return \Closure(array $array,string|int $key, mixed $default = null):mixed
  */
-    static function pull(): Closure {}
+    static function pull(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Push an item into an array using "dot" notation.
@@ -378,7 +452,9 @@ class LarArr
  * @param  mixed  $values
  * @return \Closure(ArrayAccess|array &$array, string|int|null $key, mixed ...$values):array
  */
-    static function push(): Closure {}
+    static function push(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Convert the array into a query string.
@@ -386,7 +462,9 @@ class LarArr
  * @param  array  $array
  * @return string
  */
-    static function query($array) {}
+    static function query($array) {
+        throw new \Exception;
+    }
 
         /**
  * Filter the array using the negation of the given callback.
@@ -398,7 +476,9 @@ class LarArr
  * @param  callable(TValue, TKey): bool  $callback
  * @return array<TKey, TValue>
  */
-    static function reject($array, callable $callback) {}
+    static function reject($array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Select an array of values from an array.
@@ -407,7 +487,9 @@ class LarArr
  * @param  array|string  $keys
  * @return array
  */
-    static function select($array, $keys) {}
+    static function select($array, $keys) {
+        throw new \Exception;
+    }
 
         /**
  * Set an array item to a given value using "dot" notation.
@@ -416,7 +498,9 @@ class LarArr
  *
  * @return \Closure(array $array, string|int|null $key, mixed $value):array
  */
-    static function set(): Closure {}
+    static function set(): Closure {
+        throw new \Exception;
+    }
 
         /**
  * Get the first item in the array, but only if exactly one item exists. Otherwise, throw an exception.
@@ -426,7 +510,9 @@ class LarArr
  *
  * @throws \InvalidArgumentException
  */
-    static function sole($array, ?callable $callback = null) {}
+    static function sole($array, ?callable $callback = null) {
+        throw new \Exception;
+    }
 
         /**
  * Determine if some items pass the given truth test.
@@ -435,7 +521,9 @@ class LarArr
  * @param  (callable(mixed, array-key): bool)  $callback
  * @return bool
  */
-    static function some($array, callable $callback) {}
+    static function some($array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Recursively sort an array by keys and values.
@@ -448,7 +536,9 @@ class LarArr
  * @param  bool  $descending
  * @return array<TKey, TValue>
  */
-    static function sortRecursive($array, $options = \SORT_REGULAR, $descending = false) {}
+    static function sortRecursive($array, $options = \SORT_REGULAR, $descending = false) {
+        throw new \Exception;
+    }
 
         /**
  * Recursively sort an array by keys and values in descending order.
@@ -461,7 +551,9 @@ class LarArr
  * @param  int  $options
  * @return array<TKey, TValue>
  */
-    static function sortRecursiveDesc($array, $options = \SORT_REGULAR) {}
+    static function sortRecursiveDesc($array, $options = \SORT_REGULAR) {
+        throw new \Exception;
+    }
 
         /**
  * Get a string item from an array using "dot" notation.
@@ -469,7 +561,9 @@ class LarArr
  * @param string|int|null $key
  * @throws \InvalidArgumentException
  */
-    static function string($array, $key, ?string $default = null): string {}
+    static function string($array, $key, ?string $default = null): string {
+        throw new \Exception;
+    }
 
         /**
  * Take the first or last {$limit} items from an array.
@@ -478,7 +572,9 @@ class LarArr
  * @param  int  $limit
  * @return array
  */
-    static function take($array, $limit) {}
+    static function take($array, $limit) {
+        throw new \Exception;
+    }
 
         /**
  * Conditionally compile classes from an array into a CSS class list.
@@ -486,7 +582,9 @@ class LarArr
  * @param  array<string, bool>|array<int, string|int>|string  $array
  * @return ($array is array<string, false> ? '' : ($array is '' ? '' : ($array is array{} ? '' : non-empty-string)))
  */
-    static function toCssClasses($array) {}
+    static function toCssClasses($array) {
+        throw new \Exception;
+    }
 
         /**
  * Conditionally compile styles from an array into a style list.
@@ -494,7 +592,9 @@ class LarArr
  * @param  array<string, bool>|array<int, string|int>|string  $array
  * @return ($array is array<string, false> ? '' : ($array is '' ? '' : ($array is array{} ? '' : non-empty-string)))
  */
-    static function toCssStyles($array) {}
+    static function toCssStyles($array) {
+        throw new \Exception;
+    }
 
         /**
  * Convert a flatten "dot" notation array into an expanded array.
@@ -502,7 +602,9 @@ class LarArr
  * @param  iterable  $array
  * @return array
  */
-    static function undot($array) {}
+    static function undot($array) {
+        throw new \Exception;
+    }
 
         /**
  * Filter the array using the given callback.
@@ -514,7 +616,9 @@ class LarArr
  * @param  callable(TValue, TKey): bool  $callback
  * @return array<TKey, TValue>
  */
-    static function where($array, callable $callback) {}
+    static function where($array, callable $callback) {
+        throw new \Exception;
+    }
 
         /**
  * Filter items where the value is not null.
@@ -525,7 +629,9 @@ class LarArr
  * @param  array<TKey, TValue|null>  $array
  * @return array<TKey, TValue>
  */
-    static function whereNotNull($array) {}
+    static function whereNotNull($array) {
+        throw new \Exception;
+    }
 
         /**
  * If the given value is not an array and not null, wrap it in one.
@@ -536,6 +642,8 @@ class LarArr
  * @param  array<TKey, TValue>|TValue|null  $value
  * @return ($value is null ? array{} : ($value is array ? array<TKey, TValue> : array{TValue}))
  */
-    static function wrap($value) {}
+    static function wrap($value) {
+        throw new \Exception;
+    }
 
     }

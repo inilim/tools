@@ -11,7 +11,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function allArray($value): bool {}
+    static function allArray($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -20,7 +22,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function allBool($value): bool {}
+    static function allBool($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -28,7 +32,9 @@ class Check
  * @param mixed  $value
  * @param mixed[] $values
  */
-    static function allInArray($value, array $values): bool {}
+    static function allInArray($value, array $values): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -37,7 +43,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function allNullOrArray($value): bool {}
+    static function allNullOrArray($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -46,7 +54,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function allNullOrBool($value): bool {}
+    static function allNullOrBool($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -55,7 +65,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function allString($value): bool {}
+    static function allString($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -64,7 +76,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function arrAccess($value): bool {}
+    static function arrAccess($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -73,7 +87,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function arrLike($value): bool {}
+    static function arrLike($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -83,7 +99,9 @@ class Check
  *
  * @param mixed $value
  */
-    static function contains($value, string $subString, bool $ingnoreCase = false): bool {}
+    static function contains($value, string $subString, bool $ingnoreCase = false): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -93,7 +111,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function countable($value): bool {}
+    static function countable($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -102,7 +122,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function dir($value): bool {}
+    static function dir($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -112,18 +134,24 @@ class Check
  * 
  * @param T $v
  */
-    static function enumCase($v): bool {}
+    static function enumCase($v): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  */
-    static function existSqliteLib(): bool {}
+    static function existSqliteLib(): bool {
+        throw new \Exception;
+    }
 
         /**
  * INFO phpinfo берем из кеш файла
  * @author Inilim
  */
-    static function existSqliteLib_m2(): bool {}
+    static function existSqliteLib_m2(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -132,7 +160,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function file($value): bool {}
+    static function file($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author deepseek
@@ -141,7 +171,9 @@ class Check
  * @param mixed $value
  * @todo tests
  */
-    static function hasFullwidthDigits($value): bool {}
+    static function hasFullwidthDigits($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -150,7 +182,9 @@ class Check
  *
  * @param mixed $value
  */
-    static function httpHeaderName($value): bool {}
+    static function httpHeaderName($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -160,7 +194,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function httpHeaderValue($value): bool {}
+    static function httpHeaderValue($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -169,7 +205,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function intOrFloat($value): bool {}
+    static function intOrFloat($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -178,7 +216,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function intOrFloatOrFile($value): bool {}
+    static function intOrFloatOrFile($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -187,7 +227,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function intOrFloatOrString($value): bool {}
+    static function intOrFloatOrString($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -199,7 +241,9 @@ class Check
  * @param object|string $value
  * @param class-string<T>[] $classes
  */
-    static function isAnyOf($value, array $classes): bool {}
+    static function isAnyOf($value, array $classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -210,7 +254,9 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function isCountable($value): bool {}
+    static function isCountable($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -223,7 +269,9 @@ class Check
  * @param mixed $value
  * @param array<T|class-string<T>> $classes
  */
-    static function isInstanceOfAny($value, array $classes): bool {}
+    static function isInstanceOfAny($value, array $classes): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -233,7 +281,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function isIterable($value): bool {}
+    static function isIterable($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -241,7 +291,9 @@ class Check
  * @phpstan-assert-if-true string $value
  * @param mixed $value
  */
-    static function isJson($value): bool {}
+    static function isJson($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -251,7 +303,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function isNonEmptyArray($value): bool {}
+    static function isNonEmptyArray($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -259,7 +313,9 @@ class Check
  * @phpstan-assert-if-true \IteratorAggregate $value
  * @param mixed $value
  */
-    static function iteratorAgg($value): bool {}
+    static function iteratorAgg($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * Validate whether a given input is a Luhn number.
@@ -276,7 +332,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function luhnNumber($value): bool {}
+    static function luhnNumber($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
@@ -284,7 +342,9 @@ class Check
  * @phpstan-assert-if-true string $value
  * @param mixed $value
  */
-    static function multiLineString($value): bool {}
+    static function multiLineString($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -293,63 +353,81 @@ class Check
  * @phpstan-assert-if-true int<0,max> $value
  * @param mixed  $value
  */
-    static function natural($value): bool {}
+    static function natural($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php74(): bool {}
+    static function php74(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php80(): bool {}
+    static function php80(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php81(): bool {}
+    static function php81(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php82(): bool {}
+    static function php82(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php83(): bool {}
+    static function php83(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php84(): bool {}
+    static function php84(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php85(): bool {}
+    static function php85(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author Inilim
  * 
  * equal to or greater than
  */
-    static function php86(): bool {}
+    static function php86(): bool {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-pure
@@ -357,7 +435,9 @@ class Check
  * @phpstan-assert-if-true float $value
  * @param mixed  $value
  */
-    static function positiveFloat($value): bool {}
+    static function positiveFloat($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @psalm-pure
@@ -365,7 +445,9 @@ class Check
  * @phpstan-assert-if-true int<1,max>|float $value
  * @param mixed  $value
  */
-    static function positiveFloatOrInt($value): bool {}
+    static function positiveFloatOrInt($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -374,7 +456,9 @@ class Check
  * @phpstan-assert-if-true int<1,max> $value
  * @param mixed  $value
  */
-    static function positiveInteger($value): bool {}
+    static function positiveInteger($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * check is valid regex
@@ -384,7 +468,9 @@ class Check
  * @phpstan-assert-if-true string $regex
  * @param mixed  $regex
  */
-    static function regex($regex): bool {}
+    static function regex($regex): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -396,7 +482,9 @@ class Check
  * @param mixed       $value
  * @param string|null $type    type of resource this should be. @see https://www.php.net/manual/en/function.get-resource-type.php
  */
-    static function resOrStr($value, ?string $type = null): bool {}
+    static function resOrStr($value, ?string $type = null): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -406,7 +494,9 @@ class Check
  * @param mixed       $value
  * @param string|null $type    type of resource this should be. @see https://www.php.net/manual/en/function.get-resource-type.php
  */
-    static function resource($value, ?string $type = null): bool {}
+    static function resource($value, ?string $type = null): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -417,7 +507,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function strOrArr($value): bool {}
+    static function strOrArr($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -428,7 +520,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function strOrBool($value): bool {}
+    static function strOrBool($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author inilim
@@ -439,7 +533,9 @@ class Check
  * 
  * @param mixed $value
  */
-    static function uuidv7($value): bool {}
+    static function uuidv7($value): bool {
+        throw new \Exception;
+    }
 
         /**
  * @author webmozarts/assert
@@ -450,6 +546,8 @@ class Check
  * 
  * @param mixed  $value
  */
-    static function validArrayKey($value): bool {}
+    static function validArrayKey($value): bool {
+        throw new \Exception;
+    }
 
     }
