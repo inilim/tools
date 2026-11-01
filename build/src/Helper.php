@@ -18,6 +18,8 @@ class Helper
     }
 
     /**
+     * Берем зависимости из doc комментария "@deps(...)"
+     * 
      * @return class-string[]
      */
     static function getDepsFromDoc(string $codeRaw): array

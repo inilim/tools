@@ -57,6 +57,7 @@ $pretty          = new Standard;
 $pathToDb        = \DIR_ROOT . '/files/build_dev.sqlite';
 $pathToSqlFiles  = \DIR_ROOT . '/files/sql';
 $dbDev           = new IPDOSQLite($pathToDb);
+$dbDev->setJournalMode('wal');
 $phpCodeMinifier = MinifierFactory::create();
 $twig = new Environment(
     new FilesystemLoader(\DIR_ROOT . '/files/template'),
@@ -361,7 +362,7 @@ if ($switch || false) {
                         'name'      => \basename($methodDepStr),
                         'namespace' => \dirname($methodDepStr),
                     ],
-                    1
+                    IPDO::FETCH_ONCE
                 );
 
                 if ([] === $methodDep) {
@@ -438,6 +439,12 @@ if ($switch || false) {
 
             if ([] === $deps) continue;
 
+
+            // ---------------------------------------------
+            // TODO
+            // ---------------------------------------------
+
+
             // ---------------------------------------------
             // Добавляем в БД группу зависимостей
             // ---------------------------------------------
@@ -455,7 +462,7 @@ if ($switch || false) {
                 $methodID = $dbDev->exec('SELECT id FROM methods WHERE name = {name} AND namespace = {namespace}', [
                     'name'      => \basename($dep),
                     'namespace' => \dirname($dep),
-                ], 1)['id'];
+                ], IPDO::FETCH_ONCE)['id'];
 
                 /** @var int $methodID */
 
