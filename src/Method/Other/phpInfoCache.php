@@ -12,7 +12,16 @@ function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string
 {
     return \Inilim\Tool\Method\Other\tryCallWithErrHandler(
         static function () use ($flags, $fresh) {
-            $pathToFile = \sys_get_temp_dir() . '/inilim-tools-phpinfo-' . $flags . '.tmp';
+            $pathToFile = \sprintf(
+                '%s/inilim-tools-phpinfo-%s-flags_%s.tmp',
+                \sys_get_temp_dir(),
+                // Ранее мы сохраняли данные в файл вне зависимости какой php выполнялся,
+                // но что если интерпритатор будут менятся,
+                // то получается что мы можем подхватить данные другого интерпретатора,
+                // формируя хеш мы от этого защитимся
+                \Inilim\Tool\Method\Other\phpRuntimeFingerprint(),
+                $flags
+            );
             if ($fresh) {
                 goto fresh;
             }

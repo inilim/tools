@@ -390,6 +390,19 @@ class Other
     }
 
         /**
+ * Возвращает отпечаток текущего PHP-рантайма.
+ *
+ * Учитывает всё, что влияет на конфигурацию исполнения:
+ *  - SAPI (cli, fpm-fcgi, apache2handler, ...)
+ *  - путь к бинарнику
+ *  - версию PHP
+ *  - загруженный php.ini и просканированные доп. .ini
+ */
+    static function phpRuntimeFingerprint(): string {
+        throw new \Exception;
+    }
+
+        /**
  * @author inilim
  * @template T of object
  * @param T|class-string<T> $scope
