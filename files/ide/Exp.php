@@ -63,7 +63,7 @@ class Exp
         /**
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param string $sheetId id find from Exp::excelGetSheetsInfo()
@@ -89,7 +89,7 @@ class Exp
  * INFO быстрый парсинг, но больше потребление памяти
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Cell_excelReadCellsBySheetId from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip
@@ -104,7 +104,7 @@ class Exp
  * INFO PHP7.4 100_000 записей примерно 2 минуты PHP8.4 1.5 минуты
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Cell_excelReadCellsBySheetId_m2 from \TypeExp
  * @psalm-import-type DataCell_excelReadCellsBySheetId_m2 from \TypeExp
  * @ext xmlreader zip

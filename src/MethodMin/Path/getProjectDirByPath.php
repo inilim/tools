@@ -5,7 +5,7 @@ namespace Inilim\Tool\Method\Path{function getProjectDirByPath(?string $path=nul
     }if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\LarStr\substr($path,1,1)){$path=\Inilim\Tool\Method\LarStr\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
-    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
+    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return \is_string($value)?$value:null;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('beforeLast')){
     function beforeLast(string $subject,string $search):string{if($search===''){return $subject;}$pos=\mb_strrpos($subject,$search);if($pos===false){return $subject;}return \Inilim\Tool\Method\Str\substr($subject,0,$pos);}
     }if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){

@@ -19,7 +19,7 @@ function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string
             \clearstatcache(false, $pathToFile);
             if (\is_file($pathToFile)) {
                 $result = \file_get_contents($pathToFile);
-                if ($result === false) {
+                if (false === $result) {
                     goto fresh;
                 }
                 /** @var string $result */
@@ -27,7 +27,7 @@ function phpInfoCache(int $flags = \INFO_ALL, bool $fresh = false): ?string
             } else {
                 fresh:
                 $info = \Inilim\Tool\Method\Other\phpInfo($flags);
-                if ($info === null) {
+                if (null === $info) {
                     return null;
                 }
                 \file_put_contents($pathToFile, $info);

@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\Exp;
  * @skip_build
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Row_excelReadRowsById from \TypeExp
  * @psalm-import-type Cell_excelReadRowsById from \TypeExp
  * @ext dom zip

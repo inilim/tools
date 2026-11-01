@@ -1,9 +1,9 @@
 <?php
 
-namespace Inilim\Tool\Method\Xml{function loadFile(string $filename,int $options=0):?object{\Inilim\Tool\Method\Assert\extPhp('dom');$_filename=\Inilim\Tool\Method\Path\realPath($filename);if($_filename===null){throw new \InvalidArgumentException(\sprintf('The path "%s" is not a file.',$filename));}$_filename=\Inilim\Tool\Method\Path\normalize($_filename);return \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($_filename,$options){$doc=new \DOMDocument();if($doc -> load($_filename,$options)===false){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('DOMDocument::load("%s") "%s"',$_filename),$_filename,-1);return null;}return $doc;},null);}}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
+namespace Inilim\Tool\Method\Xml{function loadFile(string $filename,int $options=0):?object{\Inilim\Tool\Method\Assert\extPhp('dom');$_filename=\Inilim\Tool\Method\Path\realPath($filename);if(null===$_filename){throw \Inilim\Tool\Method\Obj\sprintfInvalidArgumentException('The path "%s" is not a file.',[$filename]);}$_filename=\Inilim\Tool\Method\Path\normalize($_filename);return \Inilim\Tool\Method\Other\tryCallWithErrHandler(static function()use($_filename,$options){$doc=new \DOMDocument();if($doc -> load($_filename,$options)===false){\Inilim\Tool\Method\Other\__setErrorLast(-1,\sprintf('DOMDocument::load("%s") "%s"',$_filename),$_filename,-1);return null;}return $doc;},null);}}namespace Inilim\Tool\Method\Path{if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\LarStr\substr($path,1,1)){$path=\Inilim\Tool\Method\LarStr\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
-    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
+    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return \is_string($value)?$value:null;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('extPhp')){
@@ -14,8 +14,16 @@ namespace Inilim\Tool\Method\Xml{function loadFile(string $filename,int $options
     function __setErrorLast(int $type,string $message,string $file,int $line):void{\Inilim\Tool\Method\Other\__state()-> error=['type'=>$type,'message'=>$message,'file'=>$file,'line'=>$line];}
     }if(!\Inilim\Tool\Other::__definedIfNot('__state')){
     function __state():object{static $o=null;return $o ??= new class{var?array $error=null;};}
+    }}namespace Inilim\Tool\Method\Obj{if(!\Inilim\Tool\Obj::__definedIfNot('rewriteLocationException')){
+    function rewriteLocationException(\Throwable $e,string $file,int $line):object{$rc=new \ReflectionClass($e);$rpf=$rc -> getProperty('file');$rpl=$rc -> getProperty('line');if(!\Inilim\Tool\Method\Check\php81()){$rpf -> setAccessible(true);$rpl -> setAccessible(true);}$rpf -> setValue($e,$file);$rpl -> setValue($e,$line);return $e;}
+    }if(!\Inilim\Tool\Obj::__definedIfNot('sprintfException')){
+    function sprintfException(string $format='',array $values=[],$classOrObj=\Exception :: class,array $args=[]):\Throwable{$message=\sprintf($format,... $values);if(\is_object($classOrObj)){$class=\get_class($classOrObj);return \Inilim\Tool\Method\Obj\rewriteLocationException(new $class($message,... $args),$classOrObj -> getFile(),$classOrObj -> getLine());}else{return new $classOrObj($message,... $args);}}
+    }if(!\Inilim\Tool\Obj::__definedIfNot('sprintfInvalidArgumentException')){
+    function sprintfInvalidArgumentException(string $format='',array $values=[],array $args=[]):\InvalidArgumentException{return \Inilim\Tool\Method\Obj\sprintfException($format,$values,\InvalidArgumentException :: class,$args);}
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php81')){
+    function php81():bool{return \PHP_VERSION_ID>=80100?true:false;}
     }}namespace Inilim\Tool\Method\LarStr{if(!\Inilim\Tool\LarStr::__definedIfNot('substr')){
     function substr($string,$start,$length=null,$encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\LarStr::__definedIfNot('ucfirst')){

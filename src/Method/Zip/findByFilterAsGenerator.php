@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @todo tests
- * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
- * @param callable(ZipStatItem):bool $predicate
+ * @param string|\ZipArchive $source path to file-zip OR ZipArchive object
+ * @param callable(TYPE_ZIP_STAT_ITEM):bool $predicate
  * @param mixed $valueBreak
  * @throws \InvalidArgumentException
- * @return \Generator<int,ZipStatItem>
+ * @return \Generator<int,TYPE_ZIP_STAT_ITEM>
  */
-function findByFilterAsGenerator($pathToFileOrZip, callable $predicate, $valueBreak = null): ?\Generator
+function findByFilterAsGenerator($source, callable $predicate, $valueBreak = null): ?\Generator
 {
-    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
-    if ($gen === null) {
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($source);
+    if (null === $gen) {
         return null;
     }
     foreach ($gen as $stat) {

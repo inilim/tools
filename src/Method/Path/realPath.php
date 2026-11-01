@@ -10,6 +10,5 @@ namespace Inilim\Tool\Method\Path;
 function realPath(string $path): ?string
 {
     $value = \Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn() => \realpath($path), null);
-    /** @var false|string $value */
-    return $value === false ? null : $value;
+    return \is_string($value) ? $value : null;
 }

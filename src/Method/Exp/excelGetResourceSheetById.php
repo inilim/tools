@@ -7,7 +7,7 @@ namespace Inilim\Tool\Method\Exp;
 /**
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @ext zip
  * @param string|\ZipArchive $pathToFileOrZip
  * @param string $sheetId id find from Exp::excelGetSheetsInfo()

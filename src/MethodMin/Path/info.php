@@ -3,7 +3,7 @@
 namespace Inilim\Tool\Method\Path{function info(string $pathTo,bool $throw=true){$t=\Inilim\Tool\Method\Path\realPath($pathTo);if(null===$t){if($throw){throw new \Exception(\sprintf('"%s" not found',$pathTo));}return null;}$t=\Inilim\Tool\Method\Path\normalize($t);$pathTo=$t;$t=\pathinfo($t,\PATHINFO_ALL);$t['extension']??= '';return['pathDir'=>$t['dirname'],'nameDir'=>\basename($t['dirname']),'isFile'=>$isFile=\Inilim\Tool\Method\FS\isFile($pathTo),'isDir'=>!$isFile,'isLink'=>\is_link($pathTo),'ext'=>$t['extension'],'withoutExt'=>$t['extension']==='','name'=>$t['filename'],'emptyName'=>$t['filename']==='','fullName'=>$t['basename'],'fullPathTo'=>$pathTo];}if(!\Inilim\Tool\Path::__definedIfNot('normalize')){
     function normalize(string $path):string{$path=\strtr($path,'\\','/');$path=\Inilim\Tool\Method\Str\deduplicate($path,'/');if(':'===\Inilim\Tool\Method\LarStr\substr($path,1,1)){$path=\Inilim\Tool\Method\LarStr\ucfirst($path);}return $path;}
     }if(!\Inilim\Tool\Path::__definedIfNot('realPath')){
-    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return $value===false?null:$value;}
+    function realPath(string $path):?string{$value=\Inilim\Tool\Method\Other\tryCallWithErrHandler(static fn()=>\realpath($path),null);return \is_string($value)?$value:null;}
     }}namespace Inilim\Tool\Method\Str{if(!\Inilim\Tool\Str::__definedIfNot('deduplicate')){
     function deduplicate(string $string,string $character=' '){return \preg_replace('/'.\preg_quote($character,'/').'+/u',$character,$string);}
     }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('tryCallWithErrHandler')){

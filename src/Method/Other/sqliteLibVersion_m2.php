@@ -12,7 +12,7 @@ namespace Inilim\Tool\Method\Other;
 function sqliteLibVersion_m2(bool $fresh = false): ?string
 {
     $info = \Inilim\Tool\Method\Other\phpInfoCache(\INFO_MODULES, $fresh);
-    if ($info === null) {
+    if (null === $info) {
         return null;
     }
     \preg_match('/SQLite\s+Library\s+=>\s+(\d+\.\d+\.?\d+?)/i', $info, $match);

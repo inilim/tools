@@ -7,16 +7,18 @@ namespace Inilim\Tool\Method\Xml;
 /**
  * @link https://php.net/manual/en/domdocument.load.php
  * @return null|\DOMDocument
+ * 
+ * @ext dom
  */
 function loadFile(string $filename, int $options = 0): ?object
 {
     \Inilim\Tool\Method\Assert\extPhp('dom');
     $_filename = \Inilim\Tool\Method\Path\realPath($filename);
-    if ($_filename === null) {
-        throw new \InvalidArgumentException(\sprintf(
+    if (null === $_filename) {
+        throw \Inilim\Tool\Method\Obj\sprintfInvalidArgumentException(
             'The path "%s" is not a file.',
-            $filename
-        ));
+            [$filename]
+        );
     }
     $_filename = \Inilim\Tool\Method\Path\normalize($_filename);
 

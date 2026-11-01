@@ -7,20 +7,20 @@ namespace Inilim\Tool\Method\Zip;
 /**
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @ext zip
- * @param string|\ZipArchive $pathToFileOrZip
- * @param callable(ZipStatItem):bool $predicate
+ * @param string|\ZipArchive $source
+ * @param callable(TYPE_ZIP_STAT_ITEM):bool $predicate
  * @return null|resource
  */
-function findFirstResourceByCallable($pathToFileOrZip, callable $predicate)
+function findFirstResourceByCallable($source, callable $predicate)
 {
-    $zip = \Inilim\Tool\Method\Zip\getObjFrom($pathToFileOrZip);
-    if ($zip === null) {
+    $zip = \Inilim\Tool\Method\Zip\getObjFrom($source);
+    if (null === $zip) {
         return null;
     }
     $find = \Inilim\Tool\Method\Zip\findFirstByCallable($zip, $predicate);
-    if ($find === null) {
+    if (null === $find) {
         return null;
     }
     return \Inilim\Tool\Method\Zip\getResourceByIdx($zip, $find['index']);

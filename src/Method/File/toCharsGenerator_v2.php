@@ -19,7 +19,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
     \Inilim\Tool\Method\Assert\positiveInteger($chunk);
     $resource = \Inilim\Tool\Method\File\phpfopen($pathToFile, 'r');
 
-    if ($resource === false) {
+    if (false === $resource) {
         throw new \Exception(\sprintf('Failed open file: "%s"', $pathToFile));
     }
 
@@ -30,7 +30,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
 
         $internal = static function () use (&$i, $resource, $chunk) {
             $posFrom = \ftell($resource); // берем текущую позицию/указатель
-            if ($posFrom === false) {
+            if (false === $posFrom) {
                 return null;
             }
 
@@ -40,7 +40,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
 
             // INFO берем с запасом, из-за многобайтовых символов
             $substr = \fread($resource, (10 * $chunk));
-            if ($substr === false) {
+            if (false === $substr) {
                 return null;
             }
             // 
@@ -61,7 +61,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
             // ---------------------------------------------
 
             $posTo = \ftell($resource); // берем текущую позицию/указатель
-            if ($posTo === false) {
+            if (false === $posTo) {
                 return null;
             }
 
@@ -79,7 +79,7 @@ function toCharsGenerator_v2(string $pathToFile, int $chunk = 1): \Closure
 
         while (true) {
             $r = \Inilim\Tool\Method\Other\tryCallWithErrHandler_m2($internal);
-            if ($r === null) {
+            if (null === $r) {
                 break;
             }
 

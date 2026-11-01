@@ -8,7 +8,7 @@ namespace Inilim\Tool\Method\Exp;
  * INFO быстрый парсинг, но больше потребление памяти
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Cell_excelReadCellsBySheetId from \TypeExp
  * @ext dom zip
  * @param string|\ZipArchive $pathToFileOrZip

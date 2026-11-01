@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @todo tests
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
- * @param callable(ZipStatItem):bool $predicate
+ * @param callable(TYPE_ZIP_STAT_ITEM):bool $predicate
  * @throws \InvalidArgumentException
- * @return ZipStatItem[]
+ * @return TYPE_ZIP_STAT_ITEM[]
  */
 function findAllByCallable($pathToFileOrZip, callable $predicate): ?array
 {

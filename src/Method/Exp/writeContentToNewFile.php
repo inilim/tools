@@ -15,8 +15,9 @@ namespace Inilim\Tool\Method\Exp;
  */
 function writeContentToNewFile(?string $dir = null): ?\Closure
 {
-    if ($dir !== null) {
+    if (null !== $dir) {
         \Inilim\Tool\Method\Assert\dir($dir);
+        $dir = \Inilim\Tool\Method\Path\realPath($dir);
     } else {
         $dir = \sys_get_temp_dir();
     }
@@ -46,7 +47,7 @@ function writeContentToNewFile(?string $dir = null): ?\Closure
             return $opt['file'];
         }
 
-        if ($command !== null) {
+        if (null !== $command) {
 
             // ---------------------------------------------
             // Команда
@@ -86,7 +87,7 @@ function writeContentToNewFile(?string $dir = null): ?\Closure
                 $errMsg = $msg;
             }
         );
-        if ($errMsg !== null) {
+        if (null !== $errMsg) {
             \Inilim\Tool\Method\Other\__setErrorLast(-1, $errMsg, '', -1);
             $status = false;
         } else {

@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Zip;
 
 /**
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @todo tests
  * @link https://php.net/manual/en/ziparchive.statindex.php
- * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
+ * @param string|\ZipArchive $source path to file-zip OR ZipArchive object
  * @throws \InvalidArgumentException
- * @return ZipStatItem[]
+ * @return TYPE_ZIP_STAT_ITEM[]
  */
-function scan($pathToFileOrZip): ?array
+function scan($source): ?array
 {
-    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($pathToFileOrZip);
-    if ($gen === null) {
+    $gen = \Inilim\Tool\Method\Zip\scanAsGenerator($source);
+    if (null === $gen) {
         return null;
     }
     return \iterator_to_array($gen, false);

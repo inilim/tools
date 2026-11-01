@@ -9,7 +9,7 @@ namespace Inilim\Tool\Method\Exp;
  * INFO PHP7.4 100_000 записей примерно 2 минуты PHP8.4 1.5 минуты
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Cell_excelReadCellsBySheetId_m2 from \TypeExp
  * @psalm-import-type DataCell_excelReadCellsBySheetId_m2 from \TypeExp
  * @ext xmlreader zip

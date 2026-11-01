@@ -36,6 +36,8 @@ class Xml
         /**
  * @link https://php.net/manual/en/domdocument.load.php
  * @return null|\DOMDocument
+ * 
+ * @ext dom
  */
     static function loadFile(string $filename, int $options = 0): ?object {
         throw new \Exception;

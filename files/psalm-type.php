@@ -163,11 +163,11 @@ class TypePath {}
  * -------------- [Define] -------------- 
  * @example psalm-type NameType = string
  * 
- * @psalm-type ZipStatItem = array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}
+ * @psalm-type TYPE_ZIP_STAT_ITEM = array{name:string,index:int,crc:int,size:int,mtime:int,comp_size:int,comp_method:int,encryption_method:int}
  * 
  * 
  * ----- extractByCallable
- * @psalm-type Return_extractByCallable = ZipStatItem&array{status:bool,path_to_file?:string}
+ * @psalm-type Return_extractByCallable = TYPE_ZIP_STAT_ITEM&array{status:bool,path_to_file?:string}
  * 
  * 
  */

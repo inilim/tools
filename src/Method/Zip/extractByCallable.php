@@ -7,11 +7,11 @@ namespace Inilim\Tool\Method\Zip;
 /**
  * @author inilim
  * @todo tests
- * @psalm-import-type ZipStatItem from \TypeZip
+ * @psalm-import-type TYPE_ZIP_STAT_ITEM from \TypeZip
  * @psalm-import-type Return_extractByCallable from \TypeZip
  * @param string|\ZipArchive $pathToFileOrZip path to file-zip OR ZipArchive object
  * @param ?string $dir default sys_get_temp_dir()
- * @param callable(ZipStatItem):bool $predicate
+ * @param callable(TYPE_ZIP_STAT_ITEM):bool $predicate
  * @return ?Return_extractByCallable
  */
 function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir = null): ?array
@@ -38,7 +38,7 @@ function extractByCallable($pathToFileOrZip, callable $predicate, ?string $dir =
 
         $results = [];
         foreach ($gen as $stat) {
-            /** @var ZipStatItem $stat */
+            /** @var TYPE_ZIP_STAT_ITEM $stat */
             $t = $stat;
             if ($predicate($t) !== true) {
                 continue;

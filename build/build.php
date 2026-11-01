@@ -323,6 +323,7 @@ if ($switch || false) {
             // Ищем зависимости
             // ---------------------------------------------
 
+            $doubleDepsForSensetiveMethod = [];
             $deps   = [];
             $depsAs = [
                 \sprintf('%s\%s', $method['namespace'], $method['name']),
@@ -346,6 +347,23 @@ if ($switch || false) {
                 /** @var class-string $methodDepStr */
 
                 if (\in_array($methodDepStr, $deps)) {
+
+                    // INFO Тут ловим вложенные чувствительные методы.
+
+                    $fullName = \sprintf('%s\%s', $method['namespace'], $method['name']);
+
+                    if (isset($doubleDepsForSensetiveMethod[$fullName])) {
+                        continue;
+                    }
+
+                    if (
+                        false
+                        || \str_contains($methodDepStr, 'tryCallWithErrHandler')
+                        // and more
+                    ) {
+                        $doubleDepsForSensetiveMethod[$fullName] = $methodDepStr;
+                    }
+
                     continue;
                 }
 
@@ -441,9 +459,16 @@ if ($switch || false) {
 
 
             // ---------------------------------------------
-            // TODO
+            // Запрет на вложенные зависимые функции такие как "tryCallWithErrHandler"
+            // Не знаю стоит ли это делать, у меня слишком много методов на основе нее работают.
             // ---------------------------------------------
 
+            if ([] !== $doubleDepsForSensetiveMethod) {
+                \d([
+                    '$doubleDepsForSensetiveMethod' => $doubleDepsForSensetiveMethod,
+                ]);
+            }
+            unset($doubleDepsForSensetiveMethod);
 
             // ---------------------------------------------
             // Добавляем в БД группу зависимостей

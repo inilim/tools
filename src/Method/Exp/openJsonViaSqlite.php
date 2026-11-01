@@ -23,12 +23,12 @@ function openJsonViaSqlite($source): ?object
     // ---------------------------------------------
 
     $type = \gettype($source);
-    if ($type === 'string') {
+    if ('string' === $type) {
         /** @var string $source */
         \Inilim\Tool\Method\Assert\file($source);
     } elseif ($type === 'resource') {
         $source = \Inilim\Tool\Method\Other\getPathFromResource($source);
-        if ($source === null || $source === 'php://temp') {
+        if (null === $source || 'php://temp' === $source) {
             throw new \InvalidArgumentException('$source failed get path to file from resource');
         }
     } else {
@@ -42,7 +42,7 @@ function openJsonViaSqlite($source): ?object
     $curVer = \Inilim\Tool\Method\Other\sqliteLibVersion_m3();
     // TODO json_valid был встроен в версии 3.38.0
     if (false === \version_compare($curVer ?? '0.0.0', '3.38.0', '>=')) {
-        if ($curVer === null) {
+        if (null === $curVer) {
             throw new \InvalidArgumentException('SQLite library version is not defined');
         }
         throw new \InvalidArgumentException(\sprintf('Your SQLite %s library version is lower than 3.38.0', $curVer));
@@ -69,12 +69,12 @@ function openJsonViaSqlite($source): ?object
         // ---------------------------------------------
 
         $db = \Inilim\Tool\Method\Other\__resource($class, 'db_for_json_file_sqlite');
-        if ($db === null || !\is_string($db)) {
+        if (null === $db || !\is_string($db)) {
             \Inilim\Tool\Method\Other\__setErrorLast(-1, 'Database structure not found', '', -1);
             return null;
         }
         $db = \base64_decode($db, true);
-        if ($db === false) {
+        if (false === $db) {
             \Inilim\Tool\Method\Other\__setErrorLast(-1, 'Database structure broken', '', -1);
             return null;
         }
@@ -86,7 +86,7 @@ function openJsonViaSqlite($source): ?object
             $db
         );
         unset($db);
-        if ($fpt === false) {
+        if (false === $fpt) {
             return null;
         }
 
