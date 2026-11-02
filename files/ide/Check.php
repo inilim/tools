@@ -296,6 +296,16 @@ class Check
     }
 
         /**
+ * @template T
+ * @psalm-assert-if-true list<T> $value
+ * @phpstan-assert-if-true list<T> $value
+ * @param mixed $value
+ */
+    static function isList($value): bool {
+        throw new \Exception;
+    }
+
+        /**
  * @author Inilim
  * @psalm-assert-if-true mixed[] $value
  * @phpstan-assert-if-true mixed[] $value
@@ -354,6 +364,15 @@ class Check
  * @param mixed  $value
  */
     static function natural($value): bool {
+        throw new \Exception;
+    }
+
+        /**
+ * @psalm-assert-if-true !empty $value
+ * @phpstan-assert-if-true !empty $value
+ * @param mixed $value
+ */
+    static function notEmpty($value): bool {
         throw new \Exception;
     }
 

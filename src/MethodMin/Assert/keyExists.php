@@ -1,0 +1,23 @@
+<?php
+
+namespace Inilim\Tool\Method\Assert{function keyExists($value,$key,string $message=''){\Inilim\Tool\Method\Assert\keysExists($value,[$key],$message);}if(!\Inilim\Tool\Assert::__definedIfNot('isArray')){
+    function isArray($value,string $message=''){if(!\is_array($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a array. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('keysExists')){
+    function keysExists($value,array $keys,string $message=''){\Inilim\Tool\Method\Assert\isArray($value);if(!\Inilim\Tool\Method\LarArr\hasAll($value,$keys)){throw new \InvalidArgumentException(\sprintf($message?:'Expected all of: %2$s. Got: %s',\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',\array_keys($value))),\implode(', ',\array_map('\Inilim\Tool\Method\Other\valueToString',$keys))));}}
+    }}namespace Inilim\Tool\Method\Other{if(!\Inilim\Tool\Other::__definedIfNot('getType')){
+    function getType($v,bool $trueFalseAsSeparateType=false):string{$r=\gettype($v);switch($r){case 'NULL':return 'null';case 'double':return 'float';case 'object':if(\PHP_VERSION_ID>=80100&&$v instanceof \UnitEnum){return 'enum';}if($v instanceof \Throwable){return 'exception';}return 'object';case 'boolean':if($trueFalseAsSeparateType){return $v===true?'true':'false';}return 'bool';case 'integer':return 'int';case 'resource (closed)':return 'resource_closed';case 'unknown type':return 'unknown_type';default:return $r;}}
+    }if(!\Inilim\Tool\Other::__definedIfNot('valueToString')){
+    function valueToString($value):string{$type=\Inilim\Tool\Method\Other\getType($value,true);if($type==='string'){return '"'.$value.'"';}if(\in_array($type,['true','false','null','resource','resource_closed','array'])){return $type;}if(\in_array($type,['object','exception'])){if(\method_exists($value,'__toString')){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> __toString());}if($value instanceof \DateTime||$value instanceof \DateTimeImmutable){return \get_class($value).': '.\Inilim\Tool\Method\Other\valueToString($value -> format('c'));}return \get_class($value);}if($type==='enum'){if(\enum_exists(\get_class($value))){return \get_class($value).'::'.$value -> name;}return \get_class($value);}return (string) $value;}
+    }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php84')){
+    function php84():bool{return \PHP_VERSION_ID>=80400?true:false;}
+    }}namespace Inilim\Tool\Method\PF{if(!\Inilim\Tool\PF::__definedIfNot('array_all')){
+    function array_all(array $array,callable $callback):bool{if(\Inilim\Tool\Method\Check\php84()){return \array_all($array,$callback);}foreach($array as $key=>$value){if(!$callback($value,$key)){return false;}}return true;}
+    }}namespace Inilim\Tool\Method\LarArr{if(!\Inilim\Tool\LarArr::__definedIfNot('accessible')){
+    function accessible($value):bool{return \is_array($value)||$value instanceof \ArrayAccess;}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('exists')){
+    function exists($array,$key){if($array instanceof \ArrayAccess){return $array -> offsetExists($key);}if(\is_float($key)||\is_null($key)){$key=(string) $key;}return \array_key_exists($key,$array);}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('has')){
+    function has($array,$keys){$keys=(array) $keys;if(!$array||$keys===[]){return false;}foreach($keys as $key){$subKeyArray=$array;if(\Inilim\Tool\Method\LarArr\exists($array,$key)){continue;}foreach(\explode('.',$key)as $segment){if(\Inilim\Tool\Method\LarArr\accessible($subKeyArray)&&\Inilim\Tool\Method\LarArr\exists($subKeyArray,$segment)){$subKeyArray=$subKeyArray[$segment];}else{return false;}}}return true;}
+    }if(!\Inilim\Tool\LarArr::__definedIfNot('hasAll')){
+    function hasAll($array,$keys){$keys=(array) $keys;if(!$array||$keys===[]){return false;}return \Inilim\Tool\Method\PF\array_all($keys,static fn($key)=>\Inilim\Tool\Method\LarArr\has($array,$key));}
+    }}

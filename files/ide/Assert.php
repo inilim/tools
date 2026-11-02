@@ -362,6 +362,23 @@ class Assert
     }
 
         /**
+ * @author webmozarts/assert
+ * 
+ * @psalm-pure
+ *
+ * @psalm-assert list<mixed> $array
+ *
+ * @param string|callable():string $message
+ *
+ * @return list<mixed>
+ *
+ * @throws \InvalidArgumentException
+ */
+    static function isList($array, $message = ''): array {
+        throw new \Exception;
+    }
+
+        /**
  * @author inilim
  * @psalm-pure
  * @psalm-assert mixed[] $value
@@ -375,6 +392,23 @@ class Assert
     }
 
         /**
+ * @author webmozarts/assert
+ * 
+ * @psalm-pure
+ *
+ * @psalm-assert non-empty-list<mixed> $array
+ *
+ * @param string|callable():string $message
+ *
+ * @return non-empty-list<mixed>
+ *
+ * @throws \InvalidArgumentException
+ */
+    static function isNonEmptyList($array, $message = ''): array {
+        throw new \Exception;
+    }
+
+        /**
  * @author inilim
  * @psalm-pure
  * @psalm-assert string $value
@@ -384,6 +418,21 @@ class Assert
  * @throws \InvalidArgumentException
  */
     static function json($value, string $message = '') {
+        throw new \Exception;
+    }
+
+        /**
+ * @author inilim
+ * @psalm-pure
+ * @template K of int|string
+ * @psalm-assert array<K,mixed> $value
+ * @phpstan-assert array<K,mixed> $value
+ * 
+ * @param mixed $value
+ * @param K $key
+ * @throws \InvalidArgumentException
+ */
+    static function keyExists($value, $key, string $message = '') {
         throw new \Exception;
     }
 
@@ -412,6 +461,23 @@ class Assert
  * @throws \InvalidArgumentException
  */
     static function natural($value, string $message = '') {
+        throw new \Exception;
+    }
+
+        /**
+ * @author webmozarts/assert
+ * 
+ * @psalm-pure
+ *
+ * @psalm-assert !empty $value
+ *
+ * @param string|callable():string $message
+ *
+ * @return mixed
+ * 
+ * @throws \InvalidArgumentException
+ */
+    static function notEmpty($value, $message = '') {
         throw new \Exception;
     }
 
