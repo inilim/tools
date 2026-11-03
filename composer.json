@@ -63,9 +63,6 @@
     "unit:check": [
       "php74 vendor/bin/phpunit tests"
     ],
-    "phpmetrics:report": [
-      "php84 ./vendor/bin/phpmetrics --report-html=myreport ./src/Method"
-    ],
     "stan": [
       "php74 vendor/bin/phpstan"
     ],
