@@ -8,6 +8,7 @@ namespace Inilim\Tool\Method\Assert;
 /**
  * @psalm-pure
  * 
+ * @internal
  * @param mixed $value
  */
 function __typeToString($value): string
