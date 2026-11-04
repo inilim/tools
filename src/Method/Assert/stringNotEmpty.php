@@ -11,13 +11,14 @@ namespace Inilim\Tool\Method\Assert;
  * @phpstan-assert non-empty-string $value
  * @template T
  * @return T
- * @param mixed  $value
+ * @param mixed $value
  * @param string|callable():string $message
  * @throws \InvalidArgumentException
  */
 function stringNotEmpty($value, $message = '')
 {
     \Inilim\Tool\Method\Assert\string($value, $message);
-    \Inilim\Tool\Method\Assert\notEq($value, '', $message);
+    \Inilim\Tool\Method\Assert\notSame($value, '', $message);
+
     return $value;
 }
