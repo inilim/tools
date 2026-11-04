@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Check;
 
 /**
- * @author webmozarts/assert
  * @psalm-import-type Main_Countable from \TypeMain
  * @psalm-assert-if-true Main_Countable $value
  * @phpstan-assert-if-true Main_Countable $value

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Check;
 
 /**
- * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true resource $value
  * @phpstan-assert-if-true resource $value

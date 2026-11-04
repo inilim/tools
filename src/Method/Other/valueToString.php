@@ -6,7 +6,6 @@ namespace Inilim\Tool\Method\Other;
 
 /**
  * @author inilim
- * @author webmozarts/assert
  * @param mixed $value
  */
 function valueToString($value): string
