@@ -19,9 +19,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonExtractVia
     }if(!\Inilim\Tool\Assert::__definedIfNot('isIterable')){
     function isIterable($value,string $message=''){if(!\Inilim\Tool\Method\Check\isIterable($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected an iterable. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
-    function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    function string($value,$message=''){if(!\is_string($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Assert\__typeToString($value)));}return $value;}
     }if(!\Inilim\Tool\Assert::__definedIfNot('strOrArr')){
     function strOrArr($value,string $message=''){if(!\Inilim\Tool\Method\Check\strOrArr($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string or array. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__reportInvalidArgument')){
+    function __reportInvalidArgument(string $message){throw new \InvalidArgumentException($message);}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__resolveMessage')){
+    function __resolveMessage($message):string{return \is_callable($message)?$message():$message;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__typeToString')){
+    function __typeToString($value):string{return \is_object($value)?\get_class($value):\gettype($value);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('isIterable')){
     function isIterable($value):bool{return \is_iterable($value);}
     }if(!\Inilim\Tool\Check::__definedIfNot('strOrArr')){

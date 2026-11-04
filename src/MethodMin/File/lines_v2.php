@@ -19,9 +19,15 @@ declare(strict_types=1);namespace Inilim\Tool\Method\File{function lines_v2(stri
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('file')){
     function file($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\Inilim\Tool\Method\FS\isFile($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a file.',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('positiveInteger')){
-    function positiveInteger($value,string $message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}}
+    function positiveInteger($value,$message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}return $value;}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
-    function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    function string($value,$message=''){if(!\is_string($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Assert\__typeToString($value)));}return $value;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__reportInvalidArgument')){
+    function __reportInvalidArgument(string $message){throw new \InvalidArgumentException($message);}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__resolveMessage')){
+    function __resolveMessage($message):string{return \is_callable($message)?$message():$message;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__typeToString')){
+    function __typeToString($value):string{return \is_object($value)?\get_class($value):\gettype($value);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('php85')){
     function php85():bool{return \PHP_VERSION_ID>=80500?true:false;}
     }if(!\Inilim\Tool\Check::__definedIfNot('positiveInteger')){

@@ -6,6 +6,8 @@ namespace Inilim\Tool\Method\Assert;
 
 /**
  * @author webmozarts/assert
+ * 
+ * @build_skip
  *
  * @param mixed $array
  * @param mixed $number

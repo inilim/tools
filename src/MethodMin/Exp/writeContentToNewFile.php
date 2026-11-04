@@ -29,7 +29,13 @@ namespace Inilim\Tool\Method\Exp{function writeContentToNewFile(?string $dir=nul
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('dir')){
     function dir($value,string $message=''){\Inilim\Tool\Method\Assert\string($value);if(!\Inilim\Tool\Method\FS\isDir($value)){throw new \InvalidArgumentException(\sprintf($message?:'The path %s is not a directory.',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
-    function string($value,string $message=''){if(!\is_string($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
+    function string($value,$message=''){if(!\is_string($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Assert\__typeToString($value)));}return $value;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__reportInvalidArgument')){
+    function __reportInvalidArgument(string $message){throw new \InvalidArgumentException($message);}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__resolveMessage')){
+    function __resolveMessage($message):string{return \is_callable($message)?$message():$message;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__typeToString')){
+    function __typeToString($value):string{return \is_object($value)?\get_class($value):\gettype($value);}
     }}namespace Inilim\Tool\Method\LarStr{if(!\Inilim\Tool\LarStr::__definedIfNot('substr')){
     function substr($string,$start,$length=null,$encoding='UTF-8'){return \mb_substr($string,$start,$length,$encoding);}
     }if(!\Inilim\Tool\LarStr::__definedIfNot('ucfirst')){

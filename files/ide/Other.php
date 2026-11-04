@@ -640,7 +640,6 @@ class Other
 
         /**
  * @author inilim
- * @author webmozarts/assert
  * @param mixed $value
  */
     static function valueToString($value): string {

@@ -114,11 +114,19 @@ namespace Inilim\Tool\Method\Exp{function excelReadCellsBySheetId($pathToFileOrZ
     }}namespace Inilim\Tool\Method\Assert{if(!\Inilim\Tool\Assert::__definedIfNot('extPhp')){
     function extPhp(string $nameExt,string $message=''){if(false===\Inilim\Tool\Method\Other\extPhp($nameExt)){throw new \InvalidArgumentException(\sprintf($message?:'PHP Extension "%s" not found',$nameExt));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('isInstanceOf')){
-    function isInstanceOf($value,$class,string $message=''){if(!$value instanceof $class){throw new \InvalidArgumentException(\sprintf($message?:'Expected an instance of %2$s. Got: %s',\Inilim\Tool\Method\Other\getType($value),$class));}}
+    function isInstanceOf($value,$class,$message=''){\Inilim\Tool\Method\Assert\string($class,'Expected class as a string. Got: %s');if(!$value instanceof $class){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected an instance of %2$s. Got: %s',\Inilim\Tool\Method\Assert\__typeToString($value),$class));}return $value;}
     }if(!\Inilim\Tool\Assert::__definedIfNot('natural')){
     function natural($value,string $message=''){if(!\Inilim\Tool\Method\Check\natural($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a non-negative integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('resource')){
     function resource($value,?string $type=null,string $message=''){if($type!==null&&!\Inilim\Tool\Method\Check\resource($value,$type)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a resource of type %2$s. Got: %s',\Inilim\Tool\Method\Other\getType($value),$type));}if(!\Inilim\Tool\Method\Check\resource($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a resource. Got: %s',\Inilim\Tool\Method\Other\getType($value),$type));}}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('string')){
+    function string($value,$message=''){if(!\is_string($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a string. Got: %s',\Inilim\Tool\Method\Assert\__typeToString($value)));}return $value;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__reportInvalidArgument')){
+    function __reportInvalidArgument(string $message){throw new \InvalidArgumentException($message);}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__resolveMessage')){
+    function __resolveMessage($message):string{return \is_callable($message)?$message():$message;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__typeToString')){
+    function __typeToString($value):string{return \is_object($value)?\get_class($value):\gettype($value);}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('isJson')){
     function isJson($value):bool{if(!\is_string($value)){return false;}return \Inilim\Tool\Method\PF\json_validate($value);}
     }if(!\Inilim\Tool\Check::__definedIfNot('natural')){

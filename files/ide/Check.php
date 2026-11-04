@@ -104,7 +104,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-import-type Main_Countable from \TypeMain
  * @psalm-assert-if-true Main_Countable $value
  * @phpstan-assert-if-true Main_Countable $value
@@ -232,7 +231,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @template T of object
  * @psalm-assert-if-true T|class-string<T> $value
@@ -246,11 +244,10 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @deprecated use Check::countable
  * @psalm-pure
- * @psalm-assert-if-true mixed[]\Countable|\ResourceBundle|\SimpleXMLElement $value
- * @phpstan-assert-if-true mixed[]\Countable|\ResourceBundle|\SimpleXMLElement $value
+ * @psalm-assert-if-true mixed[]|\Countable|\ResourceBundle|\SimpleXMLElement $value
+ * @phpstan-assert-if-true mixed[]|\Countable|\ResourceBundle|\SimpleXMLElement $value
  * 
  * @param mixed  $value
  */
@@ -259,7 +256,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @template T of object
  * 
@@ -357,7 +353,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true int<0,max> $value
  * @phpstan-assert-if-true int<0,max> $value
@@ -373,6 +368,18 @@ class Check
  * @param mixed $value
  */
     static function notEmpty($value): bool {
+        throw new \Exception;
+    }
+
+        /**
+ * check is valid regex
+ * @author inilim
+ * @psalm-pure
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * @param mixed  $value
+ */
+    static function patternRegex($value): bool {
         throw new \Exception;
     }
 
@@ -469,7 +476,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true int<1,max> $value
  * @phpstan-assert-if-true int<1,max> $value
@@ -480,19 +486,19 @@ class Check
     }
 
         /**
+ * @deprecated use patternRegex
  * check is valid regex
  * @author inilim
  * @psalm-pure
- * @psalm-assert-if-true string $regex
- * @phpstan-assert-if-true string $regex
- * @param mixed  $regex
+ * @psalm-assert-if-true string $value
+ * @phpstan-assert-if-true string $value
+ * @param mixed  $value
  */
-    static function regex($regex): bool {
+    static function regex($value): bool {
         throw new \Exception;
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true resource|string $value
  * @phpstan-assert-if-true resource|string $value
@@ -506,7 +512,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * @psalm-pure
  * @psalm-assert-if-true resource $value
  * @phpstan-assert-if-true resource $value
@@ -557,7 +562,6 @@ class Check
     }
 
         /**
- * @author webmozarts/assert
  * Checks if a value is a valid array key (int or string).
  * @psalm-pure
  * @psalm-assert-if-true int|string $value

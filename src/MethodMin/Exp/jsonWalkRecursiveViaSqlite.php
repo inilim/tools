@@ -26,7 +26,11 @@ declare(strict_types=1);namespace Inilim\Tool\Method\Exp{function jsonWalkRecurs
     }if(!\Inilim\Tool\Assert::__definedIfNot('isIterable')){
     function isIterable($value,string $message=''){if(!\Inilim\Tool\Method\Check\isIterable($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected an iterable. Got: %s',\Inilim\Tool\Method\Other\getType($value)));}}
     }if(!\Inilim\Tool\Assert::__definedIfNot('positiveInteger')){
-    function positiveInteger($value,string $message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){throw new \InvalidArgumentException(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}}
+    function positiveInteger($value,$message=''){if(!\Inilim\Tool\Method\Check\positiveInteger($value)){$message=\Inilim\Tool\Method\Assert\__resolveMessage($message);\Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf($message?:'Expected a positive integer. Got: %s',\Inilim\Tool\Method\Other\valueToString($value)));}return $value;}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__reportInvalidArgument')){
+    function __reportInvalidArgument(string $message){throw new \InvalidArgumentException($message);}
+    }if(!\Inilim\Tool\Assert::__definedIfNot('__resolveMessage')){
+    function __resolveMessage($message):string{return \is_callable($message)?$message():$message;}
     }}namespace Inilim\Tool\Method\Check{if(!\Inilim\Tool\Check::__definedIfNot('isIterable')){
     function isIterable($value):bool{return \is_iterable($value);}
     }if(!\Inilim\Tool\Check::__definedIfNot('positiveInteger')){
