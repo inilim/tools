@@ -9,12 +9,15 @@ namespace Inilim\Tool\Method\Assert;
  * @psalm-pure
  * @psalm-assert non-empty-string $value
  * @phpstan-assert non-empty-string $value
- * 
+ * @template T
+ * @return T
  * @param mixed  $value
+ * @param string|callable():string $message
  * @throws \InvalidArgumentException
  */
-function stringNotEmpty($value, string $message = '')
+function stringNotEmpty($value, $message = '')
 {
     \Inilim\Tool\Method\Assert\string($value, $message);
     \Inilim\Tool\Method\Assert\notEq($value, '', $message);
+    return $value;
 }

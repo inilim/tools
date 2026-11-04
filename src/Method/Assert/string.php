@@ -9,16 +9,22 @@ namespace Inilim\Tool\Method\Assert;
  * @psalm-pure
  * @psalm-assert string $value
  * @phpstan-assert string $value
- * 
- * @param mixed  $value
+ * @template T
+ * @return T
+ * @param mixed $value
+ * @param string|callable $message
  * @throws \InvalidArgumentException
  */
-function string($value, string $message = '')
+function string($value, $message = '')
 {
     if (!\is_string($value)) {
-        throw new \InvalidArgumentException(\sprintf(
+        $message = \Inilim\Tool\Method\Assert\__resolveMessage($message);
+
+        \Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf(
             $message ?: 'Expected a string. Got: %s',
-            \Inilim\Tool\Method\Other\getType($value)
+            \Inilim\Tool\Method\Assert\__typeToString($value)
         ));
     }
+
+    return $value;
 }

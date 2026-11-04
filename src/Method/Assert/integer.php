@@ -10,16 +10,21 @@ namespace Inilim\Tool\Method\Assert;
  * @psalm-assert int $value
  * @phpstan-assert int $value
  * 
- * 
+ * @template T
+ * @return T
  * @param mixed  $value
+ * @param string|callable():string $message
  * @throws \InvalidArgumentException
  */
-function integer($value, string $message = '')
+function integer($value, $message = '')
 {
     if (!\is_int($value)) {
-        throw new \InvalidArgumentException(\sprintf(
+        $message = \Inilim\Tool\Method\Assert\__resolveMessage($message);
+        \Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf(
             $message ?: 'Expected an integer. Got: %s',
-            \Inilim\Tool\Method\Other\getType($value)
+            \Inilim\Tool\Method\Assert\__typeToString($value)
         ));
     }
+
+    return $value;
 }

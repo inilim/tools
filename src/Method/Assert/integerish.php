@@ -10,15 +10,22 @@ namespace Inilim\Tool\Method\Assert;
  * @psalm-assert numeric $value
  * @phpstan-assert numeric $value
  * 
+ * @template T
+ * 
  * @param mixed  $value
+ * @param string|callable():string $message
+ * @return T
  * @throws \InvalidArgumentException
  */
-function integerish($value, string $message = '')
+function integerish($value, $message = '')
 {
     if (!\is_numeric($value) || $value != (int) $value) {
-        throw new \InvalidArgumentException(\sprintf(
+        $message = \Inilim\Tool\Method\Assert\__resolveMessage($message);
+        \Inilim\Tool\Method\Assert\__reportInvalidArgument(\sprintf(
             $message ?: 'Expected an integerish value. Got: %s',
-            \Inilim\Tool\Method\Other\getType($value)
+            \Inilim\Tool\Method\Assert\__typeToString($value)
         ));
     }
+
+    return $value;
 }
