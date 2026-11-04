@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inilim\Tool\Method\Assert;
 
 /**
+ * @deprecated use patternRegex
  * @author inilim
  * @psalm-pure
  * @param mixed  $value
@@ -12,10 +13,7 @@ namespace Inilim\Tool\Method\Assert;
  */
 function regex($value, string $message = '')
 {
-    if (!\Inilim\Tool\Method\Check\regex($value)) {
-        throw new \InvalidArgumentException(\sprintf(
-            $message ?: 'Expected a regex. Got: %s',
-            \Inilim\Tool\Method\Other\valueToString($value)
-        ));
-    }
+    \Inilim\Tool\Method\Assert\patternRegex($value, $message);
 }
+
+// TODO В webmozarts/assert тоже есть метод с таким название, и у него совершенно другое предназначение
